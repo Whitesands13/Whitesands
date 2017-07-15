@@ -327,7 +327,10 @@
 	return list()
 
 /obj/machinery/atmospherics/update_remote_sight(mob/user)
-	user.sight |= (SEE_TURFS|BLIND)
+	if(isborer(user))
+		user.sight |= (SEE_PIXELS)
+	else
+		user.sight |= (SEE_TURFS|BLIND)
 
 //Used for certain children of obj/machinery/atmospherics to not show pipe vision when mob is inside it.
 /obj/machinery/atmospherics/proc/can_see_pipes()

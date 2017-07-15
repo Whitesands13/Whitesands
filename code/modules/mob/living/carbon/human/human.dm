@@ -64,6 +64,10 @@
 				stat(null, "Tank Pressure: [internal.air_contents.return_pressure()]")
 				stat(null, "Distribution Pressure: [internal.distribute_pressure]")
 
+		var/mob/living/simple_animal/borer/B = has_brain_worms()
+		if(B && B.controlling)
+			stat("Chemicals", B.chemicals)
+
 		if(mind)
 			var/datum/antagonist/changeling/changeling = mind.has_antag_datum(/datum/antagonist/changeling)
 			if(changeling)

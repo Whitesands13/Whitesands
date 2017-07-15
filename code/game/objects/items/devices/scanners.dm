@@ -153,6 +153,12 @@ GENE SCANNER
 		if(H.undergoing_cardiac_arrest() && H.stat != DEAD)
 			render_list += "<span class='alert'>Subject suffering from heart attack: Apply defibrillation or other electric shock immediately!</span>\n"
 
+	if(iscarbon(M))
+		var/mob/living/carbon/C = M
+		if(C.has_brain_worms())
+			render_list += "<span class='danger'>Foreign organism detected in subject's cranium. Recommended treatment: Dosage of sucrose solution and removal of object via surgery.</span>\n"
+
+
 	render_list += "<span class='info'>Analyzing results for [M]:</span>\n<span class='info ml-1'>Overall status: [mob_status]</span>\n"
 
 	// Damage descriptions

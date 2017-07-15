@@ -111,6 +111,8 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 
 #define isrevenant(A) (istype(A, /mob/living/simple_animal/revenant))
 
+#define isborer(A) (istype(A, /mob/living/simple_animal/borer))
+
 #define isbot(A) (istype(A, /mob/living/simple_animal/bot))
 
 #define isshade(A) (istype(A, /mob/living/simple_animal/shade))
