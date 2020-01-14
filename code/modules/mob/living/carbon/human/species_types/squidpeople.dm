@@ -46,8 +46,8 @@
 /datum/action/innate/change_color
 	name = "Change Color"
 	check_flags = AB_CHECK_CONSCIOUS
-	icon_icon = 'icons/mob/actions/actions_spells.dmi'
-	button_icon_state = "mutate"
+	icon_icon = 'icons/mob/actions.dmi'
+	button_icon_state = "squid"
 
 /datum/action/innate/change_color/Activate()
 	var/mob/living/carbon/human/H = owner
