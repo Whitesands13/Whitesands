@@ -207,6 +207,7 @@
 																								"Jellyperson",
 																								"Podperson",
 																								"Golem",
+																								"Squidperson",
 																								"Zombie")
 			if(new_species)
 				switch(new_species)
@@ -224,6 +225,8 @@
 						detect_species = /datum/species/jelly
 					if("Podperson")
 						detect_species = /datum/species/pod
+					if("Squidperson")
+						detect_species = /datum/species/squid
 					if("Golem")
 						detect_species = /datum/species/golem
 					if("Zombie")
