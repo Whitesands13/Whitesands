@@ -19,9 +19,13 @@
 	disliked_food = JUNKFOOD
 	liked_food = VEGETABLES | MEAT
 	toxic_food = FRIED
+	mutanttongue = /obj/item/organ/tongue/squid
 	meat = /obj/item/reagent_containers/food/snacks/meat/slab/human/mutant/squid
 	exotic_bloodtype = "S"
 	no_equip = list(SLOT_SHOES)
+
+/datum/species/lizard/after_equip_job(datum/job/J, mob/living/carbon/human/H)
+	H.grant_language(/datum/language/rylethian)
 
 /datum/species/squid/random_name(gender,unique,lastname)
 	if(unique)
