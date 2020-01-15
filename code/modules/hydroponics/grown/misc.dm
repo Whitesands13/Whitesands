@@ -14,7 +14,7 @@
 	growthstages = 3
 	growing_icon = 'icons/obj/hydroponics/growing_flowers.dmi'
 	genes = list(/datum/plant_gene/trait/plant_type/weed_hardy)
-	mutatelist = list(/obj/item/seeds/starthistle/corpse_flower)
+	mutatelist = list(/obj/item/seeds/starthistle/corpse_flower, /obj/item/seeds/galaxythistle)
 
 /obj/item/seeds/starthistle/harvest(mob/user)
 	var/obj/machinery/hydroponics/parent = loc
@@ -82,9 +82,10 @@
 	mutatelist = list()
 	reagents_add = list(/datum/reagent/consumable/nutriment = 0.05, /datum/reagent/medicine/silibinin = 0.1)
 
-/obj/item/seeds/galaxythistle/Initialize()
-	..()
-	unset_mutability(/datum/plant_gene/trait/invasive, PLANT_GENE_REMOVABLE)
+/obj/item/seeds/galaxythistle/Initialize(mapload,nogenes)
+	. = ..()
+	if(!nogenes)
+		unset_mutability(/datum/plant_gene/trait/invasive, PLANT_GENE_REMOVABLE)
 
 /obj/item/reagent_containers/food/snacks/grown/galaxythistle
 	seed = /obj/item/seeds/galaxythistle
@@ -181,7 +182,7 @@
 	trash = /obj/item/gun/ballistic/revolver
 	bitesize_mod = 2
 	foodtype = FRUIT
-	tastes = list("gunpowder" = 1)
+	tastes = list("blackpowder" = 1)
 	wine_power = 90 //It burns going down, too.
 
 //Cherry Bombs
@@ -203,7 +204,7 @@
 	filling_color = rgb(20, 20, 20)
 	seed = /obj/item/seeds/cherry/bomb
 	bitesize_mod = 2
-	volume = 125 //Gives enough room for the black powder at max potency
+	volume = 125 //Gives enough room for the blackpowder at max potency
 	max_integrity = 40
 	wine_power = 80
 
@@ -223,7 +224,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/cherry_bomb/proc/prime()
 	icon_state = "cherry_bomb_lit"
-	playsound(src, 'sound/effects/fuse.ogg', seed.potency, 0)
-	reagents.chem_temp = 1000 //Sets off the black powder
+	playsound(src, 'sound/effects/fuse.ogg', seed.potency, FALSE)
+	reagents.chem_temp = 1000 //Sets off the blackpowder
 	reagents.handle_reactions()
 

@@ -1,6 +1,6 @@
 /datum/species/lizard
 	// Reptilian humanoids with scaled skin and tails.
-	name = "Lizardperson"
+	name = "Unathi" //oops I'm lazy and this is all I'm going to change to lizard
 	id = "lizard"
 	say_mod = "hisses"
 	default_color = "00FF00"
@@ -24,9 +24,10 @@
 	inert_mutation = FIREBREATH
 	deathsound = 'sound/voice/lizard/deathsound.ogg'
 	wings_icon = "Dragon"
-
-/datum/species/lizard/after_equip_job(datum/job/J, mob/living/carbon/human/H)
-	H.grant_language(/datum/language/draconic)
+	species_language_holder = /datum/language_holder/lizard
+	loreblurb = "Cold-blooded and covered in scales, lizard may seem like a vicious predator put in a fancy jumpsuit, \
+	but due to some recent pressure from HR they're generally well-behaved. Most of them don't even fight all that well. \
+	Confusing them with Ash Walkers (the similarly lizard-like natives of the Lavaland Wastes) might lead to having a spear lodged in your skull."
 
 /datum/species/lizard/random_name(gender,unique,lastname)
 	if(unique)
@@ -80,3 +81,4 @@
 	limbs_id = "lizard"
 	species_traits = list(MUTCOLORS,EYECOLOR,LIPS,DIGITIGRADE)
 	inherent_traits = list(TRAIT_CHUNKYFINGERS,TRAIT_NOBREATH)
+	species_language_holder = /datum/language_holder/lizard/ash
