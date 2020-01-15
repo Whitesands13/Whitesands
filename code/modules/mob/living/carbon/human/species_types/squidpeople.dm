@@ -22,7 +22,7 @@
 	mutanttongue = /obj/item/organ/tongue/squid
 	meat = /obj/item/reagent_containers/food/snacks/meat/slab/human/mutant/squid
 	exotic_bloodtype = "S"
-	no_equip = list(SLOT_SHOES)
+	no_equip = list(ITEM_SLOT_FEET)
 
 /datum/species/lizard/after_equip_job(datum/job/J, mob/living/carbon/human/H)
 	H.grant_language(/datum/language/rylethian)

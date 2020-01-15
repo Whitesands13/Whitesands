@@ -282,11 +282,11 @@
 		/datum/language/rylethian,
 		/datum/language/common,
 		/datum/language/xenocommon,
-		/datum/language/ratvar,
+		/datum/language/aphasia,
 		/datum/language/narsie,
 		/datum/language/monkey,
-		/datum/language/shadowtongue,
-		/datum/language/terrum))
+		/datum/language/shadowtongue
+		))
 
 /obj/item/organ/tongue/squid/Initialize(mapload)
 	. = ..()

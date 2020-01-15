@@ -21,5 +21,3 @@
 		"forbici"
 	)
 	default_priority = 80
-
-	

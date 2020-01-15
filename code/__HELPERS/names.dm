@@ -19,23 +19,6 @@
 /proc/squid_name()
 	return "[pick(GLOB.squid_names)][pick("-", "", " ")][capitalize(pick(GLOB.squid_names) + pick(GLOB.squid_names))]"
 
-/proc/church_name()
-	var/static/church_name
-	if (church_name)
-		return church_name
-
-	var/name = ""
-
-	name += pick("Holy", "United", "First", "Second", "Last")
-
-	if (prob(20))
-		name += " Space"
-
-	name += " " + pick("Church", "Cathedral", "Body", "Worshippers", "Movement", "Witnesses")
-	name += " of [religion_name()]"
-
-	return name
-
 GLOBAL_VAR(command_name)
 /proc/command_name()
 	if (GLOB.command_name)
