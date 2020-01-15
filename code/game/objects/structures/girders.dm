@@ -207,7 +207,7 @@
 	if(state == GIRDER_DISPLACED)
 		user.visible_message("<span class='warning'>[user] disassembles the girder.</span>",
 							 "<span class='notice'>You start to disassemble the girder...</span>",
-							 "You hear clanking and banging noises.")
+							 "<span class='hear'>You hear clanking and banging noises.</span>")
 		if(tool.use_tool(src, user, 40, volume=100))
 			if(state != GIRDER_DISPLACED)
 				return
@@ -271,14 +271,10 @@
 			qdel(src)
 		return TRUE
 
-/obj/structure/girder/CanPass(atom/movable/mover, turf/target)
-	if(istype(mover) && (mover.pass_flags & PASSGRILLE))
+/obj/structure/girder/CanAllowThrough(atom/movable/mover, turf/target)
+	. = ..()
+	if((mover.pass_flags & PASSGRILLE) || istype(mover, /obj/projectile))
 		return prob(girderpasschance)
-	else
-		if(istype(mover, /obj/item/projectile))
-			return prob(girderpasschance)
-		else
-			return 0
 
 /obj/structure/girder/CanAStarPass(ID, dir, caller)
 	. = !density
@@ -290,13 +286,6 @@
 	if(!(flags_1 & NODECONSTRUCT_1))
 		var/remains = pick(/obj/item/stack/rods, /obj/item/stack/sheet/metal)
 		new remains(loc)
-	qdel(src)
-
-/obj/structure/girder/ratvar_act()
-	if(anchored)
-		new /obj/structure/destructible/clockwork/wall_gear(loc)
-	else
-		new /obj/structure/destructible/clockwork/wall_gear/displaced(loc)
 	qdel(src)
 
 /obj/structure/girder/narsie_act()

@@ -51,7 +51,7 @@
 		var/mob/living/brain/B = newbrain.brainmob
 		if(!B.key)
 			B.notify_ghost_cloning("Someone has put your brain in a MMI!", source = src)
-		user.visible_message("[user] sticks \a [newbrain] into [src].", "<span class='notice'>[src]'s indicator light turn on as you insert [newbrain].</span>")
+		user.visible_message("<span class='notice'>[user] sticks \a [newbrain] into [src].</span>", "<span class='notice'>[src]'s indicator light turn on as you insert [newbrain].</span>")
 
 		brainmob = newbrain.brainmob
 		newbrain.brainmob = null
@@ -78,11 +78,12 @@
 
 		SSblackbox.record_feedback("amount", "mmis_filled", 1)
 
+		log_game("[key_name(user)] has put the brain of [key_name(brainmob)] into an MMI at [AREACOORD(src)]")
+
 	else if(brainmob)
 		O.attack(brainmob, user) //Oh noooeeeee
 	else
 		return ..()
-
 
 /obj/item/mmi/attack_self(mob/user)
 	if(!brain)
@@ -103,6 +104,7 @@
 	GLOB.alive_mob_list -= brainmob //Get outta here
 	GLOB.dead_mob_list |= brainmob
 	brain.brainmob = brainmob //Set the brain to use the brainmob
+	log_game("[key_name(user)] has ejected the brain of [key_name(brainmob)] from an MMI at [AREACOORD(src)]")
 	brainmob = null //Set mmi brainmob var to null
 	if(user)
 		user.put_in_hands(brain) //puts brain in the user's hand or otherwise drops it on the user's turf
@@ -110,7 +112,6 @@
 		brain.forceMove(get_turf(src))
 	brain.organ_flags &= ~ORGAN_FROZEN
 	brain = null //No more brain in here
-
 
 /obj/item/mmi/proc/transfer_identity(mob/living/L) //Same deal as the regular brain proc. Used for human-->robot people.
 	if(!brainmob)
@@ -197,20 +198,47 @@
 
 /obj/item/mmi/examine(mob/user)
 	. = ..()
-	. += "<span class='notice'>There is a switch to toggle the radio system [radio.on ? "off" : "on"].[brain ? " It is currently being covered by [brain]." : null]</span>"
+	if(radio)
+		. += "<span class='notice'>There is a switch to toggle the radio system [radio.on ? "off" : "on"].[brain ? " It is currently being covered by [brain]." : null]</span>"
 	if(brainmob)
 		var/mob/living/brain/B = brainmob
 		if(!B.key || !B.mind || B.stat == DEAD)
-			. += "<span class='warning'>The MMI indicates the brain is completely unresponsive.</span>"
-
+			. += "<span class='warning'>\The [src] indicates that the brain is completely unresponsive.</span>"
 		else if(!B.client)
-			. += "<span class='warning'>The MMI indicates the brain is currently inactive; it might change.</span>"
-
+			. += "<span class='warning'>\The [src] indicates that the brain is currently inactive; it might change.</span>"
 		else
-			. += "<span class='notice'>The MMI indicates the brain is active.</span>"
+			. += "<span class='notice'>\The [src] indicates that the brain is active.</span>"
 
 /obj/item/mmi/relaymove(mob/user)
 	return //so that the MMI won't get a warning about not being able to move if it tries to move
+
+/obj/item/mmi/proc/brain_check(mob/user)
+	var/mob/living/brain/B = brainmob
+	if(!B)
+		if(user)
+			to_chat(user, "<span class='warning'>\The [src] indicates that there is no brain present!</span>")
+		return FALSE
+	if(!B.key || !B.mind)
+		if(user)
+			to_chat(user, "<span class='warning'>\The [src] indicates that their mind is completely unresponsive!</span>")
+		return FALSE
+	if(!B.client)
+		if(user)
+			to_chat(user, "<span class='warning'>\The [src] indicates that their mind is currently inactive.</span>")
+		return FALSE
+	if(B.suiciding || brain?.suicided)
+		if(user)
+			to_chat(user, "<span class='warning'>\The [src] indicates that their mind has no will to live!</span>")
+		return FALSE
+	if(B.stat == DEAD || brain?.brain_death)
+		if(user)
+			to_chat(user, "<span class='warning'>\The [src] indicates that the brain is dead!</span>")
+		return FALSE
+	if(brain?.organ_flags & ORGAN_FAILING)
+		if(user)
+			to_chat(user, "<span class='warning'>\The [src] indicates that the brain is damaged!</span>")
+		return FALSE
+	return TRUE
 
 /obj/item/mmi/syndie
 	name = "\improper Syndicate Man-Machine Interface"

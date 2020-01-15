@@ -3,7 +3,7 @@
 	name = "Myocardial Infarction"
 	max_stages = 5
 	stage_prob = 2
-	cure_text = "Heart replacement surgery to cure. Defibrillation (or as a last resort, uncontrolled electric shocking) may also be effective after the onset of cardiac arrest. Corazone can also mitigate cardiac arrest."
+	cure_text = "Heart replacement surgery to cure. Defibrillation (or as a last resort, uncontrolled electric shocking) may also be effective after the onset of cardiac arrest. Penthrite can also mitigate cardiac arrest."
 	agent = "Shitty Heart"
 	viable_mobtypes = list(/mob/living/carbon/human)
 	permeability_mod = 1

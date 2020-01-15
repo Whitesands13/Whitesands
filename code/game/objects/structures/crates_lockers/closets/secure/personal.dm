@@ -6,10 +6,12 @@
 
 /obj/structure/closet/secure_closet/personal/PopulateContents()
 	..()
-	if(prob(50))
+	if(prob(40))
 		new /obj/item/storage/backpack/duffelbag(src)
-	if(prob(50))
+	if(prob(40))
 		new /obj/item/storage/backpack(src)
+	if(prob(40))
+		new /obj/item/storage/backpack/messenger(src)
 	else
 		new /obj/item/storage/backpack/satchel(src)
 	new /obj/item/radio/headset( src )
@@ -25,6 +27,10 @@
 	icon_state = "cabinet"
 	resistance_flags = FLAMMABLE
 	max_integrity = 70
+	open_sound = 'sound/machines/wooden_closet_open.ogg'
+	close_sound = 'sound/machines/wooden_closet_close.ogg'
+	open_sound_volume = 25
+	close_sound_volume = 50
 
 /obj/structure/closet/secure_closet/personal/cabinet/PopulateContents()
 	new /obj/item/storage/backpack/satchel/leather/withwallet( src )

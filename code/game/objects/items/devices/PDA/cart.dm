@@ -1,11 +1,10 @@
-#define CART_SECURITY			(1<<0)
-#define CART_ENGINE				(1<<1)
-#define CART_ATMOS				(1<<2)
-#define CART_MEDICAL			(1<<3)
-#define CART_MANIFEST			(1<<4)
-#define CART_CLOWN				(1<<5)
-#define CART_MIME				(1<<6)
-#define CART_JANITOR			(1<<7)
+#define CART_SECURITY	(1<<0)
+#define CART_ENGINE	(1<<1)
+#define CART_ATMOS	(1<<2)
+#define CART_MEDICAL	(1<<3)
+#define CART_CLOWN	(1<<5)
+#define CART_MIME	(1<<6)
+#define CART_JANITOR	(1<<7)
 #define CART_REAGENT_SCANNER	(1<<8)
 #define CART_NEWSCASTER			(1<<9)
 #define CART_REMOTE_DOOR		(1<<10)
@@ -88,7 +87,7 @@
 /obj/item/cartridge/detective
 	name = "\improper D.E.T.E.C.T. cartridge"
 	icon_state = "cart-s"
-	access = CART_SECURITY | CART_MEDICAL | CART_MANIFEST
+	access = CART_SECURITY | CART_MEDICAL
 	bot_access_flags = SEC_BOT
 
 /obj/item/cartridge/janitor
@@ -104,10 +103,13 @@
 	access = CART_SECURITY
 	spam_enabled = 1
 
-/obj/item/cartridge/curator
-	name = "\improper Lib-Tweet cartridge"
-	icon_state = "cart-s"
-	access = CART_NEWSCASTER
+// DISABLED BECAUSE IT DONT FUCKIN' WORK
+/*
+///obj/item/cartridge/curator
+//	name = "\improper Lib-Tweet cartridge"
+//	icon_state = "cart-s"
+//	access = CART_NEWSCASTER
+*/
 
 /obj/item/cartridge/roboticist
 	name = "\improper B.O.O.P. Remote Control cartridge"
@@ -141,37 +143,37 @@
 /obj/item/cartridge/head
 	name = "\improper Easy-Record DELUXE cartridge"
 	icon_state = "cart-h"
-	access = CART_MANIFEST | CART_STATUS_DISPLAY
+	access = CART_STATUS_DISPLAY
 
 /obj/item/cartridge/hop
 	name = "\improper HumanResources9001 cartridge"
 	icon_state = "cart-h"
-	access = CART_MANIFEST | CART_STATUS_DISPLAY | CART_JANITOR | CART_SECURITY | CART_NEWSCASTER | CART_QUARTERMASTER | CART_DRONEPHONE
+	access = CART_STATUS_DISPLAY | CART_JANITOR | CART_SECURITY | CART_NEWSCASTER | CART_QUARTERMASTER | CART_DRONEPHONE
 	bot_access_flags = MULE_BOT | CLEAN_BOT
 
 /obj/item/cartridge/hos
 	name = "\improper R.O.B.U.S.T. DELUXE cartridge"
 	icon_state = "cart-hos"
-	access = CART_MANIFEST | CART_STATUS_DISPLAY | CART_SECURITY
+	access = CART_STATUS_DISPLAY | CART_SECURITY
 	bot_access_flags = SEC_BOT
 
 
 /obj/item/cartridge/ce
 	name = "\improper Power-On DELUXE cartridge"
 	icon_state = "cart-ce"
-	access = CART_MANIFEST | CART_STATUS_DISPLAY | CART_ENGINE | CART_ATMOS | CART_DRONEPHONE
+	access = CART_STATUS_DISPLAY | CART_ENGINE | CART_ATMOS | CART_DRONEPHONE
 	bot_access_flags = FLOOR_BOT | FIRE_BOT
 
 /obj/item/cartridge/cmo
 	name = "\improper Med-U DELUXE cartridge"
 	icon_state = "cart-cmo"
-	access = CART_MANIFEST | CART_STATUS_DISPLAY | CART_REAGENT_SCANNER | CART_MEDICAL
+	access = CART_STATUS_DISPLAY | CART_REAGENT_SCANNER | CART_MEDICAL
 	bot_access_flags = MED_BOT
 
 /obj/item/cartridge/rd
 	name = "\improper Signal Ace DELUXE cartridge"
 	icon_state = "cart-rd"
-	access = CART_MANIFEST | CART_STATUS_DISPLAY | CART_REAGENT_SCANNER | CART_ATMOS | CART_DRONEPHONE
+	access = CART_STATUS_DISPLAY | CART_REAGENT_SCANNER | CART_ATMOS | CART_DRONEPHONE
 	bot_access_flags = FLOOR_BOT | CLEAN_BOT | MED_BOT | FIRE_BOT
 
 /obj/item/cartridge/rd/Initialize()
@@ -182,7 +184,7 @@
 	name = "\improper Value-PAK cartridge"
 	desc = "Now with 350% more value!" //Give the Captain...EVERYTHING! (Except Mime, Clown, and Syndie)
 	icon_state = "cart-c"
-	access = ~(CART_CLOWN | CART_MIME | CART_REMOTE_DOOR)
+	access = ~(CART_CLOWN | CART_MIME | CART_REMOTE_DOOR | CART_NEWSCASTER)
 	bot_access_flags = SEC_BOT | MULE_BOT | FLOOR_BOT | CLEAN_BOT | MED_BOT | FIRE_BOT
 	spam_enabled = 1
 
@@ -215,7 +217,6 @@
 			menu = "<h4>[PDAIMG(signaler)] Remote Signaling System</h4>"
 
 			menu += {"
-<a href='byond://?src=[REF(src)];choice=Send Signal'>Send Signal</A><BR>
 Frequency:
 <a href='byond://?src=[REF(src)];choice=Signal Frequency;sfreq=-10'>-</a>
 <a href='byond://?src=[REF(src)];choice=Signal Frequency;sfreq=-2'>-</a>
@@ -228,25 +229,16 @@ Code:
 <a href='byond://?src=[REF(src)];choice=Signal Code;scode=-1'>-</a>
 [radio.code]
 <a href='byond://?src=[REF(src)];choice=Signal Code;scode=1'>+</a>
-<a href='byond://?src=[REF(src)];choice=Signal Code;scode=5'>+</a><br>"}
-		if (41) //crew manifest
-
-			menu = "<h4>[PDAIMG(notes)] Crew Manifest</h4>"
-			menu += "Entries cannot be modified from this terminal.<br><br>"
-			if(GLOB.data_core.general)
-				for (var/datum/data/record/t in sortRecord(GLOB.data_core.general))
-					menu += "[t.fields["name"]] - [t.fields["rank"]]<br>"
-			menu += "<br>"
-
-
+<a href='byond://?src=[REF(src)];choice=Signal Code;scode=5'>+</a><br><br>
+<a href='byond://?src=[REF(src)];choice=Send Signal'>Send Signal</A><BR>"}
 		if (42) //status displays
 			menu = "<h4>[PDAIMG(status)] Station Status Display Interlink</h4>"
 
 			menu += "\[ <A HREF='?src=[REF(src)];choice=Status;statdisp=blank'>Clear</A> \]<BR>"
 			menu += "\[ <A HREF='?src=[REF(src)];choice=Status;statdisp=shuttle'>Shuttle ETA</A> \]<BR>"
 			menu += "\[ <A HREF='?src=[REF(src)];choice=Status;statdisp=message'>Message</A> \]"
-			menu += "<ul><li> Line 1: <A HREF='?src=[REF(src)];choice=Status;statdisp=setmsg1'>[ message1 ? message1 : "(none)"]</A>"
-			menu += "<li> Line 2: <A HREF='?src=[REF(src)];choice=Status;statdisp=setmsg2'>[ message2 ? message2 : "(none)"]</A></ul><br>"
+			menu += "<ul><li> Line 1: <A HREF='?src=[REF(src)];choice=Status;statdisp=setmsg1'>[ message1 ? message1 : "(None)"]</A>"
+			menu += "<li> Line 2: <A HREF='?src=[REF(src)];choice=Status;statdisp=setmsg2'>[ message2 ? message2 : "(None)"]</A></ul><br>"
 			menu += "\[ Alert: <A HREF='?src=[REF(src)];choice=Status;statdisp=alert;alert=default'>None</A> |"
 			menu += " <A HREF='?src=[REF(src)];choice=Status;statdisp=alert;alert=redalert'>Red Alert</A> |"
 			menu += " <A HREF='?src=[REF(src)];choice=Status;statdisp=alert;alert=lockdown'>Lockdown</A> |"
@@ -305,10 +297,14 @@ Code:
 
 					var/list/S = list(" Off","AOff","  On", " AOn")
 					var/list/chg = list("N","C","F")
-
+//Neither copytext nor copytext_char is appropriate here; neither 30 UTF-8 code units nor 30 code points equates to 30 columns of output.
+//Some glyphs are very tall or very wide while others are small or even take up no space at all.
+//Emojis can take modifiers which are many characters but render as only one glyph.
+//A proper solution here (as far as Unicode goes, maybe not ideal as far as markup goes, a table would be better)
+//would be to use <span style="width: NNNpx; overflow: none;">[A.area.name]</span>
 					for(var/obj/machinery/power/apc/A in L)
-						menu += copytext(add_tspace(A.area.name, 30), 1, 30)
-						menu += " [S[A.equipment+1]] [S[A.lighting+1]] [S[A.environ+1]] [add_lspace(DisplayPower(A.lastused_total), 6)]  [A.cell ? "[add_lspace(round(A.cell.percent()), 3)]% [chg[A.charging+1]]" : "  N/C"]<BR>"
+						menu += copytext_char(add_trailing(A.area.name, 30, " "), 1, 30)
+						menu += " [S[A.equipment+1]] [S[A.lighting+1]] [S[A.environ+1]] [add_leading(DisplayPower(A.lastused_total), 6, " ")]  [A.cell ? "[add_leading(round(A.cell.percent()), 3, " ")]% [chg[A.charging+1]]" : "  N/C"]<BR>"
 
 				menu += "</FONT></PRE>"
 
@@ -316,7 +312,7 @@ Code:
 			menu = "<h4>[PDAIMG(medical)] Medical Record List</h4>"
 			if(GLOB.data_core.general)
 				for(var/datum/data/record/R in sortRecord(GLOB.data_core.general))
-					menu += "<a href='byond://?src=[REF(src)];choice=Medical Records;target=[R.fields["id"]]'>[R.fields["id"]]: [R.fields["name"]]<br>"
+					menu += "[PDAIMG(medical)]   <a href='byond://?src=[REF(src)];choice=Medical Records;target=[R.fields["id"]]'>[R.fields["id"]]: [R.fields["name"]]</a><br>"
 			menu += "<br>"
 		if(441)
 			menu = "<h4>[PDAIMG(medical)] Medical Record</h4>"
@@ -359,7 +355,7 @@ Code:
 			menu = "<h4>[PDAIMG(cuffs)] Security Record List</h4>"
 			if(GLOB.data_core.general)
 				for (var/datum/data/record/R in sortRecord(GLOB.data_core.general))
-					menu += "<a href='byond://?src=[REF(src)];choice=Security Records;target=[R.fields["id"]]'>[R.fields["id"]]: [R.fields["name"]]<br>"
+					menu += "[PDAIMG(cuffs)]  <a href='byond://?src=[REF(src)];choice=Security Records;target=[R.fields["id"]]'>[R.fields["id"]]: [R.fields["name"]]</a><br>"
 
 			menu += "<br>"
 		if(451)
@@ -452,7 +448,7 @@ Code:
 			for(var/S in SSshuttle.requestlist)
 				var/datum/supply_order/SO = S
 				menu += "<li>#[SO.id] - [SO.pack.name] requested by [SO.orderer]</li>"
-			menu += "</ol><font size=\"-3\">Upgrade NOW to Space Parts & Space Vendors PLUS for full remote order control and inventory management."
+			// menu += "</ol><font size=\"-3\">Upgrade NOW to Space Parts & Space Vendors PLUS for full remote order control and inventory management." DOESNT EXIST, SO COMMENTED OUT
 
 		if (48) // quartermaster ore logs
 			menu = list("<h4>[PDAIMG(crate)] Ore Silo Logs</h4>")
@@ -559,6 +555,22 @@ Code:
 		if (54) // Beepsky, Medibot, Floorbot, and Cleanbot access
 			menu = "<h4>[PDAIMG(medbot)] Bots Interlink</h4>"
 			bot_control()
+		if (55) // Emoji Guidebook for mimes
+			menu = "<h4>[PDAIMG(emoji)] Emoji Guidebook</h4>"
+			var/static/list/emoji_icon_states
+			var/static/emoji_table
+			if(!emoji_table)
+				var/datum/asset/spritesheet/sheet = get_asset_datum(/datum/asset/spritesheet/goonchat)
+				var/list/collate = list("<br><table>")
+				for(var/emoji in sortList(icon_states(icon('icons/emoji.dmi'))))
+					var/tag = sheet.icon_tag("emoji-[emoji]")
+					collate += "<tr><td>[emoji]</td><td>[tag]</td></tr>"
+				collate += "</table><br>"
+				emoji_table = collate.Join()
+
+			menu += "<br> To use an emoji in a pda message, refer to the guide and add \":\" around the emoji. Your PDA supports the following emoji:<br>"
+			menu += emoji_table
+
 		if (99) //Newscaster message permission error
 			menu = "<h5> ERROR : NOT AUTHORIZED [host_pda.id ? "" : "- ID SLOT EMPTY"] </h5>"
 
@@ -647,6 +659,11 @@ Code:
 			host_pda.Topic(null,list("choice"=num2text(host_pda.mode)))
 			return
 
+	//emoji previews
+	if(href_list["emoji"])
+		var/parse = emoji_parse(":[href_list["emoji"]]:")
+		to_chat(usr, parse)
+
 	//Bot control section! Viciously ripped from radios for being laggy and terrible.
 	if(href_list["op"])
 		switch(href_list["op"])
@@ -682,31 +699,31 @@ Code:
 			if(active_bot.paicard && active_bot.paicard.pai)
 				menu += "[active_bot.paicard.pai.name]"
 				if(active_bot.bot_core.allowed(usr))
-					menu += " (<A href='byond://?src=[REF(src)];op=ejectpai'><i>eject</i></A>)"
+					menu += " (<A href='byond://?src=[REF(src)];op=ejectpai'><i>Eject</i></A>)"
 			else
-				menu += "<i>none</i>"
+				menu += "<i>None</i>"
 
 		//MULEs!
 		if(active_bot.bot_type == MULE_BOT)
 			var/mob/living/simple_animal/bot/mulebot/MULE = active_bot
 			var/atom/Load = MULE.load
-			menu += "<BR>Current Load: [ !Load ? "<i>none</i>" : "[Load.name] (<A href='byond://?src=[REF(src)];mule=unload'><i>unload</i></A>)" ]<BR>"
-			menu += "Destination: [MULE.destination ? MULE.destination : "<i>None</i>"] (<A href='byond://?src=[REF(src)];mule=destination'><i>set</i></A>)<BR>"
+			menu += "<BR>Current Load: [ !Load ? "<i>None</i>" : "[Load.name] (<A href='byond://?src=[REF(src)];mule=unload'><i>Unload</i></A>)" ]<BR>"
+			menu += "Destination: [MULE.destination ? MULE.destination : "<i>None</i>"] <A href='byond://?src=[REF(src)];mule=destination'><i>Set</i></A><BR>"
 			menu += "Set ID: [MULE.suffix] <A href='byond://?src=[REF(src)];mule=setid'><i> Modify</i></A><BR>"
 			menu += "Power: [MULE.cell ? MULE.cell.percent() : 0]%<BR>"
-			menu += "Home: [!MULE.home_destination ? "<i>none</i>" : MULE.home_destination ]<BR>"
-			menu += "Delivery Reporting: <A href='byond://?src=[REF(src)];mule=report'>[MULE.report_delivery ? "(<B>On</B>)": "(<B>Off</B>)"]</A><BR>"
-			menu += "Auto Return Home: <A href='byond://?src=[REF(src)];mule=autoret'>[MULE.auto_return ? "(<B>On</B>)": "(<B>Off</B>)"]</A><BR>"
-			menu += "Auto Pickup Crate: <A href='byond://?src=[REF(src)];mule=autopick'>[MULE.auto_pickup ? "(<B>On</B>)": "(<B>Off</B>)"]</A><BR><BR>" //Hue.
+			menu += "Home: [!MULE.home_destination ? "<i>None</i>" : MULE.home_destination ]<BR>"
+			menu += "Delivery Reporting: <A href='byond://?src=[REF(src)];mule=report'>[MULE.report_delivery ? "<B>On</B>": "<B>Off</B>"]</A><BR>"
+			menu += "Auto Return Home: <A href='byond://?src=[REF(src)];mule=autoret'>[MULE.auto_return ? "<B>On</B>": "<B>Off</B>"]</A><BR>"
+			menu += "Auto Pickup Crate: <A href='byond://?src=[REF(src)];mule=autopick'>[MULE.auto_pickup ? "<B>On</B>": "<B>Off</B>"]</A><BR><BR>" //Hue.
 
-			menu += "\[<A href='byond://?src=[REF(src)];mule=stop'>Stop</A>\] "
-			menu += "\[<A href='byond://?src=[REF(src)];mule=go'>Proceed</A>\] "
-			menu += "\[<A href='byond://?src=[REF(src)];mule=home'>Return Home</A>\]<BR>"
+			menu += "<A href='byond://?src=[REF(src)];mule=stop'>Stop</A> "
+			menu += "<A href='byond://?src=[REF(src)];mule=go'>Proceed</A> "
+			menu += "<A href='byond://?src=[REF(src)];mule=home'>Return Home</A><BR>"
 
 		else
-			menu += "<BR>\[<A href='byond://?src=[REF(src)];op=patroloff'>Stop Patrol</A>\] "	//patrolon
-			menu += "\[<A href='byond://?src=[REF(src)];op=patrolon'>Start Patrol</A>\] "	//patroloff
-			menu += "\[<A href='byond://?src=[REF(src)];op=summon'>Summon Bot</A>\]<BR>"		//summon
+			menu += "<BR><A href='byond://?src=[REF(src)];op=patroloff'>Stop Patrol</A>"	//patrolon
+			menu += "<A href='byond://?src=[REF(src)];op=patrolon'>Start Patrol</A>"	//patroloff
+			menu += "<A href='byond://?src=[REF(src)];op=summon'>Summon Bot</A><BR>"		//summon
 			menu += "Keep an ID inserted to upload access codes upon summoning."
 
 		menu += "<HR><A href='byond://?src=[REF(src)];op=botlist'>[PDAIMG(back)]Return to bot list</A>"
@@ -719,7 +736,7 @@ Code:
 			var/mob/living/simple_animal/bot/Bot = B
 			if(!Bot.on || Bot.z != zlevel || Bot.remote_disabled || !(bot_access_flags & Bot.bot_type)) //Only non-emagged bots on the same Z-level are detected!
 				continue //Also, the PDA must have access to the bot type.
-			menu += "<A href='byond://?src=[REF(src)];op=control;bot=[REF(Bot)]'><b>[Bot.name]</b> ([Bot.get_mode()])<BR>"
+			menu += "[PDAIMG(medbot)]   <A href='byond://?src=[REF(src)];op=control;bot=[REF(Bot)]'><b>[Bot.name]</b> ([Bot.get_mode()])</a><BR>"
 			botcount++
 		if(!botcount) //No bots at all? Lame.
 			menu += "No bots found.<BR>"

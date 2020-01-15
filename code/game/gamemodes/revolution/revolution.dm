@@ -55,6 +55,8 @@
 		setup_error = "Not enough headrev candidates"
 		return FALSE
 
+	for(var/antag in headrev_candidates)
+		GLOB.pre_setup_antags += antag
 	return TRUE
 
 /datum/game_mode/revolution/post_setup()
@@ -97,6 +99,7 @@
 		new_head.give_hud = TRUE
 		new_head.remove_clumsy = TRUE
 		rev_mind.add_antag_datum(new_head,revolution)
+		GLOB.pre_setup_antags -= rev_mind
 
 	revolution.update_objectives()
 	revolution.update_heads()
@@ -213,3 +216,21 @@
 					N.timer_set = 200
 					N.set_safety()
 					N.set_active()
+
+
+/datum/game_mode/revolution/generate_credit_text()
+	var/list/round_credits = list()
+	var/len_before_addition
+
+	round_credits += "<center><h1>The Disgruntled Revolutionaries:</h1>"
+	len_before_addition = round_credits.len
+	for(var/datum/mind/headrev in revolution.head_revolutionaries())
+		round_credits += "<center><h2>[headrev.name] as a revolutionary leader</h2>"
+	for(var/datum/mind/grunt in (revolution.members - revolution.head_revolutionaries()))
+		round_credits += "<center><h2>[grunt.name] as a grunt of the revolution</h2>"
+	if(len_before_addition == round_credits.len)
+		round_credits += list("<center><h2>The revolutionaries were all destroyed as martyrs!</h2>", "<center><h2>We couldn't identify their remains!</h2>")
+	round_credits += "<br>"
+
+	round_credits += ..()
+	return round_credits
