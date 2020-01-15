@@ -23,6 +23,7 @@
 	meat = /obj/item/reagent_containers/food/snacks/meat/slab/human/mutant/squid
 	exotic_bloodtype = "S"
 	no_equip = list(ITEM_SLOT_FEET)
+	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_PRIDE | MIRROR_MAGIC | RACE_SWAP | ERT_SPAWN | SLIME_EXTRACT
 
 /datum/species/lizard/after_equip_job(datum/job/J, mob/living/carbon/human/H)
 	H.grant_language(/datum/language/rylethian)
