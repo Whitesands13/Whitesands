@@ -5167,6 +5167,12 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/security/brig)
+"akV" = (
+/obj/machinery/stasis,
+/turf/open/floor/plasteel/white/side{
+	dir = 8
+	},
+/area/medical/sleeper)
 "akW" = (
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/machinery/door/airlock/security/glass{
@@ -5201,6 +5207,18 @@
 	},
 /turf/open/floor/plasteel,
 /area/security/brig)
+"akY" = (
+/obj/machinery/camera{
+	c_tag = "Medbay Treatment Center";
+	dir = 8;
+	network = list("ss13","medbay")
+	},
+/obj/machinery/sleeper{
+	icon_state = "sleeper";
+	dir = 1
+	},
+/turf/open/floor/plasteel,
+/area/medical/sleeper)
 "alb" = (
 /obj/structure/chair{
 	dir = 4;
@@ -27295,6 +27313,7 @@
 	dir = 4
 	},
 /obj/structure/cable,
+/obj/effect/landmark/start/paramedic,
 /turf/open/floor/plasteel/white,
 /area/medical/medbay/central)
 "bsz" = (
@@ -28718,7 +28737,7 @@
 /turf/open/floor/plasteel/white,
 /area/medical/sleeper)
 "bwD" = (
-/obj/machinery/stasis,
+/obj/machinery/sleeper,
 /turf/open/floor/plasteel,
 /area/medical/sleeper)
 "bwE" = (
@@ -30225,15 +30244,6 @@
 	pixel_x = -24
 	},
 /turf/open/floor/plasteel/white,
-/area/medical/sleeper)
-"bAq" = (
-/obj/machinery/camera{
-	c_tag = "Medbay Treatment Center";
-	dir = 8;
-	network = list("ss13","medbay")
-	},
-/obj/machinery/stasis,
-/turf/open/floor/plasteel,
 /area/medical/sleeper)
 "bAr" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
@@ -34683,6 +34693,7 @@
 /area/medical/medbay/central)
 "bLX" = (
 /obj/machinery/atmospherics/pipe/manifold4w/scrubbers,
+/obj/effect/landmark/start/paramedic,
 /turf/open/floor/plasteel/white,
 /area/medical/medbay/central)
 "bLY" = (
@@ -49590,6 +49601,10 @@
 /obj/structure/table,
 /turf/open/floor/plasteel,
 /area/hydroponics)
+"fGg" = (
+/obj/effect/landmark/start/paramedic,
+/turf/open/floor/plasteel/white,
+/area/medical/sleeper)
 "fGF" = (
 /obj/machinery/portable_atmospherics/scrubber,
 /obj/effect/turf_decal/bot,
@@ -52418,9 +52433,8 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/research{
-	abandoned = "47, 9";
 	name = "Genetics Lab";
-	req_access_txt = "47"
+	req_access_txt = "9"
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -88764,7 +88778,7 @@ btg
 buk
 bvm
 bDT
-buk
+akV
 bvh
 bzU
 bBe
@@ -89021,7 +89035,7 @@ bvh
 bwD
 bDR
 bDR
-bAq
+akY
 bvj
 bCQ
 bDW
@@ -90053,7 +90067,7 @@ bAs
 bvj
 bCL
 bxO
-bDR
+fGg
 bDR
 bIk
 bJC
