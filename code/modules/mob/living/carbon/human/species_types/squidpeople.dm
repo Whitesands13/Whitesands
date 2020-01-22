@@ -24,6 +24,9 @@
 	exotic_bloodtype = "S"
 	no_equip = list(ITEM_SLOT_FEET)
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_PRIDE | MIRROR_MAGIC | RACE_SWAP | ERT_SPAWN | SLIME_EXTRACT
+	loreblurb = "A race of squid-like amphibians with an odd appearance. \
+	They posses the ability to change their pigmentation at will, often leading to confusion. \
+	Nanotrasen ensures that the Yaggoli do not eat human grey matter, and such reports will be discarded."
 
 /datum/species/lizard/after_equip_job(datum/job/J, mob/living/carbon/human/H)
 	H.grant_language(/datum/language/rylethian)
