@@ -5,6 +5,12 @@
 	results = list(/datum/reagent/space_cleaner/sterilizine = 3)
 	required_reagents = list(/datum/reagent/consumable/ethanol = 1, /datum/reagent/medicine/charcoal = 1, /datum/reagent/chlorine = 1)
 
+/datum/chemical_reaction/oganesson
+	name = "Oganesson"
+	id = /datum/reagent/oganesson
+	results = list(/datum/reagent/oganesson = 2)
+	required_reagents = list(/datum/reagent/medicine/calomel = 1, /datum/reagent/medicine/corazone = 1)
+
 /datum/chemical_reaction/lube
 	name = "Space Lube"
 	id = /datum/reagent/lube
