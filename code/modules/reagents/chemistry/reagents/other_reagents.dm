@@ -725,6 +725,13 @@
 	color = "#BF8C00" // rgb: 191, 140, 0
 	taste_description = "rotten eggs"
 
+/datum/reagent/oganesson
+	name = "Oganesson"
+	description = "I don't think this is supposed to exist"
+	reagent_state = SOLID
+	color = "#BF8C00" // rgb: 191, 140, 0
+	taste_description = "alpha radiation"
+
 /datum/reagent/carbon
 	name = "Carbon"
 	description = "A crumbly black solid that, while unexciting on a physical level, forms the base of all known life. Kind of a big deal."
