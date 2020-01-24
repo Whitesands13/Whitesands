@@ -138,6 +138,7 @@
 		/datum/reagent/drug/crank,\
 		/datum/reagent/blackpowder,\
 		/datum/reagent/napalm,\
+		/datum/reagent/oganesson,\
 		/datum/reagent/firefighting_foam,\
 		/datum/reagent/consumable/mayonnaise,\
 		/datum/reagent/toxin/itching_powder,\
