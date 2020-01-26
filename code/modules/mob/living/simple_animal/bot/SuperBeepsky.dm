@@ -19,17 +19,17 @@
 	maxHealth = 50
 	baton_type = /obj/item/toy/sword
 	weapon_force = 0
+	
+/mob/living/simple_animal/bot/secbot/grievous/bullet_act(obj/projectile/P)
+	visible_message("<span class='warning'>[src] deflects [P] with its energy swords!</span>")
+	playsound(src, 'sound/weapons/blade1.ogg', 50, TRUE)
+	return BULLET_ACT_BLOCK
 
 /mob/living/simple_animal/bot/secbot/grievous/nullcrate
 	name = "General Griefsky"
 	desc = "The Syndicate sends their regards."
 	emagged = 2
 	noloot = TRUE
-
-/mob/living/simple_animal/bot/secbot/grievous/bullet_act(obj/item/projectile/P)
-	visible_message("[src] deflects the missile with its energy swords!")
-	playsound(src, 'sound/weapons/blade1.ogg', 50, TRUE)
-	return BULLET_ACT_BLOCK
 
 /mob/living/simple_animal/bot/secbot/grievous/Crossed(atom/movable/AM)
 	..()
