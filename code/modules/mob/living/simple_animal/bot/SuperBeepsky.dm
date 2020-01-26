@@ -27,7 +27,7 @@
 	noloot = TRUE
 
 /mob/living/simple_animal/bot/secbot/grievous/bullet_act(obj/item/projectile/P)
-	visible_message("[src] deflects [P] with its energy swords!")
+	visible_message("[src] deflects the missile with its energy swords!")
 	playsound(src, 'sound/weapons/blade1.ogg', 50, TRUE)
 	return BULLET_ACT_BLOCK
 
