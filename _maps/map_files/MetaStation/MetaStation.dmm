@@ -1307,7 +1307,6 @@
 	dir = 8
 	},
 /obj/machinery/sleeper{
-	icon_state = "sleeper";
 	dir = 4
 	},
 /turf/open/floor/plasteel/white,
@@ -1327,7 +1326,6 @@
 	dir = 8
 	},
 /obj/machinery/sleeper{
-	icon_state = "sleeper";
 	dir = 8
 	},
 /turf/open/floor/plasteel/white,
@@ -2608,16 +2606,10 @@
 /turf/open/floor/plasteel,
 /area/security/range)
 "afs" = (
-/obj/machinery/shower{
-	dir = 4
+/obj/machinery/light/small{
+	dir = 1
 	},
-/obj/machinery/door/window/eastright{
-	base_state = "left";
-	dir = 2;
-	icon_state = "left";
-	name = "shower"
-	},
-/turf/open/floor/plasteel/freezer,
+/turf/open/floor/plasteel,
 /area/crew_quarters/fitness/recreation)
 "aft" = (
 /obj/structure/reagent_dispensers/water_cooler,
@@ -3135,25 +3127,6 @@
 "agq" = (
 /turf/closed/wall,
 /area/maintenance/fore)
-"agr" = (
-/obj/structure/sink{
-	dir = 4;
-	pixel_x = -12;
-	pixel_y = 2
-	},
-/obj/machinery/button/door{
-	id = "FitnessShower";
-	name = "Lock Control";
-	normaldoorcontrol = 1;
-	pixel_y = -25;
-	specialfunctions = 4
-	},
-/obj/structure/mirror{
-	pixel_x = -28
-	},
-/obj/machinery/light/small,
-/turf/open/floor/plasteel/freezer,
-/area/crew_quarters/fitness/recreation)
 "ags" = (
 /obj/machinery/door/airlock{
 	id_tag = "FitnessShower";
@@ -3834,10 +3807,6 @@
 /obj/effect/decal/cleanable/cobweb/cobweb2,
 /turf/open/floor/plating,
 /area/maintenance/fore)
-"ahR" = (
-/obj/item/cigbutt,
-/turf/open/floor/plating,
-/area/maintenance/fore)
 "ahS" = (
 /turf/open/floor/plating{
 	icon_state = "platingdmg1"
@@ -3849,10 +3818,16 @@
 /turf/open/floor/plasteel,
 /area/maintenance/disposal/incinerator)
 "ahU" = (
-/obj/effect/decal/cleanable/cobweb/cobweb2,
-/obj/structure/table,
-/obj/effect/spawner/lootdrop/maintenance/two,
-/turf/open/floor/plating,
+/obj/machinery/shower{
+	dir = 4
+	},
+/obj/machinery/door/window/eastright{
+	base_state = "left";
+	dir = 2;
+	icon_state = "left";
+	name = "shower"
+	},
+/turf/open/floor/plasteel/freezer,
 /area/maintenance/fore)
 "ahV" = (
 /obj/machinery/firealarm{
@@ -4278,27 +4253,25 @@
 /obj/effect/turf_decal/bot,
 /turf/open/floor/plasteel,
 /area/engine/atmos)
-"aiO" = (
-/obj/structure/chair/stool{
-	pixel_y = 8
-	},
-/turf/open/floor/plating,
-/area/maintenance/fore)
 "aiP" = (
-/obj/structure/table,
-/obj/item/folder,
-/turf/open/floor/plating,
+/obj/structure/sink{
+	dir = 4;
+	pixel_x = -12;
+	pixel_y = 2
+	},
+/obj/machinery/button/door{
+	id = "FitnessShower";
+	name = "Lock Control";
+	normaldoorcontrol = 1;
+	pixel_y = -25;
+	specialfunctions = 4
+	},
+/obj/structure/mirror{
+	pixel_x = -28
+	},
+/obj/machinery/light/small,
+/turf/open/floor/plasteel/freezer,
 /area/maintenance/fore)
-"aiQ" = (
-/obj/structure/extinguisher_cabinet{
-	pixel_x = -27
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/structure/cable,
-/turf/open/floor/plasteel,
-/area/crew_quarters/fitness/recreation)
 "aiR" = (
 /obj/structure/table,
 /obj/item/clothing/under/suit/sl,
@@ -69358,12 +69331,6 @@
 	},
 /turf/open/space,
 /area/space/nearstation)
-"dhn" = (
-/obj/structure/table,
-/obj/item/poster/random_contraband,
-/obj/effect/spawner/lootdrop/maintenance,
-/turf/open/floor/plating,
-/area/maintenance/fore)
 "dho" = (
 /obj/item/stack/sheet/cardboard,
 /obj/structure/light_construct/small{
@@ -69385,9 +69352,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 6
-	},
-/obj/structure/sign/poster/official/random{
-	pixel_x = -32
 	},
 /obj/structure/cable,
 /turf/open/floor/plasteel,
@@ -73063,6 +73027,15 @@
 	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/central)
+"kbH" = (
+/obj/machinery/cryopod{
+	dir = 4
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 6
+	},
+/turf/open/floor/plasteel/freezer,
+/area/crew_quarters/fitness/recreation)
 "kcI" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/landmark/start/janitor,
@@ -73411,6 +73384,10 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/port/aft)
+"lvb" = (
+/obj/structure/lattice,
+/turf/closed/wall,
+/area/space/nearstation)
 "lwA" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -74037,6 +74014,15 @@
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
 /area/science/misc_lab/range)
+"ocV" = (
+/obj/machinery/cryopod{
+	dir = 4
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 5
+	},
+/turf/open/floor/plasteel/freezer,
+/area/crew_quarters/fitness/recreation)
 "odU" = (
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
@@ -74604,6 +74590,12 @@
 /obj/machinery/camera/autoname,
 /turf/open/floor/plasteel,
 /area/security/checkpoint/engineering)
+"qdA" = (
+/obj/machinery/door/airlock/public/glass{
+	name = "Cryogenic Lounge"
+	},
+/turf/open/floor/plasteel,
+/area/crew_quarters/fitness/recreation)
 "qdT" = (
 /obj/effect/turf_decal/tile/yellow{
 	dir = 4
@@ -75400,6 +75392,16 @@
 /obj/machinery/meter,
 /turf/open/floor/engine,
 /area/engine/engineering)
+"sUN" = (
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/structure/cable,
+/obj/structure/extinguisher_cabinet{
+	pixel_x = -27
+	},
+/turf/open/floor/plasteel,
+/area/crew_quarters/fitness/recreation)
 "sWn" = (
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden{
 	dir = 1
@@ -76464,6 +76466,9 @@
 /obj/machinery/door/firedoor,
 /turf/open/floor/plating,
 /area/security/checkpoint/customs)
+"xzl" = (
+/turf/open/space/basic,
+/area/maintenance/fore)
 "xAp" = (
 /obj/structure/chair/comfy,
 /obj/machinery/power/apc/auto_name/north,
@@ -110120,7 +110125,7 @@ aaf
 aaf
 aaf
 aaa
-agq
+xzl
 agq
 agq
 agq
@@ -110375,11 +110380,11 @@ aaa
 aaa
 aaf
 aaa
-aaf
+lMJ
 aaa
+xzl
 agq
 ahd
-ahR
 aje
 aje
 alc
@@ -110632,11 +110637,11 @@ aaa
 aaa
 aaf
 aaa
-aaf
-aaf
+lvb
+blx
+agq
 agq
 ahe
-ahS
 aje
 ajP
 ald
@@ -110890,12 +110895,12 @@ aaa
 aaf
 aaa
 acP
+ocV
+kbH
 acP
-acP
-acP
-dhn
-aiO
-aje
+agq
+agq
+agq
 ale
 ahS
 agq
@@ -111146,9 +111151,9 @@ aaf
 aaf
 aaf
 aaf
-acQ
+acP
 afs
-agr
+ahg
 acP
 ahU
 aiP
@@ -111404,11 +111409,11 @@ aaa
 aaf
 aaa
 acP
+acQ
+qdA
+acP
 acP
 ags
-acP
-acP
-acP
 acP
 alf
 amv
@@ -111663,9 +111668,9 @@ aaa
 acQ
 aft
 agt
-agt
+sUN
 ahV
-aiQ
+agt
 dhp
 alg
 alg
