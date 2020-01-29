@@ -501,5 +501,4 @@
 	if(isturf(loc))	
 		new/obj/machinery/am_shielding(loc)	
 		qdel(src)	
->>>>>>> 8ac168c3abef280c0096f99c9176ffb57b2def1d
 		return TRUE
