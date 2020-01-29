@@ -249,7 +249,7 @@
 	if(isturf(loc))
 		new/obj/machinery/am_shielding(loc)
 		qdel(src)
-=======
+
 //like orange but only checks north/south/east/west for one step	
 /proc/cardinalrange(var/center)	
 	var/list/things = list()	
