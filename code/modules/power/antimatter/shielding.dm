@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 //like orange but only checks north/south/east/west for one step
 /proc/cardinalrange(var/center)
 	var/list/things = list()
