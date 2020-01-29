@@ -14,7 +14,7 @@
 		SSticker.Reboot("Restart requested from the discord.", "discord")
 		return "Rebooting..."
 	else
-		return "There are active admins on the server ([allmins.len])! Ask them to restart."
+		return "There are active admins on the server! Ask them to restart."
 
 /datum/tgs_chat_command/join
 	name = "join"
