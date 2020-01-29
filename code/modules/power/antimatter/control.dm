@@ -348,7 +348,7 @@
 		check_core_stability()
 
 	updateDialog()
-=======
+
 /obj/machinery/power/am_control_unit	
 	name = "antimatter control unit"	
 	desc = "This device injects antimatter into connected shielding units, the more antimatter injected the more power produced.  Wrench the device to set it up."	
