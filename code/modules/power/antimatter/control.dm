@@ -162,16 +162,10 @@
 	if(W.tool_behaviour == TOOL_WRENCH)	
 		if(!anchored)	
 			W.play_tool_sound(src, 75)	
-			user.visible_message("[user.name] secures the [src.name] to the floor.", \	
-				"<span class='notice'>You secure the anchor bolts to the floor.</span>", \	
-				"<span class='italics'>You hear a ratchet.</span>")	
 			src.anchored = TRUE	
 			connect_to_network()	
 		else if(!linked_shielding.len > 0)	
 			W.play_tool_sound(src, 75)	
-			user.visible_message("[user.name] unsecures the [src.name].", \	
-				"<span class='notice'>You remove the anchor bolts.</span>", \	
-				"<span class='italics'>You hear a ratchet.</span>")	
 			src.anchored = FALSE	
 			disconnect_from_network()	
 		else	
