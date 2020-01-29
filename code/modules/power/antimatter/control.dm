@@ -130,6 +130,13 @@
 	return
 
 
+/obj/machinery/power/am_control_unit/bullet_act(obj/item/projectile/Proj)
+	. = ..()
+	if(Proj.flag != "bullet")
+		stability -= Proj.force
+		check_stability()
+
+
 /obj/machinery/power/am_control_unit/power_change()
 	..()
 	if(stat & NOPOWER)
