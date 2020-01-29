@@ -530,9 +530,6 @@
 		if(!user.transferItemToLoc(W, src))	
 			return	
 		fueljar = W	
-		user.visible_message("[user.name] loads an [W.name] into the [src.name].", \	
-				"<span class='notice'>You load an [W.name].</span>", \	
-				"<span class='italics'>You hear a thunk.</span>")	
 	else	
 		return ..()	
 
