@@ -1595,7 +1595,7 @@ GLOBAL_LIST_INIT(uplink_items, subtypesof(/datum/uplink_item))
 /datum/uplink_item/race_restricted/syndigenetics
 	name = "Fire Breath"
 	desc = "One of our subsidiaries, 23AndMe, have recently found the formula of backtracking lizard's genetic trail and giving them the ability to breathe fire, much like their dragon ancestors."
-	cost = 6
+	cost = 5
 	item = /obj/item/dnainjector/firebreath
 	restricted_species = list("lizard")
 
