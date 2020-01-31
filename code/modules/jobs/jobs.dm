@@ -17,6 +17,7 @@ GLOBAL_LIST_INIT(medical_positions, list(
 	"Chief Medical Officer",
 	"Medical Doctor",
 	"Paramedic",
+	"Geneticist",
 	"Virologist",
 	"Chemist"))
 
@@ -24,7 +25,6 @@ GLOBAL_LIST_INIT(medical_positions, list(
 GLOBAL_LIST_INIT(science_positions, list(
 	"Research Director",
 	"Scientist",
-	"Geneticist",
 	"Roboticist"))
 
 
@@ -52,7 +52,8 @@ GLOBAL_LIST_INIT(security_positions, list(
 	"Head of Security",
 	"Warden",
 	"Detective",
-	"Security Officer"))
+	"Security Officer",
+	"Brig Physician"))
 
 
 GLOBAL_LIST_INIT(nonhuman_positions, list(

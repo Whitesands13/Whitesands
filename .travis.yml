@@ -3,9 +3,8 @@ dist: xenial
 sudo: false
 
 branches:
-  except:
-  - ___TGS3TempBranch
-  - ___TGSTempBranch
+  only:
+    - master
 
 matrix:
   include:
@@ -93,4 +92,4 @@ matrix:
         skip_cleanup: true
         local_dir: dmdoc
         github_token: $DMDOC_GITHUB_TOKEN
-        fqdn: codedocs.tgstation13.org
+        fqdn: waspstation.github.io

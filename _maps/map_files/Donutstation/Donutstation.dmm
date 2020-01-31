@@ -1743,6 +1743,9 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/red,
+/obj/machinery/computer/cargo/request{
+	dir = 8
+	},
 /turf/open/floor/plasteel,
 /area/security/main)
 "aen" = (
@@ -4225,19 +4228,6 @@
 /obj/structure/table/wood,
 /turf/open/floor/wood,
 /area/crew_quarters/bar)
-"akM" = (
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/structure/rack,
-/obj/item/clothing/gloves/boxing,
-/obj/item/clothing/mask/luchador/rudos,
-/obj/item/clothing/gloves/boxing/yellow,
-/obj/item/clothing/mask/luchador/tecnicos,
-/obj/item/clothing/gloves/boxing/green,
-/obj/item/clothing/mask/luchador,
-/turf/open/floor/plasteel,
-/area/crew_quarters/fitness)
 "akN" = (
 /obj/structure/rack,
 /obj/item/clothing/suit/armor/bulletproof{
@@ -12691,6 +12681,10 @@
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
 	},
+/obj/vehicle/ridden/wheelchair{
+	dir = 1
+	},
+/obj/effect/turf_decal/bot,
 /turf/open/floor/plasteel/white,
 /area/medical/medbay/central)
 "aII" = (
@@ -15265,7 +15259,9 @@
 	dir = 1;
 	network = list("ss13","Medical")
 	},
-/obj/machinery/sleeper,
+/obj/machinery/cryopod{
+	dir = 4
+	},
 /turf/open/floor/plasteel,
 /area/medical/sleeper)
 "aQi" = (
@@ -16345,7 +16341,7 @@
 /turf/open/floor/plating,
 /area/maintenance/starboard)
 "aTD" = (
-/obj/machinery/sleeper,
+/obj/machinery/stasis,
 /turf/open/floor/plasteel,
 /area/medical/sleeper)
 "aTE" = (
@@ -20285,6 +20281,10 @@
 "bdI" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer3{
 	dir = 4
+	},
+/obj/machinery/airalarm{
+	dir = 4;
+	pixel_x = -23
 	},
 /turf/open/floor/plasteel/white/side,
 /area/medical/sleeper)
@@ -42007,6 +42007,12 @@
 /obj/effect/turf_decal/delivery,
 /turf/open/floor/plasteel,
 /area/engine/engine_room)
+"eRH" = (
+/obj/machinery/computer/cargo/request,
+/turf/open/floor/plasteel/white/side{
+	dir = 10
+	},
+/area/science/research)
 "eSa" = (
 /obj/machinery/power/apc{
 	areastring = "/area/quartermaster/office";
@@ -43242,6 +43248,12 @@
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
 /area/security/brig)
+"hxM" = (
+/obj/machinery/computer/cargo/request{
+	dir = 4
+	},
+/turf/open/floor/plasteel,
+/area/engine/engineering)
 "hxO" = (
 /obj/structure/cable,
 /obj/structure/disposalpipe/segment{
@@ -43467,6 +43479,12 @@
 /obj/effect/turf_decal/bot,
 /turf/open/floor/plasteel,
 /area/engine/engine_room)
+"hUI" = (
+/obj/machinery/computer/cargo/request{
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/maintenance/port/aft)
 "hVt" = (
 /obj/structure/cable,
 /turf/open/floor/engine,
@@ -45757,6 +45775,12 @@
 /obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/engine/engineering)
+"nbB" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/floor/plasteel,
+/area/maintenance/fore)
 "nem" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -47460,6 +47484,16 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/medical/virology)
+"qpG" = (
+/obj/effect/turf_decal/stripes/end{
+	dir = 8
+	},
+/obj/machinery/cryopod,
+/obj/machinery/computer/cryopod{
+	pixel_y = 25
+	},
+/turf/open/floor/plasteel/showroomfloor,
+/area/crew_quarters/fitness)
 "qqo" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/bot,
@@ -50168,6 +50202,15 @@
 /obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/engine/engine_room)
+"vWC" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/computer/cargo/request{
+	dir = 1
+	},
+/turf/open/floor/plasteel/white,
+/area/medical/medbay/central)
 "vXg" = (
 /obj/machinery/dna_scannernew,
 /obj/machinery/light{
@@ -50617,7 +50660,7 @@
 /area/engine/engineering)
 "wMM" = (
 /obj/machinery/sleeper,
-/obj/machinery/airalarm{
+/obj/machinery/computer/cryopod{
 	pixel_y = 25
 	},
 /turf/open/floor/plasteel,
@@ -77644,7 +77687,7 @@ aXk
 aGT
 aGT
 aYa
-jdH
+vWC
 aJp
 aJp
 aJp
@@ -78619,7 +78662,7 @@ aaT
 bVq
 aQq
 adO
-akM
+aej
 aIE
 beq
 ber
@@ -78876,8 +78919,8 @@ asF
 bQr
 bSb
 adO
-adO
-aIW
+qpG
+nbB
 asG
 asG
 asG
@@ -78896,7 +78939,7 @@ adc
 adb
 alA
 aek
-aeB
+eRH
 aeB
 agN
 ajo
@@ -79132,9 +79175,9 @@ bQr
 aaT
 bXd
 bQh
-aaT
-nPi
-bfS
+adO
+adO
+aIW
 asG
 wtu
 aoT
@@ -79390,7 +79433,7 @@ aaT
 bQf
 bQi
 aaT
-bQr
+nPi
 hjz
 asG
 afr
@@ -82805,7 +82848,7 @@ amD
 aql
 bHe
 ahT
-aBx
+hUI
 aBx
 aBx
 bba
@@ -89211,7 +89254,7 @@ aor
 aor
 hrD
 aor
-aor
+hxM
 aor
 aTJ
 ofx

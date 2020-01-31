@@ -4,7 +4,7 @@
 	var/list/datum/mind/cult = list()
 
 /proc/iscultist(mob/living/M)
-	return istype(M) && M.mind && M.mind.has_antag_datum(/datum/antagonist/cult)
+	return M.mind?.has_antag_datum(/datum/antagonist/cult)
 
 /datum/team/cult/proc/is_sacrifice_target(datum/mind/mind)
 	for(var/datum/objective/sacrifice/sac_objective in objectives)
@@ -35,8 +35,7 @@
 	config_tag = "cult"
 	report_type = "cult"
 	antag_flag = ROLE_CULTIST
-	false_report_weight = 10
-	restricted_jobs = list("Chaplain","AI", "Cyborg", "Security Officer", "Warden", "Detective", "Head of Security", "Captain", "Head of Personnel")
+	restricted_jobs = list("Chaplain","AI", "Cyborg", "Security Officer", "Warden", "Detective", "Head of Security", "Captain", "Head of Personnel", "Brig Physician")
 	protected_jobs = list()
 	required_players = 29
 	required_enemies = 4

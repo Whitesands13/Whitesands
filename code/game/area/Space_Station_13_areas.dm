@@ -341,6 +341,11 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "Sleep"
 	safe = TRUE
 
+/area/crew_quarters/cryopods
+	name = "Cryopod Room"
+	safe = TRUE
+	icon_state = "cryopod"
+
 /area/crew_quarters/toilet
 	name = "Dormitory Toilets"
 	icon_state = "toilet"
@@ -900,10 +905,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "Toxins Mixing Chamber"
 	icon_state = "toxmix"
 	valid_territory = FALSE
-
-/area/science/genetics
-	name = "Genetics Lab"
-	icon_state = "geneticssci"
 
 /area/science/misc_lab
 	name = "Testing Lab"
