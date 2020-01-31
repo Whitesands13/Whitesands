@@ -580,7 +580,7 @@
 /datum/supply_pack/security/armory/energy
 	name = "Ion Rifle Crate"
 	desc = "Contains a single Mk.I Ion Projector, a special anti-tank rifle designed to disable electronic threats at range. Requires Armory level access to open."
-	cost = 5000
+	cost = 5500
 	contains = list(/obj/item/gun/energy/ionrifle)
 	crate_name = "ion rifle crate"
 	crate_type = /obj/structure/closet/crate/secure/plasma
