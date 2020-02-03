@@ -9,7 +9,7 @@
 
 /obj/item/pda/clown/ComponentInitialize()
 	. = ..()
-	AddComponent(/datum/component/slippery, 7SECONDS, NO_SLIP_WHEN_WALKING, CALLBACK(src, .proc/AfterSlip), 7SECONDS)
+	AddComponent(/datum/component/slippery, 5SECONDS, NO_SLIP_WHEN_WALKING, CALLBACK(src, .proc/AfterSlip), 5SECONDS)
 
 /obj/item/pda/clown/proc/AfterSlip(mob/living/carbon/human/M)
 	if (istype(M) && (M.real_name != owner))
