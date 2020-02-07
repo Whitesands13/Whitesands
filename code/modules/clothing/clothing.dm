@@ -181,7 +181,7 @@ BLIND     // can't see anything
 	female_clothing_icon 			= fcopy_rsc(female_clothing_icon)
 	GLOB.female_clothing_icons[index] = female_clothing_icon
 
-/obj/item/clothing/under/verb/toggle()
+/obj/item/clothing/under/verb/toggle(
 	set name = "Adjust Suit Sensors"
 	set category = "Object"
 	set src in usr
@@ -222,8 +222,6 @@ BLIND     // can't see anything
 		var/mob/living/carbon/human/H = loc
 		if(H.w_uniform == src)
 			H.update_suit_sensors()
-
-	..()
 
 /obj/item/clothing/under/attack_hand(mob/user)
 	if(attached_accessory && ispath(attached_accessory.pocket_storage_component_path) && loc == user)
