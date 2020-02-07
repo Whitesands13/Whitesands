@@ -181,7 +181,7 @@ BLIND     // can't see anything
 	female_clothing_icon 			= fcopy_rsc(female_clothing_icon)
 	GLOB.female_clothing_icons[index] = female_clothing_icon
 
-/obj/item/clothing/under/verb/toggle(
+/obj/item/clothing/under/verb/toggle()
 	set name = "Adjust Suit Sensors"
 	set category = "Object"
 	set src in usr
