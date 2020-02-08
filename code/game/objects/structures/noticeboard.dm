@@ -97,8 +97,8 @@
 	req_access = list(ACCESS_CAPTAIN)
 
 /obj/structure/noticeboard/hop
-	name = "Head of Personnel's Notice Board"
-	desc = "Important notices from the Head of Personnel."
+	name = "First Officer's Notice Board"
+	desc = "Important notices from the First Officer."
 	req_access = list(ACCESS_HOP)
 
 /obj/structure/noticeboard/ce

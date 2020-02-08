@@ -81,8 +81,8 @@
 #define ACCESS_CLONING 68
 /// Pharmacy access (Chemistry room in Medbay)
 #define ACCESS_PHARMACY 69 ///Nice.
-// Blueshield's Office
-#define ACCESS_BLUESHIELD 69
+// Second Officer's Office
+#define ACCESS_SECOND_OFFICER 70
 
 	//BEGIN CENTCOM ACCESS
 	/*Should leave plenty of room if we need to add more access levels.

@@ -1,6 +1,6 @@
 GLOBAL_LIST_INIT(command_positions, list(
 	"Captain",
-	"Head of Personnel",
+	"First Officer",
 	"Head of Security",
 	"Chief Engineer",
 	"Research Director",
@@ -29,7 +29,7 @@ GLOBAL_LIST_INIT(science_positions, list(
 
 
 GLOBAL_LIST_INIT(supply_positions, list(
-	"Head of Personnel",
+	"First Officer",
 	"Quartermaster",
 	"Cargo Technician",
 	"Shaft Miner"))
@@ -46,7 +46,7 @@ GLOBAL_LIST_INIT(civilian_positions, list(
 	"Clown",
 	"Mime",
 	"Assistant",
-	"Blueshield"))
+	"Second Officer"))
 
 
 GLOBAL_LIST_INIT(security_positions, list(
@@ -118,7 +118,7 @@ GLOBAL_PROTECT(exp_specialmap)
 	job = cap_expand.Replace(job, "captain")
 	job = cmo_expand.Replace(job, "chief medical officer")
 	job = hos_expand.Replace(job, "head of security")
-	job = hop_expand.Replace(job, "head of personnel")
+	job = hop_expand.Replace(job, "first officer")
 	job = rd_expand.Replace(job, "research director")
 	job = ce_expand.Replace(job, "chief engineer")
 	job = qm_expand.Replace(job, "quartermaster")

@@ -56,30 +56,30 @@
 	can_adjust = FALSE
 	fitted = FEMALE_UNIFORM_TOP
 
-/obj/item/clothing/under/rank/civilian/head_of_personnel
-	desc = "It's a jumpsuit worn by someone who works in the position of \"Head of Personnel\"."
-	name = "head of personnel's jumpsuit"
+/obj/item/clothing/under/rank/civilian/first_officer
+	desc = "It's a jumpsuit worn by someone who works in the position of \"First Officer\"."
+	name = "first officer's jumpsuit"
 	icon_state = "hop"
 	item_state = "b_suit"
 	can_adjust = FALSE
 
-/obj/item/clothing/under/rank/civilian/head_of_personnel/skirt
-	name = "head of personnel's jumpskirt"
-	desc = "It's a jumpskirt worn by someone who works in the position of \"Head of Personnel\"."
+/obj/item/clothing/under/rank/civilian/first_officer/skirt
+	name = "first officer's jumpskirt"
+	desc = "It's a jumpskirt worn by someone who works in the position of \"First Officer\"."
 	icon_state = "hop_skirt"
 	item_state = "b_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
 	can_adjust = FALSE
 	fitted = FEMALE_UNIFORM_TOP
 
-/obj/item/clothing/under/rank/civilian/head_of_personnel/suit
-	name = "head of personnel's suit"
+/obj/item/clothing/under/rank/civilian/first_officer/suit
+	name = "first officer's suit"
 	desc = "A teal suit and yellow necktie. An authoritative yet tacky ensemble."
 	icon_state = "teal_suit"
 	item_state = "g_suit"
 	can_adjust = FALSE
 
-/obj/item/clothing/under/rank/civilian/head_of_personnel/suit/skirt
+/obj/item/clothing/under/rank/civilian/first_officer/suit/skirt
 	name = "teal suitskirt"
 	desc = "A teal suitskirt and yellow necktie. An authoritative yet tacky ensemble."
 	icon_state = "teal_suit_skirt"

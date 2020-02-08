@@ -105,7 +105,7 @@
 	icon_state = "pda-hop"
 
 /obj/item/pda/heads/hop
-	name = "head of personnel PDA"
+	name = "first officer PDA"
 	default_cartridge = /obj/item/cartridge/hop
 	icon_state = "pda-hop"
 
@@ -195,8 +195,8 @@
 	silent = TRUE //Quiet in the library!
 	overlays_x_offset = -3
 
-/obj/item/pda/blueshield
-	name = "blueshield PDA"
+/obj/item/pda/second_officer
+	name = "second officer PDA"
 	default_cartridge = /obj/item/cartridge/hos
 	icon_state = "pda-h"
 

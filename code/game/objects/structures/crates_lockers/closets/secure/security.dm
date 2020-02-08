@@ -41,7 +41,7 @@
 	new /obj/item/card/id/departmental_budget/civ(src)
 
 /obj/structure/closet/secure_closet/hop
-	name = "\proper head of personnel's locker"
+	name = "\proper first officer's locker"
 	req_access = list(ACCESS_HOP)
 	icon_state = "hop"
 
@@ -49,8 +49,8 @@
 	..()
 	new /obj/item/clothing/neck/cloak/hop(src)
 	new /obj/item/storage/lockbox/medal/service(src)
-	new /obj/item/clothing/under/rank/civilian/head_of_personnel(src)
-	new /obj/item/clothing/under/rank/civilian/head_of_personnel/skirt(src)
+	new /obj/item/clothing/under/rank/civilian/first_officer(src)
+	new /obj/item/clothing/under/rank/civilian/first_officer/skirt(src)
 	new /obj/item/clothing/head/hopcap(src)
 	new /obj/item/cartridge/hop(src)
 	new /obj/item/radio/headset/heads/hop(src)
@@ -88,12 +88,12 @@
 	new /obj/item/restraints/handcuffs(src)
 	new /obj/item/clothing/gloves/color/latex/nitrile(src)
 
-/obj/structure/closet/secure_closet/blueshield
-	name = "\proper blueshield's locker"
-	req_access = list(ACCESS_BLUESHIELD)
+/obj/structure/closet/secure_closet/second_officer
+	name = "\proper second officer's locker"
+	req_access = list(ACCESS_SECOND_OFFICER)
 	icon_state = "blueshield"
 
-/obj/structure/closet/secure_closet/blueshield/PopulateContents()
+/obj/structure/closet/secure_closet/second_officer/PopulateContents()
 	..()
 	new /obj/item/storage/briefcase(src)
 	new	/obj/item/storage/firstaid/regular(src)
@@ -103,8 +103,8 @@
 	new /obj/item/restraints/handcuffs(src)
 	new /obj/item/melee/baton/loaded(src)
 	new /obj/item/clothing/glasses/sunglasses(src)
-	new /obj/item/clothing/suit/armor/vest/blueshield(src)
-	new /obj/item/clothing/suit/storage/blueshield(src)
+	new /obj/item/clothing/suit/armor/vest/second_officer(src)
+	new /obj/item/clothing/suit/storage/second_officer(src)
 	new /obj/item/storage/belt/holster(src)
 	new /obj/item/clothing/shoes/jackboots(src)
 

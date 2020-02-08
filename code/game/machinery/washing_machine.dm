@@ -15,7 +15,7 @@ GLOBAL_LIST_INIT(dye_registry, list(
 		DYE_QM = /obj/item/clothing/under/rank/cargo/qm,
 		DYE_LAW = /obj/item/clothing/under/suit/black,
 		DYE_CAPTAIN = /obj/item/clothing/under/rank/captain,
-		DYE_HOP = /obj/item/clothing/under/rank/civilian/head_of_personnel,
+		DYE_HOP = /obj/item/clothing/under/rank/civilian/first_officer,
 		DYE_HOS = /obj/item/clothing/under/rank/security/head_of_security,
 		DYE_CE = /obj/item/clothing/under/rank/engineering/chief_engineer,
 		DYE_RD = /obj/item/clothing/under/rank/rnd/research_director,

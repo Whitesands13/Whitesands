@@ -286,8 +286,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "bridge"
 	ambientsounds = list('sound/ambience/signal.ogg')
 
-/area/blueshield
-	name = "Blueshield's Office"
+/area/second_officer
+	name = "Second Officer's Office"
 	icon_state = "blueold"
 
 /area/bridge/meeting_room
@@ -319,7 +319,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "cmo_office"
 
 /area/crew_quarters/heads/hop
-	name = "Head of Personnel's Office"
+	name = "First Officer's Office"
 	icon_state = "hop_office"
 
 /area/crew_quarters/heads/hos
