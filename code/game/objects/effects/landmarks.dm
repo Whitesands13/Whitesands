@@ -212,6 +212,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 /obj/effect/landmark/start/brig_phys
 	name = "Brig Physician"
 
+/obj/effect/landmark/start/blueshield
+	name = "Blueshield"
+
 //Department Security spawns
 
 /obj/effect/landmark/start/depsec
