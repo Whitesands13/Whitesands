@@ -48,7 +48,7 @@
 
 /datum/design/gun_cell/upgraded
 	name = "Upgraded Weapon Power Cell"
-	desc = "A power cell for weapons holds 20 MJ of energy."
+	desc = "A upgraded power cell for weapons holds 20 MJ of energy."
 	id = "gun_cell_upgraded"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 700, /datum/material/gold = 150, /datum/material/silver = 150, /datum/material/glass = 80)
