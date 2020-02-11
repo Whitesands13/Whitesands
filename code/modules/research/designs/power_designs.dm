@@ -47,7 +47,7 @@
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 /datum/design/gun_cell/upgraded
-	name = "Super-Capacity Power Cell"
+	name = "Upgraded Weapon Power Cell"
 	desc = "A power cell for weapons holds 20 MJ of energy."
 	id = "gun_cell_upgraded"
 	build_type = PROTOLATHE
