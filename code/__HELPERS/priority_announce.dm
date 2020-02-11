@@ -51,13 +51,16 @@
 
 	SScommunications.send_message(M)
 
-/proc/minor_announce(message, title = "Attention:", alert)
+/proc/minor_announce(message, title = "Attention:", alert, mob/from)
 	if(!message)
 		return
 
 	for(var/mob/M in GLOB.player_list)
 		if(!isnewplayer(M) && M.can_hear())
-			to_chat(M, "<span class='big bold'><font color = red>[html_encode(title)]</font color><BR>[html_encode(message)]</span><BR>")
+			var/complete_msg = "<span class='big bold'><font color = red>[html_encode(title)]</font color><BR>[html_encode(message)]</span><BR>"
+			if(from)
+				complete_msg += "<span class='alert'>-[from.name] ([from.job])</span>"
+			to_chat(M, complete_msg)
 			if(M.client.prefs.toggles & SOUND_ANNOUNCEMENTS)
 				if(alert)
 					SEND_SOUND(M, sound('sound/misc/notice1.ogg'))
