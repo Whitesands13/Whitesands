@@ -104,7 +104,7 @@
 	icon_state = "cmo_cypherkey"
 	channels = list(RADIO_CHANNEL_MEDICAL = 1, RADIO_CHANNEL_COMMAND = 1)
 
-/obj/item/encryptionkey/heads/hop
+/obj/item/encryptionkey/heads/first_officer
 	name = "\proper the first officer's encryption key"
 	icon_state = "hop_cypherkey"
 	channels = list(RADIO_CHANNEL_SUPPLY = 1, RADIO_CHANNEL_SERVICE = 1, RADIO_CHANNEL_COMMAND = 1)

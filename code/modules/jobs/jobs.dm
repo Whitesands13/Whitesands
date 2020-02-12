@@ -1,6 +1,7 @@
 GLOBAL_LIST_INIT(command_positions, list(
 	"Captain",
 	"First Officer",
+	"Second Officer",
 	"Head of Security",
 	"Chief Engineer",
 	"Research Director",
@@ -45,8 +46,7 @@ GLOBAL_LIST_INIT(civilian_positions, list(
 	"Chaplain",
 	"Clown",
 	"Mime",
-	"Assistant",
-	"Second Officer"))
+	"Assistant"))
 
 
 GLOBAL_LIST_INIT(security_positions, list(
@@ -102,7 +102,7 @@ GLOBAL_PROTECT(exp_specialmap)
 	var/static/regex/cap_expand = new("cap(?!tain)")
 	var/static/regex/cmo_expand = new("cmo")
 	var/static/regex/hos_expand = new("hos")
-	var/static/regex/hop_expand = new("hop")
+	var/static/regex/hop_expand = new("fo")
 	var/static/regex/rd_expand = new("rd")
 	var/static/regex/ce_expand = new("ce")
 	var/static/regex/qm_expand = new("qm")

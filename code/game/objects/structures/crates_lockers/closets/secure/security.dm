@@ -40,20 +40,20 @@
 	new /obj/item/storage/photo_album/Captain(src)
 	new /obj/item/card/id/departmental_budget/civ(src)
 
-/obj/structure/closet/secure_closet/hop
+/obj/structure/closet/secure_closet/first_officer
 	name = "\proper first officer's locker"
-	req_access = list(ACCESS_HOP)
+	req_access = list(ACCESS_FO)
 	icon_state = "hop"
 
-/obj/structure/closet/secure_closet/hop/PopulateContents()
+/obj/structure/closet/secure_closet/first_officer/PopulateContents()
 	..()
-	new /obj/item/clothing/neck/cloak/hop(src)
+	new /obj/item/clothing/neck/cloak/first_officer(src)
 	new /obj/item/storage/lockbox/medal/service(src)
 	new /obj/item/clothing/under/rank/civilian/first_officer(src)
 	new /obj/item/clothing/under/rank/civilian/first_officer/skirt(src)
 	new /obj/item/clothing/head/hopcap(src)
-	new /obj/item/cartridge/hop(src)
-	new /obj/item/radio/headset/heads/hop(src)
+	new /obj/item/cartridge/first_officer(src)
+	new /obj/item/radio/headset/heads/first_officer(src)
 	new /obj/item/clothing/shoes/sneakers/brown(src)
 	new /obj/item/storage/box/ids(src)
 	new /obj/item/storage/box/ids(src)

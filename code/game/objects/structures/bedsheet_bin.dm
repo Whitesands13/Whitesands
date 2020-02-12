@@ -154,7 +154,7 @@ LINEN BINS
 	item_state = "sheethos"
 	dream_messages = list("authority", "a silvery ID", "handcuffs", "a baton", "a flashbang", "sunglasses", "the head of security")
 
-/obj/item/bedsheet/hop
+/obj/item/bedsheet/first_officer
 	name = "first officer's bedsheet"
 	desc = "It is decorated with a key emblem. For those rare moments when you can rest and cuddle with Ian without someone screaming for you over the radio."
 	icon_state = "sheethop"

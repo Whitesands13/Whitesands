@@ -318,7 +318,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "Chief Medical Officer's Office"
 	icon_state = "cmo_office"
 
-/area/crew_quarters/heads/hop
+/area/crew_quarters/heads/first_officer
 	name = "First Officer's Office"
 	icon_state = "hop_office"
 

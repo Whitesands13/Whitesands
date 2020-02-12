@@ -156,10 +156,3 @@
 	icon_state = "captain_parade"
 	item_state = "by_suit"
 	can_adjust = FALSE
-
-/obj/item/clothing/under/misc/second_officer
-	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Lieutenant\" on the left shoulder."
-	name = "\improper Second Officer Uniform"
-	icon_state = "ert_uniform"
-	item_state = "bl_suit"
-	armor = list(melee = 10, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)

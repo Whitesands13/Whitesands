@@ -59,7 +59,7 @@
 #define ACCESS_MINING_STATION 54
 #define ACCESS_XENOBIOLOGY 55
 #define ACCESS_CE 56
-#define ACCESS_HOP 57
+#define ACCESS_FO 57
 #define ACCESS_HOS 58
 /// Request console announcements
 #define ACCESS_RC_ANNOUNCE 59

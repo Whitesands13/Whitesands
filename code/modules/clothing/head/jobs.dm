@@ -50,7 +50,7 @@
 	icon_state = "hopcap"
 	desc = "The symbol of true bureaucratic micromanagement."
 	armor = list("melee" = 25, "bullet" = 15, "laser" = 25, "energy" = 35, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50)
-	dog_fashion = /datum/dog_fashion/head/hop
+	dog_fashion = /datum/dog_fashion/head/first_officer
 
 //Chaplain
 /obj/item/clothing/head/nun_hood

@@ -156,7 +156,7 @@
 	name = "statue of the head of security"
 	icon_state = "hos"
 
-/obj/structure/statue/gold/hop
+/obj/structure/statue/gold/first_officer
 	name = "statue of the first officer"
 	icon_state = "hop"
 
