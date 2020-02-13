@@ -8,6 +8,7 @@
 	spawn_positions = 2
 	supervisors = "the first officer"
 	selection_color = "#bbe291"
+	wiki_page = "Guide_to_Botany"
 
 	outfit = /datum/outfit/job/botanist
 

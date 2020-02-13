@@ -8,6 +8,7 @@
 	spawn_positions = 1
 	supervisors = "the first officer"
 	selection_color = "#bbe291"
+	wiki_page = "Food"
 	var/cooks = 0 //Counts cooks amount
 
 	outfit = /datum/outfit/job/cook

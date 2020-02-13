@@ -8,6 +8,8 @@
 	spawn_positions = 1
 	supervisors = "the first officer"
 	selection_color = "#dddddd"
+	wiki_page = "Clown"
+	special_notice = "There is a difference between funny pranks and griefing. Know it."
 
 	outfit = /datum/outfit/job/clown
 

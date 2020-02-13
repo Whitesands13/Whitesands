@@ -35,6 +35,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/tgui_fancy = TRUE
 	var/tgui_lock = TRUE
 	var/windowflashing = TRUE
+	var/crew_objectives = TRUE
 	var/toggles = TOGGLES_DEFAULT
 	var/db_flags
 	var/chat_toggles = TOGGLES_DEFAULT_CHAT
@@ -581,6 +582,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			dat += "<b>PDA Color:</b> <span style='border:1px solid #161616; background-color: [pda_color];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=pda_color;task=input'>Change</a><BR>"
 			dat += "<b>PDA Style:</b> <a href='?_src_=prefs;task=input;preference=pda_style'>[pda_style]</a><br>"
 			dat += "<br>"
+			dat += "<b>Crew Objectives:</b> <a href='?_src_=prefs;preference=crewobj'>[(crew_objectives) ? "Yes" : "No"]</a><br>"
+			dat += "<br>"
 			dat += "<b>Ghost Ears:</b> <a href='?_src_=prefs;preference=ghost_ears'>[(chat_toggles & CHAT_GHOSTEARS) ? "All Speech" : "Nearest Creatures"]</a><br>"
 			dat += "<b>Ghost Radio:</b> <a href='?_src_=prefs;preference=ghost_radio'>[(chat_toggles & CHAT_GHOSTRADIO) ? "All Messages":"No Messages"]</a><br>"
 			dat += "<b>Ghost Sight:</b> <a href='?_src_=prefs;preference=ghost_sight'>[(chat_toggles & CHAT_GHOSTSIGHT) ? "All Emotes" : "Nearest Creatures"]</a><br>"
@@ -689,6 +692,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			dat += "<br>"
 			dat += "<b>Play Admin MIDIs:</b> <a href='?_src_=prefs;preference=hear_midis'>[(toggles & SOUND_MIDI) ? "Enabled":"Disabled"]</a><br>"
 			dat += "<b>Play Lobby Music:</b> <a href='?_src_=prefs;preference=lobby_music'>[(toggles & SOUND_LOBBY) ? "Enabled":"Disabled"]</a><br>"
+			dat += "<b>Hear Radio Chatter:</b> <a href='?_src_=prefs;preference=hear_radio'>[(toggles & SOUND_RADIO) ? "Enabled":"Disabled"]</a><br>"
 			dat += "<b>See Pull Requests:</b> <a href='?_src_=prefs;preference=pull_requests'>[(chat_toggles & CHAT_PULLR) ? "Enabled":"Disabled"]</a><br>"
 			dat += "<br>"
 
@@ -1713,6 +1717,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					tgui_lock = !tgui_lock
 				if("winflash")
 					windowflashing = !windowflashing
+				if("crewobj")
+					crew_objectives = !crew_objectives
 
 				//here lies the badmins
 				if("hear_adminhelps")
@@ -1764,6 +1770,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						user.client.playtitlemusic()
 					else
 						user.stop_sound_channel(CHANNEL_LOBBYMUSIC)
+
+				if("hear_radio")
+					toggles ^= SOUND_RADIO
 
 				if("ghost_ears")
 					chat_toggles ^= CHAT_GHOSTEARS

@@ -8,6 +8,7 @@
 	spawn_positions = 2
 	supervisors = "the quartermaster and the first officer"
 	selection_color = "#dcba97"
+	wiki_page = "Cargo_technician"
 
 	outfit = /datum/outfit/job/cargo_tech
 

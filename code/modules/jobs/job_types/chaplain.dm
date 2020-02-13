@@ -8,6 +8,7 @@
 	spawn_positions = 1
 	supervisors = "the first officer"
 	selection_color = "#dddddd"
+	wiki_page = "Chaplain"
 
 	outfit = /datum/outfit/job/chaplain
 

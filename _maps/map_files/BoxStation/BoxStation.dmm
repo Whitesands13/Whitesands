@@ -466,8 +466,9 @@
 	pixel_y = 10
 	},
 /obj/structure/table/wood,
-/obj/item/radio/off,
-/obj/item/taperecorder,
+/obj/machinery/photocopier/faxmachine/longrange{
+	department = "Head of Security"
+	},
 /turf/open/floor/carpet,
 /area/crew_quarters/heads/hos)
 "abl" = (
@@ -2080,8 +2081,8 @@
 /turf/open/floor/plasteel,
 /area/engine/engineering)
 "aeE" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
+/obj/machinery/power/terminal{
+	dir = 4
 	},
 /obj/structure/cable,
 /turf/open/floor/plasteel,
@@ -2094,7 +2095,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
 	},
-/obj/machinery/power/terminal,
+/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/engine/gravity_generator)
 "aeG" = (
@@ -2462,12 +2463,10 @@
 /turf/open/space/basic,
 /area/space)
 "afq" = (
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/engine/gravity_generator)
 "afr" = (
 /obj/machinery/holopad,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/engine/gravity_generator)
 "afs" = (
@@ -7700,7 +7699,6 @@
 /turf/open/floor/plasteel,
 /area/crew_quarters/fitness)
 "ass" = (
-/obj/structure/closet/lasertag/red,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 10
 	},
@@ -7711,10 +7709,10 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
 	},
+/obj/structure/closet/lasertag/blue,
 /turf/open/floor/plasteel,
 /area/crew_quarters/fitness)
 "ast" = (
-/obj/structure/closet/lasertag/blue,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
 	},
@@ -10450,6 +10448,7 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
+/obj/machinery/washing_machine,
 /turf/open/floor/plasteel,
 /area/crew_quarters/dorms)
 "aAf" = (
@@ -10468,6 +10467,7 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
+/obj/structure/bedsheetbin,
 /turf/open/floor/plasteel,
 /area/crew_quarters/dorms)
 "aAh" = (
@@ -11857,18 +11857,11 @@
 /area/crew_quarters/dorms)
 "aDH" = (
 /obj/structure/table,
-/obj/item/paper_bin{
-	pixel_x = 1;
-	pixel_y = 9
-	},
-/obj/item/pen,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 4
 	},
-/obj/item/folder/white,
-/obj/item/stamp/rd{
-	pixel_x = 3;
-	pixel_y = -2
+/obj/machinery/photocopier/faxmachine{
+	department = "Research Director"
 	},
 /turf/open/floor/plasteel/cafeteria,
 /area/crew_quarters/heads/hor)
@@ -20948,6 +20941,9 @@
 /area/bridge/meeting_room)
 "bbZ" = (
 /obj/structure/table/wood,
+/obj/machinery/photocopier/faxmachine/longrange{
+	department = "Captain"
+	},
 /turf/open/floor/carpet,
 /area/crew_quarters/heads/captain)
 "bca" = (
@@ -21218,8 +21214,10 @@
 /turf/open/floor/plating,
 /area/maintenance/port)
 "bcN" = (
-/obj/item/folder/blue,
 /obj/structure/table/wood,
+/obj/machinery/photocopier/faxmachine/longrange{
+	department = "Bridge"
+	},
 /turf/open/floor/carpet,
 /area/bridge/meeting_room)
 "bcO" = (
@@ -26089,6 +26087,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
 	},
+/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/engine/gravity_generator)
 "bph" = (
@@ -26617,12 +26616,15 @@
 	pixel_y = -35
 	},
 /obj/structure/cable,
+/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/engine/gravity_generator)
 "bqG" = (
 /obj/machinery/power/smes{
 	charge = 5e+006
 	},
+/obj/structure/cable,
+/obj/structure/cable,
 /obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/engine/gravity_generator)
@@ -27117,6 +27119,7 @@
 /turf/closed/wall/r_wall,
 /area/engine/gravity_generator)
 "bsc" = (
+/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/engine/gravity_generator)
 "bsd" = (
@@ -27129,6 +27132,7 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on{
 	dir = 4
 	},
+/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/engine/gravity_generator)
 "bsg" = (
@@ -27641,6 +27645,7 @@
 	},
 /obj/effect/turf_decal/delivery,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/engine/gravity_generator)
 "btG" = (
@@ -28476,6 +28481,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
+/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/hallway/primary/central)
 "bvX" = (
@@ -29357,6 +29363,16 @@
 	pixel_y = 5;
 	req_access_txt = "47"
 	},
+/obj/item/paper_bin{
+	pixel_x = 1;
+	pixel_y = 9
+	},
+/obj/item/folder/white,
+/obj/item/stamp/rd{
+	pixel_x = 3;
+	pixel_y = -2
+	},
+/obj/item/pen,
 /turf/open/floor/plasteel/cafeteria,
 /area/crew_quarters/heads/hor)
 "byp" = (
@@ -30117,6 +30133,7 @@
 /area/hallway/primary/central)
 "bAf" = (
 /obj/machinery/holopad,
+/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/hallway/primary/central)
 "bAg" = (
@@ -30126,6 +30143,7 @@
 	},
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
+/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/hallway/primary/central)
 "bAh" = (
@@ -31814,6 +31832,7 @@
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
 	},
+/obj/item/pen,
 /turf/open/floor/plasteel/cafeteria,
 /area/crew_quarters/heads/cmo)
 "bEi" = (
@@ -31822,13 +31841,14 @@
 /area/crew_quarters/heads/cmo)
 "bEj" = (
 /obj/structure/table/glass,
-/obj/item/pen,
-/obj/item/clothing/neck/stethoscope,
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
+	},
+/obj/machinery/photocopier/faxmachine{
+	department = "Chief Medical Officer"
 	},
 /turf/open/floor/plasteel/cafeteria,
 /area/crew_quarters/heads/cmo)
@@ -36852,6 +36872,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
+/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/tcommsat/computer)
 "bSh" = (
@@ -37413,6 +37434,7 @@
 "bTI" = (
 /obj/machinery/holopad,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
+/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/tcommsat/computer)
 "bTJ" = (
@@ -37688,6 +37710,7 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
+/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/tcommsat/computer)
 "bUz" = (
@@ -38312,6 +38335,7 @@
 /area/science/research)
 "bWs" = (
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden,
+/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/tcommsat/computer)
 "bWt" = (
@@ -38332,12 +38356,14 @@
 	dir = 4
 	},
 /obj/machinery/navbeacon/wayfinding,
+/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/tcommsat/computer)
 "bWv" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 4
 	},
+/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/tcommsat/computer)
 "bWw" = (
@@ -38411,10 +38437,9 @@
 /turf/open/floor/plasteel,
 /area/tcommsat/computer)
 "bWI" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/structure/cable,
-/turf/open/floor/plating,
-/area/tcommsat/computer)
+/obj/machinery/door/airlock/public/glass,
+/turf/open/floor/plasteel,
+/area/crew_quarters/fitness)
 "bWJ" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden{
@@ -38433,6 +38458,7 @@
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
 	},
+/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/hallway/primary/aft)
 "bWL" = (
@@ -39130,6 +39156,7 @@
 /area/hallway/primary/aft)
 "bYF" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
+/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/tcommsat/computer)
 "bYG" = (
@@ -39644,6 +39671,7 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
+/obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/tcommsat/computer)
 "can" = (
@@ -39664,6 +39692,7 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
+/obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/tcommsat/computer)
 "cao" = (
@@ -40696,11 +40725,12 @@
 /area/chapel/main)
 "cdm" = (
 /obj/structure/table/reinforced,
-/obj/item/clipboard,
-/obj/item/paper/monitorkey,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /obj/structure/cable,
+/obj/machinery/photocopier/faxmachine{
+	department = "Chief Engineer"
+	},
 /turf/open/floor/plasteel,
 /area/crew_quarters/heads/chief)
 "cdq" = (
@@ -42169,6 +42199,7 @@
 /obj/structure/disposalpipe/segment,
 /obj/effect/landmark/event_spawn,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/item/paper/monitorkey,
 /turf/open/floor/plasteel,
 /area/crew_quarters/heads/chief)
 "cip" = (
@@ -44377,13 +44408,13 @@
 /turf/closed/wall/r_wall,
 /area/engine/supermatter)
 "crt" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 1
+	},
 /obj/machinery/door/airlock/engineering/glass/critical{
 	heat_proof = 1;
 	name = "Supermatter Chamber";
 	req_access_txt = "10"
-	},
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 1
 	},
 /turf/open/floor/engine,
 /area/engine/supermatter)
@@ -48831,13 +48862,18 @@
 /turf/closed/wall,
 /area/security/courtroom)
 "cSE" = (
-/obj/structure/cable,
-/turf/open/floor/plasteel/dark/telecomms,
-/area/tcommsat/server)
+/obj/effect/turf_decal/tile/red,
+/obj/effect/turf_decal/tile/red{
+	dir = 4
+	},
+/obj/structure/closet/lasertag/red,
+/turf/open/floor/plasteel,
+/area/crew_quarters/fitness)
 "cSF" = (
 /obj/machinery/power/terminal{
 	dir = 1
 	},
+/obj/structure/cable,
 /turf/open/floor/plasteel/dark/telecomms,
 /area/tcommsat/server)
 "cSG" = (
@@ -50245,6 +50281,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 1
 	},
+/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/engine/gravity_generator)
 "kob" = (
@@ -50465,6 +50502,13 @@
 /obj/effect/landmark/start/chemist,
 /turf/open/floor/plasteel/white,
 /area/medical/chemistry)
+"lrQ" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/structure/cable,
+/turf/open/floor/plasteel,
+/area/engine/gravity_generator)
 "ltd" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
@@ -50892,6 +50936,10 @@
 /obj/structure/cable,
 /turf/open/floor/carpet,
 /area/crew_quarters/heads/hos)
+"nIg" = (
+/obj/structure/cable,
+/turf/open/floor/plasteel/dark/telecomms,
+/area/tcommsat/server)
 "nQI" = (
 /obj/machinery/light_switch{
 	pixel_x = -23
@@ -77958,7 +78006,7 @@ bVI
 bWD
 bXA
 bYB
-bYz
+nIg
 cai
 cSF
 ccg
@@ -78216,8 +78264,8 @@ bWC
 bXz
 bYA
 bXC
-bXC
 bWB
+bXC
 ccf
 cdc
 cdZ
@@ -78474,7 +78522,7 @@ bXC
 bXC
 bXC
 cak
-bWB
+bXC
 bWB
 bWB
 cec
@@ -78729,9 +78777,9 @@ bVI
 bWE
 bXB
 bYC
+bWB
 bXC
-bWB
-bWB
+bXC
 cch
 cde
 ceb
@@ -78986,8 +79034,8 @@ bVI
 bWG
 bXD
 bYz
-cSE
-bWB
+bYz
+bXC
 bYz
 bYz
 cdf
@@ -79243,9 +79291,9 @@ bVI
 bWB
 bWB
 bYz
-bWI
+bZv
 cal
-bWI
+bZv
 bYz
 bWB
 bWB
@@ -79497,15 +79545,15 @@ gWd
 bNI
 bUz
 bVJ
-bWI
-bWI
-bWI
-bWI
+bZv
+bZv
+bZv
+bZv
 cao
-bWI
-bWI
-bWI
-bWI
+bZv
+bZv
+bZv
+bZv
 bVJ
 cay
 cjJ
@@ -80249,7 +80297,7 @@ bmr
 bmr
 bmr
 byQ
-aJq
+bBi
 aJq
 bCs
 bDy
@@ -80506,7 +80554,7 @@ aaa
 aaa
 aJn
 aXf
-aJq
+bBi
 byV
 bCs
 bAM
@@ -80763,7 +80811,7 @@ aaa
 aaa
 aJn
 aXf
-aJq
+bBi
 byU
 bCs
 bAL
@@ -81020,7 +81068,7 @@ aaf
 aaf
 aJn
 aXf
-aJq
+bBi
 aJq
 bCs
 bFa
@@ -81277,7 +81325,7 @@ buP
 bwm
 bxH
 byS
-aJq
+bBi
 aMh
 bCs
 bCs
@@ -81783,11 +81831,11 @@ bgN
 bkZ
 bgN
 bnU
-aeE
+bph
 afr
 bsc
 btF
-bph
+lrQ
 bsc
 knx
 bvW
@@ -82041,7 +82089,7 @@ bih
 bgN
 bnV
 bph
-afq
+aeE
 bsf
 btG
 buS
@@ -88169,7 +88217,7 @@ arj
 mWr
 vsk
 vsk
-arj
+bWI
 ast
 asN
 auv
@@ -88680,11 +88728,11 @@ aaa
 aag
 aag
 eCm
-arj
+auB
 arj
 kXK
 arj
-aua
+cSE
 asZ
 aua
 aua
