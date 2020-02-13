@@ -105,7 +105,7 @@
 	new /obj/item/clothing/glasses/sunglasses(src)
 	new /obj/item/clothing/suit/armor/vest/second_officer(src)
 	new /obj/item/clothing/suit/storage/second_officer(src)
-	new /obj/item/storage/belt/holster(src)
+	new /obj/item/clothing/accessory/holster(src)
 	new /obj/item/clothing/shoes/jackboots(src)
 
 /obj/structure/closet/secure_closet/hos
