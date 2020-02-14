@@ -4,6 +4,8 @@ GLOBAL_LIST_INIT(admin_verbs_default, world.AVerbsDefault())
 GLOBAL_PROTECT(admin_verbs_default)
 /world/proc/AVerbsDefault()
 	return list(
+	/client/proc/cmd_mentor_say,
+	/client/proc/mentor_memo,
 	/client/proc/deadmin,				/*destroys our own admin datum so we can play as a regular player*/
 	/client/proc/cmd_admin_say,			/*admin-only ooc chat*/
 	/client/proc/hide_verbs,			/*hides all our adminverbs*/
@@ -77,6 +79,9 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/discord_id_manipulation,
 	/datum/admins/proc/open_borgopanel
 	)
+
+GLOBAL_LIST_INIT(mentor_verbs, list(/client/proc/cmd_mentor_pm_panel, /client/proc/show_mentor_memo, /client/proc/cmd_mentor_say))
+GLOBAL_PROTECT(mentor_verbs)
 GLOBAL_LIST_INIT(admin_verbs_ban, list(/client/proc/unban_panel, /client/proc/ban_panel, /client/proc/stickybanpanel))
 GLOBAL_PROTECT(admin_verbs_ban)
 GLOBAL_LIST_INIT(admin_verbs_sounds, list(/client/proc/play_local_sound, /client/proc/play_direct_mob_sound, /client/proc/play_sound, /client/proc/set_round_end_sound))
@@ -103,7 +108,8 @@ GLOBAL_LIST_INIT(admin_verbs_fun, list(
 	/client/proc/polymorph_all,
 	/client/proc/show_tip,
 	/client/proc/smite,
-	/client/proc/admin_away
+	/client/proc/admin_away,
+	/client/proc/fax_panel
 	))
 GLOBAL_PROTECT(admin_verbs_fun)
 GLOBAL_LIST_INIT(admin_verbs_spawn, list(/datum/admins/proc/spawn_atom, /datum/admins/proc/podspawn_atom, /datum/admins/proc/spawn_cargo, /datum/admins/proc/spawn_objasmob, /client/proc/respawn_character, /datum/admins/proc/beaker_panel))
@@ -170,7 +176,7 @@ GLOBAL_PROTECT(admin_verbs_debug)
 	)
 GLOBAL_LIST_INIT(admin_verbs_possess, list(/proc/possess, /proc/release))
 GLOBAL_PROTECT(admin_verbs_possess)
-GLOBAL_LIST_INIT(admin_verbs_permissions, list(/client/proc/edit_admin_permissions))
+GLOBAL_LIST_INIT(admin_verbs_permissions, list(/client/proc/edit_admin_permissions, /client/proc/edit_mentor_permissions))
 GLOBAL_PROTECT(admin_verbs_permissions)
 GLOBAL_LIST_INIT(admin_verbs_poll, list(/client/proc/create_poll))
 GLOBAL_PROTECT(admin_verbs_poll)
@@ -237,7 +243,8 @@ GLOBAL_LIST_INIT(admin_verbs_hideable, list(
 	/client/proc/toggle_nuke,
 	/client/proc/cmd_display_del_log,
 	/client/proc/toggle_combo_hud,
-	/client/proc/debug_huds
+	/client/proc/debug_huds,
+	/client/proc/fax_panel
 	))
 GLOBAL_PROTECT(admin_verbs_hideable)
 
@@ -251,6 +258,8 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 			verbs += /client/proc/togglebuildmodeself
 		if(rights & R_ADMIN)
 			verbs += GLOB.admin_verbs_admin
+		if(rights & R_MENTOR)
+			verbs += GLOB.mentor_verbs
 		if(rights & R_BAN)
 			verbs += GLOB.admin_verbs_ban
 		if(rights & R_FUN)
@@ -279,6 +288,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		GLOB.admin_verbs_default,
 		/client/proc/togglebuildmodeself,
 		GLOB.admin_verbs_admin,
+		GLOB.mentor_verbs,
 		GLOB.admin_verbs_ban,
 		GLOB.admin_verbs_fun,
 		GLOB.admin_verbs_server,

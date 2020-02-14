@@ -38,6 +38,9 @@ GLOBAL_LIST_EMPTY(moth_wings_list)
 GLOBAL_LIST_EMPTY(moth_markings_list)
 GLOBAL_LIST_EMPTY(caps_list)
 GLOBAL_LIST_EMPTY(squid_face_list)
+GLOBAL_LIST_EMPTY(ipc_screens_list)
+GLOBAL_LIST_EMPTY(ipc_antennas_list)
+GLOBAL_LIST_EMPTY(ipc_chassis_list)
 
 GLOBAL_LIST_INIT(color_list_ethereal, list("F Class(Green)" = "97ee63", "F2 Class (Light Green)" = "00fa9a", "F3 Class (Dark Green)" = "37835b", "M Class (Red)" = "9c3030", "M1 Class (Purple)" = "ee82ee", "G Class (Yellow)" = "fbdf56", "O Class (Blue)" = "3399ff", "A Class (Cyan)" = "00ffff"))
 
@@ -175,7 +178,7 @@ GLOBAL_LIST_INIT(scarySounds, list('sound/weapons/thudswoosh.ogg','sound/weapons
 12 Research
 13 RD Office
 14 Robotics
-15 HoP Office
+15 First Officer's Office
 16 Library
 17 Chapel
 18 Theatre
@@ -203,7 +206,7 @@ GLOBAL_LIST_INIT(TAGGERLOCATIONS, list("Disposals",
 	"Cargo Bay", "QM Office", "Engineering", "CE Office",
 	"Atmospherics", "Security", "HoS Office", "Medbay",
 	"CMO Office", "Chemistry", "Research", "RD Office",
-	"Robotics", "HoP Office", "Library", "Chapel", "Theatre",
+	"Robotics", "First Officer's Office", "Library", "Chapel", "Theatre",
 	"Bar", "Kitchen", "Hydroponics", "Janitor Closet","Genetics",
 	"Testing Range", "Toxins", "Dormitories", "Virology",
 	"Xenobiology", "Law Office","Detective's Office"))

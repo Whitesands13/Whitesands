@@ -403,6 +403,7 @@
 	color = "#000000"
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 	taste_description = "ash"
+	process_flags = ORGANIC
 
 /datum/reagent/medicine/charcoal/on_mob_life(mob/living/carbon/M)
 	M.adjustToxLoss(-2*REM, 0)
@@ -417,6 +418,39 @@
 		return
 	A.reagents.remove_reagent(/datum/reagent/medicine/charcoal/, volume) //We really should not be injecting an insoluble granular material.
 	A.reagents.add_reagent(/datum/reagent/carbon, volume) // Its pores would get clogged with gunk anyway.
+	..()
+
+/datum/reagent/medicine/system_cleaner
+	name = "System Cleaner"
+	description = "Neutralizes harmful chemical compounds inside synthetic systems."
+	reagent_state = LIQUID
+	color = "#F1C40F"
+	metabolization_rate = 0.5 * REAGENTS_METABOLISM
+	process_flags = SYNTHETIC
+
+/datum/reagent/medicine/system_cleaner/on_mob_life(mob/living/M)
+	M.adjustToxLoss(-2*REM, 0)
+	. = 1
+	for(var/datum/reagent/R in M.reagents.reagent_list)
+		if(R != src)
+			M.reagents.remove_reagent(R.type,1)
+	..()
+
+/datum/reagent/medicine/liquid_solder
+	name = "Liquid Solder"
+	description = "Repairs brain damage in synthetics."
+	color = "#727272"
+	taste_description = "metallic"
+	process_flags = SYNTHETIC
+
+/datum/reagent/medicine/liquid_solder/on_mob_life(mob/living/M)
+	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -3*REM)
+	if(iscarbon(M))
+		var/mob/living/carbon/C = M
+		if(prob(30) && C.has_trauma_type(BRAIN_TRAUMA_SPECIAL))
+			C.cure_trauma_type(BRAIN_TRAUMA_SPECIAL)
+		if(prob(10) && C.has_trauma_type(BRAIN_TRAUMA_MILD))
+			C.cure_trauma_type(BRAIN_TRAUMA_MILD)
 	..()
 
 /datum/reagent/medicine/omnizine
@@ -1017,6 +1051,23 @@
 	..()
 	. = 1
 
+/datum/reagent/medicine/dexalinp
+	name = "Dexalin Plus"
+	description = "Restores oxygen loss. Overdose causes it instead. It is highly effective."
+	reagent_state = LIQUID
+	color = "#0040FF"
+	overdose_threshold = 25
+
+/datum/reagent/medicine/dexalinp/on_mob_life(mob/living/carbon/M)
+	M.adjustOxyLoss(-4*REM, 0)
+	..()
+	. = 1
+
+/datum/reagent/medicine/dexalinp/overdose_process(mob/living/M)
+	M.adjustOxyLoss(8*REM, 0)
+	..()
+	. = 1
+
 /datum/reagent/medicine/kelotane
 	name = "Kelotane"
 	description = "Restores fire damage. Overdose causes it instead."
@@ -1118,6 +1169,7 @@
 	reagent_state = SOLID
 	color = "#555555"
 	overdose_threshold = 30
+	process_flags = ORGANIC | SYNTHETIC
 
 /datum/reagent/medicine/syndicate_nanites/on_mob_life(mob/living/carbon/M)
 	M.adjustBruteLoss(-5*REM, 0) //A ton of healing - this is a 50 telecrystal investment.
@@ -1552,101 +1604,6 @@
 
 #undef PERF_BASE_DAMAGE
 
-//Injectables!
-//These are shitty chems
-
-/datum/reagent/medicine/sanguiose
-	name = "Sanguiose"
-	description = "A chemical developed to aid in the butchering proccess, it causes a chemical reaction which consumes blood and oxygen while healing cuts, bruises, and other similar injuries,"
-	reagent_state = LIQUID
-	color = "#FF6464"
-	metabolization_rate = 0.5* REAGENTS_METABOLISM
-	overdose_threshold = 25
-	taste_description = "salty"
-
-/datum/reagent/medicine/sanguiose/on_mob_life(mob/living/carbon/M)
-	M.adjustBruteLoss(-1, 0)
-	M.adjustOxyLoss(0.25,0)
-	M.blood_volume -= 1 //Removes blood
-	..()
-	. = 1
-
-/datum/reagent/medicine/sanguiose/overdose_process(mob/living/M)
-	M.adjustOxyLoss(3,0)
-	M.blood_volume -= 2 //I hope you like blood.
-	..()
-	. = 1
-
-/datum/reagent/medicine/sanguiose/on_transfer(atom/A, method=TOUCH, volume) // Borrowed from whoever made charcoal injection or pill only and modified so it doesn't add a reagent.
-	if(method == INJECT || !iscarbon(A)) //the atom not the charcoal
-		return
-	A.reagents.remove_reagent(type, volume)
-	..()
-
-/datum/reagent/medicine/frogenite
-	name = "Frogenite"
-	description = "An industrial cryostorage chemical previously used for preservation and storage. It removes oxygen from the body and heals to prevent and heal burns. If too much is injected the reaction will speed up dramatically removing all oxygen quickly."
-	reagent_state = LIQUID
-	color = "#00FFFF"
-	metabolization_rate = 0.5* REAGENTS_METABOLISM
-	overdose_threshold = 25
-	taste_description = "Oil"
-
-/datum/reagent/medicine/frogenite/on_mob_life(mob/living/carbon/M) //Reuses code done by cobby in Perflu to convert burn damage to oxygen, Meant to simunlate a chemical reaction to remove oxygen from the body.
-	var/firecalc = 1*REM*current_cycle
-	M.adjustFireLoss(-1, 0)
-	if (firecalc <10)
-		M.adjustOxyLoss(firecalc*0.15, 0)
-	if (firecalc >= 10)
-		M.adjustOxyLoss(1.5,0)
-	..()
-	. = 1
-
-/datum/reagent/medicine/frogenite/overdose_process(mob/living/M)
-	M.adjustOxyLoss(3,0)
-	M.reagents.remove_reagent(type, metabolization_rate*2) // Reused code from syndicate nanites meant to purge the chem quickly.
-	to_chat(M, "<span class='notice'>You feel like you aren't getting any oxygen!</span>")
-	..()
-	. = 1
-
-/datum/reagent/medicine/frogenite/on_transfer(atom/A, method=TOUCH, volume) // Borrowed from whoever made charcoal injection or pill only and modified so it doesn't add a reagent.
-	if(method == INJECT || !iscarbon(A)) //the atom not the charcoal
-		return
-	A.reagents.remove_reagent(type, volume)
-	..()
-
-/datum/reagent/medicine/ferveatium
-	name = "Ferveatium"
-	description = "A chemical previously used to cook questionable meat, it has come to enjoy a new life as a treatment for many poisons."
-	reagent_state = LIQUID
-	color = "#00FFFF"
-	metabolization_rate = 0.5* REAGENTS_METABOLISM
-	overdose_threshold = 25
-	taste_description = "Fire"
-
-/datum/reagent/medicine/ferveatium/on_mob_life(mob/living/carbon/M) //Reuses code done by cobby in Perflu to convert burn damage to oxygen, Meant to simunlate a chemical reaction to remove oxygen from the body.
-	var/toxcalc = 1*REM*current_cycle
-	M.adjustToxLoss(-1, 0)
-	if (toxcalc <10)
-		M.adjustFireLoss(toxcalc/10, 0)
-	if (toxcalc >= 10)
-		M.adjustFireLoss(1,0)
-	..()
-	. = 1
-
-/datum/reagent/medicine/ferveatium/overdose_process(mob/living/M)
-	M.adjustFireLoss(3,0)
-	M.reagents.remove_reagent(type, metabolization_rate*2) // Reused code from syndicate nanites meant to purge the chem quickly.
-	to_chat(M, "<span class='notice'>You feel like you are melting!</span>")
-	..()
-	. = 1
-
-/datum/reagent/medicine/ferveatium/on_transfer(atom/A, method=TOUCH, volume) // Borrowed from whoever made charcoal injection or pill only and modified so it doesn't add a reagent.
-	if(method == INJECT || !iscarbon(A)) //the atom not the charcoal
-		return
-	A.reagents.remove_reagent(type, volume)
-	..()
-
 /datum/reagent/medicine/silibinin
 	name = "Silibinin"
 	description = "A thistle derrived hepatoprotective flavolignan mixture that help reverse damage to the liver."
@@ -1690,3 +1647,50 @@
 	M.adjustOrganLoss(ORGAN_SLOT_LUNGS, 0.5)
 	..()
 	. = 1
+
+/datum/reagent/medicine/carthatoline
+	name = "Carthatoline"
+	description = "Carthatoline is strong evacuant used to treat severe poisoning."
+	reagent_state = LIQUID
+	color = "#225722"
+
+/datum/reagent/medicine/carthatoline/on_mob_life(mob/living/carbon/M)
+	M.adjustToxLoss(-5*REM, 0)
+	if(M.getToxLoss() && prob(10))
+		M.vomit(1)
+	for(var/datum/reagent/toxin/R in M.reagents.reagent_list)
+		M.reagents.remove_reagent(R.type,1)
+	..()
+	. = 1
+
+/datum/reagent/medicine/carthatoline/overdose_process(mob/living/M)
+	M.adjustToxLoss(10*REM, 0) // End result is 5 toxin loss taken, because it heals 5 and then removes 10.
+	..()
+	. = 1
+
+/datum/reagent/medicine/hepanephrodaxon
+	name = "Hepanephrodaxon"
+	description = "Used to repair the common tissues involved in filtration."
+	taste_description = "glue"
+	reagent_state = LIQUID
+	color = "#D2691E"
+	metabolization_rate = REM * 1.5
+	overdose_threshold = 10
+
+/datum/reagent/medicine/hepanephrodaxon/on_mob_life(var/mob/living/carbon/M)
+	var/repair_strength = 1
+	var/obj/item/organ/liver/L = M.getorganslot(ORGAN_SLOT_LIVER)
+	if(L.damage > 0)
+		L.damage = max(L.damage - 4 * repair_strength, 0)
+		M.confused = (2)
+	M.adjustToxLoss(-12)
+	..()
+	. = 1
+
+/datum/reagent/medicine/hepanephrodaxon/overdose_process(mob/living/M)
+	var/obj/item/organ/liver/L = M.getorganslot(ORGAN_SLOT_LIVER)
+	L.damage = max(L.damage + 4, 0)
+	M.confused = (2)
+	..()
+	. = 1
+

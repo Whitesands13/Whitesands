@@ -187,7 +187,7 @@
 	desc = "An award for distinguished combat and sacrifice in defence of Nanotrasen's commercial interests. Often awarded to security staff."
 
 /obj/item/clothing/accessory/medal/silver/excellence
-	name = "the head of personnel award for outstanding achievement in the field of excellence"
+	name = "the first officer award for outstanding achievement in the field of excellence"
 	desc = "Nanotrasen's dictionary defines excellence as \"the quality or condition of being excellent\". This is awarded to those rare crewmembers who fit that definition."
 
 /obj/item/clothing/accessory/medal/gold
@@ -372,6 +372,23 @@
 	above_suit = TRUE
 	armor = list("melee" = 5, "bullet" = 5, "laser" = 5, "energy" = 5, "bomb" = 20, "bio" = 20, "rad" = 5, "fire" = 0, "acid" = 25)
 	attachment_slot = GROIN
+
+/obj/item/clothing/accessory/holster
+	name = "shoulder holster"
+	desc = "A holster to carry a handgun and ammo. WARNING: Badasses only."
+	icon_state = "holster"
+	item_state = "holster"
+	pocket_storage_component_path = /datum/component/storage/concrete/pockets/holster
+
+/obj/item/clothing/accessory/holster/detective
+	name = "detective's shoulder holster"
+	pocket_storage_component_path = /datum/component/storage/concrete/pockets/holster/detective
+
+/obj/item/clothing/accessory/holster/detective/Initialize()
+	. = ..()
+	new /obj/item/gun/ballistic/revolver/detective(src)
+	new /obj/item/ammo_box/c38(src)
+	new /obj/item/ammo_box/c38(src)
 
 /obj/item/clothing/accessory/skilt
 	name = "Sinew Skirt"

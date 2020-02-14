@@ -152,7 +152,7 @@
 	name = "surgical apron"
 	desc = "A sterile blue surgical apron."
 	icon_state = "surgical"
-	allowed = list(/obj/item/scalpel, /obj/item/surgical_drapes, /obj/item/cautery, /obj/item/hemostat, /obj/item/retractor)
+	allowed = list(/obj/item/scalpel, /obj/item/cautery, /obj/item/hemostat, /obj/item/retractor)
 
 //Curator
 /obj/item/clothing/suit/curator
@@ -185,3 +185,17 @@
 	item_state = "techpriesthood"
 	body_parts_covered = HEAD
 	flags_inv = HIDEHAIR|HIDEEARS
+
+//Second Officer
+
+/obj/item/clothing/suit/storage/second_officer
+	name = "second officer's coat"
+	desc = "NT deluxe ripoff. You finally have your own coat."
+	icon_state = "blueshieldcoat"
+	item_state = "blueshieldcoat"
+	blood_overlay_type = "coat"
+	body_parts_covered = CHEST|LEGS|ARMS
+	allowed = list(/obj/item/gun/energy, /obj/item/reagent_containers/spray/pepper, /obj/item/ammo_box, /obj/item/ammo_casing,/obj/item/melee/baton, /obj/item/restraints/handcuffs, /obj/item/flashlight/seclite, /obj/item/melee/classic_baton)
+	armor = list(melee = 25, bullet = 10, laser = 25, energy = 10, bomb = 0, bio = 0, rad = 0)
+	cold_protection = CHEST|LEGS|ARMS
+	heat_protection = CHEST|LEGS|ARMS

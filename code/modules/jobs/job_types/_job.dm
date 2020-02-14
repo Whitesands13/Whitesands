@@ -49,6 +49,12 @@
 	var/exp_type = ""
 	var/exp_type_department = ""
 
+	//A special, very large and noticeable message for certain roles reminding them of something important. Ex: "Blueshields are not security"
+	var/special_notice = ""
+
+	// A link to the relevant wiki related to the job. Ex: "Space_law" would link to wiki.blah/Space_law
+	var/wiki_page = ""
+
 	//The amount of good boy points playing this role will earn you towards a higher chance to roll antagonist next round
 	//can be overridden by antag_rep.txt config
 	var/antag_rep = 10
@@ -191,13 +197,17 @@
 		if(GSATCHEL)
 			back = /obj/item/storage/backpack/satchel //Grey satchel
 		if(GDUFFELBAG)
-			back = /obj/item/storage/backpack/duffelbag //Grey Duffel bag
+			back = /obj/item/storage/backpack/duffelbag //Grey duffel bag
+		if(GCOURIERBAG)
+			back = /obj/item/storage/backpack/messenger //Grey messenger bag
 		if(LSATCHEL)
 			back = /obj/item/storage/backpack/satchel/leather //Leather Satchel
 		if(DSATCHEL)
 			back = satchel //Department satchel
 		if(DDUFFELBAG)
 			back = duffelbag //Department duffel bag
+		if(DCOURIERBAG)
+			back = courierbag //Department messenger bag
 		else
 			back = backpack //Department backpack
 
@@ -246,6 +256,7 @@
 	types += backpack
 	types += satchel
 	types += duffelbag
+	types += courierbag
 	return types
 
 //Warden and regular officers add this result to their get_access()

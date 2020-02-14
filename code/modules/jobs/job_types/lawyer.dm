@@ -1,13 +1,14 @@
 /datum/job/lawyer
 	title = "Lawyer"
 	flag = LAWYER
-	department_head = list("Head of Personnel")
+	department_head = list("First Officer")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the head of personnel"
+	supervisors = "the first officer"
 	selection_color = "#dddddd"
+	wiki_page = "Lawyer"
 	var/lawyers = 0 //Counts lawyer amount
 
 	outfit = /datum/outfit/job/lawyer
