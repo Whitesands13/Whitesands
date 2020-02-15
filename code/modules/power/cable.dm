@@ -25,6 +25,11 @@ GLOBAL_LIST_INIT(wire_node_generating_types, typecacheof(list(/obj/structure/gri
 	var/node = FALSE //used for sprites display
 	var/cable_layer = CABLE_LAYER_2
 	var/datum/powernet/powernet
+	FASTDMM_PROP(\
+		pipe_group = "cable-[cable_layer]",\
+		pipe_type = PIPE_TYPE_AUTO,\
+		pipe_interference_group = "cable-[cable_layer]"\
+	)
 
 /obj/structure/cable/layer1
 	color = "red"
@@ -564,6 +569,10 @@ GLOBAL_LIST_INIT(cable_coil_recipes, list(new/datum/stack_recipe("cable restrain
 	layer = WIRE_LAYER + 0.02 //Above all the cables but below terminals
 	anchored = TRUE
 	obj_flags = CAN_BE_HIT | ON_BLUEPRINTS
+	FASTDMM_PROP(\
+		pipe_type = PIPE_TYPE_MANIFOLD4W,\
+		pipe_group = "cable-CABLE_LAYER_1, cable-CABLE_LAYER_2, cable-CABLE_LAYER_3"\
+	)
 
 /obj/structure/cable_bridge/Initialize()
 	. = ..()
