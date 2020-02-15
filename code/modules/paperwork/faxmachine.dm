@@ -229,7 +229,7 @@ GLOBAL_LIST_EMPTY(alldepartments)
 		to_chat(usr, "There is nothing to remove from [src].")
 
 /obj/machinery/photocopier/faxmachine/proc/sendfax(var/destination,var/mob/sender)
-	if(stat & (BROKEN|NOPOWER))
+	if(machine_stat & (BROKEN|NOPOWER))
 		return
 
 	use_power(200)
@@ -260,7 +260,7 @@ GLOBAL_LIST_EMPTY(alldepartments)
 		visible_message("<span class='notice'>[src] beeps, \"Error transmitting message.\"</span>")
 
 /obj/machinery/photocopier/faxmachine/proc/receivefax(var/obj/item/incoming)
-	if(stat & (BROKEN|NOPOWER))
+	if(machine_stat & (BROKEN|NOPOWER))
 		return FALSE
 
 	if(department == "Unknown" || department == destination)
@@ -287,7 +287,7 @@ GLOBAL_LIST_EMPTY(alldepartments)
 	return TRUE
 
 /obj/machinery/photocopier/faxmachine/proc/send_admin_fax(var/mob/sender, var/destination)
-	if(stat & (BROKEN|NOPOWER))
+	if(machine_stat & (BROKEN|NOPOWER))
 		return
 
 	if(sendcooldown)
