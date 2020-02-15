@@ -33,6 +33,10 @@
 
 	var/drag_slowdown // Amont of multiplicative slowdown applied if pulled. >1 makes you slower, <1 makes you faster.
 
+	FASTDMM_PROP(\
+		pinned_vars = list("name")\
+	)
+
 /obj/vv_edit_var(vname, vval)
 	switch(vname)
 		if("anchored")
