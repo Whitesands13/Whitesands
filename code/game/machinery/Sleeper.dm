@@ -13,7 +13,7 @@
 	state_open = TRUE
 	circuit = /obj/item/circuitboard/machine/sleeper
 	ui_x = 250
-	ui_y = 465
+	ui_y = 550
 
 	var/obj/item/stock_parts/cell/cell //The sleeper's power cell.
 	var/efficiency = 1
@@ -29,7 +29,7 @@
 	var/list/chem_buttons	//Used when emagged to scramble which chem is used, eg: antitoxin -> morphine
 	var/scrambled_chems = FALSE //Are chem buttons scrambled? used as a warning
 	var/enter_message = "<span class='notice'><b>You feel cool air surround you. You go numb as your senses turn inward.</b></span>"
-	var/poweruse = 25 //How much power it uses per injection, minimum 10 charge/10u
+	var/poweruse = 250 //How much power it uses per injection, minimum 10 charge/10u
 	payment_department = ACCOUNT_MED
 	fair_market_price = 5
 
@@ -41,6 +41,8 @@
 
 /obj/machinery/sleeper/RefreshParts()
 	var/E
+	for(var/obj/item/stock_parts/cell/P in component_parts)
+		cell = P
 	for(var/obj/item/stock_parts/matter_bin/B in component_parts)
 		E += B.rating
 	var/I
@@ -49,7 +51,7 @@
 
 	efficiency = initial(efficiency)* E
 	min_health = initial(min_health) * E
-	poweruse = max(10, 30/efficiency)
+	poweruse = max(100, 300/efficiency)
 	available_chems = list()
 	for(var/i in 1 to I)
 		available_chems |= possible_chems[i]
@@ -86,6 +88,8 @@
 		var/mob/living/mob_occupant = occupant
 		if(mob_occupant && mob_occupant.stat != DEAD)
 			to_chat(occupant, "[enter_message]")
+/obj/machinery/sleeper/get_cell()
+	return cell
 
 /obj/machinery/sleeper/emp_act(severity)
 	. = ..()
@@ -210,7 +214,7 @@
 	if(cell)
 		data["cell"]["poweruse"] = poweruse
 		data["cell"]["maxCharge"] = cell.maxcharge
-		data["cell"]["charge"] = cell.charge
+		data["cell"]["charge"] = cell.charge ? cell.charge : "0"
 	return data
 
 /obj/machinery/sleeper/ui_act(action, params)

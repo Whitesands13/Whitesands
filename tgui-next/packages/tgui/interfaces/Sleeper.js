@@ -119,21 +119,20 @@ export const Sleeper = props => {
         ))}
       </Section>
       <Section
-        title="Power" >
-        <LabeledList>
-          <LabeledList.Item label="Charge:">
-            <ProgressBar
-              value={cell.charge}
-              content={cell.charge + ' units'}
-              minValue={0}
-              maxValue={cell.maxCharge}
-              ranges={{
-                good: [0.5*cell.maxCharge, Infinity],
-                average: [0.25*cell.maxCharge, 0.5*cell.maxCharge],
-                bad: [-Infinity, 0.25*cell.maxCharge],
-              }} />
-          </LabeledList.Item>
-        </LabeledList>
+        title="Status"
+        minHeight="50px" >
+        {!!cell && (
+          <LabeledList>
+            <LabeledList.Item label="Charge">
+              <ProgressBar
+                value={cell.charge}
+                content={cell.charge/10 + ' units'}
+                minValue={0}
+                maxValue={cell.maxCharge}
+              />
+            </LabeledList.Item>
+          </LabeledList>
+        )}
       </Section>
     </Fragment>
   );
