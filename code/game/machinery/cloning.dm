@@ -117,6 +117,7 @@
 		for(var/datum/reagent/R in beaker.reagents.reagent_list)
 			beakerContents += list(list("name" = R.name, "volume" = R.volume))
 	data["beakerContents"] = beakerContents
+	data["progress"] = get_completion()
 	return data
 
 /obj/machinery/clonepod/ui_act(action, params)
