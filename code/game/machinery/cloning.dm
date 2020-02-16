@@ -24,6 +24,7 @@
 	var/attempting = FALSE //One clone attempt at a time thanks
 	var/speed_coeff
 	var/efficiency
+	var/obj/item/reagent_containers/glass/beaker = null //Beaker full of what SHOULD be synthflesh
 
 	var/fleshamnt = 1 //Amount of synthflesh needed per cloning cycle, is divided by efficiency
 
@@ -42,9 +43,11 @@
 	var/datum/bank_account/current_insurance
 	fair_market_price = 5 // He nodded, because he knew I was right. Then he swiped his credit card to pay me for arresting him.
 	payment_department = ACCOUNT_MED
-/obj/machinery/clonepod/Initialize()
-	create_reagents(100, OPENCONTAINER)
+	ui_x = 400
+	ui_y = 550
 
+
+/obj/machinery/clonepod/Initialize()
 	. = ..()
 
 	countdown = new(src)
@@ -87,19 +90,46 @@
 	if(heal_level > 100)
 		heal_level = 100
 
-/obj/machinery/clonepod/attack_hand(mob/user)
-	. = ..()
-	if(.)
-		return
-	user.examinate(src)
+/obj/machinery/clonepod/proc/replace_beaker(mob/living/user, obj/item/reagent_containers/new_beaker)
+	if(beaker)
+		beaker.forceMove(drop_location())
+		if(user && Adjacent(user) && !issiliconoradminghost(user))
+			user.put_in_hands(beaker)
+	if(new_beaker)
+		beaker = new_beaker
+	else
+		beaker = null
+	update_icon()
+	return TRUE
 
-/obj/machinery/clonepod/AltClick(mob/user)
-	. = ..()
-	if (alert(user, "Are you sure you want to empty the cloning pod?", "Empty Reagent Storage:", "Yes", "No") != "Yes")
+/obj/machinery/clonepod/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
+									datum/tgui/master_ui = null, datum/ui_state/state = GLOB.notcontained_state)
+	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
+	if(!ui)
+		ui = new(user, src, ui_key, "clonepod", name, ui_x, ui_y, master_ui, state)
+		ui.open()
+
+/obj/machinery/clonepod/ui_data()
+	var/list/data = list()
+	data["isBeakerLoaded"] = beaker ? TRUE : FALSE
+	var/beakerContents = list()
+	if(beaker && beaker.reagents && beaker.reagents.reagent_list.len)
+		for(var/datum/reagent/R in beaker.reagents.reagent_list)
+			beakerContents += list(list("name" = R.name, "volume" = R.volume))
+	data["beakerContents"] = beakerContents
+	return data
+
+/obj/machinery/clonepod/ui_act(action, params)
+	if(..())
 		return
-	to_chat(user, "<span class='notice'>You empty \the [src]'s release valve onto the floor.</span>")
-	reagents.reaction(user.loc)
-	src.reagents.clear_reagents()
+	else if("ejectbeaker")
+		replace_beaker(usr)
+		. = TRUE
+
+/obj/machinery/chem_dispenser/AltClick(mob/living/user)
+	..()
+	if(istype(user) && user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
+		replace_beaker(user)
 
 /obj/machinery/clonepod/attack_ai(mob/user)
 	return attack_hand(user)
@@ -365,8 +395,17 @@
 			icon_state = "pod_0"
 		use_power(200)
 
-//Let's unlock this early I guess.  Might be too early, needs tweaking.
+//Let's unlock this early I guess.  Might be too early, needs tweaking. Jesus, even I'm not that indecisive.
 /obj/machinery/clonepod/attackby(obj/item/W, mob/user, params)
+	if(istype(W, /obj/item/reagent_containers) && !(W.item_flags & ABSTRACT) && W.is_open_container())
+		var/obj/item/reagent_containers/B = W
+		. = TRUE //no afterattack
+		if(!user.transferItemToLoc(B, src))
+			return
+		var/reagentlist = pretty_string_from_reagent_list(W.reagents.reagent_list)
+		replace_beaker(user, B)
+		to_chat(user, "<span class='notice'>You add [B] to [src].</span>")
+		log_game("[key_name(user)] added an [W] to the [src] at [src.loc] containing [reagentlist]")
 	if(!(occupant || mess))
 		if(default_deconstruction_screwdriver(user, "[icon_state]_maintenance", "[initial(icon_state)]",W))
 			return
@@ -533,8 +572,9 @@
 	playsound(src,'sound/hallucinations/wail.ogg', 100, TRUE)
 
 /obj/machinery/clonepod/deconstruct(disassembled = TRUE)
-	for(var/obj/item/reagent_containers/glass/G in component_parts)
-		reagents.trans_to(G, G.reagents.maximum_volume)
+	if(beaker)
+		beaker.forceMove(drop_location())
+		beaker = null
 	if(occupant)
 		var/mob/living/mob_occupant = occupant
 		go_out()
@@ -578,7 +618,8 @@
 
 /obj/machinery/clonepod/mapped/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/medicine/synthflesh, 100)
+	beaker = new /obj/item/reagent_containers/glass/beaker/large(src)
+	beaker.reagents.add_reagent(/datum/reagent/medicine/synthflesh, 100)
 
 /*
  *	Manual -- A big ol' manual.
