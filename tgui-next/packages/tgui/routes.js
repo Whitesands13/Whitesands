@@ -28,6 +28,7 @@ import { ChemPress } from './interfaces/ChemPress';
 import { ChemReactionChamber } from './interfaces/ChemReactionChamber';
 import { ChemSplitter } from './interfaces/ChemSplitter';
 import { ChemSynthesizer } from './interfaces/ChemSynthesizer';
+import { Cloner } from '.interfaces/Cloner';
 import { CodexGigas } from './interfaces/CodexGigas';
 import { ComputerFabricator } from './interfaces/ComputerFabricator';
 import { Crayon } from './interfaces/Crayon';
@@ -228,6 +229,10 @@ const ROUTES = {
   },
   synthesizer: {
     component: () => ChemSynthesizer,
+    scrollable: false,
+  },
+  cloner: {
+    component: () => Cloner,
     scrollable: false,
   },
   codex_gigas: {

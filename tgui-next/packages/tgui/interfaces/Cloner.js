@@ -1,6 +1,5 @@
-import { Fragment } from 'inferno';
 import { useBackend } from '../backend';
-import { AnimatedNumber, Button, LabeledList, ProgressBar, Section } from '../components';
+import { Button, Section } from '../components';
 import { BeakerContents } from './common/BeakerContents';
 
 export const ClonePod = props => {
@@ -9,6 +8,7 @@ export const ClonePod = props => {
   return (
     <Section
       title="Beaker"
+      minheight="50px"
       buttons={(
         <Button
           icon="eject"
