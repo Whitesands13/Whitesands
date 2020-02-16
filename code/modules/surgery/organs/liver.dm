@@ -94,7 +94,6 @@
 	maxHealth = 1.5 * STANDARD_ORGAN_THRESHOLD
 	toxTolerance = 5 //can shrug off up to 5u of toxins
 	toxLethality = 0.008 //20% less damage than a normal liver
-	emp_vulnerability = 40
 
 /obj/item/organ/liver/cybernetic/tier3
 	name = "upgraded cybernetic liver"
@@ -106,16 +105,6 @@
 	toxLethality = 0.008 //20% less damage than a normal liver
 	emp_vulnerability = 20
 
-/obj/item/organ/liver/cybernetic/emp_act(severity)
-	. = ..()
-	if(. & EMP_PROTECT_SELF)
-		return
-	if(world.time > severe_cooldown) //So we cant just spam emp to kill people.
-		owner.adjustToxLoss(10)
-		severe_cooldown = world.time + 10 SECONDS
-	if(prob(emp_vulnerability/severity))	//Chance of permanent effects
-		organ_flags = ORGAN_SYNTHETIC_EMP //Starts organ faliure - gonna need replacing soon.
-
 /obj/item/organ/liver/cybernetic/upgraded/ipc
 	name = "substance processor"
 	icon_state = "substance_processor"
@@ -126,10 +115,12 @@
 	toxLethality = 0
 	status = ORGAN_ROBOTIC
 
-/obj/item/organ/liver/cybernetic/upgraded/ipc/emp_act(severity)
-	to_chat(owner, "<span class='warning'>Alert: Your Substance Processor has been damaged. An internal chemical leak is affecting performance.</span>")
-	switch(severity)
-		if(1)
-			owner.toxloss += 15
-		if(2)
-			owner.toxloss += 5 
+/obj/item/organ/liver/cybernetic/emp_act(severity)
+	. = ..()
+	if(. & EMP_PROTECT_SELF)
+		return
+	if(world.time > severe_cooldown) //So we cant just spam emp to kill people.
+		owner.adjustToxLoss(10)
+		severe_cooldown = world.time + 10 SECONDS
+	if(prob(emp_vulnerability/severity))	//Chance of permanent effects
+		organ_flags = ORGAN_SYNTHETIC_EMP //Starts organ faliure - gonna need replacing soon.

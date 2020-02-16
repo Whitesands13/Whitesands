@@ -1,13 +1,15 @@
 /datum/job/clown
 	title = "Clown"
 	flag = CLOWN
-	department_head = list("Head of Personnel")
+	department_head = list("First Officer")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the head of personnel"
+	supervisors = "the first officer"
 	selection_color = "#dddddd"
+	wiki_page = "Clown"
+	special_notice = "There is a difference between funny pranks and griefing. Know it."
 
 	outfit = /datum/outfit/job/clown
 
@@ -47,7 +49,7 @@
 	duffelbag = /obj/item/storage/backpack/duffelbag/clown //strangely has a duffel
 
 	box = /obj/item/storage/box/hug/survival
-	
+
 	chameleon_extras = /obj/item/stamp/clown
 
 /datum/outfit/job/clown/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)

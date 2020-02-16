@@ -32,10 +32,10 @@
 /datum/computer_file/program/card_mod/New(obj/item/modular_computer/comp)
 	. = ..()
 	sub_managers = list(
-		"[ACCESS_HOP]" = list(
+		"[ACCESS_FO]" = list(
 			"department" = list(CARDCON_DEPARTMENT_SERVICE, CARDCON_DEPARTMENT_COMMAND),
 			"region" = 1,
-			"head" = "Head of Personnel"
+			"head" = "First Officer"
 		),
 		"[ACCESS_HOS]" = list(
 			"department" = CARDCON_DEPARTMENT_SECURITY,
