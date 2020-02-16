@@ -246,7 +246,7 @@
 	category = list("initial","Tools","Tool Designs")
 	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING
 
-/datum/design/airlock_painter
+/datum/design/floor_painter
 	name = "Floor Painter"
 	id = "floor_painter"
 	build_type = AUTOLATHE | PROTOLATHE
