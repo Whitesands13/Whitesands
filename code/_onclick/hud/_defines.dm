@@ -89,10 +89,6 @@
 #define ui_living_health "EAST-1:28,CENTER:15"
 #define ui_living_healthdoll "EAST-1:28,CENTER-2:13"
 
-//Generic living
-#define ui_living_pull "EAST-1:28,CENTER-3:15"
-#define ui_living_healthdoll "EAST-1:28,CENTER-1:15"
-
 //Monkeys
 #define ui_monkey_head "CENTER-5:13,SOUTH:5"
 #define ui_monkey_mask "CENTER-4:14,SOUTH:5"
