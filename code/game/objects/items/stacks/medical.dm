@@ -306,7 +306,6 @@
 	self_delay = 40
 	other_delay = 15
 	splint_fracture = TRUE
-	failure_chance = 0
 
 /obj/item/stack/medical/splint/attack(mob/living/M, mob/user) //TODO: Refactor to make it play nice
 	if(iscarbon(M))
@@ -328,7 +327,6 @@
 			return
 
 		// Apply the splint
-		if()
 		affecting.bone_status = BONE_FLAG_SPLINTED
 		C.update_inv_splints()
 		user.visible_message("<span class='green'>[user] applies [src] on [M].</span>", "<span class='green'>You apply [src] on [M].</span>")
