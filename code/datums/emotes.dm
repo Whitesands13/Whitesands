@@ -50,7 +50,7 @@
 
 	msg = replace_pronoun(user, msg)
 
-	var/end = copytext(msg, lentext(message))
+	var/end = copytext(msg, length(message))
 	if(!(end in list("!", ".", "?", ":", "\"", "-")))
 		msg += "."
 
