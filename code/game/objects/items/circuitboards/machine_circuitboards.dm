@@ -1223,3 +1223,4 @@
 		/obj/item/stock_parts/manipulator = 1,
 		/obj/item/stock_parts/micro_laser = 3,
 		/obj/item/stock_parts/matter_bin = 1)
+		
