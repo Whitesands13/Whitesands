@@ -109,14 +109,9 @@ export const Sleeper = props => {
             key={chem.name}
             icon="flask"
             content={chem.name}
-<<<<<<< HEAD
-            disabled={!(occupied && chem.allowed)}
-            width="140px"
-=======
             disabled={!(occupied && chem.allowed
               && (cell.charge > cell.poweruse))}
             width="110px"
->>>>>>> origin/master
             onClick={() => act('inject', {
               chem: chem.id,
             })}
