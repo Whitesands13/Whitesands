@@ -662,7 +662,8 @@
 		/obj/item/stack/cable_coil = 2,
 		/obj/item/stock_parts/scanning_module = 2,
 		/obj/item/stock_parts/manipulator = 2,
-		/obj/item/stack/sheet/glass = 1)
+		/obj/item/stack/sheet/glass = 1,
+		/obj/item/reagent_containers/glass/beaker = 2)
 
 /obj/item/circuitboard/machine/clonepod/experimental
 	name = "Experimental Clone Pod (Machine Board)"
@@ -746,7 +747,9 @@
 		/obj/item/stock_parts/matter_bin = 1,
 		/obj/item/stock_parts/manipulator = 1,
 		/obj/item/stack/cable_coil = 1,
-		/obj/item/stack/sheet/glass = 2)
+		/obj/item/stack/sheet/glass = 2,
+		/obj/item/stock_parts/cell = 1)
+	def_components = list(/obj/item/stock_parts/cell = /obj/item/stock_parts/cell/high)
 
 /obj/item/circuitboard/machine/sleeper/party
 	name = "Party Pod (Machine Board)"
@@ -1222,3 +1225,14 @@
 		/obj/item/stock_parts/manipulator = /obj/item/stock_parts/manipulator/femto,
 		/obj/item/stock_parts/micro_laser = /obj/item/stock_parts/micro_laser/quadultra,
 		/obj/item/stock_parts/scanning_module = /obj/item/stock_parts/scanning_module/triphasic)
+
+/obj/item/circuitboard/machine/autodoc
+	name = "Autodoc (Machine Board)"
+	build_path = /obj/machinery/autodoc
+	req_components = list(/obj/item/scalpel/advanced = 1,
+		/obj/item/retractor/advanced = 1,
+		/obj/item/surgicaldrill/advanced = 1,
+		/obj/item/stock_parts/manipulator = 1,
+		/obj/item/stock_parts/micro_laser = 3,
+		/obj/item/stock_parts/matter_bin = 1)
+		

@@ -138,6 +138,14 @@
 	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_MEDICAL
 	category = list ("Medical Machinery")
 
+/datum/design/board/sleeper
+	name = "Machine Design (Sleeper Board)"
+	desc = "The circuit board for a sleeper."
+	id = "sleeper"
+	build_path = /obj/item/circuitboard/machine/sleeper
+	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_MEDICAL
+	category = list ("Medical Machinery")
+
 /datum/design/board/chem_dispenser
 	name = "Machine Design (Portable Chem Dispenser Board)"
 	desc = "The circuit board for a portable chem dispenser."
@@ -592,6 +600,14 @@
 	desc = "The circuit board for a stasis unit."
 	id = "stasis"
 	build_path = /obj/item/circuitboard/machine/stasis
+	category = list("Medical Machinery")
+	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
+
+/datum/design/board/autodoc
+	name = "Machine Design (Autodoc)"
+	desc = "The circuit board for an Autodoc."
+	id = "autodoc"
+	build_path = /obj/item/circuitboard/machine/autodoc
 	category = list("Medical Machinery")
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
 
