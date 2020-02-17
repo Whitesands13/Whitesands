@@ -161,3 +161,4 @@
 		return
 	obj_flags |= EMAGGED
 	to_chat(user, "<span class='warning'>You reprogram [src]'s surgery procedures.</span>")
+	
