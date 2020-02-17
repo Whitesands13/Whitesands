@@ -768,7 +768,7 @@
 	bone_status = BONE_FLAG_BROKEN
 	owner.update_mobility()
 	spawn(1) // Delay so it happens after the punch message
-		owner.visible_message("<span class='userdanger'>You hear a cracking sound coming from [owner]'s [parse_zone(src)].</span>", "<span class='warning'>You feel something crack in your [parse_zone(src)]!</span>", "<span class='warning'>You hear an awful cracking sound.</span>")
+		owner.visible_message("<span class='userdanger'>You hear a cracking sound coming from [owner]'s [name].</span>", "<span class='warning'>You feel something crack in your [name]!</span>", "<span class='warning'>You hear an awful cracking sound.</span>")
 
 
 /obj/item/bodypart/proc/fix_bone()
