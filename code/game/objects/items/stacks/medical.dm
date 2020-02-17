@@ -16,6 +16,7 @@
 	var/other_delay = 0
 	var/repeating = FALSE
 	var/experience_given = 1
+	var/splint_fracture
 
 /obj/item/stack/medical/attack(mob/living/M, mob/user)
 	. = ..()
@@ -292,3 +293,49 @@
 
 	The interesting limb targeting mechanic is retained and i still believe they will be a viable choice, especially when healing others in the field.
 	 */
+
+// SPLINTS
+/obj/item/stack/medical/splint
+	amount = 4
+	name = "splints"
+	desc = "Used to secure limbs following a fracture."
+	gender = PLURAL
+	singular_name = "splint"
+	icon = 'icons/obj/items_and_weapons.dmi'
+	icon_state = "splint"
+	self_delay = 40
+	other_delay = 15
+	splint_fracture = TRUE
+	failure_chance = 0
+
+/obj/item/stack/medical/splint/attack(mob/living/M, mob/user) //TODO: Refactor to make it play nice
+	if(iscarbon(M))
+		var/mob/living/carbon/C = M
+		var/obj/item/bodypart/affecting = C.get_bodypart(check_zone(user.zone_selected))
+
+		if(!affecting) // Check for a missing limb
+			to_chat(user, "<span class='warning'>[C] doesn't have \a [parse_zone(user.zone_selected)]!</span>")
+			return
+
+		if(affecting.body_part in list(CHEST, HEAD)) // Check it aint the head or chest
+			to_chat(user, "<span class='warning'>You can't splint that bodypart!</span>")
+			return
+		else if(affecting.bone_status == BONE_FLAG_SPLINTED) // Check it aint already splinted
+			to_chat(user, "<span class='warning'>[M]'s [parse_zone(user.zone_selected)] is already splinted!</span>")
+			return
+		else if(!(affecting.bone_status == BONE_FLAG_BROKEN)) // Check it actually broken
+			to_chat(user, "<span class='warning'>[M]'s [parse_zone(user.zone_selected)] isn't broken!</span>")
+			return
+
+		// Apply the splint
+		if()
+		affecting.bone_status = BONE_FLAG_SPLINTED
+		C.update_inv_splints()
+		user.visible_message("<span class='green'>[user] applies [src] on [M].</span>", "<span class='green'>You apply [src] on [M].</span>")
+		use(1)
+
+/obj/item/stack/medical/splint/ghetto //slightly shittier, but gets the job done
+	amount = 2
+	self_delay = 50
+	other_delay = 20
+
