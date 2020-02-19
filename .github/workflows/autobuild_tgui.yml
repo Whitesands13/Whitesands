@@ -3,8 +3,8 @@ name: Autobuild TGUI
 on:
   push:
     paths:
-      - 'tgui/**.js'
-      - 'tgui/**.scss'
+      - 'tgui-next/**.js'
+      - 'tgui-next/**.scss'
 
 jobs:
   build:
@@ -21,7 +21,7 @@ jobs:
           node-version: '>=12.13'
       - name: Build TGUI
         run: bin/tgui --ci
-        working-directory: ./tgui
+        working-directory: ./tgui-next
       - name: Commit Artifacts
         run: |
           git config --local user.email "action@github.com"
