@@ -38,3 +38,4 @@
 		return
 	var/datum/material/ore = pick(ore_rates)
 	mat_container.insert_amount_mat((ore_rates[ore] * 1000), ore)
+	
