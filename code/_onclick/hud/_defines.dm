@@ -70,8 +70,9 @@
 //Middle right (status indicators)
 #define ui_healthdoll "EAST-1:28,CENTER-2:13"
 #define ui_health "EAST-1:28,CENTER-1:15"
-#define ui_internal "EAST-1:28,CENTER:17"
-#define ui_mood "EAST-1:28,CENTER-3:10"
+#define ui_internal "EAST-1:28,CENTER-3:10"
+#define ui_mood "EAST-1:28,CENTER:17"
+#define ui_spacesuit "EAST-1:28,CENTER-4:10"
 
 //Pop-up inventory
 #define ui_shoes "WEST+1:8,SOUTH:5"
@@ -83,10 +84,10 @@
 #define ui_ears "WEST+2:10,SOUTH+2:9"
 #define ui_neck "WEST:6,SOUTH+2:9"
 #define ui_head "WEST+1:8,SOUTH+3:11"
-//living
+
+//Generic living
 #define ui_living_pull "EAST-1:28,CENTER-3:15"
-#define ui_living_health "EAST-1:28,CENTER:15"
-#define ui_living_healthdoll "EAST-1:28,CENTER-2:13"
+#define ui_living_healthdoll "EAST-1:28,CENTER-1:15"
 
 //Monkeys
 #define ui_monkey_head "CENTER-5:13,SOUTH:5"

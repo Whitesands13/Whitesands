@@ -855,6 +855,7 @@
 	name = "box of rubber shots"
 	desc = "A box full of rubber shots, designed for riot shotguns."
 	icon_state = "rubbershot_box"
+	illustration = null
 
 /obj/item/storage/box/rubbershot/PopulateContents()
 	for(var/i in 1 to 7)
@@ -864,6 +865,7 @@
 	name = "box of lethal shotgun shots"
 	desc = "A box full of lethal shots, designed for riot shotguns."
 	icon_state = "lethalshot_box"
+	illustration = null
 
 /obj/item/storage/box/lethalshot/PopulateContents()
 	for(var/i in 1 to 7)
@@ -873,6 +875,7 @@
 	name = "box of beanbags"
 	desc = "A box full of beanbag shells."
 	illustration = "rubbershot_box"
+	illustration = null
 
 /obj/item/storage/box/beanbag/PopulateContents()
 	for(var/i in 1 to 6)
@@ -899,6 +902,7 @@
 	desc = "A sack neatly crafted out of paper."
 	icon_state = "paperbag_None"
 	item_state = "paperbag_None"
+	illustration = null
 	resistance_flags = FLAMMABLE
 	foldable = null
 	var/design = NODESIGN

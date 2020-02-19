@@ -74,7 +74,7 @@ GLOBAL_LIST_EMPTY(alldepartments)
 		ui.open()
 
 /obj/machinery/photocopier/faxmachine/ui_data(mob/user)
-	var/list/data = list()
+	var/data = list()
 	var/is_authenticated = is_authenticated(user)
 
 	if(scan)
@@ -99,7 +99,7 @@ GLOBAL_LIST_EMPTY(alldepartments)
 		data["paperinserted"] = TRUE
 	else
 		data["paper"] = "-----"
-		data["paperinserted"] = TRUE
+		data["paperinserted"] = FALSE
 	data["destination"] = destination
 	data["cooldown"] = sendcooldown
 	if((destination in GLOB.admin_departments) || (destination in GLOB.hidden_admin_departments))

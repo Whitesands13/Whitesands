@@ -61,6 +61,7 @@
 	color = "#8228A0"
 	toxpwr = 3
 	process_flags = ORGANIC | SYNTHETIC
+	material = /datum/material/plasma
 
 /datum/reagent/toxin/plasma/on_mob_life(mob/living/carbon/C)
 	if(holder.has_reagent(/datum/reagent/medicine/epinephrine))

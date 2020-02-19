@@ -48,7 +48,7 @@
 	starting_node = TRUE
 	display_name = "Basic Tools"
 	description = "Basic mechanical, electronic, and botanical tools."
-	design_ids = list("screwdriver", "wrench", "wirecutters", "crowbar", "multitool", "welding_tool", "tscanner", "analyzer", "cable_coil", "pipe_painter", "airlock_painter", "floor_painter"
+	design_ids = list("screwdriver", "wrench", "wirecutters", "crowbar", "multitool", "welding_tool", "tscanner", "analyzer", "cable_coil", "pipe_painter", "airlock_painter", "floor_painter",
 					"cultivator", "plant_analyzer", "shovel", "spade", "hatchet", "mop", "plunger")
 
 /datum/techweb_node/basic_medical
@@ -1129,6 +1129,19 @@
 
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
 	export_price = 2500
+	hidden = TRUE
+	experimental = TRUE
+
+/datum/techweb_node/interrogation
+	id = "interrogation"
+	display_name = "Enhanced Interrogation Technology"
+	description = "By cross-referencing several declassified documents from past dictatorial regimes, we were able to develop an incredibly effective interrogation device. \
+	Ethical concerns about loss of free will do not apply to criminals, according to galactic law."
+	prereq_ids = list("base")
+	design_ids = list("hypnochair")
+
+	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 3500)
+	export_price = 3500
 	hidden = TRUE
 	experimental = TRUE
 
