@@ -43,8 +43,8 @@
 	var/datum/bank_account/current_insurance
 	fair_market_price = 5 // He nodded, because he knew I was right. Then he swiped his credit card to pay me for arresting him.
 	payment_department = ACCOUNT_MED
-	ui_x = 400
-	ui_y = 550
+	ui_x = 200
+	ui_y = 300
 
 
 /obj/machinery/clonepod/Initialize()
@@ -74,11 +74,7 @@
 /obj/machinery/clonepod/RefreshParts()
 	speed_coeff = 0
 	efficiency = 0
-	reagents.maximum_volume = 0
 	fleshamnt = 1
-	for(var/obj/item/reagent_containers/glass/G in component_parts)
-		reagents.maximum_volume += G.volume
-		G.reagents.trans_to(src, G.reagents.total_volume)
 	for(var/obj/item/stock_parts/scanning_module/S in component_parts)
 		efficiency += S.rating
 		fleshamnt = 1/max(efficiency-1, 1)
@@ -117,7 +113,7 @@
 		for(var/datum/reagent/R in beaker.reagents.reagent_list)
 			beakerContents += list(list("name" = R.name, "volume" = R.volume))
 	data["beakerContents"] = beakerContents
-	data["progress"] = get_completion()
+	data["progress"] = round(get_completion())
 	return data
 
 /obj/machinery/clonepod/ui_act(action, params)
@@ -139,9 +135,9 @@
 	. = ..()
 	. += "<span class='notice'>The <i>linking</i> device can be <i>scanned<i> with a multitool. It can be emptied by Alt-Clicking it.</span>"
 	if(in_range(user, src) || isobserver(user))
-		. += "<span class='notice'>The status display reads: Cloning speed at <b>[speed_coeff*50]%</b>.<br>Predicted amount of cellular damage: <b>[100-heal_level]%</b><br> Storing up to <b>[reagents.maximum_volume]cm<sup>3</sup></b> of synthflesh.<br>"
+		. += "<span class='notice'>The status display reads: Cloning speed at <b>[speed_coeff*50]%</b>.<br>Predicted amount of cellular damage: <b>[100-heal_level]%</b><br>"
 		. += "Synthflesh consumption at <b>[round(fleshamnt*90, 1)]cm<sup>3</sup></b> per clone.</span><br>"
-		. += "<span class='notice'>The reagent display reads: [round(reagents.total_volume, 1)] / [reagents.maximum_volume] cm<sup>3</sup></span>"
+
 		if(efficiency > 5)
 			. += "<span class='notice'>Pod has been upgraded to support autoprocessing and apply beneficial mutations.</span>"
 
@@ -201,7 +197,7 @@
 
 //Start growing a human clone in the pod!
 /obj/machinery/clonepod/proc/growclone(clonename, ui, mutation_index, mindref, last_death, blood_type, datum/species/mrace, list/features, factions, list/quirks, datum/bank_account/insurance, list/traumas, empty)
-	if(!reagents.has_reagent(/datum/reagent/medicine/synthflesh, fleshamnt))
+	if(!beaker.reagents.has_reagent(/datum/reagent/medicine/synthflesh, fleshamnt))
 		connected_message("Cannot start cloning: Not enough synthflesh.")
 		return NONE
 	if(panel_open)
@@ -312,7 +308,7 @@
 			connected_message("Clone Ejected: Loss of power.")
 
 	else if(mob_occupant && (mob_occupant.loc == src))
-		if(!reagents.has_reagent(/datum/reagent/medicine/synthflesh, fleshamnt))
+		if(!beaker.reagents.has_reagent(/datum/reagent/medicine/synthflesh, fleshamnt))
 			go_out()
 			log_cloning("[key_name(mob_occupant)] ejected from [src] at [AREACOORD(src)] due to insufficient material.")
 			connected_message("Clone Ejected: Not enough material.")
@@ -348,10 +344,10 @@
 			var/dmg_mult = CONFIG_GET(number/damage_multiplier)
 			 //Slowly get that clone healed and finished.
 			mob_occupant.adjustCloneLoss(-((speed_coeff / 2) * dmg_mult))
-			if(reagents.has_reagent(/datum/reagent/medicine/synthflesh, fleshamnt))
-				reagents.remove_reagent(/datum/reagent/medicine/synthflesh, fleshamnt)
-			else if(reagents.has_reagent(/datum/reagent/blood, fleshamnt*3))
-				reagents.remove_reagent(/datum/reagent/blood, fleshamnt*3)
+			if(beaker.reagents.has_reagent(/datum/reagent/medicine/synthflesh, fleshamnt))
+				beaker.reagents.remove_reagent(/datum/reagent/medicine/synthflesh, fleshamnt)
+			else if(beaker.reagents.has_reagent(/datum/reagent/blood, fleshamnt*3))
+				beaker.reagents.remove_reagent(/datum/reagent/blood, fleshamnt*3)
 			var/progress = CLONE_INITIAL_DAMAGE - mob_occupant.getCloneLoss()
 			// To avoid the default cloner making incomplete clones
 			progress += (100 - MINIMUM_HEAL_LEVEL)
@@ -396,7 +392,7 @@
 			icon_state = "pod_0"
 		use_power(200)
 
-//Let's unlock this early I guess.  Might be too early, needs tweaking. Jesus, even I'm not that indecisive.
+//Let's unlock this early I guess.  Might be too early, needs tweaking. Mark says: Jesus, even I'm not that indecisive.
 /obj/machinery/clonepod/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/reagent_containers) && !(W.item_flags & ABSTRACT) && W.is_open_container())
 		var/obj/item/reagent_containers/B = W

@@ -3,7 +3,7 @@ import { useBackend } from '../backend';
 import { Button, Section, ProgressBar } from '../components';
 import { BeakerContents } from './common/BeakerContents';
 
-export const ClonePod = props => {
+export const Cloner = props => {
   const { act, data } = useBackend(props);
 
   return (
