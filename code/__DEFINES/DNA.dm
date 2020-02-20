@@ -35,7 +35,10 @@
 #define TELEPATHY	/datum/mutation/human/telepathy
 #define FIREBREATH	/datum/mutation/human/firebreath
 #define VOID		/datum/mutation/human/void
+#define TONGUESPIKE	/datum/mutation/human/tonguespike
+#define TONGUESPIKECHEM		/datum/mutation/human/tongue_spike/chem
 #define STRONG    	/datum/mutation/human/strong
+#define STIMMED		/datum/mutation/human/stimmed
 #define FIRESWEAT	/datum/mutation/human/fire
 #define THERMAL		/datum/mutation/human/thermal
 #define ANTENNA		/datum/mutation/human/antenna
@@ -50,6 +53,7 @@
 #define EXTRASTUN	/datum/mutation/human/extrastun
 #define GELADIKINESIS		/datum/mutation/human/geladikinesis
 #define CRYOKINESIS /datum/mutation/human/cryokinesis
+#define SPIDER_WEB	/datum/mutation/human/webbing
 
 #define UI_CHANGED "ui changed"
 #define UE_CHANGED "ue changed"
@@ -130,6 +134,7 @@
 #define NOHUSK			22 // Can't be husked.
 #define ROBOTIC_LIMBS	23 //limbs start out as robotic; but also use organic icons. If you want to use the default ones, you'll have to use on_species_gain
 #define NOMOUTH			24
+#define NO_BONES		25
 
 //organ slots
 #define ORGAN_SLOT_BRAIN "brain"

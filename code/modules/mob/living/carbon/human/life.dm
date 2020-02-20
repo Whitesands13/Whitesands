@@ -43,6 +43,11 @@
 			//Stuff jammed in your limbs hurts
 			handle_embedded_objects()
 
+	if(stat != DEAD)
+		// Kepler change, handle our bones being broken. Also why the fuck are all these seperate IF statements. smh.
+		handle_fractures()
+
+
 		dna.species.spec_life(src) // for mutantraces
 
 	//Update our name based on whether our face is obscured/disfigured
@@ -210,7 +215,7 @@
 		if(thermal_protection_flags & HAND_RIGHT)
 			thermal_protection += THERMAL_PROTECTION_HAND_RIGHT
 
-	return min(1,thermal_protection)
+	return min(1, thermal_protection)
 
 //See proc/get_heat_protection_flags(temperature) for the description of this proc.
 /mob/living/carbon/human/proc/get_cold_protection_flags(temperature)
@@ -271,7 +276,7 @@
 		if(thermal_protection_flags & HAND_RIGHT)
 			thermal_protection += THERMAL_PROTECTION_HAND_RIGHT
 
-	return min(1,thermal_protection)
+	return min(1, thermal_protection)
 
 /mob/living/carbon/human/handle_random_events()
 	//Puke if toxloss is too high
@@ -309,10 +314,27 @@
 				BP.receive_damage(I.w_class*I.embedding.embedded_fall_pain_multiplier)
 				BP.embedded_objects -= I
 				I.forceMove(drop_location())
+				I.unembedded()
 				visible_message("<span class='danger'>[I] falls out of [name]'s [BP.name]!</span>","<span class='userdanger'>[I] falls out of your [BP.name]!</span>")
 				if(!has_embedded_objects())
 					clear_alert("embeddedobject")
 					SEND_SIGNAL(src, COMSIG_CLEAR_MOOD_EVENT, "embedded")
+
+/mob/living/carbon/human/proc/handle_fractures()
+	//this whole thing is hacky and WILL NOT work right with multiple hands
+	//you've been warned
+	var/obj/item/bodypart/L = get_bodypart("l_arm")
+	var/obj/item/bodypart/R = get_bodypart("r_arm")
+
+	if(istype(L) && L.bone_status == BONE_FLAG_BROKEN && held_items[1] && prob(30))
+		emote("scream")
+		visible_message("<span class='warning'>[src] screams and lets go of [held_items[1]] in pain.</span>", "<span class='userdanger'>A horrible pain in your [parse_zone(L)] makes it impossible to hold [held_items[1]]!</span>")
+		dropItemToGround(held_items[1])
+
+	if(istype(R) && R.bone_status == BONE_FLAG_BROKEN && held_items[2] && prob(30))
+		emote("scream")
+		visible_message("<span class='warning'>[src] screams and lets go of [held_items[2]] in pain.</span>", "<span class='userdanger'>A horrible pain in your [parse_zone(R)] makes it impossible to hold [held_items[2]]!</span>")
+		dropItemToGround(held_items[2])
 
 /mob/living/carbon/human/proc/handle_heart()
 	var/we_breath = !HAS_TRAIT_FROM(src, TRAIT_NOBREATH, SPECIES_TRAIT)
