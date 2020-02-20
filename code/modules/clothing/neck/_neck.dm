@@ -5,6 +5,8 @@
 	slot_flags = ITEM_SLOT_NECK
 	strip_delay = 40
 	equip_delay_other = 40
+	cuttable = TRUE
+	clothamnt = 2
 
 /obj/item/clothing/neck/worn_overlays(isinhands = FALSE)
 	. = list()
@@ -50,6 +52,7 @@
 	name = "stethoscope"
 	desc = "An outdated medical apparatus for listening to the sounds of the human body. It also makes you look like you know what you're doing."
 	icon_state = "stethoscope"
+	cuttable = FALSE
 
 /obj/item/clothing/neck/stethoscope/suicide_act(mob/living/carbon/user)
 	user.visible_message("<span class='suicide'>[user] puts \the [src] to [user.p_their()] chest! It looks like [user.p_they()] wont hear much!</span>")
@@ -75,9 +78,6 @@
 					lung_strength = "<span class='danger'>strained</span>"
 					if(!(M.failed_last_breath || M.losebreath))
 						lung_strength = "healthy"
-
-			if(M.stat == DEAD && heart && world.time - M.timeofdeath < DEFIB_TIME_LIMIT * 10)
-				heart_strength = "<span class='boldannounce'>a faint, fluttery</span>"
 
 			var/diagnosis = (body_part == BODY_ZONE_CHEST ? "You hear [heart_strength] pulse and [lung_strength] respiration." : "You faintly hear [heart_strength] pulse.")
 			user.visible_message("<span class='notice'>[user] places [src] against [M]'s [body_part] and listens attentively.</span>", "<span class='notice'>You place [src] against [M]'s [body_part]. [diagnosis]</span>")
@@ -181,7 +181,7 @@
 	return ..()
 
 /obj/item/clothing/neck/petcollar/attack_self(mob/user)
-	tagname = copytext(sanitize(input(user, "Would you like to change the name on the tag?", "Name your new pet", "Spot") as null|text),1,MAX_NAME_LEN)
+	tagname = stripped_input(user, "Would you like to change the name on the tag?", "Name your new pet", "Spot", MAX_NAME_LEN)
 	name = "[initial(name)] - [tagname]"
 
 //////////////
@@ -193,6 +193,7 @@
 	desc = "Damn, it feels good to be a gangster."
 	icon = 'icons/obj/clothing/neck.dmi'
 	icon_state = "bling"
+	cuttable = FALSE
 
 /obj/item/clothing/neck/necklace/dope/merchant
 	desc = "Don't ask how it works, the proof is in the holochips!"
@@ -266,6 +267,7 @@
 	color = "#ffffff"
 	custom_price = 10
 	custom_materials = (list(/datum/material/plastic = 500))
+	cuttable = FALSE
 
 /obj/item/clothing/neck/beads/Initialize()
 	. = ..()

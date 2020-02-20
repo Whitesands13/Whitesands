@@ -48,6 +48,8 @@
 
 
 /obj/machinery/clonepod/Initialize()
+	create_reagents(100, OPENCONTAINER)
+
 	. = ..()
 
 	countdown = new(src)

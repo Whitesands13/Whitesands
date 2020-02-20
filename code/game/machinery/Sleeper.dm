@@ -13,8 +13,9 @@
 	state_open = TRUE
 	circuit = /obj/item/circuitboard/machine/sleeper
 	ui_x = 250
-	ui_y = 465
+	ui_y = 550
 
+	var/obj/item/stock_parts/cell/cell //The sleeper's power cell.
 	var/efficiency = 1
 	var/min_health = -25
 	var/list/available_chems
@@ -28,20 +29,20 @@
 	var/list/chem_buttons	//Used when emagged to scramble which chem is used, eg: antitoxin -> morphine
 	var/scrambled_chems = FALSE //Are chem buttons scrambled? used as a warning
 	var/enter_message = "<span class='notice'><b>You feel cool air surround you. You go numb as your senses turn inward.</b></span>"
+	var/poweruse = 250 //How much power it uses per injection, minimum 10 charge/10u
 	payment_department = ACCOUNT_MED
 	fair_market_price = 5
 
-/obj/machinery/sleeper/Initialize(mapload)
+/obj/machinery/sleeper/Initialize()
 	. = ..()
-	if(mapload)
-		component_parts -= circuit
-		QDEL_NULL(circuit)
 	occupant_typecache = GLOB.typecache_living
 	update_icon()
 	reset_chem_buttons()
 
 /obj/machinery/sleeper/RefreshParts()
 	var/E
+	for(var/obj/item/stock_parts/cell/P in component_parts)
+		cell = P
 	for(var/obj/item/stock_parts/matter_bin/B in component_parts)
 		E += B.rating
 	var/I
@@ -50,6 +51,7 @@
 
 	efficiency = initial(efficiency)* E
 	min_health = initial(min_health) * E
+	poweruse = max(100, 300/efficiency)
 	available_chems = list()
 	for(var/i in 1 to I)
 		available_chems |= possible_chems[i]
@@ -86,6 +88,8 @@
 		var/mob/living/mob_occupant = occupant
 		if(mob_occupant && mob_occupant.stat != DEAD)
 			to_chat(occupant, "[enter_message]")
+/obj/machinery/sleeper/get_cell()
+	return cell
 
 /obj/machinery/sleeper/emp_act(severity)
 	. = ..()
@@ -206,6 +210,11 @@
 		if(mob_occupant.reagents && mob_occupant.reagents.reagent_list.len)
 			for(var/datum/reagent/R in mob_occupant.reagents.reagent_list)
 				data["occupant"]["reagents"] += list(list("name" = R.name, "volume" = R.volume))
+	data["cell"] = list()
+	if(cell)
+		data["cell"]["poweruse"] = poweruse
+		data["cell"]["maxCharge"] = cell.maxcharge
+		data["cell"]["charge"] = cell.charge ? cell.charge : "0"
 	return data
 
 /obj/machinery/sleeper/ui_act(action, params)
@@ -236,11 +245,14 @@
 	to_chat(user, "<span class='warning'>You scramble the sleeper's user interface!</span>")
 
 /obj/machinery/sleeper/proc/inject_chem(chem, mob/user)
-	if((chem in available_chems) && chem_allowed(chem))
+	if((chem in available_chems) && chem_allowed(chem) && cell.charge > poweruse)
+		cell.use(poweruse)
 		occupant.reagents.add_reagent(chem_buttons[chem], 10) //emag effect kicks in here so that the "intended" chem is used for all checks, for extra FUUU
 		if(user)
 			log_combat(user, occupant, "injected [chem] into", addition = "via [src]")
 		return TRUE
+	else
+		log_admin("[src] at [src.loc] tried to inject [user] but failed because there was not enough power. TGUI should have prevented this, but it didn't. Notify a coder.")
 
 /obj/machinery/sleeper/proc/chem_allowed(chem)
 	var/mob/living/mob_occupant = occupant
@@ -270,6 +282,7 @@
 /obj/machinery/sleeper/syndie/fullupgrade/Initialize()
 	. = ..()
 	component_parts = list()
+	component_parts += new /obj/item/circuitboard/machine/sleeper(null)
 	component_parts += new /obj/item/stock_parts/matter_bin/bluespace(null)
 	component_parts += new /obj/item/stock_parts/manipulator/femto(null)
 	component_parts += new /obj/item/stack/sheet/glass(null)
@@ -279,3 +292,45 @@
 
 /obj/machinery/sleeper/old
 	icon_state = "oldpod"
+
+/obj/machinery/sleeper/party
+	name = "party pod"
+	desc = "'Sleeper' units were once known for their healing properties, until a lengthy investigation revealed they were also dosing patients with deadly lead acetate. This appears to be one of those old 'sleeper' units repurposed as a 'Party Pod'. It’s probably not a good idea to use it."
+	icon_state = "partypod"
+	idle_power_usage = 3000
+	circuit = /obj/item/circuitboard/machine/sleeper/party
+	var/leddit = FALSE //Get it like reddit and lead alright fine
+	ui_x = 310
+	ui_y = 400
+
+	controls_inside = TRUE
+	possible_chems = list(
+		list(/datum/reagent/consumable/ethanol/beer, /datum/reagent/consumable/laughter),
+		list(/datum/reagent/spraytan,/datum/reagent/barbers_aid),
+		list(/datum/reagent/colorful_reagent,/datum/reagent/hair_dye),
+		list(/datum/reagent/drug/space_drugs,/datum/reagent/baldium)
+	)//Exclusively uses non-lethal, "fun" chems. At an obvious downside.
+	var/spray_chems = list(
+		/datum/reagent/spraytan, /datum/reagent/hair_dye, /datum/reagent/baldium, /datum/reagent/barbers_aid
+	)//Chemicals that need to have a touch or vapor reaction to be applied, not the standard chamber reaction.
+	enter_message = "<span class='notice'><b>You're surrounded by some funky music inside the chamber. You zone out as you feel waves of krunk vibe within you.</b></span>"
+
+/obj/machinery/sleeper/party/inject_chem(chem, mob/user)
+	if(leddit)
+		occupant.reagents.add_reagent(/datum/reagent/toxin/leadacetate, 4) //You're injecting chemicals into yourself from a recalled, decrepit medical machine. What did you expect?
+	else if (prob(20))
+		occupant.reagents.add_reagent(/datum/reagent/toxin/leadacetate, rand(1,3))
+	if(chem in spray_chems)
+		var/datum/reagents/holder = new()
+		holder.add_reagent(chem_buttons[chem], 10) //I hope this is the correct way to do this.
+		holder.reaction(occupant, VAPOR, 0)
+		holder.trans_to(occupant, 10)
+		playsound(src.loc, 'sound/effects/spray2.ogg', 50, TRUE, -6)
+		if(user)
+			log_combat(user, occupant, "sprayed [chem] into", addition = "via [src]")
+		return TRUE
+	..()
+
+/obj/machinery/sleeper/party/emag_act(mob/user)
+	..()
+	leddit = TRUE

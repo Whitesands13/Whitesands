@@ -78,7 +78,7 @@
 	volume = 100
 	list_reagents = list(/datum/reagent/medicine/adminordrazine/quantum_heal = 80, /datum/reagent/medicine/synaptizine = 20)
 
-/obj/item/reagent_containers/hypospray/combat/nanites/update_icon()
+/obj/item/reagent_containers/hypospray/combat/nanites/update_icon_state()
 	if(reagents.total_volume > 0)
 		icon_state = initial(icon_state)
 	else
@@ -126,7 +126,7 @@
 	if(user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
 		inject(user, user)
 
-/obj/item/reagent_containers/hypospray/medipen/update_icon()
+/obj/item/reagent_containers/hypospray/medipen/update_icon_state()
 	if(reagents.total_volume > 0)
 		icon_state = initial(icon_state)
 	else
@@ -205,7 +205,7 @@
 	amount_per_transfer_from_this = 10
 	list_reagents = list(/datum/reagent/vaccine/fungal_tb = 20)
 
-/obj/item/reagent_containers/hypospray/medipen/tuberculosiscure/update_icon()
+/obj/item/reagent_containers/hypospray/medipen/tuberculosiscure/update_icon_state()
 	if(reagents.total_volume > 30)
 		icon_state = initial(icon_state)
 	else if (reagents.total_volume > 0)
@@ -254,6 +254,15 @@
 	list_reagents = list(/datum/reagent/drug/pumpup = 15)
 	icon_state = "maintenance"
 
+
+/obj/item/reagent_containers/hypospray/medipen/bonefixingjuice
+	name = "rejuvenating agent injector"
+	desc = "The C4L-Z1UM agent will induce a short stasis that will heal any organ damage and bone fractures effectively. \
+	Has a menacing red S on it."
+	volume = 10
+	amount_per_transfer_from_this = 10
+	list_reagents = list("bonefixingjuice" = 10)
+	icon_state = "syndipen"
 
 #define HYPO_SPRAY 0
 #define HYPO_INJECT 1
