@@ -5,4 +5,3 @@
 	restricted_roles = list("Botanist")
 	cost = 14
 	item = /obj/vehicle/ridden/lawnmower/emagged
-	
