@@ -1,4 +1,15 @@
 // WaspStation includes file. Add all modularized code files here.
 
+#include "code\controllers\subsystem\job.dm"
+#include "code\game\area\Space_Station_13_areas.dm"
+#include "code\game\gamemodes\changeling\changeling.dm"
+#include "code\_globalvars\game_modes.dm"
 #include "code\modules\mob\emote.dm"
-
+#include "code\modules\cargo\packs.dm"
+#include "code\modules\cargo\exports\large_objects.dm"
+#include "code\modules\clothing\suits\jobs.dm"
+#include "code\modules\power\antimatter\containment_jar.dm"
+#include "code\modules\power\antimatter\control.dm"
+#include "code\modules\power\antimatter\shielding.dm"
+#include "code\modules\jobs\job_types\brigphys.dm"
+#include "code\modules\jobs\job_types\lieutenant.dm"
