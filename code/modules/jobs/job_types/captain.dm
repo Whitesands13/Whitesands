@@ -15,7 +15,7 @@
 	exp_type = EXP_TYPE_CREW
 	exp_type_department = EXP_TYPE_COMMAND
 	wiki_page = "Captain"
-	special_notice = "You may be the Captain of this station, but you are still beholden to The Corporation."
+	special_notice = "You may be the Captain of this station, but you are still beholden to The Corporation." //WaspStation Edit - Wikilinks/Warning
 
 	outfit = /datum/outfit/job/captain
 

@@ -10,7 +10,7 @@
 	selection_color = "#ffeef0"
 	exp_type = EXP_TYPE_CREW
 	exp_requirements = 60
-	wiki_page = "Guide_to_Chemistry"
+	wiki_page = "Guide_to_Chemistry" //WaspStation Edit - Wikilinks/Warning
 
 	outfit = /datum/outfit/job/chemist
 

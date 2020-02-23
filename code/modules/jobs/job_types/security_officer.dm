@@ -12,8 +12,8 @@
 	minimal_player_age = 7
 	exp_requirements = 300
 	exp_type = EXP_TYPE_CREW
-	wiki_page = "Space_Law"
-	special_notice = "Space law is THE law. Follow it."
+	wiki_page = "Space_Law" //WaspStation Edit - Wikilinks/Warning
+	special_notice = "Space law is THE law. Follow it." //WaspStation Edit - Wikilinks/Warning
 
 	outfit = /datum/outfit/job/security
 
