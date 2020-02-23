@@ -211,7 +211,7 @@
 	result = /obj/item/banner/command/mundane
 	time = 40
 	reqs = list(/obj/item/stack/rods = 2,
-				/obj/item/clothing/under/rank/captain/parade = 1)
+				/obj/item/clothing/under/rank/command/captain/parade = 1)
 	category = CAT_MISC
 
 /obj/item/banner/red

@@ -12,6 +12,8 @@
 #include "code\modules\cargo\packs.dm"
 #include "code\modules\cargo\exports\large_objects.dm"
 #include "code\modules\clothing\suits\jobs.dm"
+#include "code\modules\clothing\under\jobs\centcom.dm"
+#include "code\modules\clothing\under\jobs\command.dm"
 #include "code\modules\power\antimatter\containment_jar.dm"
 #include "code\modules\power\antimatter\control.dm"
 #include "code\modules\power\antimatter\shielding.dm"

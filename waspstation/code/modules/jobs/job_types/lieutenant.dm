@@ -16,7 +16,7 @@ Lieutenant
 
   outfit = /datum/outfit/job/lieutenant
 
-  access = list(ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_COURT, ACCESS_WEAPONS, ACCESS_FO,
+  access = list(ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_COURT, ACCESS_WEAPONS, ACCESS_HOP,
 			            ACCESS_MEDICAL, ACCESS_ENGINE, ACCESS_EVA, ACCESS_HEADS,
 			            ACCESS_ALL_PERSONAL_LOCKERS, ACCESS_MAINT_TUNNELS, ACCESS_CONSTRUCTION,
 			            ACCESS_CARGO, ACCESS_RESEARCH, ACCESS_RC_ANNOUNCE, ACCESS_KEYCARD_AUTH, ACCESS_SECOND_OFFICER)
@@ -30,7 +30,7 @@ Lieutenant
   jobtype = /datum/job/lieutenant
 
   id = /obj/item/card/id/silver
-  uniform = /obj/item/clothing/under/rank/civilian/lieutenant
+  uniform = /obj/item/clothing/under/rank/command/lieutenant
   gloves = /obj/item/clothing/gloves/combat
   shoes = /obj/item/clothing/shoes/jackboots
   ears = /obj/item/radio/headset/heads/lieutenant/alt

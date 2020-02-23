@@ -1,8 +1,6 @@
-/obj/item/clothing/under/rank
+/obj/item/clothing/under/rank/centcom
 	icon = 'icons/obj/clothing/under/centcom.dmi'
-	mob_overlay_icon = 'icons/mob/clothing/under/centcom.dmi'
-
-/* WaspStation Edit - Better Command Uniforms
+	mob_overlay_icon = 'waspstation/icons/mob/clothing/under/centcom.dmi'
 
 /obj/item/clothing/under/rank/centcom/officer
 	name = "\improper CentCom officer's jumpsuit"
@@ -23,5 +21,3 @@
 	icon_state = "intern"
 	item_state = "g_suit"
 	can_adjust = FALSE
-
-Waspstation End */

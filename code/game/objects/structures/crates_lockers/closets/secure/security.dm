@@ -18,11 +18,11 @@
 	new /obj/item/clothing/neck/petcollar(src)
 	new /obj/item/pet_carrier(src)
 	new /obj/item/clothing/shoes/sneakers/brown(src)
-	new /obj/item/clothing/under/rank/captain(src)
-	new /obj/item/clothing/under/rank/captain/skirt(src)
+	new /obj/item/clothing/under/rank/command/captain(src)
+	new /obj/item/clothing/under/rank/command/captain/skirt(src)
 	new /obj/item/clothing/suit/armor/vest/capcarapace(src)
 	new /obj/item/clothing/head/caphat(src)
-	new /obj/item/clothing/under/rank/captain/parade(src)
+	new /obj/item/clothing/under/rank/command/captain/parade(src)
 	new /obj/item/clothing/suit/armor/vest/capcarapace/alt(src)
 	new /obj/item/clothing/head/caphat/parade(src)
 	new /obj/item/clothing/suit/captunic(src)
@@ -42,15 +42,15 @@
 
 /obj/structure/closet/secure_closet/head_of_personnel
 	name = "\proper head of personnel's locker"
-	req_access = list(ACCESS_FO)
+	req_access = list(ACCESS_HOP)
 	icon_state = "hop"
 
 /obj/structure/closet/secure_closet/head_of_personnel/PopulateContents()
 	..()
 	new /obj/item/clothing/neck/cloak/head_of_personnel(src)
 	new /obj/item/storage/lockbox/medal/service(src)
-	new /obj/item/clothing/under/rank/civilian/head_of_personnel(src)
-	new /obj/item/clothing/under/rank/civilian/head_of_personnel/skirt(src)
+	new /obj/item/clothing/under/rank/command/head_of_personnel(src) //WaspStation Edit - Better Command Uniforms
+	new /obj/item/clothing/under/rank/command/head_of_personnel/skirt(src) //WaspStation Edit - Better Command Uniforms
 	new /obj/item/clothing/head/hopcap(src)
 	new /obj/item/cartridge/head_of_personnel(src)
 	new /obj/item/radio/headset/heads/head_of_personnel(src)
