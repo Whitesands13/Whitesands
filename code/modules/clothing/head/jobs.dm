@@ -102,8 +102,8 @@
 	desc = "A beret, a mime's favorite headwear."
 	icon_state = "beret"
 	dog_fashion = /datum/dog_fashion/head/beret
-	dynamic_hair_suffix = "+generic"
-	dynamic_fhair_suffix = "+generic"
+	dynamic_hair_suffix = "+generic" // Waspstation edit - Berets
+	dynamic_fhair_suffix = "+generic" // Waspstation edit - Berets
 
 /obj/item/clothing/head/beret/vintage
 	name = "vintage beret"
@@ -235,6 +235,8 @@
 					message += pick(", eh?", ", EH?")
 		speech_args[SPEECH_MESSAGE] = message
 
+
+// WASPSTATION BEGIN - BERETS
 /obj/item/clothing/head/beret/corpwarden
 	name = "corporate warden beret"
 	desc = "A special black beret with a Warden's insignia in the middle. This one is commonly warn by wardens of the corporation."
@@ -365,6 +367,8 @@
 	icon_state = "beret_captain"
 	armor = list(melee = 50, bullet = 30, laser = 20, energy = 10, bomb = 15, bio = 10, rad = 10, fire = 10, acid = 60)
 	strip_delay = 90
+
+// WASPSTATION END
 
 #undef DRILL_DEFAULT
 #undef DRILL_SHOUTING

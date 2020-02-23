@@ -37,7 +37,7 @@
 
 /obj/structure/closet/secure_closet/medical3/PopulateContents()
 	..()
-	new /obj/item/clothing/head/beret/med(src)
+	new /obj/item/clothing/head/beret/med(src) // Waspstation edit - Berets
 	new /obj/item/radio/headset/headset_med(src)
 	new /obj/item/defibrillator/loaded(src)
 	new /obj/item/clothing/gloves/color/latex/nitrile(src)
@@ -53,7 +53,7 @@
 
 /obj/structure/closet/secure_closet/CMO/PopulateContents()
 	..()
-	new /obj/item/clothing/head/beret/cmo(src)
+	new /obj/item/clothing/head/beret/cmo(src) // Waspstation edit - Berets
 	new /obj/item/clothing/neck/cloak/cmo(src)
 	new /obj/item/clothing/suit/bio_suit/cmo(src)
 	new /obj/item/clothing/head/bio_hood/cmo(src)
