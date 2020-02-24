@@ -476,8 +476,10 @@ GLOBAL_LIST_INIT(pda_styles, sortList(list(MONO, VT, ORBITRON, SHARE)))
 #define FALL_NO_MESSAGE			(1<<1) //Used to suppress the "[A] falls through [old_turf]" messages where it'd make little sense at all, like going downstairs.
 #define FALL_STOP_INTERCEPTING	(1<<2) //Used in situations where halting the whole "intercept" loop would be better, like supermatter dusting (and thus deleting) the atom.
 
-// Bone flags
+// WaspStation Begin - Bone flags
 #define BONE_FLAG_NO_BONES 		0
 #define BONE_FLAG_NORMAL		1
 #define BONE_FLAG_BROKEN		2
 #define BONE_FLAG_SPLINTED		3
+// WaspStation End
+
