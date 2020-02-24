@@ -6,6 +6,7 @@
 /obj/structure/closet/secure_closet/RD/PopulateContents()
 	..()
 	new /obj/item/clothing/head/beret/sci(src) // Waspstation edit - Berets
+	new /obj/item/clothing/under/rank/command(src) // WaspStation edit - better command uniforms
 	new /obj/item/clothing/neck/cloak/rd(src)
 	new /obj/item/clothing/suit/bio_suit/scientist(src)
 	new /obj/item/clothing/head/bio_hood/scientist(src)

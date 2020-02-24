@@ -20,3 +20,6 @@
 #include "code\modules\research\designs\autolathe_designs.dm"
 #include "code\modules\jobs\job_types\brigphys.dm"
 #include "code\modules\jobs\job_types\lieutenant.dm"
+#include "code\game\machinery\cloning.dm"
+#include "code\game\machinery\Sleeper.dm"
+#include "code\game\objects\items\circuitboards\machine_circuitboards.dm"
