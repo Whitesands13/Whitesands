@@ -70,8 +70,9 @@
 //Middle right (status indicators)
 #define ui_healthdoll "EAST-1:28,CENTER-2:13"
 #define ui_health "EAST-1:28,CENTER-1:15"
-#define ui_internal "EAST-1:28,CENTER:17"
-#define ui_mood "EAST-1:28,CENTER-3:10"
+#define ui_internal "EAST-1:28,CENTER-3:10"
+#define ui_mood "EAST-1:28,CENTER:17"
+#define ui_spacesuit "EAST-1:28,CENTER-4:10"
 
 //Pop-up inventory
 #define ui_shoes "WEST+1:8,SOUTH:5"
@@ -162,7 +163,7 @@
 #define ui_pai_take_picture "SOUTH:6,WEST+12"
 #define ui_pai_view_images "SOUTH:6,WEST+13"
 
-//Ghosts
+//Ghosts - DO NOT CHANGE, WASPSTATION EDIT - SPAWNERS MENU
 #define ui_ghost_jumptomob "SOUTH:6,CENTER-3:24"
 #define ui_ghost_orbit "SOUTH:6,CENTER-2:24"
 #define ui_ghost_reenter_corpse "SOUTH:6,CENTER-1:24"

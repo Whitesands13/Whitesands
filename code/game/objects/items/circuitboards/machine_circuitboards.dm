@@ -654,6 +654,17 @@
 	else
 		return ..()
 
+/obj/item/circuitboard/machine/dnascanner
+	name = "DNA Scanner (Machine Board)"
+	icon_state = "medical"
+	build_path = /obj/machinery/dna_scannernew
+	req_components = list(
+		/obj/item/stock_parts/scanning_module = 1,
+		/obj/item/stock_parts/matter_bin = 1,
+		/obj/item/stock_parts/micro_laser = 1,
+		/obj/item/stack/sheet/glass = 1,
+		/obj/item/stack/cable_coil = 2)
+
 /obj/item/circuitboard/machine/cryo_tube
 	name = "Cryotube (Machine Board)"
 	icon_state = "medical"
@@ -691,7 +702,7 @@
 	if(!new_cost || (loc != user))
 		to_chat(user, "<span class='warning'>You must hold the circuitboard to change its cost!</span>")
 		return
-	custom_cost = CLAMP(round(new_cost, 1), 10, 1000)
+	custom_cost = clamp(round(new_cost, 1), 10, 1000)
 	to_chat(user, "<span class='notice'>The cost is now set to [custom_cost].</span>")
 
 /obj/item/circuitboard/machine/medical_kiosk/examine(mob/user)
@@ -711,6 +722,24 @@
 	name = "Departmental Protolathe (Machine Board) - Medical"
 	icon_state = "medical"
 	build_path = /obj/machinery/rnd/production/protolathe/department/medical
+
+/* WaspStation Edit - Sleepers are now in the modularized file, so that if TG removes the circuit board, we don't lose em.
+
+/obj/item/circuitboard/machine/sleeper
+	name = "Sleeper (Machine Board)"
+	icon_state = "medical"
+	build_path = /obj/machinery/sleeper
+	req_components = list(
+		/obj/item/stock_parts/matter_bin = 1,
+		/obj/item/stock_parts/manipulator = 1,
+		/obj/item/stack/cable_coil = 1,
+		/obj/item/stack/sheet/glass = 2)
+
+/obj/item/circuitboard/machine/sleeper/party
+	name = "Party Pod (Machine Board)"
+	build_path = /obj/machinery/sleeper/party
+
+WaspStation End */
 
 /obj/item/circuitboard/machine/smoke_machine
 	name = "Smoke Machine (Machine Board)"
@@ -858,7 +887,7 @@
 	if(!new_cloud || (loc != user))
 		to_chat(user, "<span class='warning'>You must hold the circuitboard to change its Cloud ID!</span>")
 		return
-	cloud_id = CLAMP(round(new_cloud, 1), 1, 100)
+	cloud_id = clamp(round(new_cloud, 1), 1, 100)
 
 /obj/item/circuitboard/machine/public_nanite_chamber/examine(mob/user)
 	. = ..()
@@ -1173,17 +1202,6 @@
 		/obj/item/stock_parts/manipulator = /obj/item/stock_parts/manipulator/femto,
 		/obj/item/stock_parts/micro_laser = /obj/item/stock_parts/micro_laser/quadultra,
 		/obj/item/stock_parts/scanning_module = /obj/item/stock_parts/scanning_module/triphasic)
-
-/obj/item/circuitboard/machine/autodoc
-	name = "Autodoc (Machine Board)"
-	build_path = /obj/machinery/autodoc
-	req_components = list(/obj/item/scalpel/advanced = 1,
-		/obj/item/retractor/advanced = 1,
-		/obj/item/surgicaldrill/advanced = 1,
-		/obj/item/stock_parts/manipulator = 1,
-		/obj/item/stock_parts/micro_laser = 3,
-		/obj/item/stock_parts/matter_bin = 1)
-
 
 /obj/item/circuitboard/machine/hypnochair
 	name = "Enhanced Interrogation Chamber (Machine Board)"

@@ -5,6 +5,8 @@
 
 #define CLONE_INITIAL_DAMAGE     150    //Clones in clonepods start with 150 cloneloss damage and 150 brainloss damage, thats just logical
 #define MINIMUM_HEAL_LEVEL 40
+#define CLONER_FRESH_CLONE "fresh"
+#define CLONER_MATURE_CLONE "mature"
 
 #define SPEAK(message) radio.talk_into(src, message, radio_channel)
 
@@ -48,8 +50,6 @@
 
 
 /obj/machinery/clonepod/Initialize()
-	create_reagents(100, OPENCONTAINER)
-
 	. = ..()
 
 	countdown = new(src)
@@ -183,9 +183,7 @@
 	// We want to simulate the clone not being in contact with
 	// the atmosphere, so we'll put them in a constant pressure
 	// nitrogen. They don't need to breathe while cloning anyway.
-	var/static/datum/gas_mixture/immutable/cloner/GM //global so that there's only one instance made for all cloning pods
-	if(!GM)
-		GM = new
+	var/static/datum/gas_mixture/immutable/GM = new
 	return GM
 
 /obj/machinery/clonepod/proc/get_completion()

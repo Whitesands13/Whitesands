@@ -35,7 +35,7 @@
 		/obj/item/stock_parts/scanning_module = 1,
 		/obj/item/stack/ore/bluespace_crystal = 3)
 	needs_anchored = FALSE
-	
+
 /obj/item/circuitboard/machine/sleeper
 	name = "Sleeper (Machine Board)"
 	icon_state = "medical"
@@ -51,3 +51,13 @@
 /obj/item/circuitboard/machine/sleeper/party
 	name = "Party Pod (Machine Board)"
 	build_path = /obj/machinery/sleeper/party
+
+/obj/item/circuitboard/machine/autodoc
+	name = "Autodoc (Machine Board)"
+	build_path = /obj/machinery/autodoc
+	req_components = list(/obj/item/scalpel/advanced = 1,
+		/obj/item/retractor/advanced = 1,
+		/obj/item/surgicaldrill/advanced = 1,
+		/obj/item/stock_parts/manipulator = 1,
+		/obj/item/stock_parts/micro_laser = 3,
+		/obj/item/stock_parts/matter_bin = 1)

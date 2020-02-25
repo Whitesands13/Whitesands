@@ -90,7 +90,7 @@
 
 /obj/structure/closet/secure_closet/lieutenant
 	name = "\proper lieutenant's locker"
-	req_access = list(ACCESS_SECOND_OFFICER)
+	req_access = list(ACCESS_LIEUTENANT)
 	icon_state = "blueshield"
 
 /obj/structure/closet/secure_closet/lieutenant/PopulateContents()
@@ -249,7 +249,7 @@
 	new /obj/item/holosign_creator/security(src)
 	new /obj/item/reagent_containers/spray/pepper(src)
 	new /obj/item/clothing/suit/armor/vest/det_suit(src)
-	new /obj/item/clothing/accessory/holster/detective(src)
+	new /obj/item/clothing/accessory/holster/detective(src) //WaspStation Edit - Made Holsters Accessories
 	new /obj/item/pinpointer/crew(src)
 	new /obj/item/twohanded/binoculars(src)
 	new /obj/item/storage/box/rxglasses/spyglasskit(src)

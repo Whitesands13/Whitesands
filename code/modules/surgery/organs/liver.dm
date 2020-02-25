@@ -94,6 +94,7 @@
 	maxHealth = 1.5 * STANDARD_ORGAN_THRESHOLD
 	toxTolerance = 5 //can shrug off up to 5u of toxins
 	toxLethality = 0.008 //20% less damage than a normal liver
+	emp_vulnerability = 40
 
 /obj/item/organ/liver/cybernetic/tier3
 	name = "upgraded cybernetic liver"
