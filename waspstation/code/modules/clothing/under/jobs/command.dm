@@ -99,3 +99,6 @@
 	name = "\improper Command Uniform"
 	icon_state = "lt_skirt"
 	item_state = "bl_suit"
+	body_parts_covered = CHEST|GROIN|ARMS
+	can_adjust = FALSE
+	fitted = FEMALE_UNIFORM_TOP

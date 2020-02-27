@@ -30,6 +30,7 @@ Lieutenant
   jobtype = /datum/job/lieutenant
 
   id = /obj/item/card/id/silver
+  head = /obj/item/clothing/head/beret/lt
   uniform = /obj/item/clothing/under/rank/command/lieutenant
   gloves = /obj/item/clothing/gloves/combat
   shoes = /obj/item/clothing/shoes/jackboots

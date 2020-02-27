@@ -4,8 +4,11 @@
 	icon_state = "holster"
 	item_state = "holster"
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/holster
-	attachment_slot = NECK
 
+/obj/item/clothing/accessory/holster/lieutenant
+	name = "lieutenant's shoulder holster"
+	desc = "A modified shoulder holster designed to fit a small egun and power cells."
+	pocket_storage_component_path = /datum/component/storage/concrete/pockets/holster/lt
 
 /obj/item/clothing/accessory/holster/detective
 	name = "detective's shoulder holster"

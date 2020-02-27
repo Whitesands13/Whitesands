@@ -100,8 +100,10 @@
 /obj/item/storage/bag/ore
 	name = "mining satchel"
 	desc = "This little bugger can be used to store and transport ores."
-	icon = 'icons/obj/mining.dmi'
-	icon_state = "satchel"
+	//WaspStation Begin - Better bag sprites
+	icon = 'waspstation/icons/obj/bags.dmi'
+	icon_state = "minebag"
+	//WaspStation end
 	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_POCKETS
 	w_class = WEIGHT_CLASS_NORMAL
 	component_type = /datum/component/storage/concrete/stack
@@ -171,7 +173,10 @@
 /obj/item/storage/bag/ore/holding //miners, your messiah has arrived
 	name = "mining satchel of holding"
 	desc = "A revolution in convenience, this satchel allows for huge amounts of ore storage. It's been outfitted with anti-malfunction safety measures."
-	icon_state = "satchel_bspace"
+	//WaspStation Begin - Better bag sprites
+	icon = 'waspstation/icons/obj/bags.dmi'
+	icon_state = "minebagbs"
+	//WaspStation end
 
 /obj/item/storage/bag/ore/holding/ComponentInitialize()
 	. = ..()

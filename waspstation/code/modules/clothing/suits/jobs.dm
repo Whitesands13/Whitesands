@@ -1,8 +1,10 @@
 //Lieutenant
 
-/obj/item/clothing/suit/storage/lieutenant
+/obj/item/clothing/suit/lieutenant
 	name = "lieutenant's coat"
 	desc = "NT deluxe ripoff. You finally have your own coat."
+	icon = 'waspstation/icons/obj/clothing/suits.dmi'
+	mob_overlay_icon = 'waspstation/icons/mob/clothing/suits.dmi'
 	icon_state = "blueshieldcoat"
 	item_state = "blueshieldcoat"
 	blood_overlay_type = "coat"
@@ -17,6 +19,8 @@
 /obj/item/clothing/suit/hazardvest/brig_phys
 	name = "brig physician's vest"
 	desc = "A lightweight vest worn by the Brig Physician."
+	icon = 'waspstation/icons/obj/clothing/suits.dmi'
+	mob_overlay_icon = 'waspstation/icons/mob/clothing/suits.dmi'
 	icon_state = "brig_phys_vest"
 	item_state = "sec_helm"//looks kinda similar, I guess
 	allowed = list(/obj/item/analyzer, /obj/item/stack/medical, /obj/item/dnainjector, /obj/item/reagent_containers/dropper, /obj/item/reagent_containers/syringe, /obj/item/reagent_containers/hypospray, /obj/item/healthanalyzer, /obj/item/flashlight, /obj/item/reagent_containers/glass/bottle, /obj/item/reagent_containers/glass/beaker, /obj/item/reagent_containers/pill, /obj/item/storage/pill_bottle, /obj/item/paper, /obj/item/melee/classic_baton/telescopic, /obj/item/soap, /obj/item/tank/internals/emergency_oxygen)

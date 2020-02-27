@@ -24,6 +24,8 @@
 
 /obj/structure/closet/secure_closet/lieutenant/PopulateContents()
 	..()
+	new /obj/item/clothing/head/beret/lt(src)
+	new /obj/item/clothing/head/beret/lt/navy(src)
 	new /obj/item/storage/briefcase(src)
 	new	/obj/item/storage/firstaid/regular(src)
 	new /obj/item/storage/belt/security(src)
@@ -33,6 +35,6 @@
 	new /obj/item/melee/baton/loaded(src)
 	new /obj/item/clothing/glasses/sunglasses(src)
 	new /obj/item/clothing/suit/armor/vest/lieutenant(src)
-	new /obj/item/clothing/suit/storage/lieutenant(src)
-	new /obj/item/clothing/accessory/holster(src)
+	new /obj/item/clothing/suit/lieutenant(src)
+	new /obj/item/clothing/accessory/holster/lieutenant(src)
 	new /obj/item/clothing/shoes/jackboots(src)

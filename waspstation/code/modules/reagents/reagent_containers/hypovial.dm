@@ -1,8 +1,9 @@
-//hypovials used with the MkII hypospray. See hypospray.dm.
+//hypovials used with the MkII hypospray. See waspstation's modularized hypospray.dm.
 
 /obj/item/reagent_containers/glass/bottle/vial
 	name = "broken hypovial"
 	desc = "A hypovial compatible with most hyposprays."
+	icon = 'waspstation/icons/obj/chemical.dmi'
 	icon_state = "hypovial"
 	spillable = FALSE
 	var/comes_with = list() //Easy way of doing this.

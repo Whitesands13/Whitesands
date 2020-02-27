@@ -85,3 +85,7 @@
 /mob/living/carbon/proc/mend_fractures()
 	for(var/obj/item/bodypart/B in bodyparts)
 		B.fix_bone()
+
+/mob/living/carbon/proc/break_all_bones()
+	for(var/obj/item/bodypart/B in bodyparts)
+		B.break_bone()
