@@ -5,14 +5,16 @@
 
 /obj/structure/closet/secure_closet/captains/PopulateContents()
 	..()
-	new /obj/item/clothing/head/beret/captain(src) // Waspstation edit - Berets
+	//WaspStation Begin
+	new /obj/item/clothing/head/beret/captain(src) //Berets
+	new /obj/item/card/id/departmental_budget/civ(src) //Budget Cards
+	new /obj/item/storage/backpack/messenger/com(src) //Messenger Bags
+	//WaspStation End
 	new /obj/item/clothing/suit/hooded/wintercoat/captain(src)
 	if(prob(33))
 		new /obj/item/storage/backpack/captain(src)
 	else if(prob(50))
 		new /obj/item/storage/backpack/satchel/cap(src)
-	else
-		new /obj/item/storage/backpack/messenger/com(src)
 	new /obj/item/storage/backpack/duffelbag/captain(src)
 	new /obj/item/clothing/neck/cloak/cap(src)
 	new /obj/item/clothing/neck/petcollar(src)
@@ -38,7 +40,6 @@
 	new /obj/item/door_remote/captain(src)
 	new /obj/item/card/id/captains_spare(src)
 	new /obj/item/storage/photo_album/Captain(src)
-	new /obj/item/card/id/departmental_budget/civ(src)
 
 /obj/structure/closet/secure_closet/head_of_personnel
 	name = "\proper head of personnel's locker"
@@ -47,6 +48,7 @@
 
 /obj/structure/closet/secure_closet/head_of_personnel/PopulateContents()
 	..()
+	new /obj/item/card/id/departmental_budget/srv(src) //WaspStation Edit - Budget Cards
 	new /obj/item/clothing/neck/cloak/head_of_personnel(src)
 	new /obj/item/storage/lockbox/medal/service(src)
 	new /obj/item/clothing/under/rank/command/head_of_personnel(src) //WaspStation Edit - Better Command Uniforms
@@ -67,46 +69,6 @@
 	new /obj/item/door_remote/civillian(src)
 	new /obj/item/circuitboard/machine/techfab/department/service(src)
 	new /obj/item/storage/photo_album/HoP(src)
-	new /obj/item/card/id/departmental_budget/srv(src)
-
-/obj/structure/closet/secure_closet/brig_phys
-	name = "\proper brig physician's locker"
-	req_access = list(ACCESS_BRIG)
-	icon_state = "brig_phys"
-
-/obj/structure/closet/secure_closet/brig_phys/PopulateContents()
-	..()
-	new /obj/item/radio/headset/headset_medsec(src)
-	new	/obj/item/storage/firstaid/regular(src)
-	new	/obj/item/storage/firstaid/fire(src)
-	new	/obj/item/storage/firstaid/toxin(src)
-	new	/obj/item/storage/firstaid/o2(src)
-	new	/obj/item/storage/firstaid/brute(src)
-	new /obj/item/storage/belt/medical(src)
-	new /obj/item/reagent_containers/spray/pepper(src)
-	new /obj/item/assembly/flash/handheld(src)
-	new /obj/item/restraints/handcuffs(src)
-	new /obj/item/clothing/gloves/color/latex/nitrile(src)
-
-/obj/structure/closet/secure_closet/lieutenant
-	name = "\proper lieutenant's locker"
-	req_access = list(ACCESS_LIEUTENANT)
-	icon_state = "blueshield"
-
-/obj/structure/closet/secure_closet/lieutenant/PopulateContents()
-	..()
-	new /obj/item/storage/briefcase(src)
-	new	/obj/item/storage/firstaid/regular(src)
-	new /obj/item/storage/belt/security(src)
-	new /obj/item/grenade/flashbang(src)
-	new /obj/item/assembly/flash/handheld(src)
-	new /obj/item/restraints/handcuffs(src)
-	new /obj/item/melee/baton/loaded(src)
-	new /obj/item/clothing/glasses/sunglasses(src)
-	new /obj/item/clothing/suit/armor/vest/lieutenant(src)
-	new /obj/item/clothing/suit/storage/lieutenant(src)
-	new /obj/item/clothing/accessory/holster(src)
-	new /obj/item/clothing/shoes/jackboots(src)
 
 /obj/structure/closet/secure_closet/hos
 	name = "\proper head of security's locker"
@@ -115,6 +77,7 @@
 
 /obj/structure/closet/secure_closet/hos/PopulateContents()
 	..()
+	new /obj/item/card/id/departmental_budget/sec(src) //WaspStation edit - budget card
 	new /obj/item/clothing/neck/cloak/hos(src)
 	new /obj/item/clothing/under/rank/command(src) // WaspStation edit - better command uniforms
 	new /obj/item/cartridge/hos(src)
@@ -142,7 +105,6 @@
 	new /obj/item/pinpointer/nuke(src)
 	new /obj/item/circuitboard/machine/techfab/department/security(src)
 	new /obj/item/storage/photo_album/HoS(src)
-	new /obj/item/card/id/departmental_budget/sec(src)
 
 /obj/structure/closet/secure_closet/warden
 	name = "\proper warden's locker"

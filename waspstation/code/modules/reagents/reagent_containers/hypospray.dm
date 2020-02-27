@@ -1,7 +1,7 @@
 //A vial-loaded hypospray. Cartridge-based!
 /obj/item/hypospray/mkii
 	name = "hypospray mk.II"
-	icon = 'icons/obj/syringe.dmi'
+	icon = 'waspstation/icons/obj/syringe.dmi'
 	icon_state = "hypo2"
 	desc = "A new development from DeForest Medical, this hypospray takes 30-unit vials as the drug supply for easy swapping."
 	w_class = WEIGHT_CLASS_TINY

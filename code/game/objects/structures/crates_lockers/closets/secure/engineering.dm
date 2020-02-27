@@ -5,8 +5,11 @@
 
 /obj/structure/closet/secure_closet/engineering_chief/PopulateContents()
 	..()
-	new /obj/item/clothing/head/beret/ce(src) // Waspstation edit - Berets
-	new /obj/item/clothing/under/rank/command(src) // WaspStation edit - better command uniforms
+	//WaspStation Begin
+	new /obj/item/clothing/head/beret/ce(src) //Berets
+	new /obj/item/clothing/under/rank/command(src) //Better command uniforms
+	new /obj/item/card/id/departmental_budget/eng(src) //Budger Cards
+	//WaspStation End
 	new /obj/item/clothing/neck/cloak/ce(src)
 	new /obj/item/clothing/under/rank/engineering/chief_engineer(src)
 	new /obj/item/clothing/under/rank/engineering/chief_engineer/skirt(src)
@@ -27,7 +30,6 @@
 	new /obj/item/circuitboard/machine/techfab/department/engineering(src)
 	new /obj/item/extinguisher/advanced(src)
 	new /obj/item/storage/photo_album/CE(src)
-	new /obj/item/card/id/departmental_budget/eng(src)
 
 /obj/structure/closet/secure_closet/engineering_electrical
 	name = "electrical supplies locker"
