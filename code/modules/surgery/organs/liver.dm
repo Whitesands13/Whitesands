@@ -107,6 +107,7 @@
 	emp_vulnerability = 20
 
 /obj/item/organ/liver/cybernetic/upgraded/ipc
+	icon = 'waspstation/icons/obj/surgery.dmi'
 	name = "substance processor"
 	icon_state = "substance_processor"
 	attack_verb = list("processed")

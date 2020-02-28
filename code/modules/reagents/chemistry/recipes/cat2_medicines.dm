@@ -17,9 +17,13 @@
 
 /*****BURN*****/
 
+/* WaspStation Begin - No CobbyChems
+
 /datum/chemical_reaction/lenturi
 	results = list(/datum/reagent/medicine/C2/lenturi = 5)
 	required_reagents = list(/datum/reagent/ammonia = 1, /datum/reagent/silver = 1, /datum/reagent/sulfur = 1, /datum/reagent/oxygen = 1, /datum/reagent/chlorine = 1)
+
+*/
 
 /datum/chemical_reaction/aiuri
 	results = list(/datum/reagent/medicine/C2/aiuri = 4)
@@ -33,11 +37,15 @@
 
 /*****OXY*****/
 
+/* WaspStation Begin - No CobbyChems
+
 /datum/chemical_reaction/convermol
 	results = list(/datum/reagent/medicine/C2/convermol = 3)
 	required_reagents = list(/datum/reagent/hydrogen = 1, /datum/reagent/fluorine = 1, /datum/reagent/fuel/oil = 1)
 	required_temp = 370
 	mix_message = "The mixture rapidly turns into a dense pink liquid."
+
+*/
 
 /datum/chemical_reaction/tirimol
 	results = list(/datum/reagent/medicine/C2/tirimol = 5)
@@ -50,11 +58,15 @@
 	results = list(/datum/reagent/medicine/C2/seiver = 3)
 	required_reagents = list(/datum/reagent/nitrogen = 1, /datum/reagent/potassium = 1, /datum/reagent/aluminium = 1)
 
+/* WaspStation Begin - No CobbyChems
+
 /datum/chemical_reaction/multiver
 	results = list(/datum/reagent/medicine/C2/multiver = 2)
 	required_reagents = list(/datum/reagent/ash = 1, /datum/reagent/consumable/sodiumchloride = 1)
 	mix_message = "The mixture yields a fine black powder."
 	required_temp = 380
+
+*/
 
 /datum/chemical_reaction/syriniver
 	results = list(/datum/reagent/medicine/C2/syriniver = 5)

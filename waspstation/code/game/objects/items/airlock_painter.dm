@@ -30,7 +30,7 @@
 
 /obj/item/airlock_painter/floor_painter
 	name = "floor painter"
-	icon = 'icons/obj/objects.dmi'
+	icon = 'waspstation/icons/obj/device.dmi'
 	icon_state = "floor_sprayer"
 	desc = "An airlock painter, reprogramed to use a different style of paint in order to apply decals for floor tiles as well, in addition to repainting doors. Decals break when the floor tiles are removed. Use it inhand to change the design, and Ctrl-Click to switch to decal-painting mode."
 

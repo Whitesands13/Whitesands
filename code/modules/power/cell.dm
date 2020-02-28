@@ -223,6 +223,7 @@
 
 /obj/item/stock_parts/cell/gun
 	name = "weapon power cell"
+	icon = 'waspstation/icons/obj/power.dmi'
 	icon_state = "g-cell"
 	maxcharge = 10000
 	custom_materials = list(/datum/material/glass=60)
