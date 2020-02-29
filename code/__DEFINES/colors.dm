@@ -8,6 +8,11 @@
 #define COLOR_DARKMODE_BACKGROUND "#272727"
 #define COLOR_DARKMODE_HEADER "#ffffff"
 #define COLOR_DARKMODE_TEXT "#000000"
+
+#define COLOR_MONOTILE        	"#545c68"
+#define COLOR_TILE_GRAY			"#4c535b"
+#define COLOR_TILE_DARK_GRAY	"#404040"
+#define COLOR_OFF_WHITE        	"#eeeeee"
 //End WaspStation
 
 #define COLOR_WHITE            "#EEEEEE"
