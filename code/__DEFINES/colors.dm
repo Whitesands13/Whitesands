@@ -12,7 +12,7 @@
 #define COLOR_MONOTILE        	"#545c68"
 #define COLOR_TILE_GRAY			"#4c535b"
 #define COLOR_TILE_DARK_GRAY	"#404040"
-#define COLOR_OFF_WHITE        	"#eeeeee"
+#define COLOR_WARNING			"#D2D53D"
 
 #define WOOD_COLOR_GENERIC     "#d5a66e"
 #define WOOD_COLOR_RICH        "#792f27"

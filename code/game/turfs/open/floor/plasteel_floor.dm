@@ -44,7 +44,7 @@
 	color = COLOR_TILE_GRAY
 /turf/open/floor/plasteel/mono/white
 	icon_state = "monotile_light"
-	color = COLOR_OFF_WHITE
+	color = COLOR_WHITE
 
 /turf/open/floor/plasteel/tech
 	icon = 'waspstation/icons/turf/floors/techfloor.dmi'
@@ -73,13 +73,13 @@
 	color = COLOR_TILE_GRAY
 
 /turf/open/floor/plasteel/white
-	color = COLOR_OFF_WHITE
+	color = COLOR_WHITE
 /turf/open/floor/plasteel/white/side
 	icon_state = "whitehall"
 /turf/open/floor/plasteel/white/corner
 	icon_state = "whitecorner"
 /turf/open/floor/plasteel/airless/white
-	color = COLOR_OFF_WHITE
+	color = COLOR_WHITE
 /turf/open/floor/plasteel/airless/white/side
 	icon_state = "whitehall"
 /turf/open/floor/plasteel/airless/white/corner
