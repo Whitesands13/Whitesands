@@ -107,6 +107,7 @@
 	icon_state = "chapel"
 
 /turf/open/floor/plasteel/showroomfloor
+	icon = 'waspstation/icons/turf/floors.dmi'
 	icon_state = "showroomfloor"
 
 
@@ -118,6 +119,7 @@
 
 /turf/open/floor/plasteel/freezer
 	color = null
+	icon = 'waspstation/icons/turf/floors.dmi'
 	icon_state = "freezer"
 
 /turf/open/floor/plasteel/freezer/airless
@@ -150,6 +152,7 @@
 	name = "engraved floor"
 
 /turf/open/floor/plasteel/vaporwave
+	icon = 'icons/turf/floors.dmi'
 	icon_state = "pinkblack"
 
 /turf/open/floor/plasteel/goonplaque
@@ -187,9 +190,11 @@
 
 
 /turf/open/floor/plasteel/elevatorshaft
+	icon = 'waspstation/icons/turf/floors.dmi'
 	icon_state = "elevatorshaft"
 
 /turf/open/floor/plasteel/bluespace
+	icon = 'icons/turf/floors.dmi'
 	icon_state = "bluespace"
 
 /turf/open/floor/plasteel/sepia

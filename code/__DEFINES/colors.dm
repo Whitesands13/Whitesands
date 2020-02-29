@@ -13,6 +13,14 @@
 #define COLOR_TILE_GRAY			"#4c535b"
 #define COLOR_TILE_DARK_GRAY	"#404040"
 #define COLOR_OFF_WHITE        	"#eeeeee"
+
+#define WOOD_COLOR_GENERIC     "#d5a66e"
+#define WOOD_COLOR_RICH        "#792f27"
+#define WOOD_COLOR_PALE        "#d2bc9d"
+#define WOOD_COLOR_PALE2       "#e6d2ba"
+#define WOOD_COLOR_BLACK       "#332521"
+#define WOOD_COLOR_CHOCOLATE   "#543c30"
+#define WOOD_COLOR_YELLOW      "#e3994e"
 //End WaspStation
 
 #define COLOR_WHITE            "#EEEEEE"
