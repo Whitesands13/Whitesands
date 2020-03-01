@@ -1,93 +1,116 @@
-/obj/machinery/scav_buying
-	name = "Import pad"
-	icon = 'icons/obj/telescience.dmi'
-	icon_state = "lpad-idle-o"
-	var/idle_state = "lpad-idle-o"
-	var/warmup_state = "lpad-idle"
-	var/sending_state = "lpad-beam"
+/obj/item/circuitboard/machine/scav_imp
+	name = "LTSRBT (Machine Board)"
+	icon_state = "bluespacearray"
+	build_path = /obj/machinery/scav_imp
+	req_components = list(
+		/obj/item/stack/ore/bluespace_crystal = 2,
+		/obj/item/stock_parts/subspace/ansible = 1,
+		/obj/item/stock_parts/micro_laser = 1,
+		/obj/item/stock_parts/scanning_module = 2)
+	def_components = list(/obj/item/stack/ore/bluespace_crystal = /obj/item/stack/ore/bluespace_crystal/artificial)
 
-/obj/machinery/scav_buying/multitool_act(mob/living/user, obj/item/multitool/I)
-	if (istype(I))
-		to_chat(user, "<span class='notice'>You register \the [src] in [I]'s buffer.</span>")
-		I.buffer = src
-		return TRUE
+/obj/machinery/scav_imp
+	name = "Long-To-Short-Range-Bluespace-Transciever"
+	desc = "The LTSRBT is a compact teleportation machine for recieving and sending items outside the station and inside the station.\nUsing teleportation frequencies stolen from NT it is near undetectable.\nEssential for any illegal market operations on NT stations.\n"
+	icon_state = "exonet_node"
+	circuit = /obj/item/circuitboard/machine/scav_imp
+	density = TRUE
 
+	idle_power_usage = 200
 
-/obj/machinery/computer/cargo/scav
-	name = "supply console"
-	desc = "Used to buy equipmen and technology from the scav marketplace."
-	icon_screen = "supply"
-	circuit = /obj/item/circuitboard/computer/cargo
-	var/obj/machinery/scav_buing/pad
-	var/scav_import_id
-	ui_x = 780
-	ui_y = 750
+	/// Divider for power_usage_per_teleport.
+	var/power_efficiency = 1
+	/// Power used per teleported which gets divided by power_efficiency.
+	var/power_usage_per_teleport = 10000
+	/// The time it takes for the machine to recharge before being able to send or recieve items.
+	var/recharge_time = 0
+	/// Current recharge progress.
+	var/recharge_cooldown = 0
+	/// Base recharge time which is used to get recharge_time.
+	var/base_recharge_time = 100
+	/// Current /datum/scav_purchase being recieved.
+	var/recieving
+	/// Current /datum/scav_purchase being sent to the target uplink.
+	var/transmitting
+	/// Queue for purchases that the machine should recieve and send.
+	var/list/datum/scav_purchase/queue = list()
 
-/obj/machinery/computer/cargo/scav/Initialize()
-	..()
-	return INITIALIZE_HINT_LATELOAD
-
-/obj/machinery/computer/scav_selling_control/multitool_act(mob/living/user, obj/item/multitool/I)
-	if (istype(I) && istype(I.buffer,/obj/machinery/scav_selling))
-		to_chat(user, "<span class='notice'>You link [src] with [I.buffer] in [I] buffer.</span>")
-		pad = I.buffer
-		updateDialog()
-		return TRUE
-
-/obj/machinery/computer/scav_selling_control/LateInitialize()
+/obj/machinery/scav_imp/Initialize()
 	. = ..()
-	if(scav_import_id)
-		for(var/obj/machinery/scav_selling/P in GLOB.machines)
-			if(P.scav_import_id == scav_import_id)
-				pad = P
-				return
-	else
-		pad = locate() in range(4,src)
+	SSscav.telepads += src
 
-/obj/machinery/computer/cargo/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
-											datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
-	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
-	if(!ui)
-		ui = new(user, src, ui_key, "cargo", name, ui_x, ui_y, master_ui, state)
-		ui.open()
+/obj/machinery/scav_imp/Destroy()
+	SSscav.telepads -= src
+	// Bye bye orders.
+	if(SSscav.telepads.len)
+		for(var/datum/scav_purchase/P in queue)
+			SSscav.queue_item(P)
+	. = ..()
 
-/obj/machinery/computer/cargo/ui_data()
-	var/list/data = list()
-	var/datum/bank_account/D = SSeconomy.get_dep_account(ACCOUNT_SCA)
-	if(D)
-		data["points"] = D.account_balance
-	data["cart"] = list()
-	for(var/datum/supply_order/SO in SSscav.shoppinglist)
-		data["cart"] += list(list(
-			"object" = SO.pack.name,
-			"cost" = SO.pack.cost,
-			"id" = SO.id,
-			"orderer" = SO.orderer,
-			"paid" = !isnull(SO.paying_account) //paid by requester
-		))
+/obj/machinery/scav_imp/RefreshParts()
+	recharge_time = base_recharge_time
+	// On tier 4 recharge_time should be 20 and by default it is 80 as scanning modules should be tier 1.
+	for(var/obj/item/stock_parts/scanning_module/scan in component_parts)
+		recharge_time -= scan.rating * 10
+	recharge_cooldown = recharge_time
 
-	return data
+	power_efficiency = 0
+	for(var/obj/item/stock_parts/micro_laser/laser in component_parts)
+		power_efficiency += laser.rating
+	// Shouldn't happen but you never know.
+	if(!power_efficiency)
+		power_efficiency = 1
 
-/obj/machinery/computer/cargo/ui_static_data(mob/user)
-	var/list/data = list()
-	data["requestonly"] = requestonly
-	data["supplies"] = list()
-	for(var/pack in SSscav.scav_packs)
-		var/datum/supply_pack/P = SSscav.scav_packs[pack]
-		if(!data["supplies"][P.group])
-			data["supplies"][P.group] = list(
-				"name" = P.group,
-				"packs" = list()
-			)
-		if((P.hidden && !(obj_flags & EMAGGED)) || (P.contraband && !contraband) || (P.special && !P.special_enabled) || P.DropPodOnly)
-			continue
-		data["supplies"][P.group]["packs"] += list(list(
-			"name" = P.name,
-			"cost" = P.cost,
-			"id" = pack,
-			"desc" = P.desc || P.name, // If there is a description, use it. Otherwise use the pack's name.
-			"small_item" = P.small_item,
-			"access" = P.access
-		))
-	return data
+/// Adds /datum/scav_purchase to queue unless the machine is free, then it sets the purchase to be instantly recieved
+/obj/machinery/scav_imp/proc/add_to_queue(datum/scav_purchase/purchase)
+	if(!recharge_cooldown && !recieving && !transmitting)
+		recieving = purchase
+		return
+	queue += purchase
+
+/obj/machinery/scav_imp/process()
+	if(machine_stat & NOPOWER)
+		return
+
+	if(recharge_cooldown)
+		recharge_cooldown--
+		return
+
+	var/turf/T = get_turf(src)
+	if(recieving)
+		var/datum/scav_purchase/P = recieving
+
+		if(!P.item || ispath(P.item))
+			P.item = P.entry.spawn_item(T)
+		else
+			var/atom/movable/M = P.item
+			M.forceMove(T)
+
+		use_power(power_usage_per_teleport / power_efficiency)
+		var/datum/effect_system/spark_spread/sparks = new
+		sparks.set_up(5, 1, get_turf(src))
+		sparks.attach(P.item)
+		sparks.start()
+
+		recieving = null
+		transmitting = P
+
+		recharge_cooldown = recharge_time
+		return
+	else if(transmitting)
+		var/datum/scav_purchase/P = transmitting
+		if(!P.item)
+			QDEL_NULL(transmitting)
+		if(!(P.item in T.contents))
+			QDEL_NULL(transmitting)
+			return
+		do_teleport(P.item, get_turf(P.uplink))
+		use_power(power_usage_per_teleport / power_efficiency)
+		QDEL_NULL(transmitting)
+
+		recharge_cooldown = recharge_time
+		return
+
+	if(queue.len)
+		recieving = pick_n_take(queue)
 
