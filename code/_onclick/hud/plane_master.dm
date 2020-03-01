@@ -40,7 +40,7 @@
 
 /obj/screen/plane_master/floor
 	name = "floor plane master"
-	plane = FLOOR_PLANE
+	plane = GAME_PLANE
 	appearance_flags = PLANE_MASTER
 	blend_mode = BLEND_OVERLAY
 

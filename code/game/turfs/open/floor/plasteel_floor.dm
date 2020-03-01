@@ -25,6 +25,7 @@
 
 /turf/open/floor/plasteel/dark
 	color = COLOR_TILE_GRAY
+	floor_tile = /obj/item/stack/tile/plasteel/dark
 /turf/open/floor/plasteel/dark/airless
 	initial_gas_mix = AIRLESS_ATMOS
 /turf/open/floor/plasteel/dark/telecomms
@@ -74,6 +75,7 @@
 
 /turf/open/floor/plasteel/white
 	color = COLOR_WHITE
+	floor_tile = /obj/item/stack/tile/plasteel/white
 /turf/open/floor/plasteel/white/side
 	icon_state = "whitehall"
 /turf/open/floor/plasteel/white/corner

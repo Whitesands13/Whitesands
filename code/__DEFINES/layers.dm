@@ -6,7 +6,7 @@
 #define PLANE_SPACE -95
 #define PLANE_SPACE_PARALLAX -90
 
-#define FLOOR_PLANE -2
+#define GAME_PLANE -2
 #define GAME_PLANE -1
 #define BLACKNESS_PLANE 0 //To keep from conflicts with SEE_BLACKNESS internals
 
@@ -26,6 +26,8 @@
 #define WIRE_LAYER 2.4
 #define WIRE_BRIDGE_LAYER 2.44
 #define WIRE_TERMINAL_LAYER 2.45
+#define UNDER_CATWALK 2.454
+#define CATWALK_LAYER 2.455
 #define GAS_SCRUBBER_LAYER 2.46
 #define GAS_PIPE_VISIBLE_LAYER 2.47
 #define GAS_FILTER_LAYER 2.48

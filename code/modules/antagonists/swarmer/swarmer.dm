@@ -203,7 +203,7 @@
 /turf/open/swarmer_act()//ex_act() on turf calls it on its contents, this is to prevent attacking mobs by DisIntegrate()'ing the floor
 	return FALSE
 
-/obj/structure/lattice/catwalk/swarmer_catwalk/swarmer_act()
+/obj/structure/catwalk/swarmer_catwalk/swarmer_act()
 	return FALSE
 
 /obj/structure/swarmer/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
@@ -225,7 +225,7 @@
 
 /turf/open/lava/swarmer_act()
 	if(!is_safe())
-		new /obj/structure/lattice/catwalk/swarmer_catwalk(src)
+		new /obj/structure/catwalk/swarmer_catwalk(src)
 	return FALSE
 
 /obj/machinery/atmospherics/swarmer_act()
@@ -375,7 +375,7 @@
 	to_chat(S, "<span class='warning'>This object is receiving unactivated swarmer shells to help us. Aborting.</span>")
 	return FALSE
 
-/obj/structure/lattice/catwalk/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/structure/catwalk/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
 	. = ..()
 	var/turf/here = get_turf(src)
 	for(var/A in here.contents)

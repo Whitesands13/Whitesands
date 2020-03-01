@@ -58,7 +58,7 @@
 	name = "pit grate"
 	icon = 'icons/obj/smooth_structures/lattice.dmi'
 	icon_state = "lattice"
-	plane = FLOOR_PLANE
+	plane = GAME_PLANE
 	anchored = TRUE
 	obj_flags = CAN_BE_HIT | BLOCK_Z_FALL
 	var/id
@@ -102,7 +102,7 @@
 			T.zFall(AM)
 
 /obj/structure/pitgrate/proc/reset_plane()
-	plane = FLOOR_PLANE
+	plane = GAME_PLANE
 
 /obj/structure/pitgrate/Destroy()
 	if(hidden)

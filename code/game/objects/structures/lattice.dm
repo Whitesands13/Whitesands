@@ -8,9 +8,10 @@
 	armor = list("melee" = 50, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 80, "acid" = 50)
 	max_integrity = 50
 	layer = LATTICE_LAYER //under pipes
-	plane = FLOOR_PLANE
+	plane = GAME_PLANE
 	var/number_of_rods = 1
 	canSmoothWith = list(/obj/structure/lattice,
+	/obj/structure/catwalk,
 	/turf/open/floor,
 	/turf/closed/wall,
 	/obj/structure/falsewall)
@@ -66,7 +67,9 @@
 	if(current_size >= STAGE_FOUR)
 		deconstruct()
 
-/obj/structure/lattice/catwalk
+/* WaspStation Edit - Better Catwalks
+
+/obj/structure/catwalk
 	name = "catwalk"
 	desc = "A catwalk for easier EVA maneuvering and cable placement."
 	icon = 'icons/obj/smooth_structures/catwalk.dmi'
@@ -76,20 +79,22 @@
 	canSmoothWith = null
 	obj_flags = CAN_BE_HIT | BLOCK_Z_FALL
 
-/obj/structure/lattice/catwalk/deconstruction_hints(mob/user)
+/obj/structure/catwalk/deconstruction_hints(mob/user)
 	return "<span class='notice'>The supporting rods look like they could be <b>cut</b>.</span>"
 
-/obj/structure/lattice/catwalk/Move()
+/obj/structure/catwalk/Move()
 	var/turf/T = loc
 	for(var/obj/structure/cable/C in T)
 		C.deconstruct()
 	..()
 
-/obj/structure/lattice/catwalk/deconstruct()
+/obj/structure/catwalk/deconstruct()
 	var/turf/T = loc
 	for(var/obj/structure/cable/C in T)
 		C.deconstruct()
 	..()
+
+WaspStation End */
 
 /obj/structure/lattice/lava
 	name = "heatproof support lattice"

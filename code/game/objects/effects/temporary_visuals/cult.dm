@@ -47,7 +47,7 @@
 /obj/effect/temp_visual/cult/turf/floor
 	icon_state = "floorglow"
 	duration = 5
-	plane = FLOOR_PLANE
+	plane = GAME_PLANE
 
 /obj/effect/temp_visual/cult/portal
 	icon_state = "space"
