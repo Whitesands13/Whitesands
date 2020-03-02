@@ -31,7 +31,7 @@
 	sawn_desc = "<i>Sigh.</i> This is a trigger attached to a bullet."
 	can_be_sawn_off  = TRUE
 
-/obj/item/gun/ballistic/shotgun/automatic/combat/compact/compact/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
+/obj/item/gun/ballistic/shotgun/automatic/combat/compact/compact/compact/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
 	if(prob(50))	//It's going to blow up.
 		playsound(user, fire_sound, fire_sound_volume, vary_fire_sound)
 		if(prob(50))
