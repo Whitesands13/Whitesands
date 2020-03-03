@@ -8,7 +8,8 @@ Uplink Items
 	desc = "An easily concealable handgun capable of firing .357 rounds. Comes in an inconspicuious packet of cigarettes with additional munitions."
 	item = /obj/item/storage/fancy/cigarettes/derringer
 	cost = 8
-	surplus = 0
+	surplus = 30
+	surplus_nullcrates = 40
 
 /datum/uplink_item/stealthy_weapons/derringerpack/purchase(mob/user, datum/component/uplink/U)
 	if(prob(1)) //For the 1%
