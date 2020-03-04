@@ -10,10 +10,12 @@
 	supervisors = "Nanotrasen officials and Space law"
 	selection_color = "#ccccff"
 	req_admin_notify = 1
-	minimal_player_age = 14
+	minimal_player_age = 30
 	exp_requirements = 180
 	exp_type = EXP_TYPE_CREW
 	exp_type_department = EXP_TYPE_COMMAND
+	wiki_page = "Captain"
+	special_notice = "You may be the Captain of this station, but you are still beholden to The Corporation." //WaspStation Edit - Wikilinks/Warning
 
 	outfit = /datum/outfit/job/captain
 
@@ -42,7 +44,7 @@
 	glasses = /obj/item/clothing/glasses/sunglasses
 	ears = /obj/item/radio/headset/heads/captain/alt
 	gloves = /obj/item/clothing/gloves/color/captain
-	uniform =  /obj/item/clothing/under/rank/captain
+	uniform =  /obj/item/clothing/under/rank/command/captain
 	suit = /obj/item/clothing/suit/armor/vest/capcarapace
 	shoes = /obj/item/clothing/shoes/sneakers/brown
 	head = /obj/item/clothing/head/caphat

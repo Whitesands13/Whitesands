@@ -1,6 +1,7 @@
 /obj/item/radio/intercom
 	name = "station intercom"
 	desc = "Talk through this."
+	icon = 'waspstation/icons/obj/radio.dmi'
 	icon_state = "intercom"
 	anchored = TRUE
 	w_class = WEIGHT_CLASS_BULKY
@@ -27,6 +28,7 @@
 
 /obj/item/radio/intercom/examine(mob/user)
 	. = ..()
+	. += "<span class='notice'>Use [MODE_TOKEN_INTERCOM] when nearby to speak into it.</span>"
 	if(!unfastened)
 		. += "<span class='notice'>It's <b>screwed</b> and secured to the wall.</span>"
 	else

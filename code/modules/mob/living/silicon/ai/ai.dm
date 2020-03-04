@@ -327,38 +327,6 @@
 /mob/living/silicon/ai/cancel_camera()
 	view_core()
 
-/mob/living/silicon/ai/verb/wipe_core()
-	set name = "Wipe Core"
-	set category = "OOC"
-	set desc = "Wipe your core. This is functionally equivalent to cryo, freeing up your job slot."
-
-	// Guard against misclicks, this isn't the sort of thing we want happening accidentally
-	if(alert("WARNING: This will immediately wipe your core and ghost you, removing your character from the round permanently (similar to cryo). Are you entirely sure you want to do this?",
-					"Wipe Core", "No", "No", "Yes") != "Yes")
-		return
-
-	// We warned you.
-	var/obj/structure/AIcore/latejoin_inactive/inactivecore = New(loc)
-	transfer_fingerprints_to(inactivecore)
-
-	if(GLOB.announcement_systems.len)
-		var/obj/machinery/announcement_system/announcer = pick(GLOB.announcement_systems)
-		announcer.announce("AIWIPE", real_name, mind.assigned_role, list())
-
-	SSjob.FreeRole(mind.assigned_role)
-
-	if(mind.objectives.len)
-		mind.objectives.Cut()
-		mind.special_role = null
-
-	if(!get_ghost(1))
-		if(world.time < 30 * 600)//before the 30 minute mark
-			ghostize(0) // Players despawned too early may not re-enter the game
-	else
-		ghostize(1)
-
-	QDEL_NULL(src)
-
 /mob/living/silicon/ai/verb/toggle_anchor()
 	set category = "AI Commands"
 	set name = "Toggle Floor Bolts"
@@ -666,7 +634,7 @@
 	set category = "Malfunction"
 	set name = "Choose Module"
 
-	malf_picker.use(src)
+	malf_picker.ui_interact(src)
 
 /mob/living/silicon/ai/proc/ai_statuschange()
 	set category = "AI Commands"
@@ -718,7 +686,7 @@
 		if("Animal")
 			var/list/icon_list = list(
 			"bear" = 'icons/mob/animal.dmi',
-			"carp" = 'icons/mob/animal.dmi',
+			"carp" = 'icons/mob/carp.dmi',
 			"chicken" = 'icons/mob/animal.dmi',
 			"corgi" = 'icons/mob/pets.dmi',
 			"cow" = 'icons/mob/animal.dmi',
@@ -933,7 +901,7 @@
 	if(istype(A, /obj/machinery/camera))
 		current = A
 	if(client)
-		if(ismovableatom(A))
+		if(ismovable(A))
 			if(A != GLOB.ai_camera_room_landmark)
 				end_multicam()
 			client.perspective = EYE_PERSPECTIVE
@@ -968,7 +936,7 @@
 	malfhacking = 0
 	clear_alert("hackingapc")
 
-	if(!istype(apc) || QDELETED(apc) || apc.stat & BROKEN)
+	if(!istype(apc) || QDELETED(apc) || apc.machine_stat & BROKEN)
 		to_chat(src, "<span class='danger'>Hack aborted. The designated APC no longer exists on the power network.</span>")
 		playsound(get_turf(src), 'sound/machines/buzz-two.ogg', 50, TRUE, ignore_walls = FALSE)
 	else if(apc.aidisabled)

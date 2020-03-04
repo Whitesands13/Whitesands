@@ -1,14 +1,15 @@
-## WaspStation 13 Codebase
+<h1 align="center">WaspStation 13 Codebase</h1>
 
-[![Build Status](https://api.travis-ci.com/WaspStation/WaspStation-1.0.svg?branch=master)](https://travis-ci.com/WaspStation/WaspStation-1.0) [![Krihelimeter](http://www.krihelinator.xyz/badge/WaspStation/WaspStation-1.0)](https://www.krihelinator.xyz)  
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/waspstation/waspstation-1.0.svg)](https://isitmaintained.com/project/tgstation/tgstation "Percentage of issues still open") [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/waspstation/waspstation-1.0.svg)](https://isitmaintained.com/project/tgstation/tgstation "Average time to resolve an issue") ![Coverage](https://img.shields.io/badge/coverage---2%25-red.svg)  
+[![Build Status](https://api.travis-ci.com/WaspStation/WaspStation-1.0.svg?branch=master)](https://travis-ci.com/WaspStation/WaspStation-1.0) [![Krihelimeter](http://www.krihelinator.xyz/badge/WaspStation/WaspStation-1.0)](https://www.krihelinator.xyz)
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/waspstation/waspstation-1.0.svg)](https://isitmaintained.com/project/tgstation/tgstation "Percentage of issues still open") [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/waspstation/waspstation-1.0.svg)](https://isitmaintained.com/project/tgstation/tgstation "Average time to resolve an issue") ![Coverage](https://img.shields.io/badge/coverage---2%25-red.svg)
 [![forthebadge](https://forthebadge.com/images/badges/built-with-resentment.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/contains-technical-debt.svg)](https://user-images.githubusercontent.com/8171642/50290880-ffef5500-043a-11e9-8270-a2e5b697c86c.png)[![forthebadge](https://forthebadge.com/images/badges/60-percent-of-the-time-works-every-time.svg)](https://forthebadge.com) [![forinfinityandbyond](https://user-images.githubusercontent.com/5211576/29499758-4efff304-85e6-11e7-8267-62919c3688a9.gif)](https://www.reddit.com/r/SS13/comments/5oplxp/what_is_the_main_problem_with_byond_as_an_engine/dclbu1a)
 
 * **Website:** TBA
 * **Code:** https://github.com/WaspStation/WaspStation-1.0
-* **Discord:** https://discord.gg/husVWe8
+* **Mantis Discord:** https://discord.gg/husVWe8
+* **Boomer Discord:** https://discord.gg/BUM8uRc
 * **Wiki** TBA
- 
+
 ## DOWNLOADING
 
 There are a number of ways to download the source code. Some are described here, an alternative all-inclusive guide is also located at https://www.tgstation13.org/wiki/Downloading_the_source_code
@@ -82,19 +83,14 @@ you set up the SQL backend (see below).
 
 ## UPDATING
 
-To update an existing installation, first back up your /config and /data folders
-as these store your server configuration, player preferences and banlist.
+This is the codebase for the /tg/station flavoured fork of SpaceStation 13.
 
-Then, extract the new files (preferably into a clean directory, but updating in
-place should work fine), copy your /config and /data folders back into the new
-install, overwriting when prompted except if we've specified otherwise, and
-recompile the game.  Once you start the server up again, you should be running
-the new version.
+Space Station 13 is a paranoia-laden round-based roleplaying game set against the backdrop of a nonsensical, metal death trap masquerading as a space station, with charming spritework designed to represent the sci-fi setting and its dangerous undertones. Have fun, and survive!
 
 ## HOSTING
 
 If you'd like a more robust server hosting option for tgstation and its
-derivatives. Check out our server tools suite at 
+derivatives. Check out our server tools suite at
 https://github.com/tgstation/tgstation-server
 
 ## MAPS
@@ -130,7 +126,7 @@ The SQL backend requires a Mariadb server running 10.2 or later. Mysql is not su
 
 If you are hosting a testing server on windows you can use a standalone version of MariaDB pre load with a blank (but initialized) tgdb database. Find them here: https://tgstation13.download/database/ Just unzip and run for a working (but insecure) database server. Includes a zipped copy of the data folder for easy resetting back to square one.
 
-## WEB/CDN RESOURCE DELIVERY 
+## WEB/CDN RESOURCE DELIVERY
 
 Web delivery of game resources makes it quicker for players to join and reduces some of the stress on the game server.
 
@@ -139,14 +135,20 @@ Web delivery of game resources makes it quicker for players to join and reduces 
     * If you keep up to date with /tg/ you could reuse /tg/'s rsc cdn at http://tgstation13.download/byond/tgstation.zip. Otherwise you can use cdn services like CDN77 or cloudflare (requires adding a page rule to enable caching of the zip), or roll your own cdn using route 53 and vps providers.
 	* Regardless even offloading the rsc to a website without a CDN will be a massive improvement over the in game system for transferring files.
 
-## IRC BOT SETUP
-
-Included in the repository is a python3 compatible IRC bot capable of relaying adminhelps to a specified
-IRC channel/server, see the /tools/minibot folder for more
-
 ## CONTRIBUTING
 
-Please see [CONTRIBUTING.md](.github/CONTRIBUTING.md)
+[Documenting your code](.github/AUTODOC_GUIDE.md)
+
+## CODEBASE CREDITS
+- /tg/, for the codebase
+- BeeStation, for the many QoL changes
+- Oracle, for the inspiration and wonderful features and sprites
+- Interstation for bridging the gap between Oracle and Modern /tg/
+- YogStation for multiple different features
+- CEV Eris, for the PDA sprites
+- Citadel, for their beautiful lighting
+
+And thank you to any other codebase not mentioned here that has been used in the code. Your wonderful contributions are known.
 
 ## LICENSE
 
@@ -162,8 +164,6 @@ Font Awesome font files, used by tgui, are licensed under the SIL Open Font Lice
 tgui assets are licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
 The TGS3 API is licensed as a subproject under the MIT license.
 
-See tgui/LICENSE.md for the MIT license.
-See tgui/assets/fonts/SIL-OFL-1.1-LICENSE.md for the SIL Open Font License.
 See the footers of code/\_\_DEFINES/server\_tools.dm, code/modules/server\_tools/st\_commands.dm, and code/modules/server\_tools/st\_inteface.dm for the MIT license.
 
 All assets including icons and sound are under a [Creative Commons 3.0 BY-SA license](https://creativecommons.org/licenses/by-sa/3.0/) unless otherwise indicated.

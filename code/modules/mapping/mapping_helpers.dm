@@ -187,7 +187,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/mapping_helpers/no_lava)
 		if(target_type && !istype(A,target_type))
 			continue
 		var/cargs = build_args()
-		A.AddComponent(arglist(cargs))
+		A._AddComponent(cargs)
 		qdel(src)
 		return
 
@@ -235,7 +235,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/mapping_helpers/no_lava)
 	qdel(src)
 
 
-//On Ian's birthday, the hop's office is decorated.
+//On Ian's birthday, the head of personnel's office is decorated.
 /obj/effect/mapping_helpers/ianbirthday
 	name = "Ian's Bday Helper"
 	late = TRUE

@@ -138,6 +138,14 @@
 	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_MEDICAL
 	category = list ("Medical Machinery")
 
+/datum/design/board/sleeper
+	name = "Machine Design (Sleeper Board)"
+	desc = "The circuit board for a sleeper."
+	id = "sleeper"
+	build_path = /obj/item/circuitboard/machine/sleeper
+	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_MEDICAL
+	category = list ("Medical Machinery")
+
 /datum/design/board/chem_dispenser
 	name = "Machine Design (Portable Chem Dispenser Board)"
 	desc = "The circuit board for a portable chem dispenser."
@@ -178,29 +186,21 @@
 	category = list ("Medical Machinery")
 	departmental_flags = DEPARTMENTAL_FLAG_ALL
 
-/datum/design/board/clonecontrol
-	name = "Computer Design (Cloning Machine Console)"
-	desc = "Allows for the construction of circuit boards used to build a new Cloning Machine console."
-	id = "clonecontrol"
-	build_path = /obj/item/circuitboard/computer/cloning
-	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
-	category = list("Medical Machinery")
-
-/datum/design/board/clonepod
-	name = "Machine Design (Clone Pod)"
-	desc = "Allows for the construction of circuit boards used to build a Cloning Pod."
-	id = "clonepod"
-	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
-	build_path = /obj/item/circuitboard/machine/clonepod
-	category = list("Medical Machinery")
-
-/datum/design/board/clonescanner
-	name = "Machine Design (Cloning Scanner)"
+/datum/design/board/dnascanner
+	name = "Machine Design (DNA Scanner)"
 	desc = "Allows for the construction of circuit boards used to build a Cloning Scanner."
-	id = "clonescanner"
+	id = "dnascanner"
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
-	build_path = /obj/item/circuitboard/machine/clonescanner
+	build_path = /obj/item/circuitboard/machine/dnascanner
 	category = list("Medical Machinery")
+
+/datum/design/board/hypnochair
+	name = "Machine Design (Enhanced Interrogation Chamber)"
+	desc = "Allows for the construction of circuit boards used to build an Enhanced Interrogation Chamber."
+	id = "hypnochair"
+	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
+	build_path = /obj/item/circuitboard/machine/hypnochair
+	category = list("Misc. Machinery")
 
 /datum/design/board/biogenerator
 	name = "Machine Design (Biogenerator Board)"
@@ -451,6 +451,14 @@
 	category = list ("Misc. Machinery")
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_CARGO | DEPARTMENTAL_FLAG_ENGINEERING
 
+/datum/design/board/bluespace_miner
+	name = "Machine Design (Bluespace Miner)"
+	desc = "The circuit board for a Bluespace Miner."
+	id = "bluespace_miner"
+	build_path = /obj/item/circuitboard/machine/bluespace_miner
+	category = list ("Misc. Machinery")
+	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_CARGO | DEPARTMENTAL_FLAG_ENGINEERING
+
 /datum/design/board/mining_equipment_vendor
 	name = "Machine Design (Mining Rewards Vendor Board)"
 	desc = "The circuit board for a Mining Rewards Vendor."
@@ -595,6 +603,14 @@
 	category = list("Medical Machinery")
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
 
+/datum/design/board/autodoc
+	name = "Machine Design (Autodoc)"
+	desc = "The circuit board for an Autodoc."
+	id = "autodoc"
+	build_path = /obj/item/circuitboard/machine/autodoc
+	category = list("Medical Machinery")
+	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
+
 /datum/design/board/spaceship_navigation_beacon
 	name = "Machine Design (Bluespace Navigation Gigabeacon)"
 	desc = "The circuit board for a Bluespace Navigation Gigabeacon."
@@ -608,5 +624,13 @@
 	desc = "The circuit board for a Medical Kiosk."
 	id = "medical_kiosk"
 	build_path = /obj/item/circuitboard/machine/medical_kiosk
+	category = list ("Medical Machinery")
+	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
+
+/datum/design/board/medipen_refiller
+	name = "Machine Design (Medipen Refiller)"
+	desc = "The circuit board for a Medipen Refiller."
+	id = "medipen_refiller"
+	build_path = /obj/item/circuitboard/machine/medipen_refiller
 	category = list ("Medical Machinery")
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL

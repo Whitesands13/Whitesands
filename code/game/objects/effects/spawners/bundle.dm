@@ -9,9 +9,8 @@
 /obj/effect/spawner/bundle/Initialize(mapload)
 	..()
 	if(items && items.len)
-		var/turf/T = get_turf(src)
 		for(var/path in items)
-			new path(T)
+			new path(loc)
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/spawner/bundle/costume/chicken
@@ -30,14 +29,14 @@
 /obj/effect/spawner/bundle/costume/madscientist
 	name = "mad scientist costume spawner"
 	items = list(
-		/obj/item/clothing/under/rank/captain/suit,
+		/obj/item/clothing/under/rank/command/captain/suit,
 		/obj/item/clothing/head/flatcap,
 		/obj/item/clothing/suit/toggle/labcoat/mad)
 
 /obj/effect/spawner/bundle/costume/elpresidente
 	name = "el presidente costume spawner"
 	items = list(
-		/obj/item/clothing/under/rank/captain/suit,
+		/obj/item/clothing/under/rank/command/captain/suit,
 		/obj/item/clothing/head/flatcap,
 		/obj/item/clothing/mask/cigarette/cigar/havana,
 		/obj/item/clothing/shoes/jackboots)
@@ -168,3 +167,31 @@
 	items = list(
 		/obj/item/clothing/mask/gas/sexymime,
 		/obj/item/clothing/under/rank/civilian/mime/sexy)
+
+/obj/effect/spawner/bundle/costume/mafia
+	name = "black mafia outfit spawner"
+	items = list(
+		/obj/item/clothing/head/fedora,
+		/obj/item/clothing/under/suit/blacktwopiece,
+		/obj/item/clothing/shoes/laceup)
+
+/obj/effect/spawner/bundle/costume/mafia/white
+	name = "white mafia outfit spawner"
+	items = list(
+		/obj/item/clothing/head/fedora/white,
+		/obj/item/clothing/under/suit/white,
+		/obj/item/clothing/shoes/laceup)
+
+/obj/effect/spawner/bundle/costume/mafia/checkered
+	name = "checkered mafia outfit spawner"
+	items = list(
+		/obj/item/clothing/head/fedora,
+		/obj/item/clothing/under/suit/checkered,
+		/obj/item/clothing/shoes/laceup)
+
+/obj/effect/spawner/bundle/costume/mafia/beige
+	name = "beige mafia outfit spawner"
+	items = list(
+		/obj/item/clothing/head/fedora/beige,
+		/obj/item/clothing/under/suit/beige,
+		/obj/item/clothing/shoes/laceup)

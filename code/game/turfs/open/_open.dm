@@ -1,5 +1,10 @@
 /turf/open
 	plane = FLOOR_PLANE
+
+	FASTDMM_PROP(\
+		pipe_astar_cost = 1\
+	)
+
 	var/slowdown = 0 //negative for faster, positive for slower
 
 	var/postdig_icon_change = FALSE
@@ -60,9 +65,9 @@
 	heavyfootstep = null
 	var/sound
 
-/turf/open/indestructible/sound/Entered(var/mob/AM)
+/turf/open/indestructible/sound/Entered(atom/movable/AM)
 	..()
-	if(istype(AM))
+	if(ismob(AM))
 		playsound(src,sound,50,TRUE)
 
 /turf/open/indestructible/necropolis

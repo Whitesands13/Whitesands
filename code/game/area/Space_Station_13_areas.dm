@@ -286,6 +286,10 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "bridge"
 	ambientsounds = list('sound/ambience/signal.ogg')
 
+/area/lieutenant
+	name = "Lieutenant's Office"
+	icon_state = "blueold"
+
 /area/bridge/meeting_room
 	name = "Heads of Staff Meeting Room"
 	icon_state = "meeting"
@@ -314,7 +318,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "Chief Medical Officer's Office"
 	icon_state = "cmo_office"
 
-/area/crew_quarters/heads/hop
+/area/crew_quarters/heads/head_of_personnel
 	name = "Head of Personnel's Office"
 	icon_state = "hop_office"
 
@@ -340,11 +344,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "Dormitories"
 	icon_state = "Sleep"
 	safe = TRUE
-
-/area/crew_quarters/cryopods
-	name = "Cryopod Room"
-	safe = TRUE
-	icon_state = "cryopod"
 
 /area/crew_quarters/toilet
 	name = "Dormitory Toilets"
@@ -484,7 +483,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/engine/atmos
 	name = "Atmospherics"
 	icon_state = "atmos"
-	flags_1 = NONE
+	flags_1 = CULT_PERMITTED_1
 
 /area/engine/atmospherics_engine
 	name = "Atmospherics Engine"
@@ -671,7 +670,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/medical/virology
 	name = "Virology"
 	icon_state = "virology"
-	flags_1 = NONE
+	flags_1 = CULT_PERMITTED_1
 
 /area/medical/morgue
 	name = "Morgue"
@@ -706,10 +705,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "Genetics Lab"
 	icon_state = "genetics"
 
-/area/medical/genetics/cloning
-	name = "Cloning Lab"
-	icon_state = "cloning"
-
 /area/medical/sleeper
 	name = "Medbay Treatment Center"
 	icon_state = "exam_room"
@@ -736,6 +731,10 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 /area/security/prison
 	name = "Prison Wing"
+	icon_state = "sec_prison"
+
+/area/security/prison/toilet
+	name = "Prison Toilet"
 	icon_state = "sec_prison"
 
 /area/security/processing
@@ -855,7 +854,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/janitor
 	name = "Custodial Closet"
 	icon_state = "janitor"
-	flags_1 = NONE
+	flags_1 = CULT_PERMITTED_1
 
 /area/hydroponics
 	name = "Hydroponics"

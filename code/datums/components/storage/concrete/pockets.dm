@@ -22,20 +22,23 @@
 	max_w_class = WEIGHT_CLASS_TINY
 	attack_hand_interact = FALSE
 
+//Waspstation Begin - Exowear Pockets
 /datum/component/storage/concrete/pockets/exo
 	max_items = 2
 	max_w_class = WEIGHT_CLASS_SMALL
-	attack_hand_interact = TRUE
+	attack_hand_interact = FALSE
 	quickdraw = FALSE
 	silent = FALSE
 
 /datum/component/storage/concrete/pockets/exo/cloak
 	max_items = 1
+	max_w_class = WEIGHT_CLASS_NORMAL
 	quickdraw = TRUE
 
 /datum/component/storage/concrete/pockets/exo/large
 	max_items = 3
-	
+//WaspStation End
+
 /datum/component/storage/concrete/pockets/small/fedora/Initialize()
 	. = ..()
 	var/static/list/exception_cache = typecacheof(list(
@@ -47,33 +50,20 @@
 /datum/component/storage/concrete/pockets/small/fedora/detective
 	attack_hand_interact = TRUE // so the detectives would discover pockets in their hats
 
+//WaspStation Begin - Any small item in shoes
 /datum/component/storage/concrete/pockets/shoes
+	max_items = 2
 	attack_hand_interact = FALSE
-	quickdraw = TRUE
+	max_w_class = WEIGHT_CLASS_SMALL
+	quickdraw = FALSE
 	silent = TRUE
+//WaspStation End
 
 /datum/component/storage/concrete/pockets/shoes/Initialize()
 	. = ..()
-	set_holdable(list(
-		/obj/item/kitchen/knife, /obj/item/switchblade, /obj/item/pen,
-		/obj/item/scalpel, /obj/item/reagent_containers/syringe, /obj/item/dnainjector,
-		/obj/item/reagent_containers/hypospray/medipen, /obj/item/reagent_containers/dropper,
-		/obj/item/implanter, /obj/item/screwdriver, /obj/item/weldingtool/mini,
-		/obj/item/firing_pin
-		),
-		list(/obj/item/screwdriver/power)
-		)
 
 /datum/component/storage/concrete/pockets/shoes/clown/Initialize()
 	. = ..()
-	set_holdable(list(
-		/obj/item/kitchen/knife, /obj/item/switchblade, /obj/item/pen,
-		/obj/item/scalpel, /obj/item/reagent_containers/syringe, /obj/item/dnainjector,
-		/obj/item/reagent_containers/hypospray/medipen, /obj/item/reagent_containers/dropper,
-		/obj/item/implanter, /obj/item/screwdriver, /obj/item/weldingtool/mini,
-		/obj/item/firing_pin, /obj/item/bikehorn),
-		list(/obj/item/screwdriver/power)
-		)
 
 /datum/component/storage/concrete/pockets/pocketprotector
 	max_items = 3
@@ -94,30 +84,6 @@
 /datum/component/storage/concrete/pockets/pocketprotector/real_location()
 	// if the component is reparented to a jumpsuit, the items still go in the protector
 	return original_parent
-
-/datum/component/storage/concrete/pockets/holster
-	max_items = 3
-	max_w_class = WEIGHT_CLASS_NORMAL
-	var/atom/original_parent
-
-/datum/component/storage/concrete/pockets/holster/Initialize()
-	original_parent = parent
-	. = ..()
-	can_hold = typecacheof(list(
-		/obj/item/gun/ballistic/automatic/pistol,
-		/obj/item/gun/ballistic/revolver,
-		/obj/item/ammo_box))
-
-/datum/component/storage/concrete/pockets/holster/real_location()
-	// if the component is reparented to a jumpsuit, the items still go in the protector
-	return original_parent
-
-/datum/component/storage/concrete/pockets/holster/detective/Initialize()
-	original_parent = parent
-	. = ..()
-	can_hold = typecacheof(list(
-		/obj/item/gun/ballistic/revolver/detective,
-		/obj/item/ammo_box/c38))
 
 /datum/component/storage/concrete/pockets/helmet
 	quickdraw = TRUE

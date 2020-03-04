@@ -37,7 +37,7 @@ GENE SCANNER
 
 /obj/item/t_scanner/proc/toggle_on()
 	on = !on
-	icon_state = copytext(icon_state, 1, length(icon_state))+"[on]"
+	icon_state = copytext_char(icon_state, 1, -1) + "[on]"
 	if(on)
 		START_PROCESSING(SSobj, src)
 	else
@@ -133,7 +133,7 @@ GENE SCANNER
 
 // Used by the PDA medical scanner too
 /proc/healthscan(mob/user, mob/living/M, mode = SCANNER_VERBOSE, advanced = FALSE)
-	if(isliving(user) && (user.incapacitated() || user.eye_blind))
+	if(isliving(user) && (user.incapacitated() || user.is_blind()))
 		return
 
 	// the final list of strings to render
@@ -256,7 +256,7 @@ GENE SCANNER
 		message = "\n<span class='alert ml-2'>Subject does not have eyes.</span>"
 		if(istype(eyes))
 			message = ""
-			if(HAS_TRAIT(C, TRAIT_BLIND))
+			if(C.is_blind())
 				message += "\n<span class='alert ml-2'>Subject is blind.</span>"
 			if(HAS_TRAIT(C, TRAIT_NEARSIGHT))
 				message += "\n<span class='alert ml-2'>Subject is nearsighted.</span>"
@@ -297,6 +297,13 @@ GENE SCANNER
 		//Genetic damage
 		if(advanced && H.has_dna())
 			render_list += "<span class='info ml-1'>Genetic Stability: [H.dna.stability]%.</span>\n"
+
+		var/list/broken_stuff = list()
+		for(var/obj/item/bodypart/B in H.bodyparts)
+			if(B.bone_status == BONE_FLAG_BROKEN)
+				broken_stuff += B
+		if(broken_stuff.len)
+			render_list += "\t<span class='alert'>Bone fractures detected. Advanced scanner required for location.</span>\n"
 
 		// Species and body temperature
 		var/datum/species/S = H.dna.species
@@ -350,12 +357,13 @@ GENE SCANNER
 			else
 				render_list += "<span class='info ml-1'>Blood level: [blood_percent] %, [C.blood_volume] cl, type: [blood_type]</span>\n"
 
-		var/cyberimp_detect = ""
+		var/cyberimp_detect
 		for(var/obj/item/organ/cyberimp/CI in C.internal_organs)
 			if(CI.status == ORGAN_ROBOTIC && !CI.syndicate_implant)
-				cyberimp_detect += "[C.name] is modified with a [CI.name].\n"
-		if(cyberimp_detect != "")
-			render_list += "<span class='notice ml-1'>Detected cybernetic modifications:</span>\n<span class='notice ml-2'>[cyberimp_detect]</span>\n"
+				cyberimp_detect += "[!cyberimp_detect ? "[CI.get_examine_string(user)]" : ", [CI.get_examine_string(user)]"]"
+		if(cyberimp_detect)
+			render_list += "<span class='notice ml-1'>Detected cybernetic modifications:</span>\n"
+			render_list += "<span class='notice ml-2'>[cyberimp_detect]</span>\n"
 
 	SEND_SIGNAL(M, COMSIG_NANITE_SCAN, user, FALSE)
 	to_chat(user, jointext(render_list, ""), trailing_newline = FALSE) // we handled the last <br> so we don't need handholding
@@ -428,7 +436,7 @@ GENE SCANNER
 /obj/item/analyzer/attack_self(mob/user)
 	add_fingerprint(user)
 
-	if (user.stat || user.eye_blind)
+	if (user.stat || user.is_blind())
 		return
 
 	var/turf/location = user.loc
@@ -589,7 +597,7 @@ GENE SCANNER
 	custom_materials = list(/datum/material/iron=30, /datum/material/glass=20)
 
 /obj/item/slime_scanner/attack(mob/living/M, mob/living/user)
-	if(user.stat || user.eye_blind)
+	if(user.stat || user.is_blind())
 		return
 	if (!isslime(M))
 		to_chat(user, "<span class='warning'>This device can only scan slimes!</span>")
@@ -733,10 +741,10 @@ GENE SCANNER
 
 		if(sequence)
 			var/display
-			for(var/i in 0 to length(sequence) / DNA_MUTATION_BLOCKS-1)
+			for(var/i in 0 to length_char(sequence) / DNA_MUTATION_BLOCKS-1)
 				if(i)
 					display += "-"
-				display += copytext(sequence, 1 + i*DNA_MUTATION_BLOCKS, DNA_MUTATION_BLOCKS*(1+i) + 1)
+				display += copytext_char(sequence, 1 + i*DNA_MUTATION_BLOCKS, DNA_MUTATION_BLOCKS*(1+i) + 1)
 
 			to_chat(user, "<span class='boldnotice'>[display]</span><br>")
 

@@ -96,7 +96,7 @@
 	desc = "Important notices from the Captain."
 	req_access = list(ACCESS_CAPTAIN)
 
-/obj/structure/noticeboard/hop
+/obj/structure/noticeboard/head_of_personnel
 	name = "Head of Personnel's Notice Board"
 	desc = "Important notices from the Head of Personnel."
 	req_access = list(ACCESS_HOP)

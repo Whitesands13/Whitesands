@@ -67,6 +67,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	jobspawn_override = TRUE
 	delete_after_roundstart = FALSE
 
+/obj/effect/landmark/start/prisoner
+	name = "Prisoner"
+	icon_state = "Prisoner"
+
 /obj/effect/landmark/start/janitor
 	name = "Janitor"
 	icon_state = "Janitor"
@@ -211,6 +215,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 
 /obj/effect/landmark/start/brig_phys
 	name = "Brig Physician"
+	icon_state = "Brig Physician"
+
+/obj/effect/landmark/start/lieutenant
+	name = "Lieutenant"
+	icon_state = "Lieutenant"
 
 //Department Security spawns
 

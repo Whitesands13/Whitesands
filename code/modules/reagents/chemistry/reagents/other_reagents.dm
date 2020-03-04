@@ -128,7 +128,8 @@
 	glass_name = "glass of water"
 	glass_desc = "The father of all refreshments."
 	shot_glass_icon_state = "shotglassclear"
-	process_flags = ORGANIC | SYNTHETIC
+
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs //WaspStation Edit - IPCs
 
 /*
  *	Water reaction to turf
@@ -252,6 +253,43 @@
 			qdel(R)
 	T.Bless()
 
+/datum/reagent/water/hollowwater
+	name = "Hollow Water"
+	description = "An ubiquitous chemical substance that is composed of hydrogen and oxygen, but it looks kinda hollow."
+	color = "#88878777"
+	taste_description = "emptyiness"
+
+/datum/reagent/hydrogen_peroxide
+	name = "Hydrogen peroxide"
+	description = "An ubiquitous chemical substance that is composed of hydrogen and oxygen and oxygen." //intended intended
+	color = "#AAAAAA77" // rgb: 170, 170, 170, 77 (alpha)
+	taste_description = "burning water"
+	var/cooling_temperature = 2
+	glass_icon_state = "glass_clear"
+	glass_name = "glass of oxygenated water"
+	glass_desc = "The father of all refreshments. Surely it tastes great, right?"
+	shot_glass_icon_state = "shotglassclear"
+
+/*
+ *	Water reaction to turf
+ */
+
+/datum/reagent/hydrogen_peroxide/reaction_turf(turf/open/T, reac_volume)
+	if(!istype(T))
+		return
+	if(reac_volume >= 5)
+		T.MakeSlippery(TURF_WET_WATER, 10 SECONDS, min(reac_volume*1.5 SECONDS, 60 SECONDS))
+/*
+ *	Water reaction to a mob
+ */
+
+/datum/reagent/hydrogen_peroxide/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with h2o2 can burn them !
+	if(!istype(M))
+		return
+	if(method == TOUCH)
+		M.adjustFireLoss(2, 0) // burns
+	..()
+
 /datum/reagent/fuel/unholywater		//if you somehow managed to extract this from someone, dont splash it on yourself and have a smoke
 	name = "Unholy Water"
 	description = "Something that shouldn't exist on this plane of existence."
@@ -287,7 +325,7 @@
 	name = "Hell Water"
 	description = "YOUR FLESH! IT BURNS!"
 	taste_description = "burning"
-	process_flags = ORGANIC | SYNTHETIC
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
 
 /datum/reagent/hellwater/on_mob_life(mob/living/carbon/M)
 	M.fire_stacks = min(5,M.fire_stacks + 3)
@@ -438,7 +476,7 @@
 									"Your appendages begin morphing." = MUT_MSG_EXTENDED,
 									"You feel as though you're about to change at any moment!" = MUT_MSG_ABOUT2TURN)
 	var/cycles_to_turn = 20 //the current_cycle threshold / iterations needed before one can transform
-	process_flags = ORGANIC | SYNTHETIC
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
 
 /datum/reagent/mutationtoxin/on_mob_life(mob/living/carbon/human/H)
 	. = TRUE
@@ -474,13 +512,13 @@
 	description = "A corruptive toxin."
 	color = "#13BC5E" // rgb: 19, 188, 94
 	race = /datum/species/jelly/slime
-	process_flags = ORGANIC | SYNTHETIC
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
 
 /datum/reagent/mutationtoxin/felinid
 	name = "Felinid Mutation Toxin"
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/human/felinid
-	process_flags = ORGANIC | SYNTHETIC
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
 	taste_description = "something nyat good"
 
 /datum/reagent/mutationtoxin/lizard
@@ -488,7 +526,7 @@
 	description = "A lizarding toxin."
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/lizard
-	process_flags = ORGANIC | SYNTHETIC
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
 	taste_description = "dragon's breath but not as cool"
 
 /datum/reagent/mutationtoxin/fly
@@ -496,7 +534,7 @@
 	description = "An insectifying toxin."
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/fly
-	process_flags = ORGANIC | SYNTHETIC
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
 	taste_description = "trash"
 
 /datum/reagent/mutationtoxin/moth
@@ -504,7 +542,7 @@
 	description = "A glowing toxin."
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/moth
-	process_flags = ORGANIC | SYNTHETIC
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
 	taste_description = "clothing"
 
 /datum/reagent/mutationtoxin/pod
@@ -512,7 +550,7 @@
 	description = "A vegetalizing toxin."
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/pod
-	process_flags = ORGANIC | SYNTHETIC
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
 	taste_description = "flowers"
 
 /datum/reagent/mutationtoxin/jelly
@@ -520,7 +558,7 @@
 	description = "A jellyfying toxin."
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/jelly
-	process_flags = ORGANIC | SYNTHETIC
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
 	taste_description = "grandma's gelatin"
 
 /datum/reagent/mutationtoxin/jelly/on_mob_life(mob/living/carbon/human/H)
@@ -543,7 +581,7 @@
 	description = "A crystal toxin."
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/golem/random
-	process_flags = ORGANIC | SYNTHETIC
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
 	taste_description = "rocks"
 
 /datum/reagent/mutationtoxin/abductor
@@ -551,7 +589,7 @@
 	description = "An alien toxin."
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/abductor
-	process_flags = ORGANIC | SYNTHETIC
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
 	taste_description = "something out of this world... no, universe!"
 
 /datum/reagent/mutationtoxin/android
@@ -559,7 +597,7 @@
 	description = "A robotic toxin."
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/android
-	process_flags = ORGANIC | SYNTHETIC
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
 	taste_description = "circuitry and steel"
 
 //BLACKLISTED RACES
@@ -568,7 +606,7 @@
 	description = "A scary toxin."
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/skeleton
-	process_flags = ORGANIC | SYNTHETIC
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
 	taste_description = "milk... and lots of it"
 
 /datum/reagent/mutationtoxin/zombie
@@ -576,7 +614,7 @@
 	description = "An undead toxin."
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/zombie //Not the infectious kind. The days of xenobio zombie outbreaks are long past.
-	process_flags = ORGANIC | SYNTHETIC
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
 	taste_description = "brai...nothing in particular"
 
 /datum/reagent/mutationtoxin/ash
@@ -584,7 +622,7 @@
 	description = "An ashen toxin."
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/lizard/ashwalker
-	process_flags = ORGANIC | SYNTHETIC
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
 	taste_description = "savagery"
 
 //DANGEROUS RACES
@@ -593,7 +631,7 @@
 	description = "A dark toxin."
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/shadow
-	process_flags = ORGANIC | SYNTHETIC
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
 	taste_description = "the night"
 
 /datum/reagent/mutationtoxin/plasma
@@ -601,7 +639,7 @@
 	description = "A plasma-based toxin."
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/plasmaman
-	process_flags = ORGANIC | SYNTHETIC
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
 	taste_description = "plasma"
 
 #undef MUT_MSG_IMMEDIATE
@@ -774,7 +812,7 @@
 	reagent_state = GAS
 	color = "#808080" // rgb: 128, 128, 128
 	taste_description = "acid"
-	process_flags = ORGANIC | SYNTHETIC
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
 
 /datum/reagent/fluorine/on_mob_life(mob/living/carbon/M)
 	M.adjustToxLoss(1*REM, 0)
@@ -833,6 +871,7 @@
 	description = "Pure iron is a metal."
 	reagent_state = SOLID
 	taste_description = "iron"
+	material = /datum/material/iron
 
 	color = "#606060" //pure iron? let's make it violet of course
 
@@ -853,6 +892,7 @@
 	reagent_state = SOLID
 	color = "#F7C430" // rgb: 247, 196, 48
 	taste_description = "expensive metal"
+	material = /datum/material/gold
 
 /datum/reagent/silver
 	name = "Silver"
@@ -860,6 +900,7 @@
 	reagent_state = SOLID
 	color = "#D0D0D0" // rgb: 208, 208, 208
 	taste_description = "expensive yet reasonable metal"
+	material = /datum/material/silver
 
 /datum/reagent/silver/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
 	if(M.has_bane(BANE_SILVER))
@@ -873,7 +914,11 @@
 	color = "#5E9964" //this used to be silver, but liquid uranium can still be green and it's more easily noticeable as uranium like this so why bother?
 	taste_description = "the inside of a reactor"
 	var/irradiation_level = 1
-	process_flags = ORGANIC | SYNTHETIC
+	material = /datum/material/uranium
+
+	//WaspStation Begin - IPCs
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
+	//WaspStation End
 
 /datum/reagent/uranium/on_mob_life(mob/living/carbon/M)
 	M.apply_effect(irradiation_level/M.metabolism_efficiency,EFFECT_IRRADIATE,0)
@@ -885,7 +930,8 @@
 			var/obj/effect/decal/cleanable/greenglow/GG = locate() in T.contents
 			if(!GG)
 				GG = new/obj/effect/decal/cleanable/greenglow(T)
-			GG.reagents.add_reagent(type, reac_volume)
+			if(!QDELETED(GG))
+				GG.reagents.add_reagent(type, reac_volume)
 
 /datum/reagent/uranium/radium
 	name = "Radium"
@@ -894,7 +940,7 @@
 	color = "#00CC00" // ditto
 	taste_description = "the colour blue and regret"
 	irradiation_level = 2*REM
-	process_flags = ORGANIC | SYNTHETIC
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
 
 /datum/reagent/bluespace
 	name = "Bluespace Dust"
@@ -902,7 +948,11 @@
 	reagent_state = SOLID
 	color = "#0000CC"
 	taste_description = "fizzling blue"
-	process_flags = ORGANIC | SYNTHETIC
+	material = /datum/material/bluespace
+
+	//WaspStation Begin - IPCs
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
+	//WaspStation End
 
 /datum/reagent/bluespace/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
 	if(method == TOUCH || method == VAPOR)
@@ -933,6 +983,7 @@
 	reagent_state = SOLID
 	color = "#A8A8A8" // rgb: 168, 168, 168
 	taste_mult = 0
+	material = /datum/material/glass
 
 /datum/reagent/fuel
 	name = "Welding fuel"
@@ -942,7 +993,7 @@
 	glass_icon_state = "dr_gibb_glass"
 	glass_name = "glass of welder fuel"
 	glass_desc = "Unless you're an industrial tool, this is probably not safe for consumption."
-	process_flags = ORGANIC | SYNTHETIC
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
 
 /datum/reagent/fuel/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with welding fuel to make them easy to ignite!
 	if(method == TOUCH || method == VAPOR)
@@ -1385,7 +1436,7 @@
 	reagent_state = LIQUID
 	color = "#2D2D2D"
 	taste_description = "oil"
-	process_flags = ORGANIC | SYNTHETIC
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
 
 /datum/reagent/stable_plasma
 	name = "Stable Plasma"
@@ -1394,7 +1445,7 @@
 	color = "#2D2D2D"
 	taste_description = "bitterness"
 	taste_mult = 1.5
-	process_flags = ORGANIC | SYNTHETIC
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
 
 /datum/reagent/stable_plasma/on_mob_life(mob/living/carbon/C)
 	C.adjustPlasma(10)
@@ -1508,6 +1559,36 @@
 	reagent_state = LIQUID
 	color = "#D35415"
 	taste_description = "chemicals"
+	
+/datum/reagent/pentaerythritol
+	name = "Pentaerythritol"
+	description = "Slow down, it ain't no spelling bee!"
+	reagent_state = SOLID
+	color = "#E66FFF"
+	taste_description = "acid"
+
+/datum/reagent/acetaldehyde
+	name = "Acetaldehyde"
+	description = "Similar to plastic. Tastes like dead people."
+	reagent_state = SOLID
+	color = "#EEEEEF"
+	taste_description = "dead people" //made from formaldehyde, ya get da joke ?
+
+/datum/reagent/acetone_oxide
+	name = "Acetone oxide"
+	description = "Enslaved oxygen"
+	reagent_state = LIQUID
+	color = "#C8A5DC"
+	taste_description = "acid"
+
+
+/datum/reagent/acetone_oxide/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people kills people!
+	if(!istype(M))
+		return
+	if(method == TOUCH)
+		M.adjustFireLoss(2, FALSE) // burns,
+		M.adjust_fire_stacks((reac_volume / 10))
+	..()
 
 /datum/reagent/phenol
 	name = "Phenol"
@@ -1762,22 +1843,22 @@
 	name = "Growth Serum"
 	description = "A commercial chemical designed to help older men in the bedroom."//not really it just makes you a giant
 	color = "#ff0000"//strong red. rgb 255, 0, 0
-	var/current_size = 1
+	var/current_size = RESIZE_DEFAULT_SIZE
 	taste_description = "bitterness" // apparently what viagra tastes like
 
 /datum/reagent/growthserum/on_mob_life(mob/living/carbon/H)
 	var/newsize = current_size
 	switch(volume)
 		if(0 to 19)
-			newsize = 1.25
+			newsize = 1.25*RESIZE_DEFAULT_SIZE
 		if(20 to 49)
-			newsize = 1.5
+			newsize = 1.5*RESIZE_DEFAULT_SIZE
 		if(50 to 99)
-			newsize = 2
+			newsize = 2*RESIZE_DEFAULT_SIZE
 		if(100 to 199)
-			newsize = 2.5
+			newsize = 2.5*RESIZE_DEFAULT_SIZE
 		if(200 to INFINITY)
-			newsize = 3.5
+			newsize = 3.5*RESIZE_DEFAULT_SIZE
 
 	H.resize = newsize/current_size
 	current_size = newsize
@@ -1785,7 +1866,8 @@
 	..()
 
 /datum/reagent/growthserum/on_mob_end_metabolize(mob/living/M)
-	M.resize = 1/current_size
+	M.resize = RESIZE_DEFAULT_SIZE/current_size
+	current_size = RESIZE_DEFAULT_SIZE
 	M.update_transform()
 	..()
 
@@ -1879,9 +1961,9 @@
 
 /datum/reagent/peaceborg/confuse/on_mob_life(mob/living/carbon/M)
 	if(M.confused < 6)
-		M.confused = CLAMP(M.confused + 3, 0, 5)
+		M.confused = clamp(M.confused + 3, 0, 5)
 	if(M.dizziness < 6)
-		M.dizziness = CLAMP(M.dizziness + 3, 0, 5)
+		M.dizziness = clamp(M.dizziness + 3, 0, 5)
 	if(prob(20))
 		to_chat(M, "You feel confused and disoriented.")
 	..()
@@ -1979,6 +2061,67 @@
 	color = "#9C5A19"
 	taste_description = "bananas"
 	can_synth = TRUE
+
+/datum/reagent/wittel
+	name = "Wittel"
+	description = "An extremely rare metallic-white substance only found on demon-class planets."
+	color = "#FFFFFF" // rgb: 255, 255, 255
+	taste_mult = 0 // oderless and tasteless
+
+/datum/reagent/metalgen
+	name = "Metalgen"
+	data = list("material"=null)
+	description = "A purple metal morphic liquid, said to impose it's metallic properties on whatever it touches."
+	color = "#b000aa"
+	taste_mult = 0 // oderless and tasteless
+	var/applied_material_flags = MATERIAL_ADD_PREFIX | MATERIAL_COLOR
+	var/minumum_material_amount = 100
+
+/datum/reagent/metalgen/reaction_obj(obj/O, volume)
+	metal_morph(O)
+	return
+
+/datum/reagent/metalgen/reaction_turf(turf/T, volume)
+	metal_morph(T)
+	return
+
+///turn an object into a special material
+/datum/reagent/metalgen/proc/metal_morph(atom/A)
+	var/metal_ref = data["material"]
+	if(!metal_ref)
+		return
+	var/metal_amount = 0
+
+	for(var/B in A.custom_materials) //list with what they're made of
+		metal_amount += A.custom_materials[B]
+
+	if(!metal_amount)
+		metal_amount = minumum_material_amount //some stuff doesn't have materials at all. To still give them properties, we give them a material. Basically doesnt exist
+
+	var/list/metal_dat = list()
+	metal_dat[metal_ref] = metal_amount //if we pass the list directly, byond turns metal_ref into "metal_ref" kjewrg8fwcyvf
+
+	A.material_flags = applied_material_flags
+	A.set_custom_materials(metal_dat)
+
+/datum/reagent/gravitum
+	name = "Gravitum"
+	description = "A rare kind of null fluid, capable of temporalily removing all weight of whatever it touches." //i dont even
+	color = "#050096" // rgb: 5, 0, 150
+	taste_mult = 0 // oderless and tasteless
+	metabolization_rate = 0.1 * REAGENTS_METABOLISM //20 times as long, so it's actually viable to use
+	var/time_multiplier = 1 MINUTES //1 minute per unit of gravitum on objects. Seems overpowered, but the whole thing is very niche
+
+/datum/reagent/gravitum/reaction_obj(obj/O, volume)
+	O.AddElement(/datum/element/forced_gravity, 0)
+
+	addtimer(CALLBACK(O, .proc/_RemoveElement, list(/datum/element/forced_gravity, 0)), volume * time_multiplier)
+
+/datum/reagent/gravitum/on_mob_add(mob/living/L)
+	L.AddElement(/datum/element/forced_gravity, 0) //0 is the gravity, and in this case weightless
+
+/datum/reagent/gravitum/on_mob_end_metabolize(mob/living/L)
+	L.RemoveElement(/datum/element/forced_gravity, 0)
 
 /datum/reagent/cellulose
 	name = "Cellulose Fibers"

@@ -56,14 +56,16 @@
 	can_adjust = FALSE
 	fitted = FEMALE_UNIFORM_TOP
 
-/obj/item/clothing/under/rank/civilian/head_of_personnel
+/* WaspStation Begin - Better Command Uniforms (see waspstation\code\modules\clothing\under\jobs\civilian\civilian.dm)
+
+/obj/item/clothing/under/rank/command/head_of_personnel
 	desc = "It's a jumpsuit worn by someone who works in the position of \"Head of Personnel\"."
 	name = "head of personnel's jumpsuit"
 	icon_state = "hop"
 	item_state = "b_suit"
 	can_adjust = FALSE
 
-/obj/item/clothing/under/rank/civilian/head_of_personnel/skirt
+/obj/item/clothing/under/rank/command/head_of_personnel/skirt
 	name = "head of personnel's jumpskirt"
 	desc = "It's a jumpskirt worn by someone who works in the position of \"Head of Personnel\"."
 	icon_state = "hop_skirt"
@@ -72,14 +74,14 @@
 	can_adjust = FALSE
 	fitted = FEMALE_UNIFORM_TOP
 
-/obj/item/clothing/under/rank/civilian/head_of_personnel/suit
+/obj/item/clothing/under/rank/command/head_of_personnel/suit
 	name = "head of personnel's suit"
 	desc = "A teal suit and yellow necktie. An authoritative yet tacky ensemble."
 	icon_state = "teal_suit"
 	item_state = "g_suit"
 	can_adjust = FALSE
 
-/obj/item/clothing/under/rank/civilian/head_of_personnel/suit/skirt
+/obj/item/clothing/under/rank/command/head_of_personnel/suit/skirt
 	name = "teal suitskirt"
 	desc = "A teal suitskirt and yellow necktie. An authoritative yet tacky ensemble."
 	icon_state = "teal_suit_skirt"
@@ -87,6 +89,8 @@
 	body_parts_covered = CHEST|GROIN|ARMS
 	can_adjust = FALSE
 	fitted = FEMALE_UNIFORM_TOP
+
+WaspStation End */
 
 /obj/item/clothing/under/rank/civilian/hydroponics
 	desc = "It's a jumpsuit designed to protect against minor plant-related hazards."

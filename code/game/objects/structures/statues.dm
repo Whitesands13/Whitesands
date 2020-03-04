@@ -15,7 +15,7 @@
 /obj/structure/statue/Initialize()
 	. = ..()
 	AddComponent(art_type, impressiveness)
-	addtimer(CALLBACK(src, /datum.proc/AddComponent, /datum/component/beauty, impressiveness *  75), 0)
+	addtimer(CALLBACK(src, /datum.proc/_AddComponent, list(/datum/component/beauty, impressiveness *  75)), 0)
 
 /obj/structure/statue/attackby(obj/item/W, mob/living/user, params)
 	add_fingerprint(user)
@@ -156,7 +156,7 @@
 	name = "statue of the head of security"
 	icon_state = "hos"
 
-/obj/structure/statue/gold/hop
+/obj/structure/statue/gold/head_of_personnel
 	name = "statue of the head of personnel"
 	icon_state = "hop"
 

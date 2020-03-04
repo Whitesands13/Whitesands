@@ -478,7 +478,7 @@
 	name = "Tr%nPo2r& Z3TA"
 	description = "A glitch appears on your monitor, flickering in and out of the options laid before you. \
 	It seems strange and alien, you may need a special technology to access the signal.."
-	admin_notes = "Has an on-board experimental cloner that creates copies of its user, alien surgery tools, and a void core that provides unlimited power."
+	admin_notes = "Has alien surgery tools, and a void core that provides unlimited power."
 	credit_cost = 8000
 
 /datum/map_template/shuttle/emergency/zeta/prerequisites_met()
@@ -621,3 +621,11 @@
 /datum/map_template/shuttle/snowdin/excavation
 	suffix = "excavation"
 	name = "Snowdin Excavation Elevator"
+
+ // Turbolifts
+/datum/map_template/shuttle/turbolift/debug/primary
+	prefix = "_maps/shuttles/turbolifts/"
+	port_id = "debug"
+	suffix = "primary"
+	name = "primary turbolift (multi-z debug)"
+	can_be_bought = FALSE

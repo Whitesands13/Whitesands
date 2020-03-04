@@ -9,7 +9,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS
 	flags_inv = HIDESUITSTORAGE
-	pocket_storage_component_path = /datum/component/storage/concrete/pockets/exo/cloak
+	pocket_storage_component_path = /datum/component/storage/concrete/pockets/exo/cloak //WaspStation Edit - Exowear Pockets
 
 /obj/item/clothing/neck/cloak/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is strangling [user.p_them()]self with [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
@@ -45,7 +45,7 @@
 	desc = "Worn by the commander of Space Station 13."
 	icon_state = "capcloak"
 
-/obj/item/clothing/neck/cloak/hop
+/obj/item/clothing/neck/cloak/head_of_personnel
 	name = "head of personnel's cloak"
 	desc = "Worn by the Head of Personnel. It smells faintly of bureaucracy."
 	icon_state = "hopcloak"

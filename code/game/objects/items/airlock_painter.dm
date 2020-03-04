@@ -1,6 +1,6 @@
 /obj/item/airlock_painter
 	name = "airlock painter"
-	desc = "An advanced autopainter preprogrammed with several paintjobs for airlocks. Use it on an airlock during or after construction to change the paintjob."
+	desc = "An advanced autopainter preprogrammed with several paintjobs for airlocks. Use it on an airlock during or after construction to change the paintjob." //WaspStation Edit - Floor Painters
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "paint sprayer"
 	item_state = "paint sprayer"
@@ -118,6 +118,8 @@
 	else
 		return ..()
 
+/* WaspStation Begin - Floor Painters
+
 /obj/item/airlock_painter/attack_self(mob/user)
 	if(ink)
 		playsound(src.loc, 'sound/machines/click.ogg', 50, TRUE)
@@ -126,9 +128,11 @@
 		to_chat(user, "<span class='notice'>You remove [ink] from [src].</span>")
 		ink = null
 
+WaspStation End */
+
 /obj/item/airlock_painter/decal
 	name = "decal painter"
-	desc = "An airlock painter, reprogramed to use a different style of paint in order to apply decals for floor tiles as well, in addition to repainting doors. Decals break when the floor tiles are removed. Alt-Click to change design."
+	desc = "An airlock painter, reprogramed to use a different style of paint in order to apply decals for floor tiles as well, in addition to repainting doors. Decals break when the floor tiles are removed. Alt-Click to change design." //WaspStation Edit - Floor Painters
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "decal_sprayer"
 	item_state = "decalsprayer"
@@ -158,6 +162,8 @@
 	if(use_paint(user) && isturf(F))
 		F.AddComponent(/datum/component/decal, 'icons/turf/decals.dmi', stored_decal_total, stored_dir, CLEAN_STRONG, color, null, null, alpha)
 
+/* WaspStation Begin - Floor Painters
+
 /obj/item/airlock_painter/decal/attack_self(mob/user)
 	if((ink) && (ink.charges >= 1))
 		to_chat(user, "<span class='notice'>[src] beeps to prevent you from removing the toner until out of charges.</span>")
@@ -167,6 +173,8 @@
 /obj/item/airlock_painter/decal/AltClick(mob/user)
 	. = ..()
 	ui_interact(user)
+
+WaspStation End */
 
 /obj/item/airlock_painter/decal/Initialize()
 	. = ..()

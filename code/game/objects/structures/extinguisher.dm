@@ -1,7 +1,7 @@
 /obj/structure/extinguisher_cabinet
 	name = "extinguisher cabinet"
 	desc = "A small wall mounted cabinet designed to hold a fire extinguisher."
-	icon = 'icons/obj/wallmounts.dmi'
+	icon = 'waspstation/icons/obj/wallmounts.dmi' //WaspStation Edit - Better Icons
 	icon_state = "extinguisher_closed"
 	anchored = TRUE
 	density = FALSE
@@ -114,11 +114,10 @@
 		opened = !opened
 		update_icon()
 
-/obj/structure/extinguisher_cabinet/update_icon()
+/obj/structure/extinguisher_cabinet/update_icon_state()
 	if(!opened)
 		icon_state = "extinguisher_closed"
-		return
-	if(stored_extinguisher)
+	else if(stored_extinguisher)
 		if(istype(stored_extinguisher, /obj/item/extinguisher/mini))
 			icon_state = "extinguisher_mini"
 		else

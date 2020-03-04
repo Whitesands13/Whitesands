@@ -54,16 +54,16 @@
 	else
 		return PROCESS_KILL
 
-/obj/item/stock_parts/cell/update_icon()
-	cut_overlays()
+/obj/item/stock_parts/cell/update_overlays()
+	. = ..()
 	if(grown_battery)
-		add_overlay(image('icons/obj/power.dmi',"grown_wires"))
+		. += mutable_appearance('icons/obj/power.dmi', "grown_wires")
 	if(charge < 0.01)
 		return
 	else if(charge/maxcharge >=0.995)
-		add_overlay("cell-o2")
+		. += "cell-o2"
 	else
-		add_overlay("cell-o1")
+		. += "cell-o1"
 
 /obj/item/stock_parts/cell/proc/percent()		// return % charge of cell
 	return 100*charge/maxcharge
@@ -176,7 +176,7 @@
 
 /obj/item/stock_parts/cell/proc/get_electrocute_damage()
 	if(charge >= 1000)
-		return CLAMP(20 + round(charge/25000), 20, 195) + rand(-5,5)
+		return clamp(20 + round(charge/25000), 20, 195) + rand(-5,5)
 	else
 		return 0
 
@@ -221,6 +221,30 @@
 	charge = 0
 	update_icon()
 
+/obj/item/stock_parts/cell/gun
+	name = "weapon power cell"
+	icon = 'waspstation/icons/obj/power.dmi'
+	icon_state = "g-cell"
+	maxcharge = 10000
+	custom_materials = list(/datum/material/glass=60)
+	chargerate = 1500
+
+/obj/item/stock_parts/cell/gun/empty/Initialize()
+	. = ..()
+	charge = 0
+	update_icon()
+
+/obj/item/stock_parts/cell/gun/upgraded
+	name = "upgraded weapon power cell"
+	icon_state = "ug-cell"
+	maxcharge = 20000
+	custom_materials = list(/datum/material/glass=300)
+	chargerate = 2000
+
+/obj/item/stock_parts/cell/gun/upgraded/empty/Initialize()
+	. = ..()
+	charge = 0
+	update_icon()
 /obj/item/stock_parts/cell/pulse //200 pulse shots
 	name = "pulse rifle power cell"
 	maxcharge = 400000
@@ -247,6 +271,7 @@
 	icon_state = "h+cell"
 	maxcharge = 15000
 	chargerate = 2250
+	rating = 2
 
 /obj/item/stock_parts/cell/high/empty/Initialize()
 	. = ..()
@@ -259,6 +284,7 @@
 	maxcharge = 20000
 	custom_materials = list(/datum/material/glass=300)
 	chargerate = 2000
+	rating = 3
 
 /obj/item/stock_parts/cell/super/empty/Initialize()
 	. = ..()
@@ -271,6 +297,7 @@
 	maxcharge = 30000
 	custom_materials = list(/datum/material/glass=400)
 	chargerate = 3000
+	rating = 4
 
 /obj/item/stock_parts/cell/hyper/empty/Initialize()
 	. = ..()
@@ -284,6 +311,7 @@
 	maxcharge = 40000
 	custom_materials = list(/datum/material/glass=600)
 	chargerate = 4000
+	rating = 5
 
 /obj/item/stock_parts/cell/bluespace/empty/Initialize()
 	. = ..()
@@ -309,9 +337,9 @@
 	maxcharge = 50000
 	ratingdesc = FALSE
 
-/obj/item/stock_parts/cell/infinite/abductor/update_icon()
-	return
-
+/obj/item/stock_parts/cell/infinite/abductor/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/update_icon_blocker)
 
 /obj/item/stock_parts/cell/potato
 	name = "potato battery"
@@ -366,7 +394,7 @@
 	. = ..()
 	if(. & EMP_PROTECT_SELF)
 		return
-	charge = CLAMP((charge-(10000/severity)),0,maxcharge)
+	charge = clamp((charge-(10000/severity)),0,maxcharge)
 
 /obj/item/stock_parts/cell/emergency_light
 	name = "miniature power cell"
