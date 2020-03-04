@@ -673,7 +673,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	// apply insulation to the amount of change
 	if(use_insulation)
 		amount *= (1 - get_insulation_protection(bodytemperature + amount))
-
+	
 	// Extra calculation for hardsuits to bleed off heat
 	if(hardsuit_fix)
 		amount += hardsuit_fix

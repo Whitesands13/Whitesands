@@ -76,6 +76,13 @@ Contents:
 	cell.name = "black power cell"
 	cell.icon_state = "bscell"
 
+// Space Suit temperature regulation and power usage
+/obj/item/clothing/suit/space/space_ninja/process()
+	var/mob/living/carbon/human/user = src.loc
+	if(!user || !ishuman(user) || !(user.wear_suit == src))
+		return
+	user.adjust_bodytemperature(BODYTEMP_NORMAL - user.bodytemperature)
+
 //Simply deletes all the attachments and self, killing all related procs.
 /obj/item/clothing/suit/space/space_ninja/proc/terminate()
 	qdel(n_hood)

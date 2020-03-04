@@ -11,7 +11,7 @@
 	var/on = FALSE
 	var/obj/item/clothing/suit/space/hardsuit/suit
 	var/hardsuit_type = "engineering" //Determines used sprites: hardsuit[on]-[type]
-	actions_types = list(/datum/action/item_action/toggle_helmet_light)
+	actions_types = list(/datum/action/item_action/toggle_helmet)
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH	| PEPPERPROOF
 	visor_flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH | PEPPERPROOF
 	var/rad_count = 0
@@ -165,7 +165,6 @@
 			to_chat(user, "<span class='notice'>You have successfully repaired [src]'s helmet.</span>")
 			new /obj/item/light/bulb/broken(drop_location())
 	return ..()
-
 
 /obj/item/clothing/suit/space/hardsuit/equipped(mob/user, slot)
 	..()
@@ -530,8 +529,6 @@
 	/obj/item/hand_tele, /obj/item/aicard)
 	armor = list("melee" = 30, "bullet" = 5, "laser" = 10, "energy" = 20, "bomb" = 100, "bio" = 100, "rad" = 60, "fire" = 60, "acid" = 80)
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/rd
-
-
 
 	//Security hardsuit
 /obj/item/clothing/head/helmet/space/hardsuit/security

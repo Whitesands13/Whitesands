@@ -406,7 +406,6 @@
 	var/mob/living/user = hud?.mymob
 	if(!istype(user))
 		return
-
 	if(!user.resting)
 		icon_state = "act_rest"
 	else
