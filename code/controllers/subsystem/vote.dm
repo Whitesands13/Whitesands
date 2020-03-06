@@ -71,6 +71,8 @@ SUBSYSTEM_DEF(vote)
 					choices[GLOB.master_mode] += non_voters.len
 					if(choices[GLOB.master_mode] >= greatest_votes)
 						greatest_votes = choices[GLOB.master_mode]
+						
+			//WaspStation Begin - Autotransfer
 			else if(mode == "transfer")
 				var/factor = 1
 				switch(world.time / (1 MINUTES ))
@@ -85,6 +87,8 @@ SUBSYSTEM_DEF(vote)
 					else
 						factor = 1.4
 				choices["Initiate Crew Transfer"] += round(non_voters.len * factor)
+			//WaspStation End	
+				
 			else if(mode == "map")
 				for (var/non_voter_ckey in non_voters)
 					var/client/C = non_voters[non_voter_ckey]
