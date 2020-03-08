@@ -18,4 +18,3 @@
 		var/client/C = M.client
 		usr.client.cmd_admin_mod_metacoins(C, href_list["modmetacoin"])
 		show_player_panel(M)
-		
