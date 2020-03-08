@@ -2,7 +2,9 @@
 /datum/species/human/felinid
 	name = "Felinid"
 	id = "felinid"
+	/* WaspStation Edit - Removes Sin
 	say_mod = "meows"
+	WaspStation End */
 	limbs_id = "human"
 
 	mutant_bodyparts = list("ears", "tail_human")
