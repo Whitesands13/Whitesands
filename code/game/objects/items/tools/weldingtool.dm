@@ -2,7 +2,7 @@
 /obj/item/weldingtool
 	name = "welding tool"
 	desc = "A standard edition welder provided by Nanotrasen."
-	icon = 'icons/obj/tools.dmi'
+	icon = 'waspstation/icons/obj/tools.dmi' //WaspStation Edit - Better Tool Sprites
 	icon_state = "welder"
 	item_state = "welder"
 	lefthand_file = 'icons/mob/inhands/equipment/tools_lefthand.dmi'
