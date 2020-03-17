@@ -445,6 +445,10 @@
 	suffix = "whiteship_pod"
 	name = "Salvage Pod"
 
+/datum/map_template/shuttle/cargo/mini
+	suffix = "mini"
+	name = "supply shuttle (Ministation)"
+
 /datum/map_template/shuttle/cargo/kilo
 	suffix = "kilo"
 	name = "supply shuttle (Kilo)"
@@ -529,6 +533,10 @@
 /datum/map_template/shuttle/mining/large
 	suffix = "large"
 	name = "mining shuttle (Large)"
+
+/datum/map_template/shuttle/mining/mini
+	suffix = "mini"
+	name = "mining shuttle (ministation)"
 
 /datum/map_template/shuttle/labour/delta
 	suffix = "delta"
