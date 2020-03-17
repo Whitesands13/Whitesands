@@ -7,4 +7,4 @@
 	required_temp = 474
 	strengthdiv = 6
 	modifier = 1
-	mix_message = "<span class='boldannounce'>Sparks start flying around the Gunpowder!</span>"
+	mix_message = "<span class='boldannounce'>Sparks start flying around the gunpowder!</span>"
