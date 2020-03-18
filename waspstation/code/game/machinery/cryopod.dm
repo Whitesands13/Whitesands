@@ -127,12 +127,11 @@ GLOBAL_LIST_EMPTY(cryopod_computers)
 
 	updateUsrDialog()
 	return
-/* Should more cryos be buildable?
-    /obj/item/circuitboard/cryopodcontrol
+
+/obj/item/circuitboard/cryopodcontrol
 	name = "Circuit board (Cryogenic Oversight Console)"
 	build_path = "/obj/machinery/computer/cryopod"
-	origin_tech = "programming=1"
-*/
+
 //Cryopods themselves.
 /obj/machinery/cryopod
 	name = "cryogenic freezer"
@@ -153,29 +152,6 @@ GLOBAL_LIST_EMPTY(cryopod_computers)
 	var/obj/machinery/computer/cryopod/control_computer
 	var/last_no_computer_message = 0
 
-	// These items are preserved when the process() despawn proc occurs.
-	var/static/list/preserve_items = list(
-		/obj/item/hand_tele,
-		/obj/item/card/id/captains_spare,
-		/obj/item/aicard,
-		/obj/item/mmi,
-		/obj/item/paicard,
-		/obj/item/gun,
-		/obj/item/pinpointer,
-		/obj/item/clothing/shoes/magboots,
-		/obj/item/areaeditor/blueprints,
-		/obj/item/clothing/head/helmet/space,
-		/obj/item/clothing/suit/space,
-		/obj/item/clothing/suit/armor,
-		/obj/item/defibrillator/compact,
-		/obj/item/reagent_containers/hypospray/CMO,
-		/obj/item/clothing/accessory/medal/gold/captain,
-		/obj/item/clothing/gloves/krav_maga,
-		/obj/item/nullrod,
-		/obj/item/tank/jetpack,
-		/obj/item/documents,
-		/obj/item/nuke_core_container
-	)
 	// These items will NOT be preserved
 	var/static/list/do_not_preserve_items = list (
 		/obj/item/mmi/posibrain
@@ -339,13 +315,12 @@ GLOBAL_LIST_EMPTY(cryopod_computers)
 		if(W.loc.loc && (( W.loc.loc == loc ) || (W.loc.loc == control_computer)))
 			continue//means we already moved whatever this thing was in
 			//I'm a professional, okay
-		for(var/T in preserve_items)
-			if(istype(W, T))
-				if(control_computer && control_computer.allow_items)
-					control_computer.frozen_items += W
-					mob_occupant.transferItemToLoc(W, control_computer, TRUE)
-				else
-					mob_occupant.transferItemToLoc(W, loc, TRUE)
+		if(istype(W))
+			if(control_computer && control_computer.allow_items)
+				control_computer.frozen_items += W
+				mob_occupant.transferItemToLoc(W, control_computer, TRUE)
+			else
+				mob_occupant.transferItemToLoc(W, loc, TRUE)
 
 	for(var/obj/item/W in mob_occupant.GetAllContents())
 		qdel(W)//because we moved all items to preserve away
