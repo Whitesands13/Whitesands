@@ -1046,6 +1046,7 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/plaque
 	name = "plaque"
 	icon_state = "plaque"
+	icon = 'icons/turf/decals.dmi'
 
 /obj/effect/floor_decal/asteroid
 	name = "random asteroid rubble"
