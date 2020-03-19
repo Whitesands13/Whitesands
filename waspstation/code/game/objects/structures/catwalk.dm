@@ -10,7 +10,6 @@
 	layer = LATTICE_LAYER //under pipes
 	plane = FLOOR_PLANE
 	smooth = SMOOTH_TRUE
-	canSmoothWith = list(/obj/structure/catwalk)
 	obj_flags = CAN_BE_HIT | BLOCK_Z_FALL
 	var/number_of_rods = 2
 	var/hatch_open = FALSE

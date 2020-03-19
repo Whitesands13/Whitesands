@@ -115,9 +115,10 @@
 
 /turf/open/floor/plasteel/solarpanel
 	icon_state = "solarpanel"
+	icon = 'waspstation/icons/turf/decals.dmi'
 /turf/open/floor/plasteel/airless/solarpanel
 	icon_state = "solarpanel"
-
+	icon = 'waspstation/icons/turf/decals.dmi'
 
 /turf/open/floor/plasteel/freezer
 	color = null
