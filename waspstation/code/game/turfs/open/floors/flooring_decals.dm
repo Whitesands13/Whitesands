@@ -29,6 +29,10 @@ var/list/floor_decals = list()
 		I.color = src.color
 		I.alpha = src.alpha
 		T.overlays += I
+		if(detail_overlay)
+			var/image/O = image(icon = src.icon, icon_state = src.detail_overlay, dir = src.dir)
+			O.color = detail_color
+			T.overlays += O
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/floor_decal/carpet
@@ -91,6 +95,10 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/corner
 	icon_state = "corner_white"
 	alpha = 229
+
+/obj/effect/floor_decal/corner/neutral
+	icon_state = "corner_white_neutral"
+	alpha = 90
 
 /obj/effect/floor_decal/corner/black
 	name = "black corner"
@@ -362,6 +370,41 @@ var/list/floor_decals = list()
 	icon_state = "bordercolorfull"
 
 /obj/effect/floor_decal/corner/red/bordercee
+	icon_state = "bordercolorcee"
+
+/obj/effect/floor_decal/corner/bar
+	name = "bar corner"
+	color = "#791500"
+	alpha = 130
+
+/obj/effect/floor_decal/corner/bar/diagonal
+	icon_state = "corner_white_diagonal"
+
+/obj/effect/floor_decal/corner/bar/three_quarters
+	icon_state = "corner_white_three_quarters"
+
+/obj/effect/floor_decal/corner/bar/full
+	icon_state = "corner_white_full"
+
+/obj/effect/floor_decal/corner/bar/border
+	icon_state = "bordercolor"
+
+/obj/effect/floor_decal/corner/bar/half
+	icon_state = "bordercolorhalf"
+
+/obj/effect/floor_decal/corner/bar/mono
+	icon_state = "bordercolormonofull"
+
+/obj/effect/floor_decal/corner/bar/bordercorner
+	icon_state = "bordercolorcorner"
+
+/obj/effect/floor_decal/corner/bar/bordercorner2
+	icon_state = "bordercolorcorner2"
+
+/obj/effect/floor_decal/corner/bar/borderfull
+	icon_state = "bordercolorfull"
+
+/obj/effect/floor_decal/corner/bar/bordercee
 	icon_state = "bordercolorcee"
 
 /obj/effect/floor_decal/corner/pink
@@ -981,6 +1024,24 @@ var/list/floor_decals = list()
 	name = "loading area"
 	icon_state = "loadingarea"
 	alpha = 229
+
+/obj/effect/floor_decal/industrial/stand_clear
+	icon_state = "stand_clear"
+
+/obj/effect/floor_decal/industrial/stand_clear/white
+	color = COLOR_WHITE
+
+/obj/effect/floor_decal/industrial/stand_clear/red
+	color = COLOR_RED
+
+/obj/effect/floor_decal/industrial/caution
+	icon_state = "caution"
+
+/obj/effect/floor_decal/industrial/caution/white
+	color = COLOR_WHITE
+
+/obj/effect/floor_decal/industrial/caution/red
+	color = COLOR_RED
 
 /obj/effect/floor_decal/plaque
 	name = "plaque"
