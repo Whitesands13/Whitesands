@@ -1,5 +1,5 @@
 /turf/open
-	plane = GAME_PLANE
+	plane = FLOOR_PLANE
 
 	FASTDMM_PROP(\
 		pipe_astar_cost = 1\

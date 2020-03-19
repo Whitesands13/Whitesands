@@ -33,10 +33,10 @@
 	var/turf/T = loc
 	if(level == 2 || (istype(T) && !T.intact))
 		showpipe = TRUE
-		plane = GAME_PLANE
+		plane = FLOOR_PLANE
 	else
 		showpipe = FALSE
-		plane = GAME_PLANE
+		plane = FLOOR_PLANE
 
 	if(!showpipe)
 		return //no need to update the pipes if they aren't showing

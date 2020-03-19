@@ -23,15 +23,12 @@ var/list/floor_decals = list()
 	var/turf/T = get_turf(src)
 	if(istype(T, /turf/open/floor))
 		layer = istype(T, /turf/open/floor/plating) ? TURF_PLATING_DECAL_LAYER : TURF_DECAL_LAYER
-		var/cache_key = "[alpha]-[color]-[dir]-[icon_state]-[plane]-[layer]-[detail_overlay]-[detail_color]"
-		if(!floor_decals[cache_key])
-			var/image/I = image(icon = src.icon, icon_state = src.icon_state, dir = src.dir)
-			I.layer = layer
-			I.appearance_flags = appearance_flags
-			I.color = src.color
-			I.alpha = src.alpha
-			floor_decals[cache_key] = I
-			T.overlays += I
+		var/image/I = image(icon = src.icon, icon_state = src.icon_state, dir = src.dir)
+		I.layer = layer
+		I.appearance_flags = appearance_flags
+		I.color = src.color
+		I.alpha = src.alpha
+		T.overlays += I
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/floor_decal/carpet
