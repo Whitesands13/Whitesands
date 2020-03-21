@@ -14,7 +14,7 @@
 	name = "cloning pod"
 	desc = "An electronically-lockable pod for growing organic tissue."
 	density = TRUE
-	icon = 'icons/obj/machines/cloning.dmi'
+	icon = 'waspstation/icons/obj/machines/cloning.dmi'
 	icon_state = "pod_0"
 	req_access = list(ACCESS_CLONING) //FOR PREMATURE UNLOCKING.
 	verb_say = "states"
@@ -121,9 +121,10 @@
 /obj/machinery/clonepod/ui_act(action, params)
 	if(..())
 		return
-	else if("ejectbeaker")
-		replace_beaker(usr)
-		. = TRUE
+	switch(action)
+		if("ejectbeaker")
+			replace_beaker(usr)
+			. = TRUE
 
 /obj/machinery/chem_dispenser/AltClick(mob/living/user)
 	..()
@@ -183,7 +184,9 @@
 	// We want to simulate the clone not being in contact with
 	// the atmosphere, so we'll put them in a constant pressure
 	// nitrogen. They don't need to breathe while cloning anyway.
-	var/static/datum/gas_mixture/immutable/GM = new
+	var/static/datum/gas_mixture/immutable/cloner/GM //global so that there's only one instance made for all cloning pods
+	if(!GM)
+		GM = new
 	return GM
 
 /obj/machinery/clonepod/proc/get_completion()
