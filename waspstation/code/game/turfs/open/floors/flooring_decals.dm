@@ -28,11 +28,11 @@ var/list/floor_decals = list()
 		I.appearance_flags = appearance_flags
 		I.color = src.color
 		I.alpha = src.alpha
-		T.overlays += I
 		if(detail_overlay)
 			var/image/O = image(icon = src.icon, icon_state = src.detail_overlay, dir = src.dir)
 			O.color = detail_color
-			T.overlays += O
+			I.overlays += O
+		T.overlays += I
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/floor_decal/carpet

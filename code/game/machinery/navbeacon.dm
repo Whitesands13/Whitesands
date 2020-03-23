@@ -9,7 +9,7 @@
 	desc = "A radio beacon used for bot navigation and crew wayfinding."
 	level = 1		// underfloor
 	plane = FLOOR_PLANE
-	layer = LOW_OBJ_LAYER
+	layer = UNDER_CATWALK
 	max_integrity = 500
 	armor = list("melee" = 70, "bullet" = 70, "laser" = 70, "energy" = 70, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 80, "acid" = 80)
 
