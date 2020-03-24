@@ -10,6 +10,7 @@
 * **Boomer Discord:** https://discord.gg/BUM8uRc
 * **Wiki** TBA
 
+<<<<<<< HEAD
 ## DOWNLOADING
 
 There are a number of ways to download the source code. Some are described here, an alternative all-inclusive guide is also located at https://www.tgstation13.org/wiki/Downloading_the_source_code
@@ -82,6 +83,15 @@ and the server should start up and be ready to join. It is also recommended that
 you set up the SQL backend (see below).
 
 ## UPDATING
+=======
+* **Website:** https://www.tgstation13.org
+* **Code:** https://github.com/tgstation/tgstation
+* **Wiki:** https://tgstation13.org/wiki/Main_Page
+* **Codedocs:** https://codedocs.tgstation13.org/
+* **/tg/station Discord:** https://tgstation13.org/phpBB/viewforum.php?f=60
+* **Coderbus Discord:** https://discord.gg/Vh8TJp9
+* **IRC:** irc://irc.rizon.net/coderbus (dead)
+>>>>>>> tg/master
 
 This is the codebase for the /tg/station flavoured fork of SpaceStation 13.
 

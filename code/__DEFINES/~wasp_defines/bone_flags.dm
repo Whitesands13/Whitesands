@@ -1,0 +1,4 @@
+#define BONE_FLAG_NO_BONES 		0
+#define BONE_FLAG_NORMAL		1
+#define BONE_FLAG_BROKEN		2
+#define BONE_FLAG_SPLINTED		3
