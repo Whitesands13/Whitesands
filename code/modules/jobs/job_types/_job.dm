@@ -190,7 +190,7 @@
 
 	var/alt_uniform = /obj/item/clothing/under
 
-	var/alt_suit = /obj/item/clothing/suit
+	var/alt_suit = null
 	var/dcoat = /obj/item/clothing/suit/hooded/wintercoat
 
 	var/pda_slot = ITEM_SLOT_BELT
@@ -228,7 +228,10 @@
 
 	switch(H.exowear)
 		if(PREF_ALTEXOWEAR)
-			suit = alt_suit
+			if(alt_suit)
+				suit = alt_suit
+			else
+				suit = suit
 		if(PREF_NOEXOWEAR)
 			suit = null
 		if(PREF_COATEXOWEAR)
