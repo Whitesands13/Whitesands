@@ -36,6 +36,7 @@ Lieutenant
   id = /obj/item/card/id/silver
   head = /obj/item/clothing/head/beret/lt
   uniform = /obj/item/clothing/under/rank/command/lieutenant
+  uniform = /obj/item/clothing/under/rank/command
   gloves = /obj/item/clothing/gloves/combat
   shoes = /obj/item/clothing/shoes/jackboots
   ears = /obj/item/radio/headset/heads/lieutenant/alt

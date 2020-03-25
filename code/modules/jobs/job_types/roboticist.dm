@@ -29,6 +29,7 @@
 	l_pocket = /obj/item/pda/roboticist
 	ears = /obj/item/radio/headset/headset_sci
 	uniform = /obj/item/clothing/under/rank/rnd/roboticist
+	alt_uniform = /obj/item/clothing/under/rank/rnd/scientist //Wasp Edit - Alt Uniforms
 	suit = /obj/item/clothing/suit/toggle/labcoat
 
 	backpack = /obj/item/storage/backpack/science

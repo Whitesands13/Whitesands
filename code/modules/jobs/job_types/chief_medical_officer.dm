@@ -39,6 +39,7 @@
 	l_pocket = /obj/item/pinpointer/crew
 	ears = /obj/item/radio/headset/heads/cmo
 	uniform = /obj/item/clothing/under/rank/medical/chief_medical_officer
+	alt_uniform = /obj/item/clothing/under/rank/medical/doctor/nurse //Wasp Edit - Alt Uniforms
 	shoes = /obj/item/clothing/shoes/sneakers/brown
 	suit = /obj/item/clothing/suit/toggle/labcoat/cmo
 	l_hand = /obj/item/storage/firstaid/medical

@@ -26,6 +26,7 @@
 	belt = /obj/item/pda/medical
 	ears = /obj/item/radio/headset/headset_med
 	uniform = /obj/item/clothing/under/rank/medical/doctor
+	alt_uniform = /obj/item/clothing/under/rank/medical/doctor/nurse //Wasp Edit - Alt Uniforms
 	shoes = /obj/item/clothing/shoes/sneakers/white
 	suit =  /obj/item/clothing/suit/toggle/labcoat
 	l_hand = /obj/item/storage/firstaid/medical

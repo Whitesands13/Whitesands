@@ -42,6 +42,7 @@
 	belt = /obj/item/pda/heads/rd
 	ears = /obj/item/radio/headset/heads/rd
 	uniform = /obj/item/clothing/under/rank/rnd/research_director
+	alt_uniform = /obj/item/clothing/under/rank/rnd/research_director/turtleneck //Wasp Edit - Alt Uniforms
 	shoes = /obj/item/clothing/shoes/sneakers/brown
 	suit = /obj/item/clothing/suit/toggle/labcoat
 	l_hand = /obj/item/clipboard

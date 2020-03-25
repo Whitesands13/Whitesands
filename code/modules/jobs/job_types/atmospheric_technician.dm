@@ -29,6 +29,7 @@
 	l_pocket = /obj/item/pda/atmos
 	ears = /obj/item/radio/headset/headset_eng
 	uniform = /obj/item/clothing/under/rank/engineering/atmospheric_technician
+	alt_uniform = /obj/item/clothing/under/rank/engineering/engineer/hazard //Wasp Edit - Alt Uniforms
 	r_pocket = /obj/item/analyzer
 
 	backpack = /obj/item/storage/backpack/industrial
