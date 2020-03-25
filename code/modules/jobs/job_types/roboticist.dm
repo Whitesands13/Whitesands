@@ -31,6 +31,7 @@
 	uniform = /obj/item/clothing/under/rank/rnd/roboticist
 	alt_uniform = /obj/item/clothing/under/rank/rnd/scientist //Wasp Edit - Alt Uniforms
 	suit = /obj/item/clothing/suit/toggle/labcoat
+	dcoat = /obj/item/clothing/suit/hooded/wintercoat/science //Wasp Edit - Alt Uniforms
 
 	backpack = /obj/item/storage/backpack/science
 	satchel = /obj/item/storage/backpack/satchel/tox
