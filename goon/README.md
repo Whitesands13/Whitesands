@@ -1,8 +1,3 @@
-# Goon-ported-assets
+# WaspStation Custom Directory
 
-All files excluding this one you're reading right now have been most likely, taken from [goonstation's 2016 release](https://github.com/goonstation/goonstation-2016), unless stated otherwise.
-It is very likely that there are modifications to be compatible or on par with our code, however. These changes are licensed under the same license as the other goon files.
-
-## License
-
-See LICENSE.md
+This directory exists to house custom code changes that can be properly seperated from the codebase and placed here. All files that can be placed here should. The includes.dm file should be used to tick new code files to avoid messing up the dme. Any code changes outside this folder should be made with this comment for one line changes `// waspstation -- <reason>` and `//waspstation begin -- <reason>` & `//waspstation end` for multiline changes. Both of these are *shamelessly* stolen from Austation which stole them from HippieStation.

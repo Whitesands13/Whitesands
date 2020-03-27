@@ -2,11 +2,18 @@ Any time you make a change to the schema files, remember to increment the databa
 
 The latest database version is 5.8; The query to update the schema revision table is:
 
-INSERT INTO `schema_revision` (`major`, `minor`) VALUES (5, 8);
+INSERT INTO `schema_revision` (`major`, `minor`) VALUES (5, 9);
 or
-INSERT INTO `SS13_schema_revision` (`major`, `minor`) VALUES (5, 8);
+INSERT INTO `SS13_schema_revision` (`major`, `minor`) VALUES (5, 9);
 
 In any query remember to add a prefix to the table names if you use one.
+
+-----------------------------------------------------
+
+Version 5.9 27 March 2020 by MarkSuckerberg
+Added Metacoin and Antag token support.
+
+ALTER TABLE `player` ADD COLUMN (`antag_tokens` tinyint(4) unsigned DEFAULT '0', `metacoins` int(10) unsigned NOT NULL DEFAULT '0');
 
 -----------------------------------------------------
 
