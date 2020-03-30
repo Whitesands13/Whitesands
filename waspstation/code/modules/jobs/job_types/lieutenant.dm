@@ -13,6 +13,10 @@ Lieutenant
   selection_color = "#ddddff"
   req_admin_notify = 1
   special_notice = "You are NOT security. Your job is to protect the Captain and Heads of Staff."
+  minimal_player_age = 7
+  exp_requirements = 180
+  exp_type = EXP_TYPE_CREW
+  exp_type_department = EXP_TYPE_SECURITY
 
   outfit = /datum/outfit/job/lieutenant
 
@@ -32,6 +36,8 @@ Lieutenant
   id = /obj/item/card/id/silver
   head = /obj/item/clothing/head/beret/lt
   uniform = /obj/item/clothing/under/rank/command/lieutenant
+  alt_uniform = /obj/item/clothing/under/rank/command
+  dcoat = /obj/item/clothing/suit/hooded/wintercoat/captain
   gloves = /obj/item/clothing/gloves/combat
   shoes = /obj/item/clothing/shoes/jackboots
   ears = /obj/item/radio/headset/heads/lieutenant/alt
