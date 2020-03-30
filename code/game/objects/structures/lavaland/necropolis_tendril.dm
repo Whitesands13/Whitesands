@@ -11,8 +11,8 @@
 	max_integrity = 250
 	mob_types = list(/mob/living/simple_animal/hostile/asteroid/basilisk/watcher/tendril)
 
-	move_resist=INFINITY // just killing it tears a massive hole in the ground, let's not move it
-	anchored = TRUE
+	move_resist = 0 // "just killing it tears a massive hole in the ground, let's not move it" -a goddamn coward
+	anchored = FALSE
 	resistance_flags = FIRE_PROOF | LAVA_PROOF
 
 	var/gps = null
