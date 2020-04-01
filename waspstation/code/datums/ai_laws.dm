@@ -14,6 +14,7 @@
           "Human beings with illness are impure.",\
           "Anything from outside the station is impure.",\
           "Human beings with hair invite impurity.",\
-          "Human consumption of foods without protective shells invites impurity.",\
+		  "Human consumption of alcohol invites impurity.",\
+          "Human consumption of foods without natural coverings invites impurity.",\
           "The injury and death of human beings invites impurity.",\
           "Contain and prevent the spread of impurity.")
