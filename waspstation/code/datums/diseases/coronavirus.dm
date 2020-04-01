@@ -36,7 +36,7 @@
 			if(prob(1) && prob(1))
 				to_chat(affected_mob, "<span class='notice'>You feel better.</span>")
 				cure()
-					return
+				return
 			if(prob(1))
 				affected_mob.emote("cough")
 			if(prob(1))
