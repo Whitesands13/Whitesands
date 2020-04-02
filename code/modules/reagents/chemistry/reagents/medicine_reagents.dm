@@ -1582,8 +1582,7 @@
 	..()
 	ADD_TRAIT(L, TRAIT_SLEEPIMMUNE, type)
 	ADD_TRAIT(L, TRAIT_STUNRESISTANCE, type)
-	M.add_movespeed_modifier(type, update=TRUE, priority=100, multiplicative_slowdown=-0.45, blacklisted_movetypes=(FLYING|FLOATING))
-	M.ignore_slowdown(type)
+	M.add_movespeed_modifier(/datum/movespeed_modifier/reagent/hepanephrodaxon)
 
 /datum/reagent/medicine/bonefixingjuice
 	name = "C4L-Z1UM Agent"

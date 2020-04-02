@@ -1248,12 +1248,13 @@
 		else
 			remove_movespeed_modifier(/datum/movespeed_modifier/limbless)
 
+		//this won't really work with species with more than 2 legs, but it'll function
 		var/broken_slowdown = 0
 		if(broken_legs > 0)
 			broken_slowdown += 0 + (broken_legs * 2)
-			add_movespeed_modifier(MOVESPEED_ID_LIVING_BROKEN_BONES, update=TRUE, priority=100, override=TRUE, multiplicative_slowdown=broken_slowdown, movetypes=GROUND) //can't move fast with a broken leg
+			add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/bones, multiplicative_slowdown=broken_slowdown) //can't move fast with a broken leg
 		else
-			remove_movespeed_modifier(MOVESPEED_ID_LIVING_BROKEN_BONES)
+			remove_movespeed_modifier(/datum/movespeed_modifier/bones)
 
 /mob/living/proc/fall(forced)
 	if(!(mobility_flags & MOBILITY_USE))

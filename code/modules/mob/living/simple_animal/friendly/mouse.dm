@@ -206,7 +206,7 @@ GLOBAL_VAR_INIT(mouse_killed, 0)
 	regen_health(15)
 	resize = 2
 	update_transform()
-	add_movespeed_modifier(/datum/movespeed_modifier/sanity/mouse_cheese)
+	add_movespeed_modifier(/datum/movespeed_modifier/mouse_cheese)
 	maxHealth = 30
 	health = maxHealth
 	to_chat(src, "<span class='userdanger'>You ate cheese! You are now stronger, bigger and faster!</span>")
@@ -218,7 +218,7 @@ GLOBAL_VAR_INIT(mouse_killed, 0)
 	health = maxHealth
 	resize = 0.5
 	update_transform()
-	remove_movespeed_modifier(MOVESPEED_ID_MOUSE_CHEESE)
+	remove_movespeed_modifier(/datum/movespeed_modifier/mouse_cheese)
 	to_chat(src, "<span class='userdanger'>A feeling of sadness comes over you as the effects of the cheese wears off. You. Must. Get. More.</span>")
 
 /atom/proc/mouse_eat(mob/living/simple_animal/mouse/M)
