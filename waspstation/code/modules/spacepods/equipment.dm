@@ -233,15 +233,15 @@
 	desc = "A kinetic accelerator system for space pods, fires bursts of energy that cut through rock."
 	icon = 'waspstation/goon/icons/obj/spacepods/parts.dmi'
 	icon_state = "pod_m_laser"
-	projectile_type = /obj/item/projectile/kinetic/pod/regular
+	projectile_type = /obj/projectile/kinetic/pod/regular
 	shot_cost = 250
 	fire_delay = 10
 	fire_sound = 'sound/weapons/Kenetic_accel.ogg'
 
-/obj/item/projectile/kinetic/pod
+/obj/projectile/kinetic/pod
 	range = 4
 
-/obj/item/projectile/kinetic/pod/regular
+/obj/projectile/kinetic/pod/regular
 	damage = 50
 	pressure_decrease = 0.5
 
