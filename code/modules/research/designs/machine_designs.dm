@@ -198,7 +198,7 @@
 	name = "cloning pod"
 	desc = "An electronically-lockable pod for growing organic tissue."
 	id = "clonepod"
-	departmental_flags = DE{ARTMENTAL_FLAG_MEDICAL
+	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
 	build_path = /obj/item/circuitboard/machine/clonepod
 	category = list("Medical Machinery")
 /datum/design/board/hypnochair
