@@ -100,7 +100,7 @@
 	name = "cloning console"
 	desc = "Used to clone people and manage DNA."
 	id = "cloning"
-	buildpath = /obj/item/circuitboard/computer/cloning
+	build_path = /obj/item/circuitboard/computer/cloning
 	category = list("Computer Boards")
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
 /datum/design/board/comconsole
