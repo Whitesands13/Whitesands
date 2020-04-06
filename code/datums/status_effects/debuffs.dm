@@ -61,6 +61,8 @@
 		if(ishuman(owner))
 			human_owner = owner
 
+/*		Wasp Station Edit		Moved to Waspstation folder
+
 /datum/status_effect/incapacitating/sleeping/Destroy()
 	carbon_owner = null
 	human_owner = null
@@ -91,6 +93,8 @@
 			carbon_owner.handle_dreams()
 		if(prob(10) && owner.health > owner.crit_threshold)
 			owner.emote("snore")
+
+		Wasp Station Edit End  */
 
 /obj/screen/alert/status_effect/asleep
 	name = "Asleep"
