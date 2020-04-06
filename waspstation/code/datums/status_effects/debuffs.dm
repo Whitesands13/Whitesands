@@ -24,7 +24,7 @@
 		else if (owner.metabolism_efficiency == 0.8)
 			healing += 2
 
-		if(health_ratio > 0)
+		if(health_ratio > 0 && heal == TRUE)
 			owner.adjustBruteLoss(healing)
 			owner.adjustFireLoss(healing)
 			owner.adjustToxLoss(healing * 0.5, TRUE, TRUE)
