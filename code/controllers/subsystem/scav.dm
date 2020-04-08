@@ -4,9 +4,9 @@ SUBSYSTEM_DEF(scav)
 	init_order	 = INIT_ORDER_DEFAULT
 
 	/// Descriptions for each shipping methods.
-	var/shipping_method_descriptions = list(
-		SHIPPING_METHOD_SCAV="Long-To-Short-Range-Bluespace-Transceiver, a machine that recieves items outside the station and then teleports them to the location of the uplink.",
-	)
+	var/shipping_method_descriptions_scav = list(
+		SHIPPING_METHOD_SCAV="Long-To-Short-Range-Bluespace-Transceiver, a machine that recieves items outside the station and then teleports them to the location of the uplink."
+		)
 
 	/// List of all existing markets.
 	var/list/datum/scav_market/markets					= list()

@@ -48,7 +48,7 @@
 		return FALSE
 
 	// Alright, the item has been purchased.
-	var/datum/scavmarket_purchase/purchase = new(src, uplink, shipping_method)
+	var/datum/scav_purchase/purchase = new(src, uplink, shipping_method)
 
 	// SSscav takes care of the shipping.
 	if(SSscav.queue_item(purchase))
@@ -58,7 +58,7 @@
 	return FALSE
 
 // This exists because it is easier to keep track of all the vars this way.
-/datum/scavmarket_purchase
+/datum/scav_purchase
 	/// The entry being purchased.
 	var/datum/scavmarket_item/entry
 	/// Instance of the item being sent.
@@ -68,7 +68,7 @@
 	/// Shipping method used to buy this item.
 	var/method
 
-/datum/scavmarket_purchase/New(_entry, _uplink, _method)
+/datum/scav_purchase/New(_entry, _uplink, _method)
 	entry = _entry
 	if(!ispath(entry.item))
 		item = entry.item

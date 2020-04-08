@@ -12,7 +12,7 @@
 	var/buying
 
 	/// How much money is inserted into the uplink.
-	var/money = SSeconomy.get_dep_account(ACCOUNT_SCA)
+	var/datum/money = 0
 	/// List of typepaths for "/datum/scav_market"s that this uplink can access.
 	var/list/accessible_markets = list(/datum/scav_market/scavmarket)
 
@@ -38,7 +38,9 @@
 	if(market)
 		for(var/delivery in market.shipping)
 			data["delivery_methods"] += list(list("name" = delivery, "price" = market.shipping[delivery]))
-	data["money"] = money
+	var/datum/bank_account/D = SSeconomy.get_dep_account(ACCOUNT_SCA)
+	if(D)
+		data["money"] = D.account_balance
 	data["buying"] = buying
 	data["items"] = list()
 	data["viewing_category"] = viewing_category
@@ -57,7 +59,7 @@
 
 /obj/item/scav_uplink/ui_static_data(mob/user)
 	var/list/data = list()
-	data["delivery_method_description"] = SSscav.shipping_method_descriptions
+	data["delivery_method_description"] = SSscav.shipping_method_descriptions_scav
 	data["scav_imp_built"] = SSscav.telepads.len
 	data["markets"] = list()
 	for(var/M in accessible_markets)
