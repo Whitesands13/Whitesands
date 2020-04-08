@@ -212,7 +212,7 @@ GLOBAL_LIST_INIT(spacepods_list, list())
 		item_map[avoid_assoc_duplicate_keys(I.name, used_key_list)] = I
 	var/selection = input(user, "Remove which equipment?", null, null) as null|anything in item_map
 	var/obj/O = item_map[selection]
-	if(O && istype(O) && O in contents)
+	if(O && istype(O) && (O in contents))
 		// alrightey now to figure out what it is
 		if(O == cell)
 			cell = null
