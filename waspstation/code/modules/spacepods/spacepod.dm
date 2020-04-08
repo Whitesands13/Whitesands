@@ -465,7 +465,7 @@ GLOBAL_LIST_INIT(spacepods_list, list())
 		add_overlay(I)
 
 /obj/spacepod/MouseDrop_T(atom/movable/A, mob/living/user)
-	if(user == pilot || user in passengers || construction_state != SPACEPOD_ARMOR_WELDED)
+	if(user == pilot || (user in passengers) || construction_state != SPACEPOD_ARMOR_WELDED)
 		return
 
 	if(istype(A, /obj/machinery/portable_atmospherics/canister))
