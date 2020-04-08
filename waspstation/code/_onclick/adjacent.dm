@@ -30,8 +30,8 @@
 	if(!isturf(loc))
 		return FALSE
 	if((islist(locs) && locs.len > 1) && (bound_width != world.icon_size || bound_height != world.icon_size))
-		for(var/turf/T in locs) //this is to handle multi tile objects
-			if(T.Adjacent(neighbor, src, src))
+		for(var/turf/L in locs) //this is to handle multi tile objects
+			if(L.Adjacent(neighbor, src, src))
 				return TRUE
 	else if(T.Adjacent(neighbor,target = neighbor, mover = src))
 		return TRUE
