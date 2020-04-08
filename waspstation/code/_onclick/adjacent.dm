@@ -24,6 +24,7 @@
 	* Must be on a turf
 */
 /atom/movable/Adjacent(var/atom/neighbor)
+	var/turf/T = loc
 	if(neighbor == loc)
 		return TRUE
 	if(!isturf(loc))
@@ -32,7 +33,6 @@
 		for(var/turf/T in locs) //this is to handle multi tile objects
 			if(T.Adjacent(neighbor, src, src))
 				return TRUE
-	var/turf/T = loc
 	else if(T.Adjacent(neighbor,target = neighbor, mover = src))
 		return TRUE
 	return FALSE
