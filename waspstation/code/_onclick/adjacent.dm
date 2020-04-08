@@ -32,6 +32,7 @@
 		for(var/turf/T in locs) //this is to handle multi tile objects
 			if(T.Adjacent(neighbor, src, src))
 				return TRUE
-	else if(loc.Adjacent(neighbor,target = neighbor, mover = src))
+	var/turf/T = loc
+	else if(T.Adjacent(neighbor,target = neighbor, mover = src))
 		return TRUE
 	return FALSE
