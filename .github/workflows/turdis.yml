@@ -136,12 +136,12 @@ jobs:
 
       - name: Compile
         run: |
-          tools/travis/dm.sh -DTRAVISBUILDING tgstation.dme || travis_terminate 1
+          tools/travis/dm.sh -DTRAVISBUILDING tgstation.dmb || travis_terminate 1
 
       - name: Prepare Artifacts
         run: |
           mkdir artifacts
-          cp tgstation.dme artifacts
+          cp tgstation.dmb artifacts
           cp tgstation.rsc artifacts
 
       - name: Upload Artifacts
