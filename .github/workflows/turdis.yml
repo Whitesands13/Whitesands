@@ -46,7 +46,7 @@ jobs:
 
       - name: Misc Checks
         run: |
-          tools/travis/check_filedirs.sh yogstation.dme
+          tools/travis/check_filedirs.sh tgstation.dme
           tools/travis/check_changelogs.sh
           find . -name "*.php" -print0 | xargs -0 -n1 php -l
           find . -name "*.json" -not -path "./tgui/node_modules/*" -print0 | xargs -0 python3 ./tools/json_verifier.py
@@ -88,7 +88,7 @@ jobs:
       - name: Compile All Maps
         run: |
           tools/travis/template_dm_generator.py
-          tools/travis/dm.sh -DTRAVISBUILDING -DTRAVISTESTING -DALL_MAPS yogstation.dme
+          tools/travis/dm.sh -DTRAVISBUILDING -DTRAVISTESTING -DALL_MAPS tgstation.dme
   test:
     name: Compile and Run Tests
     runs-on: ubuntu-18.04
@@ -136,13 +136,13 @@ jobs:
 
       - name: Compile
         run: |
-          tools/travis/dm.sh -DTRAVISBUILDING yogstation.dme || travis_terminate 1
+          tools/travis/dm.sh -DTRAVISBUILDING tgstation.dme || travis_terminate 1
 
       - name: Prepare Artifacts
         run: |
           mkdir artifacts
-          cp yogstation.dme artifacts
-          cp yogstation.rsc artifacts
+          cp tgstation.dme artifacts
+          cp tgstation.rsc artifacts
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v1
