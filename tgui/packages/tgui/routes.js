@@ -100,7 +100,6 @@ import { RapidPipeDispenser } from './interfaces/RapidPipeDispenser';
 import { Roulette } from './interfaces/Roulette';
 import { SatelliteControl } from './interfaces/SatelliteControl';
 import { ScannerGate } from './interfaces/ScannerGate';
-import { ScavUplink } from './interfaces/ScavUplink';
 import { ShuttleManipulator } from './interfaces/ShuttleManipulator';
 import { Signaler } from './interfaces/Signaler';
 import { Sleeper } from './interfaces/Sleeper';
@@ -181,7 +180,6 @@ const ROUTES = {
     scrollable: true,
     theme: 'hackerman',
   },
-
   borgopanel: {
     component: () => BorgPanel,
     scrollable: true,
@@ -588,10 +586,6 @@ const ROUTES = {
   },
   scanner_gate: {
     component: () => ScannerGate,
-    scrollable: true,
-  },
-  scav_uplink: {
-    component: () => ScavUplink,
     scrollable: true,
   },
   shuttle_manipulator: {
