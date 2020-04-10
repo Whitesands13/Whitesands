@@ -22,6 +22,7 @@
 	roundstart = FALSE
 	///Type of drone that will be spawned
 	mob_type = /mob/living/simple_animal/drone
+	short_desc = "You are a repair drone. Follow your laws and do not interfere with others."		// Waspstation Edit - Adding missing var
 
 /obj/effect/mob_spawn/drone/Initialize()
 	. = ..()
