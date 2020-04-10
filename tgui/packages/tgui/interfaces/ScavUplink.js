@@ -36,9 +36,9 @@ export const ScavUplink = props => {
               </Box>
               <Button
                 key={name}
-                content={deliveryMethod.price+' cr'}
+                content={deliveryMethod_scav.price+' cr'}
                 mt={1}
-                disabled={data.money < deliveryMethod.price}
+                disabled={data.money < deliveryMethod_scav.price}
                 onClick={() => act('buy', {
                   method: name,
                 })} />
