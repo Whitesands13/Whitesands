@@ -47,7 +47,7 @@
 	data["viewing_market"] = viewing_market
 	if(viewing_category && market)
 		if(market.available_items[viewing_category])
-			for(var/datum/blackmarket_item/I in market.available_items[viewing_category])
+			for(var/datum/scavmarket_item/I in market.available_items[viewing_category])
 				data["items"] += list(list(
 					"id" = I.type,
 					"name" = I.name,
@@ -58,6 +58,7 @@
 	return data
 
 /obj/item/scav_uplink/ui_static_data(mob/user)
+	message_admins("[SSscav.telepads.len] telepads.")
 	var/list/data = list()
 	data["delivery_method_description"] = SSscav.shipping_method_descriptions_scav
 	data["scav_imp_built"] = SSscav.telepads.len
@@ -110,13 +111,15 @@
 			buying = FALSE
 			. = TRUE
 		if("buy")
-			if(isnull(params["method"]))
-				return
+			message_admins("Buy press detected")
+			/* if(isnull(params["method"]))
+				return */
 			if(isnull(selected_item))
+				message_admins("NULL item")
 				buying = FALSE
 				return
 			var/datum/scav_market/market = SSscav.markets[viewing_market]
-			market.purchase(selected_item, viewing_category, params["method"], src, usr)
+			market.purchase(selected_item, viewing_category, SHIPPING_METHOD_SCAV, src, usr)
 
 			buying = FALSE
 			selected_item = null

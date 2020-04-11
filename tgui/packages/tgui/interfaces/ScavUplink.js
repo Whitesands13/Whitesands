@@ -14,42 +14,13 @@ export const ScavUplink = props => {
   const shipmentSelector = !!data.buying && (
     <Dimmer
       textAlign="center">
-      <Grid mt={20}>
-        {map(deliveryMethod_scav => {
-          const name = deliveryMethod_scav.name;
-          if (name === "SCAV" && !data.scav_imp_built) {
-            return null;
-          }
-
-          return (
-            <Grid.Column
-              textAlign="center"
-              position="relative">
-              <Box>
-                <Box
-                  fontSize="30px">
-                  {name}
-                </Box>
-                <Box mt={1}>
-                  {deliveryMethodDesc[name]}
-                </Box>
-              </Box>
-              <Button
-                key={name}
-                content={deliveryMethod_scav.price+' cr'}
-                mt={1}
-                disabled={data.money < deliveryMethod_scav.price}
-                onClick={() => act('buy', {
-                  method: name,
-                })} />
-            </Grid.Column>
-          );
-        })(deliveryMethods)}
-      </Grid>
       <Button
         content="Cancel"
         color="bad"
         onClick={() => act('cancel')} />
+      <Button
+        content="Buy"
+        onClick={() => act('buy')} />
     </Dimmer>
   );
 
