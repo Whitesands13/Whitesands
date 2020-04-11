@@ -39,19 +39,24 @@
 
 /// Buys the item and makes SSscav handle it.
 /datum/scavmarket_item/proc/buy(obj/item/blackmarket_uplink/uplink, mob/buyer, shipping_method)
+	message_admins("Buy called")
 	// Sanity
 	if(!istype(uplink) || !istype(buyer))
+		message_admins("Buy bad uplink or buyer")
 		return FALSE
 
 	// This shouldn't be able to happen unless there was some manipulation or admin fuckery.
 	if(!item || stock <= 0)
+		message_admins("Fuckery")
 		return FALSE
 
 	// Alright, the item has been purchased.
+	message_admins("Add to purchase")
 	var/datum/scav_purchase/purchase = new(src, uplink, shipping_method)
 
 	// SSscav takes care of the shipping.
 	if(SSscav.queue_item(purchase))
+		message_admins("Purchase successful")
 		stock--
 		log_game("[key_name(buyer)] has succesfully purchased [name] using [shipping_method] for shipping.")
 		return TRUE

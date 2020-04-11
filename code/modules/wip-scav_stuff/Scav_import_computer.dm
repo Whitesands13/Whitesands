@@ -58,7 +58,6 @@
 	return data
 
 /obj/item/scav_uplink/ui_static_data(mob/user)
-	message_admins("[SSscav.telepads.len] telepads.")
 	var/list/data = list()
 	data["delivery_method_description"] = SSscav.shipping_method_descriptions_scav
 	data["scav_imp_built"] = SSscav.telepads.len
