@@ -30,30 +30,25 @@
 /// Handles buying the item, this is mainly for future use and moving the code away from the uplink.
 /datum/scav_market/proc/purchase(item, category, method, obj/item/scav_uplink/uplink, user)
 	var/datum/bank_account/D = SSeconomy.get_dep_account(ACCOUNT_SCA)
-	message_admins("Purchase called  item [item]  category [category]  method [method]  uplink [uplink]  user [user] money [D.account_balance]")
+
 	if(!istype(uplink) || !(method in shipping))
-		message_admins("Failed first if")
 		return FALSE
 
 	for(var/datum/scavmarket_item/I in available_items[category])
-		message_admins("Entered purchase loop")
+
 		if(I.type != item)
-			message_admins("I.type != item")
 			continue
 		var/price = I.price
 		// I can't get the price of the item and shipping in a clean way to the UI, so I have to do this.
 		if(D.account_balance < price)
 			to_chat("<span class='warning'>You don't have enough credits in [uplink] for [I] with [method] shipping.</span>")
-			message_admins("Not enough money")
 			return FALSE
 
 		if(I.buy(uplink, user, method))
-			message_admins("Purchase success")
 			D.account_balance -= price
 			return TRUE
-		message_admins("Purchase reached end")
+
 		return FALSE
-	message_admins("Crit Fail")
 
 /datum/scav_market/scavmarket
 	name = "Scavmarket"

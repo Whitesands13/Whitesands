@@ -98,25 +98,16 @@
 			else
 				viewing_category = null
 			. = TRUE
-		if("select")
-			if(isnull(params["item"]))
-				return
-			var/item = text2path(params["item"])
-			selected_item = item
-			buying = TRUE
-			. = TRUE
 		if("cancel")
 			selected_item = null
 			buying = FALSE
 			. = TRUE
 		if("buy")
-			message_admins("Buy press detected")
-			/* if(isnull(params["method"]))
-				return */
-			if(isnull(selected_item))
-				message_admins("NULL item")
-				buying = FALSE
+			if(isnull(params["item"]))
 				return
+			var/item = text2path(params["item"])
+			selected_item = item
+			buying = TRUE
 			var/datum/scav_market/market = SSscav.markets[viewing_market]
 			market.purchase(selected_item, viewing_category, SHIPPING_METHOD_SCAV, src, usr)
 

@@ -11,22 +11,8 @@ export const ScavUplink = props => {
   const markets = data.markets || {};
   const items = data.items || {};
 
-  const shipmentSelector = !!data.buying && (
-    <Dimmer
-      textAlign="center">
-      <Button
-        content="Cancel"
-        color="bad"
-        onClick={() => act('cancel')} />
-      <Button
-        content="Buy"
-        onClick={() => act('buy')} />
-    </Dimmer>
-  );
-
   return (
     <Fragment>
-      {shipmentSelector}
       <Section
         title="Black Market Uplink"
         buttons={(
@@ -81,7 +67,7 @@ export const ScavUplink = props => {
                       <Button
                         content={'Buy'}
                         disabled={!item.amount || item.cost > data.money}
-                        onClick={() => act('select', {
+                        onClick={() => act('buy', {
                           item: item.id,
                         })} />
                     </Table.Cell>
