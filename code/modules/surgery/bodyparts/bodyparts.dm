@@ -351,7 +351,6 @@
 
 		if(NO_BONES in S.species_traits)
 			bone_status = BONE_FLAG_NO_BONES
-			fix_bone()
 		else
 			bone_status = BONE_FLAG_NORMAL
 
