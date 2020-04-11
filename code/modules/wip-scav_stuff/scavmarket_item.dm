@@ -38,7 +38,7 @@
 	return new item(loc)
 
 /// Buys the item and makes SSscav handle it.
-/datum/scavmarket_item/proc/buy(obj/item/blackmarket_uplink/uplink, mob/buyer, shipping_method)
+/datum/scavmarket_item/proc/buy(obj/item/scav_uplink/uplink, mob/buyer, shipping_method)
 	message_admins("Buy called")
 	// Sanity
 	if(!istype(uplink) || !istype(buyer))
