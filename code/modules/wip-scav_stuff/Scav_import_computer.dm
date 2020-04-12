@@ -47,7 +47,7 @@
 	data["viewing_market"] = viewing_market
 	if(viewing_category && market)
 		if(market.available_items[viewing_category])
-			for(var/datum/blackmarket_item/I in market.available_items[viewing_category])
+			for(var/datum/scavmarket_item/I in market.available_items[viewing_category])
 				data["items"] += list(list(
 					"id" = I.type,
 					"name" = I.name,
@@ -98,25 +98,18 @@
 			else
 				viewing_category = null
 			. = TRUE
-		if("select")
-			if(isnull(params["item"]))
-				return
-			var/item = text2path(params["item"])
-			selected_item = item
-			buying = TRUE
-			. = TRUE
 		if("cancel")
 			selected_item = null
 			buying = FALSE
 			. = TRUE
 		if("buy")
-			if(isnull(params["method"]))
+			if(isnull(params["item"]))
 				return
-			if(isnull(selected_item))
-				buying = FALSE
-				return
+			var/item = text2path(params["item"])
+			selected_item = item
+			buying = TRUE
 			var/datum/scav_market/market = SSscav.markets[viewing_market]
-			market.purchase(selected_item, viewing_category, params["method"], src, usr)
+			market.purchase(selected_item, viewing_category, SHIPPING_METHOD_SCAV, src, usr)
 
 			buying = FALSE
 			selected_item = null

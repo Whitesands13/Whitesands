@@ -29,21 +29,25 @@
 
 /// Handles buying the item, this is mainly for future use and moving the code away from the uplink.
 /datum/scav_market/proc/purchase(item, category, method, obj/item/scav_uplink/uplink, user)
+	var/datum/bank_account/D = SSeconomy.get_dep_account(ACCOUNT_SCA)
+
 	if(!istype(uplink) || !(method in shipping))
 		return FALSE
 
-	for(var/datum/blackmarket_item/I in available_items[category])
+	for(var/datum/scavmarket_item/I in available_items[category])
+
 		if(I.type != item)
 			continue
-		var/price = I.price + shipping[method]
+		var/price = I.price
 		// I can't get the price of the item and shipping in a clean way to the UI, so I have to do this.
-		if(uplink.money < price)
+		if(D.account_balance < price)
 			to_chat("<span class='warning'>You don't have enough credits in [uplink] for [I] with [method] shipping.</span>")
 			return FALSE
 
 		if(I.buy(uplink, user, method))
-			uplink.money -= price
+			D.account_balance -= price
 			return TRUE
+
 		return FALSE
 
 /datum/scav_market/scavmarket
