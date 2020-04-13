@@ -125,6 +125,21 @@
 	else
 		airlock.cyclelinkeddir = dir
 
+/obj/effect/mapping_helpers/airlock/cyclelink_helper_target	//Wasp start
+	name = "airlock cyclelink helper target"
+	icon_state = "airlock_cyclelink_helper_target"
+	var/dirx
+	var/diry
+
+/obj/effect/mapping_helpers/airlock/cyclelink_helper_target/payload(obj/machinery/door/airlock/airlock)
+	if(airlock.cyclelinkedx || airlock.cyclelinkedy)
+		log_mapping("[src] at [AREACOORD(src)] tried to set [airlock] cyclelinkedx and y, but they're already set")
+	else
+		if(!dirx && !diry)
+			log_mapping("[src] at [AREACOORD(src)] tried to set [airlock] cyclelinkedx and y, but has dirx and diry are uninitialized")
+			return
+		airlock.cyclelinkedx = dirx
+		airlock.cyclelinkedy = diry//Wasp end
 
 /obj/effect/mapping_helpers/airlock/locked
 	name = "airlock lock helper"
@@ -187,7 +202,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/mapping_helpers/no_lava)
 		if(target_type && !istype(A,target_type))
 			continue
 		var/cargs = build_args()
-		A.AddComponent(arglist(cargs))
+		A._AddComponent(cargs)
 		qdel(src)
 		return
 
@@ -235,7 +250,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/mapping_helpers/no_lava)
 	qdel(src)
 
 
-//On Ian's birthday, the first officer's office is decorated.
+//On Ian's birthday, the head of personnel's office is decorated.
 /obj/effect/mapping_helpers/ianbirthday
 	name = "Ian's Bday Helper"
 	late = TRUE

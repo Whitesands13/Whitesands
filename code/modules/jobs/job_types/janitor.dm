@@ -1,14 +1,14 @@
 /datum/job/janitor
 	title = "Janitor"
 	flag = JANITOR
-	department_head = list("First Officer")
+	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 1
-	supervisors = "the first officer"
+	supervisors = "the head of personnel"
 	selection_color = "#bbe291"
-	wiki_page = "Janitor"
+	wiki_page = "Janitor" //WaspStation Edit - Wikilinks/Warning
 
 	outfit = /datum/outfit/job/janitor
 
@@ -26,6 +26,7 @@
 	belt = /obj/item/pda/janitor
 	ears = /obj/item/radio/headset/headset_srv
 	uniform = /obj/item/clothing/under/rank/civilian/janitor
+	alt_uniform = /obj/item/clothing/under/rank/civilian/janitor/maid //Wasp Edit - Alt Uniforms
 	backpack_contents = list(/obj/item/modular_computer/tablet/preset/advanced=1)
 
 /datum/outfit/job/janitor/pre_equip(mob/living/carbon/human/H, visualsOnly)

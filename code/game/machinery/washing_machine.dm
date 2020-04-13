@@ -14,8 +14,8 @@ GLOBAL_LIST_INIT(dye_registry, list(
 		DYE_CLOWN = /obj/item/clothing/under/rank/civilian/clown,
 		DYE_QM = /obj/item/clothing/under/rank/cargo/qm,
 		DYE_LAW = /obj/item/clothing/under/suit/black,
-		DYE_CAPTAIN = /obj/item/clothing/under/rank/captain,
-		DYE_FO = /obj/item/clothing/under/rank/civilian/first_officer,
+		DYE_CAPTAIN = /obj/item/clothing/under/rank/command/captain,
+		DYE_FO = /obj/item/clothing/under/rank/command/head_of_personnel,
 		DYE_HOS = /obj/item/clothing/under/rank/security/head_of_security,
 		DYE_CE = /obj/item/clothing/under/rank/engineering/chief_engineer,
 		DYE_RD = /obj/item/clothing/under/rank/rnd/research_director,
@@ -97,7 +97,7 @@ GLOBAL_LIST_INIT(dye_registry, list(
 		DYE_QM = /obj/item/bedsheet/qm,
 		DYE_LAW = /obj/item/bedsheet/black,
 		DYE_CAPTAIN = /obj/item/bedsheet/captain,
-		DYE_FO = /obj/item/bedsheet/first_officer,
+		DYE_FO = /obj/item/bedsheet/head_of_personnel,
 		DYE_HOS = /obj/item/bedsheet/hos,
 		DYE_CE = /obj/item/bedsheet/ce,
 		DYE_RD = /obj/item/bedsheet/rd,
@@ -211,14 +211,14 @@ GLOBAL_LIST_INIT(dye_registry, list(
 	return
 
 /obj/item/stack/sheet/hairlesshide/machine_wash(obj/machinery/washing_machine/WM)
-	new /obj/item/stack/sheet/wetleather(drop_location(), amount)
+	new /obj/item/stack/sheet/wethide(drop_location(), amount)
 	qdel(src)
 
 /obj/item/clothing/suit/hooded/ian_costume/machine_wash(obj/machinery/washing_machine/WM)
 	new /obj/item/reagent_containers/food/snacks/meat/slab/corgi(loc)
 	qdel(src)
 
-/mob/living/simple_animal/pet/dog/corgi/machine_wash(obj/machinery/washing_machine/WM)
+/mob/living/simple_animal/pet/machine_wash(obj/machinery/washing_machine/WM)
 	WM.bloody_mess = TRUE
 	gib()
 
@@ -238,6 +238,10 @@ GLOBAL_LIST_INIT(dye_registry, list(
 	freshly_laundered = TRUE
 	addtimer(VARSET_CALLBACK(src, freshly_laundered, FALSE), 5 MINUTES, TIMER_UNIQUE | TIMER_OVERRIDE)
 	..()
+
+/obj/item/clothing/head/mob_holder/machine_wash(obj/machinery/washing_machine/WM)
+	..()
+	held_mob.machine_wash(WM)
 
 /obj/item/clothing/shoes/sneakers/machine_wash(obj/machinery/washing_machine/WM)
 	if(chained)
@@ -292,7 +296,6 @@ GLOBAL_LIST_INIT(dye_registry, list(
 		if(!user.transferItemToLoc(W, src))
 			to_chat(user, "<span class='warning'>\The [W] is stuck to your hand, you cannot put it in the washing machine!</span>")
 			return TRUE
-
 		if(W.dye_color)
 			color_source = W
 		update_icon()
@@ -313,7 +316,7 @@ GLOBAL_LIST_INIT(dye_registry, list(
 		if(L.buckled || L.has_buckled_mobs())
 			return
 		if(state_open)
-			if(iscorgi(L))
+			if(istype(L, /mob/living/simple_animal/pet))
 				L.forceMove(src)
 				update_icon()
 		return

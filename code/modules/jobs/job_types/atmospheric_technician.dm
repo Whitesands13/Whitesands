@@ -10,7 +10,7 @@
 	selection_color = "#fff5cc"
 	exp_requirements = 60
 	exp_type = EXP_TYPE_CREW
-	wiki_page = "Guide_to_Atmospherics"
+	wiki_page = "Guide_to_Atmospherics" //WaspStation Edit - Wikilinks/Warning
 
 	outfit = /datum/outfit/job/atmos
 
@@ -29,6 +29,9 @@
 	l_pocket = /obj/item/pda/atmos
 	ears = /obj/item/radio/headset/headset_eng
 	uniform = /obj/item/clothing/under/rank/engineering/atmospheric_technician
+	alt_uniform = /obj/item/clothing/under/rank/engineering/engineer/hazard //Wasp Edit - Alt Uniforms
+	alt_suit = /obj/item/clothing/suit/hazardvest
+	dcoat = /obj/item/clothing/suit/hooded/wintercoat/engineering //Wasp Edit - Alt Uniforms
 	r_pocket = /obj/item/analyzer
 
 	backpack = /obj/item/storage/backpack/industrial

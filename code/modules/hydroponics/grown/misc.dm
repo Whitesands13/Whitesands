@@ -182,7 +182,7 @@
 	trash = /obj/item/gun/ballistic/revolver
 	bitesize_mod = 2
 	foodtype = FRUIT
-	tastes = list("blackpowder" = 1)
+	tastes = list("gunpowder" = 1)
 	wine_power = 90 //It burns going down, too.
 
 //Cherry Bombs
@@ -194,7 +194,7 @@
 	plantname = "Cherry Bomb Tree"
 	product = /obj/item/reagent_containers/food/snacks/grown/cherry_bomb
 	mutatelist = list()
-	reagents_add = list(/datum/reagent/consumable/nutriment = 0.1, /datum/reagent/consumable/sugar = 0.1, /datum/reagent/blackpowder = 0.7)
+	reagents_add = list(/datum/reagent/consumable/nutriment = 0.1, /datum/reagent/consumable/sugar = 0.1, /datum/reagent/gunpowder = 0.7)
 	rarity = 60 //See above
 
 /obj/item/reagent_containers/food/snacks/grown/cherry_bomb
@@ -204,7 +204,7 @@
 	filling_color = rgb(20, 20, 20)
 	seed = /obj/item/seeds/cherry/bomb
 	bitesize_mod = 2
-	volume = 125 //Gives enough room for the blackpowder at max potency
+	volume = 125 //Gives enough room for the gunpowder at max potency
 	max_integrity = 40
 	wine_power = 80
 
@@ -225,6 +225,37 @@
 /obj/item/reagent_containers/food/snacks/grown/cherry_bomb/proc/prime()
 	icon_state = "cherry_bomb_lit"
 	playsound(src, 'sound/effects/fuse.ogg', seed.potency, FALSE)
-	reagents.chem_temp = 1000 //Sets off the blackpowder
+	reagents.chem_temp = 1000 //Sets off the gunpowder
 	reagents.handle_reactions()
 
+// aloe
+/obj/item/seeds/aloe
+	name = "pack of aloe seeds"
+	desc = "These seeds grow into aloe."
+	icon_state = "seed-aloe"
+	species = "aloe"
+	plantname = "Aloe"
+	product = /obj/item/reagent_containers/food/snacks/grown/aloe
+	lifespan = 60
+	endurance = 25
+	maturation = 4
+	production = 4
+	yield = 6
+	growthstages = 5
+	growing_icon = 'icons/obj/hydroponics/growing_vegetables.dmi'
+	reagents_add = list(/datum/reagent/consumable/nutriment/vitamin = 0.05, /datum/reagent/consumable/nutriment = 0.05)
+
+/obj/item/reagent_containers/food/snacks/grown/aloe
+	seed = /obj/item/seeds/aloe
+	name = "aloe"
+	desc = "Cut leaves from the aloe plant."
+	icon_state = "aloe"
+	filling_color = "#90EE90"
+	bitesize_mod = 5
+	foodtype = VEGETABLES
+	juice_results = list(/datum/reagent/consumable/aloejuice = 0)
+	distill_reagent = /datum/reagent/consumable/ethanol/tequila
+
+/obj/item/reagent_containers/food/snacks/grown/aloe/microwave_act(obj/machinery/microwave/M)
+	new /obj/item/stack/medical/aloe(drop_location(), 2)
+	qdel(src)

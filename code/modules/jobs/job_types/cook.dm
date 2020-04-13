@@ -1,14 +1,14 @@
 /datum/job/cook
 	title = "Cook"
 	flag = COOK
-	department_head = list("First Officer")
+	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 1
-	supervisors = "the first officer"
+	supervisors = "the head of personnel"
 	selection_color = "#bbe291"
-	wiki_page = "Food"
+	wiki_page = "Food" //WaspStation Edit - Wikilinks/Warning
 	var/cooks = 0 //Counts cooks amount
 
 	outfit = /datum/outfit/job/cook
@@ -27,7 +27,9 @@
 	belt = /obj/item/pda/cook
 	ears = /obj/item/radio/headset/headset_srv
 	uniform = /obj/item/clothing/under/rank/civilian/chef
+	alt_uniform = /obj/item/clothing/under/rank/civilian/cookjorts //Wasp Edit - Alt Uniforms
 	suit = /obj/item/clothing/suit/toggle/chef
+	alt_suit = /obj/item/clothing/suit/apron/chef
 	head = /obj/item/clothing/head/chefhat
 	mask = /obj/item/clothing/mask/fakemoustache/italian
 	backpack_contents = list(/obj/item/sharpener = 1)

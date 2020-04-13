@@ -62,7 +62,8 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	verbs += list(
 		/mob/dead/observer/proc/dead_tele,
 		/mob/dead/observer/proc/open_spawners_menu,
-		/mob/dead/observer/proc/tray_view)
+		/mob/dead/observer/proc/tray_view,
+		/mob/dead/observer/proc/possess_mouse_verb)
 
 	if(icon_state in GLOB.ghost_forms_with_directions_list)
 		ghostimage_default = image(src.icon,src,src.icon_state + "_nodir")
@@ -128,7 +129,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 
 	animate(src, pixel_y = 2, time = 10, loop = -1)
 
-	GLOB.dead_mob_list += src
+	add_to_dead_mob_list()
 
 	for(var/v in GLOB.active_alternate_appearances)
 		if(!v)
@@ -153,6 +154,10 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	addtimer(CALLBACK(src, /atom/proc/update_atom_colour), 10)
 
 /mob/dead/observer/Destroy()
+	// Update our old body's medhud since we're abandoning it
+	if(mind && mind.current)
+		mind.current.med_hud_set_status()
+
 	GLOB.ghost_images_default -= ghostimage_default
 	QDEL_NULL(ghostimage_default)
 
@@ -230,14 +235,16 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	var/b_val
 	var/g_val
 	var/color_format = length(input_color)
+	if(color_format != length_char(input_color))
+		return 0
 	if(color_format == 3)
-		r_val = hex2num(copytext(input_color, 1, 2))*16
-		g_val = hex2num(copytext(input_color, 2, 3))*16
-		b_val = hex2num(copytext(input_color, 3, 0))*16
+		r_val = hex2num(copytext(input_color, 1, 2)) * 16
+		g_val = hex2num(copytext(input_color, 2, 3)) * 16
+		b_val = hex2num(copytext(input_color, 3, 4)) * 16
 	else if(color_format == 6)
 		r_val = hex2num(copytext(input_color, 1, 3))
 		g_val = hex2num(copytext(input_color, 3, 5))
-		b_val = hex2num(copytext(input_color, 5, 0))
+		b_val = hex2num(copytext(input_color, 5, 7))
 	else
 		return 0 //If the color format is not 3 or 6, you're using an unexpected way to represent a color.
 
@@ -251,7 +258,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	if(b_val > 255)
 		b_val = 255
 
-	return num2hex(r_val, 2) + num2hex(g_val, 2) + num2hex(b_val, 2)
+	return copytext(rgb(r_val, g_val, b_val), 2)
 
 /*
 Transfer_mind is there to check if mob is being deleted/not going to have a body.
@@ -260,7 +267,7 @@ Works together with spawning an observer, noted above.
 
 /mob/proc/ghostize(can_reenter_corpse = TRUE)
 	if(key)
-		if(!cmptext(copytext(key,1,2),"@")) // Skip aghosts.
+		if(key[1] != "@") // Skip aghosts.
 			stop_sound_channel(CHANNEL_HEARTBEAT) //Stop heartbeat sounds because You Are A Ghost Now
 			var/mob/dead/observer/ghost = new(src)	// Transfer safety to observer spawning proc.
 			SStgui.on_transfer(src, ghost) // Transfer NanoUIs.
@@ -331,7 +338,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(!can_reenter_corpse)
 		to_chat(src, "<span class='warning'>You cannot re-enter your body.</span>")
 		return
-	if(mind.current.key && copytext(mind.current.key,1,2)!="@")	//makes sure we don't accidentally kick any clients
+	if(mind.current.key && mind.current.key[1] != "@")	//makes sure we don't accidentally kick any clients
 		to_chat(usr, "<span class='warning'>Another consciousness is in your body...It is resisting you.</span>")
 		return
 	client.change_view(CONFIG_GET(string/default_view))
@@ -353,6 +360,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return
 
 	can_reenter_corpse = FALSE
+	// Update med huds
+	var/mob/living/carbon/current = mind.current
+	current.med_hud_set_status()
 	// Disassociates observer mind from the body mind
 	mind = null
 
@@ -494,7 +504,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			views |= i
 		var/new_view = input("Choose your new view", "Modify view range", 7) as null|anything in views
 		if(new_view)
-			client.change_view(CLAMP(new_view, 7, max_view))
+			client.change_view(clamp(new_view, 7, max_view))
 	else
 		client.change_view(CONFIG_GET(string/default_view))
 
@@ -639,7 +649,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	var/dat
 	dat += "<h4>Crew Manifest</h4>"
-	dat += GLOB.data_core.get_manifest()
+	dat += GLOB.data_core.get_manifest_html()
 
 	src << browse(dat, "window=manifest;size=387x420;can_close=1")
 
@@ -884,8 +894,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	var/list/t_ray_images = list()
 	var/static/list/stored_t_ray_images = list()
 	for(var/obj/O in orange(client.view, src) )
-		if(O.level != 1)
-			continue
 
 		if(O.invisibility == INVISIBILITY_MAXIMUM)
 			var/image/I = new(loc = get_turf(O))
@@ -900,3 +908,67 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			client.images += t_ray_images
 		else
 			client.images -= stored_t_ray_images
+
+//Wasp Begin
+/mob/dead/observer/proc/possess_mouse_verb()
+	set category = "Ghost"
+	set name = "Possess a mouse"
+	set desc = "Possess a mouse to haunt the station.... and their food!"
+
+	var/list/possessible = list()
+
+	for(var/mob/living/simple_animal/mouse/M in GLOB.alive_mob_list)
+		if(M.stat != CONSCIOUS) continue
+		if(M.key) continue
+		if(M in GLOB.player_list) continue
+		if(M.mind) continue
+		if(!is_station_level(M.z)) continue
+
+		possessible += M
+
+	if(!possessible.len)
+		to_chat(src, "<span class='warning'>There are currently no mice able to be possessed!</span>")
+		return FALSE
+
+	var/mob/living/simple_animal/mouse/M = pick(possessible)
+
+	possess_mouse(M)
+
+
+/mob/dead/observer/proc/possess_mouse(mob/living/simple_animal/mouse/M)
+	if(!M)
+		return FALSE		
+
+	if(!SSticker.HasRoundStarted())
+		to_chat(usr, "<span class='warning'>The round hasn't started yet!</span>")
+		return FALSE
+
+	if(is_banned_from(key, ROLE_SENTIENCE))
+		to_chat(src, "<span class='warning'>You are job banned!</span>")
+		return FALSE
+
+	if(alert("Are you sure you want to become a mouse? (Warning, you can no longer be cloned!)",,"Yes","No") != "Yes")
+		return FALSE
+
+	if(M.key || (M.stat != CONSCIOUS) || (M in GLOB.player_list) || M.mind || QDELETED(src) || QDELETED(M))
+		to_chat(src, "<span class='warning'>This mouse is unable to be controlled, please try again!")
+		return FALSE
+
+	log_game("[key_name(src)] has became a mouse")
+
+	M.key = key
+	M.faction = list("neutral")
+	M.chew_probability = 0 //so they cant pull off a big brain play by ghosting somewhere or idk
+	M.layer = BELOW_OPEN_DOOR_LAYER //ENGAGE ADVANCED HIDING BRAIN FUNCTIONS
+	M.language_holder = new /datum/language_holder/mouse(M)
+	M.pass_flags |= PASSDOORHATCH
+	M.sentience_act()
+	M.maxHealth = 15
+	M.health = M.maxHealth
+
+	to_chat(M , "<span class='warning'>You are now possessing a mouse. \
+				You do not remember your previous life. You can eat trash and \
+				food on the floor to gain health and help create new mice. Mouse traps will hurt your fragile body \
+				and so will any kind of weapons. You can control click food and trash items in order to eat them. Get. That. Cheese.")
+	return TRUE
+//Wasp End

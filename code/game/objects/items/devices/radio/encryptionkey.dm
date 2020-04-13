@@ -64,15 +64,15 @@
 	icon_state = "medsci_cypherkey"
 	channels = list(RADIO_CHANNEL_SCIENCE = 1, RADIO_CHANNEL_MEDICAL = 1)
 
-/obj/item/encryptionkey/headset_medsec
-	name = "medical-security encryption key"
-	icon_state = "medsec_cypherkey"
-	channels = list(RADIO_CHANNEL_MEDICAL = 1, RADIO_CHANNEL_SECURITY = 1)
-
 /obj/item/encryptionkey/headset_srvsec
 	name = "law and order radio encryption key"
 	icon_state = "srvsec_cypherkey"
 	channels = list(RADIO_CHANNEL_SERVICE = 1, RADIO_CHANNEL_SECURITY = 1)
+
+/obj/item/encryptionkey/headset_srvmed
+	name = "psychology radio encryption key"
+	icon_state = "srvmed_cypherkey"
+	channels = list(RADIO_CHANNEL_MEDICAL = 1, RADIO_CHANNEL_SERVICE = 1)
 
 /obj/item/encryptionkey/headset_com
 	name = "command radio encryption key"
@@ -104,16 +104,10 @@
 	icon_state = "cmo_cypherkey"
 	channels = list(RADIO_CHANNEL_MEDICAL = 1, RADIO_CHANNEL_COMMAND = 1)
 
-/obj/item/encryptionkey/heads/first_officer
-	name = "\proper the first officer's encryption key"
+/obj/item/encryptionkey/heads/head_of_personnel
+	name = "\proper the head of personnel's encryption key"
 	icon_state = "hop_cypherkey"
 	channels = list(RADIO_CHANNEL_SUPPLY = 1, RADIO_CHANNEL_SERVICE = 1, RADIO_CHANNEL_COMMAND = 1)
-
-/obj/item/encryptionkey/heads/second_officer
-	name = "\proper the second_officer's encryption key"
-	desc = "An encryption key for a radio headset.  Channels are as follows: :c - command."
-	icon_state = "com_cypherkey"
-	channels = list("Command" = 1)
 
 /obj/item/encryptionkey/headset_cargo
 	name = "supply radio encryption key"

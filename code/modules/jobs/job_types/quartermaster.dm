@@ -1,15 +1,15 @@
 /datum/job/qm
 	title = "Quartermaster"
 	flag = QUARTERMASTER
-	department_head = list("First Officer")
+	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the first officer"
+	supervisors = "the head of personnel"
 	selection_color = "#d7b088"
-	wiki_page = "Quartermaster"
-	special_notice = "You are not a head of staff. You answer to the Head of Personnel."
+	wiki_page = "Quartermaster" //WaspStation Edit - Wikilinks/Warning
+	special_notice = "You are not a head of staff. You answer to the Head of Personnel." //WaspStation Edit - Wikilinks/Warning
 
 	outfit = /datum/outfit/job/quartermaster
 
@@ -27,6 +27,9 @@
 	belt = /obj/item/pda/quartermaster
 	ears = /obj/item/radio/headset/headset_cargo
 	uniform = /obj/item/clothing/under/rank/cargo/qm
+	alt_uniform = /obj/item/clothing/under/pants/jeans //Wasp Edit - Alt Uniforms
+	alt_suit = /obj/item/clothing/suit/hazardvest
+	dcoat = /obj/item/clothing/suit/hooded/wintercoat/cargo //Wasp Edit - Alt Uniforms
 	shoes = /obj/item/clothing/shoes/sneakers/brown
 	glasses = /obj/item/clothing/glasses/sunglasses
 	l_hand = /obj/item/clipboard

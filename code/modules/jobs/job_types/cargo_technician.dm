@@ -1,14 +1,14 @@
 /datum/job/cargo_tech
 	title = "Cargo Technician"
 	flag = CARGOTECH
-	department_head = list("First Officer")
+	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 3
 	spawn_positions = 2
-	supervisors = "the quartermaster and the first officer"
+	supervisors = "the quartermaster and the head of personnel"
 	selection_color = "#dcba97"
-	wiki_page = "Cargo_technician"
+	wiki_page = "Cargo_technician" //WaspStation Edit - Wikilinks/Warning
 
 	outfit = /datum/outfit/job/cargo_tech
 
@@ -26,5 +26,8 @@
 	belt = /obj/item/pda/cargo
 	ears = /obj/item/radio/headset/headset_cargo
 	uniform = /obj/item/clothing/under/rank/cargo/tech
+	alt_uniform = /obj/item/clothing/under/shorts/grey //Wasp Edit - Alt Uniforms
+	alt_suit = /obj/item/clothing/suit/hazardvest
+	dcoat = /obj/item/clothing/suit/hooded/wintercoat/cargo //Wasp Edit - Alt Uniforms
 	l_hand = /obj/item/export_scanner
 

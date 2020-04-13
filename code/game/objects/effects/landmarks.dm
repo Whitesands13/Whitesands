@@ -67,6 +67,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	jobspawn_override = TRUE
 	delete_after_roundstart = FALSE
 
+/obj/effect/landmark/start/prisoner
+	name = "Prisoner"
+	icon_state = "Prisoner"
+
 /obj/effect/landmark/start/janitor
 	name = "Janitor"
 	icon_state = "Janitor"
@@ -131,9 +135,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Chief Engineer"
 	icon_state = "Chief Engineer"
 
-/obj/effect/landmark/start/first_officer
-	name = "First Officer"
-	icon_state = "First Officer"
+/obj/effect/landmark/start/head_of_personnel
+	name = "Head of Personnel"
+	icon_state = "Head of Personnel"
 
 /obj/effect/landmark/start/librarian
 	name = "Curator"
@@ -183,6 +187,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Virologist"
 	icon_state = "Virologist"
 
+/obj/effect/landmark/start/psychologist
+	name = "Psychologist"
+	icon_state = "Psychologist"
+
 /obj/effect/landmark/start/chaplain
 	name = "Chaplain"
 	icon_state = "Chaplain"
@@ -213,9 +221,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Brig Physician"
 	icon_state = "Brig Physician"
 
-/obj/effect/landmark/start/second_officer
-	name = "Second Officer"
-	icon_state = "Second Officer"
+/obj/effect/landmark/start/lieutenant
+	name = "Lieutenant"
+	icon_state = "Lieutenant"
 
 //Department Security spawns
 
@@ -429,3 +437,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 	GLOB.ruin_landmarks -= src
 	ruin_template = null
 	. = ..()
+
+// handled in portals.dm, id connected to one-way portal
+/obj/effect/landmark/portal_exit
+	name = "portal exit"
+	icon_state = "portal_exit"
+	var/id

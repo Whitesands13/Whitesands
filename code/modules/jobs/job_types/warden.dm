@@ -12,8 +12,8 @@
 	minimal_player_age = 7
 	exp_requirements = 300
 	exp_type = EXP_TYPE_CREW
-	wiki_page = "Space_Law"
-	special_notice = "You're the Warden, not a Security Officer. Your job is in the brig processing criminals, not patrolling the station."
+	wiki_page = "Space_Law" //WaspStation Edit - Wikilinks/Warning
+	special_notice = "You're the Warden, not a Security Officer. Your job is in the brig processing criminals, not patrolling the station." //WaspStation Edit - Wikilinks/Warning
 
 	outfit = /datum/outfit/job/warden
 
@@ -37,8 +37,11 @@
 	belt = /obj/item/pda/warden
 	ears = /obj/item/radio/headset/headset_sec/alt
 	uniform = /obj/item/clothing/under/rank/security/warden
+	alt_uniform = /obj/item/clothing/under/rank/security/warden/grey //Wasp Edit - Alt Uniforms
 	shoes = /obj/item/clothing/shoes/jackboots
+	alt_suit = /obj/item/clothing/suit/armor/vest/warden
 	suit = /obj/item/clothing/suit/armor/vest/warden/alt
+	dcoat = /obj/item/clothing/suit/hooded/wintercoat/security //Wasp Edit - Alt Uniforms
 	gloves = /obj/item/clothing/gloves/color/black
 	head = /obj/item/clothing/head/warden
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses

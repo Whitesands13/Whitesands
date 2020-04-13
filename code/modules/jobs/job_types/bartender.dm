@@ -1,15 +1,15 @@
 /datum/job/bartender
 	title = "Bartender"
 	flag = BARTENDER
-	department_head = list("First Officer")
+	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the first officer"
+	supervisors = "the head of personnel"
 	selection_color = "#bbe291"
 	exp_type_department = EXP_TYPE_SERVICE // This is so the jobs menu can work properly
-	wiki_page = "Drinks"
+	wiki_page = "Drinks" //WaspStation Edit - Wikilinks/Warning
 
 	outfit = /datum/outfit/job/bartender
 
@@ -27,6 +27,8 @@
 	belt = /obj/item/pda/bar
 	ears = /obj/item/radio/headset/headset_srv
 	uniform = /obj/item/clothing/under/rank/civilian/bartender
+	alt_uniform = /obj/item/clothing/under/rank/civilian/bartender/purple //Wasp Edit - Alt Uniforms
+	alt_suit = /obj/item/clothing/suit/apron/purple_bartender 
 	suit = /obj/item/clothing/suit/armor/vest
 	backpack_contents = list(/obj/item/storage/box/beanbag=1)
 	shoes = /obj/item/clothing/shoes/laceup

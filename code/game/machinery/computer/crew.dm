@@ -31,8 +31,8 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 
 	var/list/jobs = new/list()
 	jobs["Captain"] = 00
-	jobs["First Officer"] = 02
-	jobs["Second Officer"] = 05
+	jobs["Head of Personnel"] = 02
+	jobs["Lieutenant"] = 05
 	jobs["Head of Security"] = 10
 	jobs["Warden"] = 11
 	jobs["Security Officer"] = 12
@@ -40,13 +40,13 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 	jobs["Brig Physician"] = 14
 	jobs["Chief Medical Officer"] = 20
 	jobs["Chemist"] = 21
-	jobs["Geneticist"] = 22
-	jobs["Virologist"] = 23
-	jobs["Medical Doctor"] = 24
-	jobs["Paramedic"] = 25
+	jobs["Virologist"] = 22
+	jobs["Medical Doctor"] = 23
+	jobs["Paramedic"] = 24
 	jobs["Research Director"] = 30
 	jobs["Scientist"] = 31
 	jobs["Roboticist"] = 32
+	jobs["Geneticist"] = 33
 	jobs["Chief Engineer"] = 40
 	jobs["Station Engineer"] = 41
 	jobs["Atmospheric Technician"] = 42
@@ -62,6 +62,7 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 	jobs["Mime"] = 67
 	jobs["Janitor"] = 68
 	jobs["Lawyer"] = 69
+	jobs["Psychologist"] = 70
 	jobs["Admiral"] = 200
 	jobs["CentCom Commander"] = 210
 	jobs["Custodian"] = 211

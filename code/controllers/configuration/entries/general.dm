@@ -105,6 +105,20 @@
 	integer = FALSE
 	min_val = 0
 
+//Waspstation Begin - Autotranfer vote
+
+/datum/config_entry/number/vote_autotransfer_initial //length of time before the first autotransfer vote is called (deciseconds, default 2 hours)
+	config_entry_value = 72000
+	integer = FALSE
+	min_val = 0
+
+/datum/config_entry/number/vote_autotransfer_interval //length of time to wait before subsequent autotransfer votes (deciseconds, default 30 minutes)
+	config_entry_value = 18000
+	integer = FALSE
+	min_val = 0
+
+//Waspstation End
+
 /datum/config_entry/flag/default_no_vote	// vote does not default to nochange/norestart
 
 /datum/config_entry/flag/no_dead_vote	// dead people can't vote
@@ -292,12 +306,6 @@
 	integer = FALSE
 
 /datum/config_entry/flag/maprotation
-
-/datum/config_entry/number/maprotatechancedelta
-	config_entry_value = 0.75
-	min_val = 0
-	max_val = 1
-	integer = FALSE
 
 /datum/config_entry/number/soft_popcap
 	config_entry_value = null
@@ -499,3 +507,21 @@
 /datum/config_entry/flag/reopen_roundstart_suicide_roles_command_report
 
 /datum/config_entry/flag/auto_profile
+
+// DISCORD ROLE STUFFS
+// Using strings for everything because BYOND does not like numbers this big
+// (exception to the above is required living hours haha)
+/datum/config_entry/flag/enable_discord_autorole
+
+/datum/config_entry/number/required_living_hours
+
+/datum/config_entry/string/discord_token
+
+/datum/config_entry/string/discord_guildid
+
+/datum/config_entry/string/discord_roleid
+
+//Begin Wasp Edit 
+/datum/config_entry/flag/minimaps_enabled
+	config_entry_value = TRUE
+//End Wasp Edit

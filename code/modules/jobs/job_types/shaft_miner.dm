@@ -1,14 +1,14 @@
 /datum/job/mining
 	title = "Shaft Miner"
 	flag = MINER
-	department_head = list("First Officer")
+	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 3
 	spawn_positions = 3
-	supervisors = "the quartermaster and the first officer"
+	supervisors = "the quartermaster and the head of personnel"
 	selection_color = "#dcba97"
-	wiki_page = "Shaft_Miner"
+	wiki_page = "Shaft_Miner" //WaspStation Edit - Wikilinks/Warning
 
 	outfit = /datum/outfit/job/miner
 
@@ -28,6 +28,9 @@
 	shoes = /obj/item/clothing/shoes/workboots/mining
 	gloves = /obj/item/clothing/gloves/color/black
 	uniform = /obj/item/clothing/under/rank/cargo/miner/lavaland
+	alt_uniform = /obj/item/clothing/under/rank/cargo/miner //Wasp Edit - Alt Uniforms
+	alt_suit = /obj/item/clothing/suit/hazardvest
+	dcoat = /obj/item/clothing/suit/hooded/wintercoat/miner //Wasp Edit - Alt Uniforms
 	l_pocket = /obj/item/reagent_containers/hypospray/medipen/survival
 	r_pocket = /obj/item/storage/bag/ore	//causes issues if spawned in backpack
 	backpack_contents = list(

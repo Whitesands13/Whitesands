@@ -1,15 +1,15 @@
 /datum/job/clown
 	title = "Clown"
 	flag = CLOWN
-	department_head = list("First Officer")
+	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the first officer"
+	supervisors = "the head of personnel"
 	selection_color = "#dddddd"
-	wiki_page = "Clown"
-	special_notice = "There is a difference between funny pranks and griefing. Know it."
+	wiki_page = "Clown" //WaspStation Edit - Wikilinks/Warning
+	special_notice = "There is a difference between funny pranks and griefing. Know it." //WaspStation Edit - Wikilinks/Warning
 
 	outfit = /datum/outfit/job/clown
 
@@ -32,6 +32,7 @@
 	belt = /obj/item/pda/clown
 	ears = /obj/item/radio/headset/headset_srv
 	uniform = /obj/item/clothing/under/rank/civilian/clown
+	alt_uniform = /obj/item/clothing/under/rank/civilian/clown/green //Wasp Edit - Alt Uniforms
 	shoes = /obj/item/clothing/shoes/clown_shoes
 	mask = /obj/item/clothing/mask/gas/clown_hat
 	l_pocket = /obj/item/bikehorn
@@ -58,6 +59,7 @@
 		return
 
 	H.fully_replace_character_name(H.real_name, pick(GLOB.clown_names)) //rename the mob AFTER they're equipped so their ID gets updated properly.
+	ADD_TRAIT(H, TRAIT_NAIVE, JOB_TRAIT)
 	H.dna.add_mutation(CLOWNMUT)
 	for(var/datum/mutation/human/clumsy/M in H.dna.mutations)
 		M.mutadone_proof = TRUE

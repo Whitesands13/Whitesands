@@ -14,7 +14,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 /obj/item/pda
 	name = "\improper PDA"
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. Functionality determined by a preprogrammed ROM cartridge."
-	icon = 'icons/obj/pda.dmi'
+	icon = 'waspstation/icons/obj/pda.dmi' //WaspStation Edit - Better PDAs from Eris(?)
 	icon_state = "pda"
 	item_state = "electronic"
 	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
@@ -212,7 +212,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 
 	user.set_machine(src)
 
-	var/dat = ""
+	var/dat = "" // WaspStation Edit - PDA Redesign
 	dat += assets.css_tag()
 	dat += emoji_s.css_tag()
 
@@ -222,14 +222,6 @@ GLOBAL_LIST_EMPTY(PDAs)
 		dat += " | [PDAIMG(eject)]   <a href='byond://?src=[REF(src)];choice=Eject'>Eject [cartridge]</a>"
 	if(mode)
 		dat += " | [PDAIMG(menu)]   <a href='byond://?src=[REF(src)];choice=Return'>Return</a>"
-
-	if (mode == 0)
-		dat += "<div align=\"center\">"
-		dat += "<br><a href='byond://?src=[REF(src)];choice=Toggle_Font'>Toggle Font</a>"
-		dat += " | <a href='byond://?src=[REF(src)];choice=Change_Color'>Change Color</a>"
-		dat += " | <a href='byond://?src=[REF(src)];choice=Toggle_Underline'>Toggle Underline</a>" //underline button
-
-		dat += "</div>"
 
 	dat += "<br>"
 
@@ -352,7 +344,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 			if(41) //crew manifest
 				dat += "<h4>Crew Manifest</h4>"
 				dat += "<center>"
-				dat += GLOB.data_core.get_manifest()
+				dat += GLOB.data_core.get_manifest_html()
 				dat += "</center>"
 
 			if(3)
@@ -399,26 +391,6 @@ GLOBAL_LIST_EMPTY(PDAs)
 //BASIC FUNCTIONS===================================
 
 			if("Refresh")//Refresh, goes to the end of the proc.
-
-			if ("Toggle_Font")
-				//CODE REVISION 2
-				font_index = (font_index + 1) % 4
-
-				switch(font_index)
-					if (MODE_MONO)
-						font_mode = FONT_MONO
-					if (MODE_SHARE)
-						font_mode = FONT_SHARE
-					if (MODE_ORBITRON)
-						font_mode = FONT_ORBITRON
-					if (MODE_VT)
-						font_mode = FONT_VT
-			if ("Change_Color")
-				var/new_color = input("Please enter a color name or hex value (Default is \'#808000\').",background_color)as color
-				background_color = new_color
-
-			if ("Toggle_Underline")
-				underline_flag = !underline_flag
 
 			if("Return")//Return
 				if(mode<=9)
@@ -521,13 +493,13 @@ GLOBAL_LIST_EMPTY(PDAs)
 			if("Clear")//Clears messages
 				tnote = null
 			if("Ringtone")
-				var/t = input(U, "Please enter new ringtone", name, ttone) as text|null
+				var/t = stripped_input(U, "Please enter new ringtone", name, ttone, 20)
 				if(in_range(src, U) && loc == U && t)
 					if(SEND_SIGNAL(src, COMSIG_PDA_CHANGE_RINGTONE, U, t) & COMPONENT_STOP_RINGTONE_CHANGE)
 						U << browse(null, "window=pda")
 						return
 					else
-						ttone = copytext(sanitize(t), 1, 20)
+						ttone = t
 				else
 					U << browse(null, "window=pda")
 					return
@@ -918,12 +890,12 @@ GLOBAL_LIST_EMPTY(PDAs)
 		switch(scanmode)
 
 			if(PDA_SCANNER_MEDICAL)
-				C.visible_message("<span class='alert'>[user] has analyzed [C]'s vitals!</span>")
+				C.visible_message("<span class='notice'>[user] analyzes [C]'s vitals.</span>")
 				healthscan(user, C, 1)
 				add_fingerprint(user)
 
 			if(PDA_SCANNER_HALOGEN)
-				C.visible_message("<span class='warning'>[user] has analyzed [C]'s radiation levels!</span>")
+				C.visible_message("<span class='notice'>[user] analyzes [C]'s radiation levels.</span>")
 
 				user.show_message("<span class='notice'>Analyzing Results for [C]:</span>")
 				if(C.radiation)
@@ -1079,7 +1051,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 	if(incapacitated())
 		return
 	if(!isnull(aiPDA))
-		var/HTML = "<html><head><title>AI PDA Message Log</title></head><body>[aiPDA.tnote]</body></html>"
+		var/HTML = "<html><head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'><title>AI PDA Message Log</title></head><body>[aiPDA.tnote]</body></html>"
 		user << browse(HTML, "window=log;size=400x444;border=1;can_resize=1;can_close=1;can_minimize=0")
 	else
 		to_chat(user, "<span class='warning'>You do not have a PDA! You should make an issue report about this.</span>")

@@ -12,8 +12,8 @@
 	minimal_player_age = 7
 	exp_requirements = 300
 	exp_type = EXP_TYPE_CREW
-	wiki_page = "Space_Law"
-	special_notice = "Space law is THE law. Follow it."
+	wiki_page = "Space_Law" //WaspStation Edit - Wikilinks/Warning
+	special_notice = "Space law is THE law. Follow it." //WaspStation Edit - Wikilinks/Warning
 
 	outfit = /datum/outfit/job/security
 
@@ -64,7 +64,7 @@ GLOBAL_LIST_INIT(available_depts, list(SEC_DEPT_ENGINEERING, SEC_DEPT_MEDICAL, S
 			accessory = /obj/item/clothing/accessory/armband/engine
 		if(SEC_DEPT_MEDICAL)
 			ears = /obj/item/radio/headset/headset_sec/alt/department/med
-			dep_access = list(ACCESS_MEDICAL, ACCESS_MORGUE, ACCESS_SURGERY, ACCESS_CLONING)
+			dep_access = list(ACCESS_MEDICAL, ACCESS_MORGUE, ACCESS_SURGERY)
 			destination = /area/security/checkpoint/medical
 			spawn_point = locate(/obj/effect/landmark/start/depsec/medical) in GLOB.department_security_spawns
 			accessory =  /obj/item/clothing/accessory/armband/medblue
@@ -96,14 +96,13 @@ GLOBAL_LIST_INIT(available_depts, list(SEC_DEPT_ENGINEERING, SEC_DEPT_MEDICAL, S
 			T = get_turf(spawn_point)
 			H.Move(T)
 		else
-			var/safety = 0
-			while(safety < 25)
-				T = safepick(get_area_turfs(destination))
-				if(T && !H.Move(T))
-					safety += 1
-					continue
-				else
+			var/list/possible_turfs = get_area_turfs(destination)
+			while (length(possible_turfs))
+				var/I = rand(1, possible_turfs.len)
+				var/turf/target = possible_turfs[I]
+				if (H.Move(target))
 					break
+				possible_turfs.Cut(I,I+1)
 	if(department)
 		to_chat(M, "<b>You have been assigned to [department]!</b>")
 	else
@@ -118,9 +117,12 @@ GLOBAL_LIST_INIT(available_depts, list(SEC_DEPT_ENGINEERING, SEC_DEPT_MEDICAL, S
 	belt = /obj/item/pda/security
 	ears = /obj/item/radio/headset/headset_sec/alt
 	uniform = /obj/item/clothing/under/rank/security/officer
+	alt_uniform = /obj/item/clothing/under/rank/security/officer/grey //Wasp Edit - Alt Uniforms
 	gloves = /obj/item/clothing/gloves/color/black
 	head = /obj/item/clothing/head/helmet/sec
 	suit = /obj/item/clothing/suit/armor/vest/alt
+	alt_suit = /obj/item/clothing/suit/armor/vest
+	dcoat = /obj/item/clothing/suit/hooded/wintercoat/security //Wasp Edit - Alt Uniforms
 	shoes = /obj/item/clothing/shoes/jackboots
 	l_pocket = /obj/item/restraints/handcuffs
 	r_pocket = /obj/item/assembly/flash/handheld

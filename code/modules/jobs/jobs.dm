@@ -1,7 +1,7 @@
 GLOBAL_LIST_INIT(command_positions, list(
 	"Captain",
-	"First Officer",
-	"Second Officer",
+	"Head of Personnel",
+	"Lieutenant",
 	"Head of Security",
 	"Chief Engineer",
 	"Research Director",
@@ -30,22 +30,25 @@ GLOBAL_LIST_INIT(science_positions, list(
 
 
 GLOBAL_LIST_INIT(supply_positions, list(
-	"First Officer",
+	"Head of Personnel",
 	"Quartermaster",
 	"Cargo Technician",
 	"Shaft Miner"))
 
 
 GLOBAL_LIST_INIT(civilian_positions, list(
+	"Lieutenant",
 	"Bartender",
 	"Botanist",
 	"Cook",
 	"Janitor",
 	"Curator",
+	"Psychologist",
 	"Lawyer",
 	"Chaplain",
 	"Clown",
 	"Mime",
+	"Prisoner",
 	"Assistant"))
 
 
@@ -62,6 +65,18 @@ GLOBAL_LIST_INIT(nonhuman_positions, list(
 	"Cyborg",
 	ROLE_PAI))
 
+// job categories for rendering the late join menu
+GLOBAL_LIST_INIT(position_categories, list(
+	EXP_TYPE_COMMAND = list("jobs" = command_positions, "color" = "#ccccff"),
+	EXP_TYPE_ENGINEERING = list("jobs" = engineering_positions, "color" = "#ffeeaa"),
+	EXP_TYPE_SUPPLY = list("jobs" = supply_positions, "color" = "#ddddff"),
+	EXP_TYPE_SILICON = list("jobs" = nonhuman_positions - "pAI", "color" = "#ccffcc"),
+	EXP_TYPE_SERVICE = list("jobs" = civilian_positions, "color" = "#bbe291"),
+	EXP_TYPE_MEDICAL = list("jobs" = medical_positions, "color" = "#ffddf0"),
+	EXP_TYPE_SCIENCE = list("jobs" = science_positions, "color" = "#ffddff"),
+	EXP_TYPE_SECURITY = list("jobs" = security_positions, "color" = "#ffdddd")
+))
+
 GLOBAL_LIST_INIT(exp_jobsmap, list(
 	EXP_TYPE_CREW = list("titles" = command_positions | engineering_positions | medical_positions | science_positions | supply_positions | security_positions | civilian_positions | list("AI","Cyborg")), // crew positions
 	EXP_TYPE_COMMAND = list("titles" = command_positions),
@@ -71,7 +86,7 @@ GLOBAL_LIST_INIT(exp_jobsmap, list(
 	EXP_TYPE_SUPPLY = list("titles" = supply_positions),
 	EXP_TYPE_SECURITY = list("titles" = security_positions),
 	EXP_TYPE_SILICON = list("titles" = list("AI","Cyborg")),
-	EXP_TYPE_SERVICE = list("titles" = civilian_positions),
+	EXP_TYPE_SERVICE = list("titles" = civilian_positions)
 ))
 
 GLOBAL_LIST_INIT(exp_specialmap, list(
@@ -118,7 +133,7 @@ GLOBAL_PROTECT(exp_specialmap)
 	job = cap_expand.Replace(job, "captain")
 	job = cmo_expand.Replace(job, "chief medical officer")
 	job = hos_expand.Replace(job, "head of security")
-	job = hop_expand.Replace(job, "first officer")
+	job = hop_expand.Replace(job, "head of personnel")
 	job = rd_expand.Replace(job, "research director")
 	job = ce_expand.Replace(job, "chief engineer")
 	job = qm_expand.Replace(job, "quartermaster")

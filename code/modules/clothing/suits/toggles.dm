@@ -4,7 +4,7 @@
 	actions_types = list(/datum/action/item_action/toggle_hood)
 	var/obj/item/clothing/head/hooded/hood
 	var/hoodtype = /obj/item/clothing/head/hooded/winterhood //so the chaplain hoodie or other hoodies can override this
-	pocket_storage_component_path = FALSE
+	pocket_storage_component_path = FALSE // WaspStation Edit - Exowear Pockets
 
 /obj/item/clothing/suit/hooded/Initialize()
 	. = ..()
@@ -185,6 +185,7 @@
 	if(!helmettype)
 		return
 	if(!helmet)
+		to_chat(H, "<span class='warning'>The helmet's lightbulb seems to be damaged! You'll need a replacement bulb.</span>")
 		return
 	if(!suittoggled)
 		if(ishuman(src.loc))

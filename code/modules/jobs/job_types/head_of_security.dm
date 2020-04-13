@@ -13,7 +13,8 @@
 	req_admin_notify = 1
 	minimal_player_age = 14
 	exp_requirements = 300
-	wiki_page = "Head_of_Security"
+	wiki_page = "Head_of_Security" //WaspStation Edit - Wikilinks/Warning
+	special_notice = "Remember, Space Law is THE law. Follow it." //WaspStation Edit - Wikilinks/Warning
 	exp_type = EXP_TYPE_CREW
 	exp_type_department = EXP_TYPE_SECURITY
 
@@ -41,8 +42,11 @@
 	belt = /obj/item/pda/heads/hos
 	ears = /obj/item/radio/headset/heads/hos/alt
 	uniform = /obj/item/clothing/under/rank/security/head_of_security
+	alt_uniform = /obj/item/clothing/under/rank/security/head_of_security/grey //Wasp Edit - Alt Uniforms
 	shoes = /obj/item/clothing/shoes/jackboots
 	suit = /obj/item/clothing/suit/armor/hos/trenchcoat
+	alt_suit = /obj/item/clothing/suit/armor/hos
+	dcoat = /obj/item/clothing/suit/hooded/wintercoat/security //Wasp Edit - Alt Uniforms
 	gloves = /obj/item/clothing/gloves/color/black
 	head = /obj/item/clothing/head/HoS/beret
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses

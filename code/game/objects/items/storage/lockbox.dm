@@ -54,7 +54,7 @@
 		desc += "It appears to be broken."
 		icon_state = src.icon_broken
 		if(user)
-			visible_message("<span class='warning'>\The [src] has been broken by [user] with an electromagnetic card!</span>")
+			visible_message("<span class='warning'>\The [src] is broken by [user] with an electromagnetic card!</span>")
 			return
 
 /obj/item/storage/lockbox/Entered()
@@ -177,7 +177,7 @@
 /obj/item/storage/lockbox/medal/service
 	name = "service award box"
 	desc = "A locked box used to store awards to be given to members of the service department."
-	req_access = list(ACCESS_FO)
+	req_access = list(ACCESS_HOP)
 
 /obj/item/storage/lockbox/medal/service/PopulateContents()
 		new /obj/item/clothing/accessory/medal/silver/excellence(src)

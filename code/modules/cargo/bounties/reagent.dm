@@ -136,7 +136,7 @@
 		/datum/reagent/medicine/diphenhydramine,\
 		/datum/reagent/drug/space_drugs,\
 		/datum/reagent/drug/crank,\
-		/datum/reagent/blackpowder,\
+		/datum/reagent/gunpowder,\
 		/datum/reagent/napalm,\
 		/datum/reagent/firefighting_foam,\
 		/datum/reagent/consumable/mayonnaise,\
@@ -238,8 +238,10 @@
 		/datum/reagent/medicine/atropine,\
 		/datum/reagent/medicine/cryoxadone,\
 		/datum/reagent/medicine/salbutamol,\
-		/datum/reagent/medicine/rhigoxane,\
-		/datum/reagent/medicine/trophazole,\
+		/* WaspStation Begin - No Cobby
+		/datum/reagent/medicine/C2/hercuri,\
+		/datum/reagent/medicine/C2/probital,\
+		WaspStation End */
 		/datum/reagent/drug/methamphetamine,\
 		/datum/reagent/drug/crank,\
 		/datum/reagent/nitrous_oxide,\
