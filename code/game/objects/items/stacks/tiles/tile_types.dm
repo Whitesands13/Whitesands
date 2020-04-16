@@ -337,11 +337,9 @@
 
 /obj/item/stack/tile/plasteel/dark
 	turf_type = /turf/open/floor/plasteel/dark
-	color = COLOR_TILE_GRAY
 
 /obj/item/stack/tile/plasteel/white
 	turf_type = /turf/open/floor/plasteel/white
-	color = COLOR_WHITE
 	
 /obj/item/stack/tile/material
 	name = "tile"

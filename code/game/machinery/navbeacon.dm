@@ -7,7 +7,6 @@
 	icon_state = "navbeacon0-f"
 	name = "navigation beacon"
 	desc = "A radio beacon used for bot navigation and crew wayfinding."
-	level = 1		// underfloor
 	plane = FLOOR_PLANE
 	layer = UNDER_CATWALK
 	max_integrity = 500

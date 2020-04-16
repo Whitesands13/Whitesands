@@ -155,6 +155,7 @@
 	name = "engraved floor"
 
 /turf/open/floor/plasteel/vaporwave
+	color = null
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "pinkblack"
 
@@ -201,4 +202,4 @@
 	icon_state = "bluespace"
 
 /turf/open/floor/plasteel/sepia
-	icon_state = "sepia"
+	color = "#938170"

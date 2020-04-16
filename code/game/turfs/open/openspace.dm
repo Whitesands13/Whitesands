@@ -46,7 +46,7 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 	return ..()
 
 /turf/open/openspace/can_have_cabling()
-	if(locate(/obj/structure/lattice/catwalk, src))
+	if(locate(/obj/structure/catwalk, src))
 		return TRUE
 	return FALSE
 

@@ -1,10 +1,10 @@
-/obj/effect/turf_decal/stripes/line
+/obj/effect/floor_decal/industrial/warning
 	icon_state = "warning"
 
-/obj/effect/turf_decal/stripes/end
+/obj/effect/floor_decal/industrial/warning/cee
 	icon_state = "warningcee"
 
-/obj/effect/turf_decal/stripes/corner
+/obj/effect/floor_decal/industrial/warning/corner
 	icon_state = "warningcorner"
 
 /obj/effect/turf_decal/stripes/box
@@ -13,7 +13,7 @@
 /obj/effect/turf_decal/stripes/full
 	icon_state = "warningfulltile"
 
-/obj/effect/turf_decal/stripes/asteroid/line
+/obj/effect/floor_decal/industrial/warning/dust
 	icon_state = "warning_dust"
 
 /obj/effect/turf_decal/stripes/asteroid/end
@@ -59,55 +59,55 @@
 /obj/effect/turf_decal/stripes/red/full
 	icon_state = "stripefull"
 
-/obj/effect/turf_decal/delivery
+/obj/effect/floor_decal/industrial/hatch
 	icon_state = "delivery"
 	color = COLOR_WARNING
 
-/obj/effect/turf_decal/delivery/white
+/obj/effect/floor_decal/industrial/hatch/white
 	icon_state = "delivery_white"
 	color = COLOR_WHITE
 
-/obj/effect/turf_decal/delivery/red
+/obj/effect/floor_decal/industrial/hatch/red
 	icon_state = "delivery_red"
 	color = COLOR_RED
 
-/obj/effect/turf_decal/bot
+/obj/effect/floor_decal/industrial/outline/yellow
 	icon_state = "outline"
 	color = COLOR_WARNING
 
-/obj/effect/turf_decal/bot/right
+/obj/effect/floor_decal/industrial/outline/yellow/right
 	icon_state = "bot_right"
 
-/obj/effect/turf_decal/bot/left
+/obj/effect/floor_decal/industrial/outline/yellow/left
 	icon_state = "bot_left"
 
-/obj/effect/turf_decal/bot_white
+/obj/effect/floor_decal/industrial/outline/yellow_white
 	icon_state = "outline"
 	color = COLOR_WHITE
 
-/obj/effect/turf_decal/bot_white/right
+/obj/effect/floor_decal/industrial/outline/yellow_white/right
 	icon_state = "bot_right_white"
 
-/obj/effect/turf_decal/bot_white/left
+/obj/effect/floor_decal/industrial/outline/yellow_white/left
 	icon_state = "bot_left_white"
 
-/obj/effect/turf_decal/bot_red
+/obj/effect/floor_decal/industrial/outline/yellow_red
 	icon_state = "outline"
 	color = COLOR_RED
 
-/obj/effect/turf_decal/bot_red/right
+/obj/effect/floor_decal/industrial/outline/yellow_red/right
 	icon_state = "bot_right_red"
 
-/obj/effect/turf_decal/bot_red/left
+/obj/effect/floor_decal/industrial/outline/yellow_red/left
 	icon_state = "bot_left_red"
 
-/obj/effect/turf_decal/loading_area
+/obj/effect/floor_decal/industrial/loading
 	icon_state = "loadingarea"
 
-/obj/effect/turf_decal/loading_area/white
+/obj/effect/floor_decal/industrial/loading/white
 	color = COLOR_WHITE
 
-/obj/effect/turf_decal/loading_area/red
+/obj/effect/floor_decal/industrial/loading/red
 	color = COLOR_WHITE
 
 /obj/effect/turf_decal/caution
@@ -119,13 +119,13 @@
 /obj/effect/turf_decal/caution/red
 	color = COLOR_RED
 
-/obj/effect/turf_decal/caution/stand_clear
+/obj/effect/floor_decal/industrial/stand_clear
 	icon_state = "stand_clear"
 
-/obj/effect/turf_decal/caution/stand_clear/white
+/obj/effect/floor_decal/industrial/stand_clear/white
 	color = COLOR_WHITE
 
-/obj/effect/turf_decal/caution/stand_clear/red
+/obj/effect/floor_decal/industrial/stand_clear/red
 	color = COLOR_RED
 
 /obj/effect/turf_decal/arrows
