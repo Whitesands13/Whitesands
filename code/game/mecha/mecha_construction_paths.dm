@@ -59,7 +59,7 @@
 	. = user.transferItemToLoc(I, parent)
 	if(.)
 		var/atom/parent_atom = parent
-		user.visible_message("<span class='notice'>[user] has connected [I] to [parent].</span>", "<span class='notice'>You connect [I] to [parent].</span>")
+		user.visible_message("<span class='notice'>[user] connects [I] to [parent].</span>", "<span class='notice'>You connect [I] to [parent].</span>")
 		parent_atom.add_overlay(I.icon_state+"+o")
 		qdel(I)
 
@@ -1051,10 +1051,10 @@
 			"desc" = "External armor is wrenched."
 		),
 		list(
-			"key" = /obj/item/assembly/signaler/anomaly/bluespace,
+			"key" = /obj/item/assembly/signaler/anomaly, //WaspStation Edit - Any anomaly core for Phazons
 			"action" = ITEM_DELETE,
 			"back_key" = TOOL_WELDER,
-			"desc" = "Anomaly core socket is open.",
+			"desc" = "Bluespace anomaly core socket is open.",
 			"icon_state" = "phazon24"
 		)
 	)
@@ -1189,8 +1189,8 @@
 				user.visible_message("<span class='notice'>[user] unfastens Phazon Armor Plates.</span>", "<span class='notice'>You unfasten Phazon Armor Plates.</span>")
 		if(26)
 			if(diff==FORWARD)
-				user.visible_message("<span class='notice'>[user] carefully inserts the bluespace anomaly core into [parent] and secures it.</span>",
-					"<span class='notice'>You slowly place the bluespace anomaly core into its socket and close its chamber.</span>")
+				user.visible_message("<span class='notice'>[user] carefully inserts the anomaly core into [parent] and secures it.</span>", //WS Edit
+					"<span class='notice'>You slowly place the anomaly core into its socket and close its chamber.</span>") //WS Edit - Any anomaly core for phazons
 	return TRUE
 
 //ODYSSEUS

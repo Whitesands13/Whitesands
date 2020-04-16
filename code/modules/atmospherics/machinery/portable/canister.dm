@@ -52,7 +52,8 @@
 		"stimulum" = /obj/machinery/portable_atmospherics/canister/stimulum,
 		"pluoxium" = /obj/machinery/portable_atmospherics/canister/pluoxium,
 		"caution" = /obj/machinery/portable_atmospherics/canister,
-		"miasma" = /obj/machinery/portable_atmospherics/canister/miasma
+		"miasma" = /obj/machinery/portable_atmospherics/canister/miasma,
+		"freon" = /obj/machinery/portable_atmospherics/canister/freon
 	)
 
 /obj/machinery/portable_atmospherics/canister/interact(mob/user)
@@ -147,6 +148,13 @@
 	gas_type = /datum/gas/miasma
 	filled = 1
 
+/obj/machinery/portable_atmospherics/canister/freon
+	name = "freon canister"
+	desc = "Freon. Can absorb heat"
+	icon_state = "freon"
+	gas_type = /datum/gas/freon
+	filled = 1
+
 /obj/machinery/portable_atmospherics/canister/fusion_test
 	name = "fusion test canister"
 	desc = "Don't be a badmin."
@@ -234,6 +242,7 @@
 		. += "can-open"
 	if(connected_port)
 		. += "can-connector"
+	/* WaspStation Edit - Use our overlays
 	var/pressure = air_contents.return_pressure()
 	if(pressure >= 40 * ONE_ATMOSPHERE)
 		. += "can-o3"
@@ -243,6 +252,7 @@
 		. += "can-o1"
 	else if(pressure >= 10)
 		. += "can-o0"
+	WaspStation End */
 
 /obj/machinery/portable_atmospherics/canister/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > temperature_resistance)

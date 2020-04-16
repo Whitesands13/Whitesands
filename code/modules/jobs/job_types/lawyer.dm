@@ -8,6 +8,7 @@
 	spawn_positions = 2
 	supervisors = "the head of personnel"
 	selection_color = "#dddddd"
+	special_notice = "You are not a security officer. However, you represent the law and can defend those who are mishandled by security in court." //WaspStation Edit - Wikilinks/Warning
 	wiki_page = "Lawyer" //WaspStation Edit - Wikilinks/Warning
 	var/lawyers = 0 //Counts lawyer amount
 
@@ -28,6 +29,7 @@
 	belt = /obj/item/pda/lawyer
 	ears = /obj/item/radio/headset/headset_srvsec
 	uniform = /obj/item/clothing/under/rank/civilian/lawyer/bluesuit
+	alt_uniform = /obj/item/clothing/under/rank/civilian/lawyer/red //Wasp Edit - Alt Uniforms
 	suit = /obj/item/clothing/suit/toggle/lawyer
 	shoes = /obj/item/clothing/shoes/laceup
 	l_hand = /obj/item/storage/briefcase/lawyer

@@ -342,3 +342,21 @@
 /obj/item/stack/tile/plasteel/white
 	turf_type = /turf/open/floor/plasteel/white
 	color = COLOR_WHITE
+	
+/obj/item/stack/tile/material
+	name = "tile"
+	singular_name = "floor tile"
+	desc = "A tile of flooring."
+	icon_state = "material_tile"
+	turf_type = /turf/open/floor/material
+	material_flags = MATERIAL_ADD_PREFIX | MATERIAL_COLOR | MATERIAL_AFFECT_STATISTICS
+
+/obj/item/stack/tile/eighties
+	name = "retro tile"
+	singular_name = "retro floor tile"
+	desc = "A stack of floor tiles that remind you of an age of funk."
+	icon_state = "tile_eighties"
+	turf_type = /turf/open/floor/eighties
+
+/obj/item/stack/tile/eighties/loaded
+	amount = 15

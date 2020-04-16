@@ -191,8 +191,10 @@
 
 /obj/item/storage/bag/plants
 	name = "plant bag"
-	icon = 'icons/obj/hydroponics/equipment.dmi'
+	//WaspStation Begin - Better bag sprites
+	icon = 'waspstation/icons/obj/bags.dmi'
 	icon_state = "plantbag"
+	//WaspStation end
 	w_class = WEIGHT_CLASS_TINY
 	resistance_flags = FLAMMABLE
 
@@ -298,7 +300,7 @@
  * Trays - Agouri
  */
 /obj/item/storage/bag/tray
-	name = "tray"
+	name = "serving tray"
 	icon = 'icons/obj/food/containers.dmi'
 	icon_state = "tray"
 	desc = "A metal tray to lay food on."
@@ -355,6 +357,12 @@
 /obj/item/storage/bag/tray/Exited()
 	. = ..()
 	update_icon()
+
+/obj/item/storage/bag/tray/cafeteria
+	name = "cafeteria tray"
+	icon = 'icons/obj/food/containers.dmi'
+	icon_state = "foodtray"
+	desc = "A cheap metal tray to pile today's meal onto."
 
 /*
  *	Chemistry bag

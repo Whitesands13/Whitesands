@@ -111,12 +111,6 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	icon_state = "sec_headset"
 	keyslot = new /obj/item/encryptionkey/headset_sec
 
-/obj/item/radio/headset/headset_medsec
-	name = "medical-security radio headset"
-	desc = "Used to hear how many security officers need to be stiched back together."
-	icon_state = "medsec_headset"
-	keyslot = new /obj/item/encryptionkey/headset_medsec
-
 /obj/item/radio/headset/headset_sec/alt
 	name = "security bowman headset"
 	desc = "This is used by your elite security force. Protects ears from flashbangs."
@@ -162,6 +156,12 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	desc = "In the criminal justice headset, the encryption key represents two separate but equally important groups. Sec, who investigate crime, and Service, who provide services. These are their comms."
 	icon_state = "srvsec_headset"
 	keyslot = new /obj/item/encryptionkey/headset_srvsec
+
+/obj/item/radio/headset/headset_srvmed
+	name = "psychology headset"
+	desc = "A headset allowing the wearer to communicate with medbay and service."
+	icon_state = "med_headset"
+	keyslot = new /obj/item/encryptionkey/headset_srvmed
 
 /obj/item/radio/headset/headset_com
 	name = "command radio headset"
@@ -227,22 +227,6 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	desc = "The headset of the guy who will one day be captain."
 	icon_state = "com_headset"
 	keyslot = new /obj/item/encryptionkey/heads/head_of_personnel
-
-/obj/item/radio/headset/heads/lieutenant
-	name = "\proper the lieutenant's headset"
-	desc = "The headset of the Lieutenant."
-	icon_state = "com_headset"
-	keyslot = new /obj/item/encryptionkey/heads/lieutenant
-
-/obj/item/radio/headset/heads/lieutenant/alt
-	name = "\proper the lieutenant's bowman headset"
-	desc = "The headset of the Lieutenant. Protects ears from flashbangs."
-	icon_state = "com_headset_alt"
-	keyslot = new /obj/item/encryptionkey/heads/lieutenant
-
-/obj/item/radio/headset/heads/lieutenant/alt/ComponentInitialize()
-	. = ..()
-	AddComponent(/datum/component/wearertargeting/earprotection, list(ITEM_SLOT_EARS))
 
 /obj/item/radio/headset/headset_cargo
 	name = "supply radio headset"

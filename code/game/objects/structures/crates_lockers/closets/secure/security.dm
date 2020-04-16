@@ -144,7 +144,12 @@
 	new /obj/item/clothing/head/helmet/sec(src)
 	new /obj/item/radio/headset/headset_sec(src)
 	new /obj/item/radio/headset/headset_sec/alt(src)
-	new /obj/item/clothing/glasses/hud/security/sunglasses(src)
+ 	//Waspstation begin - Prescription HUDs
+	if(prob(75))
+		new /obj/item/clothing/glasses/hud/security/sunglasses(src)
+	else
+		new /obj/item/clothing/glasses/hud/security/prescription(src)
+	//Waspstation end
 	new /obj/item/flashlight/seclite(src)
 
 /obj/structure/closet/secure_closet/security/sec
@@ -213,7 +218,7 @@
 	new /obj/item/clothing/suit/armor/vest/det_suit(src)
 	new /obj/item/clothing/accessory/holster/detective(src) //WaspStation Edit - Made Holsters Accessories
 	new /obj/item/pinpointer/crew(src)
-	new /obj/item/twohanded/binoculars(src)
+	new /obj/item/binoculars(src)
 	new /obj/item/storage/box/rxglasses/spyglasskit(src)
 /obj/structure/closet/secure_closet/injection
 	name = "lethal injections"

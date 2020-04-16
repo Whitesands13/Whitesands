@@ -116,6 +116,20 @@
 	dna.species.handle_environment_pressure(environment, src)
 	dna.species.handle_body_temperature(src)
 
+/**
+ * get_body_temperature Returns the body temperature with any modifications applied
+ *
+ * This applies the result from proc/get_body_temp_normal_change() against the bodytemp_normal
+ * for the species and returns the result
+ *
+ * arguments:
+ * * apply_change (optional) Default True This applies the changes to body temperature normal
+ */
+/mob/living/carbon/human/get_body_temp_normal(apply_change=TRUE)
+	if(!apply_change)
+		return dna.species.bodytemp_normal
+	return dna.species.bodytemp_normal + get_body_temp_normal_change()
+
 ///FIRE CODE
 /mob/living/carbon/human/handle_fire()
 	. = ..()
@@ -211,7 +225,7 @@
 		if(thermal_protection_flags & HAND_RIGHT)
 			thermal_protection += THERMAL_PROTECTION_HAND_RIGHT
 
-	return min(1, thermal_protection)
+	return min(1,thermal_protection)
 
 //See proc/get_heat_protection_flags(temperature) for the description of this proc.
 /mob/living/carbon/human/proc/get_cold_protection_flags(temperature)
@@ -272,7 +286,7 @@
 		if(thermal_protection_flags & HAND_RIGHT)
 			thermal_protection += THERMAL_PROTECTION_HAND_RIGHT
 
-	return min(1, thermal_protection)
+	return min(1,thermal_protection)
 
 /mob/living/carbon/human/handle_random_events()
 	//Puke if toxloss is too high

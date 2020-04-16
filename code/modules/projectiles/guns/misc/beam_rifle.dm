@@ -28,6 +28,7 @@
 	weapon_weight = WEAPON_HEAVY
 	w_class = WEIGHT_CLASS_BULKY
 	ammo_type = list(/obj/item/ammo_casing/energy/beam_rifle/hitscan)
+	internal_cell = TRUE //prevents you from giving it an OP cell - WaspStation Edit
 	cell_type = /obj/item/stock_parts/cell/beam_rifle
 	canMouseDown = TRUE
 	pin = null
@@ -446,8 +447,6 @@
 			new /obj/effect/hotspot(T)
 	for(var/obj/O in range(aoe_structure_range, epicenter))
 		if(!isitem(O))
-			if(O.level == 1)	//Please don't break underfloor items!
-				continue
 			O.take_damage(aoe_structure_damage * get_damage_coeff(O), BURN, "laser", FALSE)
 
 /obj/projectile/beam/beam_rifle/proc/check_pierce(atom/target)

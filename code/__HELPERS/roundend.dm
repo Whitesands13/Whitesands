@@ -105,6 +105,8 @@
 	var/team_gid = 1
 	var/list/team_ids = list()
 
+	var/list/greentexters = list()//WS Edit - Metacoin
+
 	for(var/datum/antagonist/A in GLOB.antagonists)
 		if(!A.owner)
 			continue
@@ -124,11 +126,27 @@
 				team_ids[T] = team_gid++
 			antag_info["team"]["id"] = team_ids[T]
 
+		var/greentexted = TRUE
+
 		if(A.objectives.len)
 			for(var/datum/objective/O in A.objectives)
 				var/result = O.check_completion() ? "SUCCESS" : "FAIL"
+
+				if (result == "FAIL")
+					greentexted = FALSE
+
 				antag_info["objectives"] += list(list("objective_type"=O.type,"text"=O.explanation_text,"result"=result))
 		SSblackbox.record_feedback("associative", "antagonists", 1, antag_info)
+
+		if (greentexted)
+			if (A.owner && A.owner.key)
+				if (A.type != /datum/antagonist/custom)
+					var/client/C = GLOB.directory[ckey(A.owner.key)]
+					if (C)
+						greentexters |= C
+
+	for (var/client/C in greentexters)
+		C.process_greentext()
 
 /datum/controller/subsystem/ticker/proc/record_nuke_disk_location()
 	var/obj/item/disk/nuclear/N = locate() in GLOB.poi_list
@@ -196,6 +214,9 @@
 		if(!C.credits)
 			C.RollCredits()
 		C.playtitlemusic(40)
+
+		C.process_endround_metacoin()
+
 		if(speed_round)
 			C.give_award(/datum/award/achievement/misc/speed_round, C.mob)
 
@@ -248,7 +269,9 @@
 			if(!crewMind.current || !length(crewMind.crew_objectives))
 				continue
 			for(var/datum/objective/crew/CO in crewMind.crew_objectives)
+				var/client/C = CO.owner
 				if(CO.check_completion())
+					C.inc_metabalance(METACOIN_CO_REWARD, reason="Completed your crew objective!") //Waspstation Edit - Metacoin
 					to_chat(crewMind.current, "<br><B>Your optional objective</B>: [CO.explanation_text] <span class='green'><B>Success!</B></span>")
 					SSticker.successfulCrew += "<B>[crewMind.current.real_name]</B> (Played by: <B>[crewMind.key]</B>)<BR><B>Optional Objective</B>: [CO.explanation_text] <span class='green'><B>Success!</B></span>"
 				else
@@ -294,8 +317,17 @@
 	parts += antag_report()
 
 	CHECK_TICK
+
 	//Medals
 	parts += medal_report()
+	//Wasp Begin
+	CHECK_TICK
+
+	//Mouse
+	parts += mouse_report() 
+
+	CHECK_TICK
+	//Wasp End
 	//Station Goals
 	parts += goal_report()
 
@@ -447,7 +479,17 @@
 			parts += com
 		return "<div class='panel stationborder'>[parts.Join("<br>")]</div>"
 	return ""
-
+//Wasp Begin
+/datum/controller/subsystem/ticker/proc/mouse_report()
+	if(GLOB.mouse_food_eaten)
+		var/list/parts = list()
+		parts += "<span class='header'>Mouse stats:</span>"
+		parts += "Mouse Born: [GLOB.mouse_spawned]"
+		parts += "Mouse Killed: [GLOB.mouse_killed]"
+		parts += "Trash Eaten: [GLOB.mouse_food_eaten]"
+		return "<div class='panel stationborder'>[parts.Join("<br>")]</div>"
+	return ""
+//Wasp End
 /datum/controller/subsystem/ticker/proc/antag_report()
 	var/list/result = list()
 	var/list/all_teams = list()

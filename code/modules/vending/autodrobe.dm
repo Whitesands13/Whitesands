@@ -27,6 +27,7 @@
 					/obj/item/clothing/head/kitty = 1,
 					/obj/item/clothing/under/dress/skirt = 1,
 					/obj/item/clothing/head/beret = 1,
+					/obj/item/clothing/head/cowboy = 1, //Waspstation - Yee Haw
 					/obj/item/clothing/accessory/waistcoat = 1,
 					/obj/item/clothing/under/suit/black = 1,
 					/obj/item/clothing/head/that = 1,
@@ -145,6 +146,7 @@
 	default_price = 180
 	extra_price = 360
 	payment_department = ACCOUNT_SRV
+	light_mask="theater-light-mask"
 
 /obj/machinery/vending/autodrobe/canLoadItem(obj/item/I,mob/user)
 	return (I.type in products)

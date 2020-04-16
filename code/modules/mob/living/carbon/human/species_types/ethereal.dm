@@ -14,7 +14,7 @@
 	brutemod = 1.25 //They're weak to punches
 	attack_type = BURN //burn bish
 	damage_overlay_type = "" //We are too cool for regular damage overlays
-	species_traits = list(DYNCOLORS, AGENDER, NO_UNDERWEAR)
+	species_traits = list(DYNCOLORS, AGENDER, NO_UNDERWEAR, HAIR)
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_PRIDE | MIRROR_MAGIC | RACE_SWAP | ERT_SPAWN | SLIME_EXTRACT
 	species_language_holder = /datum/language_holder/ethereal
 	inherent_traits = list(TRAIT_NOHUNGER)
@@ -25,6 +25,8 @@
 	bodytemp_heat_damage_limit = FIRE_MINIMUM_TEMPERATURE_TO_SPREAD // about 150C
 	// Cold temperatures hurt faster as it is harder to move with out the heat energy
 	bodytemp_cold_damage_limit = (T20C - 10) // about 10c
+	hair_color = "fixedmutcolor"
+	hair_alpha = 140
 	var/current_color
 	var/EMPeffect = FALSE
 	var/emageffect = FALSE
@@ -37,6 +39,7 @@
 	//this is shit but how do i fix it? no clue.
 	loreblurb = "Ethereals are organic humanoid beings with a blood that has strange luminiscent and electrical properties. \
 				Ethereals are barred from most authority roles on Nanotrasen stations and are not protected by the AI's default Asimov laws."
+	var/drain_time = 0 //used to keep ethereals from spam draining power sources
 
 /datum/species/ethereal/on_species_gain(mob/living/carbon/C, datum/species/old_species, pref_load)
 	.=..()
@@ -129,18 +132,16 @@
 		if(ETHEREAL_CHARGE_NONE to ETHEREAL_CHARGE_LOWPOWER)
 			H.throw_alert("ethereal_charge", /obj/screen/alert/etherealcharge, 2)
 			if(H.health > 10.5)
-				apply_damage(0.65, TOX, null, null, H)
+				apply_damage(0.2, TOX, null, null, H)
 			brutemod = 1.75
 		if(ETHEREAL_CHARGE_LOWPOWER to ETHEREAL_CHARGE_NORMAL)
 			H.throw_alert("ethereal_charge", /obj/screen/alert/etherealcharge, 1)
 			brutemod = 1.5
 		if(ETHEREAL_CHARGE_FULL to ETHEREAL_CHARGE_OVERLOAD)
 			H.throw_alert("ethereal_overcharge", /obj/screen/alert/ethereal_overcharge, 1)
-			apply_damage(0.2, TOX, null, null, H)
 			brutemod = 1.5
 		if(ETHEREAL_CHARGE_OVERLOAD to ETHEREAL_CHARGE_DANGEROUS)
 			H.throw_alert("ethereal_overcharge", /obj/screen/alert/ethereal_overcharge, 2)
-			apply_damage(0.65, TOX, null, null, H)
 			brutemod = 1.75
 			if(prob(10)) //10% each tick for ethereals to explosively release excess energy if it reaches dangerous levels
 				discharge_process(H)
