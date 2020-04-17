@@ -3,8 +3,8 @@
 	color = COLOR_FLOORTILE_GRAY
 	icon_state = "tiled"
 	floor_tile = /obj/item/stack/tile/plasteel
-	broken_states = list("damaged1", "damaged2", "damaged3", "damaged4", "damaged5")
-	burnt_states = list("floorscorched1", "floorscorched2")
+	broken_states = list("broken0", "broken1", "broken2")
+	burnt_states = list("burned0", "burned1", "burned2")
 
 /turf/open/floor/plasteel/examine(mob/user)
 	. = ..()
@@ -53,25 +53,22 @@
 	color = null
 /turf/open/floor/plasteel/tech/grid
 	icon_state = "techfloor_grid"
+/turf/open/floor/plasteel/tech/techmaint
+	icon_state = "techmaint"
+
 
 /turf/open/floor/plasteel/new_tile
 	icon_state = "tile_full"
-	color = null
 /turf/open/floor/plasteel/new_tile/cargo_one
 	icon_state = "cargo_one_full"
 /turf/open/floor/plasteel/new_tile/kafel
 	icon_state = "kafel_full"
-/turf/open/floor/plasteel/new_tile/techmaint
-	icon_state = "techmaint"
 /turf/open/floor/plasteel/new_tile/monofloor
-	icon_state = "monofloor"
-	color = COLOR_TILE_GRAY
-/turf/open/floor/plasteel/new_tile/steel_grid
+	icon_state = "steel_monofloor"
+/turf/open/floor/plasteel/new_tile/grid
 	icon_state = "grid"
-	color = COLOR_TILE_GRAY
-/turf/open/floor/plasteel/new_tile/steel_ridged
+/turf/open/floor/plasteel/new_tile/ridged
 	icon_state = "ridged"
-	color = COLOR_TILE_GRAY
 
 /turf/open/floor/plasteel/white
 	color = COLOR_WHITE

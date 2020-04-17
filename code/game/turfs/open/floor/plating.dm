@@ -29,7 +29,7 @@
 		. += "<span class='notice'>It looks like the dents could be <i>welded</i> smooth.</span>"
 		return
 	if(attachment_holes)
-		. += "<span class='notice'>There are a few attachment holes for a new <i>tile</i> or reinforcement <i>sheets</i>.</span>"
+		. += "<span class='notice'>There are a few attachment holes for a new <i>tile</i>, catwalk <i>rods</i>, or reinforcement <i>sheets</i>.</span>"
 	else
 		. += "<span class='notice'>You might be able to build ontop of it with some <i>tiles</i>...</span>"
 
@@ -72,18 +72,14 @@
 				return
 		if(istype(C, /obj/item/stack/sheet/metal))
 			var/obj/item/stack/sheet/metal/R = C
-			if (R.get_amount() < 1)
-				to_chat(user, "<span class='warning'>You need one sheet to make a reinforced floor!</span>")
+			to_chat(user, "<span class='notice'>You begin reinforcing the floor...</span>")
+			if(do_after(user, 30, target = src))
+				if (R.get_amount() >= 1 && !istype(src, /turf/open/floor/engine))
+					PlaceOnTop(/turf/open/floor/engine, flags = CHANGETURF_INHERIT_AIR)
+					playsound(src, 'sound/items/deconstruct.ogg', 80, TRUE)
+					R.use(1)
+					to_chat(user, "<span class='notice'>You reinforce the floor.</span>")
 				return
-			else
-				to_chat(user, "<span class='notice'>You begin reinforcing the floor...</span>")
-				if(do_after(user, 30, target = src))
-					if (R.get_amount() >= 2 && !istype(src, /turf/open/floor/engine))
-						PlaceOnTop(/turf/open/floor/engine, flags = CHANGETURF_INHERIT_AIR)
-						playsound(src, 'sound/items/deconstruct.ogg', 80, TRUE)
-						R.use(1)
-						to_chat(user, "<span class='notice'>You reinforce the floor.</span>")
-					return
 
 	if(istype(C, /obj/item/stack/tile))
 		if(!broken && !burnt)

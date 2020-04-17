@@ -20,7 +20,7 @@
 	update_icon()
 
 /obj/structure/catwalk/over
-	layer = CATWALK_LAYER
+	layer = CATWALK_LAYER //over pipes, duh
 
 /obj/structure/catwalk/over/plated_catwalk
 	name = "plated catwalk"
@@ -47,7 +47,7 @@
 	if(plated_tile)
 		smooth = SMOOTH_FALSE
 		I = image('waspstation/icons/obj/catwalks.dmi', "plated")
-		I.color = plated_tile.color
+		I.color = plated_tile.turf_type.color
 		overlays += I
 	else
 		smooth = SMOOTH_TRUE

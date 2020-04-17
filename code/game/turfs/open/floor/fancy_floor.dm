@@ -17,7 +17,6 @@
 	clawfootstep = FOOTSTEP_WOOD_CLAW
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
 	tiled_dirt = FALSE
-	color = WOOD_COLOR_GENERIC
 
 /turf/open/floor/wood/mahogany
 	color = WOOD_COLOR_RICH

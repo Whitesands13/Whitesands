@@ -119,16 +119,19 @@
 /turf/open/floor/proc/break_tile()
 	if(broken)
 		return
-	icon_state = pick(broken_states)
+	var/image/I = image(icon = src.icon, pick(broken_states))
+	src.overlays += I
 	broken = 1
 
 /turf/open/floor/burn_tile()
 	if(broken || burnt)
 		return
 	if(burnt_states.len)
-		icon_state = pick(burnt_states)
+		var/image/I = image(icon = src.icon, pick(burnt_states))
+		src.overlays += I
 	else
-		icon_state = pick(broken_states)
+		var/image/I = image(icon = src.icon, pick(broken_states))
+		src.overlays += I
 	burnt = 1
 
 /turf/open/floor/proc/make_plating()
