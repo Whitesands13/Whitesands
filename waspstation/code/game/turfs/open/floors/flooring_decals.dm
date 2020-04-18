@@ -33,6 +33,7 @@ var/list/floor_decals = list()
 			O.color = detail_color
 			I.overlays += O
 		T.overlays += I
+	..()
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/floor_decal/carpet

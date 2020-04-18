@@ -45,9 +45,10 @@
 	else
 		icon_state = "open"
 	if(plated_tile)
+		var/turf/open/floor/turf_type = plated_tile.turf_type
 		smooth = SMOOTH_FALSE
 		I = image('waspstation/icons/obj/catwalks.dmi', "plated")
-		I.color = plated_tile.turf_type.color
+		I.color = turf_type.color
 		overlays += I
 	else
 		smooth = SMOOTH_TRUE
