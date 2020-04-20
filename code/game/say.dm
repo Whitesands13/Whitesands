@@ -32,6 +32,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	SEND_SIGNAL(src, COMSIG_MOVABLE_HEAR, args)
 
 /atom/movable/proc/can_speak()
+	SHOULD_BE_PURE(TRUE)
 	return 1
 
 /atom/movable/proc/send_speech(message, range = 7, obj/source = src, bubble_type, list/spans, datum/language/message_language = null, message_mode)
@@ -181,10 +182,13 @@ INITIALIZE_IMMEDIATE(/atom/movable/virtualspeaker)
 
 	// The mob's job identity
 	if(ishuman(M))
-		// Humans use their job as seen on the crew manifest. This is so the AI
-		// can know their job even if they don't carry an ID.
+		// Humans use their job as seen on the crew manifest if they don't have an ID with a job assigned. This is so the AI
+		// and other crewmembers can know their job even if they don't carry an ID or aren't assigned to anything.
 		var/datum/data/record/findjob = find_record("name", name, GLOB.data_core.general)
-		if(findjob)
+		var/mob/living/carbon/human/H = M
+		if(H.get_assignment(FALSE, FALSE))
+			job = H.get_assignment()
+		else if(findjob)
 			job = findjob.fields["rank"]
 		else
 			job = "Unknown"
