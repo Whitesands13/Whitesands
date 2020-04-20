@@ -28,7 +28,7 @@
 	contains = list(/obj/item/gun/ballistic/automatic/pistol/m1911)
 	crate_name = "portable scrubber crate"
 	dangerous = TRUE
-	
+
 /datum/supply_pack/costumes_toys/foamforce/vintage_foamforce_ammo
 	name = "Emmet's Vintage Heater Parts Crate"
 	desc = "Don't be forgetting spare parts for your heating unit as well! 'Worked great and fixed the problem with my heater not working, 10/10' - from Gorlex Naval Forces Midshipman Cherilyn C. Glover."
@@ -38,7 +38,7 @@
 	contains = list(/obj/item/ammo_box/magazine/m45)
 	crate_name = "monkey cube crate"
 	dangerous = TRUE
-	
+
 /datum/supply_pack/emergency/specialops
 	name = "Special Ops Supplies"
 	desc = "(*!&@#A TRIED AND TRUE SUPPLEMENTARY BUNDLE. CONTAINS A BOX OF FIVE EMP GRENADES, THREE SMOKEBOMBS, AN INCENDIARY GRENADE, AND A \"SLEEPY PEN\" FULL OF CHEAP POISONS!#@*$"
@@ -53,17 +53,7 @@
 	crate_name = "firefighting crate"
 	crate_type = /obj/structure/closet/crate/internals
 	dangerous = TRUE
-	
-/datum/supply_pack/emergency/resupply
-	name = "Uplink Rechargement Crate"
-	desc = "#!(<+EVERYBODY WANTS MORE FANCY SOUVENIRS. OUR TELE-CRYSTAL REFINERY IS WILLING TO FULFILL A RUSH ORDER, BUT AT A BIT OF A PREMIUM. MAYBE BE A BIT MORE STINGY IN THE FUTURE!}[\;<"
-	hidden = TRUE
-	cost = 14500
-	contains = list(/obj/item/stack/telecrystal)
-	crate_name = "wizard costume crate"
-	crate_type = /obj/structure/closet/crate/wooden
-	dangerous = TRUE
-	
+
 /datum/supply_pack/security/armory/cool_wt550_ammo
 	name = "WT-550 Auto Rifle Exotic Ammo Crate"
 	desc = "Contains one magazine of armor-piercing and one magazine of incendiary ammunition for the WT-550 Auto Rifle. Each magazine is designed to facilitate rapid tactical reloads. Requires Armory access to open. Sadly, our manufacturer discontinued the uranium-tipped bullets."
@@ -72,7 +62,7 @@
 	contains = list(/obj/item/ammo_box/magazine/wt550m9/wtap,
 					/obj/item/ammo_box/magazine/wt550m9/wtic)
 	dangerous = TRUE
-	
+
 /obj/item/stock_parts/cell/inducer_supply
 	maxcharge = 5000
 	charge = 5000
@@ -83,20 +73,29 @@
 	contains = list(/obj/item/inducer {cell_type = /obj/item/stock_parts/cell/inducer_supply; opened = 0}, /obj/item/inducer {cell_type = /obj/item/stock_parts/cell/inducer_supply; opened = 0})
 	crate_name = "inducer crate"
 	crate_type = /obj/structure/closet/crate/engineering/electrical
-	
-/datum/supply_pack/security/costumes_toys/evil
+
+/datum/supply_pack/emergency/recharge
+	name = "Uplink Rechargement Crate"
+	desc = "^#!$&EVERYBODY WANTS MORE FANCY SOUVENIRS. OUR TELE-CRYSTAL REFINERY IS WILLING TO FULFILL A RUSH ORDER, BUT AT A BIT OF A PREMIUM. MAYBE BE A BIT MORE STINGY IN THE FUTURE!$*&@#@"
+	hidden = TRUE
+	cost = 15700
+	contains = list(/obj/item/stack/telecrystal)
+	crate_name = "wizard costume crate"
+	crate_type = /obj/structure/closet/crate/wooden
+	dangerous = TRUE
+
+/datum/supply_pack/costumes_toys/wardrobe/evil
 	name = "Waffle Corporation Fashion Crate"
 	desc = "~*$#?THE PEAK IN TRAITOROUS FASHION IS HERE! IN COMING THE MOST LUXURY GARB FROM THE Chambre Syndicale de la Haute Couture FASHION SCHOOL, BROUGHT TO YOU BY THE WAFFLE CORPORATION. GUARANTEED TO STUN THE WARDEN WITH YOUR ABSOLUTELY PULCHRITUDINOUS LOOKS - AND YOUR 10MM PISTOL!^@`*,"
 	cost = 8500
 	hidden = TRUE
-	num_contained = 7
 	contains = list(/obj/item/storage/fancy/cigarettes/cigpack_syndicate,
 					/obj/item/clothing/under/syndicate/bloodred,
 					/obj/item/ammo_box/magazine/m10mm,
 					/obj/item/storage/belt/military/army,
 					/obj/item/clothing/head/hooded/human_head,
 					/obj/item/clothing/shoes/combat/sneakboots,
-					/obj/item/clothing/under/syndicate/bloodred/sleepytime,
+					/obj/item/storage/box/syndie_kit/sleepytime,
 					/obj/item/clothing/mask/muzzle,
 					/obj/item/clothing/under/syndicate/soviet,
 					/obj/item/clothing/suit/armor/vest/infiltrator,
@@ -112,6 +111,12 @@
 					/obj/item/gun/ballistic/derringer,
 					/obj/item/reagent_containers/syringe/mulligan)
 	crate_name = "surplus fashion crate"
+
+/datum/supply_pack/costumes_toys/wardrobe/evil/fill(obj/structure/closet/crate/C)
+	for(var/i in 1 to 10)
+		var/item = pick(contains)
+		new item(C)
+
 /datum/supply_pack/engine/am_jar
 	name = "Antimatter Containment Jar Crate"
 	desc = "Two Antimatter containment jars stuffed into a single crate."
