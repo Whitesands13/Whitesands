@@ -14,3 +14,4 @@
 	desc = "It's a jumpsuit for TerraGov's elite officers. Designed to be comfortable in heavy armor."
 	icon_state = "terraelite"
 	item_state = "terraelite"
+	
