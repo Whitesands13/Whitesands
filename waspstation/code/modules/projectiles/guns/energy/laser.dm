@@ -9,3 +9,4 @@
 	cell_type = /obj/item/stock_parts/cell/gun/terragovlow
 	internal_cell = TRUE
 	charge_delay = 1 //50 seconds to recharge the clip
+	
