@@ -11,3 +11,4 @@
 	actions_types = list()
 	can_bayonet = FALSE
 	mag_display = TRUE
+	
