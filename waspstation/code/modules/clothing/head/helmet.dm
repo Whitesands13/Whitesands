@@ -7,3 +7,4 @@
 	dog_fashion = null
 	icon = 'waspstation/icons/obj/clothing/hats.dmi'
 	mob_overlay_icon = 'waspstation/icons/mob/clothing/head.dmi'
+	
