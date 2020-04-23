@@ -13,3 +13,4 @@
 	item_state = "terraarmor"
 	icon = 'waspstation/icons/obj/clothing/suits.dmi'
 	mob_overlay_icon = 'waspstation/icons/mob/clothing/suits.dmi'
+	
