@@ -18,3 +18,4 @@
 	slowdown = 0
 	icon = 'waspstation/icons/obj/clothing/suits.dmi'
 	mob_overlay_icon = 'waspstation/icons/mob/clothing/suits.dmi'
+	
