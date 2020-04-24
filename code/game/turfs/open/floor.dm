@@ -301,7 +301,8 @@
 /turf/open/floor/material
 	name = "plating"
 	desc = "A flooring made out of a certain material"
-	icon_state = "materialfloor"
+	icon = 'waspstation/icons/turf/floors/tiles.dmi'
+	icon_state = "tiled"
 	material_flags = MATERIAL_ADD_PREFIX | MATERIAL_COLOR | MATERIAL_AFFECT_STATISTICS
 
 /turf/open/floor/material/spawn_tile()

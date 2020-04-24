@@ -30,14 +30,16 @@
 	initial_gas_mix = AIRLESS_ATMOS
 /turf/open/floor/plasteel/dark/telecomms
 	initial_gas_mix = TCOMMS_ATMOS
-/turf/open/floor/plasteel/airless/dark
-	color = COLOR_TILE_GRAY
-/turf/open/floor/plasteel/dark/side
-	icon_state = "dark"
-/turf/open/floor/plasteel/dark/corner
-	icon_state = "darkcorner"
-/turf/open/floor/plasteel/checker
-	icon_state = "checker"
+
+
+/turf/open/floor/plasteel/white
+	color = COLOR_WHITE
+	floor_tile = /obj/item/stack/tile/plasteel/white
+/turf/open/floor/plasteel/white/airless
+	initial_gas_mix = AIRLESS_ATMOS
+/turf/open/floor/plasteel/white/telecomms
+	initial_gas_mix = TCOMMS_ATMOS
+
 
 /turf/open/floor/plasteel/mono
 	icon_state = "monotile"
@@ -46,6 +48,7 @@
 /turf/open/floor/plasteel/mono/white
 	icon_state = "monotile_light"
 	color = COLOR_WHITE
+
 
 /turf/open/floor/plasteel/tech
 	icon = 'waspstation/icons/turf/floors/techfloor.dmi'
@@ -57,80 +60,41 @@
 	icon_state = "techmaint"
 
 
-/turf/open/floor/plasteel/new_tile
+/turf/open/floor/plasteel/patterned
 	icon_state = "tile_full"
-/turf/open/floor/plasteel/new_tile/cargo_one
+/turf/open/floor/plasteel/patterned/cargo_one
 	icon_state = "cargo_one_full"
-/turf/open/floor/plasteel/new_tile/kafel
+/turf/open/floor/plasteel/patterned/brushed
 	icon_state = "kafel_full"
-/turf/open/floor/plasteel/new_tile/monofloor
+/turf/open/floor/plasteel/patterned/monofloor
 	icon_state = "steel_monofloor"
-/turf/open/floor/plasteel/new_tile/grid
+	color = null
+/turf/open/floor/plasteel/patterned/grid
 	icon_state = "grid"
-/turf/open/floor/plasteel/new_tile/ridged
+/turf/open/floor/plasteel/patterned/ridged
 	icon_state = "ridged"
 
-/turf/open/floor/plasteel/white
-	color = COLOR_WHITE
-	floor_tile = /obj/item/stack/tile/plasteel/white
-/turf/open/floor/plasteel/white/side
-	icon_state = "whitehall"
-/turf/open/floor/plasteel/white/corner
-	icon_state = "whitecorner"
-/turf/open/floor/plasteel/airless/white
-	color = COLOR_WHITE
-/turf/open/floor/plasteel/airless/white/side
-	icon_state = "whitehall"
-/turf/open/floor/plasteel/airless/white/corner
-	icon_state = "whitecorner"
-/turf/open/floor/plasteel/white/telecomms
-	initial_gas_mix = TCOMMS_ATMOS
-
-/turf/open/floor/plasteel/airless/showroomfloor
-	icon_state = "showroomfloor"
-
-
-/turf/open/floor/plasteel/yellowsiding
-	icon_state = "yellowsiding"
-/turf/open/floor/plasteel/yellowsiding/corner
-	icon_state = "yellowcornersiding"
-
-
-/turf/open/floor/plasteel/recharge_floor
-	icon_state = "recharge_floor"
-/turf/open/floor/plasteel/recharge_floor/asteroid
-	icon_state = "recharge_floor_asteroid"
-
-
-/turf/open/floor/plasteel/chapel
-	icon_state = "chapel"
 
 /turf/open/floor/plasteel/showroomfloor
 	icon = 'waspstation/icons/turf/floors.dmi'
 	icon_state = "showroomfloor"
+/turf/open/floor/plasteel/showroomfloor/airless
+	initial_gas_mix = AIRLESS_ATMOS
 
-
-/turf/open/floor/plasteel/solarpanel
-	icon_state = "solarpanel"
-	icon = 'waspstation/icons/turf/decals.dmi'
-/turf/open/floor/plasteel/airless/solarpanel
-	icon_state = "solarpanel"
-	icon = 'waspstation/icons/turf/decals.dmi'
 
 /turf/open/floor/plasteel/freezer
 	color = null
 	icon = 'waspstation/icons/turf/floors.dmi'
 	icon_state = "freezer"
-
 /turf/open/floor/plasteel/freezer/airless
 	initial_gas_mix = AIRLESS_ATMOS
 
 
 /turf/open/floor/plasteel/kitchen_coldroom
 	name = "cold room floor"
+	icon = 'waspstation/icons/turf/floors.dmi'
 	initial_gas_mix = KITCHEN_COLDROOM_ATMOS
-
-/turf/open/floor/plasteel/kitchen_coldroom/freezerfloor
+/turf/open/floor/plasteel/kitchen_coldroom/freezerfloor //tempted to make this a subset of freezer
 	icon_state = "freezer"
 
 
@@ -140,15 +104,9 @@
 	icon_state = "lino"
 	tiled_dirt = FALSE
 
-/turf/open/floor/plasteel/cafeteria
-	icon_state = "cafeteria"
-
-/turf/open/floor/plasteel/airless/cafeteria
-	icon_state = "cafeteria"
-
-
 /turf/open/floor/plasteel/cult
 	icon_state = "cult"
+	color = null
 	name = "engraved floor"
 
 /turf/open/floor/plasteel/vaporwave
@@ -168,7 +126,8 @@
 	initial_gas_mix = AIRLESS_ATMOS
 
 
-/turf/open/floor/plasteel/stairs
+/turf/open/floor/plasteel/stairs //considering removal
+	icon = 'icons/turf/floors.dmi'
 	icon_state = "stairs"
 	tiled_dirt = FALSE
 /turf/open/floor/plasteel/stairs/left
@@ -193,10 +152,12 @@
 /turf/open/floor/plasteel/elevatorshaft
 	icon = 'waspstation/icons/turf/floors.dmi'
 	icon_state = "elevatorshaft"
+	color = null
 
 /turf/open/floor/plasteel/bluespace
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "bluespace"
+	color = null
 
 /turf/open/floor/plasteel/sepia
 	color = "#938170"
