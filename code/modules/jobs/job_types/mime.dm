@@ -7,8 +7,8 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-	selection_color = "#dddddd"
 	wiki_page = "Mime" //WaspStation Edit - Wikilinks/Warning
+	selection_color = "#bbe291"
 
 	outfit = /datum/outfit/job/mime
 

@@ -10,6 +10,7 @@
 	selection_color = "#d7b088"
 	wiki_page = "Quartermaster" //WaspStation Edit - Wikilinks/Warning
 	special_notice = "You are not a head of staff. You answer to the Head of Personnel." //WaspStation Edit - Wikilinks/Warning
+	exp_type_department = EXP_TYPE_SUPPLY // This is so the jobs menu can work properly
 
 	outfit = /datum/outfit/job/quartermaster
 

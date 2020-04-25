@@ -509,7 +509,7 @@
 			"Supply" = list(jobs = list(), titles = GLOB.supply_positions, color = "#ead4ae"),
 			"Miscellaneous" = list(jobs = list(), titles = list(), color = "#ffffff", colBreak = TRUE),
 			"Synthetic" = list(jobs = list(), titles = GLOB.nonhuman_positions, color = "#ccffcc"),
-			"Service" = list(jobs = list(), titles = GLOB.civilian_positions, color = "#cccccc"),
+			"Service" = list(jobs = list(), titles = GLOB.service_positions, color = "#cccccc"),
 			"Medical" = list(jobs = list(), titles = GLOB.medical_positions, color = "#99ffe6", colBreak = TRUE),
 			"Science" = list(jobs = list(), titles = GLOB.science_positions, color = "#e6b3e6"),
 			"Security" = list(jobs = list(), titles = GLOB.security_positions, color = "#ff9999"),
@@ -575,6 +575,7 @@
 	var/mob/living/carbon/human/H = new(loc)
 
 	var/frn = CONFIG_GET(flag/force_random_names)
+	var/admin_anon_names = SSticker.anonymousnames
 	if(!frn)
 		frn = is_banned_from(ckey, "Appearance")
 		if(QDELETED(src))
@@ -582,6 +583,10 @@
 	if(frn)
 		client.prefs.random_character()
 		client.prefs.real_name = client.prefs.pref_species.random_name(gender,1)
+
+	if(admin_anon_names)//overrides random name because it achieves the same effect and is an admin enabled event tool
+		client.prefs.random_character()
+		client.prefs.real_name = anonymous_name(src)
 
 	var/is_antag
 	if(mind in GLOB.pre_setup_antags)
