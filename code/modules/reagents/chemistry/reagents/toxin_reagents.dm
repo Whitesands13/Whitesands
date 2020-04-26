@@ -34,7 +34,7 @@
 /datum/reagent/toxin/mutagen/reaction_mob(mob/living/carbon/M, method=TOUCH, reac_volume)
 	if(!..())
 		return
-	if(!M.has_dna())
+	if(!M.has_dna() || (HAS_TRAIT(M, TRAIT_RADIMMUNE) || HAS_TRAIT(M, TRAIT_BADDNA)))
 		return  //No robots, AIs, aliens, Ians or other mobs should be affected by this.
 	if((method==VAPOR && prob(min(33, reac_volume))) || method==INGEST || method==PATCH || method==INJECT)
 		M.randmuti()
@@ -158,6 +158,11 @@
 	toxpwr = 2
 	taste_description = "fish"
 
+/datum/reagent/toxin/carpotoxin/on_mob_life(mob/living/carbon/M)
+	if(isfelinid(M))
+		toxpwr = 0
+	..()
+
 /datum/reagent/toxin/zombiepowder
 	name = "Zombie Powder"
 	description = "A strong neurotoxin that puts the subject into a death-like state."
@@ -171,6 +176,8 @@
 /datum/reagent/toxin/zombiepowder/on_mob_metabolize(mob/living/L)
 	..()
 	ADD_TRAIT(L, TRAIT_FAKEDEATH, type)
+	if(fakedeath_active)
+		L.fakedeath(type)
 
 /datum/reagent/toxin/zombiepowder/on_mob_end_metabolize(mob/living/L)
 	L.cure_fakedeath(type)
@@ -179,8 +186,9 @@
 /datum/reagent/toxin/zombiepowder/reaction_mob(mob/living/L, method=TOUCH, reac_volume)
 	L.adjustOxyLoss(0.5*REM, 0)
 	if(method == INGEST)
-		fakedeath_active = TRUE
-		L.fakedeath(type)
+		var/datum/reagent/toxin/zombiepowder/Z = L.reagents.has_reagent(/datum/reagent/toxin/zombiepowder)
+		if(istype(Z))
+			Z.fakedeath_active = TRUE
 
 /datum/reagent/toxin/zombiepowder/on_mob_life(mob/living/M)
 	..()
