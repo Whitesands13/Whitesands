@@ -1,5 +1,5 @@
 import { useBackend } from '../backend';
-import { AnimatedNumber, Button, LabeledList, NumberInput, Section } from '../components';
+import { Button, LabeledList, NumberInput, Section } from '../components';
 
 export const AtmosRelief = props => {
   const { act, data } = useBackend(props);
@@ -7,44 +7,46 @@ export const AtmosRelief = props => {
     <Section>
       <LabeledList>
         <LabeledList.Item label="Open Pressure">
+          <NumberInput
+            animated
+            value={parseFloat(data.open_pressure)}
+            unit="kPa"
+            width="75px"
+            minValue={0}
+            maxValue={4500}
+            step={10}
+            onChange={(e, value) => act('open_pressure', {
+              open_pressure: value,
+            })} />
           <Button
-            icon="pencil"
-            content="Set"
-            onClick={() => act("open_pressure",
-              { "open_pressure": "input" })} />
-          <Button
+            ml={1}
             icon="plus"
             content="Max"
             disabled={data.open_pressure === data.max_pressure}
-            onClick={() => act("open_pressure",
-              { "open_pressure": "max" })} />
-          <span>
-            <AnimatedNumber
-              value={data.open_pressure}
-              format={value => Math.round(value)} />
-            {' '}
-            kPa
-          </span>
+            onClick={() => act('open_pressure', {
+              open_pressure: 'max',
+            })} />
         </LabeledList.Item>
         <LabeledList.Item label="Close Pressure">
+          <NumberInput
+            animated
+            value={parseFloat(data.close_pressure)}
+            unit="kPa"
+            width="75px"
+            minValue={0}
+            maxValue={data.open_pressure}
+            step={10}
+            onChange={(e, value) => act('close_pressure', {
+              close_pressure: value,
+            })} />
           <Button
-            icon="pencil"
-            content="Set"
-            onClick={() => act("close_pressure",
-              { "close_pressure": "input" })} />
-          <Button
+            ml={1}
             icon="plus"
             content="Max"
-            disabled={data.open_pressure === data.max_pressure}
-            onClick={() => act("close_pressure",
-              { "close_pressure": "open_pressure" })} />
-          <span>
-            <AnimatedNumber
-              value={data.close_pressure}
-              format={value => Math.round(value)} />
-            {' '}
-            kPa
-          </span>
+            disabled={data.close_pressure === data.open_pressure}
+            onClick={() => act('close_pressure', {
+              close_pressure: 'max',
+            })} />
         </LabeledList.Item>
       </LabeledList>
     </Section>
