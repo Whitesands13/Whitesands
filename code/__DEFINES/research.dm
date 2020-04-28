@@ -57,6 +57,7 @@
 #define DEPARTMENTAL_FLAG_SCIENCE		(1<<3)
 #define DEPARTMENTAL_FLAG_ENGINEERING	(1<<4)
 #define DEPARTMENTAL_FLAG_SERVICE		(1<<5)
+#define DEPARTMENTAL_FLAG_ALL			(1<<6)			//NO THIS DOESN'T ALLOW YOU TO PRINT EVERYTHING, IT'S FOR ALL DEPARTMENTS!
 
 #define DESIGN_ID_IGNORE "IGNORE_THIS_DESIGN"			///For instances where we don't want a design showing up due to it being for debug/sanity purposes
 
