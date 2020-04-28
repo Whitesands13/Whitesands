@@ -289,10 +289,6 @@
 	icon_state = "hair_dreads"
 
 /datum/sprite_accessory/hair/drillhair
-	name = "Drill Hair"
-	icon_state = "hair_drillhair"
-
-/datum/sprite_accessory/hair/drillhair
 	name = "Drillruru"
 	icon_state = "hair_drillruru"
 
@@ -476,7 +472,7 @@
 	name = "Mohawk (Shaved)"
 	icon_state = "hair_shavedmohawk"
 
-/datum/sprite_accessory/hair/shavedmohawk
+/datum/sprite_accessory/hair/unshavenmohawk
 	name = "Mohawk (Unshaven)"
 	icon_state = "hair_unshaven_mohawk"
 
