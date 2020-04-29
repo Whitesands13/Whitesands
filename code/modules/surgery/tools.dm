@@ -71,7 +71,7 @@
 	custom_materials = list(/datum/material/iron=10000, /datum/material/glass=6000)
 	flags_1 = CONDUCT_1
 	item_flags = SURGICAL_TOOL
-	force = 15
+	force = 10		// Wasp Edit - Makes drill weaker than circular saw
 	w_class = WEIGHT_CLASS_NORMAL
 	attack_verb = list("drilled")
 	sharpness = IS_SHARP		// Wasp Edit - Makes the Drill sharp
