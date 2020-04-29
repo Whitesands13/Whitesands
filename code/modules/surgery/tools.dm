@@ -74,8 +74,13 @@
 	force = 15
 	w_class = WEIGHT_CLASS_NORMAL
 	attack_verb = list("drilled")
+	sharpness = IS_SHARP		// Wasp Edit - Makes the Drill sharp
 	tool_behaviour = TOOL_DRILL
 	toolspeed = 1
+
+/obj/item/surgicaldrill/Initialize()		// Wasp Edit Start - Trying to butcher with a drill is a bad idea
+	. = ..()
+	AddComponent(/datum/component/butchering, 300 * toolspeed, 30, 0, 'sound/weapons/circsawhit.ogg')		// Only technically works - Wasp Edit End
 
 /obj/item/surgicaldrill/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] rams [src] into [user.p_their()] chest! It looks like [user.p_theyre()] trying to commit suicide!</span>")
