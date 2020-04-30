@@ -582,7 +582,7 @@
 	. = ..()
 	if(chems.has_reagent(type, 1))
 		if(myseed && prob(20))
-			mytray.pollinate(1)
+			mytray.pollinate(rand(1,3))
 		else
 			mytray.adjustWeeds(rand(1,2))
 			mytray.adjustPests(rand(1,2))

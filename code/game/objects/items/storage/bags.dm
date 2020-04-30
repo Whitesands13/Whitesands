@@ -208,7 +208,6 @@
 		/obj/item/seeds,
 		/obj/item/grown,
 		/obj/item/reagent_containers/honeycomb,
-		/obj/item/graft,
 		))
 ////////
 
