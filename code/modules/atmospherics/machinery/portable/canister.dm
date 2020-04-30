@@ -174,7 +174,7 @@
 /obj/machinery/portable_atmospherics/canister/hydrogen
 	name = "hydrogen canister"
 	desc = "Hydrogen, highly flammable"
-	icon_state = "h2"
+	icon_state = "grey"
 	gas_type = /datum/gas/hydrogen
 	filled = 1
 
