@@ -376,6 +376,17 @@
 /obj/structure/window/reinforced/attackby(obj/item/I, mob/living/user, params)
 	switch(state)
 		if(RWINDOW_SECURE)
+		    /* Waspstation Begin - Rebalances R-windows
+		    if(I.tool_behaviour == TOOL_WELDER && user.a_intent == INTENT_HARM)
+				user.visible_message("<span class='notice'>[user] holds \the [I] to the security screws on \the [src]...</span>",
+										"<span class='notice'>You begin heating the security screws on \the [src]...</span>")
+				if(I.use_tool(src, user, 150, volume = 100))
+					to_chat(user, "<span class='notice'>The security bolts are glowing white hot and look ready to be removed.</span>")
+					state = RWINDOW_BOLTS_HEATED
+					addtimer(CALLBACK(src, .proc/cool_bolts), 300)
+				return
+		if(RWINDOW_BOLTS_HEATED)
+		Waspstation end */
 			if(I.tool_behaviour == TOOL_SCREWDRIVER)
 				user.visible_message("<span class='notice'>[user] digs into the security screws and starts removing them...</span>",
 										"<span class='notice'>You dig into the screws hard and they start turning...</span>")
