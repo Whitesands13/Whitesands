@@ -239,8 +239,8 @@ GLOBAL_LIST_INIT(spacepods_list, list())
 
 /obj/spacepod/proc/remove_armor()
 	if(!pod_armor)
-		max_integrity = 50
-		obj_integrity = 50
+		max_integrity = initial(max_integrity)
+		obj_integrity = max_integrity
 		desc = initial(desc)
 		pod_armor = null
 		update_icon()
