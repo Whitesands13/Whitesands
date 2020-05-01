@@ -53,8 +53,8 @@
 	desc = "I've got my quad damage right here!"
 	icon_state = "qshotgun"
 	icon = 'waspstation/icons/obj/guns/projectile.dmi'
-	lefthand_file = 'waspstation/icons/mob.inhands/weapons/64x_guns_left.dmi'
-	righthand_file = 'waspstation/icons/mob.inhands/weapons/64x_guns_right.dmi'
+	lefthand_file = 'waspstation/icons/mob/inhands/weapons/64x_guns_left.dmi'
+	righthand_file = 'waspstation/icons/mob/inhands/weapons/64x_guns_right.dmi'
 	item_state = "shotgun_qb"
 	w_class = WEIGHT_CLASS_BULKY
 	force = 14 //blunt edge and really heavy
