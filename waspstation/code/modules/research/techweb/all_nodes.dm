@@ -105,3 +105,12 @@
 	design_ids = list("maint_drone")
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
 	export_price = 5000
+
+/datum/techweb_node/gepgun
+	id = "gepgun"
+	display_name = "Handheld Rocket Launcher"
+	description = "The technology to be proficient in the usage of rocket launchers."
+	prereq_ids = list("explosive_weapons")
+	design_ids = list("gepgun", "geprocket", "geprubberrocket")
+	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 5000)
+	export_price = 5000

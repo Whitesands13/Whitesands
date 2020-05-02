@@ -1,0 +1,19 @@
+/obj/item/gun/ballistic/rocketlauncher/gepgun
+	name = "\improper GEP Gun"
+	desc = "A very heavy rocket launcher used to perform silent takedowns. Or unsilent, depending on the method of operation."
+	icon = 'waspstation/icons/obj/guns/projectile.dmi'
+	icon_state = "gepgun"
+	mag_type = /obj/item/ammo_box/magazine/internal/gepgun
+	fire_sound = 'sound/weapons/gun/general/rocket_launch.ogg'
+	w_class = WEIGHT_CLASS_BULKY
+	pin = null
+	can_suppress = FALSE
+	burst_size = 1
+	fire_delay = 0
+	casing_ejector = FALSE
+	weapon_weight = WEAPON_HEAVY
+	bolt_type = BOLT_TYPE_NO_BOLT
+	internal_magazine = TRUE
+	cartridge_wording = "gyro-stabilized rocket"
+	tac_reloads = FALSE
+	throwforce = 30 //ow
