@@ -18,4 +18,4 @@
 	damage = 20
 	armour_penetration = 80
 	dismemberment = 0
-	stamina = 100 //lets be honest theres no way you can even survive something this size
+	stamina = 60 //lets be honest theres no way you can even survive something this size
