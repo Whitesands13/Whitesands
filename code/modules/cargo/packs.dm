@@ -10,7 +10,7 @@
 	var/crate_name = "crate"
 	var/desc = ""//no desc by default
 	var/crate_type = /obj/structure/closet/crate
-	var/dangerous = FALSE // Should we message admins?
+	var/dangerous = FALSE // Should we message admins? // wasp station edit: all the dangerous shit is actually labeled as dangerous
 	var/special = FALSE //Event/Station Goals/Admin enabled packs
 	var/special_enabled = FALSE
 	var/DropPodOnly = FALSE//only usable by the Bluespace Drop Pod via the express cargo console
@@ -220,20 +220,6 @@
 	crate_name = "space suit crate"
 	crate_type = /obj/structure/closet/crate/secure
 
-/datum/supply_pack/emergency/specialops
-	name = "Special Ops Supplies"
-	desc = "(*!&@#DON'T WANNA SHELL OUT THE FULL $20,000? WELL, THIS LITTLE ORDER CAN STILL HELP YOU OUT IN A PINCH. CONTAINS A BOX OF FIVE EMP GRENADES, THREE SMOKEBOMBS, AN INCENDIARY GRENADE, AND A \"SLEEPY PEN\" FULL OF CHEAP POISONS!#@*$"
-	hidden = TRUE
-	cost = 2000
-	contains = list(/obj/item/storage/box/emps,
-					/obj/item/grenade/smokebomb,
-					/obj/item/grenade/smokebomb,
-					/obj/item/grenade/smokebomb,
-					/obj/item/pen/sleepy,
-					/obj/item/grenade/chem_grenade/incendiary)
-	crate_name = "emergency crate"
-	crate_type = /obj/structure/closet/crate/internals
-
 /datum/supply_pack/emergency/weedcontrol
 	name = "Weed Control Crate"
 	desc = "Keep those invasive species OUT. Contains a scythe, gasmask, and two anti-weed chemical grenades. Warranty void if used on ambrosia. Requires Hydroponics access to open."
@@ -289,6 +275,7 @@
 					/obj/item/gun/energy/disabler,
 					/obj/item/gun/energy/disabler)
 	crate_name = "disabler crate"
+	dangerous = TRUE
 
 /datum/supply_pack/security/dumdum
 	name = ".38 DumDum Speedloader"
@@ -329,6 +316,7 @@
 					/obj/item/gun/energy/laser,
 					/obj/item/gun/energy/laser)
 	crate_name = "laser crate"
+	dangerous = TRUE
 
 /datum/supply_pack/security/match
 	name = ".38 Match Grade Speedloader"
@@ -406,6 +394,7 @@
 	contains = list(/obj/item/storage/box/firingpins,
 					/obj/item/storage/box/firingpins)
 	crate_name = "firing pins crate"
+	dangerous = TRUE
 
 /datum/supply_pack/security/firingpins/paywall
 	name = "Paywall Firing Pins Crate"
@@ -432,6 +421,7 @@
 					/obj/item/melee/baton/loaded,
 					/obj/item/melee/baton/loaded)
 	crate_name = "stun baton crate"
+	dangerous = TRUE
 
 /datum/supply_pack/security/wall_flash
 	name = "Wall-Mounted Flash Crate"
@@ -494,6 +484,7 @@
 	cost = 1200
 	small_item = TRUE
 	contains = list(/obj/item/kitchen/knife/combat)
+	dangerous = TRUE
 
 /datum/supply_pack/security/armory/combatknives
 	name = "Combat Knives Crate"
@@ -503,6 +494,7 @@
 					/obj/item/kitchen/knife/combat,
 					/obj/item/kitchen/knife/combat)
 	crate_name = "combat knife crate"
+	dangerous = TRUE
 
 /datum/supply_pack/security/armory/ballistic_single
 	name = "Combat Shotgun Single-Pack"
@@ -511,6 +503,7 @@
 	small_item = TRUE
 	contains = list(/obj/item/gun/ballistic/shotgun/automatic/combat,
 					/obj/item/storage/belt/bandolier)
+	dangerous = TRUE
 
 /datum/supply_pack/security/armory/ballistic
 	name = "Combat Shotguns Crate"
@@ -523,6 +516,7 @@
 					/obj/item/storage/belt/bandolier,
 					/obj/item/storage/belt/bandolier)
 	crate_name = "combat shotguns crate"
+	dangerous = TRUE
 
 /datum/supply_pack/security/armory/dragnet
 	name = "DRAGnet Crate"
@@ -539,6 +533,7 @@
 	cost = 1500
 	small_item = TRUE
 	contains = list(/obj/item/gun/energy/e_gun)
+	dangerous = TRUE
 
 /datum/supply_pack/security/armory/energy
 	name = "Energy Guns Crate"
@@ -548,6 +543,7 @@
 					/obj/item/gun/energy/e_gun)
 	crate_name = "energy gun crate"
 	crate_type = /obj/structure/closet/crate/secure/plasma
+	dangerous = TRUE
 
 /datum/supply_pack/security/armory/exileimp
 	name = "Exile Implants Crate"
@@ -579,6 +575,7 @@
 	contains = list(/obj/item/gun/energy/ionrifle)
 	crate_name = "ion rifle crate"
 	crate_type = /obj/structure/closet/crate/secure/plasma
+	dangerous = TRUE
 
 /datum/supply_pack/security/armory/mindshield
 	name = "Mindshield Implants Crate"
@@ -605,6 +602,7 @@
 					/obj/item/clothing/suit/armor/laserproof)
 	crate_name = "reflector vest crate"
 	crate_type = /obj/structure/closet/crate/secure/plasma
+	dangerous = TRUE
 
 /datum/supply_pack/security/armory/riotarmor
 	name = "Riot Armor Crate"
@@ -614,6 +612,7 @@
 					/obj/item/clothing/suit/armor/riot,
 					/obj/item/clothing/suit/armor/riot)
 	crate_name = "riot armor crate"
+	dangerous = TRUE
 
 /datum/supply_pack/security/armory/riothelmets
 	name = "Riot Helmets Crate"
@@ -623,6 +622,7 @@
 					/obj/item/clothing/head/helmet/riot,
 					/obj/item/clothing/head/helmet/riot)
 	crate_name = "riot helmets crate"
+	dangerous = TRUE
 
 /datum/supply_pack/security/armory/riotshields
 	name = "Riot Shields Crate"
@@ -632,6 +632,7 @@
 					/obj/item/shield/riot,
 					/obj/item/shield/riot)
 	crate_name = "riot shields crate"
+	dangerous = TRUE
 
 /datum/supply_pack/security/armory/russian
 	name = "Russian Surplus Crate"
@@ -653,6 +654,7 @@
 					/obj/item/gun/ballistic/rifle/boltaction,
 					/obj/item/gun/ballistic/rifle/boltaction)
 	crate_name = "surplus military crate"
+	dangerous = TRUE
 
 /datum/supply_pack/security/armory/russian/fill(obj/structure/closet/crate/C)
 	for(var/i in 1 to 10)
@@ -674,6 +676,7 @@
 					/obj/item/clothing/gloves/tackler/combat,
 					/obj/item/clothing/gloves/tackler/combat)
 	crate_name = "swat crate"
+	dangerous = TRUE
 
 /datum/supply_pack/security/armory/wt550_single
 	name = "WT-550 Auto Rifle Single-Pack"
@@ -681,6 +684,7 @@
 	cost = 2000
 	contains = list(/obj/item/gun/ballistic/automatic/wt550)
 	small_item = TRUE
+	dangerous = TRUE
 
 /datum/supply_pack/security/armory/wt550
 	name = "WT-550 Auto Rifle Crate"
@@ -689,6 +693,7 @@
 	contains = list(/obj/item/gun/ballistic/automatic/wt550,
 					/obj/item/gun/ballistic/automatic/wt550)
 	crate_name = "auto rifle crate"
+	dangerous = TRUE
 
 /datum/supply_pack/security/armory/wt550ammo
 	name = "WT-550 Auto Rifle Ammo Crate"
@@ -698,6 +703,7 @@
 					/obj/item/ammo_box/magazine/wt550m9,
 					/obj/item/ammo_box/magazine/wt550m9,
 					/obj/item/ammo_box/magazine/wt550m9)
+	dangerous = TRUE
 
 /datum/supply_pack/security/armory/wt550ammo_single
 	name = "WT-550 Auto Rifle Ammo Single-Pack"
@@ -705,6 +711,7 @@
 	cost = 750 //one of the few single-pack items that who's price per unit is the exact same as the bulk
 	contains = list(/obj/item/ammo_box/magazine/wt550m9)
 	small_item = TRUE
+	dangerous = TRUE
 
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////// Engineering /////////////////////////////////////
@@ -784,18 +791,6 @@
 					/obj/item/clothing/gloves/color/yellow,
 					/obj/item/clothing/gloves/color/yellow)
 	crate_name = "insulated gloves crate"
-	crate_type = /obj/structure/closet/crate/engineering/electrical
-
-/obj/item/stock_parts/cell/inducer_supply
-	maxcharge = 5000
-	charge = 5000
-
-/datum/supply_pack/engineering/inducers
-	name = "NT-75 Electromagnetic Power Inducers Crate"
-	desc = "No rechargers? No problem, with the NT-75 EPI, you can recharge any standard cell-based equipment anytime, anywhere. Contains two Inducers."
-	cost = 2000
-	contains = list(/obj/item/inducer/sci {cell_type = /obj/item/stock_parts/cell/inducer_supply; opened = 0}, /obj/item/inducer/sci {cell_type = /obj/item/stock_parts/cell/inducer_supply; opened = 0}) //FALSE doesn't work in modified type paths apparently.
-	crate_name = "inducer crate"
 	crate_type = /obj/structure/closet/crate/engineering/electrical
 
 /datum/supply_pack/engineering/pacman
@@ -880,6 +875,7 @@
 					/obj/item/circuitboard/computer/bsa_control
 					)
 	crate_name= "bluespace artillery parts crate"
+	dangerous = TRUE
 
 /datum/supply_pack/engineering/dna_vault
 	name = "DNA Vault Parts"
@@ -982,6 +978,7 @@
 					/obj/structure/particle_accelerator/power_box,
 					/obj/structure/particle_accelerator/end_cap)
 	crate_name = "particle accelerator crate"
+	dangerous = TRUE
 
 /datum/supply_pack/engine/collector
 	name = "Radiation Collector Crate"
@@ -998,6 +995,7 @@
 	cost = 5000
 	contains = list(/obj/machinery/the_singularitygen)
 	crate_name = "singularity generator crate"
+	dangerous = TRUE
 
 /datum/supply_pack/engine/solar
 	name = "Solar Panel Crate"
@@ -1057,6 +1055,7 @@
 	cost = 5000
 	contains = list(/obj/machinery/the_singularitygen/tesla)
 	crate_name = "tesla generator crate"
+	dangerous = TRUE
 
 //////////////////////////////////////////////////////////////////////////////
 /////////////////////// Canisters & Materials ////////////////////////////////
@@ -2189,6 +2188,7 @@
 					/obj/item/ammo_box/magazine/toy/pistol,
 					/obj/item/ammo_box/magazine/toy/pistol)
 	crate_name = "foam force crate"
+	dangerous = TRUE
 
 /datum/supply_pack/costumes_toys/formalwear
 	name = "Formalwear Crate"

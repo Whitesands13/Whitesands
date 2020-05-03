@@ -33,8 +33,8 @@
 		var/maxy = max(cornerA.y, cornerB.y)
 		var/maxz = max(cornerA.z, cornerB.z)
 
-		var map_text = write_map(minx, miny, minz, maxx, maxy, maxz, 24)
-		if(maptext.len)
+		var/map_text = write_map(minx, miny, minz, maxx, maxy, maxz, 24)
+		if(map_text)
 			text2file(map_text, "data/[file_name].dmm")
 			usr << ftp("data/[file_name].dmm", "[file_name].dmm")
 		else
