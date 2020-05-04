@@ -91,14 +91,6 @@
 			else if(L.getFireLoss() >= 50) // are they still down from other damage? fix it, but not as fast as the burns
 				var/healing = min(L.getFireLoss(), 50)
 				L.adjustFireLoss(-healing)
-			else //well, we probably got them with morphine then, let's fix that, in a fun way.
-				var/obj/effect/sweatsplash/S = new(L.loc) //I've gotten too addicted to this little block of code...
-				for(var/datum/reagent/R in L.reagents.reagent_list)
-					var/amount = R.volume
-					L.reagents.remove_reagent(R.type, amount)
-					S.reagents.add_reagent(R.type, amount)
-				S.splash()
-				FindTarget() //we want someone else! we can't fix this one.
 			impatience += 50
 			if(prob(impatience))
 				FindTarget()//so we don't focus on some unconscious dude when we could get our eyes on the prize
