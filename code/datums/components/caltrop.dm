@@ -65,4 +65,4 @@
 		if(H.pulledby)								// Waspstation Edit Begin - Being pulled over caltrops is logged
 			log_combat(H.pulledby, H, "pulled", A)
 		else
-			H.log_message("has stepped on a caltrop", LOG_ATTACK, color="orange")		// Waspstation Edit End
+			H.log_message("has stepped on [A]", LOG_ATTACK, color="orange")		// Waspstation Edit End
