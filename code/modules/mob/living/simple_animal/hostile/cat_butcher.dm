@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/cat_butcherer
 	name = "Cat Surgeon"
-	desc = "A man with the quest of chasing endless feline tail."
+	desc = "Felinid physiological modification surgery is outlawed in Nanotrasen-controlled sectors. This doctor doesn't seem to care, and thus, is wanted for several warcrimes."
 	icon = 'icons/mob/simple_human.dmi'
 	icon_state = "cat_butcher"
 	icon_living = "cat_butcher"
@@ -75,7 +75,7 @@
 			L.gain_trauma(/datum/brain_trauma/severe/pacifism, TRAUMA_RESILIENCE_SURGERY)
 			say("I'm a genius!!")
 			L.health += 20 //he heals a bit whenever he finishes
-		else if(L.stat >= UNCONSCIOUS) //quickly heal them up and move on to our next target! 
+		else if(L.stat >= UNCONSCIOUS) //quickly heal them up and move on to our next target!
 			visible_message("[src] injects [L] with an unknown medicine!", "<span class='notice'>You inject [L] with medicine.</span>")
 			L.SetSleeping(0, FALSE)
 			L.SetUnconscious(0, FALSE)
