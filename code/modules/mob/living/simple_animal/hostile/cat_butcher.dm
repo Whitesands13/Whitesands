@@ -6,7 +6,7 @@
 	icon_living = "cat_butcher"
 	icon_dead = "syndicate_dead"
 	icon_gib = "syndicate_gib"
-	projectiletype = /obj/item/projectile/bullet/dart/tranq
+	projectiletype = /obj/projectile/bullet/dart/tranq
 	projectilesound = 'sound/items/syringeproj.ogg'
 	ranged = 1
 	ranged_message = "fires the syringe gun at"
