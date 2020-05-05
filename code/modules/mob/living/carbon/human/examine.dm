@@ -366,6 +366,15 @@
 					"<a href='?src=[REF(src)];hud=s;add_comment=1'>\[Add comment\]</a>"), "")
 	else if(isobserver(user) && traitstring)
 		. += "<span class='info'><b>Traits:</b> [traitstring]</span>"
+
+	//No flavor text unless the face can be seen. Prevents certain metagaming with impersonation.
+	var/invisible_man = skipface || get_visible_name() == "Unknown"
+	if(invisible_man)
+		. += "...?"
+	else
+		var/flavor = print_flavor_text()
+		if(flavor)
+			. += flavor
 	. += "*---------*</span>"
 
 	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .)
