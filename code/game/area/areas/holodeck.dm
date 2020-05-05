@@ -60,8 +60,10 @@
 /area/holodeck/rec_center/court
 	name = "Holodeck - Empty Court"
 
+/* Wasp Edit - Holodeck Rework
 /area/holodeck/rec_center/dodgeball
 	name = "Holodeck - Dodgeball Court"
+*/
 
 /area/holodeck/rec_center/basketball
 	name = "Holodeck - Basketball Court"
@@ -75,23 +77,28 @@
 /area/holodeck/rec_center/lounge
 	name = "Holodeck - Lounge"
 
+/* Wasp Edit - Holodeck Rework
 /area/holodeck/rec_center/pet_lounge
 	name = "Holodeck - Pet Park"
-
+*/
 /area/holodeck/rec_center/firingrange
 	name = "Holodeck - Firing Range"
 
+/* Wasp Edit - Holodeck Rework
 /area/holodeck/rec_center/school
 	name = "Holodeck - Anime School"
 
 /area/holodeck/rec_center/chapelcourt
 	name = "Holodeck - Chapel Courtroom"
+*/
 
 /area/holodeck/rec_center/spacechess
 	name = "Holodeck - Space Chess"
 
+/* Wasp Edit - Holodeck Rework
 /area/holodeck/rec_center/kobayashi
 	name = "Holodeck - Kobayashi Maru"
+*/
 
 /area/holodeck/rec_center/winterwonderland
 	name = "Holodeck - Winter Wonderland"
@@ -99,11 +106,16 @@
 /area/holodeck/rec_center/photobooth
 	name = "Holodeck - Photobooth"
 
+/area/holodeck/rec_center/bunker
+	name = "Holodeck - Holdout Bunker"
+
 // Bad programs
 
+/* Wasp Edit - Holodeck Rework
 /area/holodeck/rec_center/medical
 	name = "Holodeck - Emergency Medical"
 	restricted = 1
+*/
 
 /area/holodeck/rec_center/thunderdome1218
 	name = "Holodeck - 1218 AD"
@@ -113,14 +125,12 @@
 	name = "Holodeck - Atmospheric Burn Test"
 	restricted = 1
 
+
 /area/holodeck/rec_center/wildlife
 	name = "Holodeck - Wildlife Simulation"
 	restricted = 1
 
-/area/holodeck/rec_center/bunker
-	name = "Holodeck - Holdout Bunker"
-	restricted = 1
-
+/* Wasp Edit - Holodeck Rework
 /area/holodeck/rec_center/anthophila
 	name = "Holodeck - Anthophila"
 	restricted = 1
@@ -128,3 +138,4 @@
 /area/holodeck/rec_center/refuel
 	name = "Holodeck - Refueling Station"
 	restricted = 1
+*/
