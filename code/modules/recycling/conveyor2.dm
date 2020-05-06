@@ -47,6 +47,20 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 		operating = TRUE
 		update_icon()
 
+//wasp Edit - Inverted Auto Belts
+/obj/machinery/conveyor/auto/inverted
+	icon_state = "conveyor_map_inverted"
+	verted = -1
+
+/obj/machinery/conveyor/auto/inverted/Initialize(mapload)
+	. = ..()
+	operating = TRUE
+	update_move_direction()
+	if(mapload && !(dir in GLOB.diagonals))
+		log_mapping("[src] at [AREACOORD(src)] spawned without using a diagonal dir. Please replace with a normal version.")
+
+//End Wasp Edit
+
 // create a conveyor
 /obj/machinery/conveyor/Initialize(mapload, newdir, newid)
 	. = ..()
