@@ -186,8 +186,8 @@
 	slot_flags = 0
 	mag_type = /obj/item/ammo_box/magazine/tommygunm45
 	can_suppress = FALSE
-	burst_size = 4
-	fire_delay = 1
+	burst_size = 3
+	fire_delay = 2
 	bolt_type = BOLT_TYPE_OPEN
 
 /obj/item/gun/ballistic/automatic/ar
