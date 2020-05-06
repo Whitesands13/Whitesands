@@ -208,6 +208,7 @@
 			new /obj/item/lighter (src) // 0 TC, how else would you light your smokes?
 			new /obj/item/card/id/syndicate (src) // 2 TC, Gotta be named the part, boss.
 			new /obj/item/reagent_containers/food/drinks/flask (src) // 1 TC, I can't believe I forgot about the booze flask AAAAAAA
+			new /obj/item/storage/secure/briefcase/syndie (src) // 1TC, for bribing the bartender to let you set up shop... amongst other actions.
 
 
 
