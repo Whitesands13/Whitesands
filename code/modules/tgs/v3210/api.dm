@@ -39,7 +39,7 @@
 	var/warned_custom_commands = FALSE
 
 /datum/tgs_api/v3210/ApiVersion()
-	return "3.2.1.0"
+	return new /datum/tgs_version("3.2.1.0")
 
 /datum/tgs_api/v3210/proc/trim_left(text)
 	for (var/i = 1 to length(text))
@@ -64,13 +64,13 @@
 	if(!instance_name)
 		instance_name = "TG Station Server"	//maybe just upgraded
 
-/*	var/list/logs = file2list(".git/logs/HEAD")
+	var/list/logs = file2list(".git/logs/HEAD")
 	if(logs.len)
 		logs = splittext(logs[logs.len - 1], " ")
 		commit = logs[2]
 	logs = file2list(".git/logs/refs/remotes/origin/master")
 	if(logs.len)
-		originmastercommit = splittext(logs[logs.len - 1], " ")[2] */
+		originmastercommit = splittext(logs[logs.len - 1], " ")[2]
 
 	if(world.system_type != MS_WINDOWS)
 		TGS_ERROR_LOG("This API version is only supported on Windows. Not running on Windows. Aborting initialization!")
