@@ -117,7 +117,7 @@
 			new /obj/item/card/emag(src) // 6 tc
 
 /obj/item/storage/box/syndicate/bundle_B/PopulateContents()
-	switch (pickweight(list( "bond" = 2, "ninja" = 1, "darklord" = 1, "white_whale_holy_grail" = 2, "mad_scientist" = 2, "bee" = 1, "mr_freeze" = 2, "made_man"= 2)))
+	switch (pickweight(list( "bond" = 2, "ninja" = 1, "darklord" = 1, "white_whale_holy_grail" = 2, "mad_scientist" = 2, "bee" = 1, "mr_freeze" = 2, "made_man"= 1)))
 		if("bond")
 			new /obj/item/gun/ballistic/automatic/pistol(src)
 			new /obj/item/suppressor(src)
@@ -204,10 +204,8 @@
 			new /obj/item/reagent_containers/glass/rag (src)
 			new /obj/item/reagent_containers/glass/rag (src)
 			new /obj/item/storage/fancy/cigarettes/cigars/havana (src) // 0TC, The don deserves the best.
-			new /obj/item/clothing/suit/det_suit (src) //5 TC, a spot of armor and some silent storage.
-			new /obj/item/clothing/suit/det_suit/noir (src)
+			new /obj/item/clothing/suit/det_suit/noir (src) // 5 TC, a spot of armor, and silent storage.
 			new /obj/item/lighter (src) // 0 TC, how else would you light your smokes?
-			new /obj/item/clothing/shoes/laceup (src) // 0 TC,  Nice shoes!
 			new /obj/item/card/id/syndicate (src) // 2 TC, Gotta be named the part, boss.
 
 
