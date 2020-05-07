@@ -3,4 +3,4 @@
 	icon_state = "a762-50"
 	ammo_type = /obj/item/ammo_casing/mm712x82
 	caliber = "mm71282"
-	max_ammo = 50000
+	max_ammo = 5000
