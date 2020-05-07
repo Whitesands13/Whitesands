@@ -22,13 +22,10 @@
 	ammo_x_offset = 2
 	charge_sections = 3
 	can_flashlight = FALSE // Can't attach or detach the flashlight, and override it's icon update
-<<<<<<< HEAD
 	gunlight_state = "mini-light"
 	flight_x_offset = 19
 	flight_y_offset = 13
-=======
 	weapon_weight = WEAPON_LIGHT
->>>>>>> 67fb966... small fire rate refactor, truly automatic guns, dual wielding (#1702)
 
 /obj/item/gun/energy/e_gun/mini/Initialize()
 	gun_light = new /obj/item/flashlight/seclite(src)
