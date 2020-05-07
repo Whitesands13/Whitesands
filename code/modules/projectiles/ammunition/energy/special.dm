@@ -30,11 +30,7 @@
 /obj/item/ammo_casing/energy/temp
 	projectile_type = /obj/projectile/temp
 	select_name = "freeze"
-<<<<<<< HEAD
-	e_cost = 2500
-=======
 	e_cost = 100
->>>>>>> 67fb966... small fire rate refactor, truly automatic guns, dual wielding (#1702)
 	fire_sound = 'sound/weapons/pulse3.ogg'
 
 /obj/item/ammo_casing/energy/temp/hot
