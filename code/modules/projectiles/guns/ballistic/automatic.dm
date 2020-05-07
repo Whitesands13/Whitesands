@@ -202,6 +202,26 @@
 
 
 // L6 SAW //
+/obj/item/gun/ballistic/automatic/l666
+	name = "\improper L666 FUCKYOUINATOR"
+	desc = "A heavily modified L6 Saw, this thing is something you should not see unless the gods are PISSED."
+	icon_state = "l6"
+	item_state = "l6closedmag"
+	w_class = WEIGHT_CLASS_HUGE
+	slot_flags = 0
+	mag_type = /obj/item/ammo_box/magazine/l666ammo
+	weapon_weight = WEAPON_HEAVY
+	can_suppress = FALSE
+	fire_rate = 100
+	spread = 7
+	pin = /obj/item/firing_pin
+	bolt_type = BOLT_TYPE_OPEN
+	mag_display = TRUE
+	mag_display_ammo = TRUE
+	tac_reloads = TRUE
+	fire_sound = 'sound/weapons/gun/l6/shot.ogg'
+	rack_sound = 'sound/weapons/gun/l6/l6_rack.ogg'
+	suppressed_sound = 'sound/weapons/gun/general/heavy_shot_suppressed.ogg'
 
 /obj/item/gun/ballistic/automatic/l6_saw
 	name = "\improper L6 SAW"
