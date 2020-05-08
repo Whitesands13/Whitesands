@@ -563,7 +563,7 @@ GLOBAL_LIST_INIT(uplink_items, subtypesof(/datum/uplink_item))
 /datum/uplink_item/stealthy_weapons/fuckyouinator
 	name = "L666 FUCKYOUINATOR"
 	desc = "A heavily modified L6 SAW. \
-			This literal WMD has a massive 5000-round magazine of devastating 7.12x82mm AP ammunition. \
+			This literal WMD has a massive 5000-round magazine of devastating .50 Penetrator ammunition. \
 			It has a firerate so high that it is considered unethical even for most syndicate agents, as nobody will survive it."
 	item = /obj/item/gun/ballistic/automatic/l666
 	cost = 1000
