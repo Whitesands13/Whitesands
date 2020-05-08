@@ -212,6 +212,7 @@
 	mag_type = /obj/item/ammo_box/magazine/l666ammo
 	weapon_weight = WEAPON_HEAVY
 	can_suppress = FALSE
+	burst_size = 10
 	fire_rate = 100
 	spread = 7
 	pin = /obj/item/firing_pin
