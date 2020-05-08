@@ -46,17 +46,14 @@
 	required_other = TRUE
 	required_container = /obj/item/slime_extract/green
 
-/datum/chemical_reaction/slime/slimehuman
-	results = list(/datum/reagent/mutationtoxin = 1)
-	required_reagents = list(/datum/reagent/blood = 1)
-	required_other = TRUE
-	required_container = /obj/item/slime_extract/green
-
-/datum/chemical_reaction/slime/slimelizard
-	results = list(/datum/reagent/mutationtoxin/lizard = 1)
+/datum/chemical_reaction/slime/unstabletoxin
+	name = "Unstable Mutation Toxin"
+	id = "unstablemuttoxin"
+	results = list(/datum/reagent/mutationtoxin/unstable = 1)
 	required_reagents = list(/datum/reagent/uranium/radium = 1)
 	required_other = TRUE
 	required_container = /obj/item/slime_extract/green
+
 
 //Metal
 /datum/chemical_reaction/slime/slimemetal
