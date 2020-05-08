@@ -87,7 +87,6 @@
 	item_state = "turretlaser"
 	slot_flags = null
 	w_class = WEIGHT_CLASS_HUGE
-	cell_type = /obj/item/stock_parts/cell{charge = 10000; maxcharge = 10000}
 	ammo_type = list(/obj/item/ammo_casing/energy/electrode, /obj/item/ammo_casing/energy/laser)
 	weapon_weight = WEAPON_HEAVY
 	can_flashlight = FALSE
