@@ -204,7 +204,7 @@
 // L6 SAW //
 /obj/item/gun/ballistic/automatic/l666
 	name = "\improper L666 FUCKYOUINATOR"
-	desc = "A heavily modified L6 Saw, this thing is something you should not see unless the gods are PISSED."
+	desc = "A heavily modified L6 Saw, this thing is the last think you will ever see if you are not the wielder."
 	icon_state = "l6"
 	item_state = "l6closedmag"
 	w_class = WEIGHT_CLASS_HUGE
