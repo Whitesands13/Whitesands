@@ -46,7 +46,7 @@
 /obj/item/gun/energy/Initialize()
 	. = ..()
 	if(cell_type)
-		cell = new cell_type(src)
+		cell = new() cell_type(src)
 	else
 		cell = new(src)
 	if(!dead_cell)
