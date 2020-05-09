@@ -618,8 +618,6 @@ WaspStation End */
 	required_reagents  = list(/datum/reagent/mutationtoxin/unstable = 1, /datum/reagent/medicine/morphine = 10, /datum/reagent/toxin/mutetoxin = 10)
 	
 /datum/chemical_reaction/mutationtoxin/squid
-	name = /datum/reagent/mutationtoxin/squid
-	id = /datum/reagent/mutationtoxin/squid
 	results = list(/datum/reagent/mutationtoxin/squid = 1)
 	required_reagents  = list(/datum/reagent/mutationtoxin/unstable = 1, /datum/reagent/consumable/sodiumchloride = 10, /datum/reagent/water = 20)
 
@@ -640,8 +638,6 @@ WaspStation End */
 //	required_reagents  = list(/datum/reagent/aslimetoxin = 1, /datum/reagent/toxin = 1, /datum/reagent/toxin/bad_food = 1) //Because rotting
 
 /datum/chemical_reaction/mutationtoxin/goofzombie //go on. try it with holopara
-	name = /datum/reagent/mutationtoxin/goofzombie
-	id = /datum/reagent/mutationtoxin/goofzombie
 	results = list(/datum/reagent/mutationtoxin/goofzombie = 1)
 	required_reagents  = list(/datum/reagent/aslimetoxin = 1, /datum/reagent/drug/krokodil = 10, /datum/reagent/toxin/bad_food = 10) //Because rotting
 

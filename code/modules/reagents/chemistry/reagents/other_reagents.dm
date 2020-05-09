@@ -638,7 +638,6 @@
 	description = "A salty toxin."
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/squid
-	mutationtext = "<span class='danger'>The pain subsides. You feel... salty.</span>"
 	process_flags = ORGANIC | SYNTHETIC
 
 
