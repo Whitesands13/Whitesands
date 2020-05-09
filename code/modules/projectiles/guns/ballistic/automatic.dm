@@ -211,7 +211,7 @@
 	slot_flags = 0
 	mag_type = /obj/item/ammo_box/magazine/l666ammo
 	weapon_weight = WEAPON_HEAVY
-	can_suppress = FALSE
+	can_suppress = TRUE
 	burst_size = 10
 	fire_rate = 100
 	spread = 7
