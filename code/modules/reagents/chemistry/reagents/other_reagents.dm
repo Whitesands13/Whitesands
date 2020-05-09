@@ -537,7 +537,6 @@
 						/datum/species/jelly,
 						/datum/species/abductor,
 						/datum/species/squid)
-	mutationtext = "<span class='danger'>The pain subsides. Your whole body feels... Different.</span>"
 	process_flags = ORGANIC | SYNTHETIC
 
 /datum/reagent/mutationtoxin/felinid
@@ -663,7 +662,6 @@
 	description = "An undead toxin... kinda..."
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/krokodil_addict //Not the infectious kind. The days of xenobio zombie outbreaks are long past.
-	mutationtext = "<span class='danger'>The pain subsides. You feel... as if your skin have just fallen off.</span>"
 	process_flags = ORGANIC | SYNTHETIC
 
 /datum/reagent/mutationtoxin/ash
