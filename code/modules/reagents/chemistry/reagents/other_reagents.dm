@@ -2207,3 +2207,4 @@
 	color = "#10cca6" //RGB: 16, 204, 166
 	taste_description = "lifegiiving metal"
 	can_synth = FALSE
+	
