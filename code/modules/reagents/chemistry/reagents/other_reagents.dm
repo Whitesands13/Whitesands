@@ -639,7 +639,6 @@
 	race = /datum/species/squid
 	process_flags = ORGANIC | SYNTHETIC
 
-
 //BLACKLISTED RACES
 /datum/reagent/mutationtoxin/skeleton
 	name = "Skeleton Mutation Toxin"
