@@ -79,9 +79,9 @@
 	update_icon()
 
 /obj/item/gun/ballistic/automatic/wt550
-	name = "security auto rifle"
+	name = "WT-550 Automatic Rifle"
 	desc = "An outdated personal defence weapon. Uses 4.6x30mm rounds and is designated the WT-550 Automatic Rifle."
-	icon_state = "wt550"
+	icon_state = "WT-5502"
 	item_state = "arg"
 	mag_type = /obj/item/ammo_box/magazine/wt550m9
 	fire_delay = 2
@@ -186,8 +186,8 @@
 	slot_flags = 0
 	mag_type = /obj/item/ammo_box/magazine/tommygunm45
 	can_suppress = FALSE
-	burst_size = 4
-	fire_delay = 1
+	burst_size = 3 // If you raise this, increase the fire delay.
+	fire_delay = 2 //Lowering this is a bad idea, unless you wanna basically give players the ability to vaporize with even less effort.
 	bolt_type = BOLT_TYPE_OPEN
 
 /obj/item/gun/ballistic/automatic/ar
