@@ -14,7 +14,7 @@
 
 /obj/item/gun/ballistic/automatic/proto
 	name = "\improper Nanotrasen Saber SMG"
-	desc = "A prototype three-round burst 9mm submachine gun, designated 'SABR'. Has a threaded barrel for suppressors."
+	desc = "A prototype full auto 9mm submachine gun, designated 'SABR'. Has a threaded barrel for suppressors."
 	icon_state = "saber"
 	mag_type = /obj/item/ammo_box/magazine/smgm9mm
 	pin = null
@@ -198,13 +198,13 @@
 	slot_flags = 0
 	mag_type = /obj/item/ammo_box/magazine/m556
 	can_suppress = FALSE
-	fire_rate = 4
+	fire_rate = 5
 
 
 // L6 SAW //
 /obj/item/gun/ballistic/automatic/l666
 	name = "\improper L666 FUCKYOUINATOR"
-	desc = "A heavily modified L6 Saw, this thing is the last think you will ever see if you are not the wielder. Chambered in .50 cal rounds."
+	desc = "A heavily modified L6 Saw, this thing is the last thing you will ever see if you are not the wielder. Chambered in special L666 .50 caliber rounds."
 	icon_state = "l6"
 	item_state = "l6closedmag"
 	w_class = WEIGHT_CLASS_HUGE
