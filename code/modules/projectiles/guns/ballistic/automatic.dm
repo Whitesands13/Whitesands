@@ -215,6 +215,7 @@
 	burst_size = 10
 	fire_rate = 100
 	spread = 7
+	recoil = 0.75
 	pin = /obj/item/firing_pin
 	bolt_type = BOLT_TYPE_OPEN
 	mag_display = TRUE
