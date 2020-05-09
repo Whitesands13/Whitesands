@@ -47,8 +47,6 @@
 	required_container = /obj/item/slime_extract/green
 
 /datum/chemical_reaction/slime/unstabletoxin
-	name = "Unstable Mutation Toxin"
-	id = "unstablemuttoxin"
 	results = list(/datum/reagent/mutationtoxin/unstable = 1)
 	required_reagents = list(/datum/reagent/uranium/radium = 1)
 	required_other = TRUE

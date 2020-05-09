@@ -489,7 +489,6 @@
 	var/datum/species/mutation = pick(race)			//I honestly feel extremely uncomfortable. I do not like the fact that this works.
 	var/current_species = H.dna.species.type
 	if(mutation && mutation != current_species)
-		to_chat(H, mutationtext)
 		H.set_species(mutation)
 	else
 		to_chat(H, "<span class='danger'>The pain vanishes suddenly. You feel no different.</span>")
@@ -537,7 +536,6 @@
 						/datum/species/pod,
 						/datum/species/jelly,
 						/datum/species/abductor)
-	mutationtext = "<span class='danger'>The pain subsides. Your whole body feels... Different.</span>"
 	process_flags = ORGANIC | SYNTHETIC
 
 /datum/reagent/mutationtoxin/felinid
@@ -631,7 +629,6 @@
 	description = "An integrated positronic toxin."
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/ipc
-	mutationtext = "<span class='danger'>The pain subsides. You feel... artificial.</span>"
 	process_flags = ORGANIC | SYNTHETIC
 
 
