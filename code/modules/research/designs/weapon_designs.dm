@@ -288,11 +288,11 @@
 
 /datum/design/commanderammo
 	name = "Commander magazine (9mm)"
-	desc = "A single stack M1911 reproduction magazine, modified to chamber 9mm."
+	desc = "A single stack M1911 reproduction magazine, modified to chamber 9mm and fit into Security's Commander sidearms."
 	id = "commanderammo"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 4000)
-	build_path = /obj/item/gun/energy/laser/scatter/security
+	build_path = /obj/item/ammo_box/magazine/co9mm
 	category = list("Weapons")
 	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
 
