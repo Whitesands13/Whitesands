@@ -93,6 +93,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	// 0 = character settings, 1 = game preferences
 	var/current_tab = 0
 
+	var/show_gear = TRUE
+	var/show_loadout = TRUE
+
 	var/unlock_content = 0
 
 	var/list/ignoring = list()
@@ -152,12 +155,14 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 #define MAX_MUTANT_ROWS 4
 
 /datum/preferences/proc/ShowChoices(mob/user)
+	show_gear = (current_tab != 1)
+	show_loadout = (current_tab != 1)
 	if(!user || !user.client)
 		return
 	if(slot_randomized)
 		load_character(default_slot) // Reloads the character slot. Prevents random features from overwriting the slot if saved.
 		slot_randomized = FALSE
-	update_preview_icon(!(current_tab == 1), current_tab == 2)
+	update_preview_icon(show_gear, show_loadout)
 	var/list/dat = list("<center>")
 
 	dat += "<a href='?_src_=prefs;preference=tab;tab=0' [current_tab == 0 ? "class='linkOn'" : ""]>Character Setup</a>"
@@ -1773,6 +1778,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 		else
 			switch(href_list["preference"])
+				if("showgear")
+					show_gear = !show_gear
+				if("showloadout")
+					show_loadout = !show_loadout
 				if("publicity")
 					if(unlock_content)
 						toggles ^= MEMBER_PUBLIC
