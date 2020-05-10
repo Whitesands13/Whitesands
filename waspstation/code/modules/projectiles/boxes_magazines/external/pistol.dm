@@ -1,6 +1,6 @@
 /obj/item/ammo_box/magazine/co9mm
 	name = "Commander magazine (9mm)"
-	desc = "A single stack M1911 reproduction magazine, modified to chamber 9mm auto."
+	desc = "A single stack M1911 reproduction magazine, modified to chamber 9mm."
 	icon_state = "45-8"
 	ammo_type = /obj/item/ammo_casing/c9mm
 	caliber = "9mm"
