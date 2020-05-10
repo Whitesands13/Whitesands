@@ -293,7 +293,7 @@
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 4000)
 	build_path = /obj/item/ammo_box/magazine/co9mm
-	category = list("Weapons")
+	category = list("Ammo")
 	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
 
 /datum/design/stunshell
