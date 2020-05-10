@@ -51,6 +51,8 @@ GLOBAL_LIST_EMPTY(gear_datums)
 	var/list/allowed_roles //Roles that can spawn with this item.
 	var/list/species_blacklist //Stop certain species from receiving this gear
 	var/list/species_whitelist //Only allow certain species to receive this gear
+	var/collapse = FALSE   //Should the subtypes of this item collapse into one button?
+	var/hidden = FALSE     //Should it be hidden
 	var/sort_category = "General"
 	var/subtype_path = /datum/gear //for skipping organizational subtypes (optional)
 

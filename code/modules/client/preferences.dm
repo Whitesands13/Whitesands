@@ -656,6 +656,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				var/datum/gear/G = LC.gear[gear_name]
 				var/ticked = (G.display_name in equipped_gear)
 
+				if(G.hidden)
+					continue
+
 				dat += "<tr style='vertical-align:top;'><td width=15%>[G.display_name]\n"
 				if(G.display_name in purchased_gear)
 					if(G.sort_category == "OOC")
@@ -1336,11 +1339,20 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						type_blacklist += G.subtype_path
 				if((TG.display_name in purchased_gear))
 					if(!(TG.subtype_path in type_blacklist))
-						equipped_gear += TG.display_name
+						if(TG.collapse)
+							var/list/subtypes = list()
+							for(var/datum/gear/ST in subtypesof(TG))
+								subtypes += ST.display_name
+								
+							var/item_variant = input(user, "Select item variant:","Loadout",null) as null|anything in subtypes
+							if(item_variant)
+								equipped_gear += item_variant
+						else
+							equipped_gear += TG.display_name
 					else
 						to_chat(user, "<span class='warning'>Can't equip [TG.display_name]. It conflicts with an already-equipped item.</span>")
 				else
-					log_href("[user] attemoted a HREF exploit!")
+					log_href("[user] attempted a HREF exploit!")
 			save_preferences()
 
 		else if(href_list["select_category"])

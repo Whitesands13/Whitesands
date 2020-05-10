@@ -14,12 +14,25 @@
 
 //JACKETS
 
-/datum/gear/suit/bomber_jacket
+/datum/gear/suit/jacket
+	subtype_path = /datum/gear/suit/jacket
+	cost = 2500
+
+/datum/gear/suit/jacket/bomber
 	display_name = "bomber jacket"
 	path = /obj/item/clothing/suit/jacket
-	cost = 2500
+
+/datum/gear/suit/jacket/leather
+	display_name = "leather jacket"
+	path = /obj/item/clothing/suit/jacket/leather
+
+/datum/gear/suit/jacket/leather
+	display_name = "military jacket"
+	path = /obj/item/clothing/suit/jacket/letterman_syndie
 
 /datum/gear/suit/grponcho
 	display_name = "poncho, green"
 	path = /obj/item/clothing/suit/poncho/green
 	cost = 2000
+
+

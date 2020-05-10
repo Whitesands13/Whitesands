@@ -4,6 +4,8 @@
 	slot = ITEM_SLOT_ICLOTHING
 	sort_category = "Uniforms"
 
+//Colored jumpsuits
+
 /datum/gear/uniform/color
 	subtype_path = /datum/gear/uniform/color
 	cost = 1600
@@ -26,11 +28,40 @@
 	cost = 5000
 
 /datum/gear/uniform/color/rainbow
-	display_name = "jumpsuit, rainbow"
+	display_name = "jumpsuit, rainbow" //literally useless if grey assistants is off
 	path = /obj/item/clothing/under/color/rainbow
 	cost = 5000
 
-/datum/gear/uniform/athshorts
+//Shorts
+
+/datum/gear/uniform/athshortsred
 	display_name = "athletic shorts, red"
 	path = /obj/item/clothing/under/shorts/red
 	cost = 1000
+
+/datum/gear/uniform/athshortsblack
+	display_name = "athletic shorts, black"
+	path = /obj/item/clothing/under/shorts/black
+	cost = 1000
+
+//JUMPSUIT "SUITS"
+
+/datum/gear/uniform/suit
+	cost = 1000
+
+/datum/gear/uniform/suit/amish
+	display_name = "suit, amish"
+	path = /obj/item/clothing/under/suit/sl
+
+/datum/gear/uniform/suit/black
+	display_name = "suit, executive"
+	path = /obj/item/clothing/under/suit/black_really
+
+/datum/gear/uniform/suit/black
+	display_name = "suitskirt, executive"
+	path = /obj/item/clothing/under/suit/black_really/skirt
+
+/datum/gear/uniform/suit/galaxy
+	display_name = "suit, galaxy"
+	path = /obj/item/clothing/under/rank/civilian/lawyer/galaxy
+	cost = 10000
