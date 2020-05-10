@@ -283,6 +283,18 @@
 	materials = list(/datum/material/iron = 6000, /datum/material/silver = 600, /datum/material/glass = 1000)
 	build_path = /obj/item/ammo_box/magazine/wt550m9/wtic
 	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
+	
+//Waspstation edit - free lethals
+
+/datum/design/commanderammo
+	name = "Commander magazine (9mm)"
+	desc = "A single stack M1911 reproduction magazine, modified to chamber 9mm."
+	id = "commanderammo"
+	build_type = PROTOLATHE
+	materials = list(/datum/material/iron = 4000)
+	build_path = /obj/item/gun/energy/laser/scatter/security
+	category = list("Weapons")
+	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
 
 /datum/design/stunshell
 	name = "Stun Shell"
