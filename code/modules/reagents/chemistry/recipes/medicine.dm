@@ -48,13 +48,9 @@
 	results = list(/datum/reagent/medicine/mine_salve = 15)
 	required_reagents = list(/datum/reagent/toxin/plasma = 5, /datum/reagent/iron = 5, /datum/reagent/consumable/sugar = 1) // A sheet of plasma, a twinkie and a sheet of metal makes four of these
 
-/* WaspStation Begin - No Cobbychmes
-
-/datum/chemical_reaction/instabitaluri
-	results = list(/datum/reagent/medicine/C2/instabitaluri = 3)
+/datum/chemical_reaction/synthflesh
+	results = list(/datum/reagent/medicine/synthflesh = 3)
 	required_reagents = list(/datum/reagent/blood = 1, /datum/reagent/carbon = 1, /datum/reagent/medicine/C2/libital = 1)
-
-WaspStation End */
 
 /datum/chemical_reaction/calomel
 	results = list(/datum/reagent/medicine/calomel = 2)
