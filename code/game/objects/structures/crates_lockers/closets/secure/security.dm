@@ -339,6 +339,7 @@
 		new /obj/item/storage/box/lethalshot(src)
 		new /obj/item/ammo_box/magazine/co9mm(src) // Waspstation edit - begin - better safe than sorry
 		new /obj/item/ammo_box/magazine/co9mm(src)
+		new /obj/item/ammo_box/magazine/co9mm(src)
 		new /obj/item/ammo_box/magazine/co9mm(src) // Waspstation edit - end
 
 /obj/structure/closet/secure_closet/labor_camp_security
