@@ -212,7 +212,7 @@
 	mag_type = /obj/item/ammo_box/magazine/l666ammo
 	weapon_weight = WEAPON_HEAVY
 	can_suppress = TRUE
-	burst_size = 10
+	burst_size = 1
 	fire_rate = 100
 	spread = 7
 	recoil = 0.75
@@ -224,6 +224,11 @@
 	fire_sound = 'sound/weapons/gun/l6/shot.ogg'
 	rack_sound = 'sound/weapons/gun/l6/l6_rack.ogg'
 	suppressed_sound = 'sound/weapons/gun/general/heavy_shot_suppressed.ogg'
+
+
+/obj/item/gun/ballistic/automatic/l666/BWOINK
+	desc = "HAHAHA BWOINK!"
+	fire_sound = 'sound/effects/adminhelp.ogg'
 
 /obj/item/gun/ballistic/automatic/l6_saw
 	name = "\improper L6 SAW"
