@@ -23,7 +23,7 @@
 	path = /obj/item/clothing/head/hardhat/dblue
 	allowed_roles = list("Chief Engineer", "Engineer")
 
-//Berets, AKA fuck
+//Berets, AKA how I lost my will to live again
 
 /datum/gear/hat/beret
 	display_name = "beret, red"
@@ -114,8 +114,19 @@
 	display_name = "flatcap"
 	path = /obj/item/clothing/head/flatcap
 
-/datum/gear/hat/beret
-	display_name = "beret, red"
-	subtype
-	path = /obj/item/clothing/head/beret
-	cost = 2000
+/datum/gear/hat/beanie
+	display_name = "beanie"
+	path = /obj/item/clothing/head/beanie
+
+/datum/gear/hat/tinfoil
+	display_name = "tinfoil hat"
+	path = /obj/item/clothing/head/foilhat
+
+/datum/gear/hat/wig
+	display_name = "wig"
+	path = /obj/item/clothing/head/wig
+
+/datum/gear/hat/tinfoil
+	display_name = "cat ears"
+	path = /obj/item/clothing/head/kitty
+	cost = 5000

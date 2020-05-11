@@ -53,7 +53,7 @@
 /obj/item/clothing/head/beret/service
 	name = "service beret"
 	desc =  "A standard service beret. Held by those with the sanity to serve everyone else on the Nanotrasen stations."
-	icon_state = "beret_service"
+	icon_state = "beret_serv"
 
 /obj/item/clothing/head/beret/qm
 	name = "quartermaster beret"

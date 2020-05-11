@@ -13,7 +13,6 @@
 	path = /obj/item/clothing/suit/hooded/wintercoat
 
 //JACKETS
-
 /datum/gear/suit/jacket
 	subtype_path = /datum/gear/suit/jacket
 	cost = 2500
@@ -28,11 +27,20 @@
 
 /datum/gear/suit/jacket/leather
 	display_name = "military jacket"
-	path = /obj/item/clothing/suit/jacket/letterman_syndie
+	path = /obj/item/clothing/suit/jacket/miljacket
 
+/datum/gear/suit/jacket/puffer
+	display_name = "puffer jacket"
+	path = /obj/item/clothing/suit/jacket/puffer
+
+//Misc
 /datum/gear/suit/grponcho
 	display_name = "poncho, green"
 	path = /obj/item/clothing/suit/poncho/green
 	cost = 2000
 
+/datum/gear/suit/overalls
+	display_name = "overalls"
+	path = /obj/item/clothing/suit/apron/overalls
+	cost = 1000
 

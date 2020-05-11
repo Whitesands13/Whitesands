@@ -63,3 +63,15 @@
 	display_name = "armband"
 	path = /obj/item/clothing/accessory/armband
 	cost = 1000
+
+/datum/gear/accessory/stethoscope
+	display_name = "stethoscope"
+	path = /obj/item/clothing/neck/stethoscope
+	allowed_roles = list("Medical Doctor", "Chief Medical Officer")
+	cost = 750
+
+/datum/gear/accessory/stethoscope
+	display_name = "pet collar"
+	description = "Only the truly insane would wear this around their neck."
+	path = /obj/item/clothing/neck/petcollar
+	cost = 5000

@@ -64,4 +64,10 @@
 /datum/gear/uniform/suit/galaxy
 	display_name = "suit, galaxy"
 	path = /obj/item/clothing/under/rank/civilian/lawyer/galaxy
+	cost = 7500
+
+//Premium
+/datum/gear/uniform/tacticool
+	display_name = "tacticool turtleneck"
+	path = /obj/item/clothing/under/syndicate/tacticool
 	cost = 10000

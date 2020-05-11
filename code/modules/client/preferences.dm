@@ -96,7 +96,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/show_gear = TRUE
 	var/show_loadout = TRUE
 
-	var/unlock_content = 0
+	var/unlock_content = FALSE
+	var/custom_ooc = FALSE
 
 	var/list/ignoring = list()
 
@@ -137,6 +138,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	if(loaded_preferences_successfully)
 		if("extra character slot" in purchased_gear)
 			max_save_slots += 1
+		if("custom ooc color" in purchased_gear)
+			custom_ooc = TRUE
 		if(load_character())
 			species_looking_at = pref_species.id
 			return
@@ -659,7 +662,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if(G.hidden)
 					continue
 
-				dat += "<tr style='vertical-align:top;'><td width=15%>[G.display_name]\n"
+				dat += "<tr style='vertical-align:top;'><td width=20%>[G.display_name]\n"
 				if(G.display_name in purchased_gear)
 					if(G.sort_category == "OOC")
 						dat += "<i>Purchased.</i></td>"
@@ -808,7 +811,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if(unlock_content)
 					dat += "<b>BYOND Membership Publicity:</b> <a href='?_src_=prefs;preference=publicity'>[(toggles & MEMBER_PUBLIC) ? "Public" : "Hidden"]</a><br>"
 
-				if(unlock_content || check_rights_for(user.client, R_ADMIN))
+				if(unlock_content || check_rights_for(user.client, R_ADMIN) || custom_ooc)
 					dat += "<b>OOC Color:</b> <span style='border: 1px solid #161616; background-color: [ooccolor ? ooccolor : GLOB.normal_ooc_colour];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=ooccolor;task=input'>Change</a><br>"
 
 			dat += "</td>"
@@ -912,7 +915,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	dat += "</center>"
 
 	winshow(user, "preferences_window", TRUE)
-	var/datum/browser/popup = new(user, "preferences_browser", "<div align='center'>Character Setup</div>", 640, 770)
+	var/datum/browser/popup = new(user, "preferences_browser", "<div align='center'>Character Setup</div>", 640, 825)
 	popup.set_content(dat.Join())
 	popup.open(FALSE)
 	onclose(user, "preferences_window", src)
@@ -1339,16 +1342,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						type_blacklist += G.subtype_path
 				if((TG.display_name in purchased_gear))
 					if(!(TG.subtype_path in type_blacklist))
-						if(TG.collapse)
-							var/list/subtypes = list()
-							for(var/datum/gear/ST in subtypesof(TG))
-								subtypes += ST.display_name
-								
-							var/item_variant = input(user, "Select item variant:","Loadout",null) as null|anything in subtypes
-							if(item_variant)
-								equipped_gear += item_variant
-						else
-							equipped_gear += TG.display_name
+						equipped_gear += TG.display_name
 					else
 						to_chat(user, "<span class='warning'>Can't equip [TG.display_name]. It conflicts with an already-equipped item.</span>")
 				else

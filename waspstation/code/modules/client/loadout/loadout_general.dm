@@ -18,3 +18,73 @@
 	path = /obj/item/lipstick
 	cost = 1200
 
+/datum/gear/balaclava
+	display_name = "balaclava"
+	path = /obj/item/clothing/mask/balaclava
+	cost = 1000
+
+/datum/gear/vape
+	display_name = "vape"
+	path = /obj/item/clothing/mask/vape
+	cost = 1000
+
+/datum/gear/bandana
+	display_name = "bandana, red"
+	path = /obj/item/clothing/mask/bandana/red
+	cost = 500
+
+/datum/gear/bible
+	display_name = "bible"
+	path = /obj/item/storage/book/bible
+	cost = 750
+
+/datum/gear/flask
+	display_name = "flask"
+	path = /obj/item/reagent_containers/food/drinks/flask
+	cost = 750
+
+/datum/gear/mug
+	display_name = "coffee mug"
+	path = /obj/item/reagent_containers/food/drinks/britcup
+	cost = 500
+
+/datum/gear/zippo
+	display_name = "zippo"
+	path = /obj/item/lighter/greyscale
+	cost = 750
+
+/datum/gear/cards
+	display_name = "deck of cards"
+	path = /obj/item/toy/cards/deck
+	cost = 500
+
+/datum/gear/eightball
+	display_name = "magic eight ball"
+	path = /obj/item/toy/eightball
+	cost = 750
+
+/datum/gear/box
+	display_name = "box"
+	path = /obj/item/storage/box
+	description = "It never hurts to carry an extra box."
+	cost = 500
+
+/datum/gear/wallet
+	display_name = "wallet"
+	path = /obj/item/storage/wallet
+	cost = 750
+
+/datum/gear/pai
+	display_name = "personal AI device"
+	path = /obj/item/paicard
+	cost = 1500
+
+/datum/gear/tablet
+	display_name = "tablet computer"
+	path = /obj/item/modular_computer/tablet
+	cost = 2000
+
+/datum/gear/colorpen
+	display_name = "four-color pen"
+	path = /obj/item/pen/fourcolor
+	cost = 750
