@@ -54,7 +54,7 @@ GLOBAL_LIST_EMPTY(gear_datums)
 	var/collapse = FALSE   //Should the subtypes of this item collapse into one button?
 	var/hidden = FALSE     //Should it be hidden
 	var/sort_category = "General"
-	var/subtype_path = /datum/gear //for skipping organizational subtypes (optional)
+	var/subtype_path       //for skipping organizational subtypes (optional)
 
 /datum/gear/New()
 	..()

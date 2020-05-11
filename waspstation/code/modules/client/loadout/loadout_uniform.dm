@@ -57,7 +57,7 @@
 	display_name = "suit, executive"
 	path = /obj/item/clothing/under/suit/black_really
 
-/datum/gear/uniform/suit/black
+/datum/gear/uniform/suit/black/skirt
 	display_name = "suitskirt, executive"
 	path = /obj/item/clothing/under/suit/black_really/skirt
 

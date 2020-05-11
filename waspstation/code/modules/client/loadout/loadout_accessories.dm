@@ -62,6 +62,7 @@
 /datum/gear/accessory/armband_red
 	display_name = "armband"
 	path = /obj/item/clothing/accessory/armband
+	slot = null
 	cost = 1000
 
 /datum/gear/accessory/stethoscope

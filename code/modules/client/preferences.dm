@@ -158,6 +158,13 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 #define MAX_MUTANT_ROWS 4
 
 /datum/preferences/proc/ShowChoices(mob/user)
+	switch(current_tab) //It's ugly that there's two of the same switches, but this needs to be run before the preview icon updates soooooo
+		if(0)
+			show_gear = TRUE
+			show_loadout = FALSE
+		if(1)
+			show_gear = FALSE
+			show_loadout = FALSE	
 	show_gear = (current_tab != 1)
 	show_loadout = (current_tab != 1)
 	if(!user || !user.client)
@@ -183,7 +190,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	dat += "<HR>"
 
 	switch(current_tab)
-		if (0) // Character Appearance
+		if (0) // Character Setup
 			if(path)
 				var/savefile/S = new /savefile(path)
 				if(S)
@@ -273,7 +280,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 			dat += "<br><b>Uplink Spawn Location:</b><BR><a href ='?_src_=prefs;preference=uplink_loc;task=input'>[uplink_spawn_loc]</a><BR></td>"
 
-		if(1) //Clothing/Job setup
+		if(1) //Character Appearance
 			if(path)
 				var/savefile/S = new /savefile(path)
 				if(S)
@@ -629,7 +636,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			var/fcolor =  "#3366CC"
 			var/metabalance = user.client.get_metabalance()
 			dat += "<table align='center' width='100%'>"
-			dat += "<tr><td colspan=4><center><b>Current balance: <font color='[fcolor]'>[metabalance]</font> [CONFIG_GET(string/metacurrency_name)]s.</b> \[<a href='?_src_=prefs;preference=gear;clear_loadout=1'>Clear Loadout</a>\]</center></td></tr>"
+			dat += "<tr><td colspan=4><center><b>Current balance: <font color='[fcolor]'>[metabalance]</font> [CONFIG_GET(string/metacurrency_name)]s.</b> \[<a href='?_src_=prefs;preference=gear;clear_loadout=1'>Clear Loadout</a>\] | \[<a href='?_src_=prefs;preference=gear;toggle_loadout=1'>Toggle Loadout</a>\]</center></td></tr>"
 			dat += "<tr><td colspan=4><center><b>"
 
 			var/firstcat = 1
@@ -673,8 +680,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				dat += "<td width = 5% style='vertical-align:top'>[G.cost]</td><td>"
 				if(G.allowed_roles)
 					dat += "<font size=2>"
+					var/list/allowedroles = list()
 					for(var/role in G.allowed_roles)
-						dat += role + " "
+						allowedroles += role
+					dat += english_list(allowedroles, null, ", ")	
 					dat += "</font>"
 				dat += "</td><td><font size=2><i>[G.description]</i></font></td></tr>"
 			dat += "</table>"
@@ -1353,6 +1362,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			gear_tab = href_list["select_category"]
 		else if(href_list["clear_loadout"])
 			equipped_gear.Cut()
+		else if(href_list["toggle_loadout"])
+			show_loadout = !show_loadout
 
 		ShowChoices(user)
 		return
@@ -1786,8 +1797,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			switch(href_list["preference"])
 				if("showgear")
 					show_gear = !show_gear
-				if("showloadout")
-					show_loadout = !show_loadout
 				if("publicity")
 					if(unlock_content)
 						toggles ^= MEMBER_PUBLIC

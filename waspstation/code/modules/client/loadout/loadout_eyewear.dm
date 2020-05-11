@@ -13,6 +13,10 @@
 	display_name = "glasses, large prescription"
 	path = /obj/item/clothing/glasses/regular/circle
 
+/datum/gear/eyewear/glasses/jamjar
+	display_name = "glasses, jamjar prescription"
+	path = /obj/item/clothing/glasses/regular/jamjar
+
 //Probably overpowerd but honestly idc
 /datum/gear/eyewear/glasses/hud
 	subtype_path = /datum/gear/eyewear/glasses/hud

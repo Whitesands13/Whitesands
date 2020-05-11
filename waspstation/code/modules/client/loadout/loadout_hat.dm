@@ -126,6 +126,11 @@
 	display_name = "wig"
 	path = /obj/item/clothing/head/wig
 
+/datum/gear/hat/cowboy
+	display_name = "cowboy hat"
+	path = /obj/item/clothing/head/cowboy
+	cost = 1500
+
 /datum/gear/hat/tinfoil
 	display_name = "cat ears"
 	path = /obj/item/clothing/head/kitty

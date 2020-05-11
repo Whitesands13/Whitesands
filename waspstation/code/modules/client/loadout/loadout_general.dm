@@ -54,12 +54,12 @@
 	cost = 750
 
 /datum/gear/cards
-	display_name = "deck of cards"
+	display_name = "toy, deck of cards"
 	path = /obj/item/toy/cards/deck
 	cost = 500
 
 /datum/gear/eightball
-	display_name = "magic eight ball"
+	display_name = "toy, magic eight ball"
 	path = /obj/item/toy/eightball
 	cost = 750
 
@@ -84,7 +84,52 @@
 	path = /obj/item/modular_computer/tablet
 	cost = 2000
 
+/datum/gear/pen
+	display_name = "pen, black"
+	path = /obj/item/pen
+	cost = 250
+
 /datum/gear/colorpen
-	display_name = "four-color pen"
+	display_name = "pen, four-color"
 	path = /obj/item/pen/fourcolor
+	cost = 500
+
+/datum/gear/paperbin
+	display_name = "paper bin"
+	path = /obj/item/paper_bin
 	cost = 750
+
+/datum/gear/cane
+	display_name = "cane"
+	path = /obj/item/cane
+	cost = 500
+
+/datum/gear/radio
+	display_name = "hand radio"
+	path = /obj/item/radio
+	cost = 500
+
+/datum/gear/moth
+	display_name = "toy, moth plushie"
+	path = /obj/item/toy/plush/moth
+	cost = 1500
+
+/datum/gear/flashlight
+	display_name = "tool, flashlight"
+	path = /obj/item/flashlight
+	cost = 500
+
+/datum/gear/crowbar
+	display_name = "tool, emergency crowbar"
+	path = /obj/item/crowbar/red
+	cost = 500
+
+/datum/gear/balloon
+	display_name = "toy, balloon"
+	path = /obj/item/toy/balloon
+	cost = 500
+
+/datum/gear/balloon/ian
+	display_name = "toy, ian balloon"
+	path = /obj/item/toy/balloon/corgi
+	cost = 2500
