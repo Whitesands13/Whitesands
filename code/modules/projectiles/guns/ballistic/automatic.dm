@@ -212,7 +212,6 @@
 	mag_type = /obj/item/ammo_box/magazine/l666ammo
 	weapon_weight = WEAPON_HEAVY
 	can_suppress = TRUE
-	burst_size = 1
 	fire_rate = 100
 	spread = 7
 	recoil = 0.75
@@ -227,7 +226,8 @@
 
 
 /obj/item/gun/ballistic/automatic/l666/BWOINK
-	desc = "HAHAHA BWOINK!"
+	name = "\improper L666 BWOINKINATOR"
+	desc = "The true gods are dead. All that is left is the bwoink. Repent."
 	fire_sound = 'sound/effects/adminhelp.ogg'
 
 /obj/item/gun/ballistic/automatic/l6_saw
