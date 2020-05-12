@@ -26,7 +26,8 @@
 	bitesize_mod = 1
 	foodtype = VEGETABLES
 	tastes = list ("peas" = 1, "chalky saltiness" = 1)
-	distill_regeant = /datum/reagent/saltpetre
+	distill_reagent = /datum/reagent/saltpetre
+
 
 
 // Laughin' Peas
