@@ -6,6 +6,8 @@
 	if(GLOB.say_disabled || !GLOB.ooc_allowed)	//This is here to try to identify lag problems
 		return "OOC is currently disabled."
 
+	SSredbot.send_discord_message("ooc", "**[input["sender"]]:** [input["message"]]")
+
 	for(var/client/C in GLOB.clients)
 		if(GLOB.OOC_COLOR)
 			to_chat(C, "<font color='[GLOB.OOC_COLOR]'><b><span class='prefix'>OOC:</span> <EM>[input["sender"]]:</EM> <span class='message linkify'>[input["message"]]</span></b></font>")
