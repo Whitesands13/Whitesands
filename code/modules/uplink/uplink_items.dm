@@ -401,7 +401,7 @@ GLOBAL_LIST_INIT(uplink_items, subtypesof(/datum/uplink_item))
 	item = /obj/item/dualsaber
 	player_minimum = 25
 	cost = 16
-	include_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops) //Waspstation Edit -- Soahc2's Combat Rebalances Part 1
+	include_modes = list(/datum/game_mode/nuclear) //Waspstation Edit -- Soahc2's Combat Rebalances Part 1
 
 /datum/uplink_item/dangerous/doublesword/get_discount()
 	return pick(4;0.8,2;0.65,1;0.5)
