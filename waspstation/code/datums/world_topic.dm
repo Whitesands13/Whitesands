@@ -25,7 +25,7 @@
 
 /datum/world_topic/reload_admins/Run(list/input)
 	ReloadAsync()
-	log_admin("[input["sender"] reloaded admins via chat command.")
+	log_admin("[input["sender"]] reloaded admins via chat command.")
 	return "Admins reloaded."
 
 /datum/world_topic/reload_admins/proc/ReloadAsync()
