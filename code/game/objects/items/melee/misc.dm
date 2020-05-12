@@ -380,6 +380,9 @@
 	playsound(src.loc, on_sound, 50, TRUE)
 	add_fingerprint(user)
 
+/obj/item/melee/classic_baton/telescopic/additional_effects_carbon(mob/living/target, mob/living/user) //Waspstation Addition -- Soahc2's Combat Rebalances Part 1
+	target.Stun(20)
+
 /obj/item/melee/classic_baton/telescopic/contractor_baton
 	name = "contractor baton"
 	desc = "A compact, specialised baton assigned to Syndicate contractors. Applies light electrical shocks to targets."

@@ -598,9 +598,8 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 		homerun_ready = 1
 	..()
 
-/obj/item/melee/baseball_bat/attack(mob/living/target, mob/living/user)
+/obj/item/melee/baseball_bat/homerun/attack(mob/living/target, mob/living/user) //Waspstation Edit -- Soahc2's Combat Rebalances Part 1
 	. = ..()
-	var/atom/throw_target = get_edge_target_turf(target, user.dir)
 	if(homerun_ready)
 		user.visible_message("<span class='userdanger'>It's a home run!</span>")
 		target.throw_at(throw_target, rand(8,10), 14, user)
@@ -608,8 +607,6 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 		playsound(get_turf(src), 'sound/weapons/homerun.ogg', 100, TRUE)
 		homerun_ready = 0
 		return
-	else if(!target.anchored)
-		target.throw_at(throw_target, rand(1,2), 7, user)
 
 /obj/item/melee/baseball_bat/ablative
 	name = "metal baseball bat"
