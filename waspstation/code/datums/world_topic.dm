@@ -38,7 +38,7 @@
 	keyword = "restart"
 	require_comms_key = TRUE
 
- /datum/world_topic/restart/Run(list/input)
+/datum/world_topic/restart/Run(list/input)
 	var/active_admins = FALSE
 	for(var/client/C in GLOB.admins)
 		if(!C.is_afk() && check_rights_for(C, R_SERVER))
