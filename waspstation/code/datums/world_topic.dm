@@ -9,10 +9,11 @@
 	SSredbot.send_discord_message("ooc", "**[input["sender"]]:** [input["message"]]")
 
 	for(var/client/C in GLOB.clients)
-		if(GLOB.OOC_COLOR)
-			to_chat(C, "<font color='[GLOB.OOC_COLOR]'><b><span class='prefix'>OOC:</span> <EM>[input["sender"]]:</EM> <span class='message linkify'>[input["message"]]</span></b></font>")
-		else
-			to_chat(C, "<span class='ooc'><span class='prefix'>OOC:</span> <EM>[input["sender"]]:</EM> <span class='message linkify'>[input["message"]]</span></span>")
+		if(!(key in C.prefs.ignoring))
+			if(GLOB.OOC_COLOR)
+				to_chat(C, "<font color='[GLOB.OOC_COLOR]'><b><span class='prefix'>OOC:</span> <EM>[input["sender"]]:</EM> <span class='message linkify'>[input["message"]]</span></b></font>")
+			else
+				to_chat(C, "<span class='ooc'><span class='prefix'>OOC:</span> <EM>[input["sender"]]:</EM> <span class='message linkify'>[input["message"]]</span></span>")
 
 /datum/world_topic/manifest //Inspired by SunsetStation
 	keyword = "manifest"
