@@ -69,4 +69,3 @@
 
 /obj/effect/projectile/tracer/emitter
 	icon_state = "emitter"
-	
