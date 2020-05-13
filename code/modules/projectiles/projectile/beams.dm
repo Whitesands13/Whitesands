@@ -14,11 +14,12 @@
 	ricochets_max = 50	//Honk!
 	ricochet_chance = 80
 	reflectable = REFLECT_NORMAL
-
-/obj/projectile/beam/laser
+	hitscan = TRUE
 	tracer_type = /obj/effect/projectile/tracer/laser
 	muzzle_type = /obj/effect/projectile/muzzle/laser
 	impact_type = /obj/effect/projectile/impact/laser
+
+/obj/projectile/beam/laser
 
 /obj/projectile/beam/laser/heavylaser
 	name = "heavy laser"
@@ -116,6 +117,9 @@
 	damage = 30
 	impact_effect_type = /obj/effect/temp_visual/impact_effect/green_laser
 	light_color = LIGHT_COLOR_GREEN
+	tracer_type = /obj/effect/projectile/tracer/emitter
+	muzzle_type = /obj/effect/projectile/muzzle/emitter
+	impact_type = /obj/effect/projectile/impact/emitter
 
 /obj/projectile/beam/emitter/singularity_pull()
 	return //don't want the emitters to miss

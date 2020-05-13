@@ -96,6 +96,7 @@
 	icon_state = "scatterlaser"
 	range = 255
 	damage = 6
+	hitscan = FALSE
 
 /obj/projectile/beam/laser/accelerator/Range()
 	..()
