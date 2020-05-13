@@ -81,6 +81,7 @@
 	tracer_type = /obj/effect/projectile/tracer/disabler
 	muzzle_type = /obj/effect/projectile/muzzle/disabler
 	impact_type = /obj/effect/projectile/impact/disabler
+	hitscan = FALSE
 
 /obj/projectile/beam/pulse
 	name = "pulse"
