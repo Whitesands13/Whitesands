@@ -6,14 +6,18 @@
 	if(GLOB.say_disabled || !GLOB.ooc_allowed)	//This is here to try to identify lag problems
 		return "OOC is currently disabled."
 
-	SSredbot.send_discord_message("ooc", "**[input["sender"]]:** [input["message"]]")
+	var/message = input["message"]
+
+	SSredbot.send_discord_message("ooc", "**[input["sender"]]:** [message]")
+
+	message = emoji_parse(message)
 
 	for(var/client/C in GLOB.clients)
-		if(!(key in C.prefs.ignoring))
+		if(C.prefs.chat_toggles & CHAT_OOC)
 			if(GLOB.OOC_COLOR)
-				to_chat(C, "<font color='[GLOB.OOC_COLOR]'><b><span class='prefix'>OOC:</span> <EM>[input["sender"]]:</EM> <span class='message linkify'>[input["message"]]</span></b></font>")
+				to_chat(C, "<font color='[GLOB.OOC_COLOR]'><b><span class='prefix'>OOC:</span> <EM>[input["sender"]]:</EM> <span class='message linkify'>[message]</span></b></font>")
 			else
-				to_chat(C, "<span class='ooc'><span class='prefix'>OOC:</span> <EM>[input["sender"]]:</EM> <span class='message linkify'>[input["message"]]</span></span>")
+				to_chat(C, "<span class='ooc'><span class='prefix'>OOC:</span> <EM>[input["sender"]]:</EM> <span class='message linkify'>[message]</span></span>")
 
 /datum/world_topic/manifest //Inspired by SunsetStation
 	keyword = "manifest"
@@ -41,11 +45,19 @@
 
 /datum/world_topic/restart/Run(list/input)
 	var/active_admins = FALSE
+	var/hard_reset = input["hard"]
+
+	if (hard_reset && !world.TgsAvailable())
+		hard_reset = FALSE
+
 	for(var/client/C in GLOB.admins)
 		if(!C.is_afk() && check_rights_for(C, R_SERVER))
 			active_admins = TRUE
 			break
 	if(!active_admins)
-		return world.Reboot(input[keyword], input["reason"])
+		if(hard_reset)
+			return world.Reboot(fast_track = TRUE)
+		else
+			return world.Reboot()
 	else
 		return "There are active admins on the server! Ask them to restart."
