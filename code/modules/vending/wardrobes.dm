@@ -37,7 +37,8 @@
 					/obj/item/clothing/neck/tie/black = 6)
 	premium = list(/obj/item/clothing/under/rank/security/officer/formal = 3,//WaspStation edit - Better security jumpsuit sprites
 					/obj/item/clothing/suit/security/officer = 3,
-					/obj/item/clothing/head/beret/sec/navyofficer = 3)
+					/obj/item/clothing/head/beret/sec/navyofficer = 2,
+					/obj/item/clothing/head/beret/sec/navyofficer = 2)
 	refill_canister = /obj/item/vending_refill/wardrobe/sec_wardrobe
 	payment_department = ACCOUNT_SEC
 	light_color = "#ff3300"

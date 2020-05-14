@@ -77,25 +77,40 @@
 	name = "security beret"
 	desc = "A robust beret with the security insignia emblazoned on it. Uses reinforced fabric to offer sufficient protection."
 	icon_state = "beret_officer"
-	armor = list("melee" = 40, "bullet" = 30, "laser" = 30, "energy" = 40, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 20, "acid" = 50)
+	armor = list("melee" = 35, "bullet" = 30, "laser" = 30,"energy" = 40, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50)
 	strip_delay = 60
 	dog_fashion = null
 
 /obj/item/clothing/head/beret/sec/navyhos
-	name = "head of security's beret"
-	desc = "A special beret with the Head of Security's insignia emblazoned on it. A symbol of excellence, a badge of courage, a mark of distinction."
+	name = "head of security's navy beret"
+	desc = "A navy-colored beret with the Head of Security's insignia emblazoned on it. A symbol of excellence, a badge of courage, a mark of distinction."
 	icon_state = "hosberet"
+	armor = list("melee" = 40, "bullet" = 30, "laser" = 25, "energy" = 35, "bomb" = 25, "bio" = 10, "rad" = 0, "fire" = 50, "acid" = 60)
+
+/obj/item/clothing/head/beret/sec/navyhos/black
+	name = "head of security's bleck beret"
+	desc = "A black beret with the Head of Security's insignia emblazoned on it. A symbol of excellence, a badge of courage, a mark of distinction."
+	icon_state = "hosberetblack"
 
 /obj/item/clothing/head/beret/sec/navywarden
 	name = "warden's beret"
-	desc = "A special beret with the Warden's insignia emblazoned on it. For wardens with class."
+	desc = "A navy-colored beret with the Warden's insignia emblazoned on it. For wardens with class."
 	icon_state = "wardenberet"
-	armor = list("melee" = 40, "bullet" = 30, "laser" = 30, "energy" = 40, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 30, "acid" = 50)
+	armor = list("melee" = 40, "bullet" = 30, "laser" = 30, "energy" = 40, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 30, "acid" = 60)
 	strip_delay = 60
 
+/obj/item/clothing/head/beret/sec/navywarden/black
+	name = "warden's beret"
+	desc = "A beret made with black reinforced fabric with the Warden's insignia emblazoned on it. For wardens with class."
+	icon_state = "wardenberetblack"
+
 /obj/item/clothing/head/beret/sec/navyofficer
-	desc = "A special beret with the security insignia emblazoned on it. For officers with class."
+	desc = "A navy-colored beret with the security insignia emblazoned on it. For officers with class."
 	icon_state = "officerberet"
+
+/obj/item/clothing/head/beret/sec/navyofficer/black
+	desc = "A beret made out of black reinforced fabric with the security insignia emblazoned on it. For officers with class."
+	icon_state = "officerberetblack"
 
 //Engineering
 /obj/item/clothing/head/beret/eng
