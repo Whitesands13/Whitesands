@@ -19,6 +19,16 @@
 			else
 				to_chat(C, "<span class='ooc'><span class='prefix'>OOC:</span> <EM>[input["sender"]]:</EM> <span class='message linkify'>[message]</span></span>")
 
+/datum/world_topic/asay_relay
+	keyword = "asay_send"
+	require_comms_key = TRUE
+
+/datum/world_topic/asay_relay/Run(list/input)
+	var/message = "<span class='adminsay'><span class='prefix'>ADMIN:</span> <EM>[input["sender"]]</EM>: <span class='message linkify'>[input["message"]]</span></span>"
+	message = emoji_parse(copytext_char(sanitize(message), 1, MAX_MESSAGE_LEN))
+	message = keywords_lookup(message)
+	to_chat(GLOB.admins, message)
+
 /datum/world_topic/manifest //Inspired by SunsetStation
 	keyword = "manifest"
 	require_comms_key = TRUE //not really needed, but I don't think any bot besides ours would need it
