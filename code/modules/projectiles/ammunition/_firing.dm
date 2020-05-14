@@ -10,6 +10,8 @@
 				spread = round(1 - 0.5) * distro
 		if(!throw_proj(target, targloc, user, params, spread))
 			return FALSE
+		if(i > 1)
+			newshot()
 	else
 		if(isnull(BB))
 			return FALSE
