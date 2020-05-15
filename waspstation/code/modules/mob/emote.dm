@@ -4,8 +4,7 @@
 	key = "speen"
 	key_third_person = "speeeens"
 	restraint_check = TRUE
-	mob_type_allowed_typecache = list(/mob/living, /mob/dead/observer)
-	mob_type_ignore_stat_typecache = list(/mob/dead/observer)
+	mob_type_allowed_typecache = /mob/living
 
 /datum/emote/speen/run_emote(mob/user, params,  type_override, intentional)
 	. = ..()
