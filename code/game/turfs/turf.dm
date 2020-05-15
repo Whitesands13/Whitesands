@@ -215,7 +215,8 @@
 	else if(istype(C, /obj/item/rcl))
 		handleRCL(C, user)
 	return FALSE
-/turf/CanPass(atom/movable/mover, turf/target)
+/turf/CanAllowThrough(atom/movable/mover, turf/target)
+	. = ..()
 	if(!target)
 		return FALSE
 	if(istype(mover)) // turf/Enter(...) will perform more advanced checks
