@@ -28,9 +28,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/UI_style = null
 	var/buttons_locked = FALSE
 	var/hotkeys = TRUE
-	var/chat_on_map = TRUE
+	var/chat_on_map = FALSE
 	var/max_chat_length = CHAT_MESSAGE_MAX_LENGTH
-	var/see_chat_non_mob = TRUE
+	var/see_chat_non_mob = FALSE
 
 	// Custom Keybindings
 	var/list/key_bindings = list()
