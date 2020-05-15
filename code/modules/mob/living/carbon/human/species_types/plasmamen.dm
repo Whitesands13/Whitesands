@@ -95,7 +95,7 @@
 			O = new /datum/outfit/plasmaman/security
 
 		if("Brig Physician")
-			O = new /datum/outfit/plasmaman/security/secmed
+			O = new /datum/outfit/plasmaman/secmed
 
 		if("Detective")
 			O = new /datum/outfit/plasmaman/detective
@@ -135,7 +135,7 @@
 
 		if("Atmospheric Technician")
 			O = new /datum/outfit/plasmaman/atmospherics
-			
+
 		if("Captain")
 			O = new /datum/outfit/plasmaman/command
 
