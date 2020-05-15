@@ -147,6 +147,7 @@
 		to_chat(src, "<span class='notice'>PM to-<b>Admins</b>: <span class='linkify'>[rawmsg]</span></span>", confidential = TRUE)
 		var/datum/admin_help/AH = admin_ticket_log(src, "<font color='red'>Reply PM from-<b>[key_name(src, TRUE, TRUE)]</b> to <i>External</i>: [keywordparsedmsg]</font>")
 		externalreplyamount--
+		SSredbot.send_discord_message("admin", "[AH ? "#[AH.id] " : ""]Reply: [ckey]")
 		send2tgs("[AH ? "#[AH.id] " : ""]Reply: [ckey]", rawmsg)
 	else
 		if(recipient.holder)
@@ -298,6 +299,7 @@
 		return "Error: No message"
 
 	message_admins("External message from [sender] to [key_name_admin(C)] : [msg]")
+	SSredbot.send_discord_message("admin", "External message from [sender] to [key_name_admin(C)] : [msg]")
 	log_admin_private("External PM: [sender] -> [key_name(C)] : [msg]")
 	msg = emoji_parse(msg)
 
