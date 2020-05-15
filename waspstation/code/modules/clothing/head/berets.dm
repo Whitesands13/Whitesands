@@ -88,7 +88,7 @@
 	armor = list("melee" = 40, "bullet" = 30, "laser" = 25, "energy" = 35, "bomb" = 25, "bio" = 10, "rad" = 0, "fire" = 50, "acid" = 60)
 
 /obj/item/clothing/head/beret/sec/navyhos/black
-	name = "head of security's bleck beret"
+	name = "head of security's black beret"
 	desc = "A black beret with the Head of Security's insignia emblazoned on it. A symbol of excellence, a badge of courage, a mark of distinction."
 	icon_state = "hosberetblack"
 
