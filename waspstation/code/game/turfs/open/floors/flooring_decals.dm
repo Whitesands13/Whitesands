@@ -6,12 +6,25 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal
 	name = "floor decal"
 	icon = 'waspstation/icons/turf/decals.dmi'
+	plane = FLOOR_PLANE
 	layer = TURF_DECAL_LAYER
 	appearance_flags = RESET_COLOR
 	var/supplied_dir
 	var/detail_overlay
 	var/detail_color
 
+/obj/effect/turf_decal/Initialize()
+	..()
+	return INITIALIZE_HINT_QDEL
+
+/obj/effect/turf_decal/ComponentInitialize()
+	. = ..()
+	var/turf/T = loc
+	if(!istype(T)) //you know this will happen somehow
+		CRASH("Turf decal initialized in an object/nullspace")
+	T.AddComponent(/datum/component/decal, icon, icon_state, dir, CLEAN_NEVER, color, null, null, alpha)
+
+/*
 /obj/effect/floor_decal/New(var/newloc, var/newdir, var/newcolour, var/newappearance)
 	supplied_dir = newdir
 	if(newappearance) appearance = newappearance
@@ -35,6 +48,8 @@ var/list/floor_decals = list()
 		T.overlays += I
 	..()
 	return INITIALIZE_HINT_QDEL
+*/
+
 
 /obj/effect/floor_decal/carpet
 	name = "brown carpet"
