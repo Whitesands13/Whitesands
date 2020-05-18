@@ -2,7 +2,7 @@
 	display_name = "extra character slot"
 	sort_category = "OOC"
 	description = "An extra charslot. Pretty self-explanatory."
-	cost = 10000
+	cost = 7500
 
 /datum/gear/ooc/char_slot/purchase(var/client/C)
 	C?.prefs?.max_save_slots += 1
@@ -11,7 +11,7 @@
 	display_name = "custom ooc color"
 	sort_category = "OOC"
 	description = "If you can buy this, you deserve it."
-	cost = 50000
+	cost = 25000
 
 /datum/gear/ooc/custom_color/purchase(var/client/C)
 	C?.prefs?.custom_ooc = TRUE

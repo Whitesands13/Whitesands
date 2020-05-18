@@ -6,27 +6,27 @@
 /datum/gear/briefcase
 	display_name = "briefcase"
 	path = /obj/item/storage/briefcase
-	cost = 500
+	cost = 300
 
 /datum/gear/lipstick
 	display_name = "lipstick, black"
 	path = /obj/item/lipstick/black
-	cost = 1200
+	cost = 700
 
 /datum/gear/lipstick/red
 	display_name = "lipstick, red"
 	path = /obj/item/lipstick
-	cost = 1200
+	cost = 700
 
 /datum/gear/balaclava
 	display_name = "balaclava"
 	path = /obj/item/clothing/mask/balaclava
-	cost = 1000
+	cost = 700
 
 /datum/gear/vape
 	display_name = "vape"
 	path = /obj/item/clothing/mask/vape
-	cost = 1000
+	cost = 700
 
 /datum/gear/bandana
 	display_name = "bandana, red"
@@ -48,10 +48,14 @@
 	path = /obj/item/reagent_containers/food/drinks/britcup
 	cost = 500
 
+/datum/gear/lighter
+	display_name = "cheap lighter"
+	path = /obj/item/lighter/greyscale
+	cost = 300
 /datum/gear/zippo
 	display_name = "zippo"
-	path = /obj/item/lighter/greyscale
-	cost = 750
+	path = /obj/item/lighter
+	cost = 500
 
 /datum/gear/cards
 	display_name = "toy, deck of cards"
@@ -77,12 +81,12 @@
 /datum/gear/pai
 	display_name = "personal AI device"
 	path = /obj/item/paicard
-	cost = 1500
+	cost = 1000
 
 /datum/gear/tablet
 	display_name = "tablet computer"
 	path = /obj/item/modular_computer/tablet
-	cost = 2000
+	cost = 1500
 
 /datum/gear/pen
 	display_name = "pen, black"
@@ -97,7 +101,7 @@
 /datum/gear/paperbin
 	display_name = "paper bin"
 	path = /obj/item/paper_bin
-	cost = 750
+	cost = 500
 
 /datum/gear/cane
 	display_name = "cane"

@@ -7,8 +7,7 @@
 //Colored jumpsuits
 
 /datum/gear/uniform/color
-	subtype_path = /datum/gear/uniform/color
-	cost = 1600
+	cost = 1000
 
 /datum/gear/uniform/color/red
 	display_name = "jumpsuit, red"
@@ -24,11 +23,11 @@
 
 /datum/gear/uniform/color/random
 	display_name = "jumpsuit, random"
-	path = /obj/item/clothing/under/color/random
-	cost = 5000
+	path = /obj/item/clothing/under/color/random //literally useless if grey assistants is off
+	cost = 2500
 
 /datum/gear/uniform/color/rainbow
-	display_name = "jumpsuit, rainbow" //literally useless if grey assistants is off
+	display_name = "jumpsuit, rainbow"
 	path = /obj/item/clothing/under/color/rainbow
 	cost = 5000
 
