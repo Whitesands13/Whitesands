@@ -56,7 +56,7 @@ GLOBAL_LIST_EMPTY(gear_datums)
 	var/sort_category = "General"
 	var/subtype_path = /datum/gear //for skipping organizational subtypes (optional)
 
-/datum/gear/Initialize()
+/datum/gear/New()
 	..()
 	if(!description)
 		var/obj/O = path
