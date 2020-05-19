@@ -94,18 +94,30 @@ GLOBAL_LIST_INIT(spider_last, world.file2list("strings/names/spider_last.txt"))
 	if(H.stat == "DEAD")
 		return
 	if(H.web_ready == FALSE)
-		to_chat(H, "<span class='danger'>You need to wait awhile to regenerate web fluid.</span>")
+		to_chat(H, "<span class='warning'>You need to wait awhile to regenerate web fluid.</span>")
+		return
+	var/turf/T = get_turf(H)
+	if(!T)
+		to_chat(H, "<span class='warning'>There's no room to spin your web here!</span>")
+		return
+	var/obj/structure/spider/stickyweb/W = locate() in T
+	var/obj/structure/spider_player/W2 = locate() in T
+	if(W || W2)
+		to_chat(H, "<span class='warning'>There's already a web here!</span>")
 		return
 	 // Should have some minimum amount of food before trying to activate
 	var/nutrition_threshold = NUTRITION_LEVEL_FED
 	if (H.nutrition >= nutrition_threshold)
-		if (isturf(H.loc)) // no spinning into oblivion
-			to_chat(H, "<i>You begin spinning some web...</i>")
-			if(prob(75))
-				H.adjust_nutrition(-H.spinner_rate)
-				to_chat(H, "<i>You use up a fair amount of energy spinning the web and feel hungry.</i>")
-			new /obj/structure/spider_player(get_turf(H))
-			to_chat(H, "<i>You weave a web on the ground with your spinneret!</i>")
-			addtimer(VARSET_CALLBACK(H, web_ready, TRUE), H.web_cooldown)
-		else
-			to_chat(H, "<span class='danger'>There's no room to shoot your web here!</span>")
+		to_chat(H, "<i>You begin spinning some web...</i>")
+		if(!do_after(H, 10 SECONDS, 1, T))
+			to_chat(H, "<span class='warning'>Your web spinning was interrupted!</span>")
+			return
+		if(prob(75))
+			H.adjust_nutrition(-H.spinner_rate)
+			to_chat(H, "<i>You use up a fair amount of energy spinning the web.</i>")
+		new /obj/structure/spider_player()
+		to_chat(H, "<i>You weave a web on the ground with your spinneret!</i>")
+		addtimer(VARSET_CALLBACK(H, web_ready, TRUE), H.web_cooldown)
+	else
+		to_chat(H, "<span class='warning'>You're too hungry to spin web right now, eat something first!</span>")
+		return
