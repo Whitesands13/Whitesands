@@ -77,19 +77,19 @@
 	item_state = "roboticist_enviroskirt"
 
 /obj/item/clothing/under/plasmaman/viro/skirt
-	name = "virology plasma envirosuit"
+	name = "virology plasma enviroskirt"
 	desc = "The kilt worn by the safest people on the station, those who are completely immune to the monstrosities they create."
 	icon_state = "virologist_enviroskirt"
 	item_state = "virologist_enviroskirt"
 
 /obj/item/clothing/under/plasmaman/genetics/skirt
-	name = "genetics plasma envirosuit"
+	name = "genetics plasma enviroskirt"
 	desc = "A plasmaman enviroskirt designed for geneticists."
 	icon_state = "geneticist_enviroskirt"
 	item_state = "geneticist_enviroskirt"
 
 /obj/item/clothing/under/plasmaman/chemist/skirt
-	name = "chemistry plasma envirosuit"
+	name = "chemistry plasma enviroskirt"
 	desc = "A plasmaman enviroskirt designed for chemists."
 	icon_state = "chemist_enviroskirt"
 	item_state = "chemist_enviroskirt"
