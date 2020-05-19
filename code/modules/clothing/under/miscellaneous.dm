@@ -97,7 +97,10 @@
 	var/extinguish_cooldown = 100
 	var/extinguishes_left = 5
 	cuttable = FALSE
-
+	
+/obj/item/clothing/under/plasmaman/skirt
+	name = "plasma enviroskirt"
+	icon_state = "plasmaskirt"
 
 /obj/item/clothing/under/plasmaman/examine(mob/user)
 	. = ..()
