@@ -298,6 +298,7 @@
 /datum/nanite_program/dermal_button
 	name = "Dermal Button"
 	desc = "Displays a button on the host's skin, which can be used to send a signal to the nanites."
+	use_rate = 0.1			// Wasp Edit - Nerfs Dermal Button
 	unique = FALSE
 	var/datum/action/innate/nanite_button/button
 
