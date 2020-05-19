@@ -149,6 +149,7 @@ GLOBAL_LIST_INIT(spider_last, world.file2list("strings/names/spider_last.txt"))
 		to_chat(H, "<span class='warning'>You pull out a strand from your spinneret, ready to wrap a target. <BR>\
 		 (Press ALT+CLICK or MMB on the target to start wrapping.)</span>")
 		H.adjust_nutrition(H.spinner_rate * -3)
+		addtimer(VARSET_CALLBACK(H, web_ready, TRUE), H.web_cooldown)
 		RegisterSignal(H, list(COMSIG_MOB_MIDDLECLICKON, COMSIG_MOB_ALTCLICKON), .proc/cocoonAtom)
 		return
 	else
@@ -160,6 +161,9 @@ GLOBAL_LIST_INIT(spider_last, world.file2list("strings/names/spider_last.txt"))
 	if (!H || !isspiderperson(H))
 		return COMSIG_MOB_CANCEL_CLICKON
 	else
+		if(H.web_ready == FALSE)
+			to_chat(H, "<span class='warning'>You need to wait awhile to regenerate web fluid.</span>")
+			return
 		if(!do_after(H, 10 SECONDS, 1, A))
 			to_chat(H, "<span class='warning'>Your web spinning was interrupted!</span>")
 			return
