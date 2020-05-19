@@ -81,12 +81,6 @@
 	icon_state = "assistant_formal"
 	item_state = "gy_suit"
 	can_adjust = FALSE
-	
-/obj/item/clothing/under/plasmaman/skirt
-	name = "plasma enviroskirt"
-	desc = "A special containment suit that allows plasma-based lifeforms to exist safely in an oxygenated environment, and automatically extinguishes them in a crisis. Despite being airtight, it's not spaceworthy."
-	icon_state = "plasmaskirt"
-	item_state = "plasmaman"
 
 /obj/item/clothing/under/plasmaman
 	name = "plasma envirosuit"
