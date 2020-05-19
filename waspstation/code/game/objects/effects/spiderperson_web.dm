@@ -26,7 +26,8 @@
 
 /obj/structure/spider_player/CanAllowThrough(atom/movable/mover, turf/target)
 	. = ..()
-	if(istype(mover, /mob/living/carbon/human/species/spider))
+	if(isspiderperson(mover))
+
 		return TRUE
 	else if(isliving(mover))
 		if(isspiderperson(mover.pulledby))
