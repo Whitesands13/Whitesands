@@ -94,7 +94,7 @@ GLOBAL_LIST_INIT(spider_last, world.file2list("strings/names/spider_last.txt"))
 	name = "Spin Cocoon"
 	check_flags = AB_CHECK_RESTRAINED|AB_CHECK_STUN|AB_CHECK_CONSCIOUS
 	icon_icon = 'icons/mob/actions.dmi'
-    button_icon_state = "spidercocoon"
+	button_icon_state = "spidercocoon"
 
 /datum/action/innate/spin_web/Activate()
 	var/mob/living/carbon/human/species/spider/H = owner
@@ -149,13 +149,13 @@ GLOBAL_LIST_INIT(spider_last, world.file2list("strings/names/spider_last.txt"))
 		to_chat(H, "<span class='warning'>You pull out a strand from your spinneret, ready to wrap a target. <BR>\
 		 (Press ALT+CLICK or MMB on the target to start wrapping.)</span>")
 		H.adjust_nutrition(H.spinner_rate * -3)
-		RegisterSignal(H, list(COMSIG_MOB_MIDDLECLICKON, COMSIG_MOB_ALTCLICKON), ./proc/cocoonAtom)
+		RegisterSignal(H, list(COMSIG_MOB_MIDDLECLICKON, COMSIG_MOB_ALTCLICKON), .proc/cocoonAtom)
 		return
 	else
 		to_chat(H, "<span class='warning'>You're too hungry to spin web right now, eat something first!</span>")
 		return
 
-/datum/action/innate/spin_cocoon/proc/cocoonAtom(mob/living/carbon/human/species/spider/H, atom/A)
+/datum/action/innate/spin_cocoon/proc/cocoonAtom(mob/living/carbon/human/species/spider/H, atom/movable/A)
 	UnregisterSignal(H, list(COMSIG_MOB_MIDDLECLICKON, COMSIG_MOB_ALTCLICKON))
 	if (!H || !isspiderperson(H))
 		return COMSIG_MOB_CANCEL_CLICKON
@@ -163,13 +163,13 @@ GLOBAL_LIST_INIT(spider_last, world.file2list("strings/names/spider_last.txt"))
 		if(!do_after(H, 10 SECONDS, 1, A))
 			to_chat(H, "<span class='warning'>Your web spinning was interrupted!</span>")
 			return
-		var/obj/structure/spider_player/coocoon/C = new(A.loc)
+		var/obj/structure/spider_player/cocoon/C = new(A.loc)
 		if(isliving(A))
 			C.icon_state = pick("cocoon_large1","cocoon_large2","cocoon_large3")
 			A.forceMove(C)
-			visible_message("<span class='danger'>[H] wraps [A] into a large cocoon!</span>")
+			H.visible_message("<span class='danger'>[H] wraps [A] into a large cocoon!</span>")
 			return
 		else
 			A.forceMove(C)
-			visible_message("<span class='danger'>[H] wraps [A] into a cocoon!</span>")
+			H.visible_message("<span class='danger'>[H] wraps [A] into a cocoon!</span>")
 			return
