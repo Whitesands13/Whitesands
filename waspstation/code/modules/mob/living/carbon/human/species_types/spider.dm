@@ -6,6 +6,14 @@ GLOBAL_LIST_INIT(spider_last, world.file2list("strings/names/spider_last.txt"))
 	desc = "These eyes seem to have increased sensitivity to bright light, offset by basic night vision."
 	flash_protect = FLASH_PROTECTION_SENSITIVE
 
+/obj/item/reagent_containers/food/snacks/meat/slab/human/mutant/slime
+	icon_state = "spidermeat"
+	desc = "The stringy meat jokes have been done to death, just like this Arachnid."
+	list_reagents = list(/datum/reagent/consumable/nutriment = 3)
+	filling_color = "#00FFFF"
+	tastes = list("meat" = 3, "stringy" = 1)
+	foodtype = MEAT | RAW | TOXIC
+
 /datum/species/spider
 	name = "Spiderperson"
 	id = "spider"
@@ -96,7 +104,7 @@ GLOBAL_LIST_INIT(spider_last, world.file2list("strings/names/spider_last.txt"))
 			if(prob(75))
 				H.adjust_nutrition(-H.spinner_rate)
 				to_chat(H, "<i>You use up a fair amount of energy spinning the web and feel hungry.</i>")
-			var/obj/structure/spider_player/R = new /obj/structure/spider_player()
+			new /obj/structure/spider_player(get_turf(H))
 			to_chat(H, "<i>You weave a web on the ground with your spinneret!</i>")
 			addtimer(VARSET_CALLBACK(H, web_ready, TRUE), H.web_cooldown)
 		else

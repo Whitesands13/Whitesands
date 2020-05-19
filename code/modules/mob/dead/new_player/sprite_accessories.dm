@@ -2205,7 +2205,7 @@
 
 /datum/sprite_accessory/spider_legs
 	icon = 'icons/mob/spider_legs.dmi'
-	color_src = null
+	color_src = MUTCOLORS
 
 /datum/sprite_accessory/spider_legs/plain
 	name = 'Plain'
@@ -2221,7 +2221,7 @@
 
 /datum/sprite_accessory/spider_spinneret
 	icon = 'icons/mob/spider_spinneret.dmi'
-	color_src = null
+	color_src = MUTCOLORS
 
 /datum/sprite_accessory/spider_spinneret/plain
 	name = 'Plain'
