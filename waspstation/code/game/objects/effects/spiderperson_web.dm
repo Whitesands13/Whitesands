@@ -24,6 +24,19 @@
 	if(exposed_temperature > 300)
 		take_damage(5, BURN, 0, 0)
 
+/obj/structure/spider/stickyweb/CanAllowThrough(atom/movable/mover, turf/target)
+	. = ..()
+	if(istype(mover, /mob/living/carbon/human/species/spider))
+		return TRUE
+	else if(isliving(mover))
+		if(istype(mover.pulledby, /mob/living/carbon/human/species/spider))
+			return TRUE
+		if(prob(50))
+			to_chat(mover, "<span class='danger'>You get stuck in \the [src] for a moment.</span>")
+			return FALSE
+	else if(istype(mover, /obj/projectile))
+		return prob(30)
+
 /obj/structure/spider_player/cocoon
 	name = "cocoon"
 	desc = "Something wrapped in silky spider web."
