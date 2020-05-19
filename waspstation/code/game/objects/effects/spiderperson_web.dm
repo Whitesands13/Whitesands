@@ -29,7 +29,8 @@
 	if(istype(mover, /mob/living/carbon/human/species/spider))
 		return TRUE
 	else if(isliving(mover))
-		if(istype(mover.pulledby, /mob/living/carbon/human/species/spider))
+		if(isspiderperson(mover.pulledby))
+
 			return TRUE
 		if(prob(50))
 			to_chat(mover, "<span class='danger'>You get stuck in \the [src] for a moment.</span>")
