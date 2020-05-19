@@ -15,14 +15,15 @@ GLOBAL_LIST_INIT(spider_last, world.file2list("strings/names/spider_last.txt"))
 	foodtype = MEAT | RAW | TOXIC
 
 /datum/species/spider
-	name = "Spiderperson"
+	name = "Arachnid"
 	id = "spider"
+	sexes = 0
 	say_mod = "chitters"
 	default_color = "00FF00"
 	species_traits = list(LIPS, NOEYESPRITES)
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID|MOB_BUG
 	mutant_bodyparts = list("spider_legs", "spider_spinneret")
-	default_features = list("F" = "Plain", "spider_spinneret" = "Plain")
+	default_features = list("spider_legs" = "Plain", "spider_spinneret" = "Plain")
 	attack_verb = "slash"
 	attack_sound = 'sound/weapons/slash.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
@@ -85,9 +86,15 @@ GLOBAL_LIST_INIT(spider_last, world.file2list("strings/names/spider_last.txt"))
 
 /datum/action/innate/spin_web
     name = "Spin Web"
-    check_flags = AB_CHECK_CONSCIOUS
+    check_flags = AB_CHECK_RESTRAINED|AB_CHECK_STUN|AB_CHECK_CONSCIOUS
     icon_icon = 'icons/mob/actions.dmi'
-    button_icon_state = "spider"
+    button_icon_state = "spiderweb"
+
+/datum/action/innate/spin_cocoon
+	name = "Spin Cocoon"
+	check_flags = AB_CHECK_RESTRAINED|AB_CHECK_STUN|AB_CHECK_CONSCIOUS
+	icon_icon = 'icons/mob/actions.dmi'
+    button_icon_state = "spidercocoon"
 
 /datum/action/innate/spin_web/Activate()
 	var/mob/living/carbon/human/species/spider/H = owner
@@ -122,3 +129,47 @@ GLOBAL_LIST_INIT(spider_last, world.file2list("strings/names/spider_last.txt"))
 	else
 		to_chat(H, "<span class='warning'>You're too hungry to spin web right now, eat something first!</span>")
 		return
+/*
+	This took me far too long to figure out so I'm gonna document it here.
+	1) Create an innate action for the species
+	2) Have that action trigger a RegisterSignal for mob clicking
+	3) Trigger the cocoonAtom proc on that signal
+	4) Validate the target then start spinning
+	5) if you're not interrupted, force move the target to the cocoon created at their location.
+*/
+/datum/action/innate/spin_cocoon/Activate()
+	var/mob/living/carbon/human/species/spider/H = owner
+	if(H.stat == "DEAD")
+		return
+	if(H.web_ready == FALSE)
+		to_chat(H, "<span class='warning'>You need to wait awhile to regenerate web fluid.</span>")
+		return
+	var/nutrition_threshold = NUTRITION_LEVEL_FED
+	if (H.nutrition >= nutrition_threshold)
+		to_chat(H, "<span class='warning'>You pull out a strand from your spinneret, ready to wrap a target. <BR>\
+		 (Press ALT+CLICK or MMB on the target to start wrapping.)</span>")
+		H.adjust_nutrition(H.spinner_rate * -3)
+		RegisterSignal(H, list(COMSIG_MOB_MIDDLECLICKON, COMSIG_MOB_ALTCLICKON), ./proc/cocoonAtom)
+		return
+	else
+		to_chat(H, "<span class='warning'>You're too hungry to spin web right now, eat something first!</span>")
+		return
+
+/datum/action/innate/spin_cocoon/proc/cocoonAtom(mob/living/carbon/human/species/spider/H, atom/A)
+	UnregisterSignal(H, list(COMSIG_MOB_MIDDLECLICKON, COMSIG_MOB_ALTCLICKON))
+	if (!H || !isspiderperson(H))
+		return COMSIG_MOB_CANCEL_CLICKON
+	else
+		if(!do_after(H, 10 SECONDS, 1, A))
+			to_chat(H, "<span class='warning'>Your web spinning was interrupted!</span>")
+			return
+		var/obj/structure/spider_player/coocoon/C = new(A.loc)
+		if(isliving(A))
+			C.icon_state = pick("cocoon_large1","cocoon_large2","cocoon_large3")
+			A.forceMove(C)
+			visible_message("<span class='danger'>[H] wraps [A] into a large cocoon!</span>")
+			return
+		else
+			A.forceMove(C)
+			visible_message("<span class='danger'>[H] wraps [A] into a cocoon!</span>")
+			return
