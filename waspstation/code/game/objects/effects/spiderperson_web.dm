@@ -24,7 +24,7 @@
 	if(exposed_temperature > 300)
 		take_damage(5, BURN, 0, 0)
 
-/obj/structure/spider/stickyweb/CanAllowThrough(atom/movable/mover, turf/target)
+/obj/structure/spider_player/CanAllowThrough(atom/movable/mover, turf/target)
 	. = ..()
 	if(istype(mover, /mob/living/carbon/human/species/spider))
 		return TRUE
