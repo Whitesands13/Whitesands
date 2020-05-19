@@ -2203,8 +2203,9 @@
 	name = "Zeng-Hu Pharmaceuticals"
 	limbs_id = "zhpipc"
 
+//START WaspStation
 /datum/sprite_accessory/spider_legs
-	icon = 'icons/mob/spider_legs.dmi'
+	icon = 'waspstation/icons/mob/spider_legs.dmi'
 	color_src = MUTCOLORS
 
 /datum/sprite_accessory/spider_legs/plain
@@ -2220,7 +2221,7 @@
 	icon_state = 'spiky'
 
 /datum/sprite_accessory/spider_spinneret
-	icon = 'icons/mob/spider_spinneret.dmi'
+	icon = 'waspstation/icons/mob/spider_spinneret.dmi'
 	color_src = MUTCOLORS
 
 /datum/sprite_accessory/spider_spinneret/plain
@@ -2234,3 +2235,4 @@
 /datum/sprite_accessory/spider_spinneret/black_widow
 	name = 'Black Widow'
 	icon_state = 'blackwidow'
+//END WaspStation

@@ -489,7 +489,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if(mutant_category >= MAX_MUTANT_ROWS)
 					dat += "</td>"
 					mutant_category = 0
-			if("spider_legs" in pref_species.default_features) 
+			if("spider_legs" in pref_species.default_features)
 				if(!mutant_category)
 					dat += APPEARANCE_CATEGORY_COLUMN
 				dat += "<h3>Spider Extra Legs</h3>"
@@ -500,7 +500,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if(mutant_category >= MAX_MUTANT_ROWS)
 					dat += "</td>"
 					mutant_category = 0
-			if("spider_spinneret" in pref_species.default_features) 
+			if("spider_spinneret" in pref_species.default_features)
 				if(!mutant_category)
 					dat += APPEARANCE_CATEGORY_COLUMN
 				dat += "<h3>Spider Spinneret Markings</h3>"
@@ -1573,7 +1573,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if("spider_spinneret")
 					var/new_spider_spinneret
 					new_spider_spinneret = input(user, "Choose your character's spinneret markings:", "Character Preference") as null|anything in GLOB.spider_spinneret_list
-
+					if(new_spider_spinneret)
+						features["spider_spinneret"] = new_spider_spinneret
 				if("squid_face")
 					var/new_squid_face
 					new_squid_face = input(user, "Choose your character's face type:", "Character Preference") as null|anything in GLOB.squid_face_list
