@@ -39,14 +39,14 @@
 					/obj/item/clothing/gloves/color/black = 3,
 					/obj/item/clothing/under/rank/security/officer/skirt = 3,
 					///obj/item/clothing/under/rank/security/officer/grey = 3,
-					/obj/item/clothing/under/rank/security/officer/white = 3, //WaspStation edit - Better security jumpsuit sprites
+					/obj/item/clothing/under/rank/security/officer/white = 3,//WaspStation edit - Better security jumpsuit sprites
 					/obj/item/clothing/under/pants/khaki = 3,
 					/obj/item/clothing/under/rank/security/officer/blueshirt = 3,
 					/obj/item/clothing/under/rank/security/officer/mallcop = 3,
 					/obj/item/clothing/head/beret/corpsec = 3, // Waspstation edit - Berets
 					/obj/item/clothing/neck/tie/red = 6,
 					/obj/item/clothing/neck/tie/black = 6)
-	premium = list(/obj/item/clothing/under/rank/security/officer/formal = 3, //WaspStation edit - Better security jumpsuit sprites
+	premium = list(/obj/item/clothing/under/rank/security/officer/formal = 3,//WaspStation edit - Better security jumpsuit sprites
 					/obj/item/clothing/suit/security/officer = 3,
 					/obj/item/clothing/head/beret/sec/navyofficer = 3)
 	refill_canister = /obj/item/vending_refill/wardrobe/sec_wardrobe
