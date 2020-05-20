@@ -22,21 +22,31 @@
 					/obj/item/storage/backpack/satchel/sec = 3,
 					/obj/item/storage/backpack/duffelbag/sec = 3,
 					/obj/item/clothing/under/rank/security/officer = 3,
+					/obj/item/clothing/under/plasmaman/security = 1, //WS edit begin
+					/obj/item/clothing/head/helmet/space/plasmaman/security = 1,
+					/obj/item/clothing/under/plasmaman/security/warden = 1,
+					/obj/item/clothing/head/helmet/space/plasmaman/security/warden = 1,
+					/obj/item/clothing/under/plasmaman/security/secmed = 1,
+					/obj/item/clothing/under/plasmaman/security/secmed/skirt = 1,
+					/obj/item/clothing/head/helmet/space/plasmaman/security/secmed = 1,
+					/obj/item/clothing/under/plasmaman/prisoner = 1,
+					/obj/item/clothing/under/plasmaman/prisoner/skirt = 1,
+					/obj/item/clothing/head/helmet/space/plasmaman/prisoner = 1, //WS edit end
 					/obj/item/clothing/shoes/jackboots = 3,
 					/obj/item/clothing/head/beret/sec = 3,
 					/obj/item/clothing/head/soft/sec = 3,
 					/obj/item/clothing/mask/bandana/red = 3,
 					/obj/item/clothing/gloves/color/black = 3,
 					/obj/item/clothing/under/rank/security/officer/skirt = 3,
-					///obj/item/clothing/under/rank/security/officer/grey = 3,
-					/obj/item/clothing/under/rank/security/officer/white = 3,//WaspStation edit - Better security jumpsuit sprites
+					/obj/item/clothing/under/rank/security/officer/grey = 3,
+					/obj/item/clothing/under/rank/security/officer/white = 3, //WaspStation edit - Better security jumpsuit sprites
 					/obj/item/clothing/under/pants/khaki = 3,
 					/obj/item/clothing/under/rank/security/officer/blueshirt = 3,
 					/obj/item/clothing/under/rank/security/officer/mallcop = 3,
 					/obj/item/clothing/head/beret/corpsec = 3, // Waspstation edit - Berets
 					/obj/item/clothing/neck/tie/red = 6,
 					/obj/item/clothing/neck/tie/black = 6)
-	premium = list(/obj/item/clothing/under/rank/security/officer/formal = 3,//WaspStation edit - Better security jumpsuit sprites
+	premium = list(/obj/item/clothing/under/rank/security/officer/formal = 3, //WaspStation edit - Better security jumpsuit sprites
 					/obj/item/clothing/suit/security/officer = 3,
 					/obj/item/clothing/head/beret/sec/navyofficer = 3)
 	refill_canister = /obj/item/vending_refill/wardrobe/sec_wardrobe
@@ -64,6 +74,12 @@
 					/obj/item/clothing/under/rank/medical/doctor/green = 4,
 					/obj/item/clothing/under/rank/medical/doctor/purple = 4,
 					/obj/item/clothing/under/rank/medical/doctor = 4,
+					/obj/item/clothing/under/plasmaman/medical = 1, //WS edit begin
+					/obj/item/clothing/under/plasmaman/medical/skirt = 1,
+					/obj/item/clothing/head/helmet/space/plasmaman/medical = 1,
+					/obj/item/clothing/under/plasmaman/paramedic = 1,
+					/obj/item/clothing/under/plasmaman/paramedic/skirt = 1,
+					/obj/item/clothing/head/helmet/space/plasmaman/paramedic = 1, //WS edit end
 					/obj/item/clothing/suit/toggle/labcoat = 4,
 					/obj/item/clothing/suit/toggle/labcoat/paramedic = 4,
 					/obj/item/clothing/shoes/sneakers/white = 4,
@@ -90,6 +106,9 @@
 					/obj/item/clothing/under/rank/engineering/engineer = 3,
 					/obj/item/clothing/under/rank/engineering/engineer/skirt = 3,
 					/obj/item/clothing/under/rank/engineering/engineer/hazard = 3,
+					/obj/item/clothing/under/plasmaman/engineering = 1, //WS edit begin
+					/obj/item/clothing/under/plasmaman/engineering/skirt = 1,
+					/obj/item/clothing/head/helmet/space/plasmaman/engineering = 1, //WS edit end
 					/obj/item/clothing/head/beret/eng = 3, // Waspstation edit - Berets
 					/obj/item/clothing/suit/hazardvest = 3,
 					/obj/item/clothing/shoes/workboots = 3,
@@ -116,6 +135,9 @@
 					/obj/item/clothing/suit/hooded/wintercoat/engineering/atmos = 3,
 					/obj/item/clothing/under/rank/engineering/atmospheric_technician = 3,
 					/obj/item/clothing/under/rank/engineering/atmospheric_technician/skirt = 3,
+					/obj/item/clothing/under/plasmaman/atmospherics = 1,
+					/obj/item/clothing/under/plasmaman/atmospherics/skirt = 1,
+					/obj/item/clothing/head/helmet/space/plasmaman/atmospherics = 1,
 					/obj/item/clothing/shoes/sneakers/black = 3
 					)
 	refill_canister = /obj/item/vending_refill/wardrobe/atmos_wardrobe
@@ -134,6 +156,9 @@
 	products = list(/obj/item/clothing/suit/hooded/wintercoat/cargo = 3,
 					/obj/item/clothing/under/rank/cargo/tech = 3,
 					/obj/item/clothing/under/rank/cargo/tech/skirt = 3,
+					/obj/item/clothing/under/plasmaman/cargo = 1, //WS edit begin
+					/obj/item/clothing/under/plasmaman/cargo/skirt = 1,
+					/obj/item/clothing/head/helmet/space/plasmaman/cargo = 1, //WS edit end
 					/obj/item/clothing/shoes/sneakers/black = 3,
 					/obj/item/clothing/gloves/fingerless = 3,
 					/obj/item/clothing/head/soft = 3,
@@ -153,6 +178,9 @@
 	products = list(/obj/item/clothing/glasses/hud/diagnostic = 2,
 					/obj/item/clothing/under/rank/rnd/roboticist = 2,
 					/obj/item/clothing/under/rank/rnd/roboticist/skirt = 2,
+					/obj/item/clothing/under/plasmaman/robotics = 1, //WS edit begin
+					/obj/item/clothing/under/plasmaman/robotics/skirt = 1,
+					/obj/item/clothing/head/helmet/space/plasmaman/robotics = 1, //WS edit end
 					/obj/item/clothing/suit/toggle/labcoat = 2,
 					/obj/item/clothing/shoes/sneakers/black = 2,
 					/obj/item/clothing/gloves/fingerless = 2,
@@ -180,6 +208,9 @@
 					/obj/item/clothing/suit/hooded/wintercoat/science = 3,
 					/obj/item/clothing/under/rank/rnd/scientist = 3,
 					/obj/item/clothing/under/rank/rnd/scientist/skirt = 3,
+					/obj/item/clothing/under/plasmaman/science = 1, //WS edit begin
+					/obj/item/clothing/under/plasmaman/science/skirt = 1,
+					/obj/item/clothing/head/helmet/space/plasmaman/science = 1, //WS edit end
 					/obj/item/clothing/suit/toggle/labcoat/science = 3,
 					/obj/item/clothing/shoes/sneakers/white = 3,
 					/obj/item/radio/headset/headset_sci = 3,
@@ -204,6 +235,9 @@
 					/obj/item/clothing/suit/apron/waders = 3,
 					/obj/item/clothing/under/rank/civilian/hydroponics = 3,
 					/obj/item/clothing/under/rank/civilian/hydroponics/skirt = 3,
+					/obj/item/clothing/under/plasmaman/botany = 1, //WS edit begin
+					/obj/item/clothing/under/plasmaman/botany/skirt = 1,
+					/obj/item/clothing/head/helmet/space/plasmaman/botany = 1, //WS edit end
 					/obj/item/clothing/mask/bandana = 3,
 					/obj/item/clothing/accessory/armband/hydro = 3)
 	refill_canister = /obj/item/vending_refill/wardrobe/hydro_wardrobe
@@ -228,6 +262,8 @@
 					/obj/item/clothing/under/rank/civilian/curator/skirt = 2,
 					/obj/item/clothing/under/rank/command/captain/suit/skirt = 2,
 					/obj/item/clothing/under/rank/command/head_of_personnel/suit/skirt = 2,
+					/obj/item/clothing/under/plasmaman/curator = 1, //WS edit begin
+					/obj/item/clothing/head/helmet/space/plasmaman/curator = 1, //WS edit end
 					/obj/item/storage/backpack/satchel/explorer = 1,
 					/obj/item/clothing/glasses/regular = 2,
 					/obj/item/clothing/glasses/regular/jamjar = 1,
@@ -249,6 +285,9 @@
 					/obj/item/clothing/under/rank/civilian/bartender = 2,
 					/obj/item/clothing/under/rank/civilian/bartender/purple = 2,
 					/obj/item/clothing/under/rank/civilian/bartender/skirt = 2,
+					/obj/item/clothing/under/plasmaman/enviroslacks = 1, //WS edit begin
+					/obj/item/clothing/under/plasmaman/enviroslacks/skirt = 1,
+					/obj/item/clothing/head/helmet/space/plasmaman/white = 1, //WS edit end
 					/obj/item/clothing/accessory/waistcoat = 2,
 					/obj/item/clothing/suit/apron/purple_bartender = 2,
 					/obj/item/clothing/head/soft/black = 2,
@@ -286,8 +325,9 @@
 					/obj/item/clothing/suit/toggle/chef = 1,
 					/obj/item/clothing/under/rank/civilian/chef = 1,
 					/obj/item/clothing/under/rank/civilian/chef/skirt = 2,
-					///obj/item/clothing/under/rank/chef = 3,//WaspStation edit - Better security jumpsuit sprites
+					/obj/item/clothing/under/rank/chef = 3,//WaspStation edit - Better security jumpsuit sprites
 					/obj/item/clothing/under/plasmaman/chef = 1,
+					/obj/item/clothing/under/plasmaman/chef/skirt = 1 //WS edit
 					/obj/item/clothing/head/helmet/space/plasmaman/white = 1,
 					/obj/item/clothing/head/chefhat = 1,
 					/obj/item/clothing/under/rank/civilian/cookjorts = 2,
@@ -308,6 +348,9 @@
 	products = list(/obj/item/clothing/under/rank/civilian/janitor = 2,
 					/obj/item/cartridge/janitor = 2,
 					/obj/item/clothing/under/rank/civilian/janitor/skirt = 2,
+					/obj/item/clothing/under/plasmaman/janitor = 1, //WS edit begin
+					/obj/item/clothing/under/plasmaman/janitor/skirt = 1,
+					/obj/item/clothing/head/helmet/space/plasmaman/janitor = 1, //WS edit end
 					/obj/item/clothing/gloves/color/black = 2,
 					/obj/item/clothing/head/soft/purple = 2,
 					/obj/item/pushbroom = 2,
@@ -354,6 +397,9 @@
 					/obj/item/clothing/under/rank/civilian/lawyer/red/skirt = 1,
 					/obj/item/clothing/under/rank/civilian/lawyer/black = 1,
 					/obj/item/clothing/under/rank/civilian/lawyer/black/skirt = 1,
+					/obj/item/clothing/under/plasmaman/enviroslacks = 1, //WS edit begin
+					/obj/item/clothing/under/plasmaman/enviroslacks/skirt = 1,
+					/obj/item/clothing/head/helmet/space/plasmaman/white = 1 //WS edit end
 					/obj/item/clothing/shoes/laceup = 2,
 					/obj/item/clothing/neck/tie/red = 6,
 					/obj/item/clothing/neck/tie/black = 6,
@@ -374,6 +420,9 @@
 					/obj/item/clothing/accessory/pocketprotector/cosmetology = 1,
 					/obj/item/clothing/under/rank/civilian/chaplain = 1,
 					/obj/item/clothing/under/rank/civilian/chaplain/skirt = 2,
+					/obj/item/clothing/under/plasmaman/chaplain = 1, //WS edit begin
+					/obj/item/clothing/under/plasmaman/chaplain/skirt = 1,
+					/obj/item/clothing/head/helmet/space/plasmaman/chaplain = 1, //WS edit end
 					/obj/item/clothing/shoes/sneakers/black = 1,
 					/obj/item/clothing/suit/chaplainsuit/nun = 1,
 					/obj/item/clothing/head/nun_hood = 1,
@@ -406,6 +455,9 @@
 	vend_reply = "Thank you for using the ChemDrobe!"
 	products = list(/obj/item/clothing/under/rank/medical/chemist = 2,
 					/obj/item/clothing/under/rank/medical/chemist/skirt = 2,
+					/obj/item/clothing/under/plasmaman/chemist = 1, //WS edit begin
+					/obj/item/clothing/under/plasmaman/chemist/skirt = 1,
+					/obj/item/clothing/head/helmet/space/plasmaman/chemist = 1, //WS edit end
 					/obj/item/clothing/head/beret/med = 2, // Waspstation edit - Berets
 					/obj/item/clothing/shoes/sneakers/white = 2,
 					/obj/item/clothing/suit/toggle/labcoat/chemist = 2,
@@ -426,6 +478,9 @@
 	vend_reply = "Thank you for using the GeneDrobe!"
 	products = list(/obj/item/clothing/under/rank/medical/geneticist = 2,
 					/obj/item/clothing/under/rank/medical/geneticist/skirt = 2,
+					/obj/item/clothing/under/plasmaman/genetics = 1, //WS edit begin
+					/obj/item/clothing/under/plasmaman/genetics/skirt = 1,
+					/obj/item/clothing/head/helmet/space/plasmaman/genetics = 1, //WS edit end
 					/obj/item/clothing/shoes/sneakers/white = 2,
 					/obj/item/clothing/suit/toggle/labcoat/genetics = 2,
 					/obj/item/storage/backpack/genetics = 2,
@@ -443,6 +498,9 @@
 	vend_reply = "Thank you for using the ViroDrobe"
 	products = list(/obj/item/clothing/under/rank/medical/virologist = 2,
 					/obj/item/clothing/under/rank/medical/virologist/skirt = 2,
+					/obj/item/clothing/under/plasmaman/viro = 1, //WS edit begin
+					/obj/item/clothing/under/plasmaman/viro/skirt = 1,
+					/obj/item/clothing/head/helmet/space/plasmaman/viro = 1, //WS edit end
 					/obj/item/clothing/shoes/sneakers/white = 2,
 					/obj/item/clothing/suit/toggle/labcoat/virologist = 2,
 					/obj/item/clothing/mask/surgical = 2,
