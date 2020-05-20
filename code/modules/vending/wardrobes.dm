@@ -38,7 +38,7 @@
 					/obj/item/clothing/mask/bandana/red = 3,
 					/obj/item/clothing/gloves/color/black = 3,
 					/obj/item/clothing/under/rank/security/officer/skirt = 3,
-					/obj/item/clothing/under/rank/security/officer/grey = 3,
+					///obj/item/clothing/under/rank/security/officer/grey = 3,
 					/obj/item/clothing/under/rank/security/officer/white = 3, //WaspStation edit - Better security jumpsuit sprites
 					/obj/item/clothing/under/pants/khaki = 3,
 					/obj/item/clothing/under/rank/security/officer/blueshirt = 3,
@@ -325,9 +325,9 @@
 					/obj/item/clothing/suit/toggle/chef = 1,
 					/obj/item/clothing/under/rank/civilian/chef = 1,
 					/obj/item/clothing/under/rank/civilian/chef/skirt = 2,
-					/obj/item/clothing/under/rank/chef = 3,//WaspStation edit - Better security jumpsuit sprites
+					///obj/item/clothing/under/rank/chef = 3,//WaspStation edit - Better security jumpsuit sprites
 					/obj/item/clothing/under/plasmaman/chef = 1,
-					/obj/item/clothing/under/plasmaman/chef/skirt = 1 //WS edit
+					/obj/item/clothing/under/plasmaman/chef/skirt = 1, //WS edit
 					/obj/item/clothing/head/helmet/space/plasmaman/white = 1,
 					/obj/item/clothing/head/chefhat = 1,
 					/obj/item/clothing/under/rank/civilian/cookjorts = 2,
@@ -399,7 +399,7 @@
 					/obj/item/clothing/under/rank/civilian/lawyer/black/skirt = 1,
 					/obj/item/clothing/under/plasmaman/enviroslacks = 1, //WS edit begin
 					/obj/item/clothing/under/plasmaman/enviroslacks/skirt = 1,
-					/obj/item/clothing/head/helmet/space/plasmaman/white = 1 //WS edit end
+					/obj/item/clothing/head/helmet/space/plasmaman/white = 1, //WS edit end
 					/obj/item/clothing/shoes/laceup = 2,
 					/obj/item/clothing/neck/tie/red = 6,
 					/obj/item/clothing/neck/tie/black = 6,
