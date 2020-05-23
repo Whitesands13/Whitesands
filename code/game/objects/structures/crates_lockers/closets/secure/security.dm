@@ -51,6 +51,7 @@
 	new /obj/item/card/id/departmental_budget/srv(src) //WaspStation Edit - Budget Cards
 	new /obj/item/clothing/neck/cloak/head_of_personnel(src)
 	new /obj/item/storage/lockbox/medal/service(src)
+	new /obj/item/clothing/head/beret/hop(src) //Waspstation edit - More Berets
 	new /obj/item/clothing/under/rank/command/head_of_personnel(src) //WaspStation Edit - Better Command Uniforms
 	new /obj/item/clothing/under/rank/command/head_of_personnel/skirt(src) //WaspStation Edit - Better Command Uniforms
 	new /obj/item/clothing/head/hopcap(src)
@@ -78,13 +79,16 @@
 /obj/structure/closet/secure_closet/hos/PopulateContents()
 	..()
 	new /obj/item/card/id/departmental_budget/sec(src) //WaspStation edit - budget card
+	new /obj/item/storage/box/deputy(src) // WaspStation edit - Small QoL Brig additions
 	new /obj/item/clothing/neck/cloak/hos(src)
 	new /obj/item/clothing/under/rank/command(src) // WaspStation edit - better command uniforms
 	new /obj/item/cartridge/hos(src)
+	new /obj/item/radio/headset/heads/hos/alt(src) // WaspStation edit - Small QoL Brig additions
 	new /obj/item/radio/headset/heads/hos(src)
 	new /obj/item/clothing/under/rank/security/head_of_security/parade/female(src)
 	new /obj/item/clothing/under/rank/security/head_of_security/parade(src)
 	new /obj/item/clothing/suit/armor/vest/leather(src)
+	new /obj/item/clothing/suit/armor/hos/trenchcoat(src) // WaspStation edit - Small QoL Brig additions
 	new /obj/item/clothing/suit/armor/hos(src)
 	new /obj/item/clothing/under/rank/security/head_of_security/skirt(src)
 	new /obj/item/clothing/under/rank/security/head_of_security/alt(src)
@@ -119,7 +123,7 @@
 	new /obj/item/clothing/head/warden(src)
 	new /obj/item/clothing/head/warden/drill(src)
 	new /obj/item/clothing/head/beret/sec/navywarden(src)
-	new /obj/item/clothing/head/beret/corpwarden(src) // Waspstation edit - Berets
+	new /obj/item/clothing/head/beret/sec/navywarden/black(src)
 	new /obj/item/clothing/suit/armor/vest/warden/alt(src)
 	new /obj/item/clothing/under/rank/security/warden/formal(src)
 	new /obj/item/clothing/under/rank/security/warden/skirt(src)
@@ -130,6 +134,7 @@
 	new /obj/item/storage/box/flashbangs(src)
 	new /obj/item/storage/belt/security/full(src)
 	new /obj/item/flashlight/seclite(src)
+	new /obj/item/megaphone/sec(src) // WaspStation edit - Small QoL Brig additions
 	new /obj/item/clothing/gloves/krav_maga/sec(src)
 	new /obj/item/door_remote/head_of_security(src)
 	new /obj/item/gun/ballistic/shotgun/automatic/combat/compact(src)

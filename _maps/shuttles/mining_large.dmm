@@ -69,7 +69,7 @@
 	},
 /obj/effect/turf_decal/bot_white,
 /turf/open/floor/plasteel/dark,
-/area/shuttle/mining/large)
+/area/shuttle/mining)
 "h" = (
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
@@ -360,6 +360,17 @@
 /obj/effect/turf_decal/box/white/corners,
 /turf/open/floor/plasteel/dark,
 /area/shuttle/mining/large)
+"A" = (
+/obj/machinery/light/small,
+/obj/effect/turf_decal/box/white/corners{
+	dir = 8
+	},
+/turf/open/floor/plasteel/dark,
+/area/shuttle/mining/large)
+"B" = (
+/obj/effect/turf_decal/box/white/corners,
+/turf/open/floor/plasteel/dark,
+/area/shuttle/mining/large)
 "C" = (
 /obj/effect/turf_decal/stripes/white/line{
 	dir = 1
@@ -370,18 +381,18 @@
 /obj/item/flashlight,
 /turf/open/floor/plating,
 /area/shuttle/mining/large)
-"E" = (
-/obj/machinery/power/apc/highcap{
-	dir = 4;
-	locked = 0;
-	name = "Mining Shuttle APC";
-	pixel_x = 24
+"D" = (
+/obj/machinery/door/airlock/external{
+	name = "Mining Shuttle External Airlock"
 	},
+/obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/turf/open/floor/plating,
+/area/shuttle/mining/large)
+"E" = (
 /obj/effect/turf_decal/stripes/white/line{
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/shuttle/mining/large)
 "F" = (
@@ -399,7 +410,6 @@
 /obj/structure/sign/warning/vacuum/external{
 	pixel_x = 32
 	},
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/shuttle/mining/large)
 "I" = (
@@ -421,52 +431,7 @@
 	port_direction = 2;
 	width = 7
 	},
-/obj/structure/cable,
 /turf/open/floor/plating,
-/area/shuttle/mining/large)
-"P" = (
-/obj/effect/turf_decal/box/white/corners,
-/obj/structure/cable{
-	icon_state = "2-8"
-	},
-/turf/open/floor/plasteel/dark,
-/area/shuttle/mining/large)
-"R" = (
-/obj/machinery/light/small,
-/obj/effect/turf_decal/box/white/corners{
-	dir = 8
-	},
-/obj/structure/cable{
-	icon_state = "4-8"
-	},
-/turf/open/floor/plasteel/dark,
-/area/shuttle/mining/large)
-"V" = (
-/obj/machinery/door/airlock/external{
-	name = "Mining Shuttle External Airlock"
-	},
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
-/obj/structure/cable{
-	icon_state = "1-2"
-	},
-/turf/open/floor/plating,
-/area/shuttle/mining/large)
-"Y" = (
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/white/line,
-/obj/structure/cable{
-	icon_state = "2-4"
-	},
-/turf/open/floor/plasteel/dark,
 /area/shuttle/mining/large)
 
 (1,1,1) = {"
@@ -512,8 +477,8 @@ h
 n
 r
 u
-Y
-V
+n
+D
 H
 J
 "}
@@ -524,7 +489,7 @@ i
 o
 k
 v
-R
+A
 k
 k
 k
@@ -536,7 +501,7 @@ j
 p
 k
 w
-P
+B
 E
 G
 I
