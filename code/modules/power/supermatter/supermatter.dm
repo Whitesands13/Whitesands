@@ -244,10 +244,10 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 	if(integrity < SUPERMATTER_DANGER_PERCENT)
 		return SUPERMATTER_DANGER
 
-	if((integrity < SUPERMATTER_WARNING_PERCENT) || (air.temperature > CRITICAL_TEMPERATURE))
+	if((integrity < SUPERMATTER_WARNING_PERCENT) || (air.return_temperature() > CRITICAL_TEMPERATURE))
 		return SUPERMATTER_WARNING
 
-	if(air.temperature > (CRITICAL_TEMPERATURE * 0.8))
+	if(air.return_temperature() > (CRITICAL_TEMPERATURE * 0.8))
 		return SUPERMATTER_NOTIFY
 
 	if(power > 5)
@@ -397,7 +397,7 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 			//((((some value between 0.5 and 1 * temp - ((273.15 + 40) * some values between 1 and 6)) * some number between 0.25 and knock your socks off / 150) * 0.25
 			//Heat and mols account for each other, a lot of hot mols are more damaging then a few
 			//Mols start to have a positive effect on damage after 350
-			damage = max(damage + (max(clamp(removed.total_moles() / 200, 0.5, 1) * removed.temperature - ((T0C + HEAT_PENALTY_THRESHOLD)*dynamic_heat_resistance), 0) * mole_heat_penalty / 150 ) * DAMAGE_INCREASE_MULTIPLIER, 0)
+			damage = max(damage + (max(clamp(removed.total_moles() / 200, 0.5, 1) * removed.return_temperature() - ((T0C + HEAT_PENALTY_THRESHOLD)*dynamic_heat_resistance), 0) * mole_heat_penalty / 150 ) * DAMAGE_INCREASE_MULTIPLIER, 0)
 			//Power only starts affecting damage when it is above 5000
 			damage = max(damage + (max(power - POWER_PENALTY_THRESHOLD, 0)/500) * DAMAGE_INCREASE_MULTIPLIER, 0)
 			//Molar count only starts affecting damage when it is above 1800
@@ -407,7 +407,7 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 			//healing damage
 			if(combined_gas < MOLE_PENALTY_THRESHOLD)
 				//Only heals damage when the temp is below 313.15, heals up to 2 damage
-				damage = max(damage + (min(removed.temperature - (T0C + HEAT_PENALTY_THRESHOLD), 0) / 150 ), 0)
+				damage = max(damage + (min(removed.return_temperature() - (T0C + HEAT_PENALTY_THRESHOLD), 0) / 150 ), 0)
 
 			//caps damage rate
 
@@ -415,31 +415,22 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 			//This means we can only deal 1.8 damage per function call
 			damage = min(damage_archived + (DAMAGE_HARDCAP * explosion_point),damage)
 
-		removed.assert_gases(/datum/gas/oxygen, /datum/gas/plasma, /datum/gas/carbon_dioxide, /datum/gas/nitrous_oxide, /datum/gas/nitrogen, /datum/gas/pluoxium, /datum/gas/tritium, /datum/gas/bz, /datum/gas/freon)
 		//calculating gas related values
 		//Wanna know a secret? See that max() to zero? it's used for error checking. If we get a mol count in the negative, we'll get a divide by zero error
 		combined_gas = max(removed.total_moles(), 0)
 
-		//This is more error prevention, according to all known laws of atmos, gas_mix.remove() should never make negative mol values.
-		//But this is tg
+		plasmacomp = max(removed.get_moles(/datum/gas/plasma)/combined_gas, 0)
+		o2comp = max(removed.get_moles(/datum/gas/oxygen)/combined_gas, 0)
+		co2comp = max(removed.get_moles(/datum/gas/carbon_dioxide)/combined_gas, 0)
+		pluoxiumcomp = max(removed.get_moles(/datum/gas/pluoxium)/combined_gas, 0)
+		tritiumcomp = max(removed.get_moles(/datum/gas/tritium)/combined_gas, 0)
+		bzcomp = max(removed.get_moles(/datum/gas/bz)/combined_gas, 0)
 
-		//Lets get the proportions of the gasses in the mix and then slowly move our comp to that value
-		//Can cause an overestimation of mol count, should stabalize things though.
-		//Prevents huge bursts of gas/heat when a large amount of something is introduced
-		//They range between 0 and 1
-		plasmacomp += clamp(max(removed.gases[/datum/gas/plasma][MOLES]/combined_gas, 0) - plasmacomp, -1, gas_change_rate)
-		o2comp += clamp(max(removed.gases[/datum/gas/oxygen][MOLES]/combined_gas, 0) - o2comp, -1, gas_change_rate)
-		co2comp += clamp(max(removed.gases[/datum/gas/carbon_dioxide][MOLES]/combined_gas, 0) - co2comp, -1, gas_change_rate)
-		pluoxiumcomp += clamp(max(removed.gases[/datum/gas/pluoxium][MOLES]/combined_gas, 0) - pluoxiumcomp, -1, gas_change_rate)
-		tritiumcomp += clamp(max(removed.gases[/datum/gas/tritium][MOLES]/combined_gas, 0) - tritiumcomp, -1, gas_change_rate)
-		bzcomp += clamp(max(removed.gases[/datum/gas/bz][MOLES]/combined_gas, 0) - bzcomp, -1, gas_change_rate)
-		n2ocomp += clamp(max(removed.gases[/datum/gas/nitrous_oxide][MOLES]/combined_gas, 0) - n2ocomp, -1, gas_change_rate)
-		n2comp += clamp(max(removed.gases[/datum/gas/nitrogen][MOLES]/combined_gas, 0) - n2comp, -1, gas_change_rate)
-		freoncomp += clamp(max(removed.gases[/datum/gas/freon][MOLES]/combined_gas, 0) - freoncomp, -1, gas_change_rate)
+		n2ocomp = max(removed.get_moles(/datum/gas/nitrous_oxide)/combined_gas, 0)
+		n2comp = max(removed.get_moles(/datum/gas/nitrogen)/combined_gas, 0)
 
-		//We're concerned about pluoxium being too easy to abuse at low percents, so we make sure there's a substantial amount.
 		if(pluoxiumcomp >= 0.15)
-			pluoxiumbonus = 1    //makes pluoxium only work at 15%+
+			pluoxiumbonus = 1	//Just to be safe I don't want to remove pluoxium
 		else
 			pluoxiumbonus = 0
 
@@ -503,7 +494,7 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 			icon_state = base_icon_state
 
 		//if there is more pluox and n2 then anything else, we receive no power increase from heat
-		power = max((removed.temperature * temp_factor / T0C) * gasmix_power_ratio + power, 0)
+		power = max((removed.return_temperature() * temp_factor / T0C) * gasmix_power_ratio + power, 0)
 
 		if(prob(50))
 			//(1 + (tritRad + pluoxDampen * bzDampen * o2Rad * plasmaRad / (10 - bzrads))) * freonbonus
@@ -522,15 +513,15 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 		//Also keep in mind we are only adding this temperature to (efficiency)% of the one tile the rock
 		//is on. An increase of 4*C @ 25% efficiency here results in an increase of 1*C / (#tilesincore) overall.
 		//Power * 0.55 * (some value between 1.5 and 15) / 5
-		removed.temperature += ((device_energy * dynamic_heat_modifier) / THERMAL_RELEASE_MODIFIER)
+		removed.set_temperature(removed.return_temperature() + ((device_energy * dynamic_heat_modifier) / THERMAL_RELEASE_MODIFIER))
 		//We can only emit so much heat, that being 37500
-		removed.temperature = max(0, min(removed.temperature, 2500 * dynamic_heat_modifier))
+		removed.set_temperature(max(0, min(removed.return_temperature(), 2500 * dynamic_heat_modifier)))
 
 		//Calculate how much gas to release
 		//Varies based on power and gas content
-		removed.gases[/datum/gas/plasma][MOLES] += max((device_energy * dynamic_heat_modifier) / PLASMA_RELEASE_MODIFIER, 0)
+		removed.adjust_moles(/datum/gas/plasma, max((device_energy * dynamic_heat_modifier) / PLASMA_RELEASE_MODIFIER, 0))
 		//Varies based on power, gas content, and heat
-		removed.gases[/datum/gas/oxygen][MOLES] += max(((device_energy + removed.temperature * dynamic_heat_modifier) - T0C) / OXYGEN_RELEASE_MODIFIER, 0)
+		removed.adjust_moles(/datum/gas/oxygen, max(((device_energy + removed.return_temperature() * dynamic_heat_modifier) - T0C) / OXYGEN_RELEASE_MODIFIER, 0))
 
 		if(produces_gas)
 			env.merge(removed)
