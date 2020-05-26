@@ -56,8 +56,8 @@ const TARGET_SPECIES_LIST = [
   },
   {
     name: 'Arachnid',
-    value: 'rachnid'
-  }
+    value: 'rachnid',
+  },
 ];
 
 const TARGET_NUTRITION_LIST = [
