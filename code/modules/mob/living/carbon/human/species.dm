@@ -705,7 +705,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				if("spider_legs")
 					S = GLOB.spider_legs_list[H.dna.features["spider_legs"]]
 				if("spider_spinneret")
-					S = GLOB.spider_spinneret[H.dna.features["spider_spinneret"]]
+					S = GLOB.spider_spinneret_list[H.dna.features["spider_spinneret"]]
 			if(!S || S.icon_state == "none")
 				continue
 
