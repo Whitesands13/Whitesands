@@ -617,6 +617,14 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(!H.dna.features["ipc_antenna"] || H.dna.features["ipc_antenna"] == "None" || H.head && (H.head.flags_inv & HIDEHAIR) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEHAIR)) || !HD)
 			bodyparts_to_add -= "ipc_antenna"
 
+	if("spider_legs" in mutant_bodyparts)
+		if(!H.dna.features["spider_legs"] || H.dna.features["spider_legs"] == "None" || (H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT) && (!H.wear_suit.species_exception || !is_type_in_list(src, H.wear_suit.species_exception))))
+			bodyparts_to_add -= "spider_legs"
+
+	if("spider_spinneret" in mutant_bodyparts)
+		if(!H.dna.features["spider_spinneret"] || H.dna.features["spider_spinneret"] == "None" || (H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT) && (!H.wear_suit.species_exception || !is_type_in_list(src, H.wear_suit.species_exception))))
+			bodyparts_to_add -= "spider_spinneret"
+
 	//Digitigrade legs are stuck in the phantom zone between true limbs and mutant bodyparts. Mainly it just needs more agressive updating than most limbs.
 	var/update_needed = FALSE
 	var/not_digitigrade = TRUE
@@ -694,6 +702,10 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 					S = GLOB.ipc_antennas_list[H.dna.features["ipc_antenna"]]
 				if("ipc_chassis")
 					S = GLOB.ipc_chassis_list[H.dna.features["ipc_chassis"]]
+				if("spider_legs")
+					S = GLOB.spider_legs_list[H.dna.features["spider_legs"]]
+				if("spider_spinneret")
+					S = GLOB.spider_spinneret[H.dna.features["spider_spinneret"]]
 			if(!S || S.icon_state == "none")
 				continue
 

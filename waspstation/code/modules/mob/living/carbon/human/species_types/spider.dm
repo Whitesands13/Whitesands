@@ -16,7 +16,7 @@ GLOBAL_LIST_INIT(spider_last, world.file2list("strings/names/spider_last.txt"))
 
 /datum/species/spider
 	name = "Arachnid"
-	id = "spider"
+	id = "rachnid"
 	sexes = 0
 	say_mod = "chitters"
 	default_color = "00FF00"
