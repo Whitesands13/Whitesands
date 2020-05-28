@@ -1,7 +1,6 @@
 /obj/effect/turf_decal/tile
 	name = "tile decal"
-	icon = 'waspstation/icons/turf/decals.dmi'
-	icon_state = "corner_white"
+	icon_state = "tile_corner"
 	layer = TURF_PLATING_DECAL_LAYER
 	alpha = 110
 
