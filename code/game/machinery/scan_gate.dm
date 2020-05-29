@@ -17,7 +17,7 @@
 #define SCANGATE_POD			"pod"
 #define SCANGATE_GOLEM			"golem"
 #define SCANGATE_ZOMBIE			"zombie"
-#define SCANGATE_SPIDER			"spider"
+#define SCANGATE_SPIDER			"rachnid"
 
 /obj/machinery/scanner_gate
 	name = "scanner gate"
