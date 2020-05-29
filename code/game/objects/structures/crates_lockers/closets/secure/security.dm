@@ -347,7 +347,7 @@
 	new /obj/item/clothing/suit/armor/bulletproof(src)
 
 /obj/structure/closet/secure_closet/lethalshots
-	name = "lethal ammunition locker"
+	name = "lethal ammunition"
 	req_access = list(ACCESS_ARMORY)
 	icon_state = "tac"
 
