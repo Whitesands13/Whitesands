@@ -7,7 +7,7 @@ GLOBAL_LIST_INIT(spider_last, world.file2list("strings/names/spider_last.txt"))
 	flash_protect = FLASH_PROTECTION_SENSITIVE
 
 /obj/item/reagent_containers/food/snacks/meat/slab/human/mutant/spider
-	icon_state = "spidermeat"
+	icon_state = "mothmeat"
 	desc = "The stringy meat jokes have been done to death, just like this Arachnid."
 	list_reagents = list(/datum/reagent/consumable/nutriment = 3)
 	filling_color = "#00FFFF"
