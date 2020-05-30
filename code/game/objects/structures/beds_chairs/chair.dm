@@ -205,7 +205,7 @@
 	buildstacktype = /obj/item/stack/sheet/mineral/titanium
 
 /obj/structure/chair/comfy/shuttle/GetArmrest()
-	return mutable_appearance('icons/obj/chairs.dmi', "shuttle_chair_armrest")
+	return mutable_appearance('waspstation/icons/obj/chairs.dmi', "shuttle_chair_armrest")
 
 /obj/structure/chair/office
 	anchored = FALSE

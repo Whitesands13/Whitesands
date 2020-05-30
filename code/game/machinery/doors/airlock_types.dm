@@ -456,8 +456,8 @@
 
 /obj/machinery/door/airlock/shuttle
 	name = "shuttle airlock"
-	icon = 'icons/obj/doors/airlocks/shuttle/shuttle.dmi'
-	overlays_file = 'icons/obj/doors/airlocks/shuttle/overlays.dmi'
+	icon = 'waspstation/icons/obj/doors/airlocks/shuttle/shuttle.dmi' //Wasp Edit - Classic Shuttle
+	overlays_file = 'waspstation/icons/obj/doors/airlocks/shuttle/overlays.dmi'
 	assemblytype = /obj/structure/door_assembly/door_assembly_shuttle
 	has_hatch = FALSE
 
