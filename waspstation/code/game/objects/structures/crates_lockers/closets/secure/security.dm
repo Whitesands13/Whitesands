@@ -5,6 +5,7 @@
 
 /obj/structure/closet/secure_closet/brig_phys/PopulateContents()
 	..()
+	new /obj/item/defibrillator/loaded(src)
 	new /obj/item/radio/headset/headset_medsec(src)
 	new	/obj/item/storage/firstaid/regular(src)
 	new	/obj/item/storage/firstaid/fire(src)
@@ -25,7 +26,6 @@
 /obj/structure/closet/secure_closet/lieutenant/PopulateContents()
 	..()
 	new /obj/item/clothing/head/beret/lt(src)
-	new /obj/item/clothing/head/beret/lt/navy(src)
 	new /obj/item/storage/briefcase(src)
 	new	/obj/item/storage/firstaid/regular(src)
 	new /obj/item/storage/belt/security(src)
