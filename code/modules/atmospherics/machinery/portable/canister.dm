@@ -1,8 +1,4 @@
-#define CAN_DEFAULT_RELEASE_PRESSURE 	(ONE_ATMOSPHERE)
-///Used when setting the mode of the canisters, enabling us to switch the overlays
-#define CANISTER_TIER_1					1
-#define CANISTER_TIER_2					2
-#define CANISTER_TIER_3					3
+#define CAN_DEFAULT_RELEASE_PRESSURE (ONE_ATMOSPHERE)
 
 /obj/machinery/portable_atmospherics/canister
 	name = "canister"
@@ -22,10 +18,6 @@
 	var/release_pressure = ONE_ATMOSPHERE
 	var/can_max_release_pressure = (ONE_ATMOSPHERE * 10)
 	var/can_min_release_pressure = (ONE_ATMOSPHERE / 10)
-	///Max amount of heat allowed inside of the canister before it starts to melt (different tiers have different limits)
-	var/heat_limit = 5000
-	///Max amount of pressure allowed inside of the canister before it starts to break (different tiers have different limits)
-	var/pressure_limit = 50000
 
 	armor = list("melee" = 50, "bullet" = 50, "laser" = 50, "energy" = 100, "bomb" = 10, "bio" = 100, "rad" = 100, "fire" = 80, "acid" = 50)
 	max_integrity = 250
@@ -42,8 +34,6 @@
 	var/maximum_timer_set = 300
 	var/timing = FALSE
 	var/restricted = FALSE
-	///Set the tier of the canister and overlay used
-	var/mode = CANISTER_TIER_1
 	req_access = list()
 
 	var/update = 0
@@ -72,11 +62,6 @@
 		playsound(src, 'sound/misc/compiler-failure.ogg', 50, TRUE)
 		return
 	..()
-
-/obj/machinery/portable_atmospherics/canister/examine(user)
-	. = ..()
-	if(mode)
-		. += "<span class='notice'>This canister is tier [mode].</span>"
 
 /obj/machinery/portable_atmospherics/canister/nitrogen
 	name = "n2 canister"
@@ -173,9 +158,6 @@
 /obj/machinery/portable_atmospherics/canister/fusion_test
 	name = "fusion test canister"
 	desc = "Don't be a badmin."
-	heat_limit = 1e12
-	pressure_limit = 1e14
-	mode = CANISTER_TIER_3
 
 /obj/machinery/portable_atmospherics/canister/fusion_test/create_gas()
 	air_contents.add_gases(/datum/gas/carbon_dioxide, /datum/gas/plasma, /datum/gas/tritium)
@@ -220,32 +202,6 @@
 	filled = 1
 	release_pressure = ONE_ATMOSPHERE*2
 
-/obj/machinery/portable_atmospherics/canister/tier_1
-	name = "Tier 1 canister"
-	heat_limit = 5000
-	pressure_limit = 50000
-	mode = CANISTER_TIER_1
-
-/obj/machinery/portable_atmospherics/canister/tier_2
-	name = "Tier 2 canister"
-	heat_limit = 500000
-	pressure_limit = 5e6
-	volume = 3000
-	max_integrity = 300
-	can_max_release_pressure = (ONE_ATMOSPHERE * 30)
-	can_min_release_pressure = (ONE_ATMOSPHERE / 30)
-	mode = CANISTER_TIER_2
-
-/obj/machinery/portable_atmospherics/canister/tier_3
-	name = "Tier 3 canister"
-	heat_limit = 1e12
-	pressure_limit = 1e14
-	volume = 5000
-	max_integrity = 500
-	can_max_release_pressure = (ONE_ATMOSPHERE * 50)
-	can_min_release_pressure = (ONE_ATMOSPHERE / 50)
-	mode = CANISTER_TIER_3
-
 /obj/machinery/portable_atmospherics/canister/Initialize(mapload, datum/gas_mixture/existing_mixture)
 	. = ..()
 	if(existing_mixture)
@@ -256,7 +212,6 @@
 	pump.on = TRUE
 	pump.machine_stat = 0
 	SSair.add_to_rebuild_queue(pump)
-	update_overlays()
 
 /obj/machinery/portable_atmospherics/canister/Destroy()
 	qdel(pump)
@@ -298,16 +253,10 @@
 	else if(pressure >= 10)
 		. += "can-o0"
 	WaspStation End */
-	///Function is used to actually set the overlays
-	if(mode == CANISTER_TIER_1)
-		. += "tier1-o"
-	else if(mode == CANISTER_TIER_2)
-		. += "tier2-o"
-	else if(mode == CANISTER_TIER_3)
-		. += "tier3-o"
 
+	
 /obj/machinery/portable_atmospherics/canister/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(exposed_temperature > (temperature_resistance * mode))
+	if(exposed_temperature > temperature_resistance)
 		take_damage(5, BURN, 0)
 
 
@@ -390,12 +339,6 @@
 		pump.airs[2] = null
 
 	update_icon()
-	var/pressure = air_contents.return_pressure()
-	var/temperature = air_contents.return_temperature()
-	///function used to check the limit of the canisters and also set the amount of damage that the canister can recieve, if the heat and pressure are way higher than the limit the more damage will be done
-	if(temperature > heat_limit || pressure > pressure_limit)
-		take_damage(min(((temperature/heat_limit) * (pressure/pressure_limit)), 50), BURN, 0)
-		return
 
 /obj/machinery/portable_atmospherics/canister/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
 															datum/tgui/master_ui = null, datum/ui_state/state = GLOB.physical_state)
