@@ -7,6 +7,7 @@
 //Colored jumpsuits
 
 /datum/gear/uniform/color
+	subtype_path = /datum/gear/uniform/color
 	cost = 1000
 
 /datum/gear/uniform/color/red
@@ -46,6 +47,7 @@
 //JUMPSUIT "SUITS"
 
 /datum/gear/uniform/suit
+	subtype_path = /datum/gear/uniform/suit
 	cost = 1000
 
 /datum/gear/uniform/suit/amish
@@ -65,6 +67,13 @@
 	path = /obj/item/clothing/under/rank/civilian/lawyer/galaxy
 	cost = 7500
 
+/datum/gear/uniform/suit/white/skirt
+	display_name = "suitskirt, white shirt"
+	path = /obj/item/clothing/under/suit/black/skirt
+
+/datum/gear/uniform/suit/white
+	display_name = "suit, white shirt"
+	path = /obj/item/clothing/under/suit/black
 //Premium
 /datum/gear/uniform/tacticool
 	display_name = "tacticool turtleneck"
