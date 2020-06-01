@@ -421,7 +421,33 @@
 /mob/living/silicon/robot/regenerate_icons()
 	return update_icons()
 
-// /mob/living/silicon/robot/update_icons() <--- Wasp - Moved to modular for borg icons
+/* /mob/living/silicon/robot/update_icons() <--- Wasp - Moved to modular for borg icons
+/mob/living/silicon/robot/update_icons()
+	cut_overlays()
+	icon_state = module.cyborg_base_icon
+	if(stat != DEAD && !(HAS_TRAIT(src, TRAIT_KNOCKEDOUT) || IsStun() || IsParalyzed() || low_power_mode)) //Not dead, not stunned.
+		if(!eye_lights)
+			eye_lights = new()
+		if(lamp_intensity > 2)
+			eye_lights.icon_state = "[module.special_light_key ? "[module.special_light_key]":"[module.cyborg_base_icon]"]_l"
+		else
+			eye_lights.icon_state = "[module.special_light_key ? "[module.special_light_key]":"[module.cyborg_base_icon]"]_e"
+		eye_lights.icon = icon
+		add_overlay(eye_lights)
+
+	if(opened)
+		if(wiresexposed)
+			add_overlay("ov-opencover +w")
+		else if(cell)
+			add_overlay("ov-opencover +c")
+		else
+			add_overlay("ov-opencover -c")
+	if(hat)
+		var/mutable_appearance/head_overlay = hat.build_worn_icon(default_layer = 20, default_icon_file = 'icons/mob/clothing/head.dmi')
+		head_overlay.pixel_y += hat_offset
+		add_overlay(head_overlay)
+	update_fire()
+*/
 
 /mob/living/silicon/robot/proc/self_destruct()
 	if(emagged)
@@ -747,18 +773,12 @@
 		if(health <= -maxHealth) //die only once
 			death()
 			return
-		if(IsUnconscious() || IsStun() || IsKnockdown() || IsParalyzed() || getOxyLoss() > maxHealth*0.5)
-			if(stat == CONSCIOUS)
-				set_stat(UNCONSCIOUS)
-				become_blind(UNCONSCIOUS_BLIND)
-				update_mobility()
-				update_headlamp()
+		if(HAS_TRAIT(src, TRAIT_KNOCKEDOUT) || IsStun() || IsKnockdown() || IsParalyzed())
+			set_stat(UNCONSCIOUS)
 		else
-			if(stat == UNCONSCIOUS)
-				set_stat(CONSCIOUS)
-				cure_blind(UNCONSCIOUS_BLIND)
-				update_mobility()
-				update_headlamp()
+			set_stat(CONSCIOUS)
+	update_mobility()
+	update_headlamp()
 	diag_hud_set_status()
 	diag_hud_set_health()
 	diag_hud_set_aishell()
