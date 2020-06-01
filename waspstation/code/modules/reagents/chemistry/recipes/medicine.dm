@@ -34,6 +34,7 @@
 
 /datum/chemical_reaction/corazone
 	results = list(/datum/reagent/medicine/corazone = 3)
+	required_reagents = list(/datum/reagent/phenol = 2, /datum/reagent/lithium = 1)
 
 /datum/chemical_reaction/carthatoline
 	results = list(/datum/reagent/medicine/carthatoline = 3)

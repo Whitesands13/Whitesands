@@ -35,7 +35,7 @@
 /obj/item/reagent_containers/glass/bottle/vial/update_icon()
 	cut_overlays()
 	if(reagents.total_volume)
-		var/mutable_appearance/filling = mutable_appearance('icons/obj/reagentfillings.dmi', "hypovial10")
+		var/mutable_appearance/filling = mutable_appearance('waspstation/icons/obj/reagentfillings.dmi', "hypovial10")
 
 		var/percent = round((reagents.total_volume / volume) * 100)
 		switch(percent)

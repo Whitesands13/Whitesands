@@ -208,6 +208,8 @@ class PackagingControls extends Component {
       pillAmount: 1,
       patchAmount: 1,
       bottleAmount: 1,
+      syringeAmount: 1,
+      hypovialAmount: 1,
       packAmount: 1,
     };
   }
@@ -219,10 +221,13 @@ class PackagingControls extends Component {
       pillAmount,
       patchAmount,
       bottleAmount,
+      syringeAmount,
+      hypovialAmount,
       packAmount,
     } = this.state;
     const {
       condi,
+      upgraded,
       chosenPillStyle,
       pillStyles = [],
     } = props.state.data;
@@ -285,6 +290,36 @@ class PackagingControls extends Component {
             onCreate={() => act(ref, 'create', {
               type: 'bottle',
               amount: bottleAmount,
+              volume: 'auto',
+            })} />
+        )}
+        {!condi && (
+          <PackagingControlsItem
+            label="Syringes"
+            amount={syringeAmount}
+            amountUnit="syringes"
+            sideNote="max 15u"
+            onChangeAmount={(e, value) => this.setState({
+              syringeAmount: value,
+            })}
+            onCreate={() => act(ref, 'create', {
+              type: 'syringe',
+              amount: syringeAmount,
+              volume: 'auto',
+            })} />
+        )}
+        {!condi && !!upgraded && (
+          <PackagingControlsItem
+            label="Hypovials"
+            amount={hypovialAmount}
+            amountUnit="hypovials"
+            sideNote="max 60u"
+            onChangeAmount={(e, value) => this.setState({
+              hypovialAmount: value,
+            })}
+            onCreate={() => act(ref, 'create', {
+              type: 'hypovial',
+              amount: hypovialAmount,
               volume: 'auto',
             })} />
         )}

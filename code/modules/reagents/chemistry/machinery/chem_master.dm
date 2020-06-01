@@ -16,6 +16,7 @@
 	var/obj/item/storage/pill_bottle/bottle = null
 	var/mode = 1
 	var/condi = FALSE
+	var/upgraded = FALSE ///Manipulator level >3, allows hypovials
 	var/chosenPillStyle = 1
 	var/screen = "home"
 	var/analyzeVars[0]
@@ -45,6 +46,9 @@
 	reagents.maximum_volume = 0
 	for(var/obj/item/reagent_containers/glass/beaker/B in component_parts)
 		reagents.maximum_volume += B.reagents.maximum_volume
+	for(var/obj/item/stock_parts/manipulator/M in component_parts)
+		if (M.rating > 3)
+			upgraded = TRUE
 
 /obj/machinery/chem_master/ex_act(severity, target)
 	if(severity < 3)
@@ -162,6 +166,7 @@
 	data["beakerMaxVolume"] = beaker ? beaker.volume : null
 	data["mode"] = mode
 	data["condi"] = condi
+	data["upgraded"] = upgraded
 	data["screen"] = screen
 	data["analyzeVars"] = analyzeVars
 	data["chosenPillStyle"] = chosenPillStyle
@@ -259,6 +264,10 @@
 			vol_each_max = min(40, vol_each_max)
 		else if (item_type == "bottle")
 			vol_each_max = min(30, vol_each_max)
+		else if (item_type == "syringe")
+			vol_each_max = min(15, vol_each_max)
+		else if (item_type == "hypovial")
+			vol_each_max = min(60, vol_each_max)
 		else if (item_type == "condimentPack")
 			vol_each_max = min(10, vol_each_max)
 		else if (item_type == "condimentBottle")
@@ -277,7 +286,7 @@
 			return FALSE
 		// Get item name
 		var/name = params["name"]
-		var/name_has_units = item_type == "pill" || item_type == "patch"
+		var/name_has_units = item_type == "pill" || item_type == "patch" || item_type == "syringe"
 		if(!name)
 			var/name_default = reagents.get_master_reagent_name()
 			if (name_has_units)
@@ -327,6 +336,22 @@
 			for(var/i = 0; i < amount; i++)
 				P = new/obj/item/reagent_containers/glass/bottle(drop_location())
 				P.name = trim("[name] bottle")
+				adjust_item_drop_location(P)
+				reagents.trans_to(P, vol_each, transfered_by = usr)
+			return TRUE
+		if(item_type == "syringe")
+			var/obj/item/reagent_containers/syringe/nomats/P
+			for(var/i = 0; i < amount; i++)
+				P = new/obj/item/reagent_containers/syringe/nomats(drop_location())
+				P.name = trim("[name] syringe")
+				adjust_item_drop_location(P)
+				reagents.trans_to(P, vol_each, transfered_by = usr)
+			return TRUE
+		if(item_type == "hypovial")
+			var/obj/item/reagent_containers/glass/bottle/vial/small/P
+			for(var/i = 0; i < amount; i++)
+				P = new/obj/item/reagent_containers/glass/bottle/vial/small(drop_location())
+				P.name = trim("[name] hypovial")
 				adjust_item_drop_location(P)
 				reagents.trans_to(P, vol_each, transfered_by = usr)
 			return TRUE

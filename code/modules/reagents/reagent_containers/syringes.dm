@@ -183,6 +183,11 @@
 	else
 		return 0
 
+/obj/item/reagent_containers/syringe/nomats
+	name = "synthetic syringe"
+	desc = "A syringe that can hold up to 15 units. This one seems to be made out of synthesized materials."
+	custom_materials = null
+
 /obj/item/reagent_containers/syringe/epinephrine
 	name = "syringe (epinephrine)"
 	desc = "Contains epinephrine - used to stabilize patients."

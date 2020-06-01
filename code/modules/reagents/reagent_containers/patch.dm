@@ -1,7 +1,7 @@
 /obj/item/reagent_containers/pill/patch
 	name = "chemical patch"
 	desc = "A chemical patch for touch based applications."
-	icon = 'icons/obj/chemical.dmi'
+	icon = 'waspstation/icons/obj/chemical.dmi'
 	icon_state = "bandaid"
 	item_state = "bandaid"
 	possible_transfer_amounts = list()
@@ -10,6 +10,16 @@
 	apply_method = "apply"
 	self_delay = 30		// three seconds
 	dissolvable = FALSE
+	unique_reskin = list("plain patch" = "bandaid",
+						"pink patch" = "bandaid_pink",
+						"brute patch" = "bandaid_brute",
+						"burn patch" = "bandaid_burn",
+						"brute/burn patch" = "bandaid_both",
+						"toxin patch" = "bandaid_toxin",
+						"oxy patch" = "bandaid_oxy",
+						"nicotine patch" = "bandaid_smoke",
+						"energy patch" = "bandaid_energy"
+						)
 
 /obj/item/reagent_containers/pill/patch/attack(mob/living/L, mob/user)
 	if(ishuman(L))
