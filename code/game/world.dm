@@ -46,6 +46,8 @@ GLOBAL_VAR(restart_counter)
 	SSdbcore.SetRoundID()
 	SetupLogs()
 
+	populate_gear_list()
+
 #ifndef USE_CUSTOM_ERROR_HANDLER
 	world.log = file("[GLOB.log_directory]/dd.log")
 #else
@@ -292,8 +294,13 @@ GLOBAL_VAR(restart_counter)
 
 	s += "<b>[station_name()]</b>";
 	s += " ("
-	s += "<a href=\"https://discord.gg/husVWe8\">" //Change this to wherever you want the hub to link to.
+	s += "<a href=\"https://discord.gg/BUM8uRc\">" //Change this to wherever you want the hub to link to.
 	s += "Discord"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
+	s += "</a>"
+	s += ")"
+	s += " ("
+	s += "<a href=\"https://github.com/WaspStation/WaspStation-1.0\">" //Change this to wherever you want the hub to link to.
+	s += "Github"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
 	s += "</a>"
 	s += ")"
 
