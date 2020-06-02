@@ -46,7 +46,6 @@
 /turf/open/floor/plasteel/mono/dark
 	color = COLOR_TILE_GRAY
 /turf/open/floor/plasteel/mono/white
-	icon_state = "monotile_light"
 	color = COLOR_WHITE
 
 
