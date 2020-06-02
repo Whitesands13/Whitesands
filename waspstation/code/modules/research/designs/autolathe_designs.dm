@@ -9,7 +9,7 @@
 
 /datum/design/hypovial
 	name = "Hypovial"
-	id = "beaker"
+	id = "hypovial"
 	build_type = AUTOLATHE | PROTOLATHE
 	materials = list(/datum/material/glass = 500)
 	build_path = /obj/item/reagent_containers/glass/bottle/vial/small
@@ -18,7 +18,7 @@
 
 /datum/design/bluespacehypovial
 	name = "Bluespace Hypovial"
-	id = "bluespacebeaker"
+	id = "bluespacehypovial"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/glass = 1500, /datum/material/plasma = 750, /datum/material/diamond = 250, /datum/material/bluespace = 500)
 	build_path = /obj/item/reagent_containers/glass/bottle/vial/small/bluespace
