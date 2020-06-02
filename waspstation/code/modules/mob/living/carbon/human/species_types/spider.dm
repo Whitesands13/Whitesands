@@ -177,3 +177,11 @@ GLOBAL_LIST_INIT(spider_last, world.file2list("strings/names/spider_last.txt"))
 			A.forceMove(C)
 			H.visible_message("<span class='danger'>[H] wraps [A] into a cocoon!</span>")
 			return
+
+/datum/reagent/mutationtoxin/arachnid
+	name = "Arachnid Mutation Toxin"
+	description = "A glowing toxin."
+	color = "#5EFF3B" //RGB: 94, 255, 59
+	race = /datum/species/spider
+	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
+	taste_description = "silk"
