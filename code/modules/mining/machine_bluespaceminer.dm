@@ -6,6 +6,8 @@
 	density = TRUE
 	circuit = /obj/item/circuitboard/machine/bluespace_miner
 	layer = BELOW_OBJ_LAYER
+	processing_flags = START_PROCESSING_ON_INIT
+	var/rate = 0.5
 	var/list/ore_rates = list(/datum/material/iron = 0.6, /datum/material/glass = 0.6, /*/datum/material/copper = 0.4,*/ /datum/material/plasma = 0.2,  /datum/material/silver = 0.2, /datum/material/gold = 0.1, /datum/material/titanium = 0.1, /datum/material/uranium = 0.1, /datum/material/diamond = 0.1)
 	var/datum/component/remote_materials/materials
 
@@ -16,6 +18,10 @@
 /obj/machinery/mineral/bluespace_miner/Destroy()
 	materials = null
 	return ..()
+
+/obj/machinery/mineral/bluespace_miner/RefreshParts()
+	for(var/obj/item/stock_parts/micro_laser/L in component_parts)
+		rate = 0.5 * max(rate, L.rating)
 
 /obj/machinery/mineral/bluespace_miner/examine(mob/user)
 	. = ..()
@@ -31,5 +37,5 @@
 	if(!mat_container || panel_open || !powered())
 		return
 	var/datum/material/ore = pick(ore_rates)
-	mat_container.insert_amount_mat((ore_rates[ore] * 1000), ore)
+	mat_container.insert_amount_mat((ore_rates[ore] * 1000 * rate), ore)
 
