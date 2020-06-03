@@ -43,6 +43,8 @@
 	name = "cocoon"
 	desc = "Something wrapped in silky spider web."
 	icon_state = "cocoon1"
+	anchored = FALSE
+	density = FALSE
 	max_integrity = 60
 
 /obj/structure/spider_player/cocoon/Initialize()
