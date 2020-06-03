@@ -77,10 +77,3 @@
 
 /mob/living/carbon/human/species/squid
 	race = /datum/species/squid
-
-/mob/living/carbon/human/species/spider
-	race = /datum/species/spider
-	icon = 'waspstation/icons/mob/spider.dmi'
-	var/web_cooldown = 30
-	var/web_ready = TRUE
-	var/spinner_rate = 75

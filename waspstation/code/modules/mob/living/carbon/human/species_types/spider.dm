@@ -20,7 +20,7 @@ GLOBAL_LIST_INIT(spider_last, world.file2list("strings/names/spider_last.txt"))
 	sexes = 0
 	say_mod = "chitters"
 	default_color = "00FF00"
-	species_traits = list(LIPS, NOEYESPRITES)
+	species_traits = list(LIPS, NOEYESPRITES, NO_UNDERWEAR)
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID|MOB_BUG
 	mutant_bodyparts = list("spider_legs", "spider_spinneret")
 	default_features = list("spider_legs" = "Plain", "spider_spinneret" = "Plain")
@@ -35,12 +35,6 @@ GLOBAL_LIST_INIT(spider_last, world.file2list("strings/names/spider_last.txt"))
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 	species_language_holder = /datum/language_holder/spider
 	loreblurb = ""
-
-/datum/species/spider/regenerate_organs(mob/living/carbon/C,datum/species/old_species,replace_current=TRUE,list/excluded_zones)
-	. = ..()
-	if(ishuman(C))
-		var/mob/living/carbon/human/H = C
-		handle_mutant_bodyparts(H)
 
 /proc/random_unique_spider_name(attempts_to_find_unique_name=10)
 	for(var/i in 1 to attempts_to_find_unique_name)
@@ -74,27 +68,39 @@ GLOBAL_LIST_INIT(spider_last, world.file2list("strings/names/spider_last.txt"))
 		return 9 //flyswatters deal 10x damage to spiders
 	return 0
 
+/mob/living/carbon/human/species/spider
+	race = /datum/species/spider
+	var/web_cooldown = 30
+	var/web_ready = TRUE
+	var/spinner_rate = 75
+
 /datum/species/spider/on_species_gain(mob/living/carbon/human/H, datum/species/old_species)
 	. = ..()
-	var/datum/action/innate/change_color/S = new
-	S.Grant(H)
+	var/mob/living/carbon/human/species/spider/S = H
+	var/datum/action/innate/spin_web/SW = new
+	var/datum/action/innate/spin_cocoon/SC = new
+	SC.Grant(S)
+	SW.Grant(S)
 
 /datum/species/spider/on_species_loss(mob/living/carbon/human/H)
 	. = ..()
-	var/datum/action/innate/spin_web/S = locate(/datum/action/innate/spin_web) in H.actions
-	S?.Remove(H)
+	var/mob/living/carbon/human/species/spider/S = H
+	var/datum/action/innate/spin_web/SW = locate(/datum/action/innate/spin_web) in H.actions
+	var/datum/action/innate/spin_cocoon/SC = locate(/datum/action/innate/spin_cocoon) in H.actions
+	SC?.Remove(S)
+	SW?.Remove(S)
 
 /datum/action/innate/spin_web
     name = "Spin Web"
     check_flags = AB_CHECK_RESTRAINED|AB_CHECK_STUN|AB_CHECK_CONSCIOUS
-    icon_icon = 'icons/mob/actions.dmi'
-    button_icon_state = "spiderweb"
+    icon_icon = 'icons/mob/actions/actions_animal.dmi'
+    button_icon_state = "lay_web"
 
 /datum/action/innate/spin_cocoon
 	name = "Spin Cocoon"
 	check_flags = AB_CHECK_RESTRAINED|AB_CHECK_STUN|AB_CHECK_CONSCIOUS
-	icon_icon = 'icons/mob/actions.dmi'
-	button_icon_state = "spidercocoon"
+	icon_icon = 'icons/mob/actions/actions_animal.dmi'
+	button_icon_state = "wrap_0"
 
 /datum/action/innate/spin_web/Activate()
 	var/mob/living/carbon/human/species/spider/H = owner
