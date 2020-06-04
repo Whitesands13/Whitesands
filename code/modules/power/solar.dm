@@ -39,6 +39,11 @@
 	unset_control() //remove from control computer
 	return ..()
 
+/* Wasp Edit - Smartwire Revert - Fucking swear don't TG Marge This
+/obj/machinery/power/solar/should_have_node()
+	return TRUE
+*/
+
 //set the control of the panel to a given computer
 /obj/machinery/power/solar/proc/set_control(obj/machinery/power/solar_control/SC)
 	unset_control()

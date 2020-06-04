@@ -118,7 +118,7 @@
 	breakouttime = 30 SECONDS
 	cuffsound = 'sound/weapons/cablecuff.ogg'
 
-/*Wasp - Lets remove this and see if it still errors
+/*Wasp - Smartwire Revert
 /obj/item/restraints/handcuffs/cable/Initialize(mapload, param_color)
 	. = ..()
 
