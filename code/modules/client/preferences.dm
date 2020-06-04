@@ -1722,7 +1722,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if("spider_mandibles")
 					var/new_spider_mandibles
 					new_spider_mandibles = input(user, "Choose your character's variant of mandibles:", "Character Preference") as null|anything in GLOB.spider_mandibles_list
-
+					if (new_spider_mandibles)
+						features["spider_mandibles"] = new_spider_mandibles
 				if("squid_face")
 					var/new_squid_face
 					new_squid_face = input(user, "Choose your character's face type:", "Character Preference") as null|anything in GLOB.squid_face_list
