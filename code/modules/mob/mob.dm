@@ -219,7 +219,7 @@
   * * deaf_message (optional) is what deaf people will see.
   * * hearing_distance (optional) is the range, how many tiles away the message can be heard.
   */
-/atom/proc/audible_message(message, deaf_message, hearing_distance = DEFAULT_MESSAGE_RANGE, self_message)
+/atom/proc/audible_message(message, deaf_message, hearing_distance = DEFAULT_MESSAGE_RANGE, self_message, list/ignored_mobs)
 	var/list/hearers = get_hearers_in_view(hearing_distance, src)
 	if(self_message)
 		hearers -= src
@@ -237,7 +237,7 @@
   * * deaf_message (optional) is what deaf people will see.
   * * hearing_distance (optional) is the range, how many tiles away the message can be heard.
   */
-/mob/audible_message(message, deaf_message, hearing_distance = DEFAULT_MESSAGE_RANGE, self_message)
+/mob/audible_message(message, deaf_message, hearing_distance = DEFAULT_MESSAGE_RANGE, self_message, list/ignored_mobs)
 	. = ..()
 	if(self_message)
 		show_message(self_message, MSG_AUDIBLE, deaf_message, MSG_VISUAL)
@@ -353,6 +353,32 @@
 			return 1
 
 	return 0
+
+// Convinience proc.  Collects crap that fails to equip either onto the mob's back, or drops it.
+// Used in job equipping so shit doesn't pile up at the start loc.
+/mob/living/carbon/human/proc/equip_or_collect(var/obj/item/W, var/slot)
+	if(W.mob_can_equip(src, null, slot, TRUE, TRUE))
+		//Mob can equip.  Equip it.
+		equip_to_slot_or_del(W, slot)
+	else
+		//Mob can't equip it.  Put it in a bag B.
+		// Do I have a backpack?
+		var/obj/item/storage/B
+		if(istype(back,/obj/item/storage))
+			//Mob is wearing backpack
+			B = back
+		else
+			//not wearing backpack.  Check if player holding box
+			if(!is_holding_item_of_type(/obj/item/storage/box)) //If not holding box, give box
+				B = new /obj/item/storage/box(null) // Null in case of failed equip.
+				if(!put_in_hands(B))
+					return // box could not be placed in players hands.  I don't know what to do here...
+			//Now, B represents a container we can insert W into.
+			var/datum/component/storage/STR = B.GetComponent(/datum/component/storage)
+			if(STR.can_be_inserted(W, stop_messages=TRUE))
+				STR.handle_item_insertion(W,1)
+			return B
+
 /**
   * Reset the attached clients perspective (viewpoint)
   *
@@ -608,6 +634,10 @@
 		var/t1 = text("window=[href_list["mach_close"]]")
 		unset_machine()
 		src << browse(null, t1)
+
+	if(href_list["flavor_more"])
+		usr << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", name, replacetext(flavor_text, "\n", "<BR>")), text("window=[];size=500x200", name))
+		onclose(usr, "[name]")
 
 	if(user != src)
 		if(href_list["item"] && user.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))

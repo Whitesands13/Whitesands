@@ -37,7 +37,7 @@
 	belt = /obj/item/pda/warden
 	ears = /obj/item/radio/headset/headset_sec/alt
 	uniform = /obj/item/clothing/under/rank/security/warden
-	alt_uniform = /obj/item/clothing/under/rank/security/warden/grey //Wasp Edit - Alt Uniforms
+	alt_uniform = /obj/item/clothing/under/rank/security/warden/white //Wasp Edit - Alt Uniforms
 	shoes = /obj/item/clothing/shoes/jackboots
 	alt_suit = /obj/item/clothing/suit/armor/vest/warden
 	suit = /obj/item/clothing/suit/armor/vest/warden/alt
@@ -48,7 +48,7 @@
 	r_pocket = /obj/item/assembly/flash/handheld
 	l_pocket = /obj/item/restraints/handcuffs
 	suit_store = /obj/item/gun/energy/disabler
-	backpack_contents = list(/obj/item/melee/baton/loaded=1)
+	backpack_contents = list(/obj/item/melee/baton/loaded=1, /obj/item/ammo_box/magazine/co9mm=1) //WS edit - free lethals
 
 	backpack = /obj/item/storage/backpack/security
 	satchel = /obj/item/storage/backpack/satchel/sec

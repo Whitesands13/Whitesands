@@ -72,7 +72,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/eye_color = "000"				//Eye color
 	var/datum/species/pref_species = new /datum/species/human()	//Mutant race
 	var/species_looking_at = "human" //used as a helper to keep track of in the species select thingy
-	var/list/features = list("mcolor" = "FFF", "ethcolor" = "9c3030", "tail_lizard" = "Smooth", "tail_human" = "None", "snout" = "Round", "horns" = "None", "ears" = "None", "wings" = "None", "frills" = "None", "spines" = "None", "body_markings" = "None", "legs" = "Normal Legs", "moth_wings" = "Plain", "moth_markings" = "None", "squid_face" = "Squidward", "ipc_screen" = "Blue", "ipc_antenna" = "None", "ipc_chassis" = "Morpheus Cyberkinetics(Greyscale)")
+	var/list/features = list("mcolor" = "FFF", "ethcolor" = "9c3030", "tail_lizard" = "Smooth", "tail_human" = "None", "snout" = "Round", "horns" = "None", "ears" = "None", "wings" = "None", "frills" = "None", "spines" = "None", "body_markings" = "None", "legs" = "Normal Legs", "moth_wings" = "Plain", "moth_markings" = "None", "squid_face" = "Squidward", "ipc_screen" = "Blue", "ipc_antenna" = "None", "ipc_chassis" = "Morpheus Cyberkinetics(Greyscale)", "flavor_text" = "")
 	var/list/randomise = list(RANDOM_UNDERWEAR = TRUE, RANDOM_UNDERWEAR_COLOR = TRUE, RANDOM_UNDERSHIRT = TRUE, RANDOM_SOCKS = TRUE, RANDOM_BACKPACK = TRUE, RANDOM_JUMPSUIT_STYLE = TRUE, RANDOM_EXOWEAR_STYLE = TRUE, RANDOM_HAIRSTYLE = TRUE, RANDOM_HAIR_COLOR = TRUE, RANDOM_FACIAL_HAIRSTYLE = TRUE, RANDOM_FACIAL_HAIR_COLOR = TRUE, RANDOM_SKIN_TONE = TRUE, RANDOM_EYE_COLOR = TRUE)
 	var/list/friendlyGenders = list("Male" = "male", "Female" = "female", "Other" = "plural")
 	var/phobia = "spiders"
@@ -93,7 +93,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	// 0 = character settings, 1 = game preferences
 	var/current_tab = 0
 
-	var/unlock_content = 0
+	var/show_gear = TRUE
+	var/show_loadout = TRUE
+
+	var/unlock_content = FALSE
+	var/custom_ooc = FALSE
 
 	var/list/ignoring = list()
 
@@ -109,6 +113,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	var/list/exp = list()
 	var/list/menuoptions
+
+	//Loadout stuff
+	var/list/purchased_gear = list()
+	var/list/equipped_gear = list()
+	var/gear_tab = "General"
 
 	var/action_buttons_screen_locs = list()
 
@@ -127,6 +136,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				max_save_slots = 10
 	var/loaded_preferences_successfully = load_preferences()
 	if(loaded_preferences_successfully)
+		if("extra character slot" in purchased_gear)
+			max_save_slots += 1
+		if("custom ooc color" in purchased_gear)
+			custom_ooc = TRUE
 		if(load_character())
 			species_looking_at = pref_species.id
 			return
@@ -145,18 +158,29 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 #define MAX_MUTANT_ROWS 4
 
 /datum/preferences/proc/ShowChoices(mob/user)
+	switch(current_tab) //It's ugly that there's two of the same switches, but this needs to be run before the preview icon updates soooooo
+		if(0)
+			show_gear = TRUE
+			show_loadout = FALSE
+		if(1)
+			show_gear = FALSE
+			show_loadout = FALSE	
+	show_gear = (current_tab != 1)
+	show_loadout = (current_tab != 1)
 	if(!user || !user.client)
 		return
 	if(slot_randomized)
 		load_character(default_slot) // Reloads the character slot. Prevents random features from overwriting the slot if saved.
 		slot_randomized = FALSE
-	update_preview_icon()
+	update_preview_icon(show_gear, show_loadout)
 	var/list/dat = list("<center>")
 
-	dat += "<a href='?_src_=prefs;preference=tab;tab=0' [current_tab == 0 ? "class='linkOn'" : ""]>Character Settings</a>"
-	dat += "<a href='?_src_=prefs;preference=tab;tab=1' [current_tab == 1 ? "class='linkOn'" : ""]>Game Preferences</a>"
-	dat += "<a href='?_src_=prefs;preference=tab;tab=2' [current_tab == 2 ? "class='linkOn'" : ""]>OOC Preferences</a>"
-	dat += "<a href='?_src_=prefs;preference=tab;tab=3' [current_tab == 3 ? "class='linkOn'" : ""]>Custom Keybindings</a>"
+	dat += "<a href='?_src_=prefs;preference=tab;tab=0' [current_tab == 0 ? "class='linkOn'" : ""]>Character Setup</a>"
+	dat += "<a href='?_src_=prefs;preference=tab;tab=1' [current_tab == 1 ? "class='linkOn'" : ""]>Character Appearance</a>"
+	dat += "<a href='?_src_=prefs;preference=tab;tab=2' [current_tab == 2 ? "class='linkOn'" : ""]>Gear</a>"
+	dat += "<a href='?_src_=prefs;preference=tab;tab=3' [current_tab == 3 ? "class='linkOn'" : ""]>Game Preferences</a>"
+	dat += "<a href='?_src_=prefs;preference=tab;tab=4' [current_tab == 4 ? "class='linkOn'" : ""]>OOC Preferences</a>"
+	dat += "<a href='?_src_=prefs;preference=tab;tab=5' [current_tab == 5 ? "class='linkOn'" : ""]>Custom Keybindings</a>"
 
 	if(!path)
 		dat += "<div class='notice'>Please create an account to save your preferences</div>"
@@ -166,7 +190,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	dat += "<HR>"
 
 	switch(current_tab)
-		if (0) // Character Settings#
+		if (0) // Character Setup
 			if(path)
 				var/savefile/S = new /savefile(path)
 				if(S)
@@ -192,7 +216,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				dat += "<a href='?_src_=prefs;preference=trait;task=menu'>Configure Quirks</a><br></center>"
 				dat += "<center><b>Current Quirks:</b> [all_quirks.len ? all_quirks.Join(", ") : "None"]</center>"
 			dat += "<h2>Identity</h2>"
-			dat += "<table width='100%'><tr><td width='75%' valign='top'>"
+			dat += "<table width='100%'><tr><td width='24%' valign='top'>"
 			if(is_banned_from(user.ckey, "Appearance"))
 				dat += "<b>You are banned from using custom names and appearances. You can continue to adjust your characters, but you will be randomised once you join the game.</b><br>"
 			dat += "<a href='?_src_=prefs;preference=name;task=random'>Random Name</A> "
@@ -219,6 +243,15 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				dat += "<a href='?_src_=prefs;preference=toggle_random;random_type=[RANDOM_AGE]'>Always Random Age: [(randomise[RANDOM_AGE]) ? "Yes" : "No"]</A>"
 				dat += "<a href='?_src_=prefs;preference=toggle_random;random_type=[RANDOM_AGE_ANTAG]'>When Antagonist: [(randomise[RANDOM_AGE_ANTAG]) ? "Yes" : "No"]</A>"
 
+			dat += "<br><a href='?_src_=prefs;preference=flavor_text;task=input'><b>Set Flavor Text</b></a>"
+			if(length(features["flavor_text"]) <= 40)
+				if(!length(features["flavor_text"]))
+					dat += "\[...\]"
+				else
+					dat += "[features["flavor_text"]]"
+			else
+				dat += "[copytext_char(features["flavor_text"], 1, 37)]...<BR>"
+
 			dat += "<br><br><b>Special Names:</b><BR>"
 			var/old_group
 			for(var/custom_name_id in GLOB.preferences_custom_names)
@@ -236,6 +269,35 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			dat += "<a href='?_src_=prefs;preference=sec_dept;task=input'><b>Preferred Security Department:</b> [prefered_security_department]</a><BR></td>"
 
 			dat += "</tr></table>"
+
+			dat += "<h2>Clothing</h2>"
+
+			dat += "<b>Backpack:</b><BR><a href ='?_src_=prefs;preference=bag;task=input'>[backpack]</a>"
+
+			dat += "<br><b>Jumpsuit Style:</b><BR><a href ='?_src_=prefs;preference=suit;task=input'>[jumpsuit_style]</a>"
+
+			dat += "<br><b>Outerwear Style:</b><BR><a href ='?_src_=prefs;preference=exo;task=input'>[exowear]</a>"
+
+			dat += "<br><b>Uplink Spawn Location:</b><BR><a href ='?_src_=prefs;preference=uplink_loc;task=input'>[uplink_spawn_loc]</a><BR></td>"
+
+		if(1) //Character Appearance
+			if(path)
+				var/savefile/S = new /savefile(path)
+				if(S)
+					dat += "<center>"
+					var/name
+					var/unspaced_slots = 0
+					for(var/i=1, i<=max_save_slots, i++)
+						unspaced_slots++
+						if(unspaced_slots > 4)
+							dat += "<br>"
+							unspaced_slots = 0
+						S.cd = "/character[i]"
+						S["real_name"] >> name
+						if(!name)
+							name = "Character[i]"
+						dat += "<a style='white-space:nowrap;' href='?_src_=prefs;preference=changeslot;num=[i];' [i == default_slot ? "class='linkOn'" : ""]>[name]</a> "
+					dat += "</center>"
 
 			dat += "<h2>Body</h2>"
 			dat += "<a href='?_src_=prefs;preference=all;task=random'>Random Body</A> "
@@ -259,20 +321,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 
 			dat += "<br><b>Socks:</b><BR><a href ='?_src_=prefs;preference=socks;task=input'>[socks]</a>"
-			dat += "<a href='?_src_=prefs;preference=toggle_random;random_type=[RANDOM_SOCKS]'>[(randomise[RANDOM_SOCKS]) ? "Lock" : "Unlock"]</A>"
+			dat += "<a href='?_src_=prefs;preference=toggle_random;random_type=[RANDOM_SOCKS]'>[(randomise[RANDOM_SOCKS]) ? "Lock" : "Unlock"]</A><BR></td>"
 
-
-			dat += "<br><b>Backpack:</b><BR><a href ='?_src_=prefs;preference=bag;task=input'>[backpack]</a>"
-			dat += "<a href='?_src_=prefs;preference=toggle_random;random_type=[RANDOM_BACKPACK]'>[(randomise[RANDOM_BACKPACK]) ? "Lock" : "Unlock"]</A>"
-
-
-			dat += "<br><b>Jumpsuit Style:</b><BR><a href ='?_src_=prefs;preference=suit;task=input'>[jumpsuit_style]</a>"
-			dat += "<a href='?_src_=prefs;preference=toggle_random;random_type=[RANDOM_JUMPSUIT_STYLE]'>[(randomise[RANDOM_JUMPSUIT_STYLE]) ? "Lock" : "Unlock"]</A>"
-
-			dat += "<br><b>Outerwear Style:</b><BR><a href ='?_src_=prefs;preference=exo;task=input'>[exowear]</a>"
-			dat += "<a href='?_src_=prefs;preference=toggle_random;random_type=[RANDOM_EXOWEAR_STYLE]'>[(randomise[RANDOM_EXOWEAR_STYLE]) ? "Lock" : "Unlock"]</A>"
-
-			dat += "<br><b>Uplink Spawn Location:</b><BR><a href ='?_src_=prefs;preference=uplink_loc;task=input'>[uplink_spawn_loc]</a><BR></td>"
 
 			var/use_skintones = pref_species.use_skintones
 			if(use_skintones)
@@ -571,8 +621,74 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				mutant_category = 0
 			dat += "</tr></table>"
 
+		if(2) //Loadout
+			var/list/type_blacklist = list()
+			if(equipped_gear && equipped_gear.len)
+				for(var/i = 1, i <= equipped_gear.len, i++)
+					var/datum/gear/G = GLOB.gear_datums[equipped_gear[i]]
+					if(G)
+						if(G.subtype_path in type_blacklist)
+							continue
+						type_blacklist += G.subtype_path
+					else
+						equipped_gear.Cut(i,i+1)
 
-		if (1) // Game Preferences
+			var/fcolor =  "#3366CC"
+			var/metabalance = user.client.get_metabalance()
+			dat += "<table align='center' width='100%'>"
+			dat += "<tr><td colspan=4><center><b>Current balance: <font color='[fcolor]'>[metabalance]</font> [CONFIG_GET(string/metacurrency_name)]s.</b> \[<a href='?_src_=prefs;preference=gear;clear_loadout=1'>Clear Loadout</a>\] | \[<a href='?_src_=prefs;preference=gear;toggle_loadout=1'>Toggle Loadout</a>\]</center></td></tr>"
+			dat += "<tr><td colspan=4><center><b>"
+
+			var/firstcat = 1
+			for(var/category in GLOB.loadout_categories)
+				if(firstcat)
+					firstcat = 0
+				else
+					dat += " |"
+				if(category == gear_tab)
+					dat += " <span class='linkOff'>[category]</span> "
+				else
+					dat += " <a href='?_src_=prefs;preference=gear;select_category=[category]'>[category]</a> "
+			dat += "</b></center></td></tr>"
+
+			var/datum/loadout_category/LC = GLOB.loadout_categories[gear_tab]
+			dat += "<tr><td colspan=4><hr></td></tr>"
+			dat += "<tr><td colspan=4><b><center>[LC.category]</center></b></td></tr>"
+			dat += "<tr><td colspan=4><hr></td></tr>"
+
+			dat += "<tr><td colspan=4><hr></td></tr>"
+			dat += "<tr><td><b>Name</b></td>"
+			dat += "<td><b>Cost</b></td>"
+			dat += "<td><b>Restricted Jobs</b></td>"
+			dat += "<td><b>Description</b></td></tr>"
+			dat += "<tr><td colspan=4><hr></td></tr>"
+			for(var/gear_name in LC.gear)
+				var/datum/gear/G = LC.gear[gear_name]
+				var/ticked = (G.display_name in equipped_gear)
+
+				if(G.hidden)
+					continue
+
+				dat += "<tr style='vertical-align:top;'><td width=20%>[G.display_name]\n"
+				if(G.display_name in purchased_gear)
+					if(G.sort_category == "OOC")
+						dat += "<i>Purchased.</i></td>"
+					else
+						dat += "<a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>Equip</a></td>"
+				else
+					dat += "<a style='white-space:normal;' href='?_src_=prefs;preference=gear;purchase_gear=[G.display_name]'>Purchase</a></td>"
+				dat += "<td width = 5% style='vertical-align:top'>[G.cost]</td><td>"
+				if(G.allowed_roles)
+					dat += "<font size=2>"
+					var/list/allowedroles = list()
+					for(var/role in G.allowed_roles)
+						allowedroles += role
+					dat += english_list(allowedroles, null, ", ")	
+					dat += "</font>"
+				dat += "</td><td><font size=2><i>[G.description]</i></font></td></tr>"
+			dat += "</table>"
+
+		if (3) // Game Preferences
 			dat += "<table><tr><td width='340px' height='300px' valign='top'>"
 			dat += "<h2>General Settings</h2>"
 			dat += "<b>UI Style:</b> <a href='?_src_=prefs;task=input;preference=ui'>[UI_style]</a><br>"
@@ -688,7 +804,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			dat += "<br>"
 			dat += "<b>Midround Antagonist:</b> <a href='?_src_=prefs;preference=allow_midround_antag'>[(toggles & MIDROUND_ANTAG) ? "Enabled" : "Disabled"]</a><br>"
 			dat += "</td></tr></table>"
-		if(2) //OOC Preferences
+		if(4) //OOC Preferences
 			dat += "<table><tr><td width='340px' height='300px' valign='top'>"
 			dat += "<h2>OOC Settings</h2>"
 			dat += "<b>Window Flashing:</b> <a href='?_src_=prefs;preference=winflash'>[(windowflashing) ? "Enabled":"Disabled"]</a><br>"
@@ -704,7 +820,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if(unlock_content)
 					dat += "<b>BYOND Membership Publicity:</b> <a href='?_src_=prefs;preference=publicity'>[(toggles & MEMBER_PUBLIC) ? "Public" : "Hidden"]</a><br>"
 
-				if(unlock_content || check_rights_for(user.client, R_ADMIN))
+				if(unlock_content || check_rights_for(user.client, R_ADMIN) || custom_ooc)
 					dat += "<b>OOC Color:</b> <span style='border: 1px solid #161616; background-color: [ooccolor ? ooccolor : GLOB.normal_ooc_colour];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=ooccolor;task=input'>Change</a><br>"
 
 			dat += "</td>"
@@ -757,7 +873,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 				dat += "</td>"
 			dat += "</tr></table>"
-		if(3) // Custom keybindings
+		if(5) // Custom keybindings
 			// Create an inverted list of keybindings -> key
 			var/list/user_binds = list()
 			for (var/key in key_bindings)
@@ -808,7 +924,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	dat += "</center>"
 
 	winshow(user, "preferences_window", TRUE)
-	var/datum/browser/popup = new(user, "preferences_browser", "<div align='center'>Character Setup</div>", 640, 770)
+	var/datum/browser/popup = new(user, "preferences_browser", "<div align='center'>Character Setup</div>", 640, 825)
 	popup.set_content(dat.Join())
 	popup.open(FALSE)
 	onclose(user, "preferences_window", src)
@@ -1211,6 +1327,47 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				SetQuirks(user)
 		return TRUE
 
+	if(href_list["preference"] == "gear")
+		if(href_list["purchase_gear"])
+			var/datum/gear/TG = GLOB.gear_datums[href_list["purchase_gear"]]
+			if(TG.cost < user.client.get_metabalance())
+				purchased_gear += TG.display_name
+				TG.purchase(user.client)
+				user.client.inc_metabalance((TG.cost * -1), TRUE, "Purchased [TG.display_name].")
+				save_preferences()
+			else
+				to_chat(user, "<span class='warning'>You don't have enough [CONFIG_GET(string/metacurrency_name)]s to purchase \the [TG.display_name]!</span>")
+		if(href_list["toggle_gear"])
+			var/datum/gear/TG = GLOB.gear_datums[href_list["toggle_gear"]]
+			if(TG.display_name in equipped_gear)
+				equipped_gear -= TG.display_name
+			else
+				var/list/type_blacklist = list()
+				for(var/gear_name in equipped_gear)
+					var/datum/gear/G = GLOB.gear_datums[gear_name]
+					if(istype(G))
+						if(G.subtype_path in type_blacklist)
+							continue
+						type_blacklist += G.subtype_path
+				if((TG.display_name in purchased_gear))
+					if(!(TG.subtype_path in type_blacklist))
+						equipped_gear += TG.display_name
+					else
+						to_chat(user, "<span class='warning'>Can't equip [TG.display_name]. It conflicts with an already-equipped item.</span>")
+				else
+					log_href("[user] attempted a HREF exploit!")
+			save_preferences()
+
+		else if(href_list["select_category"])
+			gear_tab = href_list["select_category"]
+		else if(href_list["clear_loadout"])
+			equipped_gear.Cut()
+		else if(href_list["toggle_loadout"])
+			show_loadout = !show_loadout
+
+		ShowChoices(user)
+		return
+
 	switch(href_list["task"])
 		if("random")
 			switch(href_list["preference"])
@@ -1317,6 +1474,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					var/new_age = input(user, "Choose your character's age:\n([AGE_MIN]-[AGE_MAX])", "Character Preference") as num|null
 					if(new_age)
 						age = max(min( round(text2num(new_age)), AGE_MAX),AGE_MIN)
+
+				if("flavor_text")
+					var/msg = stripped_multiline_input(usr, "Set the flavor text in your 'examine' verb. This can also be used for OOC notes and preferences!", "Flavor Text", features["flavor_text"], 4096, TRUE)
+					if(!isnull(msg))
+						features["flavor_text"] = html_decode(msg)
 
 				if("hair")
 					var/new_hair = input(user, "Choose your character's hair colour:", "Character Preference","#"+hair_color) as color|null
@@ -1633,6 +1795,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 		else
 			switch(href_list["preference"])
+				if("showgear")
+					show_gear = !show_gear
 				if("publicity")
 					if(unlock_content)
 						toggles ^= MEMBER_PUBLIC
@@ -1856,7 +2020,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	ShowChoices(user)
 	return 1
 
-/datum/preferences/proc/copy_to(mob/living/carbon/human/character, icon_updates = 1, roundstart_checks = TRUE, character_setup = FALSE, antagonist = FALSE)
+/datum/preferences/proc/copy_to(mob/living/carbon/human/character, icon_updates = 1, roundstart_checks = TRUE, character_setup = FALSE, antagonist = FALSE, loadout = FALSE)
 
 	if(randomise[RANDOM_SPECIES] && !character_setup)
 		random_species()
@@ -1906,6 +2070,15 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	character.jumpsuit_style = jumpsuit_style
 
 	character.exowear = exowear
+
+	character.flavor_text = features["flavor_text"] //Let's update their flavor_text at least initially
+
+	if(loadout) //I have been told not to do this because it's too taxing on performance, but hey, I did it anyways!
+		for(var/gear in usr.client.prefs.equipped_gear)
+			var/datum/gear/G = GLOB.gear_datums[gear]
+			if(G && G.slot)
+				if(!character.equip_to_slot_or_del(G.spawn_item(character), G.slot))
+					continue
 
 	var/datum/species/chosen_species
 	chosen_species = pref_species.type
