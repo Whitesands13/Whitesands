@@ -334,7 +334,12 @@
 		C.access = J.get_access()
 		shuffle_inplace(C.access) // Shuffle access list to make NTNet passkeys less predictable
 		C.registered_name = H.real_name
-		C.assignment = J.title
+		//Wasp begin - Alt job titles
+		if(H.client && H.client.prefs && H.client.prefs.alt_titles_preferences[J.title])
+			C.assignment = H.client.prefs.alt_titles_preferences[J.title]
+		else
+			C.assignment = J.title
+		//Wasp end
 		C.update_label()
 		for(var/A in SSeconomy.bank_accounts)
 			var/datum/bank_account/B = A
@@ -347,7 +352,12 @@
 	var/obj/item/pda/PDA = H.get_item_by_slot(pda_slot)
 	if(istype(PDA))
 		PDA.owner = H.real_name
-		PDA.ownjob = J.title
+		//Wasp begin - Alt job titles
+		if(H.client && H.client.prefs && H.client.prefs.alt_titles_preferences[J.title])
+			PDA.ownjob = H.client.prefs.alt_titles_preferences[J.title]
+		else
+			PDA.ownjob = J.title
+		//Wasp end
 		PDA.update_label()
 
 /datum/outfit/job/get_chameleon_disguise_info()

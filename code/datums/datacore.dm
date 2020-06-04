@@ -216,6 +216,11 @@
 		else
 			assignment = "Unassigned"
 
+		//Wasp begin - Alt job titles
+		if(C && C.prefs && C.prefs.alt_titles_preferences[assignment])
+			assignment = C.prefs.alt_titles_preferences[assignment]
+		//Wasp end
+
 		var/static/record_id_num = 1001
 		var/id = num2hex(record_id_num++,6)
 		if(!C)
