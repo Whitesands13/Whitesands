@@ -22,7 +22,7 @@ GLOBAL_LIST_INIT(spider_last, world.file2list("strings/names/spider_last.txt"))
 	default_color = "00FF00"
 	species_traits = list(LIPS, NOEYESPRITES, NO_UNDERWEAR)
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID|MOB_BUG
-	mutant_bodyparts = list("spider_legs", "spider_spinneret" "spider_mandibles")
+	mutant_bodyparts = list("spider_legs", "spider_spinneret", "spider_mandibles")
 	default_features = list("spider_legs" = "Plain", "spider_spinneret" = "Plain", "spider_mandibles" = "Plain")
 	attack_verb = "slash"
 	attack_sound = 'sound/weapons/slash.ogg'
