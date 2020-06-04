@@ -187,6 +187,7 @@
 	name = "synthetic syringe"
 	desc = "A syringe that can hold up to 15 units. This one seems to be made out of synthesized materials."
 	custom_materials = null
+	mode = SYRINGE_INJECT
 
 /obj/item/reagent_containers/syringe/epinephrine
 	name = "syringe (epinephrine)"
