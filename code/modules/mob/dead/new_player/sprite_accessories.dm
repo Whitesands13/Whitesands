@@ -2235,4 +2235,20 @@
 /datum/sprite_accessory/spider_spinneret/black_widow
 	name = "Black Widow"
 	icon_state = "blackwidow"
+
+/datum/sprite_accessory/spider_mandibles
+	icon = 'waspstation/icons/mob/spider_mandibles.dmi'
+	color_src = MUTCOLORS
+
+/datum/sprite_accessory/spider_mandibles/plain
+	name = "Plain"
+	icon_state = "plain"
+
+/datum/sprite_accessory/spider_mandibles/fuzzy
+	name = "Fuzzy"
+	icon_state = "fuzzy"
+
+/datum/sprite_accessory/spider_mandibles/spiky
+	name = "Spiky"
+	icon_state = "spiky"
 //END WaspStation
