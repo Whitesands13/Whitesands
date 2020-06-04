@@ -22,6 +22,9 @@
 	new /obj/item/clothing/shoes/sneakers/brown(src)
 	new /obj/item/clothing/under/rank/command/captain(src)
 	new /obj/item/clothing/under/rank/command/captain/skirt(src)
+	new /obj/item/clothing/under/plasmaman/command(src) //WS edit plasmaman customization begin
+	new /obj/item/clothing/under/plasmaman/command/skirt(src)
+	new /obj/item/clothing/head/helmet/space/plasmaman/command(src) //WS edit plasmaman customization end
 	new /obj/item/clothing/suit/armor/vest/capcarapace(src)
 	new /obj/item/clothing/head/caphat(src)
 	new /obj/item/clothing/under/rank/command/captain/parade(src)
@@ -54,6 +57,9 @@
 	new /obj/item/clothing/head/beret/hop(src) //Waspstation edit - More Berets
 	new /obj/item/clothing/under/rank/command/head_of_personnel(src) //WaspStation Edit - Better Command Uniforms
 	new /obj/item/clothing/under/rank/command/head_of_personnel/skirt(src) //WaspStation Edit - Better Command Uniforms
+	new /obj/item/clothing/under/plasmaman/hop(src) //WS edit begin
+	new /obj/item/clothing/under/plasmaman/hop/skirt(src)
+	new /obj/item/clothing/head/helmet/space/plasmaman/hop(src) //WS edit end
 	new /obj/item/clothing/head/hopcap(src)
 	new /obj/item/cartridge/head_of_personnel(src)
 	new /obj/item/radio/headset/heads/head_of_personnel(src)
@@ -93,6 +99,9 @@
 	new /obj/item/clothing/under/rank/security/head_of_security/skirt(src)
 	new /obj/item/clothing/under/rank/security/head_of_security/alt(src)
 	new /obj/item/clothing/under/rank/security/head_of_security/alt/skirt(src)
+	new /obj/item/clothing/under/plasmaman/security/hos(src) //WS edit begin
+	new /obj/item/clothing/under/plasmaman/security/hos/skirt(src)
+	new /obj/item/clothing/head/helmet/space/plasmaman/security/hos(src) //WS edit end
 	new /obj/item/clothing/head/HoS(src)
 	new /obj/item/clothing/glasses/hud/security/sunglasses/eyepatch(src)
 	new /obj/item/clothing/glasses/hud/security/sunglasses/gars/supergars(src)
@@ -107,6 +116,7 @@
 	new /obj/item/shield/riot/tele(src)
 	new /obj/item/storage/belt/security/full(src)
 	new /obj/item/gun/energy/e_gun/hos(src)
+	new /obj/item/gun/ballistic/automatic/pistol/commander(src) // Waspstation edit - free lethals
 	new /obj/item/pinpointer/nuke(src)
 	new /obj/item/circuitboard/machine/techfab/department/security(src)
 	new /obj/item/storage/photo_album/HoS(src)
@@ -138,6 +148,7 @@
 	new /obj/item/clothing/gloves/krav_maga/sec(src)
 	new /obj/item/door_remote/head_of_security(src)
 	new /obj/item/gun/ballistic/shotgun/automatic/combat/compact(src)
+	new /obj/item/gun/ballistic/automatic/pistol/commander(src) // Waspstation edit - free lethals
 
 /obj/structure/closet/secure_closet/security
 	name = "security officer's locker"
@@ -163,6 +174,7 @@
 /obj/structure/closet/secure_closet/security/sec/PopulateContents()
 	..()
 	new /obj/item/storage/belt/security/full(src)
+	new /obj/item/gun/ballistic/automatic/pistol/commander/no_mag(src) // Waspstation edit - free lethals
 
 /obj/structure/closet/secure_closet/security/cargo
 
@@ -335,7 +347,7 @@
 	new /obj/item/clothing/suit/armor/bulletproof(src)
 
 /obj/structure/closet/secure_closet/lethalshots
-	name = "shotgun lethal rounds"
+	name = "lethal ammunition"
 	req_access = list(ACCESS_ARMORY)
 	icon_state = "tac"
 
@@ -343,6 +355,10 @@
 	..()
 	for(var/i in 1 to 3)
 		new /obj/item/storage/box/lethalshot(src)
+		new /obj/item/ammo_box/magazine/co9mm(src) // Waspstation edit - begin - better safe than sorry
+		new /obj/item/ammo_box/magazine/co9mm(src)
+		new /obj/item/ammo_box/magazine/co9mm(src)
+		new /obj/item/ammo_box/magazine/co9mm(src) // Waspstation edit - end
 
 /obj/structure/closet/secure_closet/labor_camp_security
 	name = "labor camp security locker"
