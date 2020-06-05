@@ -687,6 +687,7 @@ GLOBAL_LIST_INIT(cable_coil_recipes, list(new/datum/stack_recipe("cable restrain
 			NC.d2 = fdirn
 			NC.add_fingerprint(user)
 			NC.update_icon()
+			NC.update_stored(1, cable_color) 
 
 			//create a new powernet with the cable, if needed it will be merged later
 			var/datum/powernet/newPN = new(loc.z)
