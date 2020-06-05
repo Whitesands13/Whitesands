@@ -160,6 +160,18 @@
 		if("Clown")
 			O = new /datum/outfit/plasmaman/clown
 
+	var/holder
+	switch(H.jumpsuit_style)
+		if(PREF_SKIRT)
+			holder = "[O.uniform]/skirt"
+		if(PREF_GREYSUIT)
+			holder = /obj/item/clothing/under/plasmaman
+		else
+			holder = "[O.uniform]"
+
+	if(text2path(holder))
+		O.uniform = text2path(holder)
+
 	H.equipOutfit(O, visualsOnly)
 	H.internal = H.get_item_for_held_index(2)
 	H.update_internals_hud_icon(1)
