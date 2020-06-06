@@ -6,6 +6,28 @@ GLOBAL_LIST_INIT(spider_last, world.file2list("strings/names/spider_last.txt"))
 	desc = "These eyes seem to have increased sensitivity to bright light, offset by basic night vision."
 	flash_protect = FLASH_PROTECTION_SENSITIVE
 
+/obj/item/organ/tongue/spider
+	name = "inner mandible"
+	desc = "A set of soft, spoon-esque mandibles closer to the mouth opening, that allow for basic speech, and the ability to speak Rachnidian."
+	say_mod = "chitters"
+	var/static/list/languages_possible_arachnid = typecacheof(list(
+		/datum/language/common,
+		/datum/language/draconic,
+		/datum/language/codespeak,
+		/datum/language/monkey,
+		/datum/language/narsie,
+		/datum/language/beachbum,
+		/datum/language/aphasia,
+		/datum/language/piratespeak,
+		/datum/language/moffic,
+		/datum/language/spider
+	))
+
+/obj/item/organ/tongue/spider/Initialize(mapload)
+	. = ..()
+	languages_possible = languages_possible_arachnid
+
+
 /obj/item/reagent_containers/food/snacks/meat/slab/human/mutant/spider
 	icon_state = "mothmeat"
 	desc = "The stringy meat jokes have been done to death, just like this Arachnid."

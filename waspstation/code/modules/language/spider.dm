@@ -1,7 +1,7 @@
 /datum/language/spider
-	name = "spider"
-	desc = "A language that exploits the multiple limbs of spiders to do subtle dance like movements to communicate without relying on sound.\
-	The movements are quick enough to make audible whiffs and thumps however."
+	name = "Rachnidian"
+	desc = "A language that exploits the multiple limbs of spiders to do subtle dance like movements to communicate.\
+	A proper speaker's movements are quick and sharp enough to make audible whiffs and thumps however, which are intelligible over the radio."
 	speech_verb = "chitter"
 	ask_verb = "chitter"
 	exclaim_verb = "chitter"
