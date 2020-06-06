@@ -331,6 +331,14 @@ GLOBAL_LIST_INIT(uplink_items, subtypesof(/datum/uplink_item))
 	surplus = 30
 	include_modes = list(/datum/game_mode/nuclear)
 
+/datum/uplink_item/dangerous/grenadelauncher
+	name = "Universal Grenade Launcher"
+	desc = "A reusable grenade launcher. Has a capacity of 3 ammo but isn't preloaded. Works with grenades and several other types of explosives."
+	item = /obj/item/gun/grenadelauncher
+	cost = 6
+	surplus = 30
+	include_modes = list(/datum/game_mode/nuclear)
+
 /datum/uplink_item/dangerous/pie_cannon
 	name = "Banana Cream Pie Cannon"
 	desc = "A special pie cannon for a special clown, this gadget can hold up to 20 pies and automatically fabricates one every two seconds!"
@@ -530,6 +538,25 @@ GLOBAL_LIST_INIT(uplink_items, subtypesof(/datum/uplink_item))
 	item = /obj/item/gun/ballistic/automatic/toy/pistol/riot
 	cost = 2
 	surplus = 10
+
+/datum/uplink_item/dangerous/semiautoturret
+	name = "Semi-Auto Turret"
+	desc = "An autoturret which shoots semi-automatic ballistic rounds. The turret is bulky \
+			and cannot be moved; upon ordering this item, a smaller beacon will be transported to you \
+			that will teleport the actual turret to it upon activation."
+	item = /obj/item/sbeacondrop/semiautoturret
+	cost = 8
+	include_modes = list(/datum/game_mode/nuclear)
+
+/datum/uplink_item/dangerous/heavylaserturret
+	name = "Heavy Laser Turret"
+	desc = "An autoturret which shoots heavy lasers. The turret is bulky \
+			and cannot be moved; upon ordering this item, a smaller beacon will be transported to you \
+			that will teleport the actual turret to it upon activation."
+	item = /obj/item/sbeacondrop/heavylaserturret
+	cost = 12
+	include_modes = list(/datum/game_mode/nuclear)
+
 
 // Stealthy Weapons
 /datum/uplink_item/stealthy_weapons
@@ -1764,6 +1791,12 @@ GLOBAL_LIST_INIT(uplink_items, subtypesof(/datum/uplink_item))
 	restricted_roles = list("Chaplain")
 	surplus = 5 //Very low chance to get it in a surplus crate even without being the chaplain
 
+/datum/uplink_item/role_restricted/cultconstructkit
+	name = "Cult Construct Kit"
+	desc = "Recovered from an abandoned Nar'sie cult lair two construct shells and a stash of empty soulstones was found. These were purified to prevent occult contamination and have been put in a belt so they may be used as an accessible source of disposable minions. The construct shells have been packaged into two beacons for rapid and portable deployment."
+	item = /obj/item/storage/box/syndie_kit/cultconstructkit
+	cost = 20
+	restricted_roles = list("Chaplain")
 /datum/uplink_item/role_restricted/explosive_hot_potato
 	name = "Exploding Hot Potato"
 	desc = "A potato rigged with explosives. On activation, a special mechanism is activated that prevents it from being dropped. \
