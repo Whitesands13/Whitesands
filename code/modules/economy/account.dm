@@ -9,15 +9,15 @@
 	var/account_id
 	var/being_dumped = FALSE //pink levels are rising
 	var/withdrawDelay = 0
-	var/account_holder_gender = NEUTER
+	var/account_holder_gender = NEUTER //WS edit - pay gap
 
-/datum/bank_account/New(newname, job, gender = MALE)
+/datum/bank_account/New(newname, job, gender = MALE) //WS edit - pay gap
 	if(add_to_accounts)
 		SSeconomy.bank_accounts += src
 	account_holder = newname
 	account_job = job
 	account_id = rand(111111,999999)
-	account_holder_gender = gender
+	account_holder_gender = gender //WS edit - pay gap
 
 /datum/bank_account/Destroy()
 	if(add_to_accounts)
@@ -51,8 +51,8 @@
 
 /datum/bank_account/proc/payday(amt_of_paychecks, free = FALSE)
 	var/money_to_transfer = account_job.paycheck * amt_of_paychecks
-	if(account_holder_gender == FEMALE)
-		money_to_transfer *= 0.70
+	if(account_holder_gender == FEMALE) //WS edit - pay gap
+		money_to_transfer *= 0.70 //WS edit - pay gap
 	if(free)
 		adjust_money(money_to_transfer)
 	else
