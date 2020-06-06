@@ -54,6 +54,7 @@ GLOBAL_LIST_INIT(spider_last, world.file2list("strings/names/spider_last.txt"))
 	disliked_food = FRUIT
 	toxic_food = VEGETABLES | DAIRY | CLOTH
 	mutanteyes = /obj/item/organ/eyes/night_vision/spider
+	mutanttongue = /obj/item/organ/tongue/spider
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 	species_language_holder = /datum/language_holder/spider
 	loreblurb = "A competitive species, evolved to enjoy working, Arachnids make up a small yet rapidly growing space in Nanotrasens workforce.\
