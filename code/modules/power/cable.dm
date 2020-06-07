@@ -489,7 +489,6 @@ GLOBAL_LIST_INIT(cable_coil_recipes, list(new/datum/stack_recipe("cable restrain
 	full_w_class = WEIGHT_CLASS_SMALL
 	grind_results = list(/datum/reagent/copper = 2) //2 copper per cable in the coil
 	usesound = 'sound/items/deconstruct.ogg'
-	var/obj/structure/cable/target_type = /obj/structure/cable
 
 /obj/item/stack/cable_coil/cyborg
 	is_cyborg = 1
@@ -616,7 +615,7 @@ GLOBAL_LIST_INIT(cable_coil_recipes, list(new/datum/stack_recipe("cable restrain
 	C.update_icon()
 
 	//create a new powernet with the cable, if needed it will be merged later
-	var/datum/powernet/PN = new()
+	var/datum/powernet/PN = new(loc.z)
 	PN.add_cable(C)
 
 	C.mergeConnectedNetworks(C.d2) //merge the powernet with adjacents powernets
