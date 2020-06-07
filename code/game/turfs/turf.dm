@@ -208,13 +208,15 @@
 		for(var/obj/structure/cable/LC in src)
 			if(!LC.d1 || !LC.d2)
 				LC.attackby(C,user)
-				LC.attackby(C, user)
 				return
 		coil.place_turf(src, user)
 		return TRUE
+
 	else if(istype(C, /obj/item/rcl))
 		handleRCL(C, user)
+
 	return FALSE
+
 /turf/CanAllowThrough(atom/movable/mover, turf/target)
 	. = ..()
 	if(!target)
