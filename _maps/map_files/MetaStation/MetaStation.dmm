@@ -39847,7 +39847,9 @@
 /turf/open/floor/circuit/green,
 /area/science/robotics/mechbay)
 "cxH" = (
-/obj/machinery/airalarm/directional/west,
+/obj/machinery/airalarm/directional/west{
+	pixel_x = -24
+	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
@@ -63916,21 +63918,6 @@
 "lAu" = (
 /turf/open/space/basic,
 /area/space/nearstation)
-"lBc" = (
-/obj/machinery/light{
-	dir = 8
-	},
-/obj/machinery/power/apc/highcap/five_k{
-	areastring = "/area/security/warden";
-	dir = 8;
-	name = "Brig Control APC";
-	pixel_x = -24
-	},
-/obj/structure/cable{
-	icon_state = "1-4"
-	},
-/turf/open/floor/plasteel/showroomfloor,
-/area/security/warden)
 "lBN" = (
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -78376,6 +78363,24 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/starboard/fore)
+"ufT" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/machinery/power/apc/highcap/five_k{
+	areastring = "/area/security/warden";
+	dir = 8;
+	name = "Brig Control APC";
+	pixel_x = -24
+	},
+/obj/structure/cable{
+	icon_state = "1-4"
+	},
+/obj/structure/cable{
+	icon_state = "0-4"
+	},
+/turf/open/floor/plasteel/showroomfloor,
+/area/security/warden)
 "ugV" = (
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden{
 	dir = 1
@@ -112930,7 +112935,7 @@ ajy
 arj
 vRT
 lBN
-lBc
+ufT
 dCf
 akI
 akI
