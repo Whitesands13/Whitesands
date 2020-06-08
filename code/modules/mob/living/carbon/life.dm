@@ -316,7 +316,7 @@
 	var/internals = FALSE
 
 	for(check in GET_INTERNAL_SLOTS(src))
-		if(check.clothing_flags & ALLOWINTERNALS))
+		if(check.clothing_flags & ALLOWINTERNALS)
 			internals = TRUE
 	//Wasp Port End - Citadel Internals
 	if(internal)
