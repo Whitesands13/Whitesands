@@ -16,7 +16,7 @@
 	var/obj/item/storage/pill_bottle/bottle = null
 	var/mode = 1
 	var/condi = FALSE
-	var/upgraded = FALSE ///Manipulator level >3, allows hypovials
+	var/upgraded = FALSE ///Manipulator level >3, allows hypovials - Wasp edit
 	var/chosenPillStyle = 1
 	var/screen = "home"
 	var/analyzeVars[0]
@@ -46,9 +46,11 @@
 	reagents.maximum_volume = 0
 	for(var/obj/item/reagent_containers/glass/beaker/B in component_parts)
 		reagents.maximum_volume += B.reagents.maximum_volume
+	// Wasp begin - better chem masters
 	for(var/obj/item/stock_parts/manipulator/M in component_parts)
 		if (M.rating > 3)
 			upgraded = TRUE
+	// Wasp end
 
 /obj/machinery/chem_master/ex_act(severity, target)
 	if(severity < 3)
@@ -166,7 +168,7 @@
 	data["beakerMaxVolume"] = beaker ? beaker.volume : null
 	data["mode"] = mode
 	data["condi"] = condi
-	data["upgraded"] = upgraded
+	data["upgraded"] = upgraded //Wasp edit
 	data["screen"] = screen
 	data["analyzeVars"] = analyzeVars
 	data["chosenPillStyle"] = chosenPillStyle
@@ -339,6 +341,7 @@
 				adjust_item_drop_location(P)
 				reagents.trans_to(P, vol_each, transfered_by = usr)
 			return TRUE
+		//Wasp Begin - Better chem master
 		if(item_type == "syringe")
 			var/obj/item/reagent_containers/syringe/nomats/P
 			for(var/i = 0; i < amount; i++)
@@ -355,6 +358,7 @@
 				adjust_item_drop_location(P)
 				reagents.trans_to(P, vol_each, transfered_by = usr)
 			return TRUE
+		//Wasp end
 		if(item_type == "condimentPack")
 			var/obj/item/reagent_containers/food/condiment/pack/P
 			for(var/i = 0; i < amount; i++)
