@@ -7,6 +7,7 @@
 //Colored jumpsuits
 
 /datum/gear/uniform/color
+	subtype_path = /datum/gear/uniform/color
 	cost = 1000
 
 /datum/gear/uniform/color/red
@@ -20,6 +21,22 @@
 /datum/gear/uniform/color/blue
 	display_name = "jumpsuit, blue"
 	path = /obj/item/clothing/under/color/blue
+
+/datum/gear/uniform/color/yellow
+	display_name = "jumpsuit, yellow"
+	path = /obj/item/clothing/under/color/yellow
+
+/datum/gear/uniform/color/pink
+	display_name = "jumpsuit, pink"
+	path = /obj/item/clothing/under/color/pink
+
+/datum/gear/uniform/color/black
+	display_name = "jumpsuit, black"
+	path = /obj/item/clothing/under/color/black
+
+/datum/gear/uniform/color/white
+	display_name = "jumpsuit, white"
+	path = /obj/item/clothing/under/color/white
 
 /datum/gear/uniform/color/random
 	display_name = "jumpsuit, random"
@@ -46,11 +63,20 @@
 //JUMPSUIT "SUITS"
 
 /datum/gear/uniform/suit
+	subtype_path = /datum/gear/uniform/suit
 	cost = 1000
 
 /datum/gear/uniform/suit/amish
 	display_name = "suit, amish"
 	path = /obj/item/clothing/under/suit/sl
+
+/datum/gear/uniform/suit/white
+	display_name = "suit, white"
+	path = /obj/item/clothing/under/suit/white
+
+/datum/gear/uniform/suit/tan
+	display_name = "suit, tan"
+	path = /obj/item/clothing/under/suit/tan
 
 /datum/gear/uniform/suit/black
 	display_name = "suit, executive"
@@ -59,6 +85,14 @@
 /datum/gear/uniform/suit/black/skirt
 	display_name = "suitskirt, executive"
 	path = /obj/item/clothing/under/suit/black_really/skirt
+
+/datum/gear/uniform/suit/navy
+	display_name = "suit, navy"
+	path = /obj/item/clothing/under/suit/navy
+
+/datum/gear/uniform/suit/burgundy
+	display_name = "suit, burgundy"
+	path = /obj/item/clothing/under/suit/burgundy
 
 /datum/gear/uniform/suit/galaxy
 	display_name = "suit, galaxy"
