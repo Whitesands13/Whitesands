@@ -162,7 +162,7 @@ GLOBAL_LIST_INIT(backpacklist, list(DBACKPACK, DSATCHEL, DCOURIERBAG, DDUFFELBAG
 
 	//Uniform
 #define PREF_SUIT "Standard Jumpsuit"
-#define PREF_SKIRT "Standard Jumpskirt"
+#define PREF_SKIRT "Standard Jumpkilt"
 #define PREF_ALTSUIT "Alternate Jumpsuit"
 #define PREF_GREYSUIT "Grey Jumpsuit"
 #define PREF_LOADOUT "Loadout uniform"

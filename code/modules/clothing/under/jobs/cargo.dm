@@ -9,8 +9,8 @@
 	item_state = "lb_suit"
 
 /obj/item/clothing/under/rank/cargo/qm/skirt
-	name = "quartermaster's jumpskirt"
-	desc = "It's a jumpskirt worn by the quartermaster. It's specially designed to prevent back injuries caused by pushing paper."
+	name = "quartermaster's jumpkilt"
+	desc = "It's a jumpkilt worn by the quartermaster. It's specially designed to prevent back injuries caused by pushing paper."
 	icon_state = "qm_skirt"
 	item_state = "lb_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -27,7 +27,7 @@
 	alt_covers_chest = TRUE
 
 /obj/item/clothing/under/rank/cargo/tech/skirt
-	name = "cargo technician's jumpskirt"
+	name = "cargo technician's jumpkilt"
 	desc = "Skiiiiirts! They're comfy and easy to wear"
 	icon_state = "cargo_skirt"
 	item_state = "lb_suit"

@@ -13,8 +13,8 @@
 	resistance_flags = NONE
 
 /obj/item/clothing/under/rank/engineering/chief_engineer/skirt
-	name = "chief engineer's jumpskirt"
-	desc = "It's a high visibility jumpskirt given to those engineers insane enough to achieve the rank of \"Chief Engineer\". It has minor radiation shielding."
+	name = "chief engineer's jumpkilt"
+	desc = "It's a high visibility jumpkilt given to those engineers insane enough to achieve the rank of \"Chief Engineer\". It has minor radiation shielding."
 	icon_state = "chief_skirt"
 	item_state = "gy_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -29,8 +29,8 @@
 	resistance_flags = NONE
 
 /obj/item/clothing/under/rank/engineering/atmospheric_technician/skirt
-	name = "atmospheric technician's jumpskirt"
-	desc = "It's a jumpskirt worn by atmospheric technicians."
+	name = "atmospheric technician's jumpkilt"
+	desc = "It's a jumpkilt worn by atmospheric technicians."
 	icon_state = "atmos_skirt"
 	item_state = "atmos_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -53,8 +53,8 @@
 	alt_covers_chest = TRUE
 
 /obj/item/clothing/under/rank/engineering/engineer/skirt
-	name = "engineer's jumpskirt"
-	desc = "It's an orange high visibility jumpskirt worn by engineers."
+	name = "engineer's jumpkilt"
+	desc = "It's an orange high visibility jumpkilt worn by engineers."
 	icon_state = "engine_skirt"
 	item_state = "engi_suit"
 	body_parts_covered = CHEST|GROIN|ARMS

@@ -64,7 +64,7 @@
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 10, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 
 /obj/item/clothing/under/rank/rnd/scientist/skirt
-	name = "scientist's jumpskirt"
+	name = "scientist's jumpkilt"
 	desc = "It's made of a special fiber that provides minor protection against explosives. It has markings that denote the wearer as a scientist."
 	icon_state = "toxinswhite_skirt"
 	item_state = "w_suit"
@@ -80,7 +80,7 @@
 	resistance_flags = NONE
 
 /obj/item/clothing/under/rank/rnd/roboticist/skirt
-	name = "roboticist's jumpskirt"
+	name = "roboticist's jumpkilt"
 	desc = "It's a slimming black with reinforced seams; great for industrial work."
 	icon_state = "robotics_skirt"
 	item_state = "robotics"

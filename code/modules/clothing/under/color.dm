@@ -42,7 +42,7 @@
 	resistance_flags = NONE
 
 /obj/item/clothing/under/color/jumpskirt/black
-	name = "black jumpskirt"
+	name = "black jumpkilt"
 	icon_state = "black_skirt"
 	item_state = "bl_suit"
 
@@ -60,8 +60,8 @@
 	item_state = "gy_suit"
 
 /obj/item/clothing/under/color/jumpskirt/grey
-	name = "grey jumpskirt"
-	desc = "A tasteful grey jumpskirt that reminds you of the good old days."
+	name = "grey jumpkilt"
+	desc = "A tasteful grey jumpkilt that reminds you of the good old days."
 	icon_state = "grey_skirt"
 	item_state = "gy_suit"
 
@@ -79,7 +79,7 @@
 	item_state = "b_suit"
 
 /obj/item/clothing/under/color/jumpskirt/blue
-	name = "blue jumpskirt"
+	name = "blue jumpkilt"
 	icon_state = "blue_skirt"
 	item_state = "b_suit"
 
@@ -89,7 +89,7 @@
 	item_state = "g_suit"
 
 /obj/item/clothing/under/color/jumpskirt/green
-	name = "green jumpskirt"
+	name = "green jumpkilt"
 	icon_state = "green_skirt"
 	item_state = "g_suit"
 
@@ -100,7 +100,7 @@
 	item_state = "o_suit"
 
 /obj/item/clothing/under/color/jumpskirt/orange
-	name = "orange jumpskirt"
+	name = "orange jumpkilt"
 	icon_state = "orange_skirt"
 	item_state = "o_suit"
 
@@ -111,7 +111,7 @@
 	item_state = "p_suit"
 
 /obj/item/clothing/under/color/jumpskirt/pink
-	name = "pink jumpskirt"
+	name = "pink jumpkilt"
 	icon_state = "pink_skirt"
 	item_state = "p_suit"
 
@@ -121,7 +121,7 @@
 	item_state = "r_suit"
 
 /obj/item/clothing/under/color/jumpskirt/red
-	name = "red jumpskirt"
+	name = "red jumpkilt"
 	icon_state = "red_skirt"
 	item_state = "r_suit"
 
@@ -131,7 +131,7 @@
 	item_state = "w_suit"
 
 /obj/item/clothing/under/color/jumpskirt/white
-	name = "white jumpskirt"
+	name = "white jumpkilt"
 	icon_state = "white_skirt"
 	item_state = "w_suit"
 
@@ -141,7 +141,7 @@
 	item_state = "y_suit"
 
 /obj/item/clothing/under/color/jumpskirt/yellow
-	name = "yellow jumpskirt"
+	name = "yellow jumpkilt"
 	icon_state = "yellow_skirt"
 	item_state = "y_suit"
 
@@ -151,7 +151,7 @@
 	item_state = "b_suit"
 
 /obj/item/clothing/under/color/jumpskirt/darkblue
-	name = "darkblue jumpskirt"
+	name = "darkblue jumpkilt"
 	icon_state = "darkblue_skirt"
 	item_state = "b_suit"
 
@@ -161,7 +161,7 @@
 	item_state = "b_suit"
 
 /obj/item/clothing/under/color/jumpskirt/teal
-	name = "teal jumpskirt"
+	name = "teal jumpkilt"
 	icon_state = "teal_skirt"
 	item_state = "b_suit"
 
@@ -172,7 +172,7 @@
 	item_state = "p_suit"
 
 /obj/item/clothing/under/color/jumpskirt/lightpurple
-	name = "lightpurple jumpskirt"
+	name = "lightpurple jumpkilt"
 	icon_state = "lightpurple_skirt"
 	item_state = "p_suit"
 
@@ -182,7 +182,7 @@
 	item_state = "g_suit"
 
 /obj/item/clothing/under/color/jumpskirt/darkgreen
-	name = "darkgreen jumpskirt"
+	name = "darkgreen jumpkilt"
 	icon_state = "darkgreen_skirt"
 	item_state = "g_suit"
 
@@ -192,7 +192,7 @@
 	item_state = "lb_suit"
 
 /obj/item/clothing/under/color/jumpskirt/lightbrown
-	name = "lightbrown jumpskirt"
+	name = "lightbrown jumpkilt"
 	icon_state = "lightbrown_skirt"
 	item_state = "lb_suit"
 
@@ -202,7 +202,7 @@
 	item_state = "lb_suit"
 
 /obj/item/clothing/under/color/jumpskirt/brown
-	name = "brown jumpskirt"
+	name = "brown jumpkilt"
 	icon_state = "brown_skirt"
 	item_state = "lb_suit"
 
@@ -212,7 +212,7 @@
 	item_state = "r_suit"
 
 /obj/item/clothing/under/color/jumpskirt/maroon
-	name = "maroon jumpskirt"
+	name = "maroon jumpkilt"
 	icon_state = "maroon_skirt"
 	item_state = "r_suit"
 
@@ -224,8 +224,8 @@
 	can_adjust = FALSE
 
 /obj/item/clothing/under/color/jumpskirt/rainbow
-	name = "rainbow jumpskirt"
-	desc = "A multi-colored jumpskirt!"
+	name = "rainbow jumpkiltt"
+	desc = "A multi-colored jumpkilt!"
 	icon_state = "rainbow_skirt"
 	item_state = "rainbow"
 	can_adjust = FALSE

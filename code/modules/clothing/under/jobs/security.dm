@@ -33,8 +33,8 @@
 	item_state = "gy_suit"
 
 /obj/item/clothing/under/rank/security/officer/skirt
-	name = "security jumpskirt"
-	desc = "A \"tactical\" security jumpsuit with the legs replaced by a skirt."
+	name = "security jumpkilt"
+	desc = "A \"tactical\" security jumpsuit with the legs replaced by a kilt. You feel the urge defend freedom when wearing this."
 	icon_state = "secskirt"
 	item_state = "r_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -152,8 +152,8 @@
 	random_sensor = FALSE
 
 /obj/item/clothing/under/rank/security/head_of_security/skirt
-	name = "head of security's jumpskirt"
-	desc = "A security jumpskirt decorated for those few with the dedication to achieve the position of Head of Security."
+	name = "head of security's jumpkilt"
+	desc = "A security jumpkilt decorated for those few with the dedication to achieve the position of Head of Security."
 	icon_state = "rhos_skirt"
 	item_state = "r_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -242,7 +242,7 @@
 	random_sensor = FALSE
 
 /obj/item/clothing/under/rank/prisoner/skirt
-	name = "prison jumpskirt"
+	name = "prison jumpkilt"
 	desc = "It's standardised Nanotrasen prisoner-wear. Its suit sensors are stuck in the \"Fully On\" position."
 	icon_state = "prisoner_skirt"
 	item_state = "o_suit"

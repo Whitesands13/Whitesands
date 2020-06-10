@@ -11,8 +11,8 @@
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 10, "rad" = 0, "fire" = 0, "acid" = 0)
 
 /obj/item/clothing/under/rank/medical/chief_medical_officer/skirt
-	name = "chief medical officer's jumpskirt"
-	desc = "It's a jumpskirt worn by those with the experience to be \"Chief Medical Officer\". It provides minor biological protection."
+	name = "chief medical officer's jumpkilt"
+	desc = "It's a jumpkilt worn by those with the experience to be \"Chief Medical Officer\". It provides minor biological protection."
 	icon_state = "cmo_skirt"
 	item_state = "w_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -30,7 +30,7 @@
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 10, "rad" = 0, "fire" = 0, "acid" = 0)
 
 /obj/item/clothing/under/rank/medical/geneticist/skirt
-	name = "geneticist's jumpskirt"
+	name = "geneticist's jumpkilt"
 	desc = "It's made of a special fiber that gives special protection against biohazards. It has a genetics rank stripe on it."
 	icon_state = "geneticswhite_skirt"
 	item_state = "w_suit"
@@ -47,7 +47,7 @@
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 10, "rad" = 0, "fire" = 0, "acid" = 0)
 
 /obj/item/clothing/under/rank/medical/virologist/skirt
-	name = "virologist's jumpskirt"
+	name = "virologist's jumpkilt"
 	desc = "It's made of a special fiber that gives special protection against biohazards. It has a virologist rank stripe on it."
 	icon_state = "virologywhite_skirt"
 	item_state = "w_suit"
@@ -93,7 +93,7 @@
 	can_adjust = FALSE
 
 /obj/item/clothing/under/rank/medical/doctor/skirt
-	name = "medical doctor's jumpskirt"
+	name = "medical doctor's jumpkilt"
 	desc = "It's made of a special fiber that provides minor protection against biohazards. It has a cross on the chest denoting that the wearer is trained medical personnel."
 	icon_state = "medical_skirt"
 	item_state = "w_suit"
@@ -110,7 +110,7 @@
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 10, "rad" = 0, "fire" = 50, "acid" = 65)
 
 /obj/item/clothing/under/rank/medical/chemist/skirt
-	name = "chemist's jumpskirt"
+	name = "chemist's jumpkilt"
 	desc = "It's made of a special fiber that gives special protection against biohazards. It has a chemist rank stripe on it."
 	icon_state = "chemistrywhite_skirt"
 	item_state = "w_suit"
@@ -127,7 +127,7 @@
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 10, "rad" = 0, "fire" = 0, "acid" = 0)
 
 /obj/item/clothing/under/rank/medical/paramedic/skirt
-	name = "paramedic jumpskirt"
+	name = "paramedic jumpkilt"
 	desc = "It's made of a special fiber that provides minor protection against biohazards. It has a dark blue cross on the chest denoting that the wearer is a trained paramedic."
 	icon_state = "paramedic_skirt"
 	item_state = "w_suit"
