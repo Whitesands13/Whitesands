@@ -10,8 +10,9 @@
 	supervisors = "the head of security"
 	selection_color = "#ffeeee"
 	minimal_player_age = 7
-	exp_requirements = 300
+	exp_requirements = 90
 	exp_type = EXP_TYPE_CREW
+	exp_type_department = EXP_TYPE_SECURITY
 	wiki_page = "Space_Law" //WaspStation Edit - Wikilinks/Warning
 	special_notice = "You're the Warden, not a Security Officer. Your job is in the brig processing criminals, not patrolling the station." //WaspStation Edit - Wikilinks/Warning
 
