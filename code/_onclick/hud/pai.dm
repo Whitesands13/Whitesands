@@ -125,7 +125,6 @@
 /obj/screen/pai/pda_msg_show
 	name = "PDA - Show Message Log"
 	icon_state = "pda_receive"
-	required_software = "digital messenger"
 
 /obj/screen/pai/pda_msg_show/Click()
 	if(!..())
