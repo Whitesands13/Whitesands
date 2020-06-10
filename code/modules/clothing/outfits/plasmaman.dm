@@ -180,6 +180,7 @@
 
 	head = /obj/item/clothing/head/helmet/space/plasmaman/security/hos
 	uniform =/obj/item/clothing/under/plasmaman/security/hos
+	gloves = /obj/item/clothing/gloves/color/plasmaman/black
 
 /datum/outfit/plasmaman/rd
 	name = "Plasmaman RD"

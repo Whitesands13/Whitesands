@@ -38,7 +38,7 @@ Lieutenant
   uniform = /obj/item/clothing/under/rank/command/lieutenant
   alt_uniform = /obj/item/clothing/under/rank/command
   dcoat = /obj/item/clothing/suit/hooded/wintercoat/captain
-  gloves = /obj/item/clothing/gloves/combat
+  gloves = /obj/item/clothing/gloves/color/black
   shoes = /obj/item/clothing/shoes/jackboots
   ears = /obj/item/radio/headset/heads/lieutenant/alt
   glasses = /obj/item/clothing/glasses/hud/health/sunglasses
