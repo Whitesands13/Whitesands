@@ -153,13 +153,13 @@ SUBSYSTEM_DEF(explosions)
 		return
 	var/range = 0
 	range = round((2 * power)**GLOB.DYN_EX_SCALE)
-	explosion(epicenter, round(range * 0.25), round(range * 0.5), round(range), flash_range*range, adminlog, ignorecap, flame_range*range, silent, smoke)
+	explosion(epicenter, round(range * 0.1), round(range * 0.5), round(range), flash_range*range, adminlog, ignorecap, flame_range*range, silent, smoke)
 
 // Using default dyn_ex scale:
-// 100 explosion power is a (5, 10, 20) explosion.
-// 75 explosion power is a (4, 8, 17) explosion.
-// 50 explosion power is a (3, 7, 14) explosion.
-// 25 explosion power is a (2, 5, 10) explosion.
+// 100 explosion power is a (2, 10, 20) explosion.
+// 75 explosion power is a (2, 8, 17) explosion.
+// 50 explosion power is a (1, 7, 14) explosion.
+// 25 explosion power is a (1, 5, 10) explosion.
 // 10 explosion power is a (1, 3, 6) explosion.
 // 5 explosion power is a (0, 1, 3) explosion.
 // 1 explosion power is a (0, 0, 1) explosion.

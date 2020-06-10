@@ -416,10 +416,10 @@
 				damage_clothes(400 - bomb_armor, BRUTE, "bomb")
 
 		if (EXPLODE_HEAVY)
-			brute_loss = 60
-			burn_loss = 60
+			brute_loss = 50
+			burn_loss = 50
 			if(bomb_armor)
-				brute_loss = 30*(2 - round(bomb_armor*0.01, 0.05))
+				brute_loss = 25*(2 - round(bomb_armor*0.01, 0.05))
 				burn_loss = brute_loss				//damage gets reduced from 120 to up to 60 combined brute+burn
 			damage_clothes(200 - bomb_armor, BRUTE, "bomb")
 			if (!istype(ears, /obj/item/clothing/ears/earmuffs))
