@@ -47,7 +47,7 @@
 	suit = /obj/item/clothing/suit/armor/hos/trenchcoat
 	alt_suit = /obj/item/clothing/suit/armor/hos
 	dcoat = /obj/item/clothing/suit/hooded/wintercoat/security //Wasp Edit - Alt Uniforms
-	gloves = /obj/item/clothing/gloves/color/black
+	gloves = /obj/item/clothing/gloves/combat
 	head = /obj/item/clothing/head/beret/sec/navyhos/black //Wasp edit - Better Berets
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses
 	suit_store = /obj/item/gun/energy/e_gun
