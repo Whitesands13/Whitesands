@@ -36,6 +36,7 @@
 	shoes = /obj/item/clothing/shoes/clown_shoes
 	mask = /obj/item/clothing/mask/gas/clown_hat
 	l_pocket = /obj/item/bikehorn
+	r_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
 	backpack_contents = list(
 		/obj/item/stamp/clown = 1,
 		/obj/item/reagent_containers/spray/waterflower = 1,

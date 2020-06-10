@@ -32,6 +32,8 @@
 	alt_suit = /obj/item/clothing/suit/apron/chef
 	head = /obj/item/clothing/head/chefhat
 	mask = /obj/item/clothing/mask/fakemoustache/italian
+	r_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
+	l_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
 	backpack_contents = list(/obj/item/sharpener = 1)
 
 /datum/outfit/job/cook/pre_equip(mob/living/carbon/human/H, visualsOnly = FALSE)

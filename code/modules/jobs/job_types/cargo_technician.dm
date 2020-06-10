@@ -30,4 +30,6 @@
 	alt_suit = /obj/item/clothing/suit/hazardvest
 	dcoat = /obj/item/clothing/suit/hooded/wintercoat/cargo //Wasp Edit - Alt Uniforms
 	l_hand = /obj/item/export_scanner
+	l_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
+	r_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
 

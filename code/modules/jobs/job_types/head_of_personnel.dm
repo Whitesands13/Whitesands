@@ -52,6 +52,8 @@
 	dcoat = /obj/item/clothing/suit/hooded/wintercoat/captain //Wasp Edit - Alt Uniforms
 	shoes = /obj/item/clothing/shoes/sneakers/brown
 	head = /obj/item/clothing/head/hopcap
+	l_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
+	r_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
 	backpack_contents = list(/obj/item/storage/box/ids=1,\
 		/obj/item/melee/classic_baton/telescopic=1, /obj/item/modular_computer/tablet/preset/advanced = 1)
 

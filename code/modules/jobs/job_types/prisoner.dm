@@ -21,5 +21,7 @@
 	alt_suit = /obj/item/clothing/suit/jacket/leather
 	shoes = /obj/item/clothing/shoes/sneakers/orange
 	id = /obj/item/card/id/prisoner
+	l_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
+	r_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
 	ears = null
 	belt = null

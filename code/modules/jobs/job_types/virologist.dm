@@ -36,6 +36,8 @@
 	alt_suit = /obj/item/clothing/suit/toggle/labcoat/mad
 	dcoat = /obj/item/clothing/suit/hooded/wintercoat/medical //Wasp Edit - Alt Uniforms
 	suit_store =  /obj/item/flashlight/pen
+	r_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
+	l_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
 
 	backpack = /obj/item/storage/backpack/virology
 	satchel = /obj/item/storage/backpack/satchel/vir

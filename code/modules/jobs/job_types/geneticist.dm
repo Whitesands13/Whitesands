@@ -34,6 +34,7 @@
 	suit =  /obj/item/clothing/suit/toggle/labcoat/genetics
 	suit_store =  /obj/item/flashlight/pen
 	l_pocket = /obj/item/sequence_scanner
+	r_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
 
 	backpack = /obj/item/storage/backpack/genetics
 	satchel = /obj/item/storage/backpack/satchel/gen

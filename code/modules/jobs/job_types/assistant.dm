@@ -30,6 +30,9 @@ Assistant
 	name = "Assistant"
 	jobtype = /datum/job/assistant
 
+	r_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
+	l_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
+
 /datum/outfit/job/assistant/pre_equip(mob/living/carbon/human/H)
 	..()
 	if (CONFIG_GET(flag/grey_assistants))

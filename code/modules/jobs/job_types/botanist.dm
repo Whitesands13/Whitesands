@@ -31,6 +31,8 @@
 	alt_suit = /obj/item/clothing/suit/apron/overalls
 	gloves  =/obj/item/clothing/gloves/botanic_leather
 	suit_store = /obj/item/plant_analyzer
+	l_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
+	r_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
 
 	backpack = /obj/item/storage/backpack/botany
 	satchel = /obj/item/storage/backpack/satchel/hyd

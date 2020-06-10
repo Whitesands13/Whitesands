@@ -39,6 +39,7 @@
 	id = /obj/item/card/id/silver
 	belt = /obj/item/storage/belt/utility/chief/full
 	l_pocket = /obj/item/pda/heads/ce
+	r_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
 	ears = /obj/item/radio/headset/heads/ce
 	uniform = /obj/item/clothing/under/rank/engineering/chief_engineer
 	alt_uniform = /obj/item/clothing/under/rank/engineering/engineer/hazard //Wasp Edit - Alt Uniforms

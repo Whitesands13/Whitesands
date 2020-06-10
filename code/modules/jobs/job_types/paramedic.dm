@@ -35,6 +35,7 @@
 	belt = /obj/item/storage/belt/medical/paramedic
 	id = /obj/item/card/id
 	l_pocket = /obj/item/pda/medical
+	r_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
 	suit_store = /obj/item/flashlight/pen
 	backpack_contents = list(/obj/item/roller=1)
 	pda_slot = ITEM_SLOT_LPOCKET

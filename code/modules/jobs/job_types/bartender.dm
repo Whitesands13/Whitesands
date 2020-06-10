@@ -28,8 +28,10 @@
 	ears = /obj/item/radio/headset/headset_srv
 	uniform = /obj/item/clothing/under/rank/civilian/bartender
 	alt_uniform = /obj/item/clothing/under/rank/civilian/bartender/purple //Wasp Edit - Alt Uniforms
-	alt_suit = /obj/item/clothing/suit/apron/purple_bartender 
+	alt_suit = /obj/item/clothing/suit/apron/purple_bartender
 	suit = /obj/item/clothing/suit/armor/vest
 	backpack_contents = list(/obj/item/storage/box/beanbag=1)
 	shoes = /obj/item/clothing/shoes/laceup
+	r_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
+	l_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
 

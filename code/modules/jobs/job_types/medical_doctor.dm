@@ -33,6 +33,8 @@
 	dcoat = /obj/item/clothing/suit/hooded/wintercoat/medical //Wasp Edit - Alt Uniforms
 	l_hand = /obj/item/storage/firstaid/medical
 	suit_store = /obj/item/flashlight/pen
+	l_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
+	r_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
 
 	backpack = /obj/item/storage/backpack/medic
 	satchel = /obj/item/storage/backpack/satchel/med

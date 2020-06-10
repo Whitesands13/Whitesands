@@ -27,6 +27,7 @@
 
 	belt = /obj/item/storage/belt/utility/full
 	l_pocket = /obj/item/pda/roboticist
+	r_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
 	ears = /obj/item/radio/headset/headset_sci
 	uniform = /obj/item/clothing/under/rank/rnd/roboticist
 	alt_uniform = /obj/item/clothing/under/rank/rnd/scientist //Wasp Edit - Alt Uniforms

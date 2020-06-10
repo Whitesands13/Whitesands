@@ -26,6 +26,8 @@
 	belt = /obj/item/pda/janitor
 	ears = /obj/item/radio/headset/headset_srv
 	uniform = /obj/item/clothing/under/rank/civilian/janitor
+	l_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
+	r_pocket = /obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti
 	alt_uniform = /obj/item/clothing/under/rank/civilian/janitor/maid //Wasp Edit - Alt Uniforms
 	backpack_contents = list(/obj/item/modular_computer/tablet/preset/advanced=1)
 
