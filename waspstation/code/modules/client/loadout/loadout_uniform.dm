@@ -83,7 +83,7 @@
 	path = /obj/item/clothing/under/suit/black_really
 
 /datum/gear/uniform/suit/black/skirt
-	display_name = "suitskirt, executive"
+	display_name = "suitkilt, executive"
 	path = /obj/item/clothing/under/suit/black_really/skirt
 
 /datum/gear/uniform/suit/navy
@@ -100,7 +100,7 @@
 	cost = 7500
 
 /datum/gear/uniform/suit/white/skirt
-	display_name = "suitskirt, white shirt"
+	display_name = "suitkilt, white shirt"
 	path = /obj/item/clothing/under/suit/black/skirt
 
 /datum/gear/uniform/suit/white

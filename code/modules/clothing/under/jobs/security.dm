@@ -83,8 +83,8 @@
 	item_state = "gy_suit"
 
 /obj/item/clothing/under/rank/security/warden/skirt
-	name = "warden's suitskirt"
-	desc = "A formal security suitskirt for officers complete with Nanotrasen belt buckle."
+	name = "warden's suitkilt"
+	desc = "A formal security suitkilt for officers complete with Nanotrasen belt buckle."
 	icon_state = "rwarden_skirt"
 	item_state = "r_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -113,7 +113,7 @@
 	random_sensor = FALSE
 
 /obj/item/clothing/under/rank/security/detective/skirt
-	name = "detective's suitskirt"
+	name = "detective's suitkilt"
 	desc = "Someone who wears this means business."
 	icon_state = "detective_skirt"
 	item_state = "det"
@@ -129,8 +129,8 @@
 	alt_covers_chest = TRUE
 
 /obj/item/clothing/under/rank/security/detective/grey/skirt
-	name = "noir suitskirt"
-	desc = "A hard-boiled private investigator's grey suitskirt, complete with tie clip."
+	name = "noir suitkilt"
+	desc = "A hard-boiled private investigator's grey suitkilt, complete with tie clip."
 	icon_state = "greydet_skirt"
 	item_state = "greydet"
 	body_parts_covered = CHEST|GROIN|ARMS

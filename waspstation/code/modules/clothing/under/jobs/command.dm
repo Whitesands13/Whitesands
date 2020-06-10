@@ -37,8 +37,8 @@
 	fitted = FEMALE_UNIFORM_TOP
 
 /obj/item/clothing/under/rank/command/captain/suit/skirt
-	name = "green suitskirt"
-	desc = "A green suitskirt and yellow necktie. Exemplifies authority."
+	name = "green suitkilt"
+	desc = "A green suitkilt and yellow necktie. Exemplifies authority."
 	icon_state = "green_suit_skirt"
 	item_state = "dg_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -78,8 +78,8 @@
 	can_adjust = FALSE
 
 /obj/item/clothing/under/rank/command/head_of_personnel/suit/skirt
-	name = "teal suitskirt"
-	desc = "A teal suitskirt and yellow necktie. An authoritative yet tacky ensemble."
+	name = "teal suitkilt"
+	desc = "A teal suitkilt and yellow necktie. An authoritative yet tacky ensemble."
 	icon_state = "teal_suit_skirt"
 	item_state = "g_suit"
 	body_parts_covered = CHEST|GROIN|ARMS

@@ -148,7 +148,7 @@ WaspStation End */
 	item_state = "lawyer_black"
 
 /obj/item/clothing/under/rank/civilian/lawyer/black/skirt
-	name = "lawyer black suitskirt"
+	name = "lawyer black suitkilt"
 	icon_state = "lawyer_black_skirt"
 	item_state = "lawyer_black"
 	fitted = FEMALE_UNIFORM_TOP
@@ -160,7 +160,7 @@ WaspStation End */
 	mob_overlay_icon = 'icons/mob/clothing/under/suits.dmi'
 
 /obj/item/clothing/under/rank/civilian/lawyer/female/skirt
-	name = "female black suitskirt"
+	name = "female black suitkilt"
 	icon_state = "black_suit_fem_skirt"
 	item_state = "black_suit_fem_skirt"
 	mob_overlay_icon = 'icons/mob/clothing/under/suits.dmi'
@@ -172,7 +172,7 @@ WaspStation End */
 	item_state = "lawyer_red"
 
 /obj/item/clothing/under/rank/civilian/lawyer/red/skirt
-	name = "lawyer red suitskirt"
+	name = "lawyer red suitkilt"
 	icon_state = "lawyer_red_skirt"
 	item_state = "lawyer_red"
 	fitted = FEMALE_UNIFORM_TOP
@@ -183,7 +183,7 @@ WaspStation End */
 	item_state = "lawyer_blue"
 
 /obj/item/clothing/under/rank/civilian/lawyer/blue/skirt
-	name = "lawyer blue suitskirt"
+	name = "lawyer blue suitkilt"
 	icon_state = "lawyer_blue_skirt"
 	item_state = "lawyer_blue"
 	fitted = FEMALE_UNIFORM_TOP
@@ -197,8 +197,8 @@ WaspStation End */
 	alt_covers_chest = TRUE
 
 /obj/item/clothing/under/rank/civilian/lawyer/bluesuit/skirt
-	name = "blue suitskirt"
-	desc = "A classy suitskirt and tie."
+	name = "blue suitkilt"
+	desc = "A classy suitkilt and tie."
 	icon_state = "bluesuit_skirt"
 	item_state = "b_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -214,7 +214,7 @@ WaspStation End */
 	alt_covers_chest = TRUE
 
 /obj/item/clothing/under/rank/civilian/lawyer/purpsuit/skirt
-	name = "purple suitskirt"
+	name = "purple suitkilt"
 	icon_state = "lawyer_purp_skirt"
 	item_state = "p_suit"
 	body_parts_covered = CHEST|GROIN|ARMS

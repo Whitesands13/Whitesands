@@ -99,7 +99,7 @@
 	cuttable = FALSE
 
 /obj/item/clothing/under/plasmaman/skirt //WS edit plasmaman customization
-	name = "plasma enviroskirt"
+	name = "plasma envirokilt"
 	icon_state = "plasmaskirt"
 	item_state = "plasmaskirt"
 

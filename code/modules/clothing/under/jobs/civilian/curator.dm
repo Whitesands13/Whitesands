@@ -8,8 +8,8 @@
 	can_adjust = FALSE
 
 /obj/item/clothing/under/rank/civilian/curator/skirt
-	name = "sensible suitskirt"
-	desc = "It's very... sensible."
+	name = "sensible suitkilt"
+	desc = "It's not very... sensible."
 	icon = 'icons/obj/clothing/under/suits.dmi'
 	icon_state = "red_suit_skirt"
 	item_state = "red_suit"

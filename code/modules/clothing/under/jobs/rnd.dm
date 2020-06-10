@@ -11,8 +11,8 @@
 	can_adjust = FALSE
 
 /obj/item/clothing/under/rank/rnd/research_director/skirt
-	name = "research director's vest suitskirt"
-	desc = "It's a suitskirt worn by those with the know-how to achieve the position of \"Research Director\". Its fabric provides minor protection from biological contaminants."
+	name = "research director's vest suitkilt"
+	desc = "It's a suitkilt worn by those with the know-how to achieve the position of \"Research Director\". Its fabric provides minor protection from biological contaminants."
 	icon_state = "director_skirt"
 	item_state = "lb_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -29,7 +29,7 @@
 	alt_covers_chest = TRUE
 
 /obj/item/clothing/under/rank/rnd/research_director/alt/skirt
-	name = "research director's tan suitskirt"
+	name = "research director's tan suitkilt"
 	desc = "Maybe you'll engineer your own half-man, half-pig creature some day. Its fabric provides minor protection from biological contaminants."
 	icon_state = "rdwhimsy_skirt"
 	item_state = "rdwhimsy"
