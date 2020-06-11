@@ -326,6 +326,11 @@
 	slot_flags = ITEM_SLOT_BACK
 	actions_types = list()
 	mag_display = TRUE
+	
+/obj/item/gun/ballistic/automatic/sniper_rifle/security
+	name = "security anti-material rifle"
+	desc = "A large caliber breaching rifle. The station used to have a T-Rex problem. Used to..."
+	w_class = WEIGHT_CLASS_BULKY
 
 /obj/item/gun/ballistic/automatic/sniper_rifle/syndicate
 	name = "syndicate sniper rifle"
