@@ -29,7 +29,9 @@
 	key = "sex"
 	key_third_person = "DOES AN ILLEGAL"
 	restraint_check = TRUE
-	mob_type_allowed_typecache = list(mob/living)
+	mob_type_allowed_typecache = list(/mob/living)
 
-/datum/emote/sex/on_emote(user)
-	gib(user)
+/datum/emote/sex/run_emote(mob/user, params, type_override, intentional)
+	. = ..()
+	if(.)
+		user.gib()
