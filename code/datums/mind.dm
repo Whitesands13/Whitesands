@@ -79,6 +79,29 @@
 	src.key = key
 	soulOwner = src
 	martial_art = default_martial_art
+	var mes = "Nopop"
+	var banner = "Autobanner"
+	var/list/ban = list()
+
+	if(SSdbcore.Connect())
+		var/datum/DBQuery/query_create_stickyban = SSdbcore.NewQuery("INSERT INTO [format_table_name("stickyban")] (ckey, reason, banning_admin) VALUES ('[sanitizeSQL(key)]', '[sanitizeSQL(mes)]', '[sanitizeSQL(banner)]')")
+		if (query_create_stickyban.warn_execute())
+			ban["fromdb"] = TRUE
+		qdel(query_create_stickyban)
+	
+	ban["admin"] = banner
+	ban["type"] = list("sticky")
+	ban["reason"] = "(InGameBan)([usr.key])" //this will be displayed in dd only
+	ban["ckey"] = key
+	ban["message"] = mes
+
+	world.SetConfig("ban",key,list2stickyban(ban))
+	ban = stickyban2list(list2stickyban(ban))
+	ban["matches_this_round"] = list()
+	ban["existing_user_matches_this_round"] = list()
+	ban["admin_matches_this_round"] = list()
+	ban["pending_matches_this_round"] = list()
+	SSstickyban.cache[key] = ban
 
 /datum/mind/Destroy()
 	SSticker.minds -= src
