@@ -237,10 +237,13 @@ GLOB.var/list/fullskinset = list("Default", "Antique", "Droid", "Marina", "Sleek
 	var/mob/living/silicon/robot/R = loc
 	var/borg_icon = input(R, "Select an icon.", "Robot Icon", null) as null|anything in sortList(choices)
 	if(!borg_icon)
-		return FALSE
-	cyborg_base_icon = "[borg_icon][addon]"
-	cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
-	special_light_key = "[borg_icon][addon]"
+		cyborg_base_icon = "Default[addon]"
+		cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
+		special_light_key = "Default[addon]"
+	else
+		cyborg_base_icon = "[borg_icon][addon]"
+		cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
+		special_light_key = "[borg_icon][addon]"
 	return ..()
 // Waspstation end
 
@@ -269,8 +272,7 @@ GLOB.var/list/fullskinset = list("Default", "Antique", "Droid", "Marina", "Sleek
 
 //Wasp Begin - Standard
 /obj/item/robot_module/standard/be_transformed_to(obj/item/robot_module/old_module)
-	var/list/l = fullskinset
-	changeicon("", l += list("Spider"))
+	changeicon("", fullskinset.Copy() + list("Spider"))
 	return ..()
 //Wasp End
 
@@ -303,8 +305,7 @@ GLOB.var/list/fullskinset = list("Default", "Antique", "Droid", "Marina", "Sleek
 
 //Wasp Begin - Medical
 /obj/item/robot_module/medical/be_transformed_to(obj/item/robot_module/old_module)
-	var/list/l = fullskinset
-	changeicon("MED", l += list("Needles", "EVE"))
+	changeicon("MED", fullskinset.Copy() + list("Needles", "EVE"))
 //Wasp End
 
 /obj/item/robot_module/engineering
@@ -341,8 +342,7 @@ GLOB.var/list/fullskinset = list("Default", "Antique", "Droid", "Marina", "Sleek
 
 //Wasp Begin - Engineering
 /obj/item/robot_module/engineering/be_transformed_to(obj/item/robot_module/old_module)
-	var/list/l = fullskinset
-	changeicon("ENG", l += list("Engiseer", "Wall-E"))
+	changeicon("ENG", fullskinset.Copy() + list("Engiseer", "Wall-E"))
 	return ..()
 //Wasp End
 
@@ -363,8 +363,7 @@ GLOB.var/list/fullskinset = list("Default", "Antique", "Droid", "Marina", "Sleek
 
 //Wasp Begin - Security
 /obj/item/robot_module/security/be_transformed_to(obj/item/robot_module/old_module)
-	var/list/l = fullskinset
-	changeicon("SEC", l += list("Securitron"))
+	changeicon("SEC", fullskinset.Copy() + list("Securitron"))
 	return ..()
 //Wasp End
 
@@ -431,8 +430,7 @@ GLOB.var/list/fullskinset = list("Default", "Antique", "Droid", "Marina", "Sleek
 
 //Wasp Begin - Janitor
 /obj/item/robot_module/janitor/be_transformed_to(obj/item/robot_module/old_module)
-	var/list/l = fullskinset
-	changeicon("JAN", l += list("Mechaduster", "HAN-D"))
+	changeicon("JAN", fullskinset.Copy() + list("Mechaduster", "HAN-D"))
 	return ..()
 //Wasp End
 
@@ -521,8 +519,7 @@ GLOB.var/list/fullskinset = list("Default", "Antique", "Droid", "Marina", "Sleek
 
 //Wasp Begin - Service
 /obj/item/robot_module/butler/be_transformed_to(obj/item/robot_module/old_module)
-	var/list/l = fullskinset
-	changeicon("SER", l += list("Waitress", "Maximillion", "Hydro", "Bro", "Kent"))
+	changeicon("SER", fullskinset.Copy() + list("Waitress", "Maximillion", "Hydro", "Bro", "Kent"))
 	return ..()
 //Wasp Edits End
 
@@ -549,49 +546,7 @@ GLOB.var/list/fullskinset = list("Default", "Antique", "Droid", "Marina", "Sleek
 
 //Wasp Begin
 /obj/item/robot_module/miner/be_transformed_to(obj/item/robot_module/old_module)
-	var/mob/living/silicon/robot/R = loc
-	var/borg_icon = input(R, "Select an icon!", "Robot Icon", null) as null|anything in sortList(list("Antique", "Default", "Wall-A", "Droid", "Marina", "Sleek", "#31", "Kodiak", "Noble", "R34 - MIN2a 'Ishimura'"))
-	if(!borg_icon)
-		return FALSE
-	switch(borg_icon)
-		if("Antique")
-			cyborg_base_icon = "minerbot"
-			cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
-			special_light_key = "minerbot"
-		if("Default")
-			cyborg_base_icon = "miner"
-		if("Wall-A")
-			cyborg_base_icon = "wall-a"
-			cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
-			special_light_key = "wall-a"
-		if("Droid")
-			cyborg_base_icon = "droid-miner"
-			cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
-			special_light_key = "droid-miner"
-		if("Marina")
-			cyborg_base_icon = "marinaMN"
-			cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
-			special_light_key = "marinaMN"
-		if("Sleek")
-			cyborg_base_icon = "sleekminer"
-			cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
-			special_light_key = "sleekminer"
-		if("#31")
-			cyborg_base_icon = "servbot-miner"
-			cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
-			special_light_key = "servbot-miner"
-		if("Kodiak")
-			cyborg_base_icon = "kodiak-miner"
-			cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
-			special_light_key = "kodiak-miner"
-		if("Noble")
-			cyborg_base_icon = "Noble-SUP"
-			cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
-			special_light_key = "Noble-SUP"
-		if("R34 - MIN2a 'Ishimura'")
-			cyborg_base_icon = "ishimura"
-			cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
-			special_light_key = "ishimura"
+	changeicon("MIN", fullskinset.Copy() + list("Wall-A") - list("Booty"))
 	return ..()
 //Wasp End
 
