@@ -359,6 +359,7 @@
 		new /obj/item/ammo_box/magazine/co9mm(src)
 		new /obj/item/ammo_box/magazine/co9mm(src)
 		new /obj/item/ammo_box/magazine/co9mm(src) // Waspstation edit - end
+		new /obj/item/ammo_box/magazine/sniper_rounds(src) //WS edit - HoS rifle
 
 /obj/structure/closet/secure_closet/labor_camp_security
 	name = "labor camp security locker"
