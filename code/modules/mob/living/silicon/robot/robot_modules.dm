@@ -518,52 +518,6 @@
 //Wasp Begin - Service
 /obj/item/robot_module/butler/be_transformed_to(obj/item/robot_module/old_module)
 	changeicon("SER", fullskinset += list("Waitress", "Maximillion", "Hydro", "Bro", "Kent"))
-		if("Default - 'Waitress'")
-			cyborg_base_icon = "service_f"
-		if("Default - 'Butler'")
-			cyborg_base_icon = "service_m"
-		if("Default - 'Bro'")
-			cyborg_base_icon = "brobot"
-		if("Default - 'Maximillion'")
-			cyborg_base_icon = "tophat"
-			special_light_key = null
-			hat_offset = INFINITY //He is already wearing a hat
-		if("Default - 'Hydro'")
-			cyborg_base_icon = "hydrobot"
-			cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
-			special_light_key = "hydrobot"
-		if("Default - 'Kent'")
-			cyborg_base_icon = "kent"
-			special_light_key = "medical"
-			hat_offset = 3
-		if("Marina")
-			cyborg_base_icon = "marinaSV"
-			cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
-			special_light_key = "marinaSV"
-		if("Sleek")
-			cyborg_base_icon = "sleekservice"
-			cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
-			special_light_key = "sleekservice"
-		if("#27")
-			cyborg_base_icon = "servbot-service"
-			cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
-			special_light_key = "servbot-service"
-		if("Kodiak - 'Teddy'")
-			cyborg_base_icon = "kodiak-service"
-			cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
-			special_light_key = "kodiak-service"
-		if("Noble")
-			cyborg_base_icon = "Noble-SRV"
-			cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
-			special_light_key = "Noble-SRV"
-		if("R34 - SRV9a 'Llyod'")
-			cyborg_base_icon = "lloyd"
-			cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
-			special_light_key = "lloyd"
-		if("Booty")
-			cyborg_base_icon = "booty-flower"
-			cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
-			special_light_key = "booty-flower"
 	return ..()
 //Wasp Edits End
 
