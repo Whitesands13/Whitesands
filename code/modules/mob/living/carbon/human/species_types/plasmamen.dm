@@ -165,7 +165,8 @@
 		if(PREF_SKIRT)
 			holder = "[O.uniform]/skirt"
 		if(PREF_GREYSUIT)
-			holder = /obj/item/clothing/under/plasmaman
+			holder = "/obj/item/clothing/under/plasmaman"
+
 		else
 			holder = "[O.uniform]"
 
@@ -222,4 +223,3 @@
 					H.emote("sigh")
 		H.reagents.remove_reagent(chem.type, chem.metabolization_rate)
 		return TRUE
-
