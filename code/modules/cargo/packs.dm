@@ -278,12 +278,12 @@
 	dangerous = TRUE
 
 /datum/supply_pack/security/taser
-	name = "Taser Crate"
-	desc = "Three quick-stunning, low energy taser weapons. Requires Security access to open."
+	name = "Hybrid Taser Crate"
+	desc = "Two disabler-taser hybrid weapons. Requires Security access to open."
 	cost = 4000
-	contains = list(/obj/item/gun/energy/taser,
-					/obj/item/gun/energy/taser)
-	crate_name = "taser crate"
+	contains = list(/obj/item/gun/energy/e_gun/advtaser,
+					/obj/item/gun/energy/e_gun/advtaser)
+	crate_name = "hybrid taser crate"
 	dangerous = TRUE
 
 /datum/supply_pack/security/forensics
