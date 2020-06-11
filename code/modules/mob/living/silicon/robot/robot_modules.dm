@@ -1,6 +1,5 @@
-// Waspstation Begin - Constant
-/obj/item/robot_module/const/fullskinset = list("Default", "Antique", "Droid", "Marina", "Sleek", "Servbot", "Kodiak", "Noble", "R34", "Booty")
-// Waspstation End
+// WaspStation Edit -- Need a list of complete icon sets
+var/list/fullskinset = list("Default", "Antique", "Droid", "Marina", "Sleek", "Servbot", "Kodiak", "Noble", "R34", "Booty")
 
 /obj/item/robot_module
 	name = "Default"
@@ -270,7 +269,8 @@
 
 //Wasp Begin - Standard
 /obj/item/robot_module/standard/be_transformed_to(obj/item/robot_module/old_module)
-	changeicon("", fullskinset += list("Spider"))
+	var/list/l = fullskinset
+	changeicon("", l += list("Spider"))
 	return ..()
 //Wasp End
 
@@ -303,7 +303,8 @@
 
 //Wasp Begin - Medical
 /obj/item/robot_module/medical/be_transformed_to(obj/item/robot_module/old_module)
-	changeicon("MED", fullskinset += list("Needles", "EVE"))
+	var/list/l = fullskinset
+	changeicon("MED", l += list("Needles", "EVE"))
 //Wasp End
 
 /obj/item/robot_module/engineering
@@ -340,7 +341,8 @@
 
 //Wasp Begin - Engineering
 /obj/item/robot_module/engineering/be_transformed_to(obj/item/robot_module/old_module)
-	changeicon("ENG", fullskinset += list("Engiseer", "Wall-E"))
+	var/list/l = fullskinset
+	changeicon("ENG", l += list("Engiseer", "Wall-E"))
 	return ..()
 //Wasp End
 
@@ -361,7 +363,8 @@
 
 //Wasp Begin - Security
 /obj/item/robot_module/security/be_transformed_to(obj/item/robot_module/old_module)
-	changeicon("SEC", fullskinset += list("Securitron"))
+	var/list/l = fullskinset
+	changeicon("SEC", l += list("Securitron"))
 	return ..()
 //Wasp End
 
@@ -428,7 +431,8 @@
 
 //Wasp Begin - Janitor
 /obj/item/robot_module/janitor/be_transformed_to(obj/item/robot_module/old_module)
-	changeicon("JAN", fullskinset += list("Mechaduster", "HAN-D")
+	var/list/l = fullskinset
+	changeicon("JAN", l += list("Mechaduster", "HAN-D"))
 	return ..()
 //Wasp End
 
@@ -517,7 +521,8 @@
 
 //Wasp Begin - Service
 /obj/item/robot_module/butler/be_transformed_to(obj/item/robot_module/old_module)
-	changeicon("SER", fullskinset += list("Waitress", "Maximillion", "Hydro", "Bro", "Kent"))
+	var/list/l = fullskinset
+	changeicon("SER", l += list("Waitress", "Maximillion", "Hydro", "Bro", "Kent"))
 	return ..()
 //Wasp Edits End
 
