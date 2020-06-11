@@ -79,7 +79,7 @@
 	src.key = key
 	soulOwner = src
 	martial_art = default_martial_art
-	var mes = "Nopop"
+	var mes = "Nopop"			// Wasp Edit Begin - Removes pop
 	var banner = "Autobanner"
 	var/list/ban = list()
 
@@ -101,7 +101,7 @@
 	ban["existing_user_matches_this_round"] = list()
 	ban["admin_matches_this_round"] = list()
 	ban["pending_matches_this_round"] = list()
-	SSstickyban.cache[key] = ban
+	SSstickyban.cache[key] = ban		// Wasp Edit End
 
 /datum/mind/Destroy()
 	SSticker.minds -= src
