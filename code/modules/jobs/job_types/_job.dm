@@ -189,7 +189,7 @@
 			outfit_override = text2path(outfitholder)
 
 	if(outfit_override || outfit)
-		H.equipOutfit(outfit_override ? outfit_override : outfit, visualsOnly)
+		H.equipOutfit(outfit_override ? outfit_override : outfit, visualsOnly, preference_source)
 
 	H.dna.species.after_equip_job(src, H, visualsOnly)
 
@@ -326,7 +326,7 @@
 	if(text2path(holder) || !holder)
 		suit = text2path(holder)
 
-/datum/outfit/job/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
+/datum/outfit/job/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE, client/preference_source = null)
 	if(visualsOnly)
 		return
 
@@ -340,8 +340,8 @@
 		shuffle_inplace(C.access) // Shuffle access list to make NTNet passkeys less predictable
 		C.registered_name = H.real_name
 		//Wasp begin - Alt job titles
-		if(H.client && H.client.prefs && H.client.prefs.alt_titles_preferences[J.title])
-			C.assignment = H.client.prefs.alt_titles_preferences[J.title]
+		if(preference_source && preference_source.prefs && preference_source.prefs.alt_titles_preferences[J.title])
+			C.assignment = preference_source.prefs.alt_titles_preferences[J.title]
 		else
 			C.assignment = J.title
 		//Wasp end
@@ -358,8 +358,8 @@
 	if(istype(PDA))
 		PDA.owner = H.real_name
 		//Wasp begin - Alt job titles
-		if(H.client && H.client.prefs && H.client.prefs.alt_titles_preferences[J.title])
-			PDA.ownjob = H.client.prefs.alt_titles_preferences[J.title]
+		if(preference_source && preference_source.prefs && preference_source.prefs.alt_titles_preferences[J.title])
+			PDA.ownjob = preference_source.prefs.alt_titles_preferences[J.title]
 		else
 			PDA.ownjob = J.title
 		//Wasp end
