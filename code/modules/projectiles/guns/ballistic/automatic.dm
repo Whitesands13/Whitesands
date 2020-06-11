@@ -327,7 +327,7 @@
 	actions_types = list()
 	mag_display = TRUE
 	
-/obj/item/gun/ballistic/automatic/sniper_rifle/security
+/obj/item/gun/ballistic/automatic/sniper_rifle/security //WS edit - HoS rifle
 	name = "security anti-material rifle"
 	desc = "A large caliber breaching rifle. The station used to have a T-Rex problem. Used to..."
 	w_class = WEIGHT_CLASS_BULKY
