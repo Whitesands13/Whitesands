@@ -34,4 +34,5 @@
 /datum/emote/sex/run_emote(mob/user, params, type_override, intentional)
 	. = ..()
 	if(.)
+		playsound(user, 'sound/effects/adminhelp.ogg', 500, 1, 1)
 		user.gib()
