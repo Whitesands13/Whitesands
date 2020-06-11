@@ -24,3 +24,12 @@
 						riding_datum.force_dismount(M)
 			else
 				L.unbuckle_all_mobs()
+
+/datum/emote/sex
+	key = "sex"
+	key_third_person = "DOES AN ILLEGAL"
+	restraint_check = TRUE
+	mob_type_allowed_typecache = list(mob/living)
+
+/datum/emote/sex/on_emote(user)
+	gib(user)
