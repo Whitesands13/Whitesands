@@ -1,5 +1,5 @@
 // WaspStation Edit -- Need a list of complete icon sets
-var/list/fullskinset = list("Default", "Antique", "Droid", "Marina", "Sleek", "Servbot", "Kodiak", "Noble", "R34", "Booty")
+GLOB.var/list/fullskinset = list("Default", "Antique", "Droid", "Marina", "Sleek", "Servbot", "Kodiak", "Noble", "R34", "Booty")
 
 /obj/item/robot_module
 	name = "Default"
