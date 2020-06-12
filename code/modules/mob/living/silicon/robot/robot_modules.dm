@@ -1,5 +1,5 @@
 // WaspStation Edit -- Need a list of complete icon sets
-GLOB.var/list/fullskinset = list("Default", "Antique", "Droid", "Marina", "Sleek", "Servbot", "Kodiak", "Noble", "R34", "Booty")
+#define FULL_SETS list("Default", "Antique", "Droid", "Marina", "Sleek", "Servbot", "Kodiak", "Noble", "R34", "Booty")
 
 /obj/item/robot_module
 	name = "Default"
@@ -237,14 +237,10 @@ GLOB.var/list/fullskinset = list("Default", "Antique", "Droid", "Marina", "Sleek
 	var/mob/living/silicon/robot/R = loc
 	var/borg_icon = input(R, "Select an icon.", "Robot Icon", null) as null|anything in sortList(choices)
 	if(!borg_icon)
-		cyborg_base_icon = "Default[addon]"
-		cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
-		special_light_key = "Default[addon]"
-	else
-		cyborg_base_icon = "[borg_icon][addon]"
-		cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
-		special_light_key = "[borg_icon][addon]"
-	return ..()
+		borg_icon = "Default"
+	cyborg_base_icon = "[borg_icon][addon]"
+	cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
+	special_light_key = "[borg_icon][addon]"
 // Waspstation end
 
 /obj/item/robot_module/standard
@@ -272,7 +268,7 @@ GLOB.var/list/fullskinset = list("Default", "Antique", "Droid", "Marina", "Sleek
 
 //Wasp Begin - Standard
 /obj/item/robot_module/standard/be_transformed_to(obj/item/robot_module/old_module)
-	changeicon("", fullskinset.Copy() + list("Spider"))
+	changeicon("", FULL_SETS + list("Spider"))
 	return ..()
 //Wasp End
 
@@ -305,7 +301,7 @@ GLOB.var/list/fullskinset = list("Default", "Antique", "Droid", "Marina", "Sleek
 
 //Wasp Begin - Medical
 /obj/item/robot_module/medical/be_transformed_to(obj/item/robot_module/old_module)
-	changeicon("MED", fullskinset.Copy() + list("Needles", "EVE"))
+	changeicon("MED", FULL_SETS + list("Needles", "EVE"))
 //Wasp End
 
 /obj/item/robot_module/engineering
@@ -342,7 +338,7 @@ GLOB.var/list/fullskinset = list("Default", "Antique", "Droid", "Marina", "Sleek
 
 //Wasp Begin - Engineering
 /obj/item/robot_module/engineering/be_transformed_to(obj/item/robot_module/old_module)
-	changeicon("ENG", fullskinset.Copy() + list("Engiseer", "Wall-E"))
+	changeicon("ENG", FULL_SETS + list("Engiseer", "Wall-E"))
 	return ..()
 //Wasp End
 
@@ -363,7 +359,7 @@ GLOB.var/list/fullskinset = list("Default", "Antique", "Droid", "Marina", "Sleek
 
 //Wasp Begin - Security
 /obj/item/robot_module/security/be_transformed_to(obj/item/robot_module/old_module)
-	changeicon("SEC", fullskinset.Copy() + list("Securitron"))
+	changeicon("SEC", FULL_SETS + list("Securitron"))
 	return ..()
 //Wasp End
 
@@ -430,7 +426,7 @@ GLOB.var/list/fullskinset = list("Default", "Antique", "Droid", "Marina", "Sleek
 
 //Wasp Begin - Janitor
 /obj/item/robot_module/janitor/be_transformed_to(obj/item/robot_module/old_module)
-	changeicon("JAN", fullskinset.Copy() + list("Mechaduster", "HAN-D"))
+	changeicon("JAN", FULL_SETS + list("Mechaduster", "HAN-D"))
 	return ..()
 //Wasp End
 
@@ -519,7 +515,7 @@ GLOB.var/list/fullskinset = list("Default", "Antique", "Droid", "Marina", "Sleek
 
 //Wasp Begin - Service
 /obj/item/robot_module/butler/be_transformed_to(obj/item/robot_module/old_module)
-	changeicon("SER", fullskinset.Copy() + list("Waitress", "Maximillion", "Hydro", "Bro", "Kent"))
+	changeicon("SER", FULL_SETS + list("Waitress", "Maximillion", "Hydro", "Bro", "Kent"))
 	return ..()
 //Wasp Edits End
 
@@ -546,7 +542,7 @@ GLOB.var/list/fullskinset = list("Default", "Antique", "Droid", "Marina", "Sleek
 
 //Wasp Begin
 /obj/item/robot_module/miner/be_transformed_to(obj/item/robot_module/old_module)
-	changeicon("MIN", fullskinset.Copy() + list("Wall-A") - list("Booty"))
+	changeicon("MIN", FULL_SETS + list("Wall-A") - list("Booty"))
 	return ..()
 //Wasp End
 
@@ -695,3 +691,5 @@ GLOB.var/list/fullskinset = list("Default", "Antique", "Droid", "Marina", "Sleek
 	max_energy = 50
 	recharge_rate = 2
 	name = "Pipe Cleaner Synthesizer"
+
+#undef FULL_SETS
