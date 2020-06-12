@@ -492,7 +492,7 @@
 	heat_resistance = 50000
 	armor = list("melee" = 80, "bullet" = 20, "laser" = 0, "energy" = 0, "bomb" = 60, "bio" = 100, "rad" = 100, "fire" = 99, "acid" = 100)
 	max_integrity = 500
-	damage_deflection = 11
+	damage_deflection = 11		// Wasp Edit - Weakens R-Windows
 	explosion_block = 2
 	glass_type = /obj/item/stack/sheet/plasmarglass
 
