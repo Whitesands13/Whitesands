@@ -1,5 +1,6 @@
-// WaspStation Edit -- Need a list of complete icon sets
-#define FULL_SETS list("Default", "Antique", "Droid", "Marina", "Sleek", "Servbot", "Kodiak", "Noble", "R34", "Booty")
+// WaspStation Edit - Need a list of complete icon sets
+#define COMMON_ICON_SETS list("Default", "Antique", "Droid", "Marina", "Sleek", "Servbot", "Kodiak", "Noble", "R34", "Booty", "Ravensdale", "Drone", "Kent", "Eyebot")
+//It's alright if one is missing in a sec, like "Booty", aslong as you remove it later on.
 
 /obj/item/robot_module
 	name = "Default"
@@ -36,7 +37,7 @@
 	var/allow_riding = TRUE
 	var/canDispose = FALSE // Whether the borg can stuff itself into disposal
 
-	var/icon/cyborg_icon_override //Wasp Addition, need this shit to use VG icons
+	var/icon/cyborg_icon_override //WaspStation Edit - Need this shit to use VG icons
 
 /obj/item/robot_module/Initialize()
 	. = ..()
@@ -232,17 +233,6 @@
 		R.hud_used.update_robot_modules_display()
 	SSblackbox.record_feedback("tally", "cyborg_modules", 1, R.module)
 
-// Waspstation begin - function
-/obj/item/robot_module/proc/changeicon(addon, choices)
-	var/mob/living/silicon/robot/R = loc
-	var/borg_icon = input(R, "Select an icon.", "Robot Icon", null) as null|anything in sortList(choices)
-	if(!borg_icon)
-		borg_icon = "Default"
-	cyborg_base_icon = "[borg_icon][addon]"
-	cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
-	special_light_key = "[borg_icon][addon]"
-// Waspstation end
-
 /obj/item/robot_module/standard
 	name = "Standard"
 	basic_modules = list(
@@ -266,12 +256,6 @@
 	moduleselect_icon = "standard"
 	hat_offset = -3
 
-//Wasp Begin - Standard
-/obj/item/robot_module/standard/be_transformed_to(obj/item/robot_module/old_module)
-	changeicon("", FULL_SETS + list("Spider"))
-	return ..()
-//Wasp End
-
 /obj/item/robot_module/medical
 	name = "Medical"
 	basic_modules = list(
@@ -281,7 +265,7 @@
 		/obj/item/borg/apparatus/beaker,
 		/obj/item/reagent_containers/dropper,
 		/obj/item/reagent_containers/syringe,
-				/obj/item/retractor,
+		/obj/item/retractor,
 		/obj/item/hemostat,
 		/obj/item/cautery,
 		/obj/item/surgicaldrill,
@@ -298,11 +282,6 @@
 	moduleselect_icon = "medical"
 	can_be_pushed = FALSE
 	hat_offset = 3
-
-//Wasp Begin - Medical
-/obj/item/robot_module/medical/be_transformed_to(obj/item/robot_module/old_module)
-	changeicon("MED", FULL_SETS + list("Needles", "EVE"))
-//Wasp End
 
 /obj/item/robot_module/engineering
 	name = "Engineering"
@@ -336,12 +315,6 @@
 	magpulsing = TRUE
 	hat_offset = -4
 
-//Wasp Begin - Engineering
-/obj/item/robot_module/engineering/be_transformed_to(obj/item/robot_module/old_module)
-	changeicon("ENG", FULL_SETS + list("Engiseer", "Wall-E"))
-	return ..()
-//Wasp End
-
 /obj/item/robot_module/security
 	name = "Security"
 	basic_modules = list(
@@ -356,12 +329,6 @@
 	moduleselect_icon = "security"
 	can_be_pushed = FALSE
 	hat_offset = 3
-
-//Wasp Begin - Security
-/obj/item/robot_module/security/be_transformed_to(obj/item/robot_module/old_module)
-	changeicon("SEC", FULL_SETS + list("Securitron"))
-	return ..()
-//Wasp End
 
 /obj/item/robot_module/security/do_transform_animation()
 	..()
@@ -423,12 +390,6 @@
 	moduleselect_icon = "janitor"
 	hat_offset = -5
 	clean_on_move = TRUE
-
-//Wasp Begin - Janitor
-/obj/item/robot_module/janitor/be_transformed_to(obj/item/robot_module/old_module)
-	changeicon("JAN", FULL_SETS + list("Mechaduster", "HAN-D"))
-	return ..()
-//Wasp End
 
 /obj/item/reagent_containers/spray/cyborg_drying
 	name = "drying agent spray"
@@ -513,12 +474,6 @@
 	if(O)
 		O.reagents.add_reagent(/datum/reagent/consumable/enzyme, 2 * coeff)
 
-//Wasp Begin - Service
-/obj/item/robot_module/butler/be_transformed_to(obj/item/robot_module/old_module)
-	changeicon("SER", FULL_SETS + list("Waitress", "Maximillion", "Hydro", "Bro", "Kent"))
-	return ..()
-//Wasp Edits End
-
 /obj/item/robot_module/miner
 	name = "Miner"
 	basic_modules = list(
@@ -539,12 +494,6 @@
 	moduleselect_icon = "miner"
 	hat_offset = 0
 	var/obj/item/t_scanner/adv_mining_scanner/cyborg/mining_scanner //built in memes.
-
-//Wasp Begin
-/obj/item/robot_module/miner/be_transformed_to(obj/item/robot_module/old_module)
-	changeicon("MIN", FULL_SETS + list("Wall-A") - list("Booty"))
-	return ..()
-//Wasp End
 
 /obj/item/robot_module/miner/rebuild_modules()
 	. = ..()
@@ -589,7 +538,7 @@
 		/obj/item/reagent_containers/borghypo/syndicate,
 		/obj/item/shockpaddles/syndicate/cyborg,
 		/obj/item/healthanalyzer,
-				/obj/item/retractor,
+		/obj/item/retractor,
 		/obj/item/hemostat,
 		/obj/item/cautery,
 		/obj/item/surgicaldrill,
@@ -642,6 +591,64 @@
 	hat_offset = -4
 	canDispose = TRUE
 
+// Waspstation Begin - Custom icon proc
+/obj/item/robot_module/proc/changeicon(addon, choices)
+	var/mob/living/silicon/robot/R = loc
+	var/borg_icon = input(R, "Select an icon.", "Robot Icon", null) as null|anything in sortList(choices)
+	if(!borg_icon)
+		borg_icon = "Default"
+	cyborg_base_icon = "[borg_icon][addon]"
+	cyborg_icon_override = 'waspstation/icons/mob/robots.dmi'
+	special_light_key = "[borg_icon][addon]"
+
+/* Transforms - Need to add something? Please add recurring icons at the topline, anything one-time or more goes here.
+Sorry for the spaghetti code, I just don't want to type out every single icon name.
+Not my fault spriters did not make an icon for every job ;) That's why you have to negate a list like this: `- list("Something")` even if you regret it */
+/obj/item/robot_module/standard/be_transformed_to(obj/item/robot_module/old_module)
+	changeicon("", COMMON_ICON_SETS + list("Spider", "Motile", "Worm"))
+	return ..()
+
+/obj/item/robot_module/medical/be_transformed_to(obj/item/robot_module/old_module)
+	changeicon("MED", COMMON_ICON_SETS + list("Needles", "EVE"))
+	return ..()
+
+/obj/item/robot_module/engineering/be_transformed_to(obj/item/robot_module/old_module)
+	changeicon("ENG", COMMON_ICON_SETS + list("Engiseer", "Wall-E", "Worm"))
+	return ..()
+
+/obj/item/robot_module/security/be_transformed_to(obj/item/robot_module/old_module)
+	changeicon("SEC", COMMON_ICON_SETS + list("Securitron", "Motile"))
+	return ..()
+
+/obj/item/robot_module/janitor/be_transformed_to(obj/item/robot_module/old_module)
+	changeicon("JAN", COMMON_ICON_SETS + list("Mechaduster", "HAN-D") - list("Kodiak"))
+	return ..()
+
+/obj/item/robot_module/butler/be_transformed_to(obj/item/robot_module/old_module)
+	changeicon("SER", COMMON_ICON_SETS + list("Waitress", "Maximillion", "Hydro", "Bro", "Kent") - list("Droid"))
+	return ..()
+
+/obj/item/robot_module/miner/be_transformed_to(obj/item/robot_module/old_module)
+	changeicon("MIN", COMMON_ICON_SETS + list("Wall-A", "Spider", "OldMiner") - list("Booty"))
+	return ..()
+
+/obj/item/robot_module/peacekeeper/be_transformed_to(obj/item/robot_module/old_module)
+	changeicon("PEA", list("Default", "Omoikane", "R2D2"))
+	return ..()
+
+/obj/item/robot_module/syndicate/be_transformed_to(obj/item/robot_module/old_module)
+	changeicon("SYN", COMMON_ICON_SETS + list("Motile", "Bladewolf") - list("Antique", "Noble", "Booty", "Drone", "Kent", "Eyebot"))
+	return ..()
+
+/obj/item/robot_module/syndicate_medical/be_transformed_to(obj/item/robot_module/old_module)
+	changeicon("SME", list("Default", "Droid"))
+	return ..()
+
+/obj/item/robot_module/saboteur/be_transformed_to(obj/item/robot_module/old_module)
+	changeicon("SAB", list("Default", "MrGutsy"))
+	return ..()
+//WaspStation End
+
 /datum/robot_energy_storage
 	var/name = "Generic energy storage"
 	var/max_energy = 30000
@@ -692,4 +699,4 @@
 	recharge_rate = 2
 	name = "Pipe Cleaner Synthesizer"
 
-#undef FULL_SETS
+#undef COMMON_ICON_SETS // WaspStation Edit -- Need to undefine this otherwise marg will send me to the codebasement
