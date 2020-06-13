@@ -82,13 +82,6 @@
 	crate_name = "advanced engineering tools crate"
 	dangerous = TRUE
 
-/datum/supply_pack/service/vending/engivend
-	name = "EngiVend Supply Crate"
-	desc = "The engineers are out of metal foam grenades? This should help."
-	cost = 2000
-	contains = list(/obj/item/vending_refill/engivend)
-	crate_name = "engineering supply crate"
-
 /datum/supply_pack/materials/plasma20
 	name = "20 Plasma Sheets"
 	desc = "Your supposed to be mining this, not buying it."
