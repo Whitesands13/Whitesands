@@ -277,15 +277,6 @@
 	crate_name = "disabler crate"
 	dangerous = TRUE
 
-/datum/supply_pack/security/taser
-	name = "Hybrid Taser Crate"
-	desc = "Two disabler-taser hybrid weapons. Requires Security access to open."
-	cost = 4000
-	contains = list(/obj/item/gun/energy/e_gun/advtaser,
-					/obj/item/gun/energy/e_gun/advtaser)
-	crate_name = "hybrid taser crate"
-	dangerous = TRUE
-
 /datum/supply_pack/security/forensics
 	name = "Forensics Crate"
 	desc = "Stay hot on the criminal's heels with Nanotrasen's Detective Essentials(tm). Contains a forensics scanner, six evidence bags, camera, tape recorder, white crayon, and of course, a fedora. Requires Security access to open."
