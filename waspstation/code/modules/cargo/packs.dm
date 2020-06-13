@@ -19,7 +19,7 @@
 					/obj/item/storage/belt/bandolier)
 	crate_name = "shotguns crate"
 	dangerous = TRUE
-	
+
 /datum/supply_pack/security/hardsuit
 	name = "Security Hardsuit Crate"
 	desc = "Contains a security hardsuit for catching criminals in space! Requires Security access to open."
@@ -35,7 +35,7 @@
 					/obj/item/clothing/suit/space/hardsuit/security,
 					/obj/item/clothing/suit/space/hardsuit/security)
 	crate_name = "bulk security hardsuit crate"
-	
+
 /datum/supply_pack/engineering/hardsuit
 	name = "Engineering Hardsuit Crate"
 	desc = "Who took all the damn hardsuits? Not a problem, for some money we can hook you up with another hardsuit!"
@@ -68,7 +68,7 @@
 	cost = 2000
 	contains = list(/obj/item/tank/jetpack/carbondioxide)
 	crate_name = "jetpack crate"
-	
+
 /datum/supply_pack/engineering/advtools
 	name = "Advanced Engineering Tools Crate"
 	desc = "A set of advanced engineering tools."
@@ -81,36 +81,14 @@
 	cost = 3000
 	crate_name = "advanced engineering tools crate"
 	dangerous = TRUE
-	
+
 /datum/supply_pack/service/vending/engivend
 	name = "EngiVend Supply Crate"
 	desc = "The engineers are out of metal foam grenades? This should help."
 	cost = 2000
 	contains = list(/obj/item/vending_refill/engivend)
 	crate_name = "engineering supply crate"
-	
-/datum/supply_pack/materials/glass250
-	name = "250 Glass Sheets"
-	desc = "Holy SHEET thats a lot of glass."
-	cost = 5000
-	contains = list(/obj/item/stack/sheet/glass/fifty,
-					/obj/item/stack/sheet/glass/fifty,
-					/obj/item/stack/sheet/glass/fifty,
-					/obj/item/stack/sheet/glass/fifty,
-					/obj/item/stack/sheet/glass/fifty)
-	crate_name = "bulk glass sheets crate"
-	
-/datum/supply_pack/materials/iron250
-	name = "250 Iron Sheets"
-	desc = "Enough Iron to rebuild an entire station!"
-	cost = 5000
-	contains = list(/obj/item/stack/sheet/iron/fifty,
-					/obj/item/stack/sheet/iron/fifty,
-					/obj/item/stack/sheet/iron/fifty,
-					/obj/item/stack/sheet/iron/fifty,
-					/obj/item/stack/sheet/iron/fifty)
-	crate_name = "bulk iron sheets crate"
-	
+
 /datum/supply_pack/materials/plasma20
 	name = "20 Plasma Sheets"
 	desc = "Your supposed to be mining this, not buying it."
@@ -124,7 +102,7 @@
 	cost = 15000
 	contains = list(/obj/item/stack/sheet/mineral/plasma/fifty)
 	crate_name = "bulk plasma sheets crate"
-	
+
 /datum/supply_pack/materials/silver20
 	name = "20 Silver Sheets"
 	desc = "Somewhat less shiny."
@@ -138,7 +116,7 @@
 	cost = 7500
 	contains = list(/obj/item/stack/sheet/mineral/silver/fifty)
 	crate_name = "bulk silver sheets crate"
-	
+
 /datum/supply_pack/materials/gold20
 	name = "20 Gold Sheets"
 	desc = "Shiny."
@@ -152,7 +130,7 @@
 	cost = 10000
 	contains = list(/obj/item/stack/sheet/mineral/gold/fifty)
 	crate_name = "bulk gold sheets crate"
-	
+
 /datum/supply_pack/materials/uranium20
 	name = "20 Uranium Sheets"
 	desc = "Green rock make thog puke red."
@@ -166,7 +144,7 @@
 	cost = 10000
 	contains = list(/obj/item/stack/sheet/mineral/uranium/fifty)
 	crate_name = "bulk uranium sheets crate"
-	
+
 /datum/supply_pack/materials/titanium20
 	name = "20 Titanium Sheets"
 	desc = "Used for making big boy tanks and tools."
@@ -180,7 +158,7 @@
 	cost = 1000
 	contains = list(/obj/item/stack/sheet/mineral/titanium/fifty)
 	crate_name = "titanium sheets crate"
-	
+
 /datum/supply_pack/materials/diamond
 	name = "A Diamond"
 	desc = "Impress your girl with this one!"
@@ -194,7 +172,7 @@
 	cost = 17500
 	contains = list(/obj/item/stack/sheet/mineral/diamond/five)
 	crate_name = "bulk diamond sheets crate"
-	
+
 /datum/supply_pack/medical/syringegun
 	name = "Syringe Gun Crate"
 	desc = "Contains a syringe guns. Requires chemistry access to open."
@@ -202,16 +180,7 @@
 	access = ACCESS_CHEMISTRY
 	contains = list(/obj/item/gun/syringe)
 	crate_name = "syringe gun crate"
-	
-/datum/supply_pack/medical/synthflesh
-	name = "Synthflesh resupply pack"
-	desc = "Contains two 100u cartons of synthflesh, suitable for use in cloning machines."
-	cost = 2000
-	contains = list(/obj/item/reagent_containers/food/drinks/bottle/synthflesh,
-					/obj/item/reagent_containers/food/drinks/bottle/synthflesh)
-	crate_name = "rusty freezer"
-	crate_type = /obj/structure/closet/crate/freezer
-	
+
 /datum/supply_pack/medical/hardsuit
 	name = "Medical Hardsuit Crate"
 	desc = "A medical hardsuit resistant to diseases and useful for retrieving patients in space! Requires medical access to open."
@@ -219,7 +188,7 @@
 	access = ACCESS_MEDICAL
 	contains = list(/obj/item/clothing/suit/space/hardsuit/medical)
 	crate_name = "medical hardsuit crate"
-	
+
 /datum/supply_pack/science/hardsuit
 	name = "Science Hardsuit Crate"
 	desc = "A science hardsuit for added safety during explosives test or for scientific activies outside of the station! Requires science access to open."
@@ -291,7 +260,7 @@
 	crate_name = "wizard costume crate"
 	crate_type = /obj/structure/closet/crate/wooden
 	dangerous = TRUE
-	
+
 /datum/supply_pack/medical/evilsurgery
 	name = "Super Surgical Supplies Crate"
 	desc = "Do you want to perform surgery, but DO have one of those fancy shmancy degrees? This could be just what you need to properly up your game."
