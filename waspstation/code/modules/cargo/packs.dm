@@ -57,7 +57,7 @@
 /datum/supply_pack/engineering/atmossuit
 	name = "Atmospherics Hardsuit Crate"
 	desc = "Atmospherics hardsuit suspiciously missing with multiple plasma fires throughout the station?, This hardsuit can help with that! They do cost a fair bit because of the materials required to insulate them. Requires engineering access to open."
-	cost = 8000
+	cost = 12000
 	access = ACCESS_ATMOSPHERICS
 	contains = list(/obj/item/clothing/suit/space/hardsuit/engine/atmos)
 	crate_name = "atmospherics hardsuit crate"
