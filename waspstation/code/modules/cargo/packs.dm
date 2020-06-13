@@ -291,6 +291,17 @@
 	crate_name = "wizard costume crate"
 	crate_type = /obj/structure/closet/crate/wooden
 	dangerous = TRUE
+	
+/datum/supply_pack/medical/evilsurgery
+	name = "Super Surgical Supplies Crate"
+	desc = "Do you want to perform surgery, but DO have one of those fancy shmancy degrees? This could be just what you need to properly up your game."
+	hidden = TRUE
+	cost = 6500
+	contains = list(/obj/item/storage/backpack/duffelbag/syndie/surgery,
+					/obj/item/storage/firstaid/tactical,
+					/obj/item/reagent_containers/medigel/sterilizine,
+					/obj/item/roller)
+	dangerous = TRUE
 
 /datum/supply_pack/costumes_toys/wardrobe/evil
 	name = "Waffle Corporation Fashion Crate"
