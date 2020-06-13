@@ -23,14 +23,14 @@
 /datum/supply_pack/security/hardsuit
 	name = "Security Hardsuit Crate"
 	desc = "Contains a security hardsuit for catching criminals in space! Requires Security access to open."
-	cost = 3500
+	cost = 4500
 	contains = list(/obj/item/clothing/suit/space/hardsuit/security)
 	crate_name = "security hardsuit crate"
 
 /datum/supply_pack/security/hardsuit3
 	name = "Bulk Security Hardsuit Crate"
 	desc = "Contains three security hardsuits for catching criminals in space! Requires Security access to open."
-	cost = 10000
+	cost = 11000
 	contains = list(/obj/item/clothing/suit/space/hardsuit/security,
 					/obj/item/clothing/suit/space/hardsuit/security,
 					/obj/item/clothing/suit/space/hardsuit/security)
@@ -177,7 +177,7 @@
 /datum/supply_pack/medical/hardsuit
 	name = "Medical Hardsuit Crate"
 	desc = "A medical hardsuit resistant to diseases and useful for retrieving patients in space! Requires medical access to open."
-	cost = 5000
+	cost = 4000
 	access = ACCESS_MEDICAL
 	contains = list(/obj/item/clothing/suit/space/hardsuit/medical)
 	crate_name = "medical hardsuit crate"
