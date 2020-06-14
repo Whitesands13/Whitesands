@@ -406,7 +406,7 @@ By design, d1 is the smallest direction and d2 is the highest
 
 	var/list/powerlist = power_list(T1,src,0,0) //find the other cables that ended in the centre of the turf, with or without a powernet
 	if(powerlist.len>0)
-		var/datum/powernet/PN = new(loc.z)
+		var/datum/powernet/PN = new()
 		propagate_network(powerlist[1],PN) //propagates the new powernet beginning at the source cable
 
 		if(PN.is_empty()) //can happen with machines made nodeless when smoothing cables
@@ -616,7 +616,7 @@ GLOBAL_LIST_INIT(cable_coil_recipes, list(new/datum/stack_recipe("cable restrain
 	C.update_stored(1, cable_color) 
 
 	//create a new powernet with the cable, if needed it will be merged later
-	var/datum/powernet/PN = new(loc.z)
+	var/datum/powernet/PN = new()
 	PN.add_cable(C)
 
 	C.mergeConnectedNetworks(C.d2) //merge the powernet with adjacents powernets
