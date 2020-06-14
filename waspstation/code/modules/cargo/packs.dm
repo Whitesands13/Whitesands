@@ -78,7 +78,7 @@
 					/obj/item/construction/rcd,
 					/obj/item/pipe_dispenser,
 					/obj/item/lightreplacer)
-	cost = 3000
+	cost = 5000
 	crate_name = "advanced engineering tools crate"
 	dangerous = TRUE
 
