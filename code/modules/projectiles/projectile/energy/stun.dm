@@ -15,7 +15,7 @@
 	var/stun_time = 5 SECONDS
 
 	var/attack_cooldown_check = 0 SECONDS
-	var/attack_cooldown = 2.5 SECONDS		// Wasp Edit Begin - Nerfs tasers
+	var/attack_cooldown = 2.5 SECONDS		// Wasp Edit End
 
 /obj/projectile/energy/electrode/on_hit(atom/target, blocked = FALSE)
 	. = ..()
