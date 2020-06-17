@@ -59,7 +59,6 @@
 	onclose(user, "copier")
 
 /obj/machinery/photocopier/proc/copy(var/obj/item/paper/copy)
-	var/obj/item/paper/c
 	for(var/i = 0, i < copies, i++)
 		if(toner > 0 && !busy && copy)
 			var/copy_as_paper = 1
@@ -69,7 +68,7 @@
 				if(C)
 					copy_as_paper = 0
 			if(copy_as_paper)
-				c = new /obj/item/paper (loc)
+				var/obj/item/paper/c = new /obj/item/paper (loc)
 				if(length(copy.info) > 0)	//Only print and add content if the copied doc has words on it
 					if(toner > 10)	//lots of toner, make it dark
 						c.info = "<font color = #101010>"
@@ -81,20 +80,17 @@
 					c.info += copied
 					c.info += "</font>"
 					c.name = copy.name
-					c.fields = copy.fields
 					c.update_icon()
-					c.updateinfolinks()
 					c.stamps = copy.stamps
 					if(copy.stamped)
 						c.stamped = copy.stamped.Copy()
 					c.copy_overlays(copy, TRUE)
 					toner--
 			busy = TRUE
-			addtimer(CALLBACK(src, .proc/disable_busy,), 15)
+			addtimer(CALLBACK(src, .proc/reset_busy), 1.5 SECONDS)
 		else
 			break
 	updateUsrDialog()
-	return c
 
 /obj/machinery/photocopier/proc/disable_busy()
 	busy = FALSE
