@@ -309,7 +309,7 @@
 			to_chat(M, "<span class='warning'>[src] does not have a [M.zone_selected == BODY_ZONE_L_LEG ? "left" : "right"] leg!</span>")
 		else
 			M.visible_message("<span class='notice'>[M] pokes [src]'s leg.</span>", \
-						"<span class='notice'>You poke [src]'s leg.</span>")
+						"<span class='notice'>You poke [src]'s leg.</span>")		// Wasp Edit End
 	AdjustStun(-60)
 	AdjustKnockdown(-60)
 	AdjustUnconscious(-60)
