@@ -38,7 +38,7 @@
 
 /datum/supply_pack/engineering/hardsuit
 	name = "Engineering Hardsuit Crate"
-	desc = "Who took all the damn hardsuits? Not a problem, for some money we can hook you up with another hardsuit!"
+	desc = "Who took all the damn hardsuits? Not a problem, for some money, we can hook you up with another hardsuit!"
 	cost = 3500
 	access = ACCESS_ENGINE
 	contains = list(/obj/item/clothing/suit/space/hardsuit/engine)
@@ -46,7 +46,7 @@
 
 /datum/supply_pack/engineering/hardsuit3
 	name = "Bulk Engineering Hardsuit Crate"
-	desc = "All the engineers with hardsuits walk into the SM or die to space carp, not a problem!, for some money we can hook you up with more hardsuits!"
+	desc = "All the engineers with hardsuits walk into the SM or die to space carp? Not a problem! For a small fee we can hook you up with more hardsuits!"
 	cost = 10000
 	access = ACCESS_ENGINE
 	contains = list(/obj/item/clothing/suit/space/hardsuit/engine,
@@ -69,29 +69,16 @@
 	contains = list(/obj/item/tank/jetpack/carbondioxide)
 	crate_name = "jetpack crate"
 
-/datum/supply_pack/engineering/advtools
-	name = "Advanced Engineering Tools Crate"
-	desc = "A set of advanced engineering tools."
-	contains = list(/obj/item/crowbar/power,
-					/obj/item/weldingtool/experimental,
-					/obj/item/screwdriver/power,
-					/obj/item/construction/rcd,
-					/obj/item/pipe_dispenser,
-					/obj/item/lightreplacer)
-	cost = 5000
-	crate_name = "advanced engineering tools crate"
-	dangerous = TRUE
-
 /datum/supply_pack/materials/plasma20
 	name = "20 Plasma Sheets"
-	desc = "Your supposed to be mining this, not buying it."
+	desc = "You're supposed to be mining this, not buying it."
 	cost = 6000
 	contains = list(/obj/item/stack/sheet/mineral/plasma/twenty)
 	crate_name = "plasma sheets crate"
 
 /datum/supply_pack/materials/plasma50
 	name = "50 Plasma Sheets"
-	desc = "Your supposed to be mining this, not buying it."
+	desc = "You're supposed to be mining this, not buying it."
 	cost = 15000
 	contains = list(/obj/item/stack/sheet/mineral/plasma/fifty)
 	crate_name = "bulk plasma sheets crate"
@@ -161,14 +148,14 @@
 
 /datum/supply_pack/materials/diamond5
 	name = "5 Diamonds"
-	desc = "If you like high technology, these materials can help!"
+	desc = "If you like nice technology, this can help as well!"
 	cost = 17500
 	contains = list(/obj/item/stack/sheet/mineral/diamond/five)
 	crate_name = "bulk diamond sheets crate"
 
 /datum/supply_pack/medical/syringegun
 	name = "Syringe Gun Crate"
-	desc = "Contains a syringe guns. Requires chemistry access to open."
+	desc = "Contains a syringe gun. Requires chemistry access to open."
 	cost = 1000
 	access = ACCESS_CHEMISTRY
 	contains = list(/obj/item/gun/syringe)
