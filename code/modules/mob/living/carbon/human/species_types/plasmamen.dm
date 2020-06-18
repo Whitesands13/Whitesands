@@ -165,8 +165,8 @@
 		if(PREF_SKIRT)
 			holder = "[O.uniform]/skirt"
 		if(PREF_GREYSUIT)
+			O.head = /obj/item/clothing/head/helmet/space/plasmaman
 			holder = "/obj/item/clothing/under/plasmaman"
-
 		else
 			holder = "[O.uniform]"
 
