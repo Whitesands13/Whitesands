@@ -38,11 +38,11 @@
 	if(CONFIG_GET(flag/protect_roles_from_antagonist))
 		for(var/id in (CONFIG_GET(keyed_list/no_traitor_head)))
 			switch(id)
-				if("CHIEF_MEDICAL_OFFICER")
+				if("chief_medical_officer")
 					protected_jobs += "Chief Medical Officer"
-				if("RESEARCH_DIRECTOR")
+				if("research_director")
 					protected_jobs += "Research Director"
-				if("CHIEF_ENGINEER")
+				if("chief_engineer")
 					protected_jobs += "Chief Engineer"
 
 	if(CONFIG_GET(flag/protect_assistant_from_antagonist))
