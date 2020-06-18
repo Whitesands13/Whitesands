@@ -210,6 +210,11 @@ SUBSYSTEM_DEF(ticker)
 				toggle_ooc(TRUE) // Turn it on
 				toggle_dooc(TRUE)
 				declare_completion(force_ending)
+				// Wasp begin
+				for(var/mob/living/carbon/human/H in GLOB.carbon_list)
+					if(ismoth(H))
+					H.gib()
+				// Wasp end
 				check_maprotate()
 				Master.SetRunLevel(RUNLEVEL_POSTGAME)
 
