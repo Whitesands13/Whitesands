@@ -157,7 +157,7 @@
 		var/has_department = FALSE
 		for(var/department in departments)
 			var/list/jobs = departments[department]
-			if(rank in jobs)
+			if(rank in jobs || (t.fields["truerank"] && (t.fields["truerank"] in jobs))) //Wasp edit - alt titles ((((((fun))) with (parenthesis) and (AND/OR/in))))
 				if(!manifest_out[department])
 					manifest_out[department] = list()
 				manifest_out[department] += list(list(
@@ -209,6 +209,7 @@
 	var/static/list/show_directions = list(SOUTH, WEST)
 	if(H.mind && (H.mind.assigned_role != H.mind.special_role))
 		var/assignment
+		var/trueassignment //wasp edit - alt titles
 		if(H.mind.assigned_role)
 			assignment = H.mind.assigned_role
 		else if(H.job)
@@ -218,6 +219,7 @@
 
 		//Wasp begin - Alt job titles
 		if(C && C.prefs && C.prefs.alt_titles_preferences[assignment])
+			trueassignment = assignment
 			assignment = C.prefs.alt_titles_preferences[assignment]
 		//Wasp end
 
@@ -243,6 +245,7 @@
 		G.fields["id"]			= id
 		G.fields["name"]		= H.real_name
 		G.fields["rank"]		= assignment
+		G.fields["truerank"]	= trueassignment //Wasp edit - This PR Keeps Me Up At Night (Alternate Job Titles) - Artist: Mark Suckerberg
 		G.fields["age"]			= H.age
 		G.fields["species"]	= H.dna.species.name
 		G.fields["fingerprint"]	= md5(H.dna.uni_identity)

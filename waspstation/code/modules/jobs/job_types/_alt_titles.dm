@@ -1,12 +1,4 @@
 //Command
-/datum/job/captain
-	alt_titles = list("Overseer", "Station Manager", "Acting Captain")
-	senior_title = "Veteran Captain"
-
-/datum/job/head_of_personnel
-	alt_titles = list("Human Resources Officer")
-	senior_title = "Senior Bureaucrat"
-
 /datum/job/lieutenant
 	alt_titles = list("Bridge Officer", "Command Assistant")
 	senior_title = "Senior Officer"
@@ -16,7 +8,7 @@
 	alt_titles = list("Engineering Coordinator")
 
 /datum/job/engineer
-	alt_titles = list("Maintenance Technician", "Engine Technician", "Electrician", "Junior Engineer")
+	alt_titles = list("Maintenance Technician", "Engine Technician", "Electrician", "Telecommunications Specialist", "Junior Engineer")
 	senior_title = "Senior Engineer"
 
 /datum/job/atmos
@@ -37,7 +29,7 @@
 	senior_title = "Master Mixologist"
 
 /datum/job/hydro
-	alt_titles = list("Gardener", "Herbalist", "Botanical Scientist", "Hydroponicist")
+	alt_titles = list("Gardener", "Herbalist", "Botanical Scientist", "Hydroponicist", "Beekeeper")
 	senior_title = "Master Gardener"
 
 /datum/job/curator
@@ -91,7 +83,7 @@
 	alt_titles = list("Biochemist")
 
 /datum/job/virologist
-	alt_titles = list("Biochemist")
+	alt_titles = list("Pathologist", "Viral Technician")
 
 //Security
 /datum/job/hos
@@ -121,8 +113,7 @@
 
 /datum/job/mining
 	alt_titles = list("Explorer")
-	senior_title = "Master Miner"
+	senior_title = "Senior Miner"
 
 /datum/job/cargo_tech
 	alt_titles = list("Mailroom Technician", "Deliveries Officer")
-	senior_title = "Bounty Hunter"
