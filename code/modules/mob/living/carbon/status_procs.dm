@@ -16,7 +16,7 @@
 	var/prev = stam_paralyzed
 	stam_paralyzed = TRUE
 	ADD_TRAIT(src, TRAIT_INCAPACITATED, STAMINA)
-	if(!prev && getStaminaLoss() < 120) // Puts you a little further into the initial stamcrit, makes stamcrit harder to outright counter with chems.
+	if(!prev && (maxHealth - health + getStaminaLoss()) > 120) // Puts you a little further into the initial stamcrit, makes stamcrit harder to outright counter with chems.		// Waspstation Edit - Stamina stacks with health damage
 		adjustStaminaLoss(30, FALSE)
 	update_mobility()
 
