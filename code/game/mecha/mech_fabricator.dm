@@ -25,8 +25,8 @@
 	var/list/part_sets = list(
 								"Cyborg",
 								"Ripley",
+								"Firefighter",
 								"Odysseus",
-								"Clarke",
 								"Gygax",
 								"Durand",
 								"H.O.N.K",
