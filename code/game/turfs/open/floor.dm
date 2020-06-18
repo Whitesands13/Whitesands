@@ -25,7 +25,8 @@
 	tiled_dirt = TRUE
 
 /turf/open/floor/Initialize(mapload)
-
+	if(color)
+		add_atom_colour(color, FIXED_COLOUR_PRIORITY) //This should already be called in atoms.dm:150 but apparently it's not and I'm too lazy to find out why B)
 	if (!broken_states)
 		broken_states = typelist("broken_states", list("damaged1", "damaged2", "damaged3", "damaged4", "damaged5"))
 	else
