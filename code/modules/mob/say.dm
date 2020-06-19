@@ -1,4 +1,17 @@
 //Speech verbs.
+// Wasp Edit - Typing Indicators
+// the _keybind verbs uses "as text" versus "as text|null" to force a popup when pressed by a keybind. 
+/mob/verb/say_typing_indicator()
+	set name = "say_indicator"
+	set hidden = TRUE
+	set category = "IC"
+	display_typing_indicator()
+	var/message = input(usr, "", "say") as text|null
+	// If they don't type anything just drop the message.
+	clear_typing_indicator()		// clear it immediately!
+	if(!length(message))
+		return
+	return say_verb(message)
 
 ///Say verb
 /mob/verb/say_verb(message as text)
@@ -7,32 +20,62 @@
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
-	if(message)
-		say(message)
+	clear_typing_indicator()		// clear it immediately! // Wasp Edit - Typing Indicators
+	say(message)
+
+//Emote typing indicator // Wasp Edit - Typing Indicators
+/mob/verb/me_typing_indicator()
+	set name = "me_indicator"
+	set hidden = TRUE
+	set category = "IC"
+	display_typing_indicator()
+	var/message = input(usr, "", "me") as message|null
+	// If they don't type anything just drop the message.
+	clear_typing_indicator()		// clear it immediately!
+	if(!length(message))
+		return
+	return me_verb(message)
 	
 ///Whisper verb
 /mob/verb/whisper_verb(message as text)
-	set name = "Whisper"
+	set name = "Whisper (no indicator)" // Wasp Edit - Typing Indicators
 	set category = "IC"
+	if(!length(message)) // Wasp Edit - Typing Indicators
+		return
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
+	clear_typing_indicator()		// clear it immediately! // Wasp Edit - Typing Indicators
 	whisper(message)
 
 ///whisper a message
 /mob/proc/whisper(message, datum/language/language=null)
 	say(message, language) //only living mobs actually whisper, everything else just talks
+
+//Whisper typing indicator // Wasp Edit - Typing Indicators
+/mob/verb/whisper_typing_indicator()
+	set name = "Whisper"
+	set category = "IC"
+	display_typing_indicator()
+	var/message = input(usr, "", "me") as message|null
+	// If they don't type anything just drop the message.
+	clear_typing_indicator()		// clear it immediately!
+	if(!length(message))
+		return
+	return whisper_verb(message)
 	
 ///The me emote verb
 /mob/verb/me_verb(message as message) // WASP CHANGE - makes me command input box bigger
 	set name = "Me"
 	set category = "IC"
-
+	if(!length(message)) // Wasp Edit - Typing Indicators
+		return
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
 
 	message = trim(copytext_char(sanitize(message), 1, MAX_MESSAGE_LEN))
+	clear_typing_indicator()		// clear it immediately! // Wasp Edit - Typing Indicators
 
 	usr.emote("me",1,message,TRUE)
 

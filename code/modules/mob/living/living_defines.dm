@@ -6,6 +6,7 @@
 	pressure_resistance = 10
 
 	hud_type = /datum/hud/living
+	typing_indicator_enabled = TRUE // Wasp Edit - Typing Indicators
 
 	var/resize = 1 ///Badminnery resize
 	var/lastattacker = null

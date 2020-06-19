@@ -103,6 +103,9 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/changesource_flags = NONE
 	var/loreblurb = "Description not provided. Yell at a coder. Also, please look into cooking fajitas. That stuff is amazing."
 
+	/// Our default override for typing indicator state // Wasp Edit - Typing Indicators
+	var/typing_indicator_state
+
 ///////////
 // PROCS //
 ///////////

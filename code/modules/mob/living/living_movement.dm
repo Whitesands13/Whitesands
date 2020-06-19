@@ -1,6 +1,8 @@
 /mob/living/Moved()
 	. = ..()
 	update_turf_movespeed(loc)
+	//Hide typing indicator if we move. // Wasp Edit - Typing Indicators
+	clear_typing_indicator()
 
 /mob/living/CanAllowThrough(atom/movable/mover, turf/target)
 	. = ..()
