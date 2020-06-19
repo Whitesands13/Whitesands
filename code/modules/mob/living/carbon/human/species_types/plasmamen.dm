@@ -160,7 +160,7 @@
 		if("Clown")
 			O = new /datum/outfit/plasmaman/clown
 
-	var/holder
+	var/holder		// Wasp Edit Begin - Plasma skirtsuit prefs
 	switch(H.jumpsuit_style)
 		if(PREF_SKIRT)
 			holder = "[O.uniform]/skirt"
@@ -171,7 +171,7 @@
 			holder = "[O.uniform]"
 
 	if(text2path(holder))
-		O.uniform = text2path(holder)
+		O.uniform = text2path(holder)		// Wasp Edit End
 
 	H.equipOutfit(O, visualsOnly)
 	H.internal = H.get_item_for_held_index(2)
