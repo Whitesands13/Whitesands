@@ -12,7 +12,7 @@
 /obj/structure/closet/crate/necropolis/tendril
 	desc = "It's watching you suspiciously."
 
-/obj/structure/closet/crate/necropolis/tendril/PopulateContents()
+/obj/structure/closet/crate/necropolis/tendril/PopulateContents() //WS edit - cringe tendrils
 	var/loot = rand(1,18)
 	switch(loot)
 		if(1)
@@ -61,6 +61,33 @@
 			new /obj/item/bedsheet/cult(src)
 		if(18)
 			new /obj/item/clothing/neck/necklace/memento_mori(src)
+			
+/obj/structure/closet/crate/necropolis/legion
+	name = "legion chest"
+
+/obj/structure/closet/crate/necropolis/tendril/PopulateContents()
+	var/loot = rand(1,10)
+		if(1)
+            new /obj/item/clothing/suit/space/hardsuit/cult(src)
+		if(2)
+            new /obj/item/soulstone/anybody(src)
+		if(3)
+            new /obj/item/clothing/glasses/godeye(src)
+        if(4)
+            new /obj/item/reagent_containers/glass/bottle/potion/flight(src)
+		if(5)
+            new /obj/item/clothing/suit/space/hardsuit/ert/paranormal/berserker(src)
+		if(6)
+            new /obj/item/guardiancreator/miner(src)
+		if(7)
+            new /obj/item/wisp_lantern(src)
+		if(8)
+            new /obj/item/reagent_containers/food/drinks/bottle/holywater/hell(src)
+            new /obj/item/clothing/suit/space/hardsuit/ert/paranormal/inquisitor(src)
+		if(9)
+            new /obj/item/book/granter/spell/summonitem(src)
+		if(10)
+			new /obj/item/clothing/neck/necklace/memento_mori(src) //WS edit end
 
 //KA modkit design discs
 /obj/item/disk/design_disk/modkit_disc
@@ -749,6 +776,29 @@
 			new /obj/item/gun/magic/wand/fireball(src)
 		if(4)
 			new /obj/item/dragons_blood(src)
+	var/bonusloot = rand(1,10) //WS edit - cringe tendrils
+	switch(bonusloot)
+		if(1)
+            new /obj/item/clothing/suit/space/hardsuit/cult(src)
+		if(2)
+            new /obj/item/soulstone/anybody(src)
+		if(3)
+            new /obj/item/clothing/glasses/godeye(src)
+        if(4)
+            new /obj/item/reagent_containers/glass/bottle/potion/flight(src)
+		if(5)
+            new /obj/item/clothing/suit/space/hardsuit/ert/paranormal/berserker(src)
+		if(6)
+            new /obj/item/guardiancreator/miner(src)
+		if(7)
+            new /obj/item/wisp_lantern(src)
+		if(8)
+            new /obj/item/reagent_containers/food/drinks/bottle/holywater/hell(src)
+            new /obj/item/clothing/suit/space/hardsuit/ert/paranormal/inquisitor(src)
+		if(9)
+            new /obj/item/book/granter/spell/summonitem(src)
+		if(10)
+			new /obj/item/clothing/neck/necklace/memento_mori(src) //WS edit end
 
 /obj/structure/closet/crate/necropolis/dragon/crusher
 	name = "firey dragon chest"
@@ -977,6 +1027,29 @@
 			new /obj/item/blood_contract(src)
 		if(3)
 			new /obj/item/gun/magic/staff/spellblade(src)
+	var/bonusloot = rand(1,10) //WS edit - cringe tendrils
+	switch(bonusloot)
+		if(1)
+            new /obj/item/clothing/suit/space/hardsuit/cult(src)
+		if(2)
+            new /obj/item/soulstone/anybody(src)
+		if(3)
+            new /obj/item/clothing/glasses/godeye(src)
+        if(4)
+            new /obj/item/reagent_containers/glass/bottle/potion/flight(src)
+		if(5)
+            new /obj/item/clothing/suit/space/hardsuit/ert/paranormal/berserker(src)
+		if(6)
+            new /obj/item/guardiancreator/miner(src)
+		if(7)
+            new /obj/item/wisp_lantern(src)
+		if(8)
+            new /obj/item/reagent_containers/food/drinks/bottle/holywater/hell(src)
+            new /obj/item/clothing/suit/space/hardsuit/ert/paranormal/inquisitor(src)
+		if(9)
+            new /obj/item/book/granter/spell/summonitem(src)
+		if(10)
+			new /obj/item/clothing/neck/necklace/memento_mori(src) //WS edit end
 
 /obj/structure/closet/crate/necropolis/bubblegum/crusher
 	name = "bloody bubblegum chest"
@@ -1068,6 +1141,34 @@
 	new /obj/item/crusher_trophy/blaster_tubes(src)
 
 //Hierophant
+/obj/structure/closet/crate/necropolis/hierophant //WS edit- cringe tendrils
+	name = "hierophant chest"
+
+/obj/structure/closet/crate/necropolis/hierophant/PopulateContents()
+	var/bonusloot = rand(1,10)
+	switch(bonusloot)
+		if(1)
+            new /obj/item/clothing/suit/space/hardsuit/cult(src)
+		if(2)
+            new /obj/item/soulstone/anybody(src)
+		if(3)
+            new /obj/item/clothing/glasses/godeye(src)
+        if(4)
+            new /obj/item/reagent_containers/glass/bottle/potion/flight(src)
+		if(5)
+            new /obj/item/clothing/suit/space/hardsuit/ert/paranormal/berserker(src)
+		if(6)
+            new /obj/item/guardiancreator/miner(src)
+		if(7)
+            new /obj/item/wisp_lantern(src)
+		if(8)
+            new /obj/item/reagent_containers/food/drinks/bottle/holywater/hell(src)
+            new /obj/item/clothing/suit/space/hardsuit/ert/paranormal/inquisitor(src)
+		if(9)
+            new /obj/item/book/granter/spell/summonitem(src)
+		if(10)
+			new /obj/item/clothing/neck/necklace/memento_mori(src) //WS edit end
+
 /obj/item/hierophant_club
 	name = "hierophant club"
 	desc = "The strange technology of this large club allows various nigh-magical feats. It used to beat you, but now you can set the beat."
