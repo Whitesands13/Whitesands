@@ -199,7 +199,7 @@
 		loot = list(/obj/item/staff/storm)
 		elimination = FALSE
 	else if(prob(20)) //20% chance for sick lootz.
-		loot = list(/obj/structure/closet/crate/necropolis/tendril)
+		loot = list(/obj/structure/closet/crate/necropolis/legion) //WS edit - cringe tendrils
 		if(!true_spawn)
 			loot = null
 	return ..()
