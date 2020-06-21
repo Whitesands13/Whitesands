@@ -87,7 +87,11 @@
 			<BR>
 			"}
 
-	usr << browse(dat.Join(), "window=secrets")
+	var/datum/browser/popup = new(user, "secrets", name, 300, 430)
+	popup.set_content(dat.Join())
+	popup.open()
+
+//	usr << browse(dat.Join(), "window=secrets")
 	return
 
 
@@ -104,7 +108,10 @@
 				dat += "<li>[l]</li>"
 			if(!GLOB.admin_log.len)
 				dat += "No-one has done anything this round!"
-			usr << browse(dat, "window=admin_log")
+//			usr << browse(dat, "window=admin_log")
+			var/datum/browser/popup = new(user, "admin_log", name, 300, 430)
+			popup.set_content(dat)
+			popup.open()
 
 		if("mentor_log")
 			var/dat = "<B>Mentor Log<HR></B>"
@@ -112,7 +119,10 @@
 				dat += "<li>[l]</li>"
 			if(!GLOB.mentorlog.len)
 				dat += "No mentors have done anything this round!"
-			usr << browse(dat, "window=mentor_log")
+//			usr << browse(dat, "window=mentor_log")
+			var/datum/browser/popup = new(user, "mentor_log", name, 300, 430)
+			popup.set_content(dat)
+			popup.open()
 
 		if("show_admins")
 			var/dat = "<B>Current admins:</B><HR>"
@@ -120,7 +130,10 @@
 				for(var/ckey in GLOB.admin_datums)
 					var/datum/admins/D = GLOB.admin_datums[ckey]
 					dat += "[ckey] - [D.rank.name]<br>"
-				usr << browse(dat, "window=showadmins;size=600x500")
+//				usr << browse(dat, "window=showadmins;size=600x500")
+				var/datum/browser/popup = new(user, "showadmins", name, 600, 500)
+				popup.set_content(dat)
+				popup.open()
 
 		if("tdomereset")
 			if(!check_rights(R_ADMIN))

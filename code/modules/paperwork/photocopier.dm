@@ -61,6 +61,8 @@
 /obj/machinery/photocopier/proc/copy(var/obj/item/paper/copy)
 	for(var/i = 0, i < copies, i++)
 		if(toner > 0 && !busy && copy)
+			busy = TRUE
+			addtimer(CALLBACK(src, .proc/reset_busy), 1.5 SECONDS)
 			var/copy_as_paper = 1
 			if(istype(copy, /obj/item/paper/contract/employment))
 				var/obj/item/paper/contract/employment/E = copy
@@ -86,8 +88,7 @@
 						c.stamped = copy.stamped.Copy()
 					c.copy_overlays(copy, TRUE)
 					toner--
-			busy = TRUE
-			addtimer(CALLBACK(src, .proc/reset_busy), 1.5 SECONDS)
+					return c
 		else
 			break
 	updateUsrDialog()
