@@ -24,8 +24,8 @@ SUBSYSTEM_DEF(input)
 	"Any+UP" = "\"KeyUp \[\[*\]\]\"",
 	"O" = "ooc",
 	"Ctrl+O" = "looc", //Wasp Edit
-	"T" = "say_indicator", // Wasp Edit - Typing Indicators
-	"M" = "me_indicator", // Wasp Edit - Typing Indicators
+	"T" = "say",
+	"M" = "me",
 	"Back" = "\".winset \\\"input.text=\\\"\\\"\\\"\"",
 	"Tab" = "\".winset \\\"input.focus=true?map.focus=true input.background-color=[COLOR_INPUT_DISABLED]:input.focus=true input.background-color=[COLOR_INPUT_ENABLED]\\\"\"", 
 	"Escape" = "\".winset \\\"input.text=\\\"\\\"\\\"\"")
