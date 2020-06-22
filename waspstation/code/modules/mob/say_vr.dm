@@ -106,4 +106,3 @@ SUBTLER  //WaspStation - Subtle emotes
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
 	usr.emote("subtler")
-
