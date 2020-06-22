@@ -1257,6 +1257,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	target_amount = 3
 
 /datum/objective/borer/New()
+	target_amount = clamp(rand(2, 10), 2, get_active_player_count(TRUE, FALSE, TRUE)/2)//"dynamic" scaling
 	explanation_text = "You must escape with at least [target_amount] borers with hosts on the shuttle."
 
 /datum/objective/borer/check_completion()
@@ -1271,7 +1272,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 			var/turf/location = get_turf(C)
 			if(is_centcom_level(location.z) && D && D.stat != DEAD)
 				total_borer_hosts++
-		if(GLOB.total_borer_hosts_needed <= total_borer_hosts)
+		if(total_borer_hosts <= target_amount)
 			return TRUE
 
 //Mob
