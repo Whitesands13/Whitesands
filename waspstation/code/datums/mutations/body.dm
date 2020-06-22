@@ -13,7 +13,7 @@
 		return
 	ADD_TRAIT(owner, TRAIT_DWARF, GENETIC_MUTATION)
 	owner.AddElement(/datum/element/dwarfism, src)
-	passtable_on(owner, GENETIC_MUTATION)
+	//passtable_on(owner, GENETIC_MUTATION) Commenting out for now. It can be re-added if Mald approves this for the species.
 	owner.visible_message("<span class='danger'>[owner] suddenly shrinks!</span>", "<span class='notice'>Everything around you seems to grow..</span>")
 
 /datum/mutation/human/dwarfism/on_losing(mob/living/carbon/human/owner)
