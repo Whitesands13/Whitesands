@@ -57,7 +57,7 @@
 	suit_store = /obj/item/tank/internals/oxygen
 	head = null
 	internals_slot = ITEM_SLOT_SUITSTORE
-
+//Wasp Edit Start - Alt-Job Titles
 /datum/outfit/job/engineer/electrician
 	name = "Station Engineer (Electrician)"
 	l_hand = /obj/item/storage/toolbox/electrical
@@ -75,3 +75,4 @@
 	accessory = /obj/item/clothing/accessory/armband/engine
 	r_pocket = /obj/item/stack/cable_coil
 	l_pocket = /obj/item/flashlight
+//Wasp Edit End - Alt-Job Titles

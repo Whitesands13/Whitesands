@@ -544,6 +544,7 @@
 			var/color = categorizedJobs[jobcat]["color"]
 			dat += "<fieldset style='border: 2px solid [color]; display: inline'>"
 			dat += "<legend align='center' style='color: [color]'>[jobcat]</legend>"
+			// Wasp Edit Start - Alt-Job Titles
 			for(var/datum/job/job in categorizedJobs[jobcat]["jobs"])
 				var/altjobline = ""
 				var/position_class = "otherPosition"
@@ -555,6 +556,7 @@
 					dat += "<a class='[position_class]' style='display:block;width:170px' href='byond://?src=[REF(src)];SelectedJob=[job.title]'><font color='lime'><b>[job.title] [altjobline] ([job.current_positions])</b></font></a>"
 				else
 					dat += "<a class='[position_class]' style='display:block;width:170px' href='byond://?src=[REF(src)];SelectedJob=[job.title]'>[job.title] [altjobline] ([job.current_positions])</a>"
+			// Wasp Edit End - Alt-Job Titles
 			dat += "</fieldset><br>"
 
 
