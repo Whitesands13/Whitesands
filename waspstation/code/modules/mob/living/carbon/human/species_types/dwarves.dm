@@ -35,7 +35,7 @@ GLOBAL_LIST_INIT(dwarf_last, world.file2list("strings/names/dwarf_last.txt")) //
 /datum/species/dwarf/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	. = ..()
 	var/mob/living/carbon/human/H = C
-	H.dna.add_mutation(DORFISM, MUT_EXTRA)
+	H.dna.add_mutation(DORFISM, MUT_OTHER)
 
 /datum/species/dwarf/on_species_loss(mob/living/carbon/H, datum/species/new_species)
 	. = ..()
