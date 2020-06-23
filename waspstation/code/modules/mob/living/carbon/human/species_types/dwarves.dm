@@ -6,16 +6,23 @@ GLOBAL_LIST_INIT(dwarf_last, world.file2list("strings/names/dwarf_last.txt")) //
 	name = "Dwarf"
 	id = "dwarf" //Also called Homo sapiens pumilionis
 	default_color = "FFFFFF"
+	default_features = list("mcolor" = "FFF", "wings" = "None")
 	species_traits = list(EYECOLOR,HAIR,FACEHAIR,LIPS)
-	inherent_traits = list(TRAIT_DWARF,TRAIT_SNOB)
+	inherent_traits = list(TRAIT_DWARF,TRAIT_SNOB,TRAIT_QUICK_CARRY)
 	limbs_id = "human"
-	say_mod = "bellows" //high energy, EXTRA BIOLOGICAL FUEL
+	use_skintones = 1
+	armor = 15 //True dwarves are a bit sturdier than humans
+	speedmod = 0.5 //They are also slower
+	punchdamagelow = 5
+	punchdamagehigh = 15 //and a bit stronger
+	punchstunthreshold = 10
 	damage_overlay_type = "human"
 	skinned_type = /obj/item/stack/sheet/animalhide/human
 	liked_food = ALCOHOL | MEAT | DAIRY //Dwarves like alcohol, meat, and dairy products.
 	disliked_food = JUNKFOOD | FRIED //Dwarves hate foods that have no nutrition other than alcohol.
-	mutant_organs = list(/obj/item/organ/dwarfgland) //Dwarven alcohol gland, literal gland warrior
+	mutant_organs = list(/obj/item/organ/dwarfgland) //Dwarven alcohol gland, literal gland warrior.
 	mutantliver = /obj/item/organ/liver/dwarf //Dwarven super liver (Otherwise they r doomed)
+	mutanttongue= /obj/item/organ/tongue/dwarf //A workaround for the language issues I was having
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 	species_language_holder = /datum/language_holder/dwarf
 
@@ -23,14 +30,17 @@ GLOBAL_LIST_INIT(dwarf_last, world.file2list("strings/names/dwarf_last.txt")) //
 	race = /datum/species/dwarf //and the race the path is set to.
 
 /datum/species/dwarf/check_roundstart_eligible()
-	if(SSevents.holidays && SSevents.holidays[HALLOWEEN])
-		return TRUE
-	return ..()
+	return TRUE
+
+/datum/species/dwarf/on_species_gain(mob/living/carbon/C, datum/species/old_species)
+	. = ..()
+	var/mob/living/carbon/human/H = C
+	H.grant_language(/datum/language/dwarf, TRUE, TRUE, LANGUAGE_DWARF)
+	H.dna.add_mutation(DORFISM, MUT_EXTRA)
 
 /datum/species/dwarf/on_species_loss(mob/living/carbon/H, datum/species/new_species)
 	. = ..()
-	UnregisterSignal(H, COMSIG_MOB_SAY) //We register handle_speech is not being used.
-	//H.remove_language(/datum/language/dwarf) SKYRAT CHANGE= We have an additional language option for this
+	H.remove_language(/datum/language/dwarf)
 
 //Dwarf Name stuff
 /proc/dwarf_name() //hello caller: my name is urist mcuristurister
@@ -38,6 +48,29 @@ GLOBAL_LIST_INIT(dwarf_last, world.file2list("strings/names/dwarf_last.txt")) //
 
 /datum/species/dwarf/random_name(gender,unique,lastname)
 	return dwarf_name() //hello, ill return the value from dwarf_name proc to you when called.
+
+/obj/item/organ/tongue/dwarf
+	name = "squat tongue"
+	desc = "A stout, sturdy slab of muscle and tastebuds well-suited to enjoying strong alcohol and spewing litanies of scathing insults and threats at elves."
+	say_mod = "bellows"
+	initial_language_holder = /datum/language_holder/dwarf
+	var/static/list/languages_possible_dwarf = typecacheof(list(
+		/datum/language/common,
+		/datum/language/draconic,
+		/datum/language/codespeak,
+		/datum/language/monkey,
+		/datum/language/narsie,
+		/datum/language/beachbum,
+		/datum/language/aphasia,
+		/datum/language/piratespeak,
+		/datum/language/terrum,
+		/datum/language/sylvan,
+		/datum/language/dwarf
+	))
+
+/obj/item/organ/tongue/dwarf/Initialize(mapload)
+    . = ..()
+    languages_possible = languages_possible_dwarf
 
 //This mostly exists because my testdwarf's liver died while trying to also not die due to no alcohol.
 /obj/item/organ/liver/dwarf
