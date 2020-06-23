@@ -97,7 +97,7 @@
 	alt_titles = list("Security Medic")
 
 /datum/job/officer
-	alt_titles = list("Security Guard", "Junior Officer", "Prison Guard")
+	alt_titles = list("Security Guard", "Junior Officer")
 	senior_title = "Senior Officer"
 
 /datum/job/prisoner
