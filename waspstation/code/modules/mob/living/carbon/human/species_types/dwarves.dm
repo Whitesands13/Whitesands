@@ -35,12 +35,11 @@ GLOBAL_LIST_INIT(dwarf_last, world.file2list("strings/names/dwarf_last.txt")) //
 /datum/species/dwarf/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	. = ..()
 	var/mob/living/carbon/human/H = C
-	H.grant_language(/datum/language/dwarf, TRUE, TRUE, LANGUAGE_DWARF)
 	H.dna.add_mutation(DORFISM, MUT_EXTRA)
 
 /datum/species/dwarf/on_species_loss(mob/living/carbon/H, datum/species/new_species)
 	. = ..()
-	H.remove_language(/datum/language/dwarf)
+	H.dna.remove_mutation(DORFISM)
 
 //Dwarf Name stuff
 /proc/dwarf_name() //hello caller: my name is urist mcuristurister
