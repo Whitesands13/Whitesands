@@ -1,6 +1,6 @@
 //Command
 /datum/job/lieutenant
-	alt_titles = list("Bridge Officer", "Command Assistant")
+	alt_titles = list("Bridge Officer", "Executive Officer")
 	senior_title = "Senior Officer"
 
 //Engineering
@@ -17,7 +17,7 @@
 
 //Service
 /datum/job/assistant
-	alt_titles = list("Civilian", "Visitor", "Businessman", "Trader", "Entertainer")
+	alt_titles = list("Civilian", "Visitor", "Businessman", "Entertainer")
 	senior_title = "Greytider"
 
 /datum/job/cook
@@ -25,7 +25,7 @@
 	senior_title = "Chef"
 
 /datum/job/bartender
-	alt_titles = list("Barkeep", "Server", "Mixologist")
+	alt_titles = list("Barkeep", "Mixologist")
 	senior_title = "Master Mixologist"
 
 /datum/job/hydro
@@ -57,7 +57,7 @@
 	alt_titles = list("Research Supervisor", "Head Scientist", "Chief Researcher", "Chief Science Officer")
 
 /datum/job/scientist
-	alt_titles = list("Xenobiologist", "Chemical Researcher", "Toxologist", "Nanite Researcher", "Junior Scientist")
+	alt_titles = list("Xenobiologist", "Chemical Researcher", "Nanite Researcher", "Junior Scientist")
 	senior_title = "Senior Scientist"
 
 /datum/job/roboticist
@@ -79,11 +79,8 @@
 	alt_titles = list("Pharmacist", "Pharmacologist", "Junior Chemist")
 	senior_title = "Senior Chemist"
 
-/datum/job/geneticist
-	alt_titles = list("Biochemist")
-
 /datum/job/virologist
-	alt_titles = list("Pathologist", "Viral Technician")
+	alt_titles = list("Pathologist")
 
 //Security
 /datum/job/hos
@@ -93,7 +90,7 @@
 	alt_titles = list("Brig Chief", "Master at Arms")
 
 /datum/job/detective
-	alt_titles = list("Forensics Technician", "Private Investigator")
+	alt_titles = list("Forensics Specialist", "Private Investigator")
 	senior_title = "Hard-boiled Detective"
 
 /datum/job/brig_phys
