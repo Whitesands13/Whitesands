@@ -407,6 +407,7 @@
 	dir = 1
 	},
 /obj/machinery/firealarm{
+	dir = 2;
 	pixel_y = 24
 	},
 /obj/effect/turf_decal/tile/neutral{
@@ -642,7 +643,9 @@
 	name = "Dorms APC";
 	pixel_x = 24
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "0-2"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/dorm)
 "bQ" = (
@@ -790,7 +793,7 @@
 /area/awaymission/snowdin/post/kitchen)
 "cf" = (
 /obj/machinery/airalarm{
-	pixel_y = 23
+	pixel_y = 24
 	},
 /obj/structure/spider/stickyweb,
 /obj/effect/decal/cleanable/dirt,
@@ -800,11 +803,12 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "Kitchen APC";
-	pixel_x = 1;
-	pixel_y = 23
+	pixel_y = 24
+	},
+/obj/structure/cable/yellow{
+	icon_state = "0-2"
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/kitchen)
 "ch" = (
@@ -843,14 +847,18 @@
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/dorm)
 "cn" = (
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-4"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/dorm)
 "co" = (
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/machinery/door/airlock/maintenance{
 	req_access_txt = "12"
 	},
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/dorm)
 "cp" = (
@@ -860,6 +868,9 @@
 	pixel_y = 5
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
@@ -869,7 +880,6 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/dorm)
 "cq" = (
@@ -1001,7 +1011,7 @@
 /area/awaymission/snowdin/post/research)
 "cD" = (
 /obj/machinery/airalarm{
-	pixel_y = 23
+	pixel_y = 24
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/tile/neutral{
@@ -1014,6 +1024,7 @@
 /area/awaymission/snowdin/post/research)
 "cE" = (
 /obj/machinery/firealarm{
+	dir = 2;
 	pixel_y = 24
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -1120,11 +1131,13 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-4"
+	},
 /obj/item/storage/box{
 	illustration = "donk_kit";
 	name = "box of donkpockets"
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/kitchen)
 "cN" = (
@@ -1137,8 +1150,10 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/kitchen)
 "cO" = (
@@ -1217,8 +1232,10 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-4"
+	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/dorm)
 "cW" = (
@@ -1231,8 +1248,10 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
 	},
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/dorm)
 "cX" = (
@@ -1251,6 +1270,7 @@
 "cY" = (
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden,
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden{
+	dir = 2;
 	piping_layer = 3;
 	pixel_x = 5;
 	pixel_y = 5
@@ -1298,6 +1318,7 @@
 "db" = (
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden,
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden{
+	dir = 2;
 	piping_layer = 3;
 	pixel_x = 5;
 	pixel_y = 5
@@ -1357,6 +1378,7 @@
 "df" = (
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden,
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden{
+	dir = 2;
 	piping_layer = 3;
 	pixel_x = 5;
 	pixel_y = 5
@@ -1490,8 +1512,10 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/effect/decal/cleanable/food/flour,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/kitchen)
 "du" = (
@@ -1542,8 +1566,10 @@
 /turf/open/floor/carpet,
 /area/awaymission/snowdin/post/dorm)
 "dD" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/dorm)
 "dE" = (
@@ -1658,12 +1684,14 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/item/storage/box{
 	illustration = "donk_kit";
 	name = "box of donkpockets"
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/kitchen)
 "dT" = (
@@ -1741,7 +1769,9 @@
 	},
 /area/awaymission/snowdin/post/dorm)
 "ed" = (
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/dorm)
 "ee" = (
@@ -1799,48 +1829,68 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post)
 "ek" = (
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post)
 "el" = (
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/structure/grille/broken,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post)
 "em" = (
 /obj/machinery/power/apc{
+	dir = 2;
 	name = "Gateway APC";
-	pixel_y = -23;
+	pixel_y = -24;
 	req_access = 150
 	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "0-8"
+	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/gateway)
 "en" = (
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "Research Center APC";
-	pixel_x = 1;
-	pixel_y = 23
+	pixel_y = 24
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "0-8"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/research)
 "eo" = (
 /obj/machinery/light/small,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post)
 "ep" = (
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post)
 "eq" = (
@@ -1849,8 +1899,10 @@
 	name = "Mess Hall APC";
 	pixel_x = 24
 	},
+/obj/structure/cable/yellow{
+	icon_state = "0-8"
+	},
 /obj/effect/decal/cleanable/cobweb/cobweb2,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/messhall)
 "er" = (
@@ -1872,7 +1924,9 @@
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/messhall)
 "et" = (
-/obj/machinery/vending/boozeomat,
+/obj/machinery/vending/boozeomat{
+	req_access_txt = "0"
+	},
 /obj/effect/turf_decal/tile/bar,
 /obj/effect/turf_decal/tile/bar{
 	dir = 1
@@ -1892,7 +1946,7 @@
 /area/awaymission/snowdin/post/messhall)
 "ev" = (
 /obj/machinery/airalarm{
-	pixel_y = 23
+	pixel_y = 24
 	},
 /obj/effect/turf_decal/tile/bar,
 /obj/effect/turf_decal/tile/bar{
@@ -1902,6 +1956,7 @@
 /area/awaymission/snowdin/post/messhall)
 "ew" = (
 /obj/machinery/firealarm{
+	dir = 2;
 	pixel_y = 24
 	},
 /obj/effect/turf_decal/tile/bar,
@@ -1932,9 +1987,11 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/kitchen)
 "eA" = (
@@ -2038,7 +2095,9 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 6
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plating{
 	icon_state = "platingdmg1"
 	},
@@ -2139,6 +2198,7 @@
 	dir = 1
 	},
 /obj/machinery/firealarm{
+	dir = 2;
 	pixel_y = 24
 	},
 /obj/effect/turf_decal/tile/blue{
@@ -2153,7 +2213,7 @@
 /obj/structure/table,
 /obj/item/clothing/glasses/hud/health,
 /obj/machinery/airalarm{
-	pixel_y = 23
+	pixel_y = 24
 	},
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
@@ -2194,8 +2254,10 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post)
 "fe" = (
@@ -2232,13 +2294,15 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/machinery/door/airlock/public/glass{
 	name = "Kitchen";
 	req_access_txt = "35"
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/barricade/wooden/crude,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/kitchen)
 "fk" = (
@@ -2312,7 +2376,9 @@
 	pixel_y = 5
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/dorm)
 "fv" = (
@@ -2415,20 +2481,55 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/awaymission/snowdin/post)
+"fD" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
+	piping_layer = 3;
+	pixel_x = 5;
+	pixel_y = 5
+	},
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post)
 "fE" = (
 /obj/machinery/power/apc{
 	dir = 4;
 	name = "Outpost Hallway APC";
 	pixel_x = 24
 	},
+/obj/structure/cable/yellow{
+	icon_state = "0-8"
+	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post)
 "fF" = (
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/gateway)
 "fG" = (
+/obj/machinery/gateway{
+	dir = 9
+	},
+/obj/effect/turf_decal/bot,
+/turf/open/floor/plasteel,
+/area/awaymission/snowdin/post/gateway)
+"fH" = (
+/obj/machinery/gateway{
+	dir = 1
+	},
+/obj/effect/turf_decal/bot,
+/turf/open/floor/plasteel,
+/area/awaymission/snowdin/post/gateway)
+"fI" = (
+/obj/machinery/gateway{
+	dir = 5
+	},
 /obj/effect/turf_decal/bot,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/gateway)
@@ -2490,7 +2591,9 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/hydro)
 "fR" = (
@@ -2515,6 +2618,7 @@
 /area/awaymission/snowdin/post/hydro)
 "fT" = (
 /obj/machinery/firealarm{
+	dir = 2;
 	pixel_y = 24
 	},
 /obj/effect/turf_decal/tile/green{
@@ -2629,9 +2733,11 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/dorm)
 "gj" = (
@@ -2764,6 +2870,18 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/awaymission/snowdin/post)
+"gt" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
+	piping_layer = 3;
+	pixel_x = 5;
+	pixel_y = 5
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post)
 "gu" = (
 /obj/structure/grille,
 /turf/open/floor/plating,
@@ -2776,17 +2894,29 @@
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/gateway)
 "gw" = (
+/obj/machinery/gateway{
+	dir = 8
+	},
 /obj/effect/turf_decal/bot,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/gateway)
 "gx" = (
-/obj/machinery/gateway/away{
+/obj/machinery/gateway/centerstation{
 	calibrated = 0
 	},
 /obj/effect/turf_decal/bot,
+/obj/structure/cable/yellow{
+	icon_state = "0-2"
+	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
+/turf/open/floor/plasteel,
+/area/awaymission/snowdin/post/gateway)
+"gy" = (
+/obj/machinery/gateway{
+	dir = 4
+	},
+/obj/effect/turf_decal/bot,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/gateway)
 "gz" = (
@@ -2830,8 +2960,10 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plating{
 	icon_state = "platingdmg2"
 	},
@@ -2860,7 +2992,7 @@
 /area/awaymission/snowdin/post/hydro)
 "gL" = (
 /obj/structure/sink{
-	dir = 8;
+	dir = 4;
 	pixel_x = 11
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
@@ -2873,7 +3005,7 @@
 	},
 /area/awaymission/snowdin/post/hydro)
 "gM" = (
-/obj/item/stack/cable_coil{
+/obj/item/stack/cable_coil/red{
 	amount = 1
 	},
 /obj/structure/lattice/catwalk,
@@ -2884,24 +3016,30 @@
 /turf/open/floor/plating/snowed/smoothed,
 /area/awaymission/snowdin/outside)
 "gN" = (
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
 /obj/structure/lattice/catwalk,
 /obj/effect/turf_decal/weather/snow,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
 	},
-/obj/structure/cable,
 /turf/open/floor/plating/snowed/smoothed,
 /area/awaymission/snowdin/outside)
 "gO" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 10
 	},
-/obj/structure/cable,
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
 /turf/closed/wall/ice,
 /area/awaymission/snowdin/post/garage)
 "gP" = (
-/obj/machinery/power/terminal,
-/obj/structure/cable,
+/obj/machinery/power/smes/engineering,
+/obj/structure/cable/yellow{
+	icon_state = "0-4"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/garage)
 "gQ" = (
@@ -2909,16 +3047,21 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/garage)
 "gR" = (
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "Garage APC";
-	pixel_y = 23
+	pixel_y = 24
+	},
+/obj/structure/cable/yellow{
+	icon_state = "0-8"
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/garage)
 "gS" = (
@@ -2979,10 +3122,12 @@
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden{
 	dir = 8
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/effect/decal/cleanable/dirt,
 /obj/item/trash/can,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/dorm)
 "ha" = (
@@ -3116,13 +3261,30 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/gateway)
-"hm" = (
+"hl" = (
+/obj/machinery/gateway{
+	dir = 10
+	},
 /obj/effect/turf_decal/bot,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
+/turf/open/floor/plasteel,
+/area/awaymission/snowdin/post/gateway)
+"hm" = (
+/obj/machinery/gateway,
+/obj/effect/turf_decal/bot,
+/obj/structure/cable/yellow{
+	icon_state = "0-2"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/gateway)
 "hn" = (
+/obj/machinery/gateway{
+	dir = 6
+	},
 /obj/effect/turf_decal/bot,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -3205,12 +3367,20 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /turf/open/floor/plating/snowed/smoothed,
 /area/awaymission/snowdin/outside)
+"hC" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/structure/cable{
+	icon_state = "1-4"
+	},
+/turf/closed/wall/ice,
+/area/awaymission/snowdin/post/garage)
 "hD" = (
 /obj/machinery/power/terminal{
 	dir = 1
 	},
-/obj/machinery/power/smes/engineering,
-/obj/structure/cable,
+/obj/structure/cable{
+	icon_state = "0-8"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/garage)
 "hE" = (
@@ -3298,7 +3468,9 @@
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden{
 	dir = 4
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/dorm)
 "hM" = (
@@ -3343,10 +3515,12 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/machinery/door/airlock/maintenance{
 	req_access_txt = "12"
 	},
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post)
 "hQ" = (
@@ -3362,9 +3536,11 @@
 /area/awaymission/snowdin/post/gateway)
 "hS" = (
 /obj/effect/landmark/awaystart,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/effect/turf_decal/loading_area,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/gateway)
 "hT" = (
@@ -3411,7 +3587,9 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/hydro)
 "ib" = (
@@ -3507,7 +3685,9 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-4"
+	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/dorm)
 "ip" = (
@@ -3520,7 +3700,9 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/dorm)
 "iq" = (
@@ -3533,13 +3715,15 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
 	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/dorm)
 "ir" = (
@@ -3552,13 +3736,15 @@
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden{
 	dir = 1
 	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/dorm)
 "is" = (
@@ -3574,6 +3760,9 @@
 /obj/machinery/door/airlock/public/glass{
 	name = "Dorms"
 	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/machinery/door/firedoor,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
@@ -3581,7 +3770,6 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/dorm)
 "it" = (
@@ -3594,29 +3782,34 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
 	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post)
 "iu" = (
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden{
+	dir = 2;
 	piping_layer = 3;
 	pixel_x = 5;
 	pixel_y = 5
 	},
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post)
 "iv" = (
@@ -3629,8 +3822,10 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plating{
 	icon_state = "platingdmg1"
 	},
@@ -3645,10 +3840,12 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
 /obj/structure/sign/departments/medbay{
 	pixel_y = 32
 	},
-/obj/structure/cable,
 /turf/open/floor/plating{
 	icon_state = "platingdmg1"
 	},
@@ -3676,7 +3873,7 @@
 /obj/structure/table,
 /obj/machinery/airalarm{
 	dir = 4;
-	pixel_x = -23
+	pixel_x = -24
 	},
 /obj/item/paper_bin,
 /turf/open/floor/plasteel,
@@ -3699,9 +3896,11 @@
 	dir = 10
 	},
 /obj/effect/landmark/awaystart,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/machinery/holopad,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/gateway)
 "iC" = (
@@ -3771,10 +3970,12 @@
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/hydro)
 "iM" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
 /obj/structure/lattice/catwalk,
 /obj/effect/turf_decal/weather/snow,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/obj/structure/cable,
 /turf/open/floor/plating/snowed/smoothed,
 /area/awaymission/snowdin/outside)
 "iN" = (
@@ -3802,7 +4003,7 @@
 	dir = 4
 	},
 /obj/machinery/airalarm{
-	pixel_y = 23
+	pixel_y = 24
 	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/garage)
@@ -3911,7 +4112,7 @@
 "iX" = (
 /obj/structure/table,
 /obj/machinery/airalarm{
-	pixel_y = 23
+	pixel_y = 24
 	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/garage)
@@ -4058,7 +4259,12 @@
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden{
 	dir = 8
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
 /turf/open/floor/plating{
 	icon_state = "platingdmg1"
 	},
@@ -4073,8 +4279,10 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
 	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post)
 "jr" = (
@@ -4087,9 +4295,11 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 9
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
+	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post)
 "js" = (
@@ -4118,9 +4328,11 @@
 	pixel_y = 5
 	},
 /obj/effect/landmark/awaystart,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/gateway)
 "jw" = (
@@ -4168,7 +4380,7 @@
 	pixel_y = 5
 	},
 /obj/structure/sink{
-	dir = 8;
+	dir = 4;
 	pixel_x = 11
 	},
 /obj/effect/turf_decal/tile/green,
@@ -4178,21 +4390,25 @@
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/hydro)
 "jC" = (
+/obj/structure/cable{
+	icon_state = "2-4"
+	},
 /obj/structure/lattice/catwalk,
 /obj/effect/turf_decal/weather/snow,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 6
 	},
-/obj/structure/cable,
 /turf/open/floor/plating/snowed/smoothed,
 /area/awaymission/snowdin/outside)
 "jD" = (
+/obj/structure/cable{
+	icon_state = "1-8"
+	},
 /obj/structure/lattice/catwalk,
 /obj/effect/turf_decal/weather/snow,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 9
 	},
-/obj/structure/cable,
 /turf/open/floor/plating/snowed/smoothed,
 /area/awaymission/snowdin/outside)
 "jE" = (
@@ -4321,8 +4537,10 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post)
 "jW" = (
@@ -4352,17 +4570,19 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/machinery/door/poddoor/shutters/preopen{
 	id = "snowdin_gate"
 	},
 /obj/effect/turf_decal/delivery,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/gateway)
 "ka" = (
 /obj/machinery/airalarm{
 	dir = 4;
-	pixel_x = -23
+	pixel_x = -24
 	},
 /turf/open/floor/plasteel/cafeteria,
 /area/awaymission/snowdin/post/messhall)
@@ -4390,7 +4610,7 @@
 "ke" = (
 /obj/machinery/airalarm{
 	dir = 4;
-	pixel_x = -23
+	pixel_x = -24
 	},
 /obj/effect/turf_decal/tile/green{
 	dir = 1
@@ -4602,7 +4822,7 @@
 /area/awaymission/snowdin/post/dorm)
 "kC" = (
 /obj/structure/sink{
-	dir = 8;
+	dir = 4;
 	pixel_x = 11
 	},
 /turf/open/floor/plasteel/showroomfloor,
@@ -4612,16 +4832,17 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "Custodials APC";
-	pixel_x = 1;
-	pixel_y = 23
+	pixel_y = 24
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "0-2"
+	},
 /turf/open/floor/plasteel/dark,
 /area/awaymission/snowdin/post/custodials)
 "kE" = (
 /obj/structure/table,
 /obj/machinery/airalarm{
-	pixel_y = 23
+	pixel_y = 24
 	},
 /turf/open/floor/plasteel/dark,
 /area/awaymission/snowdin/post/custodials)
@@ -4680,6 +4901,9 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
@@ -4689,7 +4913,6 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post)
 "kL" = (
@@ -4744,7 +4967,7 @@
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/hydro)
 "kT" = (
-/obj/item/stack/cable_coil{
+/obj/item/stack/cable_coil/red{
 	amount = 1
 	},
 /obj/structure/lattice/catwalk,
@@ -4801,7 +5024,7 @@
 "la" = (
 /obj/structure/filingcabinet,
 /obj/machinery/airalarm{
-	pixel_y = 23
+	pixel_y = 24
 	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/garage)
@@ -4889,8 +5112,10 @@
 /turf/open/floor/plasteel/showroomfloor,
 /area/awaymission/snowdin/post/dorm)
 "lk" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/machinery/holopad,
-/obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/awaymission/snowdin/post/custodials)
 "ll" = (
@@ -4928,8 +5153,13 @@
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden{
 	dir = 8
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-4"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
 /obj/effect/turf_decal/snowdin_station_sign/up,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post)
 "lp" = (
@@ -4942,9 +5172,11 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/effect/turf_decal/snowdin_station_sign/up/two,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post)
 "lq" = (
@@ -4957,10 +5189,12 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/effect/turf_decal/snowdin_station_sign/up/three,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post)
 "lr" = (
@@ -4973,9 +5207,11 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/effect/turf_decal/snowdin_station_sign/up/four,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post)
 "ls" = (
@@ -4988,9 +5224,11 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/effect/turf_decal/snowdin_station_sign/up/five,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post)
 "lt" = (
@@ -5003,8 +5241,10 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/effect/turf_decal/snowdin_station_sign/up/six,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post)
 "lu" = (
@@ -5017,19 +5257,27 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/effect/turf_decal/snowdin_station_sign/up/seven,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post)
 "lv" = (
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden{
+	dir = 2;
 	piping_layer = 3;
 	pixel_x = 5;
 	pixel_y = 5
 	},
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden,
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-4"
+	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post)
 "lw" = (
@@ -5042,7 +5290,9 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post)
 "lx" = (
@@ -5055,12 +5305,14 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post)
 "ly" = (
@@ -5076,8 +5328,10 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/machinery/door/firedoor,
-/obj/structure/cable,
 /turf/open/floor/plasteel/cafeteria,
 /area/awaymission/snowdin/post/messhall)
 "lz" = (
@@ -5090,7 +5344,9 @@
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden{
 	dir = 1
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/messhall)
 "lA" = (
@@ -5103,7 +5359,9 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/messhall)
 "lB" = (
@@ -5116,7 +5374,9 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plasteel/cafeteria,
 /area/awaymission/snowdin/post/messhall)
 "lC" = (
@@ -5129,7 +5389,12 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plasteel/cafeteria,
 /area/awaymission/snowdin/post/messhall)
 "lD" = (
@@ -5137,11 +5402,14 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden{
+	dir = 2;
 	piping_layer = 3;
 	pixel_x = 5;
 	pixel_y = 5
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plasteel/cafeteria,
 /area/awaymission/snowdin/post/messhall)
 "lE" = (
@@ -5154,12 +5422,14 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
 	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/machinery/door/airlock/public/glass{
 	name = "Hydroponics";
 	req_access_txt = "35"
 	},
 /obj/machinery/door/firedoor,
-/obj/structure/cable,
 /turf/open/floor/plasteel/cafeteria,
 /area/awaymission/snowdin/post/messhall)
 "lF" = (
@@ -5172,11 +5442,14 @@
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden{
 	dir = 1
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/hydro)
 "lG" = (
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden{
+	dir = 2;
 	piping_layer = 3;
 	pixel_x = 5;
 	pixel_y = 5
@@ -5184,7 +5457,12 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 9
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plating{
 	icon_state = "platingdmg2"
 	},
@@ -5196,9 +5474,11 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/hydro)
 "lI" = (
@@ -5208,8 +5488,23 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
+/turf/open/floor/plasteel,
+/area/awaymission/snowdin/post/hydro)
+"lJ" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
+	dir = 4;
+	piping_layer = 3;
+	pixel_x = 5;
+	pixel_y = 5
+	},
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/hydro)
 "lK" = (
@@ -5357,15 +5652,19 @@
 	brightness = 3;
 	dir = 8
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-4"
+	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/awaymission/snowdin/post/custodials)
 "ma" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plasteel/dark,
 /area/awaymission/snowdin/post/custodials)
 "mb" = (
@@ -5378,7 +5677,9 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plasteel/dark,
 /area/awaymission/snowdin/post/custodials)
 "mc" = (
@@ -5391,10 +5692,12 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
 	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/machinery/door/airlock{
 	name = "Custodial Closet"
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/awaymission/snowdin/post/custodials)
 "md" = (
@@ -5407,13 +5710,15 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel{
 	heat_capacity = 1e+006
 	},
@@ -5428,7 +5733,9 @@
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden{
 	dir = 1
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post)
 "mf" = (
@@ -5441,10 +5748,15 @@
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden{
 	dir = 4
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/effect/turf_decal/snowdin_station_sign,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post)
 "mg" = (
@@ -5499,7 +5811,9 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plasteel/cafeteria,
 /area/awaymission/snowdin/post/messhall)
 "mp" = (
@@ -5532,14 +5846,16 @@
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/hydro)
 "mu" = (
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plating{
 	icon_state = "platingdmg1"
 	},
 /area/awaymission/snowdin/post/hydro)
 "mv" = (
 /obj/structure/sink{
-	dir = 8;
+	dir = 4;
 	pixel_x = 11
 	},
 /turf/open/floor/plating{
@@ -5657,9 +5973,11 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post)
 "mK" = (
@@ -5686,12 +6004,14 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/machinery/door/airlock/engineering/glass{
 	name = "Engineering";
 	req_access_txt = "32"
 	},
 /obj/machinery/door/firedoor,
-/obj/structure/cable,
 /turf/open/floor/plasteel/cafeteria,
 /area/awaymission/snowdin/post/messhall)
 "mQ" = (
@@ -5701,7 +6021,9 @@
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/hydro)
 "mR" = (
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/hydro)
 "mS" = (
@@ -5806,11 +6128,13 @@
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden{
 	dir = 8
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post)
 "nf" = (
@@ -5894,6 +6218,9 @@
 /turf/closed/wall,
 /area/awaymission/snowdin/post/engineering)
 "nm" = (
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
 /obj/effect/turf_decal/tile/yellow{
 	dir = 1
 	},
@@ -5904,12 +6231,14 @@
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/engineering)
 "nn" = (
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/machinery/airalarm{
-	pixel_y = 23
+	pixel_y = 24
 	},
 /obj/effect/turf_decal/tile/yellow{
 	dir = 1
@@ -5921,20 +6250,27 @@
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/engineering)
 "no" = (
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/effect/turf_decal/tile/yellow{
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/engineering)
 "np" = (
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
+	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/visible{
 	piping_layer = 3;
 	pixel_x = 5;
@@ -5942,11 +6278,12 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/visible,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/engineering)
 "nq" = (
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plating{
 	icon_state = "platingdmg1"
 	},
@@ -5955,14 +6292,21 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "Engineering APC";
-	pixel_y = 23
+	pixel_y = 24
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "0-8"
+	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/engineering)
 "ns" = (
 /obj/machinery/computer/monitor/secret,
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "0-8"
+	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/engineering)
 "nt" = (
@@ -6008,7 +6352,9 @@
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/hydro)
 "nz" = (
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plating{
 	icon_state = "platingdmg2"
 	},
@@ -6049,8 +6395,12 @@
 	pixel_y = 5
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/machinery/door/airlock/security{
 	name = "Security Checkpoint";
+	req_access = null;
 	req_access_txt = "1"
 	},
 /obj/effect/turf_decal/tile/red{
@@ -6063,7 +6413,6 @@
 /obj/effect/turf_decal/tile/red{
 	dir = 8
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/secpost)
 "nH" = (
@@ -6075,7 +6424,7 @@
 /obj/structure/table/reinforced,
 /obj/machinery/door/firedoor,
 /obj/item/shard,
-/obj/item/stack/cable_coil{
+/obj/item/stack/cable_coil/red{
 	amount = 1
 	},
 /obj/effect/turf_decal/tile/red{
@@ -6128,15 +6477,25 @@
 /turf/closed/wall,
 /area/awaymission/snowdin/post/engineering)
 "nO" = (
+/obj/machinery/power/smes/engineering,
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/engineering)
 "nP" = (
+/obj/machinery/power/terminal{
+	dir = 8
+	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
+	},
+/obj/structure/cable{
+	icon_state = "0-2"
 	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/engineering)
@@ -6179,11 +6538,13 @@
 /turf/closed/wall/rust,
 /area/awaymission/snowdin/post/hydro)
 "nX" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/machinery/door/airlock/public/glass{
 	name = "Hydroponics";
 	req_access_txt = "35"
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/hydro)
 "nY" = (
@@ -6217,6 +6578,7 @@
 /obj/item/ammo_box/a762,
 /obj/structure/closet/secure_closet{
 	icon_state = "sec";
+	locked = 1;
 	name = "security officer's locker";
 	req_access_txt = "201"
 	},
@@ -6232,8 +6594,10 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "Security Outpost APC";
-	pixel_x = 1;
-	pixel_y = 23
+	pixel_y = 24
+	},
+/obj/structure/cable/yellow{
+	icon_state = "0-4"
 	},
 /obj/effect/turf_decal/tile/red{
 	dir = 1
@@ -6241,7 +6605,6 @@
 /obj/effect/turf_decal/tile/red{
 	dir = 4
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/secpost)
 "of" = (
@@ -6251,13 +6614,15 @@
 	pixel_y = 5
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
+	},
 /obj/effect/turf_decal/tile/red{
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/red{
 	dir = 4
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/secpost)
 "og" = (
@@ -6284,7 +6649,7 @@
 	pixel_y = 5
 	},
 /obj/machinery/airalarm{
-	pixel_y = 23
+	pixel_y = 24
 	},
 /obj/effect/turf_decal/tile/red{
 	dir = 1
@@ -6335,21 +6700,21 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/structure/sign/warning/electricshock{
 	pixel_x = -32
 	},
-/obj/structure/cable,
-/obj/machinery/power/smes/engineering,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/engineering)
 "om" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
-/obj/machinery/power/terminal{
-	dir = 8
+/obj/structure/cable{
+	icon_state = "1-2"
 	},
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/engineering)
 "on" = (
@@ -6366,9 +6731,9 @@
 "oo" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/visible{
 	dir = 4;
-	piping_layer = 3;
 	pixel_x = 5;
-	pixel_y = 5
+	pixel_y = 5;
+	piping_layer = 3
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
@@ -6376,9 +6741,9 @@
 "op" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/visible{
 	dir = 4;
-	piping_layer = 3;
 	pixel_x = 5;
-	pixel_y = 5
+	pixel_y = 5;
+	piping_layer = 3
 	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/engineering)
@@ -6411,12 +6776,15 @@
 /area/awaymission/snowdin/post/hydro)
 "ot" = (
 /obj/machinery/firealarm{
+	dir = 2;
 	pixel_y = 24
 	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/hydro)
 "ou" = (
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-4"
+	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/hydro)
 "ov" = (
@@ -6425,7 +6793,9 @@
 	name = "Hydroponics APC";
 	pixel_x = 24
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "0-8"
+	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/hydro)
 "ow" = (
@@ -6575,15 +6945,28 @@
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post)
 "oM" = (
+/obj/machinery/power/smes/engineering,
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/engineering)
 "oN" = (
+/obj/machinery/power/terminal{
+	dir = 8
+	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
 	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/engineering)
@@ -6645,8 +7028,10 @@
 /turf/closed/wall/ice,
 /area/awaymission/snowdin/post/engineering)
 "oX" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/obj/structure/cable,
 /turf/closed/wall/ice,
 /area/awaymission/snowdin/post/engineering)
 "oY" = (
@@ -6820,8 +7205,9 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/machinery/power/smes/engineering,
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/engineering)
 "pv" = (
@@ -6867,9 +7253,11 @@
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/engineering)
 "pz" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
 /obj/structure/rack,
 /obj/machinery/atmospherics/pipe/simple/supply/visible,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/engineering)
 "pA" = (
@@ -6983,6 +7371,26 @@
 	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post)
+"pS" = (
+/obj/machinery/power/terminal{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/effect/light_emitter{
+	name = "outdoor light";
+	set_cap = 3;
+	set_luminosity = 6
+	},
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post/engineering)
 "pT" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/visible{
 	piping_layer = 3;
@@ -7083,11 +7491,13 @@
 /turf/closed/wall,
 /area/awaymission/snowdin/post/engineering)
 "qf" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/structure/grille,
 /obj/machinery/atmospherics/pipe/simple/supply/visible{
 	dir = 9
 	},
-/obj/structure/cable,
-/obj/structure/grille/broken,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/engineering)
 "qg" = (
@@ -7171,15 +7581,14 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/visible{
 	dir = 6;
 	piping_layer = 3;
 	pixel_x = 5;
 	pixel_y = 5
-	},
-/obj/structure/cable,
-/obj/machinery/power/terminal{
-	dir = 8
 	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/engineering)
@@ -7190,7 +7599,6 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/engineering)
 "qv" = (
@@ -7198,7 +7606,6 @@
 	name = "Air Mix To Turbine Mix"
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/engineering)
 "qw" = (
@@ -7206,14 +7613,12 @@
 	dir = 5
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/engineering)
 "qx" = (
 /obj/machinery/atmospherics/components/trinary/mixer/airmix/flipped{
 	dir = 4
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/engineering)
 "qy" = (
@@ -7221,34 +7626,41 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/engineering)
 "qz" = (
 /obj/machinery/atmospherics/pipe/simple/supplymain/visible{
 	dir = 8
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/engineering)
 "qA" = (
 /obj/machinery/atmospherics/pipe/simple/supplymain/visible{
 	dir = 10
 	},
-/obj/structure/cable,
 /turf/open/floor/plating{
 	icon_state = "platingdmg1"
 	},
 /area/awaymission/snowdin/post/engineering)
 "qB" = (
-/obj/structure/cable,
+/obj/structure/cable{
+	icon_state = "2-4"
+	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/engineering)
 "qC" = (
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
 /obj/machinery/door/airlock/maintenance{
 	req_access_txt = "12"
 	},
-/obj/structure/cable,
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post/engineering)
+"qD" = (
+/obj/structure/cable{
+	icon_state = "1-8"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/engineering)
 "qE" = (
@@ -7319,14 +7731,23 @@
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post)
 "qP" = (
+/obj/machinery/power/smes/engineering,
 /obj/effect/turf_decal/stripes/line{
 	dir = 10
 	},
+/obj/structure/cable/yellow,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/engineering)
 "qQ" = (
+/obj/machinery/power/terminal{
+	dir = 8
+	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 6
+	},
+/obj/structure/cable,
+/obj/structure/cable{
+	icon_state = "1-4"
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/visible{
 	piping_layer = 3;
@@ -7340,6 +7761,9 @@
 	dir = 1;
 	id = "snowdin_turbine"
 	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
 /obj/effect/turf_decal/tile/yellow{
 	dir = 1
 	},
@@ -7347,7 +7771,6 @@
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/engineering)
 "qS" = (
@@ -7361,21 +7784,32 @@
 	name = "Turbine Gas Release";
 	pixel_y = -24
 	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plating{
 	icon_state = "platingdmg1"
 	},
 /area/awaymission/snowdin/post/engineering)
 "qT" = (
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/obj/structure/cable{
+	icon_state = "2-4"
+	},
 /obj/effect/turf_decal/tile/yellow,
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/engineering)
 "qU" = (
 /obj/machinery/atmospherics/pipe/simple/orange/visible{
 	dir = 6
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
 	},
 /obj/machinery/doorButtons/airlock_controller{
 	idExterior = "snowdin_turbine_exterior";
@@ -7401,6 +7835,9 @@
 /obj/machinery/atmospherics/pipe/simple/orange/visible{
 	dir = 8
 	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
 /obj/structure/extinguisher_cabinet{
 	pixel_x = 5;
 	pixel_y = -32
@@ -7414,6 +7851,9 @@
 "qW" = (
 /obj/machinery/atmospherics/pipe/manifold/orange/visible{
 	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
 	},
 /obj/effect/turf_decal/tile/yellow,
 /obj/effect/turf_decal/tile/yellow{
@@ -7429,11 +7869,17 @@
 	output_tag = "snowdin_toxins_out";
 	sensors = list("snowdin_toxins" = "Tank")
 	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plating{
 	icon_state = "platingdmg1"
 	},
 /area/awaymission/snowdin/post/engineering)
 "qY" = (
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
 /obj/effect/turf_decal/tile/yellow,
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
@@ -7442,6 +7888,9 @@
 /area/awaymission/snowdin/post/engineering)
 "qZ" = (
 /obj/machinery/atmospherics/pipe/simple/supplymain/visible,
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
 /obj/effect/turf_decal/tile/yellow,
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
@@ -7456,6 +7905,9 @@
 	output_tag = "snowdin_oxygen_out";
 	sensors = list("snowdin_oxygen" = "Tank")
 	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
 /obj/effect/turf_decal/tile/yellow,
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
@@ -7469,6 +7921,9 @@
 	name = "Nitrogen Supply Control";
 	output_tag = "snowdin_nitrogen_out";
 	sensors = list("snowdin_nitrogen" = "Tank")
+	},
+/obj/structure/cable{
+	icon_state = "1-8"
 	},
 /obj/effect/turf_decal/tile/yellow,
 /obj/effect/turf_decal/tile/yellow{
@@ -7504,7 +7959,7 @@
 /area/awaymission/snowdin/post/cavern2)
 "rg" = (
 /obj/machinery/airalarm{
-	pixel_y = 23
+	pixel_y = 24
 	},
 /turf/open/floor/engine/cult,
 /area/awaymission/snowdin/post/cavern2)
@@ -7567,6 +8022,9 @@
 /turf/closed/wall/r_wall,
 /area/awaymission/snowdin/post/engineering)
 "rq" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
 /obj/effect/mapping_helpers/airlock/locked,
 /obj/machinery/door/airlock/glass{
 	autoclose = 0;
@@ -7577,7 +8035,6 @@
 	req_access_txt = "32"
 	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
-/obj/structure/cable,
 /turf/open/floor/engine,
 /area/awaymission/snowdin/post/engineering)
 "rr" = (
@@ -7611,30 +8068,43 @@
 /area/awaymission/snowdin/cave/cavern)
 "rx" = (
 /obj/machinery/door/firedoor,
+/obj/structure/cable/yellow{
+	icon_state = "0-4"
+	},
 /obj/structure/grille,
 /obj/structure/window/reinforced/fulltile/ice,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern2)
 "ry" = (
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plating{
 	icon_state = "platingdmg1"
 	},
 /area/awaymission/snowdin/post/cavern2)
 "rz" = (
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern2)
 "rA" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/door/firedoor,
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "0-4"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern2)
 "rB" = (
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/cavern2)
 "rC" = (
@@ -7647,24 +8117,29 @@
 /turf/open/floor/engine/cult,
 /area/awaymission/snowdin/post/cavern2)
 "rD" = (
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "Main Outpost APC";
-	pixel_y = 23
+/obj/machinery/power/port_gen/pacman,
+/obj/structure/cable{
+	icon_state = "0-4"
 	},
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern2)
 "rE" = (
+/obj/machinery/power/terminal{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "0-8"
+	},
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern2)
 "rF" = (
 /obj/machinery/power/smes/engineering,
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "0-2"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern2)
 "rG" = (
@@ -7684,9 +8159,9 @@
 "rI" = (
 /obj/machinery/atmospherics/components/unary/outlet_injector/atmos{
 	dir = 1;
-	piping_layer = 3;
 	pixel_x = 5;
-	pixel_y = 5
+	pixel_y = 5;
+	piping_layer = 3
 	},
 /obj/effect/light_emitter{
 	name = "cave light";
@@ -7711,7 +8186,9 @@
 /turf/open/floor/engine,
 /area/awaymission/snowdin/post/engineering)
 "rK" = (
-/obj/structure/cable,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
 /turf/open/floor/engine,
 /area/awaymission/snowdin/post/engineering)
 "rL" = (
@@ -7740,7 +8217,7 @@
 	id_tag = "snowdin_toxins_out";
 	name = "toxin out"
 	},
-/turf/open/floor/engine/plasma,
+/turf/open/floor/plating/airless,
 /area/awaymission/snowdin/post/engineering)
 "rN" = (
 /obj/machinery/air_sensor{
@@ -7748,7 +8225,7 @@
 	id_tag = "snowdin_toxins";
 	name = "gas sensor (toxins)"
 	},
-/turf/open/floor/engine/plasma,
+/turf/open/floor/plating/airless,
 /area/awaymission/snowdin/post/engineering)
 "rO" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/siphon/on{
@@ -7757,7 +8234,7 @@
 	id_tag = "snowdin_oxygen_out";
 	name = "oxygen out"
 	},
-/turf/open/floor/engine/o2,
+/turf/open/floor/plating/airless,
 /area/awaymission/snowdin/post/engineering)
 "rP" = (
 /obj/machinery/air_sensor{
@@ -7765,7 +8242,7 @@
 	id_tag = "snowdin_oxygen";
 	name = "gas sensor (oxygen)"
 	},
-/turf/open/floor/engine/o2,
+/turf/open/floor/plating/airless,
 /area/awaymission/snowdin/post/engineering)
 "rQ" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/siphon/on{
@@ -7774,7 +8251,7 @@
 	id_tag = "snowdin_nitrogen_out";
 	name = "nitrogen out"
 	},
-/turf/open/floor/engine/n2,
+/turf/open/floor/plating/airless,
 /area/awaymission/snowdin/post/engineering)
 "rR" = (
 /obj/machinery/air_sensor{
@@ -7782,7 +8259,7 @@
 	id_tag = "snowdin_nitrogen";
 	name = "gas sensor (nitrogen)"
 	},
-/turf/open/floor/engine/n2,
+/turf/open/floor/plating/airless,
 /area/awaymission/snowdin/post/engineering)
 "rS" = (
 /obj/effect/turf_decal/stripes/corner,
@@ -7812,6 +8289,13 @@
 /obj/machinery/light/small,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern2)
+"rY" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plasteel,
+/area/awaymission/snowdin/post/cavern2)
 "rZ" = (
 /mob/living/simple_animal/hostile/netherworld/migo,
 /turf/open/floor/engine/cult,
@@ -7831,12 +8315,20 @@
 /obj/item/stack/sheet/mineral/plasma{
 	amount = 10
 	},
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern2)
 "sd" = (
-/obj/machinery/power/port_gen/pacman,
-/obj/machinery/power/terminal{
-	dir = 1
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "Main Outpost APC";
+	pixel_x = 24
+	},
+/obj/structure/cable/yellow,
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
 	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern2)
@@ -7854,6 +8346,9 @@
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/snowdin/outside)
 "sg" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
 /obj/effect/mapping_helpers/airlock/locked,
 /obj/machinery/door/airlock/glass{
 	autoclose = 0;
@@ -7866,21 +8361,23 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 1
 	},
-/obj/structure/cable,
 /turf/open/floor/engine,
 /area/awaymission/snowdin/post/engineering)
 "sh" = (
-/turf/open/floor/engine/plasma,
+/obj/machinery/atmospherics/miner/toxins,
+/turf/open/floor/plating/airless,
 /area/awaymission/snowdin/post/engineering)
 "si" = (
 /obj/machinery/light/small,
-/turf/open/floor/engine/plasma,
+/turf/open/floor/plating/airless,
 /area/awaymission/snowdin/post/engineering)
 "sj" = (
-/turf/open/floor/engine/o2,
+/obj/machinery/atmospherics/miner/oxygen,
+/turf/open/floor/plating/airless,
 /area/awaymission/snowdin/post/engineering)
 "sk" = (
-/turf/open/floor/engine/n2,
+/obj/machinery/atmospherics/miner/nitrogen,
+/turf/open/floor/plating/airless,
 /area/awaymission/snowdin/post/engineering)
 "sl" = (
 /obj/effect/turf_decal/stripes/line{
@@ -7923,23 +8420,43 @@
 	},
 /turf/open/floor/plating/snowed/cavern,
 /area/awaymission/snowdin/post/cavern2)
+"sr" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-4"
+	},
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post/cavern2)
 "ss" = (
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/engine/cult,
+/area/awaymission/snowdin/post/cavern2)
+"st" = (
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/cavern2)
 "su" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "SMES Storage";
 	req_access_txt = "32"
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern2)
 "sv" = (
 /obj/machinery/computer/monitor/secret{
 	dir = 8
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow,
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern2)
 "sw" = (
@@ -8004,10 +8521,12 @@
 /turf/open/floor/engine/vacuum,
 /area/awaymission/snowdin/post/engineering)
 "sB" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
 /obj/machinery/igniter{
 	id = "snowdin_turbine_ignitor"
 	},
-/obj/structure/cable,
 /turf/open/floor/engine/vacuum,
 /area/awaymission/snowdin/post/engineering)
 "sC" = (
@@ -8099,6 +8618,9 @@
 	luminosity = 2
 	},
 /obj/structure/cable,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
 /turf/open/floor/engine/vacuum,
 /area/awaymission/snowdin/post/engineering)
 "sN" = (
@@ -8165,6 +8687,7 @@
 /area/awaymission/snowdin/outside)
 "sW" = (
 /obj/machinery/power/turbine{
+	dir = 2;
 	luminosity = 2
 	},
 /obj/structure/cable,
@@ -8191,7 +8714,7 @@
 /area/awaymission/snowdin/post/cavern2)
 "tc" = (
 /obj/structure/sink{
-	dir = 8;
+	dir = 4;
 	pixel_x = 11
 	},
 /turf/open/floor/plasteel/showroomfloor,
@@ -8494,17 +9017,24 @@
 	dir = 1
 	},
 /obj/effect/spawner/lootdrop/crate_spawner,
-/obj/structure/cable,
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post/cavern1)
+"ui" = (
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "Main Outpost APC";
-	pixel_y = 23
+	pixel_y = 24
+	},
+/obj/structure/cable/yellow{
+	icon_state = "0-2"
 	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern1)
 "uj" = (
-/obj/machinery/computer/monitor/secret,
-/obj/structure/cable,
+/obj/machinery/power/port_gen/pacman,
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern1)
 "uk" = (
@@ -8516,7 +9046,30 @@
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern1)
 "um" = (
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post/cavern1)
+"un" = (
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post/cavern1)
+"uo" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post/cavern1)
+"up" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern1)
 "uq" = (
@@ -8538,6 +9091,19 @@
 	name = "SMES Storage";
 	req_access_txt = "32"
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post/cavern1)
+"ut" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post/cavern1)
+"uu" = (
+/obj/machinery/power/terminal,
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern1)
@@ -8564,11 +9130,14 @@
 /area/awaymission/snowdin/post/cavern1)
 "uy" = (
 /obj/machinery/airalarm{
-	pixel_y = 23
+	pixel_y = 24
 	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern1)
 "uz" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
@@ -8576,19 +9145,25 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/cavern1)
 "uA" = (
-/obj/machinery/power/port_gen/pacman,
-/obj/machinery/power/terminal{
-	dir = 4
+/obj/machinery/computer/monitor/secret{
+	dir = 1
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-4"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "0-4"
 	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern1)
 "uB" = (
 /obj/machinery/power/smes/engineering,
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "0-8"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern1)
 "uC" = (
@@ -8625,6 +9200,9 @@
 /area/awaymission/snowdin/post/cavern1)
 "uH" = (
 /obj/structure/table,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/item/storage/firstaid/brute,
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
@@ -8643,8 +9221,18 @@
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern1)
 "uK" = (
-/obj/structure/cable,
 /mob/living/simple_animal/hostile/skeleton/plasmaminer,
+/turf/open/floor/plasteel,
+/area/awaymission/snowdin/post/cavern1)
+"uL" = (
+/obj/structure/table,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/cavern1)
 "uM" = (
@@ -8666,9 +9254,11 @@
 /area/awaymission/snowdin/post/cavern1)
 "uO" = (
 /obj/machinery/door/firedoor,
+/obj/structure/cable/yellow{
+	icon_state = "0-2"
+	},
 /obj/structure/grille,
 /obj/structure/window/reinforced/fulltile/ice,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern1)
 "uP" = (
@@ -8693,6 +9283,16 @@
 	icon_state = "platingdmg1"
 	},
 /area/awaymission/snowdin/post/cavern1)
+"uT" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/turf/open/floor/plasteel,
+/area/awaymission/snowdin/post/cavern1)
 "uU" = (
 /obj/item/chair,
 /turf/open/floor/plasteel,
@@ -8704,6 +9304,18 @@
 	dir = 4
 	},
 /turf/open/floor/plasteel,
+/area/awaymission/snowdin/post/cavern1)
+"uW" = (
+/obj/machinery/door/firedoor,
+/obj/structure/cable/yellow{
+	icon_state = "0-2"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/structure/grille,
+/obj/structure/window/reinforced/fulltile/ice,
+/turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern1)
 "uX" = (
 /obj/effect/light_emitter{
@@ -8745,32 +9357,44 @@
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern1)
 "vc" = (
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel{
 	heat_capacity = 1e+006
 	},
 /area/awaymission/snowdin/post/cavern1)
 "vd" = (
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/effect/turf_decal/tile/neutral,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/cavern1)
 "ve" = (
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/machinery/light/broken,
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/cavern1)
 "vf" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
@@ -8778,13 +9402,15 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/cavern1)
 "vg" = (
 /obj/machinery/door/airlock/public/glass{
 	name = "Observation Deck"
 	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
@@ -8795,27 +9421,90 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
+/area/awaymission/snowdin/post/cavern1)
+"vh" = (
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/turf/open/floor/plasteel{
+	heat_capacity = 1e+006
+	},
+/area/awaymission/snowdin/post/cavern1)
+"vi" = (
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plating{
+	icon_state = "platingdmg1"
+	},
 /area/awaymission/snowdin/post/cavern1)
 "vj" = (
 /obj/structure/table,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
+/area/awaymission/snowdin/post/cavern1)
+"vk" = (
+/obj/machinery/door/firedoor,
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
+	},
+/obj/structure/grille,
+/obj/structure/window/reinforced/fulltile/ice,
+/turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern1)
 "vl" = (
 /obj/effect/mob_spawn/human/corpse/assistant,
 /turf/open/floor/plating/asteroid/snow/ice,
 /area/awaymission/snowdin/cave/cavern)
+"vm" = (
+/obj/machinery/door/firedoor,
+/obj/structure/cable/yellow{
+	icon_state = "0-4"
+	},
+/obj/structure/grille,
+/obj/structure/window/reinforced/fulltile/ice,
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post/cavern1)
 "vn" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/door/firedoor,
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "0-4"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plating,
+/area/awaymission/snowdin/post/cavern1)
+"vo" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/turf/open/floor/plasteel{
+	heat_capacity = 1e+006
+	},
 /area/awaymission/snowdin/post/cavern1)
 "vp" = (
 /obj/machinery/door/airlock{
@@ -8837,6 +9526,16 @@
 	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/cavern1)
+"vs" = (
+/obj/machinery/door/firedoor,
+/obj/structure/cable/yellow,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/structure/grille,
+/obj/structure/window/reinforced/fulltile/ice,
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post/cavern1)
 "vt" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on,
 /turf/open/floor/plating,
@@ -8857,7 +9556,7 @@
 /area/awaymission/snowdin/post/cavern1)
 "vw" = (
 /obj/structure/sink{
-	dir = 8;
+	dir = 4;
 	pixel_x = 11
 	},
 /turf/open/floor/plasteel/showroomfloor,
@@ -8871,6 +9570,13 @@
 	dir = 8
 	},
 /turf/open/floor/plasteel,
+/area/awaymission/snowdin/post/cavern1)
+"vy" = (
+/obj/machinery/door/firedoor,
+/obj/structure/cable/yellow,
+/obj/structure/grille,
+/obj/structure/window/reinforced/fulltile/ice,
+/turf/open/floor/plating,
 /area/awaymission/snowdin/post/cavern1)
 "vz" = (
 /obj/machinery/light/small/broken{
@@ -9037,10 +9743,10 @@
 /area/awaymission/snowdin/post/broken_shuttle)
 "wc" = (
 /obj/machinery/computer{
+	name = "Shuttle Transist Console";
 	desc = "A console meant for calling and sending a transit ferry. It seems iced-over and non-functional.";
 	dir = 1;
-	icon_screen = null;
-	name = "Shuttle Transist Console"
+	icon_screen = null
 	},
 /turf/open/floor/mineral/titanium/blue,
 /area/awaymission/snowdin/post/broken_shuttle)
@@ -9129,6 +9835,7 @@
 "wm" = (
 /obj/machinery/porta_turret/centcom_shuttle/weak{
 	desc = "A turret built with substandard parts and run down further with age.";
+	icon_state = "syndie_off";
 	dir = 9;
 	faction = list("pirate")
 	},
@@ -9222,6 +9929,7 @@
 	},
 /obj/effect/light_emitter{
 	light_color = "#FAA019";
+	light_power = 1;
 	light_range = 4;
 	name = "fire light"
 	},
@@ -9253,6 +9961,7 @@
 /area/awaymission/snowdin/outside)
 "wC" = (
 /obj/vehicle/ridden/atv{
+	icon_state = "atv";
 	dir = 4
 	},
 /obj/effect/light_emitter{
@@ -9275,45 +9984,68 @@
 /area/awaymission/snowdin/outside)
 "wG" = (
 /obj/machinery/power/smes/engineering,
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "0-4"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "wH" = (
 /obj/structure/sign/warning/electricshock{
 	pixel_y = 32
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "wI" = (
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "wJ" = (
 /obj/machinery/computer/monitor/secret,
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "0-8"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "wK" = (
 /obj/machinery/power/terminal{
 	dir = 1
 	},
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "wL" = (
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "wM" = (
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post/mining_dock)
+"wN" = (
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "Main Outpost APC";
+	pixel_x = 24
+	},
+/obj/structure/cable/yellow,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "wO" = (
 /obj/machinery/power/port_gen/pacman,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "wP" = (
@@ -9327,7 +10059,9 @@
 	name = "SMES Storage";
 	req_access_txt = "32"
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "wS" = (
@@ -9362,7 +10096,7 @@
 /area/awaymission/snowdin/post/mining_dock)
 "wV" = (
 /obj/machinery/airalarm{
-	pixel_y = 23
+	pixel_y = 24
 	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
@@ -9385,7 +10119,9 @@
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/mining_dock)
 "wY" = (
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/engine/cult,
 /area/awaymission/snowdin/post/mining_dock)
 "wZ" = (
@@ -9466,18 +10202,22 @@
 /area/awaymission/snowdin/post/mining_dock)
 "xi" = (
 /obj/effect/turf_decal/stripes/line,
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-4"
+	},
 /turf/open/floor/engine/cult,
 /area/awaymission/snowdin/post/mining_dock)
 "xj" = (
 /obj/effect/turf_decal/stripes/corner{
 	dir = 8
 	},
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
 /obj/structure/spawner/nether{
 	max_mobs = 4;
 	name = "weak netherworld link"
 	},
-/obj/structure/cable,
 /turf/open/floor/engine/cult,
 /area/awaymission/snowdin/post/mining_dock)
 "xk" = (
@@ -9538,7 +10278,9 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/engine/cult,
 /area/awaymission/snowdin/post/mining_dock)
 "xx" = (
@@ -9567,13 +10309,13 @@
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "xA" = (
+/mob/living/simple_animal/hostile/netherworld/migo,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
-/mob/living/simple_animal/hostile/netherworld/migo,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/mining_dock)
 "xB" = (
@@ -9725,13 +10467,15 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel{
 	heat_capacity = 1e+006
 	},
@@ -9840,7 +10584,11 @@
 /turf/open/floor/plating,
 /area/awaymission/snowdin/cave)
 "yg" = (
-/turf/open/floor/engine/plasma,
+/turf/open/floor/engine/vacuum,
+/area/awaymission/snowdin/cave)
+"yh" = (
+/obj/machinery/atmospherics/miner/toxins,
+/turf/open/floor/engine/vacuum,
 /area/awaymission/snowdin/cave)
 "yi" = (
 /obj/effect/turf_decal/stripes/line{
@@ -9949,12 +10697,12 @@
 /area/awaymission/snowdin/cave)
 "yu" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/siphon/on{
+	name = "toxin out";
 	dir = 8;
-	frequency = 1442;
 	id_tag = "snowdin_toxins_mine_1";
-	name = "toxin out"
+	frequency = 1442
 	},
-/turf/open/floor/engine/plasma,
+/turf/open/floor/engine/vacuum,
 /area/awaymission/snowdin/cave)
 "yv" = (
 /turf/closed/wall/mineral/snow,
@@ -10002,7 +10750,20 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
+/turf/open/floor/plating{
+	icon_state = "platingdmg1"
+	},
+/area/awaymission/snowdin/post/mining_dock)
+"yB" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plating{
 	icon_state = "platingdmg1"
 	},
@@ -10011,13 +10772,35 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
 	},
-/obj/structure/cable,
+/turf/open/floor/plasteel{
+	heat_capacity = 1e+006
+	},
+/area/awaymission/snowdin/post/mining_dock)
+"yD" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
 /turf/open/floor/plasteel{
 	heat_capacity = 1e+006
 	},
@@ -10026,7 +10809,9 @@
 /obj/effect/turf_decal/stripes/corner{
 	dir = 1
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
+	},
 /turf/open/floor/plating{
 	icon_state = "platingdmg1"
 	},
@@ -10127,11 +10912,13 @@
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "yS" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/mining_dock)
 "yT" = (
@@ -10183,7 +10970,7 @@
 	id_tag = "snowdin_toxins_mine_1";
 	name = "toxin out"
 	},
-/turf/open/floor/engine/plasma,
+/turf/open/floor/engine/vacuum,
 /area/awaymission/snowdin/cave)
 "zc" = (
 /obj/machinery/atmospherics/pipe/simple/orange/visible{
@@ -10262,7 +11049,10 @@
 "zm" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/door/firedoor,
-/obj/structure/cable,
+/obj/structure/cable/yellow,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "zn" = (
@@ -10282,6 +11072,7 @@
 /area/awaymission/snowdin/post/minipost)
 "zq" = (
 /obj/vehicle/ridden/atv{
+	icon_state = "atv";
 	dir = 8
 	},
 /turf/open/floor/plating,
@@ -10316,12 +11107,16 @@
 	dir = 8
 	},
 /obj/structure/closet/emcloset,
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "zw" = (
 /obj/structure/rack,
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "zx" = (
@@ -10394,7 +11189,9 @@
 /area/awaymission/snowdin/outside)
 "zG" = (
 /obj/machinery/space_heater,
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "zH" = (
@@ -10406,7 +11203,9 @@
 /obj/structure/sign/warning/xeno_mining{
 	pixel_x = 32
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "zI" = (
@@ -10472,9 +11271,9 @@
 /area/awaymission/snowdin/igloo)
 "zR" = (
 /obj/machinery/door/firedoor,
+/obj/structure/cable/yellow,
 /obj/structure/grille,
 /obj/structure/window/reinforced/fulltile/ice,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "zS" = (
@@ -10770,6 +11569,7 @@
 	},
 /obj/effect/light_emitter{
 	light_color = "#FAA019";
+	light_power = 1;
 	light_range = 4;
 	name = "fire light"
 	},
@@ -11020,10 +11820,11 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "Recon Post APC";
-	pixel_x = 1;
-	pixel_y = 23
+	pixel_y = 24
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "0-2"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/minipost)
 "Br" = (
@@ -11094,7 +11895,7 @@
 /area/awaymission/snowdin/cave/cavern)
 "BA" = (
 /obj/machinery/power/smes,
-/obj/structure/cable,
+/obj/structure/cable/yellow,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/minipost)
 "BB" = (
@@ -11102,15 +11903,19 @@
 	dir = 8
 	},
 /obj/machinery/light/small,
-/obj/structure/cable,
+/obj/structure/cable{
+	icon_state = "0-4"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/minipost)
 "BC" = (
+/obj/structure/cable{
+	icon_state = "0-8"
+	},
 /obj/machinery/power/port_gen/pacman,
 /obj/item/stack/sheet/mineral/plasma{
 	amount = 3
 	},
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/minipost)
 "BD" = (
@@ -11520,6 +12325,7 @@
 /area/awaymission/snowdin/cave)
 "CP" = (
 /obj/structure/shuttle/engine/heater{
+	icon_state = "heater";
 	dir = 4
 	},
 /obj/effect/turf_decal/stripes/line{
@@ -11599,7 +12405,7 @@
 /area/awaymission/snowdin/cave)
 "CW" = (
 /obj/item/shard,
-/obj/item/stack/cable_coil{
+/obj/item/stack/cable_coil/red{
 	amount = 1
 	},
 /obj/effect/turf_decal/tile/neutral,
@@ -11637,7 +12443,7 @@
 /area/awaymission/snowdin/cave)
 "CZ" = (
 /obj/structure/frame/machine,
-/obj/item/stack/cable_coil{
+/obj/item/stack/cable_coil/red{
 	amount = 1
 	},
 /turf/open/floor/circuit/red,
@@ -11726,7 +12532,7 @@
 /turf/open/floor/plasteel/dark,
 /area/awaymission/snowdin/cave)
 "Dk" = (
-/obj/item/stack/cable_coil{
+/obj/item/stack/cable_coil/red{
 	amount = 1
 	},
 /obj/effect/turf_decal/tile/neutral{
@@ -12129,7 +12935,7 @@
 /area/awaymission/snowdin/cave)
 "Ec" = (
 /obj/item/shard,
-/obj/item/stack/cable_coil{
+/obj/item/stack/cable_coil/red{
 	amount = 1
 	},
 /obj/effect/turf_decal/tile/neutral{
@@ -12492,6 +13298,7 @@
 /area/awaymission/snowdin/cave)
 "EN" = (
 /obj/machinery/sleeper/syndie{
+	icon_state = "sleeper_s";
 	dir = 1
 	},
 /obj/effect/turf_decal/bot_white,
@@ -12504,6 +13311,7 @@
 "EP" = (
 /obj/effect/turf_decal/bot_white,
 /obj/machinery/sleeper/syndie{
+	icon_state = "sleeper_s";
 	dir = 1
 	},
 /turf/open/floor/plasteel/dark,
@@ -12771,9 +13579,11 @@
 /area/awaymission/snowdin/post/mining_dock)
 "FD" = (
 /obj/machinery/door/firedoor,
+/obj/structure/cable/yellow{
+	icon_state = "0-2"
+	},
 /obj/structure/holosign/barrier/atmos,
 /obj/structure/grille/broken,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "FE" = (
@@ -12791,11 +13601,13 @@
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/snowdin/outside)
 "FG" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/item/shard,
 /obj/item/stack/rods{
 	amount = 2
 	},
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "FH" = (
@@ -12808,6 +13620,9 @@
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/snowdin/outside)
 "FJ" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/machinery/light/small{
 	brightness = 3;
 	dir = 8
@@ -12815,7 +13630,6 @@
 /obj/item/stack/rods{
 	amount = 2
 	},
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "FK" = (
@@ -12836,8 +13650,13 @@
 /area/awaymission/snowdin/post/mining_dock)
 "FM" = (
 /obj/machinery/door/firedoor,
+/obj/structure/cable/yellow{
+	icon_state = "0-2"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/structure/grille/broken,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "FN" = (
@@ -12882,20 +13701,22 @@
 /turf/closed/mineral/snowmountain/cavern,
 /area/awaymission/snowdin/cave/cavern)
 "FU" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel{
 	heat_capacity = 1e+006
 	},
 /area/awaymission/snowdin/post/mining_dock)
 "FV" = (
 /obj/machinery/airalarm{
-	pixel_y = 23
+	pixel_y = 24
 	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
@@ -12914,6 +13735,7 @@
 /area/awaymission/snowdin/cave/cavern)
 "FY" = (
 /obj/machinery/conveyor{
+	dir = 2;
 	id = "snowdin_belt_mine"
 	},
 /obj/machinery/light/small{
@@ -12936,7 +13758,8 @@
 /area/awaymission/snowdin/post/mining_main)
 "Gc" = (
 /obj/structure/statue/snow/snowman{
-	anchored = 1
+	anchored = 1;
+	name = "snowman"
 	},
 /obj/item/pickaxe/mini{
 	pixel_x = 5;
@@ -12949,6 +13772,33 @@
 /area/awaymission/snowdin/post/mining_main/robotics)
 "Ge" = (
 /obj/machinery/door/firedoor,
+/obj/structure/cable/yellow{
+	icon_state = "0-4"
+	},
+/obj/structure/grille,
+/obj/structure/window/reinforced/fulltile/ice,
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post/mining_main/robotics)
+"Gf" = (
+/obj/machinery/door/firedoor,
+/obj/structure/cable/yellow{
+	icon_state = "0-4"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/structure/grille,
+/obj/structure/window/reinforced/fulltile/ice,
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post/mining_main/robotics)
+"Gg" = (
+/obj/machinery/door/firedoor,
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "0-8"
+	},
 /obj/structure/grille,
 /obj/structure/window/reinforced/fulltile/ice,
 /turf/open/floor/plating,
@@ -12965,8 +13815,10 @@
 	},
 /area/awaymission/snowdin/post/mining_dock)
 "Gi" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/mining_dock)
 "Gj" = (
@@ -12994,6 +13846,7 @@
 "Gn" = (
 /obj/structure/plasticflaps,
 /obj/machinery/conveyor{
+	dir = 2;
 	id = "snowdin_belt_mine"
 	},
 /turf/open/floor/plating,
@@ -13076,6 +13929,9 @@
 /area/awaymission/snowdin/post/mining_main/robotics)
 "GB" = (
 /obj/machinery/mecha_part_fabricator,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/mining_main/robotics)
 "GC" = (
@@ -13090,8 +13946,10 @@
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/mining_dock)
 "GE" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/item/disk/holodisk/snowdin/ripjacob,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "GF" = (
@@ -13168,6 +14026,7 @@
 	output_dir = 2
 	},
 /obj/machinery/conveyor{
+	dir = 2;
 	id = "snowdin_belt_mine"
 	},
 /turf/open/floor/plating,
@@ -13224,6 +14083,9 @@
 /area/awaymission/snowdin/post/mining_main/robotics)
 "GY" = (
 /obj/effect/turf_decal/stripes/line,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_main/robotics)
 "GZ" = (
@@ -13231,7 +14093,9 @@
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/mining_dock)
 "Ha" = (
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/mining_dock)
 "Hb" = (
@@ -13278,6 +14142,7 @@
 /area/awaymission/snowdin/post/mining_main/mechbay)
 "Hk" = (
 /obj/machinery/conveyor{
+	dir = 2;
 	id = "snowdin_belt_mine"
 	},
 /turf/open/floor/plating,
@@ -13300,7 +14165,7 @@
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/snowdin/cave/mountain)
 "Ho" = (
-/turf/open/floor/engine/plasma,
+/turf/open/floor/engine/vacuum,
 /area/awaymission/snowdin/outside)
 "Hp" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/siphon/on{
@@ -13309,7 +14174,7 @@
 	id_tag = "snowdin_toxins_mine_1";
 	name = "toxin out"
 	},
-/turf/open/floor/engine/plasma,
+/turf/open/floor/engine/vacuum,
 /area/awaymission/snowdin/outside)
 "Hq" = (
 /obj/effect/turf_decal/bot,
@@ -13350,11 +14215,18 @@
 	name = "Robotics APC";
 	pixel_x = 24
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "0-2"
+	},
 /turf/open/floor/plasteel/white,
 /area/awaymission/snowdin/post/mining_main/robotics)
 "Hw" = (
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plating{
 	icon_state = "platingdmg1"
 	},
@@ -13386,9 +14258,11 @@
 /area/awaymission/snowdin/post/mining_main/mechbay)
 "HC" = (
 /obj/machinery/mineral/processing_unit{
-	dir = 1
+	dir = 1;
+	output_dir = 2
 	},
 /obj/machinery/conveyor{
+	dir = 2;
 	id = "snowdin_belt_mine"
 	},
 /turf/open/floor/plating,
@@ -13432,6 +14306,10 @@
 	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/mining_main)
+"HH" = (
+/obj/machinery/atmospherics/miner/toxins,
+/turf/open/floor/engine/vacuum,
+/area/awaymission/snowdin/outside)
 "HI" = (
 /obj/effect/turf_decal/bot,
 /obj/machinery/portable_atmospherics/canister,
@@ -13446,7 +14324,7 @@
 /obj/effect/turf_decal/stripes/line,
 /obj/machinery/airalarm{
 	dir = 4;
-	pixel_x = -23
+	pixel_x = -24
 	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/mining_main/robotics)
@@ -13465,14 +14343,16 @@
 /turf/open/floor/plasteel/white,
 /area/awaymission/snowdin/post/mining_main/robotics)
 "HM" = (
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plasteel/white,
 /area/awaymission/snowdin/post/mining_main/robotics)
 "HN" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/machinery/airalarm{
 	dir = 4;
-	pixel_x = -23
+	pixel_x = -24
 	},
 /turf/open/floor/plating{
 	icon_state = "platingdmg1"
@@ -13559,22 +14439,32 @@
 	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_main)
+"Ib" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-4"
+	},
+/turf/open/floor/plasteel/white,
+/area/awaymission/snowdin/post/mining_main/robotics)
 "Ic" = (
 /obj/machinery/door/airlock/research{
 	name = "Robotics Lab";
 	req_access_txt = "29"
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plasteel/white,
 /area/awaymission/snowdin/post/mining_main/robotics)
 "Id" = (
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel{
 	heat_capacity = 1e+006
 	},
@@ -13698,6 +14588,7 @@
 /area/awaymission/snowdin/post/mining_main)
 "Ix" = (
 /obj/vehicle/ridden/atv{
+	icon_state = "atv";
 	dir = 1
 	},
 /obj/effect/decal/cleanable/oil,
@@ -13724,12 +14615,28 @@
 /obj/structure/table,
 /turf/open/floor/plasteel/white,
 /area/awaymission/snowdin/post/mining_main/robotics)
+"IC" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/turf/open/floor/plasteel{
+	heat_capacity = 1e+006
+	},
+/area/awaymission/snowdin/post/mining_dock)
 "ID" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/mining_dock)
 "IE" = (
@@ -13768,29 +14675,77 @@
 	},
 /turf/closed/wall,
 /area/awaymission/snowdin/post/mining_main/robotics)
+"IK" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/turf/open/floor/plasteel{
+	heat_capacity = 1e+006
+	},
+/area/awaymission/snowdin/post/mining_dock)
+"IL" = (
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plasteel,
+/area/awaymission/snowdin/post/mining_dock)
+"IM" = (
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
+	},
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post/mining_dock)
 "IN" = (
 /obj/machinery/door/airlock/maintenance{
 	req_access_txt = "12"
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post/mining_dock)
+"IO" = (
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "IP" = (
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "Main Outpost APC";
-	pixel_y = 23
+	pixel_y = 24
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "0-8"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "IQ" = (
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "Mechbay APC";
-	pixel_y = 23
+	pixel_y = 24
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "0-8"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_main/mechbay)
 "IR" = (
@@ -13862,7 +14817,36 @@
 	icon_state = "platingdmg1"
 	},
 /area/awaymission/snowdin/post/mining_main)
+"IZ" = (
+/obj/machinery/computer/monitor/secret,
+/obj/structure/cable/yellow{
+	icon_state = "0-4"
+	},
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post/mining_dock)
+"Ja" = (
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post/mining_dock)
+"Jb" = (
+/obj/machinery/door/airlock/maintenance{
+	name = "SMES Storage";
+	req_access_txt = "32"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post/mining_dock)
 "Jc" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
+	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
@@ -13870,7 +14854,6 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/mining_dock)
 "Jd" = (
@@ -14082,10 +15065,12 @@
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/mining_main)
 "JA" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
 /obj/structure/sign/warning/electricshock{
 	pixel_x = 32
 	},
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "JB" = (
@@ -14231,10 +15216,6 @@
 "JQ" = (
 /turf/open/floor/plasteel/elevatorshaft,
 /area/awaymission/snowdin/post/mining_main)
-"JT" = (
-/obj/machinery/light/small,
-/turf/open/floor/engine/o2,
-/area/awaymission/snowdin/post/engineering)
 "JU" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -14247,11 +15228,25 @@
 	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/mining_main)
+"JV" = (
+/obj/machinery/power/port_gen/pacman,
+/obj/structure/cable{
+	icon_state = "0-4"
+	},
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post/mining_dock)
 "JW" = (
 /obj/machinery/power/terminal{
 	dir = 4
 	},
-/obj/structure/cable,
+/obj/structure/cable{
+	icon_state = "0-8"
+	},
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post/mining_dock)
+"JX" = (
+/obj/machinery/power/smes/engineering,
+/obj/structure/cable/yellow,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "JY" = (
@@ -14314,7 +15309,7 @@
 /area/awaymission/snowdin/post/mining_dock)
 "Kh" = (
 /obj/machinery/airalarm{
-	pixel_y = 23
+	pixel_y = 24
 	},
 /obj/structure/sign/warning/docking{
 	pixel_x = 32
@@ -14335,15 +15330,20 @@
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "Kj" = (
-/obj/machinery/power/port_gen/pacman,
-/obj/machinery/power/terminal{
-	dir = 4
+/obj/machinery/power/smes/engineering,
+/obj/structure/cable/yellow{
+	icon_state = "0-4"
 	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_main)
 "Kk" = (
-/obj/machinery/power/smes/engineering,
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
+/obj/machinery/computer/monitor/secret,
+/obj/structure/cable/yellow{
+	icon_state = "0-8"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_main)
 "Kl" = (
@@ -14461,24 +15461,45 @@
 	},
 /turf/open/floor/plasteel,
 /area/awaymission/snowdin/post/mining_dock)
+"Kv" = (
+/obj/machinery/power/terminal{
+	dir = 1
+	},
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post/mining_main)
 "Kw" = (
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "1-4"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_main)
 "Kx" = (
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/structure/cable,
+/turf/open/floor/plating,
+/area/awaymission/snowdin/post/mining_main)
+"Ky" = (
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_main)
 "Kz" = (
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "Mining Post APC";
-	pixel_y = 23
+	pixel_y = 24
 	},
-/obj/structure/cable,
+/obj/structure/cable/yellow{
+	icon_state = "0-8"
+	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_main)
 "KA" = (
@@ -14529,16 +15550,13 @@
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "KH" = (
-/obj/machinery/computer/monitor/secret{
-	dir = 1
-	},
 /obj/structure/cable,
+/obj/machinery/power/port_gen/pacman,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_main)
 "KI" = (
 /obj/structure/table,
 /obj/item/storage/toolbox/mechanical,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_main)
 "KJ" = (
@@ -14710,26 +15728,6 @@
 	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
-"Ml" = (
-/obj/machinery/atmospherics/pipe/simple/supply/visible{
-	dir = 8
-	},
-/obj/structure/cable,
-/turf/open/floor/plasteel,
-/area/awaymission/snowdin/post/engineering)
-"Nv" = (
-/obj/structure/cable,
-/turf/open/floor/plating,
-/area/awaymission/snowdin/post/engineering)
-"Oe" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
-/turf/open/floor/plating,
-/area/awaymission/snowdin/post/garage)
-"Oo" = (
-/obj/machinery/light/small,
-/turf/open/floor/engine/n2,
-/area/awaymission/snowdin/post/engineering)
 "OF" = (
 /obj/machinery/door/airlock/external{
 	name = "Ready Room";
@@ -14750,12 +15748,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/awaymission/snowdin/cave)
-"PI" = (
-/obj/structure/cable,
-/turf/open/floor/plating{
-	icon_state = "platingdmg1"
-	},
-/area/awaymission/snowdin/post/cavern1)
 "PR" = (
 /obj/machinery/door/airlock/external{
 	name = "Ready Room";
@@ -14774,36 +15766,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/awaymission/snowdin/cave)
-"Qp" = (
-/obj/structure/cable,
-/obj/machinery/power/apc{
-	dir = 4;
-	name = "Main Outpost APC";
-	pixel_x = 24
-	},
-/turf/open/floor/plating,
-/area/awaymission/snowdin/post/mining_dock)
-"Qx" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
-/turf/open/floor/plasteel,
-/area/awaymission/snowdin/post/engineering)
-"Sc" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/plantgenes,
-/turf/open/floor/plating,
-/area/awaymission/snowdin/post/hydro)
-"Sk" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/structure/sign/warning/electricshock{
-	pixel_x = -32
-	},
-/obj/machinery/power/smes/engineering,
-/obj/structure/cable,
-/turf/open/floor/plating,
-/area/awaymission/snowdin/post/engineering)
 "SX" = (
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
@@ -14842,18 +15804,6 @@
 	},
 /turf/open/floor/plating/asteroid/snow/ice,
 /area/awaymission/snowdin/cave/cavern)
-"WS" = (
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/structure/cable,
-/turf/open/floor/plasteel{
-	heat_capacity = 1e+006
-	},
-/area/awaymission/snowdin/post/cavern1)
 "Xu" = (
 /obj/effect/turf_decal/stripes/corner{
 	dir = 1
@@ -14883,16 +15833,6 @@
 "Ys" = (
 /turf/open/floor/plasteel/elevatorshaft,
 /area/awaymission/snowdin/post/mining_dock)
-"ZH" = (
-/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{
-	dir = 4;
-	piping_layer = 3;
-	pixel_x = 5;
-	pixel_y = 5
-	},
-/obj/structure/cable,
-/turf/open/floor/plasteel,
-/area/awaymission/snowdin/post/engineering)
 
 (1,1,1) = {"
 aa
@@ -24178,7 +25118,7 @@ dK
 iw
 jp
 jV
-ej
+gt
 lo
 mf
 mJ
@@ -24685,11 +25625,11 @@ dh
 dL
 ej
 fd
-fd
-ej
+fD
+gt
 fd
 hP
-ej
+gt
 jr
 jW
 jU
@@ -24905,7 +25845,7 @@ Go
 ae
 Go
 Kj
-Gq
+Kv
 KH
 GP
 ae
@@ -25676,7 +26616,7 @@ Is
 Ir
 Iq
 Go
-Kw
+Ky
 Gq
 GP
 ae
@@ -25715,7 +26655,7 @@ en
 fh
 fG
 gw
-gw
+hl
 hR
 iA
 ju
@@ -25970,7 +26910,7 @@ bE
 dK
 eo
 fh
-fG
+fH
 gx
 hm
 hS
@@ -26227,8 +27167,8 @@ dk
 dK
 ep
 fh
-fG
-fG
+fI
+gy
 hn
 hT
 iC
@@ -27015,7 +27955,7 @@ ol
 oM
 pu
 oM
-Sk
+ol
 qP
 oW
 af
@@ -27271,7 +28211,7 @@ nP
 om
 oN
 om
-oN
+pS
 qt
 qQ
 ro
@@ -27525,11 +28465,11 @@ gC
 mO
 no
 nQ
-no
-no
-no
-no
-ZH
+nQ
+nQ
+nQ
+nQ
+op
 qR
 rp
 rp
@@ -28043,7 +28983,7 @@ oo
 oP
 pw
 pw
-Qx
+oP
 qT
 rq
 rK
@@ -28300,7 +29240,7 @@ op
 oP
 px
 pU
-Nv
+nS
 qU
 rr
 rL
@@ -28416,7 +29356,7 @@ ae
 ae
 ae
 ai
-yg
+yh
 yg
 ai
 wQ
@@ -28557,7 +29497,7 @@ oq
 oQ
 py
 pV
-Nv
+nS
 qV
 rp
 rp
@@ -28655,9 +29595,9 @@ aj
 aj
 ai
 yg
+yh
 yg
-yg
-yg
+yh
 yg
 ai
 ae
@@ -29328,7 +30268,7 @@ iJ
 iJ
 nt
 pY
-Ml
+pV
 qY
 nN
 nN
@@ -29846,7 +30786,7 @@ qy
 ra
 rt
 rP
-JT
+si
 oW
 am
 am
@@ -30347,7 +31287,7 @@ iK
 gH
 hz
 hy
-lI
+lJ
 mu
 mR
 nz
@@ -30617,7 +31557,7 @@ qB
 rb
 rt
 rR
-Oo
+si
 oW
 ag
 af
@@ -31063,7 +32003,7 @@ Fx
 Fy
 GS
 Ho
-Ho
+HH
 tq
 ae
 ae
@@ -31127,7 +32067,7 @@ jC
 oX
 pz
 qf
-Nv
+qD
 oW
 af
 ag
@@ -32348,7 +33288,7 @@ te
 Gw
 GS
 Ho
-Ho
+HH
 tq
 ae
 ae
@@ -32397,7 +33337,7 @@ af
 af
 fX
 gO
-ic
+hC
 ic
 iN
 jE
@@ -32525,7 +33465,7 @@ ae
 ae
 ai
 yg
-yg
+yh
 ai
 ae
 ae
@@ -32911,7 +33851,7 @@ af
 af
 fY
 gQ
-Oe
+hE
 ie
 iP
 jF
@@ -33168,7 +34108,7 @@ af
 af
 fY
 gR
-Oe
+hE
 if
 iQ
 jG
@@ -34050,7 +34990,7 @@ ae
 ae
 ae
 ai
-yg
+yh
 yg
 ai
 ae
@@ -59586,7 +60526,7 @@ oZ
 oZ
 oZ
 oZ
-Ge
+Gf
 Gz
 GW
 Ht
@@ -59594,10 +60534,10 @@ HK
 HL
 IA
 GU
-wJ
+IZ
 Jk
 wL
-wO
+JV
 wE
 eJ
 eJ
@@ -59843,7 +60783,7 @@ oZ
 oZ
 oZ
 oZ
-Ge
+Gf
 GA
 GX
 Hu
@@ -59851,7 +60791,7 @@ HL
 HL
 IB
 Gx
-wM
+IO
 wL
 wL
 JW
@@ -60100,18 +61040,18 @@ oZ
 oZ
 oZ
 oZ
-Ge
+Gg
 GB
 GY
 Hv
 HM
-HM
+Ib
 IB
 IJ
-wM
+Ja
 wM
 JA
-wG
+JX
 wE
 eJ
 eJ
@@ -60217,7 +61157,7 @@ eJ
 eJ
 uI
 uZ
-uO
+vm
 uZ
 uI
 oZ
@@ -60365,7 +61305,7 @@ GC
 Ic
 GU
 GU
-wR
+Jb
 wD
 wD
 wE
@@ -60474,7 +61414,7 @@ tZ
 tY
 tY
 uF
-PI
+vi
 vt
 vA
 vG
@@ -60620,8 +61560,8 @@ Gh
 wL
 Gh
 Id
-Id
-Id
+IC
+IK
 Jc
 Jl
 JB
@@ -60731,7 +61671,7 @@ ul
 uJ
 tY
 va
-PI
+vi
 ul
 uI
 eJ
@@ -60878,7 +61818,7 @@ xy
 Gj
 wL
 wL
-Gi
+IL
 Jd
 Jm
 JC
@@ -61135,7 +62075,7 @@ Hw
 Hw
 Hw
 ID
-wM
+IM
 Ih
 Jl
 JD
@@ -61245,7 +62185,7 @@ uE
 uE
 uE
 vc
-vc
+vo
 ul
 vB
 tY
@@ -61649,7 +62589,7 @@ GZ
 Gj
 If
 wD
-wM
+IO
 wE
 Jn
 Jn
@@ -61906,7 +62846,7 @@ wL
 xy
 Ig
 wD
-wM
+IO
 wD
 Jo
 wL
@@ -62011,11 +62951,11 @@ tY
 ug
 ul
 tZ
-WS
-PI
+ux
+uF
 uK
-PI
-um
+uF
+un
 vp
 vv
 vD
@@ -62270,8 +63210,8 @@ um
 us
 uz
 uH
-uV
-vu
+uL
+uT
 vf
 tY
 vw
@@ -62420,7 +63360,7 @@ Hy
 GN
 GH
 GH
-wM
+IO
 wE
 wD
 wE
@@ -62523,7 +63463,7 @@ eJ
 fr
 tY
 uh
-um
+un
 tY
 tZ
 tZ
@@ -62677,7 +63617,7 @@ Hg
 HN
 Ii
 GN
-wM
+IO
 wL
 wD
 JF
@@ -62779,14 +63719,14 @@ fr
 eL
 fr
 tY
-ul
-um
-ul
+ui
+uo
+ut
 uA
 tY
 uy
 uE
-vc
+vh
 vq
 vx
 tY
@@ -62934,7 +63874,7 @@ Hg
 HO
 Ij
 GH
-wM
+IO
 wL
 wD
 JG
@@ -63037,13 +63977,13 @@ fr
 fr
 tY
 uj
-um
-um
+up
+uu
 uB
 tY
 uM
 uU
-PI
+vi
 ul
 uF
 tY
@@ -63191,7 +64131,7 @@ He
 HP
 Ik
 GH
-wM
+IO
 wL
 wE
 JH
@@ -63556,10 +64496,10 @@ eJ
 eJ
 uI
 uO
-uO
-uO
-uO
-uO
+uW
+vk
+vs
+vy
 uI
 fr
 fr
@@ -66690,7 +67630,7 @@ Ys
 Ys
 Ys
 Ys
-yA
+yB
 xy
 zn
 wL
@@ -66947,7 +67887,7 @@ Ys
 Ys
 Ys
 Ys
-yA
+yB
 xy
 zn
 wL
@@ -67367,8 +68307,8 @@ qk
 pE
 qH
 rB
-rB
-rz
+rY
+sr
 pG
 ow
 sZ
@@ -67461,7 +68401,7 @@ wW
 Ys
 Ys
 Ys
-yC
+yD
 yT
 wE
 xW
@@ -67707,8 +68647,8 @@ eJ
 eJ
 wE
 wJ
+wN
 wL
-Qp
 wP
 wZ
 xj
@@ -68910,7 +69850,7 @@ qI
 ri
 qH
 qH
-rB
+st
 rf
 ow
 tc
@@ -69423,7 +70363,7 @@ eJ
 eJ
 pE
 rD
-rz
+pG
 rz
 ox
 eJ
