@@ -24,7 +24,7 @@
 	use_power = IDLE_POWER_USE				//this turret uses and requires power
 	idle_power_usage = 50		//when inactive, this turret takes up constant 50 Equipment power
 	active_power_usage = 300	//when active, this turret takes up constant 300 Equipment power
-	req_access = list(ACCESS_SEC_DOORS)
+	req_access = list(ACCESS_SECURITY) /// Only people with Security access
 	power_channel = AREA_USAGE_EQUIP	//drains power from the EQUIPMENT channel
 
 	var/base_icon_state = "standard"
@@ -99,6 +99,25 @@
 	if(!has_cover)
 		INVOKE_ASYNC(src, .proc/popUp)
 
+/obj/machinery/porta_turret/proc/toggle_on(var/set_to)
+	var/current = on
+	if (!isnull(set_to))
+		on = set_to
+	else
+		on = !on
+	if (current != on)
+		check_should_process()
+		if (!on)
+			popDown()
+
+/obj/machinery/porta_turret/proc/check_should_process()
+	if (datum_flags & DF_ISPROCESSING)
+		if (!on || !anchored || (machine_stat & BROKEN) || !powered())
+			end_processing()
+	else
+		if (on && anchored && !(machine_stat & BROKEN) && powered())
+			begin_processing()
+
 /obj/machinery/porta_turret/update_icon_state()
 	if(!anchored)
 		icon_state = "turretCover"
@@ -160,8 +179,8 @@
 
 /obj/machinery/porta_turret/ui_interact(mob/user)
 	. = ..()
-	var/dat
-	dat += "Status: <a href='?src=[REF(src)];power=1'>[on ? "On" : "Off"]</a><br>"
+
+	var/list/dat = list("Status: <a href='?src=[REF(src)];power=1'>[on ? "On" : "Off"]</a><br>")
 	dat += "Behaviour controls are [locked ? "locked" : "unlocked"]<br>"
 
 	if(!locked)
@@ -182,7 +201,7 @@
 
 
 	var/datum/browser/popup = new(user, "autosec", "Automatic Portable Turret Installation", 300, 300)
-	popup.set_content(dat)
+	popup.set_content(dat.Join(""))
 	popup.open()
 
 /obj/machinery/porta_turret/Topic(href, href_list)
@@ -193,7 +212,7 @@
 
 	if(href_list["power"] && !locked)
 		if(anchored)	//you can't turn a turret on/off if it's not anchored/secured
-			on = !on	//toggle on/off
+			toggle_on()
 		else
 			to_chat(usr, "<span class='warning'>It has to be secured first!</span>")
 		interact(usr)
@@ -226,6 +245,9 @@
 	if(!anchored || (machine_stat & BROKEN) || !powered())
 		update_icon()
 		remove_control()
+	check_should_process()
+
+
 
 /obj/machinery/porta_turret/attackby(obj/item/I, mob/user, params)
 	if(machine_stat & BROKEN)
@@ -290,10 +312,10 @@
 	audible_message("<span class='hear'>[src] hums oddly...</span>")
 	obj_flags |= EMAGGED
 	controllock = TRUE
-	on = FALSE //turns off the turret temporarily
+	toggle_on(FALSE) //turns off the turret temporarily
 	update_icon()
 	//6 seconds for the traitor to gtfo of the area before the turret decides to ruin his shit
-	addtimer(VARSET_CALLBACK(src, on, TRUE), 6 SECONDS)
+	addtimer(CALLBACK(src, .proc/toggle_on, TRUE), 6 SECONDS)
 	//turns it back on. The cover popUp() popDown() are automatically called in process(), no need to define it here
 
 
@@ -311,10 +333,10 @@
 		if(prob(20))
 			turret_flags |= TURRET_FLAG_SHOOT_ALL // Shooting everyone is a pretty big deal, so it's least likely to get turned on
 
-		on = FALSE
+		toggle_on(FALSE)
 		remove_control()
 
-		addtimer(VARSET_CALLBACK(src, on, TRUE), rand(60,600))
+		addtimer(CALLBACK(src, .proc/toggle_on, TRUE), rand(60,600))
 
 /obj/machinery/porta_turret/take_damage(damage, damage_type = BRUTE, damage_flag = 0, sound_effect = 1)
 	. = ..()
@@ -352,7 +374,7 @@
 				cover.parent_turret = src	//assign the cover its parent_turret, which would be this (src)
 
 	if(!on || (machine_stat & (NOPOWER|BROKEN)) || manual_control)
-		return
+		return PROCESS_KILL
 
 	var/list/targets = list()
 	for(var/mob/A in view(scan_range, base))
@@ -385,7 +407,7 @@
 				if(LAZYLEN(faction) && (ROLE_SYNDICATE in faction) && sillyconerobot.emagged == TRUE)
 					continue
 
-		if(iscarbon(A))
+		else if(iscarbon(A))
 			var/mob/living/carbon/C = A
 			//If not emagged, only target carbons that can use items
 			if(mode != TURRET_LETHAL && (C.stat || C.handcuffed || !(C.mobility_flags & MOBILITY_USE)))
@@ -403,20 +425,13 @@
 			else if(turret_flags & TURRET_FLAG_SHOOT_ANOMALOUS) //non humans who are not simple animals (xenos etc)
 				if(!in_faction(C))
 					targets += C
+
 	for(var/A in GLOB.mechas_list)
 		if((get_dist(A, base) < scan_range) && can_see(base, A, scan_range))
 			var/obj/mecha/Mech = A
 			if(Mech.occupant && !in_faction(Mech.occupant)) //If there is a user and they're not in our faction
 				if(assess_perp(Mech.occupant) >= 4)
 					targets += Mech
-	// Wasp start
-	for(var/A in GLOB.spacepods_list)
-		if((get_dist(A, base) < scan_range) && can_see(base, A, scan_range))
-			var/obj/spacepod/SP = A
-			if(SP.pilot && !in_faction(SP.pilot))
-				if(assess_perp(SP.pilot) >= 4)
-					targets += SP
-	// Wasp end
 
 	if((turret_flags & TURRET_FLAG_SHOOT_ANOMALOUS) && GLOB.blobs.len && (mode == TURRET_LETHAL))
 		for(var/obj/structure/blob/B in view(scan_range, base))
@@ -574,9 +589,7 @@
 		return
 
 	shoot_cyborgs ? (turret_flags |= TURRET_FLAG_SHOOT_BORGS) : (turret_flags &= ~TURRET_FLAG_SHOOT_BORGS)
-	src.on = on
-	if(!on)
-		popDown()
+	toggle_on(on)
 	src.mode = mode
 	power_change()
 
@@ -682,8 +695,6 @@
 	desc = "An energy blaster auto-turret."
 
 /obj/machinery/porta_turret/syndicate/energy/heavy
-	name = "syndicate heavy laser turret"
-	desc = "A heavy laser auto-turret."
 	icon_state = "standard_lethal"
 	base_icon_state = "standard"
 	stun_projectile = /obj/projectile/energy/electrode
@@ -699,16 +710,12 @@
 
 
 /obj/machinery/porta_turret/syndicate/pod
-	name = "syndicate semi-auto turret"
-	desc = "A ballistic semi-automatic auto-turret."
 	integrity_failure = 0.5
 	max_integrity = 40
 	stun_projectile = /obj/projectile/bullet/syndicate_turret
 	lethal_projectile = /obj/projectile/bullet/syndicate_turret
 
 /obj/machinery/porta_turret/syndicate/shuttle
-	name = "syndicate penetrator turret"
-	desc = "A ballistic penetrator auto-turret."
 	scan_range = 9
 	shot_delay = 3
 	stun_projectile = /obj/projectile/bullet/p50/penetrator/shuttle
@@ -801,15 +808,24 @@
 	icon = 'icons/obj/machines/turret_control.dmi'
 	icon_state = "control_standby"
 	density = FALSE
-	var/enabled = 1
-	var/lethal = 0
-	var/locked = TRUE
-	var/control_area = null //can be area name, path or nothing.
-	var/ailock = 0 // AI cannot use this
-	var/shoot_cyborgs = FALSE
 	req_access = list(ACCESS_AI_UPLOAD)
-	var/list/obj/machinery/porta_turret/turrets = list()
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
+	ui_x = 305
+	ui_y = 172
+	/// Variable dictating if linked turrets are active and will shoot targets
+	var/enabled = TRUE
+	/// Variable dictating if linked turrets will shoot lethal projectiles
+	var/lethal = FALSE
+	/// Variable dictating if the panel is locked, preventing changes to turret settings
+	var/locked = TRUE
+	 /// An area in which linked turrets are located, it can be an area name, path or nothing
+	var/control_area = null
+	 /// AI is unable to use this machine if set to TRUE
+	var/ailock = FALSE
+	/// Variable dictating if linked turrets will shoot cyborgs
+	var/shoot_cyborgs = FALSE
+	/// List of all linked turrets
+	var/list/turrets = list()
 
 /obj/machinery/turretid/Initialize(mapload, ndir = 0, built = 0)
 	. = ..()
@@ -843,7 +859,7 @@
 
 /obj/machinery/turretid/examine(mob/user)
 	. += ..()
-	if(issilicon(user) && (!machine_stat & BROKEN))
+	if(issilicon(user) && !(machine_stat & BROKEN))
 		. += {"<span class='notice'>Ctrl-click [src] to [ enabled ? "disable" : "enable"] turrets.</span>
 					<span class='notice'>Alt-click [src] to set turrets to [ lethal ? "stun" : "kill"].</span>"}
 
@@ -871,13 +887,6 @@
 
 			locked = !locked
 			to_chat(user, "<span class='notice'>You [ locked ? "lock" : "unlock"] the panel.</span>")
-			if (locked)
-				if (user.machine==src)
-					user.unset_machine()
-					user << browse(null, "window=turretid")
-			else
-				if (user.machine==src)
-					attack_hand(user)
 		else
 			to_chat(user, "<span class='alert'>Access denied.</span>")
 
@@ -887,8 +896,6 @@
 	to_chat(user, "<span class='notice'>You short out the turret controls' access analysis module.</span>")
 	obj_flags |= EMAGGED
 	locked = FALSE
-	if(user && user.machine == src)
-		attack_hand(user)
 
 /obj/machinery/turretid/attack_ai(mob/user)
 	if(!ailock || IsAdminGhost(user))
@@ -896,44 +903,45 @@
 	else
 		to_chat(user, "<span class='warning'>There seems to be a firewall preventing you from accessing this device!</span>")
 
-/obj/machinery/turretid/ui_interact(mob/user)
+/obj/machinery/turretid/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
+									datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
+	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
+	if(!ui)
+		ui = new(user, src, ui_key, "TurretControl", name, ui_x, ui_y, master_ui, state)
+		ui.open()
+
+/obj/machinery/turretid/ui_data(mob/user)
+	var/list/data = list()
+	data["locked"] = locked
+	data["siliconUser"] = user.has_unlimited_silicon_privilege
+	data["enabled"] = enabled
+	data["lethal"] = lethal
+	data["shootCyborgs"] = shoot_cyborgs
+	return data
+
+/obj/machinery/turretid/ui_act(action, list/params)
 	. = ..()
-	if ( get_dist(src, user) > 0 )
-		if ( !(issilicon(user) || IsAdminGhost(user)) )
-			to_chat(user, "<span class='warning'>You are too far away!</span>")
-			user.unset_machine()
-			user << browse(null, "window=turretid")
-			return
-
-	var/t = ""
-
-	if(locked && !(issilicon(user) || IsAdminGhost(user)))
-		t += "<div class='notice icon'>Swipe ID card to unlock interface</div>"
-	else
-		if(!issilicon(user) && !IsAdminGhost(user))
-			t += "<div class='notice icon'>Swipe ID card to lock interface</div>"
-		t += "Turrets [enabled?"activated":"deactivated"] - <A href='?src=[REF(src)];toggleOn=1'>[enabled?"Disable":"Enable"]?</a><br>"
-		t += "Currently set for [lethal?"lethal":"stun repeatedly"] - <A href='?src=[REF(src)];toggleLethal=1'>Change to [lethal?"Stun repeatedly":"Lethal"]?</a><br>"
-		t += "Target Cyborgs [shoot_cyborgs?"Yes":"No"] - <A href='?src=[REF(src)];shoot_silicons=1'>Change to [shoot_cyborgs?"Dont Shoot Borgs":"Shoot Borgs"]?</a><br>"
-	var/datum/browser/popup = new(user, "turretid", "Turret Control Panel ([get_area_name(src, TRUE)])")
-	popup.set_content(t)
-	popup.set_title_image(user.browse_rsc_icon(src.icon, src.icon_state))
-	popup.open()
-
-/obj/machinery/turretid/Topic(href, href_list)
-	if(..())
+	if(.)
 		return
-	if (locked)
-		if(!(issilicon(usr) || IsAdminGhost(usr)))
-			to_chat(usr, "<span class='warning'>Control panel is locked!</span>")
-			return
-	if (href_list["toggleOn"])
-		toggle_on(usr)
-	else if (href_list["toggleLethal"])
-		toggle_lethal(usr)
-	else if (href_list["shoot_silicons"])
-		shoot_silicons(usr)
-	attack_hand(usr)
+
+	switch(action)
+		if("lock")
+			if(!usr.has_unlimited_silicon_privilege)
+				return
+			if((obj_flags & EMAGGED) || (machine_stat & BROKEN))
+				to_chat(usr, "<span class='warning'>The turret control is unresponsive!</span>")
+				return
+			locked = !locked
+			return TRUE
+		if("power")
+			toggle_on(usr)
+			return TRUE
+		if("mode")
+			toggle_lethal(usr)
+			return TRUE
+		if("shoot_silicons")
+			shoot_silicons(usr)
+			return TRUE
 
 /obj/machinery/turretid/proc/toggle_lethal(mob/user)
 	lethal = !lethal
@@ -946,11 +954,13 @@
 	add_hiddenprint(user)
 	log_combat(user, src, "[enabled ? "enabled" : "disabled"]")
 	updateTurrets()
+
 /obj/machinery/turretid/proc/shoot_silicons(mob/user)
 	shoot_cyborgs = !shoot_cyborgs
 	add_hiddenprint(user)
 	log_combat(user, src, "[shoot_cyborgs ? "Shooting Borgs" : "Not Shooting Borgs"]")
 	updateTurrets()
+
 /obj/machinery/turretid/proc/updateTurrets()
 	for (var/obj/machinery/porta_turret/aTurret in turrets)
 		aTurret.setState(enabled, lethal, shoot_cyborgs)
@@ -1088,9 +1098,9 @@
 	if(on)
 		if(team_color == "blue")
 			if(istype(P, /obj/projectile/beam/lasertag/redtag))
-				on = FALSE
-				addtimer(VARSET_CALLBACK(src, on, TRUE), 10 SECONDS)
+				toggle_on(FALSE)
+				addtimer(CALLBACK(src, .proc/toggle_on, TRUE), 10 SECONDS)
 		else if(team_color == "red")
 			if(istype(P, /obj/projectile/beam/lasertag/bluetag))
-				on = FALSE
-				addtimer(VARSET_CALLBACK(src, on, TRUE), 10 SECONDS)
+				toggle_on(FALSE)
+				addtimer(CALLBACK(src, .proc/toggle_on, TRUE), 10 SECONDS)
