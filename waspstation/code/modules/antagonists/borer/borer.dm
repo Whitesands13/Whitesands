@@ -61,7 +61,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	name = "cortical borer"
 	real_name = "cortical borer"
 	desc = "A small, quivering, slug-like creature."
-	icon = 'icons/mob/borer.dmi'
+	icon = 'waspstation/icons/mob/borer.dmi'
 	icon_state = "brainslug"
 	icon_living = "brainslug"
 	icon_dead = "brainslug_dead"
