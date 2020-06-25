@@ -119,6 +119,7 @@ GLOBAL_LIST_INIT(dwarf_last, world.file2list("strings/names/dwarf_last.txt")) //
 	if(stored_alcohol > 400) //If they are over 400 they start regenerating
 		owner.adjustBruteLoss(-heal_amt) //But its alcohol, there will be other issues here.
 		owner.adjustFireLoss(-heal_amt) //Unless they drink casually all the time.
+		owner.adjustToxLoss(-heal_amt)
 		owner.adjustOxyLoss(-heal_amt)
 		owner.adjustCloneLoss(-heal_amt) //Also they will probably get brain damage if thats a thing here.
 	if(init_stored_alcohol + 0.5 < stored_alcohol) //recovering stored alcohol at a steady rate of +0.75, no spam.
