@@ -1313,7 +1313,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 
 //Wasp Begin - Borers
 /obj/effect/hallucination/simple/borer
-	image_icon = 'icons/mob/borer.dmi'
+	image_icon = 'waspstation/icons/mob/borer.dmi'
 	image_state = "brainslug"
 
 /datum/hallucination/borer

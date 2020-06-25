@@ -111,8 +111,6 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 
 #define isrevenant(A) (istype(A, /mob/living/simple_animal/revenant))
 
-#define isborer(A) (istype(A, /mob/living/simple_animal/borer))
-
 #define isbot(A) (istype(A, /mob/living/simple_animal/bot))
 
 #define isshade(A) (istype(A, /mob/living/simple_animal/shade))
@@ -143,6 +141,11 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 
 #define isclown(A) (istype(A, /mob/living/simple_animal/hostile/retaliate/clown))
 
+//Waspstation Begin - Custom Simplemobs
+
+#define isborer(A) (istype(A, /mob/living/simple_animal/borer))
+
+//Wasp end
 
 //Misc mobs
 #define isobserver(A) (istype(A, /mob/dead/observer))

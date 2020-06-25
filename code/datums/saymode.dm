@@ -70,7 +70,7 @@
 	if(user.hivecheck())
 		user.alien_talk(message)
 	return FALSE
-
+//Wasp begin - Borers
 /datum/saymode/borer
 	key = MODE_KEY_BORER
 	mode = MODE_BORER
@@ -79,6 +79,7 @@
 	if(user.borercheck())
 		user.borer_talk(message)
 	return FALSE
+//Wasp end
 
 /datum/saymode/vocalcords
 	key = MODE_KEY_VOCALCORDS
