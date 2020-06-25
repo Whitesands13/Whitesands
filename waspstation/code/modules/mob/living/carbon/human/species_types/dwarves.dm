@@ -92,7 +92,7 @@ GLOBAL_LIST_INIT(dwarf_last, world.file2list("strings/names/dwarf_last.txt")) //
 	w_class = WEIGHT_CLASS_NORMAL
 	var/stored_alcohol = 250 //They start with 250 units, that ticks down and eventaully bad effects occur
 	var/max_alcohol = 500 //Max they can attain, easier than you think to OD on alcohol.
-	var/heal_rate = 0.5 //The rate they heal damages over 400 alcohol stored. Default is 0.5 so we times 3 since 3 seconds.
+	var/heal_rate = 1.25 //The rate they heal damages over 400 alcohol stored. This has been buffed, but is still less effective than dedicated healing chems.
 	var/alcohol_rate = 0.25 //The rate the alcohol ticks down per each iteration of dwarf_eth_ticker completing.
 	//These count in on_life ticks which should be 2 seconds per every increment of 1 in a perfect world.
 	var/dwarf_eth_ticker = 0 //Currently set =< 1, that means this will fire the proc around every 2 seconds
@@ -128,7 +128,7 @@ GLOBAL_LIST_INIT(dwarf_last, world.file2list("strings/names/dwarf_last.txt")) //
 			if(last_alcohol_spam + 8 SECONDS < world.time)
 				to_chat(owner, "<span class='userdanger'>DAMNATION INCARNATE, WHY AM I CURSED WITH THIS DRY-SPELL? I MUST DRINK.</span>")
 				last_alcohol_spam = world.time
-			owner.adjustToxLoss(10)
+			owner.adjustToxLoss(2.5)
 		if(25 to 50)
 			if(last_alcohol_spam + 20 SECONDS < world.time)
 				to_chat(owner, "<span class='danger'>Oh DAMN, I need some brew!</span>")
