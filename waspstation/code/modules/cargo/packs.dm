@@ -1,3 +1,12 @@
+/datum/supply_pack/security/taser
+	name = "Hybrid Taser Crate"
+	desc = "Two disabler-taser hybrid weapons. Requires Security access to open."
+	cost = 4000
+	contains = list(/obj/item/gun/energy/e_gun/advtaser,
+					/obj/item/gun/energy/e_gun/advtaser)
+	crate_name = "hybrid taser crate"
+	dangerous = TRUE
+
 /datum/supply_pack/security/armory/riot_shotgun_single
 	name = "Riot Shotgun Single-Pack"
 	desc = "When you simply just want Butch to step aside. Requires Armory level access to open."
@@ -148,3 +157,13 @@
 					/obj/item/am_shielding_container) //10 shields: 3x3 containment and a core
 	crate_name = "antimatter shielding crate"
 	dangerous = TRUE
+/datum/supply_pack/organic/catgrill
+	name = "Felinid-Style Grilling Kit"
+	desc = "Command recieved a request for \"Nic catgrill gf plz\", we're pretty sure this is what that meant."
+	cost = 12000
+	contraband = TRUE
+	crate_type = /obj/structure/closet/crate/trashcart
+	contains = list(/obj/item/stack/sheet/mineral/coal/five,
+					/obj/machinery/grill/cat,
+					/obj/item/reagent_containers/food/snacks/meat/slab/mouse)
+	crate_name = "catgrill crate"

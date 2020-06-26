@@ -41,7 +41,7 @@
 	starting_node = TRUE
 	display_name = "Basic Exosuit Equipment"
 	description = "Various tools fit for basic mech units"
-	design_ids = list("mech_drill", "mech_mscanner", "mech_extinguisher")
+	design_ids = list("mech_drill", "mech_mscanner", "mech_extinguisher", "mech_cable_layer") //Wasp Edit - Reverted Smartwire
 
 /datum/techweb_node/basic_tools
 	id = "basic_tools"
@@ -682,7 +682,7 @@
 	display_name = "Ballistic Weaponry"
 	description = "This isn't research.. This is reverse-engineering!"
 	prereq_ids = list("weaponry")
-	design_ids = list("mag_oldsmg", "mag_oldsmg_ap", "mag_oldsmg_ic")
+	design_ids = list("mag_oldsmg", "mag_oldsmg_ap", "mag_oldsmg_ic", "commanderammo")
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
 	export_price = 5000
 
