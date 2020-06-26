@@ -1,19 +1,21 @@
 //Speech verbs.
-// the _keybind verbs uses "as text" versus "as text|null" to force a popup when pressed by a keybind. 
+// the _keybind verbs uses "as text" versus "as text|null" to force a popup when pressed by a keybind. // Wasp Edit - Typing Indicators
 ///Say verb
-/mob/verb/say_verb(message as text) // Wasp Edit - Typing Indicators START
+/mob/verb/say_verb()
 	set name = "Say"
 	set category = "IC"
+	/*	Wasp Edit - Typing Indicators
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
+	*/
 	display_typing_indicator() // Wasp Edit - Typing Indicators START
 	var/message = input(usr, "", "say") as text|null
 	// If they don't type anything just drop the message.
 	clear_typing_indicator()		// clear it immediately!
 	if(!length(message))
-		return  // Wasp Edit - Typing Indicators EBD
-	say(message)
+		return  
+	say(message) // Wasp Edit - Typing Indicators END
 
 ///Whisper verb
 /mob/verb/whisper_verb(message as text)
