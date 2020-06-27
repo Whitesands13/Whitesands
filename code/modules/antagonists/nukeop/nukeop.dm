@@ -68,7 +68,8 @@
 			else //Already set by admins/something else?
 				nuke_team.memorized_code = nuke.r_code
 			for(var/obj/machinery/nuclearbomb/beer/beernuke in GLOB.nuke_list)
-				beernuke.r_code = nuke_team.memorized_code
+				if(beernuke.r_code == "ADMIN") // Wasp Edit - Room Templates START
+					beernuke.r_code = nuke_team.memorized_code // Wasp Edit - Room Templates END
 		else
 			stack_trace("Syndicate nuke not found during nuke team creation.")
 			nuke_team.memorized_code = null
