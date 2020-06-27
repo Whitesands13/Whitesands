@@ -231,3 +231,10 @@
 	name = "geneticist PDA"
 	default_cartridge = /obj/item/cartridge/medical
 	icon_state = "pda-genetics"
+
+/obj/item/pda/unlicensed // Wasp Edit - Room Templates
+	name = "unlicensed PDA"
+	desc = "A shitty knockoff of a portable microcomputer by Thinktronic Systems, LTD. Complete with a cracked operating system."
+	note = "Error: Unlicensed OS. Please contact your supervisor."
+	icon_state = "pda-knockoff"
+
