@@ -18,14 +18,13 @@
 	shoes = /obj/item/clothing/shoes/laceup
 	r_hand = /obj/item/gun/ballistic/automatic/surplus
 	gloves =  null
-	ears = /obj/item/radio/headset/syndicate/alt
 	l_pocket = /obj/item/pinpointer/nuke/syndicate
 	r_pocket = /obj/item/ammo_box/magazine/m10mm/rifle
-	belt = /obj/item/storage/belt/military
-	id = /obj/item/card/id/syndicate
+	belt = null
 	back = /obj/item/tank/jetpack/oxygen/harness
 	backpack_contents = null
 	internals_slot = ITEM_SLOT_SUITSTORE
 
 	tc = 10
 	uplink_type = /obj/item/uplink/nuclear
+	uplink_slot = ITEM_SLOT_BELT
