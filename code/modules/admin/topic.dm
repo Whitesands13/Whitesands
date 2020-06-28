@@ -2057,10 +2057,14 @@
 		thing_to_check = splittext(thing_to_check, ", ")
 
 
-		var/list/dat = list("Related accounts by [uppertext(href_list["showrelatedacc"])]:")
+		var/list/dat = list()
 		dat += thing_to_check
 
-		usr << browse(dat.Join("<br>"), "window=related_[C];size=420x300")
+//		usr << browse(dat.Join("<br>"), "window=related_[C];size=420x300")
+
+		var/datum/browser/popup = new(usr, "related_[C]", "Related accounts by [uppertext(href_list["showrelatedacc"])]:", 425, 300)
+		popup.set_content(dat.Join("<br>"))
+		popup.open()
 
 	else if(href_list["modantagrep"])
 		if(!check_rights(R_ADMIN))
@@ -2407,7 +2411,10 @@
 	dat += {"<A href='?src=[REF(src)];[HrefToken()];c_mode2=secret'>Secret</A><br>"}
 	dat += {"<A href='?src=[REF(src)];[HrefToken()];c_mode2=random'>Random</A><br>"}
 	dat += {"Now: [GLOB.master_mode]"}
-	usr << browse(dat, "window=c_mode")
+	var/datum/browser/popup = new(usr, "c_mode", "Gamemode Panel", 500, 600)
+	popup.set_content(dat)
+	popup.open()
+//	usr << browse(dat, "window=c_mode")
 
 /datum/admins/proc/HandleFSecret()
 	if(!check_rights(R_ADMIN))

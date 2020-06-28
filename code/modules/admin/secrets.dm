@@ -87,7 +87,7 @@
 			<BR>
 			"}
 
-	var/datum/browser/popup = new(usr, "secrets", name, 300, 430)
+	var/datum/browser/popup = new(usr, "secrets", null, 300, 430)
 	popup.set_content(dat.Join())
 	popup.open()
 
@@ -109,7 +109,7 @@
 			if(!GLOB.admin_log.len)
 				dat += "No-one has done anything this round!"
 //			usr << browse(dat, "window=admin_log")
-			var/datum/browser/popup = new(usr, "admin_log", name, 300, 430)
+			var/datum/browser/popup = new(usr, "admin_log", null, 300, 430)
 			popup.set_content(dat)
 			popup.open()
 
@@ -120,7 +120,7 @@
 			if(!GLOB.mentorlog.len)
 				dat += "No mentors have done anything this round!"
 //			usr << browse(dat, "window=mentor_log")
-			var/datum/browser/popup = new(usr, "mentor_log", name, 300, 430)
+			var/datum/browser/popup = new(usr, "mentor_log", null, 300, 430)
 			popup.set_content(dat)
 			popup.open()
 
@@ -131,7 +131,7 @@
 					var/datum/admins/D = GLOB.admin_datums[ckey]
 					dat += "[ckey] - [D.rank.name]<br>"
 //				usr << browse(dat, "window=showadmins;size=600x500")
-				var/datum/browser/popup = new(usr, "showadmins", name, 600, 500)
+				var/datum/browser/popup = new(usr, "showadmins", null, 600, 500)
 				popup.set_content(dat)
 				popup.open()
 

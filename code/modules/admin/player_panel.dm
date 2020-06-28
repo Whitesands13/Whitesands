@@ -324,4 +324,7 @@
 	</body></html>
 	"}
 
-	usr << browse(dat, "window=players;size=600x480")
+//	usr << browse(dat, "window=players;size=600x480")
+	var/datum/browser/popup = new(usr, "players", null, 600, 480)
+	popup.set_content(dat)
+	popup.open()
