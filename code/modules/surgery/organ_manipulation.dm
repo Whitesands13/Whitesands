@@ -138,11 +138,11 @@
 		current_type = "extract"
 		var/list/organs = target.getorganszone(target_zone)
 
-		var/mob/living/simple_animal/borer/B = target.has_brain_worms()
+		var/mob/living/simple_animal/borer/B = target.has_brain_worms()		//Wasp Begin - Borers
 		if(target.has_brain_worms())
 			user.visible_message("[user] begins to extract [B] from [target]'s [parse_zone(target_zone)].",
 					"<span class='notice'>You begin to extract [B] from [target]'s [parse_zone(target_zone)]...</span>")
-			return TRUE
+			return TRUE		//Wasp End
 
 		if(!organs.len)
 			to_chat(user, "<span class='warning'>There are no removable organs in [target]'s [parse_zone(target_zone)]!</span>")
