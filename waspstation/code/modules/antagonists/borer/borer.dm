@@ -75,6 +75,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	attack_verb_simple = "chomp"
 	attack_sound = 'sound/weapons/bite.ogg'
 	pass_flags = PASSTABLE | PASSMOB | PASSDOORHATCH
+	layer = UNDERDOOR
 	mob_size = MOB_SIZE_SMALL
 	faction = list("creature")
 	ventcrawler = VENTCRAWLER_ALWAYS
@@ -99,6 +100,9 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	var/leaving = FALSE
 	var/hiding = FALSE
 	var/waketimerid = null
+	var/leap_on_click = FALSE
+	var/leaping = FALSE
+	var/leap_cooldown = 0
 
 	var/datum/action/innate/borer/talk_to_host/talk_to_host_action = new
 	var/datum/action/innate/borer/infest_host/infest_host_action = new
@@ -113,6 +117,9 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	var/datum/action/innate/borer/freeze_victim/freeze_victim_action = new
 	var/datum/action/innate/borer/punish_victim/punish_victim_action = new
 	var/datum/action/innate/borer/jumpstart_host/jumpstart_host_action = new
+	var/datum/action/innate/borer/scan_host/scan_host_action = new
+	var/datum/action/innate/borer/scan_chem/scan_chem_action = new
+	var/datum/action/innate/borer/toggle_leap/toggle_leap_action = new
 
 	var/is_team_borer = TRUE
 	var/borer_alert = "Become a cortical borer? (Warning, You can no longer be cloned!)"
@@ -149,111 +156,11 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	QDEL_NULL(freeze_victim_action)
 	QDEL_NULL(punish_victim_action)
 	QDEL_NULL(jumpstart_host_action)
+	QDEL_NULL(scan_host_action)
+	QDEL_NULL(scan_chem_action)
+	QDEL_NULL(toggle_leap_action)
 
 	return ..()
-
-/mob/living/simple_animal/borer/proc/get_html_template(content)
-	var/html = {"<!DOCTYPE html">
-		<html>
-		<head>
-			<title>Borer Chemicals</title>
-			<link rel='stylesheet' type='text/css' href='icons.css'>
-			<link rel='stylesheet' type='text/css' href='shared.css'>
-			<style type='text/css'>
-			body {
-				padding: 10;
-				margin: 0;
-				font-size: 12px;
-				color: #ffffff;
-				line-height: 170%;
-				font-family: Verdana, Geneva, sans-serif;
-				background: #272727 url(uiBackground.png) 50% 0 repeat-x;
-				overflow-x: hidden;
-			}
-			a, a:link, a:visited, a:active, .link, .linkOn, .linkOff, .selected, .disabled {
-				color: #ffffff;
-				text-decoration: none;
-				background: #40628a;
-				border: 1px solid #161616;
-				padding: 2px 2px 2px 2px;
-				margin: 2px 2px 2px 2px;
-				cursor: pointer;
-				display: inline-block;
-			}
-			a:hover, .linkActive:hover {
-				background: #507aac;
-				cursor: pointer;
-			}
-			img {
-				border: 0px;
-			}
-			p {
-				padding: 4px;
-				margin: 0px;
-			}
-			h1, h2, h3, h4, h5, h6 {
-				margin: 0;
-				padding: 16px 0 8px 0;
-				color: #517087;
-				clear: both;
-			}
-			h1 {
-				font-size: 15px;
-			}
-			h2 {
-				font-size: 14px;
-			}
-			h3 {
-				font-size: 13px;
-			}
-			h4 {
-				font-size: 12px;
-			}
-			#header {
-				margin: 3px;
-				padding: 0px;
-			}
-			table {
-				width: 570px;
-				margin: 10px;
-			}
-			td {
-				border: solid 1px #000;
-				width: 560px;
-			}
-			.chem-select {
-				width: 560px;
-				margin: 5px;
-				text-align: center;
-			}
-			.enabled {
-				background-color: #0a0;
-			}
-			.disabled {
-				background-color: #a00;
-			}
-			.shown {
-				display: block;
-			}
-			.hidden {
-				display: none;
-			}
-			</style>
-			<script src="jquery.min.js"></script>
-			<script type='text/javascript'>
-				function update_chemicals(chemicals) {
-					$('#chemicals').text(chemicals);
-				}
-				$(function() {
-				});
-			</script>
-		</head>
-		<body scroll='yes'><div id='content'>
-		<h1 id='header'>Borer Chemicals</h1>
-		<br />
-		[content]
-		</div></body></html>"}
-	return html
 
 /mob/living/simple_animal/borer/Topic(href, href_list)//not entirely sure if this is even required
 	if(href_list["ghostjoin"])
@@ -467,7 +374,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 
 	..()
 
-/mob/living/simple_animal/borer/verb/infect_victim()
+/mob/living/simple_animal/borer/proc/infect_victim(mob/living/carbon/H = null)
 	set name = "Infest"
 	set category = "Borer"
 	set desc = "Infest a suitable humanoid host."
@@ -478,14 +385,16 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	if(stat == DEAD)
 		return
 
-	var/list/choices = list()
-	for(var/mob/living/carbon/H in view(1,src))
-		if(H!=src && Adjacent(H))
-			choices += H
+	if(!H)
+		var/list/choices = list()
+		for(var/mob/living/carbon/C in view(1,src))
+			if(C!=src && Adjacent(C))
+				choices += C
 
-	if(!choices.len)
-		return
-	var/mob/living/carbon/H = choices.len > 1 ? input(src,"Who do you wish to infest?") in null|choices : choices[1]
+		if(!choices.len)
+			return
+		H = choices.len > 1 ? input(src,"Who do you wish to infest?") in null|choices : choices[1]
+
 	if(!H || !src)
 		return
 
@@ -551,7 +460,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 		to_chat(src, "<span class='warning'>You are feeling far too docile to do that.</span>")
 		return
 
-	var content = ""
+	var/content = ""
 	content += "<p>Chemicals: <span id='chemicals'>[chemicals]</span></p>"
 
 	content += "<table>"
@@ -587,7 +496,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 						"<span class='noticealien'>You are now hiding.</span>")
 		hiding = TRUE
 	else
-		layer = MOB_LAYER
+		layer = UNDERDOOR
 		visible_message("[src] slowly peaks up from the ground...", \
 					"<span class='noticealien'>You stop hiding.</span>")
 		hiding = FALSE
@@ -628,11 +537,12 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 		to_chat(src, "<span class='warning'>You cannot paralyze someone who is already infested!</span>")
 		return
 
-	layer = MOB_LAYER
+	layer = UNDERDOOR
 
 	to_chat(src, "<span class='warning'>You focus your psychic lance on [M] and freeze their limbs with a wave of terrible dread.</span>")
 	to_chat(M, "<span class='userdanger'>You feel a creeping, horrible sense of dread come over you, freezing your limbs and setting your heart racing.</span>")
-	M.Paralyze(60)
+	M.Knockdown(30)
+	M.blind_eyes(4)
 
 	used_dominate = world.time
 
@@ -860,10 +770,13 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 
 		victim.med_hud_set_status()
 
+		var/release_delay = 300 + victim.getOrganLoss(ORGAN_SLOT_BRAIN)*20
+		addtimer(CALLBACK(victim, /mob/living/carbon/proc/release_control), release_delay)
+
 /mob/living/simple_animal/borer/verb/punish()
 	set category = "Borer"
 	set name = "Punish"
-	set desc = "Punish your victim."
+	set desc = "Punish your victim by disabling one of their limbs temporarily."
 
 	if(!victim)
 		to_chat(src, "<span class='warning'>You are not inside a host body.</span>")
@@ -881,24 +794,15 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 		to_chat(src, "<span class='warning'>You need 75 chems to punish your host.</span>")
 		return
 
-	var/punishment = input("Select a punishment:.", "Punish") as null|anything in list("Blindness","Deafness","Stun")
-
-	if(!punishment)
-		return
-
 	if(chemicals < 75)
 		to_chat(src, "<span class='warning'>You need 75 chems to punish your host.</span>")
 		return
 
-	switch(punishment) //Hardcoding this stuff.
-		if("Blindness")
-			victim.blind_eyes(4)
-		if("Deafness")
-			victim.minimumDeafTicks(40)
-		if("Stun")
-			victim.Knockdown(50)
+	var/limb = pick(victim.bodyparts)
+	limb = parse_zone(limb)
+	victim.apply_damage(50, STAMINA, limb)
 
-	log_game("[src]/([src.ckey]) punished [victim]/([victim.ckey] with [punishment]")
+	log_combat(src, victim, "disabled", addition = "with borer powers")
 
 	chemicals -= 75
 
@@ -1006,6 +910,79 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 
 	qdel(host_brain)
 
+/mob/living/simple_animal/borer/proc/toggle_leap()
+	set category = "Borer"
+	set name = "Toggle Leap"
+	set desc = "Prepare to leap at a potential victim."
+	leap_on_click = !leap_on_click
+	to_chat(src, "<span class='borer'>You [src.leap_on_click ? "prepare to leap at a victim...":"stop preparing to leap."]</span>")
+
+#define MAX_BORER_LEAP_DIST 5
+
+/mob/living/simple_animal/borer/ClickOn(atom/A, params)
+	face_atom(A)
+	if(leap_on_click)
+		leap_at(A)
+	else
+		..()
+
+/mob/living/simple_animal/borer/proc/leap_at(atom/A)
+	if((mobility_flags & (MOBILITY_MOVE | MOBILITY_STAND)) != (MOBILITY_MOVE | MOBILITY_STAND) || leaping)
+		return
+
+	if(leap_cooldown > world.time)
+		to_chat(src, "<span class='borer'>You are too fatigued to leap right now!</span>")
+		return
+
+	if(!has_gravity() || !A.has_gravity())
+		to_chat(src, "<span class='borer'>It is unsafe to leap without gravity!</span>")
+		//It's also extremely buggy visually, so it's balance+bugfix
+		return
+
+	else
+		if(hiding)
+			src.hide()
+		leaping = TRUE
+		throw_at(A, MAX_BORER_LEAP_DIST, 1, src, FALSE, TRUE, callback = CALLBACK(src, .proc/leap_end))
+
+/mob/living/simple_animal/borer/proc/leap_end()
+	leaping = FALSE
+
+/mob/living/simple_animal/borer/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
+
+	if(!leaping)
+		return ..()
+
+	leap_cooldown = world.time + 60
+	if(hit_atom)
+		if(isliving(hit_atom))
+			var/mob/living/L = hit_atom
+			var/blocked = FALSE
+			if(ishuman(hit_atom))
+				var/mob/living/carbon/human/H = hit_atom
+				if(H.check_shields(src, 0, "the [name]", attack_type = LEAP_ATTACK))
+					blocked = TRUE
+			if(!blocked)
+				L.visible_message("<span class='danger'>[src] pounces on [L]!</span>", "<span class='userdanger'>[src] pounces on you!</span>")
+				L.Paralyze(50)
+				sleep(2)//Runtime prevention (infinite bump() calls on hulks)
+				step_towards(src,L)
+				if(iscarbon(hit_atom))
+					var/mob/living/carbon/C = hit_atom
+					addtimer(CALLBACK(src, .proc/infect_victim, C), 15)
+			else
+				Paralyze(40, 1, 1)
+
+			toggle_leap()
+		else if(hit_atom.density && !hit_atom.CanPass(src))
+			visible_message("<span class='danger'>[src] smashes into [hit_atom]!</span>", "<span class='borer'>[src] smashes into [hit_atom]!</span>")
+			Paralyze(40, 1, 1)
+
+		if(leaping)
+			leaping = FALSE
+			update_icons()
+			update_mobility()
+
 /proc/create_borer_mind(key)
 	var/datum/mind/M = new /datum/mind(key)
 	M.assigned_role = "Cortical Borer"
@@ -1016,11 +993,13 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	infest_host_action.Grant(src)
 	toggle_hide_action.Grant(src)
 	freeze_victim_action.Grant(src)
+	toggle_leap_action.Grant(src)
 
 /mob/living/simple_animal/borer/proc/RemoveBorerActions()
 	infest_host_action.Remove(src)
 	toggle_hide_action.Remove(src)
 	freeze_victim_action.Remove(src)
+	toggle_leap_action.Remove(src)
 
 /mob/living/simple_animal/borer/proc/GrantInfestActions()
 	talk_to_host_action.Grant(src)
@@ -1029,6 +1008,8 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	punish_victim_action.Grant(src)
 	make_chems_action.Grant(src)
 	jumpstart_host_action.Grant(src)
+	scan_host_action.Grant(src)
+	scan_chem_action.Grant(src)
 
 /mob/living/simple_animal/borer/proc/RemoveInfestActions()
 	talk_to_host_action.Remove(src)
@@ -1037,6 +1018,8 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	punish_victim_action.Remove(src)
 	make_chems_action.Remove(src)
 	jumpstart_host_action.Remove(src)
+	scan_host_action.Remove(src)
+	scan_chem_action.Remove(src)
 
 /mob/living/simple_animal/borer/proc/GrantControlActions()
 	talk_to_brain_action.Grant(victim)
@@ -1081,6 +1064,15 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	button_icon_state = "borer_hiding_[B.hiding ? "true" : "false"]"
 	UpdateButtonIcon()
 
+/datum/action/innate/borer/toggle_leap
+	name = "Prepare Leap"
+	desc = "Prepare to leap at an unsuspecting host."
+	button_icon_state = "borer_leap"
+
+/datum/action/innate/borer/toggle_leap/Activate()
+	var/mob/living/simple_animal/borer/B = owner
+	B.toggle_leap()
+
 /datum/action/innate/borer/talk_to_borer
 	name = "Converse with Borer"
 	desc = "Communicate mentally with your borer."
@@ -1090,7 +1082,6 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	var/mob/living/simple_animal/borer/B = owner.has_brain_worms()
 	B.victim = owner
 	B.victim.borer_comm()
-
 
 /datum/action/innate/borer/talk_to_brain
 	name = "Converse with Trapped Mind"
@@ -1161,8 +1152,9 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 
 /datum/action/innate/borer/punish_victim
 	name = "Punish"
-	desc = "Punish your victim."
-	button_icon_state = "blind"
+	desc = "Punish your host by disabling one of their limbs."
+	icon_icon = 'icons/mob/actions/actions_items.dmi'
+	button_icon_state = "legsweep"
 
 /datum/action/innate/borer/punish_victim/Activate()
 	var/mob/living/simple_animal/borer/B = owner
@@ -1178,6 +1170,27 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	var/mob/living/simple_animal/borer/B = owner
 	B.jumpstart()
 
+/datum/action/innate/borer/scan_host
+	name = "Analyze Host"
+	desc = "Analyze you host's current health."
+	icon_icon = 'icons/obj/device.dmi'
+	button_icon_state = "health"
+
+/datum/action/innate/borer/scan_host/Activate()
+	var/mob/living/simple_animal/borer/B = owner
+	var/mob/living/carbon/C = B.victim
+	healthscan(B, C)
+
+/datum/action/innate/borer/scan_chem
+	name = "Taste Blood"
+	desc = "Analyze the chemicals in your host."
+	icon_icon = 'icons/mob/actions/actions_items.dmi'
+	button_icon_state = "scan_mode"
+
+/datum/action/innate/borer/scan_chem/Activate()
+	var/mob/living/simple_animal/borer/B = owner
+	var/mob/living/carbon/C = B.victim
+	chemscan(B, C)
 
 /////ACTUAL ANTAG DATUM THINGS (Translation: Big Scary Magic Things)
 /datum/team/borer
