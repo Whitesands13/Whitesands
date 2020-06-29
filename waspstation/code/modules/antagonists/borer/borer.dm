@@ -780,7 +780,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 
 	var/mob/living/simple_animal/borer/B = has_brain_worms()
 	if(B && B.host_brain)
-		to_chat(src, "<span class='danger'>You withdraw your probosci, releasing control of [B.host_brain]</span>")
+		to_chat(B, "<span class='danger'>You withdraw your probosci, releasing control of [B.host_brain]</span>")
 
 		B.detatch()
 
