@@ -561,7 +561,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 		detatch()
 
 	if(src.mind.language_holder)
-		var/datum/language_holder/language_holer = src.mind.language_holder
+		var/datum/language_holder/language_holder = src.mind.language_holder
 		language_holder.remove_all_languages()
 		language_holder.grant_language(/datum/language/common)
 
