@@ -444,6 +444,9 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	RemoveBorerActions()
 	GrantInfestActions()
 
+	if(src.mind && src.mind.language_holder && C.mind.language_holder)
+		src.mind.language_holder.copy_languages(C.mind.language_holder)
+
 	log_game("[src]/([src.ckey]) has infested [victim]/([victim.ckey]")
 
 /mob/living/simple_animal/borer/verb/secrete_chemicals()
@@ -556,6 +559,11 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 
 	if(controlling)
 		detatch()
+
+	if(src.mind.language_holder)
+		var/datum/language_holder/language_holer = src.mind.language_holder
+		language_holder.remove_all_languages()
+		language_holder.grant_language(/datum/language/common)
 
 	GrantBorerActions()
 	RemoveInfestActions()
