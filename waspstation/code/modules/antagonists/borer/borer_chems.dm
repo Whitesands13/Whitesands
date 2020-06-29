@@ -17,10 +17,12 @@
 	chem_desc = "This keeps a host's temperature stable. High doses can allow short periods of unprotected EVA."
 	chemuse = 75
 
-/datum/borer_chem/omnizine
+/datum/borer_chem/spaceacillin
 	chem = /datum/reagent/medicine/spaceacillin
 	chemname = "spaceacillin"
 	chem_desc = "Prevents your host from spreading diseases, as well as cures some specific types of disease. Also known to hide borers from rudimentary health scans."
+	chemuse = 75
+	quantity = 5
 
 /datum/borer_chem/mannitol
 	chem = /datum/reagent/medicine/mannitol
@@ -31,6 +33,7 @@
 	chem = /datum/reagent/medicine/omnizine
 	chemname = "omnizine"
 	chem_desc = "Slowly heals all damage types in the host. Overdose will cause damage in all types instead."
+	quantity = 5
 
 /datum/borer_chem/ephedrine
 	chem = /datum/reagent/medicine/ephedrine
@@ -65,3 +68,9 @@
 	chemname = "formaldehyde"
 	chem_desc = "A mildly potent toxin, more importantly used for its ability to preserve dead bodies and their organs."
 	quantity = 5
+
+/datum/borer_chem/nutriment
+	chem = /datum/reagent/consumable/nutriment
+	chemname = "nutriment"
+	chem_desc = "A mix of all the nutrients needed to keep a host satiated."
+	quantity = 7

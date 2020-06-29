@@ -96,7 +96,6 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	var/bonding = FALSE
 	var/controlling = FALSE
 	var/chemicals = 10
-	var/used_dominate
 	var/leaving = FALSE
 	var/hiding = FALSE
 	var/waketimerid = null
@@ -114,7 +113,6 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	var/datum/action/innate/borer/leave_body/leave_body_action = new
 	var/datum/action/innate/borer/make_chems/make_chems_action = new
 	var/datum/action/innate/borer/make_larvae/make_larvae_action = new
-	var/datum/action/innate/borer/freeze_victim/freeze_victim_action = new
 	var/datum/action/innate/borer/punish_victim/punish_victim_action = new
 	var/datum/action/innate/borer/jumpstart_host/jumpstart_host_action = new
 	var/datum/action/innate/borer/scan_host/scan_host_action = new
@@ -129,8 +127,9 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	generation = gen
 	if(is_team_borer)
 		notify_ghosts("A cortical borer has been created in [get_area(src)]!", enter_link = "<a href=?src=\ref[src];ghostjoin=1>(Click to enter)</a>", source = src, action = NOTIFY_ATTACK)
-	real_name = "Cortical Borer [rand(1000,9999)]"
-	truename = "[borer_names[min(generation, borer_names.len)]] [rand(1000,9999)]"
+	var/numeral = rand(1000, 9999)
+	real_name = "Cortical Borer [numeral]"
+	truename = "[borer_names[min(generation, borer_names.len)]] [numeral]"
 
 	if(is_team_borer)
 		GLOB.borers += src
@@ -153,7 +152,6 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	QDEL_NULL(leave_body_action)
 	QDEL_NULL(make_chems_action)
 	QDEL_NULL(make_larvae_action)
-	QDEL_NULL(freeze_victim_action)
 	QDEL_NULL(punish_victim_action)
 	QDEL_NULL(jumpstart_host_action)
 	QDEL_NULL(scan_host_action)
@@ -363,11 +361,6 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	if(waketimerid)
 		waketimerid = null
 
-/mob/living/simple_animal/borer/UnarmedAttack(atom/A)
-	if(isliving(A))
-		healthscan(usr, A)
-		chemscan(usr, A)
-
 /mob/living/simple_animal/borer/ex_act()
 	if(victim)
 		return
@@ -408,6 +401,15 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	if(H.has_brain_worms())
 		to_chat(src, "<span class='warning'>[H] is already infested!</span>")
 		return
+
+	if(H.is_mouth_covered(head_only = 1))
+		to_chat(src, "<span class='warning'>[H] is wearing head protection!</span>")
+		return
+
+	if(H.ears)
+		if(H.dropItemToGround(H.ears))
+			H.visible_message("<span class='danger'>[src] tears [H.ears] off of [H]'s ear!</span>", \
+							"<span class='userdanger'>[src] tears [H.ears] off of your ear!</span>") //coz, you know, they go in the ear holes
 
 	to_chat(src, "<span class='warning'>You slither up [H] and begin probing at their ear canal...</span>")
 	if(!do_mob(src, H, 30))
@@ -500,51 +502,6 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 		visible_message("[src] slowly peaks up from the ground...", \
 					"<span class='noticealien'>You stop hiding.</span>")
 		hiding = FALSE
-
-/mob/living/simple_animal/borer/verb/dominate_victim()
-	set category = "Borer"
-	set name = "Paralyze Victim"
-	set desc = "Freeze the limbs of a potential host with supernatural fear."
-
-	if(world.time - used_dominate < 150)
-		to_chat(src, "<span class='warning'>You cannot use that ability again so soon.</span>")
-		return
-
-	if(victim)
-		to_chat(src, "<span class='warning'>You cannot do that from within a host body.</span>")
-		return
-
-	if(stat != CONSCIOUS)
-		to_chat(src, "<span class='warning'>You cannot do that in your current state.</span>")
-		return
-
-	var/list/choices = list()
-	for(var/mob/living/carbon/C in view(1,src))
-		if(C.stat == CONSCIOUS)
-			choices += C
-
-	if(!choices.len)
-		return
-	var/mob/living/carbon/M = choices.len > 1 ? input(src,"Who do you wish to dominate?") in null|choices : choices[1]
-
-
-	if(!M || !src || stat != CONSCIOUS || victim || (world.time - used_dominate < 150))
-		return
-	if(!Adjacent(M))
-		return
-
-	if(M.has_brain_worms())
-		to_chat(src, "<span class='warning'>You cannot paralyze someone who is already infested!</span>")
-		return
-
-	layer = UNDERDOOR
-
-	to_chat(src, "<span class='warning'>You focus your psychic lance on [M] and freeze their limbs with a wave of terrible dread.</span>")
-	to_chat(M, "<span class='userdanger'>You feel a creeping, horrible sense of dread come over you, freezing your limbs and setting your heart racing.</span>")
-	M.Knockdown(30)
-	M.blind_eyes(4)
-
-	used_dominate = world.time
 
 /mob/living/simple_animal/borer/verb/release_victim()
 	set category = "Borer"
@@ -960,7 +917,10 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 			var/blocked = FALSE
 			if(ishuman(hit_atom))
 				var/mob/living/carbon/human/H = hit_atom
-				if(H.check_shields(src, 0, "the [name]", attack_type = LEAP_ATTACK))
+				if(H.is_mouth_covered(head_only = 1))
+					to_chat(src, "<span class='userdanger'>You smash against [H]'s [H.head]!</span>")
+					H.visible_message("<span class='danger'>[src] smashes against [H]'s [H.head]!</span>", \
+					"<span class='userdanger'>[src] smashes against your [H.head]!</span>")
 					blocked = TRUE
 			if(!blocked)
 				L.visible_message("<span class='danger'>[src] pounces on [L]!</span>", "<span class='userdanger'>[src] pounces on you!</span>")
@@ -992,13 +952,11 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 /mob/living/simple_animal/borer/proc/GrantBorerActions()
 	infest_host_action.Grant(src)
 	toggle_hide_action.Grant(src)
-	freeze_victim_action.Grant(src)
 	toggle_leap_action.Grant(src)
 
 /mob/living/simple_animal/borer/proc/RemoveBorerActions()
 	infest_host_action.Remove(src)
 	toggle_hide_action.Remove(src)
-	freeze_victim_action.Remove(src)
 	toggle_leap_action.Remove(src)
 
 /mob/living/simple_animal/borer/proc/GrantInfestActions()
@@ -1141,15 +1099,6 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	B.victim = owner
 	B.victim.spawn_larvae()
 
-/datum/action/innate/borer/freeze_victim
-	name = "Paralyze Victim"
-	desc = "Freeze the limbs of a potential host with supernatural fear."
-	button_icon_state = "freeze"
-
-/datum/action/innate/borer/freeze_victim/Activate()
-	var/mob/living/simple_animal/borer/B = owner
-	B.dominate_victim()
-
 /datum/action/innate/borer/punish_victim
 	name = "Punish"
 	desc = "Punish your host by disabling one of their limbs."
@@ -1215,15 +1164,18 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	parts += "<span class='header'>The [name] were:</span>"
 	for(var/mob/living/simple_animal/borer/B in GLOB.borers)
 		var/borertext
-		if((B.key || B.controlling) && B.stat != DEAD)
+		if(B.is_team_borer && (B.key || B.controlling) && B.stat != DEAD)
 			if(!won && B.client)
 				SEND_SOUND(B.client, 'sound/ambience/ambifailure.ogg')
 			borertext += "<br><b>[B.controlling ? B.victim.key : B.key]</b> was <b>[B.truename]</b> and "
 			var/turf/location = get_turf(B)
-			if(is_centcom_level(location.z) && B.victim)
-				borertext += "<span class='greentext'>escaped with a host</span>"
+			if(B.stat != DEAD)
+				if(is_centcom_level(location.z) && B.victim)
+					borertext += "<span class='greentext'>escaped with a host</span>"
+				else
+					borertext += "<span class='redtext'>failed to find a host</span>"
 			else
-				borertext += "<span class='redtext'>failed to find a host</span>"
+				borertext += "<span class='redtext'>died</span>"
 			parts += borertext
 	parts += printobjectives(objectives)
 	return "<div class='panel redborder'>[parts.Join("<br>")]</div>"
@@ -1262,7 +1214,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	to_chat(owner.current, "<span class='notice'>You are the [name].</span>")
 	to_chat(owner.current, "You are a brain slug that worms its way into the head of its victim. Use stealth, persuasion and your powers of mind control to keep you, your host and your eventual spawn safe and warm.")
 	to_chat(owner.current, "Sugar nullifies your abilities, avoid it at all costs!")
-	to_chat(owner.current, "You can speak to your fellow borers by prefixing your messages with '.o'. Check out your Borer tab to see your abilities. To reproduce, you must have 100 chemicals and be controlling a host.")
+	to_chat(owner.current, "You can speak to your fellow borers by prefixing your messages with '.o'. Check out your Borer tab to see your abilities. To reproduce, you must have 200 chemicals and be controlling a host.")
 	return ..()
 
 //Objective
@@ -1285,7 +1237,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 			var/turf/location = get_turf(C)
 			if(is_centcom_level(location.z) && D && D.stat != DEAD)
 				total_borer_hosts++
-		if(total_borer_hosts <= target_amount)
+		if(total_borer_hosts >= target_amount)
 			return TRUE
 
 //Mob
