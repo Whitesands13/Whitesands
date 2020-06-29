@@ -59,3 +59,9 @@
 	chem = /datum/reagent/consumable/ethanol
 	chemname = "ethanol"
 	chem_desc = "The most potent alcoholic 'beverage', with the fastest toxicity."
+
+/datum/borer_chem/formaldehyde
+	chem = /datum/reagent/toxin/formaldehyde
+	chemname = "formaldehyde"
+	chem_desc = "A mildly potent toxin, more importantly used for its ability to preserve dead bodies and their organs."
+	quantity = 5

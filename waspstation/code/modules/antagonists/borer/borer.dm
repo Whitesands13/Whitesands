@@ -406,7 +406,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 		return FALSE
 
 	if(H.has_brain_worms())
-		to_chat(src, "<span class='warning'>[victim] is already infested!</span>")
+		to_chat(src, "<span class='warning'>[H] is already infested!</span>")
 		return
 
 	to_chat(src, "<span class='warning'>You slither up [H] and begin probing at their ear canal...</span>")
