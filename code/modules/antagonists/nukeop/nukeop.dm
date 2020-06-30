@@ -225,7 +225,7 @@
 	always_new_team = TRUE
 	send_to_spawnpoint = FALSE //Handled by event
 	nukeop_outfit = /datum/outfit/syndicate/full
-	var/intern_pop_max = 10
+	var/intern_pop_max = 8
 	var/intern_outfit = /datum/outfit/syndicate/intern
 
 /datum/antagonist/nukeop/lone/on_gain()
