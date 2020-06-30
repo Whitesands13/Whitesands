@@ -2,6 +2,14 @@
 	var/glasses_overlay_file = 'waspstation/icons/mob/pets.dmi'
 	var/obj/item/clothing/glasses/glasses = null //snek glasses
 
+/mob/living/simple_animal/hostile/retaliate/poison/snake/say(message, bubble_type, list/spans, sanitize, datum/language/language, ignore_spam, forced)
+	var/static/regex/lizard_hiss = new("s+", "g")
+	var/static/regex/lizard_hiSS = new("S+", "g")
+	if(message[1] != "*")
+		message = lizard_hiss.Replace(message, "sss")
+		message = lizard_hiSS.Replace(message, "SSS")
+	..()
+
 /mob/living/simple_animal/hostile/retaliate/poison/snake/update_overlays()
 	..()
 	overlays.Cut()
@@ -75,6 +83,7 @@
 	icon_state = "bookworm"
 	icon_living = "bookworm"
 	icon_dead = "bookworm_dead"
+	desc = "The Curator's beloved astigmatic corn snake. Probably best not to poke it too much..."
 	speak_chance = 10 //a lot less than poly
 	speak = list("I can't find anything to read!")
 
@@ -87,11 +96,14 @@
 
 /mob/living/simple_animal/hostile/retaliate/poison/snake/bookworm/proc/get_phrases() //if someone sees this, be sure to actually literally really kill me
 	var/phrase_buffer = list()
-	create_random_books(15, src, TRUE)
+	create_random_books(20, src, TRUE)
 	for(var/obj/item/book/B in contents)
-		var/start = findtext(B.dat, ">")
-		var/end = findtext(B.dat, "<", 2)
-		phrase_buffer += strip_html(copytext_char(B.dat, start, min(start + 15, end)))
+		phrase_buffer += "[strip_booktext(B.dat, 25)]..."
+		if(prob(25))
+			phrase_buffer += "Have you read anything by [B.author] lately?"
+		if(prob(35))
+			phrase_buffer += "You should read [B.title]. It's [pick(list("hilarious", "wonderful", "atrocious", "interesting"))]."
+
 		qdel(B)
 	return phrase_buffer //and I mean really actually kill me with a gun or knife or something that can kill people
 
@@ -100,12 +112,36 @@
 	LH.selected_language = get_random_spoken_language()
 	..()
 
-/mob/living/simple_animal/hostile/retaliate/poison/snake/examine(mob/user)
+/mob/living/simple_animal/hostile/retaliate/poison/snake/bookworm/examine(mob/user)
 	. = ..()
-	. += "This one [glasses ? "is wearing glasses!" : "seems to be having trouble seeing..."]"
+	. += "[src] [glasses ? "is wearing glasses!" : "seems to be having trouble seeing..."]"
 
-/mob/living/simple_animal/hostile/retaliate/poison/snake/attack_hand(mob/living/carbon/human/M)
+/mob/living/simple_animal/hostile/retaliate/poison/snake/bookworm/attack_hand(mob/living/carbon/human/M)
 	..()
 	if(stat != DEAD && M.a_intent == INTENT_HELP)
 		handle_automated_speech(1) //assured speak/emote
 	return
+
+/mob/living/simple_animal/hostile/retaliate/poison/snake/bookworm/attackby(obj/item/O, mob/user, params)
+	if(istype(O, /obj/item/book) && user.a_intent == INTENT_HELP)
+		var/obj/item/book/B = O
+		if(B.dat)
+			var/textdata = strip_booktext(B.dat, 25)
+			if(!(textdata in speak))
+				speak.Remove(pick(speak))
+				speak.Add("[textdata]...")
+				say("[textdata]...")
+				return
+			else
+				say("I've already read that one.")
+				return
+	if(istype(O, /obj/item/reagent_containers/food/snacks/deadmouse))
+		if(speak_chance >= 75)
+			user.visible_message("[src] doesn't seem to want the [O]...")
+		else
+			user.visible_message("[user] feeds [src] the [O]!", "You feed [src] the [O]!")
+			playsound(src.loc,'sound/items/eatfood.ogg', rand(10,50), TRUE)
+			speak_chance = min(speak_chance * 2, 75)
+			qdel(O)
+			return
+	..()
