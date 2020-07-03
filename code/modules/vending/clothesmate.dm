@@ -76,6 +76,7 @@
 		            /obj/item/clothing/suit/jacket/letterman = 2,
 		            /obj/item/clothing/suit/jacket/letterman_red = 2,
 		            /obj/item/clothing/glasses/regular = 2,
+					/obj/item/clothing/glasses/cheapsuns = 2, // Wasp Edit - Cheap sunglasses
 		            /obj/item/clothing/glasses/regular/jamjar = 1,
 		            /obj/item/clothing/glasses/orange = 1,
 		            /obj/item/clothing/glasses/red = 1,
@@ -97,6 +98,9 @@
 		            /obj/item/clothing/under/dress/sailor = 1,
 		            /obj/item/clothing/under/dress/redeveninggown = 1,
 		            /obj/item/clothing/under/dress/blacktango = 1,
+					/obj/item/clothing/under/plasmaman = 1, //WS edit start
+					/obj/item/clothing/under/plasmaman/skirt = 1,
+					/obj/item/clothing/head/helmet/space/plasmaman = 1, //WS edit end
 		            /obj/item/clothing/suit/ianshirt = 1,
 		            /obj/item/clothing/shoes/laceup = 2,
 		            /obj/item/clothing/shoes/sandal = 2,
@@ -131,6 +135,8 @@
 	default_price = 60
 	extra_price = 120
 	payment_department = NO_FREEBIES
+	light_mask = "wardrobe-light-mask"
+	light_color = "#00FF00"
 
 /obj/machinery/vending/clothing/canLoadItem(obj/item/I,mob/user)
 	return (I.type in products)

@@ -27,6 +27,8 @@
 	belt = /obj/item/pda/curator
 	ears = /obj/item/radio/headset/headset_srv
 	uniform = /obj/item/clothing/under/rank/civilian/curator
+	alt_uniform = /obj/item/clothing/under/suit/tan
+	alt_suit = /obj/item/clothing/suit/curator
 	l_hand = /obj/item/storage/bag/books
 	r_pocket = /obj/item/key/displaycase
 	l_pocket = /obj/item/laser_pointer
@@ -44,3 +46,16 @@
 		return
 
 	H.grant_all_languages(TRUE, TRUE, TRUE, LANGUAGE_CURATOR)
+
+/datum/outfit/job/curator/journalist
+	name = "Curator (Journalist)"
+	uniform = /obj/item/clothing/under/suit/checkered
+	head = /obj/item/clothing/head/fedora
+	neck = /obj/item/camera
+	l_hand = /obj/item/taperecorder
+	l_pocket = /obj/item/newspaper
+	backpack_contents = list(
+		/obj/item/choice_beacon/hero = 1,
+		/obj/item/soapstone = 1,
+		/obj/item/tape = 1
+	)

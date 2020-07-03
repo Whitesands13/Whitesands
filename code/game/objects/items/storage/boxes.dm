@@ -957,6 +957,13 @@
 				return 0
 	return ..()
 
+/obj/item/storage/box/papersack/meat
+	desc = "It's slightly moist and smells like a slaughterhouse."
+
+/obj/item/storage/box/papersack/meat/PopulateContents()
+	for(var/i in 1 to 7)
+		new /obj/item/reagent_containers/food/snacks/meat/slab(src)
+
 #undef NODESIGN
 #undef NANOTRASEN
 #undef SYNDI
@@ -1183,7 +1190,7 @@
 /obj/item/storage/box/dishdrive/PopulateContents()
 	var/static/items_inside = list(
 		/obj/item/stack/sheet/metal/five = 1,
-		/obj/item/stack/cable_coil/five = 1,
+		/obj/item/stack/cable_coil/random/five = 1, //Random from Smartwire Revert - Waspie Bois
 		/obj/item/circuitboard/machine/dish_drive = 1,
 		/obj/item/stack/sheet/glass = 1,
 		/obj/item/stock_parts/manipulator = 1,
@@ -1297,6 +1304,7 @@
 	name = "bubblegum packet"
 	desc = "The packaging is entirely in japanese, apparently. You can't make out a single word of it."
 	icon_state = "bubblegum_generic"
+	w_class = WEIGHT_CLASS_TINY
 	illustration = null
 	foldable = null
 	custom_price = 120

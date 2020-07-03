@@ -29,6 +29,9 @@
 	l_pocket = /obj/item/pda/atmos
 	ears = /obj/item/radio/headset/headset_eng
 	uniform = /obj/item/clothing/under/rank/engineering/atmospheric_technician
+	alt_uniform = /obj/item/clothing/under/rank/engineering/engineer/hazard //Wasp Edit - Alt Uniforms
+	alt_suit = /obj/item/clothing/suit/hazardvest
+	dcoat = /obj/item/clothing/suit/hooded/wintercoat/engineering //Wasp Edit - Alt Uniforms
 	r_pocket = /obj/item/analyzer
 
 	backpack = /obj/item/storage/backpack/industrial
@@ -46,3 +49,13 @@
 	suit = /obj/item/clothing/suit/space/hardsuit/engine/atmos
 	suit_store = /obj/item/tank/internals/oxygen
 	internals_slot = ITEM_SLOT_SUITSTORE
+
+/datum/outfit/job/atmos/firefighter
+	name = "Atmospheric Technician (Firefighter)"
+	uniform = /obj/item/clothing/under/rank/engineering/engineer/hazard
+	head = /obj/item/clothing/head/hardhat/red
+	l_hand = /obj/item/extinguisher
+
+/datum/outfit/job/atmos/lifesupportspecialist
+	name = "Atmospheric Technician (Life Support Specialist)"
+	backpack_contents = list(/obj/item/modular_computer/tablet/preset/advanced=1, /obj/item/storage/box/survival=2)

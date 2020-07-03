@@ -29,11 +29,12 @@
 	. = ..()
 	initialize_directions = dir
 
-/obj/machinery/atmospherics/components/unary/thermomachine/on_construction()
+/obj/machinery/atmospherics/components/unary/thermomachine/on_construction(obj_color, set_layer)
 	var/obj/item/circuitboard/machine/thermomachine/board = circuit
 	if(board)
 		piping_layer = board.pipe_layer
-	..(dir, piping_layer)
+		set_layer = piping_layer
+	..()
 
 /obj/machinery/atmospherics/components/unary/thermomachine/RefreshParts()
 	var/B
@@ -103,9 +104,11 @@
 	SetInitDirections()
 	var/obj/machinery/atmospherics/node = nodes[1]
 	if(node)
-		node.disconnect(src)
+		if(src in node.nodes) //Only if it's actually connected. On-pipe version would is one-sided.
+			node.disconnect(src)
 		nodes[1] = null
-	nullifyPipenet(parents[1])
+	if(parents[1])
+		nullifyPipenet(parents[1])
 
 	atmosinit()
 	node = nodes[1]
@@ -171,11 +174,17 @@
 
 	update_icon()
 
+//Wasp Edit - Update from Cit's Thermomachine - PR #8800, adds additional info to ctrl and alt clicks - BFAT
+
 /obj/machinery/atmospherics/components/unary/thermomachine/CtrlClick(mob/living/user)
+	var/area/A = get_area(src)
+	var/turf/T = get_turf(src)
 	if(!istype(user) || !user.canUseTopic(src, BE_CLOSE))
 		return
 	on = !on
 	update_icon()
+	investigate_log("was turned [on ? "on" : "off"] by [key_name(usr)]", INVESTIGATE_ATMOS)
+	message_admins("[src.name] was turned [on ? "on" : "off"] [ADMIN_LOOKUPFLW(usr)] at [ADMIN_COORDJMP(T)], [A]")
 
 /obj/machinery/atmospherics/components/unary/thermomachine/freezer
 	name = "freezer"
@@ -211,9 +220,15 @@
 	min_temperature = max(T0C - (initial(min_temperature) + L * 15), TCMB) //73.15K with T1 stock parts
 
 /obj/machinery/atmospherics/components/unary/thermomachine/freezer/AltClick(mob/living/user)
+	. = ..()
+	var/area/A = get_area(src)
+	var/turf/T = get_turf(src)
 	if(!istype(user) || !user.canUseTopic(src, BE_CLOSE))
 		return
 	target_temperature = min_temperature
+	investigate_log("was set to [target_temperature] K by [key_name(usr)]", INVESTIGATE_ATMOS)
+	message_admins("[src.name] was minimized by [ADMIN_LOOKUPFLW(usr)] at [ADMIN_COORDJMP(T)], [A]")
+	return TRUE
 
 /obj/machinery/atmospherics/components/unary/thermomachine/heater
 	name = "heater"
@@ -237,6 +252,12 @@
 	max_temperature = T20C + (initial(max_temperature) * L) //573.15K with T1 stock parts
 
 /obj/machinery/atmospherics/components/unary/thermomachine/heater/AltClick(mob/living/user)
+	. = ..()
+	var/area/A = get_area(src)
+	var/turf/T = get_turf(src)
 	if(!istype(user) || !user.canUseTopic(src, BE_CLOSE))
 		return
 	target_temperature = max_temperature
+	investigate_log("was set to [target_temperature] K by [key_name(usr)]", INVESTIGATE_ATMOS)
+	message_admins("[src.name] was maximized by [ADMIN_LOOKUPFLW(usr)] at [ADMIN_COORDJMP(T)], [A]")
+	return TRUE

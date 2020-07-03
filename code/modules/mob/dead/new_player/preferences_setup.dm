@@ -22,7 +22,9 @@
 	if(randomise[RANDOM_BACKPACK])
 		backpack = random_backpack()
 	if(randomise[RANDOM_JUMPSUIT_STYLE])
-		jumpsuit_style = pick(GLOB.jumpsuitlist)
+		jumpsuit_style = pick(GLOB.jumpsuitlistrandom)
+	if(randomise[RANDOM_EXOWEAR_STYLE])
+		exowear = pick(GLOB.exowearlist)
 	if(randomise[RANDOM_HAIRSTYLE])
 		hairstyle = random_hairstyle(gender)
 	if(randomise[RANDOM_FACIAL_HAIRSTYLE])
@@ -46,7 +48,7 @@
 	if(randomise[RANDOM_NAME])
 		real_name = pref_species.random_name(gender,1)
 
-/datum/preferences/proc/update_preview_icon()
+/datum/preferences/proc/update_preview_icon(showGear = TRUE, showLoadout = FALSE)
 	// Determine what job is marked as 'High' priority, and dress them up as such.
 	var/datum/job/previewJob
 	var/highest_pref = 0
@@ -66,9 +68,9 @@
 
 	// Set up the dummy for its photoshoot
 	var/mob/living/carbon/human/dummy/mannequin = generate_or_wait_for_human_dummy(DUMMY_HUMAN_SLOT_PREFERENCES)
-	copy_to(mannequin, 1, TRUE, TRUE)
+	copy_to(mannequin, 1, TRUE, TRUE, loadout = showLoadout)
 
-	if(previewJob)
+	if(previewJob && showGear)
 		mannequin.job = previewJob.title
 		previewJob.equip(mannequin, TRUE, preference_source = parent)
 

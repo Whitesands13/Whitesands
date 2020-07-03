@@ -31,6 +31,8 @@
 	l_pocket = /obj/item/pda/engineering
 	ears = /obj/item/radio/headset/headset_eng
 	uniform = /obj/item/clothing/under/rank/engineering/engineer
+	alt_uniform = /obj/item/clothing/under/rank/engineering/engineer/hazard //Wasp Edit - Alt Uniforms
+	dcoat = /obj/item/clothing/suit/hooded/wintercoat/engineering //Wasp Edit - Alt Uniforms
 	shoes = /obj/item/clothing/shoes/workboots
 	head = /obj/item/clothing/head/hardhat
 	r_pocket = /obj/item/t_scanner
@@ -55,4 +57,22 @@
 	suit_store = /obj/item/tank/internals/oxygen
 	head = null
 	internals_slot = ITEM_SLOT_SUITSTORE
+//Wasp Edit Start - Alt-Job Titles
+/datum/outfit/job/engineer/electrician
+	name = "Station Engineer (Electrician)"
+	l_hand = /obj/item/storage/toolbox/electrical
+	gloves = /obj/item/clothing/gloves/color/grey
 
+/datum/outfit/job/engineer/enginetechnician
+	name = "Station Engineer (Engine Technician)"
+	uniform = /obj/item/clothing/under/rank/engineering/engineer/hazard
+	r_pocket = /obj/item/geiger_counter
+
+/datum/outfit/job/engineer/maintenancetechnician
+	name = "Station Engineer (Maintenance Technician)"
+	uniform = /obj/item/clothing/under/color/grey
+	suit = /obj/item/clothing/suit/hazardvest
+	accessory = /obj/item/clothing/accessory/armband/engine
+	r_pocket = /obj/item/stack/cable_coil
+	l_pocket = /obj/item/flashlight
+//Wasp Edit End - Alt-Job Titles

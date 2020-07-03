@@ -409,6 +409,14 @@
 			if(Mech.occupant && !in_faction(Mech.occupant)) //If there is a user and they're not in our faction
 				if(assess_perp(Mech.occupant) >= 4)
 					targets += Mech
+	// Wasp start
+	for(var/A in GLOB.spacepods_list)
+		if((get_dist(A, base) < scan_range) && can_see(base, A, scan_range))
+			var/obj/spacepod/SP = A
+			if(SP.pilot && !in_faction(SP.pilot))
+				if(assess_perp(SP.pilot) >= 4)
+					targets += SP
+	// Wasp end
 
 	if((turret_flags & TURRET_FLAG_SHOOT_ANOMALOUS) && GLOB.blobs.len && (mode == TURRET_LETHAL))
 		for(var/obj/structure/blob/B in view(scan_range, base))
@@ -674,6 +682,8 @@
 	desc = "An energy blaster auto-turret."
 
 /obj/machinery/porta_turret/syndicate/energy/heavy
+	name = "syndicate heavy laser turret"
+	desc = "A heavy laser auto-turret."
 	icon_state = "standard_lethal"
 	base_icon_state = "standard"
 	stun_projectile = /obj/projectile/energy/electrode
@@ -689,12 +699,16 @@
 
 
 /obj/machinery/porta_turret/syndicate/pod
+	name = "syndicate semi-auto turret"
+	desc = "A ballistic semi-automatic auto-turret."
 	integrity_failure = 0.5
 	max_integrity = 40
 	stun_projectile = /obj/projectile/bullet/syndicate_turret
 	lethal_projectile = /obj/projectile/bullet/syndicate_turret
 
 /obj/machinery/porta_turret/syndicate/shuttle
+	name = "syndicate penetrator turret"
+	desc = "A ballistic penetrator auto-turret."
 	scan_range = 9
 	shot_delay = 3
 	stun_projectile = /obj/projectile/bullet/p50/penetrator/shuttle

@@ -1,7 +1,7 @@
 /datum/job/geneticist
 	title = "Geneticist"
 	flag = GENETICIST
-	department_head = list("Chief Medical Officer", "Research Director")
+	department_head = list("Chief Medical Officer")		// Wasp Edit - More Gen/Sci Split
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 2
@@ -17,7 +17,7 @@
 	access = list(ACCESS_MEDICAL, ACCESS_MORGUE, ACCESS_CHEMISTRY, ACCESS_GENETICS, ACCESS_CLONING, ACCESS_MECH_MEDICAL, ACCESS_RESEARCH, ACCESS_XENOBIOLOGY, ACCESS_ROBOTICS, ACCESS_MINERAL_STOREROOM, ACCESS_TECH_STORAGE) //WaspStation edit - Gen/Sci Split
 	minimal_access = list(ACCESS_MEDICAL, ACCESS_MORGUE, ACCESS_GENETICS, ACCESS_CLONING, ACCESS_MECH_MEDICAL, ACCESS_MINERAL_STOREROOM, ACCESS_PHARMACY) //WaspStation edit - Gen/Sci Split
 	paycheck = PAYCHECK_MEDIUM
-	paycheck_department = ACCOUNT_SCI
+	paycheck_department = ACCOUNT_MED		// Wasp Edit - Connects gen to med budget
 
 	display_order = JOB_DISPLAY_ORDER_GENETICIST
 
@@ -28,6 +28,8 @@
 	belt = /obj/item/pda/geneticist
 	ears = /obj/item/radio/headset/headset_medsci
 	uniform = /obj/item/clothing/under/rank/medical/geneticist
+	alt_uniform = /obj/item/clothing/under/rank/medical/doctor/green //Wasp Edit - Alt Uniforms
+	dcoat = /obj/item/clothing/suit/hooded/wintercoat/medical //Wasp Edit - Alt Uniforms
 	shoes = /obj/item/clothing/shoes/sneakers/white
 	suit =  /obj/item/clothing/suit/toggle/labcoat/genetics
 	suit_store =  /obj/item/flashlight/pen

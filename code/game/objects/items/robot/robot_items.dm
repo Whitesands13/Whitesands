@@ -25,8 +25,8 @@
 	M.Paralyze(100)
 	M.apply_effect(EFFECT_STUTTER, 5)
 
-	M.visible_message("<span class='danger'>[user] has prodded [M] with [src]!</span>", \
-					"<span class='userdanger'>[user] has prodded you with [src]!</span>")
+	M.visible_message("<span class='danger'>[user] prods [M] with [src]!</span>", \
+					"<span class='userdanger'>[user] prods you with [src]!</span>")
 
 	playsound(loc, 'sound/weapons/egloves.ogg', 50, TRUE, -1)
 
@@ -490,7 +490,6 @@
 	name = "Gumball"
 	desc = "Why are you seeing this?!"
 	projectile_type = /obj/projectile/bullet/reusable/gumball
-	click_cooldown_override = 2
 
 
 /obj/projectile/bullet/reusable/gumball
@@ -511,7 +510,6 @@
 	name = "Lollipop"
 	desc = "Why are you seeing this?!"
 	projectile_type = /obj/projectile/bullet/reusable/lollipop
-	click_cooldown_override = 2
 
 /obj/projectile/bullet/reusable/lollipop
 	name = "lollipop"

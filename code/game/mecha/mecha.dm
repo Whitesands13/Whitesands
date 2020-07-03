@@ -63,6 +63,7 @@
 	var/list/equipment = new
 	var/obj/item/mecha_parts/mecha_equipment/selected
 	var/max_equip = 3
+	var/datum/events/events //Wasp - Readded for Smartwire Revert
 
 	var/step_silent = FALSE //Used for disabling mech step sounds while using thrusters or pushing off lockers
 	var/stepsound = 'sound/mecha/mechstep.ogg'
@@ -121,6 +122,7 @@
 
 /obj/mecha/Initialize()
 	. = ..()
+	events = new //Wasp - Readded for Smartwire Revert
 	icon_state += "-open"
 	add_radio()
 	add_cabin()
@@ -537,6 +539,8 @@
 
 /obj/mecha/Move(atom/newloc, direct)
 	. = ..()
+	if(.)
+		events.fireEvent("onMove",get_turf(src)) //Wasp - Readded for Smartwire Revert
 	if (internal_tank?.disconnect()) // Something moved us and broke connection
 		occupant_message("<span class='warning'>Air port connection has been severed!</span>")
 		log_message("Lost connection to gas port.", LOG_MECHA)
@@ -877,6 +881,9 @@
 	if((user != M) || user.incapacitated() || !Adjacent(user))
 		return
 	if(!ishuman(user)) // no silicons or drones in mechas.
+		return
+	if(HAS_TRAIT(user, TRAIT_PRIMITIVE)) //no lavalizards either.
+		to_chat(user, "<span class='warning'>The knowledge to use this device eludes you!</span>")
 		return
 	log_message("[user] tries to move in.", LOG_MECHA)
 	if (occupant)

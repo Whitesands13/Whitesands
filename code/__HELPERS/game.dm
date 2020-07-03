@@ -53,6 +53,27 @@
 	for(var/I in adjacent_turfs)
 		. |= get_area(I)
 
+/**
+ * Get a bounding box of a list of atoms.
+ *
+ * Arguments:
+ * - atoms - List of atoms. Can accept output of view() and range() procs.
+ *
+ * Returns: list(x1, y1, x2, y2)
+ */
+/proc/get_bbox_of_atoms(list/atoms)
+	var/list/list_x = list()
+	var/list/list_y = list()
+	for(var/_a in atoms)
+		var/atom/a = _a
+		list_x += a.x
+		list_y += a.y
+	return list(
+		min(list_x),
+		min(list_y),
+		max(list_x),
+		max(list_y))
+
 // Like view but bypasses luminosity check
 
 /proc/get_hear(range, atom/source)
@@ -276,12 +297,15 @@
 	else
 		return 0
 
-
-/proc/try_move_adjacent(atom/movable/AM)
+/proc/try_move_adjacent(atom/movable/AM, trydir)
 	var/turf/T = get_turf(AM)
-	for(var/direction in GLOB.cardinals)
+	if(trydir)
+		if(AM.Move(get_step(T, trydir)))
+			return TRUE
+	for(var/direction in (GLOB.cardinals-trydir))
 		if(AM.Move(get_step(T, direction)))
-			break
+			return TRUE
+	return FALSE
 
 /proc/get_mob_by_key(key)
 	var/ckey = ckey(key)
@@ -500,8 +524,13 @@
 	if((character.mind.assigned_role == "Cyborg") || (character.mind.assigned_role == character.mind.special_role))
 		return
 
+	//Wasp begin - Alternate job titles
+	var/displayed_rank = rank
+	if(character.client && character.client.prefs && character.client.prefs.alt_titles_preferences[rank])
+		displayed_rank = character.client.prefs.alt_titles_preferences[rank]
 	var/obj/machinery/announcement_system/announcer = pick(GLOB.announcement_systems)
-	announcer.announce("ARRIVAL", character.real_name, rank, list()) //make the list empty to make it announce it in common
+	announcer.announce("ARRIVAL", character.real_name, displayed_rank, list()) //make the list empty to make it announce it in common
+	//Wasp end
 
 /proc/GetRedPart(const/hexa)
 	return hex2num(copytext(hexa, 2, 4))

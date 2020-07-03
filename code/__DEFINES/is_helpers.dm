@@ -73,6 +73,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 //WaspStation Begin - Custom Species
 #define issquidperson(A) (is_species(A, /datum/species/squid))
 #define isipc(A) (is_species(A, /datum/species/ipc))
+#define isspiderperson(A) (is_species(A, /datum/species/spider))
 //WaspStation End
 
 //more carbon mobs
@@ -213,3 +214,7 @@ GLOBAL_LIST_INIT(glass_sheet_types, typecacheof(list(
 #define isblobmonster(O) (istype(O, /mob/living/simple_animal/hostile/blob))
 
 #define isshuttleturf(T) (length(T.baseturfs) && (/turf/baseturf_skipover/shuttle in T.baseturfs))
+
+//Wasp Begin
+#define isspacepod(A) (istype(A, /obj/spacepod))
+//Wasp End

@@ -27,7 +27,9 @@
 	belt = /obj/item/pda/cook
 	ears = /obj/item/radio/headset/headset_srv
 	uniform = /obj/item/clothing/under/rank/civilian/chef
+	alt_uniform = /obj/item/clothing/under/rank/civilian/cookjorts //Wasp Edit - Alt Uniforms
 	suit = /obj/item/clothing/suit/toggle/chef
+	alt_suit = /obj/item/clothing/suit/apron/chef
 	head = /obj/item/clothing/head/chefhat
 	mask = /obj/item/clothing/mask/fakemoustache/italian
 	backpack_contents = list(/obj/item/sharpener = 1)
@@ -53,3 +55,12 @@
 	var/datum/martial_art/cqc/under_siege/justacook = new
 	justacook.teach(H)
 
+// Wasp Edit Start - Alt-Job Titles
+/datum/outfit/job/cook/grillmaster
+	uniform = /obj/item/clothing/under/rank/civilian/cookjorts
+	suit = null
+	head = null
+	mask = null
+	r_hand = /obj/item/reagent_containers/food/drinks/soda_cans/monkey_energy
+	l_pocket = /obj/item/stack/sheet/mineral/coal
+// Wasp Edit End - Alt-Job Titles

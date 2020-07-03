@@ -340,6 +340,10 @@
 	for(var/i in 1 to 6)
 		new /obj/item/soulstone/anybody/chaplain(src)
 
+/obj/item/storage/belt/soulstone/full/purified/PopulateContents()
+	for(var/i in 1 to 6)
+		new /obj/item/soulstone/anybody/purified(src)
+
 /obj/item/storage/belt/champion
 	name = "championship belt"
 	desc = "Proves to the world that you are the strongest!"
@@ -537,7 +541,7 @@
 		/obj/item/melee/flyswatter,
 		/obj/item/assembly/mousetrap,
 		/obj/item/paint/paint_remover,
-		/obj/item/twohanded/broom
+		/obj/item/pushbroom
 		))
 
 /obj/item/storage/belt/janitor/full/PopulateContents()

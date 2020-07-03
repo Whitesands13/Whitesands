@@ -25,6 +25,7 @@
 	var/vary = FALSE	//used for the honk borg emote
 	var/only_forced_audio = FALSE //can only code call this event instead of the player.
 	var/cooldown = 0.8 SECONDS
+	var/static/regex/stop_bad_mime = regex(@"says|exclaims|yells|asks") //Wasp Edit
 
 /datum/emote/New()
 	if (ispath(mob_type_allowed_typecache))
@@ -49,10 +50,6 @@
 		msg = select_param(user, params)
 
 	msg = replace_pronoun(user, msg)
-
-	var/end = copytext(msg, length(message))
-	if(!(end in list("!", ".", "?", ":", "\"", "-")))
-		msg += "."
 
 	if(isliving(user))
 		var/mob/living/L = user

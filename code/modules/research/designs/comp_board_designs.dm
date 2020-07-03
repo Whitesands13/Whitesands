@@ -96,6 +96,13 @@
 	category = list("Computer Boards")
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL | DEPARTMENTAL_FLAG_SCIENCE
 
+/datum/design/board/cloning
+	name = "cloning console"
+	desc = "Used to clone people and manage DNA."
+	id = "cloning"
+	build_path = /obj/item/circuitboard/computer/cloning
+	category = list("Computer Boards")
+	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
 /datum/design/board/comconsole
 	name = "Computer Design (Communications)"
 	desc = "Allows for the construction of circuit boards used to build a communications console."
@@ -303,7 +310,7 @@
 	build_path = /obj/item/circuitboard/computer/nanite_cloud_controller
 	category = list("Computer Boards")
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE
-	
+
 /datum/design/board/advanced_camera
 	name = "Computer Design (Advanced Camera Console)"
 	desc = "Allows for the construction of circuit boards used to build advanced camera consoles."

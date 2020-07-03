@@ -19,15 +19,15 @@
 /obj/item/clothing/suit/armor/vest
 	name = "armor vest"
 	desc = "A slim Type I armored vest that provides decent protection against most types of damage."
-	icon_state = "armoralt"
-	item_state = "armoralt"
+	icon_state = "armor"
+	item_state = "armor"
 	blood_overlay_type = "armor"
 	dog_fashion = /datum/dog_fashion/back
 
 /obj/item/clothing/suit/armor/vest/alt
 	desc = "A Type I armored vest that provides decent protection against most types of damage."
-	icon_state = "armor"
-	item_state = "armor"
+	icon_state = "armoralt"
+	item_state = "armoralt"
 
 /obj/item/clothing/suit/armor/vest/old
 	name = "degrading armor vest"
@@ -172,6 +172,15 @@
 	. = ..()
 	allowed = GLOB.detective_vest_allowed
 
+/obj/item/clothing/suit/armor/vest/infiltrator
+	name = "infiltrator vest"
+	desc = "This vest appears to be made of of highly flexible materials that absorb impacts with ease."
+	icon_state = "infiltrator"
+	item_state = "infiltrator"
+	armor = list("melee" = 30, "bullet" = 40, "laser" = 20, "energy" = 30, "bomb" = 70, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 100)
+	resistance_flags = FIRE_PROOF | ACID_PROOF
+	strip_delay = 80
+
 //All of the armor below is mostly unused
 
 /obj/item/clothing/suit/armor/centcom
@@ -229,6 +238,7 @@
 	desc = "A classic suit of plate armour, highly effective at stopping melee attacks."
 	icon_state = "knight_green"
 	item_state = "knight_green"
+	allowed = list(/obj/item/nullrod, /obj/item/claymore, /obj/item/banner, /obj/item/tank/internals/emergency_oxygen, /obj/item/tank/internals/plasmaman)
 
 /obj/item/clothing/suit/armor/riot/knight/yellow
 	icon_state = "knight_yellow"

@@ -20,6 +20,7 @@
 	display_order = JOB_DISPLAY_ORDER_MIME
 
 /datum/job/mime/after_spawn(mob/living/carbon/human/H, mob/M)
+	. = ..()
 	H.apply_pref_name("mime", M.client)
 
 /datum/outfit/job/mime
@@ -29,6 +30,7 @@
 	belt = /obj/item/pda/mime
 	ears = /obj/item/radio/headset/headset_srv
 	uniform = /obj/item/clothing/under/rank/civilian/mime
+	alt_uniform = /obj/item/clothing/under/rank/civilian/mime/sexy //Wasp Edit - Alt Uniforms
 	mask = /obj/item/clothing/mask/gas/mime
 	gloves = /obj/item/clothing/gloves/color/white
 	head = /obj/item/clothing/head/frenchberet

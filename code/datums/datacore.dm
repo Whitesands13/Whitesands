@@ -75,37 +75,55 @@
 					D.adjust_money(amount)
 					return
 
-/datum/datacore/proc/addMinorCrime(id = "", datum/data/crime/crime)
+/**
+  * Adds crime to security record.
+  *
+  * Is used to add single crime to someone's security record.
+  * Arguments:
+  * * id - record id.
+  * * datum/data/crime/crime - premade array containing every variable, usually created by createCrimeEntry.
+  */
+/datum/datacore/proc/addCrime(id = "", datum/data/crime/crime)
 	for(var/datum/data/record/R in security)
 		if(R.fields["id"] == id)
-			var/list/crimes = R.fields["mi_crim"]
+			var/list/crimes = R.fields["crim"]
 			crimes |= crime
 			return
 
-/datum/datacore/proc/removeMinorCrime(id, cDataId)
+/**
+  * Deletes crime from security record.
+  *
+  * Is used to delete single crime to someone's security record.
+  * Arguments:
+  * * id - record id.
+  * * cDataId - id of already existing crime.
+  */
+/datum/datacore/proc/removeCrime(id, cDataId)
 	for(var/datum/data/record/R in security)
 		if(R.fields["id"] == id)
-			var/list/crimes = R.fields["mi_crim"]
+			var/list/crimes = R.fields["crim"]
 			for(var/datum/data/crime/crime in crimes)
 				if(crime.dataId == text2num(cDataId))
 					crimes -= crime
 					return
 
-/datum/datacore/proc/removeMajorCrime(id, cDataId)
+/**
+  * Adds details to a crime.
+  *
+  * Is used to add or replace details to already existing crime.
+  * Arguments:
+  * * id - record id.
+  * * cDataId - id of already existing crime.
+  * * details - data you want to add.
+  */
+/datum/datacore/proc/addCrimeDetails(id, cDataId, details)
 	for(var/datum/data/record/R in security)
 		if(R.fields["id"] == id)
-			var/list/crimes = R.fields["ma_crim"]
+			var/list/crimes = R.fields["crim"]
 			for(var/datum/data/crime/crime in crimes)
 				if(crime.dataId == text2num(cDataId))
-					crimes -= crime
+					crime.crimeDetails = details
 					return
-
-/datum/datacore/proc/addMajorCrime(id = "", datum/data/crime/crime)
-	for(var/datum/data/record/R in security)
-		if(R.fields["id"] == id)
-			var/list/crimes = R.fields["ma_crim"]
-			crimes |= crime
-			return
 
 /datum/datacore/proc/manifest()
 	for(var/i in GLOB.new_player_list)
@@ -139,7 +157,7 @@
 		var/has_department = FALSE
 		for(var/department in departments)
 			var/list/jobs = departments[department]
-			if(rank in jobs)
+			if(rank in jobs || (t.fields["truerank"] && (t.fields["truerank"] in jobs))) //Wasp edit - alt titles ((((((fun))) with (parenthesis) and (AND/OR/in))))
 				if(!manifest_out[department])
 					manifest_out[department] = list()
 				manifest_out[department] += list(list(
@@ -191,12 +209,19 @@
 	var/static/list/show_directions = list(SOUTH, WEST)
 	if(H.mind && (H.mind.assigned_role != H.mind.special_role))
 		var/assignment
+		var/trueassignment //wasp edit - alt titles
 		if(H.mind.assigned_role)
 			assignment = H.mind.assigned_role
 		else if(H.job)
 			assignment = H.job
 		else
 			assignment = "Unassigned"
+
+		//Wasp begin - Alt job titles
+		if(C && C.prefs && C.prefs.alt_titles_preferences[assignment])
+			trueassignment = assignment
+			assignment = C.prefs.alt_titles_preferences[assignment]
+		//Wasp end
 
 		var/static/record_id_num = 1001
 		var/id = num2hex(record_id_num++,6)
@@ -220,6 +245,7 @@
 		G.fields["id"]			= id
 		G.fields["name"]		= H.real_name
 		G.fields["rank"]		= assignment
+		G.fields["truerank"]	= trueassignment //Wasp edit - This PR Keeps Me Up At Night (Alternate Job Titles) - Artist: Mark Suckerberg
 		G.fields["age"]			= H.age
 		G.fields["species"]	= H.dna.species.name
 		G.fields["fingerprint"]	= md5(H.dna.uni_identity)
@@ -259,8 +285,7 @@
 		S.fields["name"]		= H.real_name
 		S.fields["criminal"]	= "None"
 		S.fields["citation"]	= list()
-		S.fields["mi_crim"]		= list()
-		S.fields["ma_crim"]		= list()
+		S.fields["crim"]		= list()
 		S.fields["notes"]		= "No notes."
 		security += S
 

@@ -17,6 +17,7 @@
 #define SCANGATE_POD			"pod"
 #define SCANGATE_GOLEM			"golem"
 #define SCANGATE_ZOMBIE			"zombie"
+#define SCANGATE_SPIDER			"rachnid"
 
 /obj/machinery/scanner_gate
 	name = "scanner gate"
@@ -51,7 +52,10 @@
 		. += "<span class='notice'>The control panel is unlocked. Swipe an ID to lock it.</span>"
 
 /obj/machinery/scanner_gate/Crossed(atom/movable/AM)
-	..()
+	. = ..()
+	auto_scan(AM)
+
+/obj/machinery/scanner_gate/proc/auto_scan(atom/movable/AM)
 	if(!(machine_stat & (BROKEN|NOPOWER)) && isliving(AM))
 		perform_scan(AM)
 
@@ -139,6 +143,8 @@
 						scan_species = /datum/species/golem
 					if(SCANGATE_ZOMBIE)
 						scan_species = /datum/species/zombie
+					if(SCANGATE_SPIDER)
+						scan_species = /datum/species/spider
 				if(is_species(H, scan_species))
 					beep = TRUE
 				if(detect_species == SCANGATE_ZOMBIE) //Can detect dormant zombies
@@ -256,3 +262,4 @@
 #undef SCANGATE_POD
 #undef SCANGATE_GOLEM
 #undef SCANGATE_ZOMBIE
+#undef SCANGATE_SPIDER
