@@ -84,7 +84,7 @@
 	icon_living = "bookworm"
 	icon_dead = "bookworm_dead"
 	desc = "The Curator's beloved astigmatic corn snake. Probably best not to poke it too much..."
-	speak_chance = 10 //a lot less than poly
+	speak_chance = 15 //less than poly
 	speak = list("I can't find anything to read!")
 
 /mob/living/simple_animal/hostile/retaliate/poison/snake/bookworm/Initialize()
@@ -103,9 +103,8 @@
 			phrase_buffer += "Have you read anything by [B.author] lately?"
 		if(prob(35))
 			phrase_buffer += "You should read [B.title]. It's [pick(list("hilarious", "wonderful", "atrocious", "interesting"))]."
-
 		qdel(B)
-	return phrase_buffer //and I mean really actually kill me with a gun or knife or something that can kill people
+	return phrase_buffer //and I mean really actually kill me with a gun or knife or something else that can kill people
 
 /mob/living/simple_animal/hostile/retaliate/poison/snake/bookworm/handle_automated_speech(override)
 	var/datum/language_holder/LH = get_language_holder()
@@ -131,6 +130,8 @@
 				speak.Remove(pick(speak))
 				speak.Add("[textdata]...")
 				say("[textdata]...")
+				if(user in enemies)
+					enemies -= user
 				return
 			else
 				say("I've already read that one.")
