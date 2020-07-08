@@ -157,7 +157,7 @@
 /mob/living/carbon/get_broken_legs()
 	var/brokenlegs = 0
 	for(var/obj/item/bodypart/X in bodyparts)
-		if(X.bone_status == BONE_FLAG_BROKEN || X.bone_status == BONE_FLAG_SPLINTED)
+		if(X && X.bone_status == BONE_FLAG_BROKEN || X.bone_status == BONE_FLAG_SPLINTED)
 			if(X.body_part == LEG_RIGHT || X.body_part == LEG_LEFT)
 				brokenlegs++
 	return brokenlegs
