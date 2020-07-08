@@ -85,18 +85,14 @@
 	needs_update_stat = TRUE
 	var/mob/living/carbon/carbon_owner
 	var/mob/living/carbon/human/human_owner
-	var/heal = FALSE		// WaspStation Edit
 
-/datum/status_effect/incapacitating/sleeping/on_creation(mob/living/new_owner, updating_canmove, healing)		// WaspStation Edit  Added healing
+/datum/status_effect/incapacitating/sleeping/on_creation(mob/living/new_owner, updating_canmove)
 	. = ..()
 	if(.)
 		if(iscarbon(owner)) //to avoid repeated istypes
 			carbon_owner = owner
 		if(ishuman(owner))
 			human_owner = owner
-		heal = healing		// WaspStation Edit
-
-/*		WaspStation Edit		Moved to WaspStation folder
 
 /datum/status_effect/incapacitating/sleeping/Destroy()
 	carbon_owner = null
@@ -128,8 +124,6 @@
 			carbon_owner.handle_dreams()
 		if(prob(10) && owner.health > owner.crit_threshold)
 			owner.emote("snore")
-
-		Wasp Station Edit End  */
 
 /obj/screen/alert/status_effect/asleep
 	name = "Asleep"
