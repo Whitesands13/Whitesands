@@ -464,7 +464,7 @@
 	if(marked_datum && istype(marked_datum, /atom))
 		dat += "<A href='?src=[REF(src)];[HrefToken()];dupe_marked_datum=1'>Duplicate Marked Datum</A><br>"
 
-	var/datum/browser/popup = new(user, "admin2", name, 240, 280)
+	var/datum/browser/popup = new(usr, "admin2", name, 240, 280)
 	popup.set_content(dat)
 	popup.open()
 //	usr << browse(dat, "window=admin2;size=240x280")
