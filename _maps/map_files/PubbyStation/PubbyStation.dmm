@@ -13510,7 +13510,9 @@
 /area/hallway/secondary/exit/departure_lounge)
 "aWL" = (
 /obj/machinery/camera/emp_proof{
-	dir = 1
+	c_tag = Engine - South West;
+	dir = 1;
+	network = list("ss13","engine")
 	},
 /turf/open/floor/plating/airless,
 /area/engine/engineering)
@@ -53084,7 +53086,10 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/obj/machinery/camera/emp_proof,
+/obj/machinery/camera/emp_proof{
+	c_tag = Engine - North West;
+	network = list("ss13","engine")
+	},
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
@@ -53525,6 +53530,14 @@
 	icon_state = "panelscorched"
 	},
 /area/maintenance/department/engine)
+"rzw" = (
+/obj/machinery/camera/emp_proof{
+	c_tag = Engine - South East;
+	dir = 1;
+	network = list("ss13","engine")
+	},
+/turf/open/floor/plating/airless,
+/area/engine/engineering)
 "rzF" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
@@ -54284,16 +54297,15 @@
 /turf/open/floor/plating,
 /area/maintenance/department/cargo)
 "shg" = (
-/obj/machinery/camera{
-	c_tag = "Engineering Center";
-	network = list("ss13","engine");
-	pixel_x = 23
-	},
 /obj/machinery/light{
 	dir = 1
 	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
+	},
+/obj/machinery/camera/emp_proof{
+	c_tag = Engine - Particle Accelerator;
+	network = list("ss13","engine")
 	},
 /turf/open/floor/plating,
 /area/engine/engineering)
@@ -54906,7 +54918,10 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/obj/machinery/camera/emp_proof,
+/obj/machinery/camera/emp_proof{
+	c_tag = Engine - North East;
+	network = list("ss13","engine")
+	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
@@ -94127,7 +94142,7 @@ nLD
 nLD
 jqP
 hum
-aWL
+rzw
 bXk
 aht
 aaa
