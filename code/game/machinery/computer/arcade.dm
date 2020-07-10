@@ -352,6 +352,33 @@ GLOBAL_LIST_INIT(arcade_prize_pool, list(
 	blocked = FALSE
 	return
 
+///used to check if the last three move of the player are the one we want in the right order and if the passive's weakpoint has been triggered yet
+/obj/machinery/computer/arcade/battle/proc/weakpoint_check(passive,first_move,second_move,third_move)
+	if(LAZYLEN(last_three_move) < 3)
+		return FALSE
+
+	if(last_three_move[1] == first_move && last_three_move[2] == second_move && last_three_move[3] == third_move && LAZYACCESS(enemy_passive, passive))
+		LAZYREMOVE(enemy_passive, passive)
+		pissed_off++
+		return TRUE
+	else
+		return FALSE
+
+
+/obj/machinery/computer/arcade/battle/Destroy()
+	enemy_passive = null
+	weapons = null
+	last_three_move = null
+	return ..() //well boys we did it, lists are no more
+
+/obj/machinery/computer/arcade/battle/examine_more(mob/user)
+	var/list/msg = list("<span class='notice'><i>You notice some writing scribbled on the side of [src]...</i></span>")
+	msg += "\t<span class='info'>smart -> defend, defend, light attack</span>"
+	msg += "\t<span class='info'>shotgun -> defend, defend, power attack</span>"
+	msg += "\t<span class='info'>short temper -> counter, counter, counter</span>"
+	msg += "\t<span class='info'>poisonous -> light attack, light attack, light attack</span>"
+	msg += "\t<span class='info'>chonker -> power attack, power attack, power attack</span>"
+	return msg
 
 /obj/machinery/computer/arcade/battle/emag_act(mob/user)
 	if(obj_flags & EMAGGED)
