@@ -167,6 +167,13 @@ export const Apc = props => {
                 color="bad"
                 onClick={() => act(malfStatus.action)} />
             )}
+            {!!data.malfStatus && data.malfStatus.action === 'occupy' && (
+              <Button
+                icon="eye-slash"
+                content="Mask Override Subroutines"
+                color="bad"
+                onClick={() => act("hack_hide")} />
+            )}
             <Button
               icon="lightbulb-o"
               content="Overload"
