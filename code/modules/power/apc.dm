@@ -7,7 +7,6 @@
 #define UPSTATE_BLUESCREEN	(1<<5)
 #define UPSTATE_WIREEXP		(1<<6)
 #define UPSTATE_ALLGOOD		(1<<7)
-#define UPSTATE_HIDDENBSOD  (1<<8) // WaspStation Edit - Malf AI Rework
 
 #define APC_RESET_EMP "emp"
 
@@ -381,7 +380,7 @@
 		update_state |= UPSTATE_BLUESCREEN
 	else if(malfai)
 		if(malfhackhide)
-			update_state |= UPSATE_ALLGOOD
+			update_state |= UPSTATE_ALLGOOD
 		else
 			update_state |= UPSTATE_BLUESCREEN
 	// End WaspStation Edit - Malf AI Rework
