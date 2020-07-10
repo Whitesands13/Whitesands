@@ -167,7 +167,7 @@
 	.=1
 	// WaspStation Edit - Malf AI Rework
 	if(prob(20))
-		var/special_pick = rand(1,4)
+		var/special_pick = rand(1,3)
 		switch(special_pick)
 			if(1)
 				var/datum/objective/block/block_objective = new
