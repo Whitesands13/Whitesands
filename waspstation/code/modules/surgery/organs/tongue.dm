@@ -19,6 +19,6 @@
 		/datum/language/buzzwords
 	))
 
-/obj/item/organ/tongue/spider/Initialize(mapload)
+/obj/item/organ/tongue/moth/Initialize(mapload)
 	. = ..()
 	languages_possible = languages_possible_moth
