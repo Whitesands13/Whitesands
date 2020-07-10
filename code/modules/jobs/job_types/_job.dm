@@ -301,16 +301,19 @@
 		if(PREF_GREYSUIT)
 			holder = "/obj/item/clothing/under/color/grey"
 		// WaspStation Edit - Fix Loadout Uniforms not spawning ID/PDA
-		if(PREF_LOADOUT && preference_source != null)
-			var/datum/pref_loadout_uniform = null
-			for(var/gear in preference_source.prefs.equipped_gear)
-				var/datum/gear/G = GLOB.gear_datums[gear]
-				if (G.slot == ITEM_SLOT_ICLOTHING)
-					pref_loadout_uniform = G.path
-			if (pref_loadout_uniform == null)
-				holder = "[uniform]"
+		if(PREF_LOADOUT)
+			if (preference_source == null)
+				holder = "[uniform]" // Who are we getting the loadout pref from anyways?
 			else
-				uniform = pref_loadout_uniform
+				var/datum/pref_loadout_uniform = null
+				for(var/gear in preference_source.prefs.equipped_gear)
+					var/datum/gear/G = GLOB.gear_datums[gear]
+					if (G.slot == ITEM_SLOT_ICLOTHING)
+						pref_loadout_uniform = G.path
+				if (pref_loadout_uniform == null)
+					holder = "[uniform]"
+				else
+					uniform = pref_loadout_uniform
 		// End WaspStation Edit - Fix Loadout Uniforms not spawning ID/PDA
 		else
 			holder = "[uniform]"
