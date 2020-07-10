@@ -1091,7 +1091,7 @@
 	if(malf.malfhacking)
 		to_chat(malf, "<span class='warning'>You cannot mask your presence in this APC while hacking another!</span>")
 		return
-	if(malfhackhide == -1 || malfhidecooldown != 0)
+	if(malfhackhide == -1 || malfhackhidecooldown != 0)
 		to_chat(malf, "<span class='warning'>You've already masked your presence in this APC recently. You cannot do so again without causing permanent damage. Please wait a minute for the system to recover.</span>")
 		return
 
