@@ -2,7 +2,7 @@
 	name = "proboscis"
 	desc = "A fleshy tube that curls up when not in use. While vaguely reminiscent of the proboscis of their genetic ancestors, \
 	it is effectively vestigial, only useful for speaking buzzwords."
-	say_mod = "chitters"
+	say_mod = "flutters"
 	var/static/list/languages_possible_moth = typecacheof(list(
 		/datum/language/common,
 		/datum/language/draconic,
