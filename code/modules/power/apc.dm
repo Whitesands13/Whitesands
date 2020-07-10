@@ -1124,7 +1124,7 @@
 		return
 	malfhackhide = 0
 	malfhackhidecooldown = 0
-	to_chat(malf, "<span class='notice'>The [] APC has recovered from your masking and has returned to normal operating status.</span>" )
+	to_chat(malf, "<span class='notice'>The [src.area.name] APC has recovered from your masking and has returned to normal operating status.</span>" )
 
 // End WaspStation Edit - Malf AI Rework
 
