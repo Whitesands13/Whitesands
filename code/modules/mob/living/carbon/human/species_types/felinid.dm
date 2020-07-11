@@ -89,15 +89,15 @@
 	return ..()
 
 /proc/mass_purrbation()
-	for(var/H in GLOB.mob_list)
-		if(ishuman(H))
-			purrbation_apply(H)
+	for(var/M in GLOB.mob_list)
+		if(ishuman(M))
+			purrbation_apply(M)
 		CHECK_TICK
 
 /proc/mass_remove_purrbation()
-	for(var/H in GLOB.mob_list)
-		if(ishuman(H))
-			purrbation_remove(H)
+	for(var/M in GLOB.mob_list)
+		if(ishuman(M))
+			purrbation_remove(M)
 		CHECK_TICK
 
 /proc/purrbation_toggle(mob/living/carbon/human/H, silent = FALSE)
