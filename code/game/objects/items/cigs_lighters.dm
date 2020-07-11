@@ -769,7 +769,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon = 'waspstation/icons/obj/cigarettes.dmi'
 	icon_state = "clockworklighter"
 	heat = 2000 //??????????????????
-	light_color = LIGHT_COLOR_RED
+	light_color = LIGHT_COLOR_BLOOD_MAGIC
 	overlay_state = "clockwork"
 	grind_results = list(/datum/reagent/iron = 1, /datum/reagent/fuel = 5, /datum/reagent/copper = 1)
 
@@ -832,7 +832,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		if(!param_color)
 			param_color = pick("red","blue","black","white","green","purple","yellow","orange")
 		vapecolor = param_color
-	icon_state = "[vapecolor]_vapeoff" 
+	icon_state = "[vapecolor]_vapeoff"
 	item_state = "[vapecolor]_vapeoff" //End Waspstation edit - Lightable e-cigarettes
 
 /obj/item/clothing/mask/vape/attackby(obj/item/O, mob/user, params)
@@ -933,9 +933,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			to_chat(user, "<span class='notice'>You need to turn on \the [src] first!")	//End Waspstation edit - Lightable e-cigarettes
 
 /obj/item/clothing/mask/vape/dropped(mob/user)
-	. = ..()	
-	if(user.get_item_by_slot(ITEM_SLOT_MASK) == src)	
-		reagents.flags |= NO_REACT	
+	. = ..()
+	if(user.get_item_by_slot(ITEM_SLOT_MASK) == src)
+		reagents.flags |= NO_REACT
 		STOP_PROCESSING(SSobj, src)
 
 /obj/item/clothing/mask/vape/proc/hand_reagents()//had to rename to avoid duplicate error

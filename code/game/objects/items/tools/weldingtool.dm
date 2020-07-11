@@ -24,8 +24,6 @@
 	heat = 3800
 	tool_behaviour = TOOL_WELDER
 	toolspeed = 1
-	wound_bonus = 10
-	bare_wound_bonus = 15
 	custom_materials = list(/datum/material/iron=70, /datum/material/glass=30)
 	var/welding = 0 	//Whether or not the welding tool is off(0), on(1) or currently welding(2)
 	var/status = TRUE 		//Whether the welder is secured or unsecured (able to attach rods to it to make a flamethrower)
