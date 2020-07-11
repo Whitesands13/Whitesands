@@ -101,7 +101,7 @@ GLOBAL_LIST_INIT(common_loot, list( //common: basic items
 		) = 1,
 
 	list(//construction and crafting
-		/obj/item/stack/cable_coil = 1,
+		/obj/item/stack/cable_coil/random = 1, //Random from Wasp Smartwire Revert
 		/obj/item/stock_parts/cell = 1,
 		/obj/item/stack/rods/twentyfive = 1,
 		/obj/item/stack/sheet/metal/twenty = 1,
@@ -247,7 +247,8 @@ GLOBAL_LIST_INIT(oddity_loot, list(//oddity: strange or crazy items
 		/obj/item/clothing/shoes/jackboots/fast = 1,
 		/obj/item/clothing/suit/armor/reactive/table = 1,
 		/obj/item/storage/box/donkpockets/donkpocketgondola = 1,
-		/obj/item/gun/ballistic/derringer = 1 //Waspstation - Derringer
+		/obj/item/gun/ballistic/derringer = 1, //Waspstation - Derringer
+		/obj/item/melee/greykingsword = 1 //Waspstation - Meth Sword
 	))
 
 //Maintenance loot spawner pools
