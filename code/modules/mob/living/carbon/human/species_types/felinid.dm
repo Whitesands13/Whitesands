@@ -20,6 +20,26 @@
 /datum/species/human/felinid/qualifies_for_rank(rank, list/features)
 	return TRUE
 
+//Waspstation - haha cat go hurrrg
+/datum/species/human/felinid/handle_chemicals(datum/reagent/chem, mob/living/carbon/human/H)
+	. = ..()
+	if(chem.type == /datum/reagent/consumable/coco || chem.type == /datum/reagent/consumable/hot_coco || chem.type == /datum/reagent/consumable/milk/chocolate_milk)
+		if (prob(10))
+			var/sick_message = pick("Your insides revolt at the presence of lethal chocolate!", "You feel nausious.", "You don't feel so good.","You feel like your insides are melting.")
+			to_chat(H, "<span class='notice'>[sick_message]</span>")
+		if(prob(30))
+			H.Dizzy(5)
+			H.adjust_disgust(20)
+			H.visible_message("<span class='warning'>[H] [pick("dry heaves!","coughs!","splutters!")]</span>")
+		if(prob(40))
+			H.Jitter(10)
+			H.adjustStaminaLoss(20)
+		if(prob(20))
+			H.blur_eyes(10)
+			var/obj/item/organ/guts = pick(H.internal_organs)
+			guts.applyOrganDamage(10)
+		return FALSE
+
 //Curiosity killed the cat's wagging tail.
 /datum/species/human/felinid/spec_death(gibbed, mob/living/carbon/human/H)
 	if(H)
@@ -69,15 +89,15 @@
 	return ..()
 
 /proc/mass_purrbation()
-	for(var/M in GLOB.mob_list)
-		if(ishuman(M))
-			purrbation_apply(M)
+	for(var/H in GLOB.mob_list)
+		if(ishuman(H))
+			purrbation_apply(H)
 		CHECK_TICK
 
 /proc/mass_remove_purrbation()
-	for(var/M in GLOB.mob_list)
-		if(ishuman(M))
-			purrbation_remove(M)
+	for(var/H in GLOB.mob_list)
+		if(ishuman(H))
+			purrbation_remove(H)
 		CHECK_TICK
 
 /proc/purrbation_toggle(mob/living/carbon/human/H, silent = FALSE)
