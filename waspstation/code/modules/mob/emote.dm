@@ -11,7 +11,7 @@
 	. = ..()
 	if(.)
 		user.spin(20, 1)
-		if(isobserver(user)) //Speening in their grave
+		if(isobserver(user) && prob(90)) //Speening in their grave
 			var/turf/turf_source = get_turf(user)
 			for(var/P in SSmobs.dead_players_by_zlevel[turf_source.z])
 				var/mob/M = P
