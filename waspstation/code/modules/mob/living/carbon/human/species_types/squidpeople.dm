@@ -54,12 +54,12 @@
 	check_flags = AB_CHECK_CONSCIOUS
 	icon_icon = 'icons/mob/actions.dmi'
 	button_icon_state = "squid"
-	var/active = FALSE //Simple check to prevent multiple color change prompts
+	var/in_use = FALSE //Simple check to prevent multiple color change prompts
 
 /datum/action/innate/change_color/Activate()
-	if(active)
+	if(in_use)
 		return null
-	active = TRUE
+	in_use = TRUE
 	var/mob/living/carbon/human/H = owner
 	var/color_choice = input(usr, "What color will you change to?", "Color Change") as null | color
 	if (color_choice)
@@ -69,7 +69,7 @@
 			H.update_body()
 		else
 			to_chat(usr, "<span class='danger'>Invalid color. Your color is not bright enough.</span>")
-	active = FALSE
+	in_use = FALSE
 
 // Zero gravity movement
 /datum/species/squid/negates_gravity(mob/living/carbon/human/H)
