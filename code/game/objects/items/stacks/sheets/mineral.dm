@@ -117,7 +117,7 @@ GLOBAL_LIST_INIT(diamond_recipes, list ( \
 /obj/item/stack/sheet/mineral/diamond/get_main_recipes()
 	. = ..()
 	. += GLOB.diamond_recipes
-	
+
 /obj/item/stack/sheet/mineral/diamond/fifty
 	amount = 50
 
@@ -154,7 +154,7 @@ GLOBAL_LIST_INIT(uranium_recipes, list ( \
 /obj/item/stack/sheet/mineral/uranium/get_main_recipes()
 	. = ..()
 	. += GLOB.uranium_recipes
-	
+
 /obj/item/stack/sheet/mineral/uranium/fifty
 	amount = 50
 
@@ -177,7 +177,7 @@ GLOBAL_LIST_INIT(uranium_recipes, list ( \
 	max_integrity = 100
 	custom_materials = list(/datum/material/plasma=MINERAL_MATERIAL_AMOUNT)
 	grind_results = list(/datum/reagent/toxin/plasma = 20)
-	point_value = 20
+	point_value = 5
 	merge_type = /obj/item/stack/sheet/mineral/plasma
 	material_type = /datum/material/plasma
 	walltype = /turf/closed/wall/mineral/plasma
@@ -208,7 +208,7 @@ GLOBAL_LIST_INIT(plasma_recipes, list ( \
 /obj/item/stack/sheet/mineral/plasma/fire_act(exposed_temperature, exposed_volume)
 	atmos_spawn_air("plasma=[amount*10];TEMP=[exposed_temperature]")
 	qdel(src)
-	
+
 /obj/item/stack/sheet/mineral/plasma/fifty
 	amount = 50
 
@@ -288,7 +288,7 @@ GLOBAL_LIST_INIT(silver_recipes, list ( \
 /obj/item/stack/sheet/mineral/silver/get_main_recipes()
 	. = ..()
 	. += GLOB.silver_recipes
-	
+
 /obj/item/stack/sheet/mineral/silver/fifty
 	amount = 50
 
@@ -354,7 +354,7 @@ GLOBAL_LIST_INIT(titanium_recipes, list ( \
 
 /obj/item/stack/sheet/mineral/titanium/fifty
 	amount = 50
-	
+
 /obj/item/stack/sheet/mineral/titanium/twenty
 	amount = 20
 
