@@ -55,9 +55,6 @@
 		else if(location == BODY_ZONE_HEAD)
 			if("moth_fluff" in H.dna.species.mutant_bodyparts)
 				if(user.a_intent == INTENT_HELP)
-					if (H == user)
-						to_chat(user, "<span class='warning'>You can't style your own fluff!</span>")
-						return
 					if(!user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
 						return
 					var/new_style = input(user, "Select a fluff style", "Grooming")  as null|anything in GLOB.moth_fluff_list
