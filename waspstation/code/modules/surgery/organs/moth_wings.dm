@@ -25,8 +25,3 @@
 		H.dna.species.mutant_bodyparts -= "moth_wings"
 		wing_type = H.dna.features["moth_wings"]
 		H.update_body()
-
-/obj/item/organ/moth_wings/metal
-	name = "metal moth wings"
-	desc = "A pair of artificial moth wings made with ultralight materials."
-	wing_type = "Metal"
