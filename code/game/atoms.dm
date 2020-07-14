@@ -764,6 +764,7 @@
 /atom/proc/zap_act(power, zap_flags, shocked_targets)
 	return
 
+
 /**
   * Implement the behaviour for when a user click drags a storage object to your atom
   *
