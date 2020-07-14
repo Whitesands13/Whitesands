@@ -39,7 +39,7 @@
 
 /obj/machinery/power/bluespace_miner/RefreshParts()
 	var/M_C = 0 //mining_chance
-	var/P_U = 5000000 //idle_power_usage
+	var/P_U = 50000 //idle_power_usage
 	for(var/obj/item/stock_parts/scanning_module/SM in component_parts)
 		if (SM.rating > 1)
 			minable_ores |= tier2_ores
