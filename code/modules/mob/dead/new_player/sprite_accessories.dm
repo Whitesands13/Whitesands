@@ -1957,11 +1957,6 @@
 
 //Waspstation begin - Moth wing additions / Squids / IPCs
 
-/datum/sprite_accessory/moth_wings/metal
-	name = "Metal"
-	icon_state = "metal"
-	locked = TRUE
-
 //Moth fluff
 /datum/sprite_accessory/moth_fluff
 	icon = 'waspstation/icons/mob/moth_wings.dmi'
