@@ -1,14 +1,5 @@
 #define TESLA_DEFAULT_POWER 1738260
 #define TESLA_MINI_POWER 869130
-//Zap constants, speeds up targeting
-#define BIKE (COIL + 1)
-#define COIL (ROD + 1)
-#define ROD (RIDE + 1)
-#define RIDE (LIVING + 1)
-#define LIVING (MACHINERY + 1)
-#define MACHINERY (BLOB + 1)
-#define BLOB (STRUCTURE + 1)
-#define STRUCTURE (1)
 
 //Zap constants, speeds up targeting
 #define BIKE (COIL + 1)
