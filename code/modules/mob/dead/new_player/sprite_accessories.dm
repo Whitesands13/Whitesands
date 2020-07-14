@@ -2026,6 +2026,10 @@
 	name = "Witch Wing"
 	icon_state = "witchwing"
 
+/datum/sprite_accessory/moth_fluff/shaved
+	name = "Shaved"
+	icon_state = "shaved"
+
 //Squids
 /datum/sprite_accessory/squid_face
 	icon = 'icons/mob/mutant_bodyparts.dmi'
