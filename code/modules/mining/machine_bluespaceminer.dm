@@ -7,7 +7,7 @@
 	circuit = /obj/item/circuitboard/machine/bluespace_miner
 	layer = BELOW_OBJ_LAYER
 	use_power = NO_POWER_USE
-	idle_power_usage = 5000000
+	idle_power_usage = 50000
 
 	var/icon_state_on = "stacker"
 	var/icon_state_off = "stacker_off"
@@ -53,7 +53,7 @@
 		M_C += sqrt(M.rating) * 16
 	mining_chance = M_C
 	for(var/obj/item/stock_parts/matter_bin/MB in component_parts)
-		P_U -= 6 * (MB.rating + 3) ** 6
+		P_U -= 3 * (MB.rating + 1) ** 5
 
 /obj/machinery/power/bluespace_miner/examine(mob/user)
 	. = ..()
