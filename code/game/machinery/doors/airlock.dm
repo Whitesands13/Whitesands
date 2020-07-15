@@ -271,11 +271,11 @@
 /obj/machinery/door/airlock/vv_edit_var(var_name)
 	. = ..()
 	switch (var_name)
-		if ("cyclelinkedx")				//Wasp start
+		if (NAMEOF(src, cyclelinkedx))				//Wasp start
 			cyclelinkairlock_target()
-		if ("cyclelinkedy")
+		if (NAMEOF(src, cyclelinkedy))
 			cyclelinkairlock_target()	//Wasp end
-		if ("cyclelinkeddir")
+		if (NAMEOF(src, cyclelinkeddir))
 			cyclelinkairlock()
 
 /obj/machinery/door/airlock/check_access_ntnet(datum/netdata/data)
