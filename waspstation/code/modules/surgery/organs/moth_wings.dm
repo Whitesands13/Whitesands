@@ -3,7 +3,7 @@
 	desc = "A severed pair of moth wings. A moth somewhere is now slightly more useless."
 	var/wing_type = "Plain"
 	icon_state = "severedwings"
-	zone = BODY_ZONE_HEAD
+	zone = BODY_ZONE_CHEST
 	slot = ORGAN_SLOT_WINGS
 
 /obj/item/organ/moth_wings/examine(mob/user)
