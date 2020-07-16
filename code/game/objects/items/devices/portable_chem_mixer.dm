@@ -8,8 +8,6 @@
 	equip_sound = 'sound/items/equip/toolbelt_equip.ogg'
 	custom_price = 2000
 	custom_premium_price = 2000
-	var/ui_x = 645	///tgui window width
-	var/ui_y = 550	///tgui window height
 
 	var/obj/item/reagent_containers/beaker = null	///Creating an empty slot for a beaker that can be added to dispense into
 	var/amount = 30	///The amount of reagent that is to be dispensed currently
@@ -145,13 +143,13 @@
 			var/obj/screen/inventory/hand/H = over_object
 			M.putItemFromInventoryInHandIfPossible(src, H.held_index)
 
-/obj/item/storage/portable_chem_mixer/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
-										datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
-	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
+/obj/item/storage/portable_chem_mixer/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
-		ui = new(user, src, ui_key, "PortableChemMixer", name, ui_x, ui_y, master_ui, state)
+		ui = new(user, src, "PortableChemMixer", name)
 		if(user.hallucinating())
-			ui.set_autoupdate(FALSE)	//to not ruin the immersion by constantly changing the fake chemicals
+			// to not ruin the immersion by constantly changing the fake chemicals
+			ui.set_autoupdate(FALSE)
 		ui.open()
 
 /obj/item/storage/portable_chem_mixer/ui_data(mob/user)
