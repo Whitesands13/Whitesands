@@ -143,7 +143,7 @@
 
 	/// Messages currently seen by this client
 	var/list/seen_messages
-	
+
 	var/datum/viewData/view_size
 
 	var/list/parallax_layers
@@ -159,6 +159,8 @@
 	var/parallax_movedir = 0
 	var/parallax_layers_max = 4
 	var/parallax_animate_timer
+	///A lazy list of atoms we've examined in the last EXAMINE_MORE_TIME (default 1.5) seconds, so that we will call [atom/proc/examine_more()] instead of [atom/proc/examine()] on them when examining
+	var/list/recent_examines
 
 	/// rate limiting for the crew manifest
 	var/crew_manifest_delay

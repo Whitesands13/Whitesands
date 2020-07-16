@@ -260,7 +260,7 @@
 	id = "decal_painter"
 	build_type = AUTOLATHE | PROTOLATHE
 	materials = list(/datum/material/iron = 50, /datum/material/glass = 50)
-	build_path = /obj/item/airlock_painter/decal
+	build_path = /obj/item/decal_painter
 	category = list("initial","Tools","Tool Designs")
 	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_SERVICE
 
