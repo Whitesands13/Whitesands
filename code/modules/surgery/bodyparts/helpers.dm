@@ -146,7 +146,7 @@
 	var/list/broken = list()
 	for(var/zone in full)
 		var/obj/item/bodypart/affecting = get_bodypart(zone)
-		if(affecting.bone_status == BONE_FLAG_BROKEN)
+		if(affecting && affecting.bone_status == BONE_FLAG_BROKEN)
 			broken += zone
 	return broken
 
