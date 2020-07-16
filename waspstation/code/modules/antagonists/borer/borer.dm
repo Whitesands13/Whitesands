@@ -51,7 +51,7 @@
 
     B.victim.adjustOrganLoss(ORGAN_SLOT_BRAIN, rand(5, 10))
     to_chat(src, "<span class='danger'>With an immense exertion of will, you regain control of your body!</span>")
-    to_chat(B.victim, "<span class='danger'>You feel control of the host brain ripped from your grasp, and retract your probosci before the wild neural impulses can damage you.</span>")
+    to_chat(B, "<span class='danger'>You feel control of the host brain ripped from your grasp, and retract your probosci before the wild neural impulses can damage you.</span>")
     B.detatch()
 
 GLOBAL_LIST_EMPTY(borers)
@@ -735,9 +735,6 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 
 		victim.med_hud_set_status()
 
-		var/release_delay = 300 + victim.getOrganLoss(ORGAN_SLOT_BRAIN)*20
-		addtimer(CALLBACK(victim, /mob/living/carbon/proc/release_control), release_delay)
-
 /mob/living/simple_animal/borer/verb/punish()
 	set category = "Borer"
 	set name = "Punish"
@@ -1230,7 +1227,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 	target_amount = 3
 
 /datum/objective/borer/New()
-	target_amount = clamp(rand(2, 10), 2, get_active_player_count(TRUE, FALSE, TRUE)/2)//"dynamic" scaling
+	target_amount = clamp(rand(2, 10), 2, round(get_active_player_count(TRUE, FALSE, TRUE)/2))//"dynamic" scaling
 	explanation_text = "You must escape with at least [target_amount] borers with hosts on the shuttle."
 
 /datum/objective/borer/check_completion()
