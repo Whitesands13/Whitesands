@@ -160,7 +160,7 @@
 /datum/tgui/proc/send_full_update(custom_data, force)
 	if(!user.client || !initialized || closing)
 		return
-	var/should_update_data = force || status > UI_UPDATE
+	var/should_update_data = force || status >= UI_UPDATE
 	window.send_message("update", get_payload(
 		custom_data,
 		with_data = should_update_data,
@@ -177,7 +177,7 @@
 /datum/tgui/proc/send_update(custom_data, force)
 	if(!user.client || !initialized || closing)
 		return
-	var/should_update_data = force || status > UI_UPDATE
+	var/should_update_data = force || status >= UI_UPDATE
 	window.send_message("update", get_payload(
 		custom_data,
 		with_data = should_update_data))
