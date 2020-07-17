@@ -1308,13 +1308,63 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	return
 
 /datum/species/proc/disarm(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
+	//Wasp Edit - Ass slapping USA
+	var/aim_for_mouth = user.zone_selected == "mouth"
+	var/target_on_help = target.a_intent == INTENT_HELP
+	var/target_aiming_for_mouth = target.zone_selected == "mouth"
+	var/target_restrained = target.restrained()
+	var/same_dir = (target.dir & user.dir)
+	var/aim_for_groin  = user.zone_selected == "groin"
+	var/target_aiming_for_groin = target.zone_selected == "groin"
+
 	if(target.check_block())
 		target.visible_message("<span class='warning'>[user]'s shove is blocked by [target]!</span>", \
 						"<span class='danger'>You block [user]'s shove!</span>", "<span class='hear'>You hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, user)
 		to_chat(user, "<span class='warning'>Your shove at [target] was blocked!</span>")
 		return FALSE
-	if(attacker_style && attacker_style.disarm_act(user,target))
+	else if(user.getStaminaLoss() >= 100)
+		to_chat(user, "<span class='warning'>You're too exhausted!</span>")
+		return FALSE
+	else if(aim_for_mouth && ( target_on_help || target_restrained || target_aiming_for_mouth))
+		playsound(target.loc, 'sound/weapons/slap.ogg', 50, 1, -1)
+		
+		user.visible_message(
+			"<span class='danger'>[user] slaps [target] in the face!</span>",
+			"<span class='notice'>You slap [user == target ? "yourself" : target] in the face! </span>",\
+			"You hear a slap."
+		)
+		user.do_attack_animation(target, ATTACK_EFFECT_FACE_SLAP)
+		user.adjustStaminaLoss(3)
+		return FALSE
+	else if(aim_for_groin && (target == user || (target.mobility_flags & MOBILITY_STAND) || same_dir) && (target_on_help || target_restrained || target_aiming_for_groin))
+		user.do_attack_animation(target, ATTACK_EFFECT_ASS_SLAP)
+		user.adjustStaminaLoss(3)
+		if(HAS_TRAIT(target, TRAIT_ASSBLASTUSA))
+			var/hit_zone = (user.held_index_to_dir(user.active_hand_index) == "l" ? "l_":"r_") + "arm"
+			user.adjustStaminaLoss(50)
+			var/obj/item/bodypart/affecting = user.get_bodypart(hit_zone)
+			if(affecting)
+				if(affecting.receive_damage(5, 0))
+					user.update_damage_overlays()
+			user.visible_message(\
+				"<span class='danger'>\The [user] slaps \the [target]'s ass, but their hand bounces off like they hit metal!</span>",\
+				"<span class='danger'>You slap [user == target ? "your" : "\the [target]'s"] ass, but feel an intense amount of pain as you realize their buns are harder than steel!</span>",\
+				"You hear a slap."
+			)
+			playsound(target.loc, 'sound/weapons/tap.ogg', 50, 1, -1)
+			user.emote("scream")
+			return FALSE
+		playsound(target.loc, 'sound/weapons/slap.ogg', 50, 1, -1)
+		user.visible_message(
+			"<span class='danger'>[user] slaps [target]'s ass!</span>",
+			"<span class='notice'>You slap [user == target ? "your" : "[target]'s"] ass! </span>",\
+			"You hear a slap."
+		)
+		return FALSE
+
+	else if(attacker_style && attacker_style.disarm_act(user,target))
 		return TRUE
+	//Wasp End
 	if(user.resting || user.IsKnockdown())
 		return FALSE
 	if(user == target)
