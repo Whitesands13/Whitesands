@@ -1322,7 +1322,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 						"<span class='danger'>You block [user]'s shove!</span>", "<span class='hear'>You hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, user)
 		to_chat(user, "<span class='warning'>Your shove at [target] was blocked!</span>")
 		return FALSE
-	else if(user.getStaminaLoss() >= 100)
+	else if(user.getStaminaLoss() >= 50)
 		to_chat(user, "<span class='warning'>You're too exhausted!</span>")
 		return FALSE
 	else if(aim_for_mouth && ( target_on_help || target_restrained || target_aiming_for_mouth))
