@@ -5,4 +5,4 @@
 	value = 0
 	medical_record_text = "Patient never skipped ass day."
 	gain_text = "<span class='notice'>Your ass rivals those of golems.</span>"
-	lose_text = "<span class='notice'>Your butt feels more squishy and slappable.</span>" 
+	lose_text = "<span class='notice'>Your butt feels more squishy and slappable.</span>"
