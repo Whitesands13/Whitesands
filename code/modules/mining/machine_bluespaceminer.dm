@@ -7,7 +7,7 @@
 	circuit = /obj/item/circuitboard/machine/bluespace_miner
 	layer = BELOW_OBJ_LAYER
 	use_power = NO_POWER_USE
-	idle_power_usage = 500000
+	idle_power_usage = 50000
 
 	var/icon_state_on = "stacker"
 	var/icon_state_off = "stacker_off"
