@@ -50,6 +50,16 @@
 	base_overlay.appearance_flags = RESET_COLOR
 	. += base_overlay
 
+/obj/item/screwdriver/get_belt_overlay()
+	if(random_color)
+		var/mutable_appearance/body = mutable_appearance('waspstation/icons/obj/clothing/belt_overlays.dmi', "cutters")
+		var/mutable_appearance/head = mutable_appearance('waspstation/icons/obj/clothing/belt_overlays.dmi', "cutters_head")
+		body.color = color
+		head.add_overlay(body)
+		return head
+	else
+		return mutable_appearance('waspstation/icons/obj/clothing/belt_overlays.dmi', icon_state)
+
 /obj/item/wirecutters/attack(mob/living/carbon/C, mob/user)
 	if(istype(C) && C.handcuffed && istype(C.handcuffed, /obj/item/restraints/handcuffs/cable))
 		user.visible_message("<span class='notice'>[user] cuts [C]'s restraints with [src]!</span>")
