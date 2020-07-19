@@ -11,7 +11,7 @@
 /obj/item/geiger_counter //DISCLAIMER: I know nothing about how real-life Geiger counters work. This will not be realistic. ~Xhuis
 	name = "\improper Geiger counter"
 	desc = "A handheld device used for detecting and measuring radiation pulses."
-	icon = 'icons/obj/device.dmi'
+	icon = 'waspstation/icons/obj/tools.dmi'
 	icon_state = "geiger_off"
 	item_state = "multitool"
 	lefthand_file = 'icons/mob/inhands/equipment/tools_lefthand.dmi'
