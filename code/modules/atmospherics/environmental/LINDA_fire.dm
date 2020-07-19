@@ -10,7 +10,9 @@
 
 
 /turf/open/hotspot_expose(exposed_temperature, exposed_volume, soh)
-	if(!air)
+	//If the air doesn't exist we just return false
+	var/list/air_gases = air?.get_gases()
+	if(!air_gases)
 		return
 
 	var/oxy = air.get_moles(/datum/gas/oxygen)
@@ -164,6 +166,7 @@
 	if((temperature < FIRE_MINIMUM_TEMPERATURE_TO_EXIST) || (volume <= 1))
 		qdel(src)
 		return
+
 	if(!location.air || (INSUFFICIENT(/datum/gas/plasma) && INSUFFICIENT(/datum/gas/tritium)) || INSUFFICIENT(/datum/gas/oxygen))
 		qdel(src)
 		return

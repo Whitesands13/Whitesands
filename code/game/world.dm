@@ -48,6 +48,7 @@ GLOBAL_VAR(restart_counter)
 	SSdbcore.CheckSchemaVersion()
 	SSdbcore.SetRoundID()
 	SetupLogs()
+	load_poll_data()
 
 	populate_gear_list()
 
@@ -144,6 +145,8 @@ GLOBAL_VAR(restart_counter)
 	GLOB.tgui_log = "[GLOB.log_directory]/tgui.log"
 	GLOB.world_shuttle_log = "[GLOB.log_directory]/shuttle.log"
 	GLOB.discord_api_log = "[GLOB.log_directory]/discord_api_log.log"
+
+	GLOB.demo_log = "[GLOB.log_directory]/demo.log"
 
 #ifdef UNIT_TESTS
 	GLOB.test_log = file("[GLOB.log_directory]/tests.log")

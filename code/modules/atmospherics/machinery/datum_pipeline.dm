@@ -138,9 +138,7 @@
 	for(var/obj/machinery/atmospherics/pipe/member in members)
 		member.air_temporary = new
 		member.air_temporary.set_volume(member.volume)
-		member.air_temporary.copy_from(air)
-
-		member.air_temporary.multiply(member.volume/air.return_volume())
+		member.air_temporary.copy_from(air, member.volume/air.return_volume())
 
 		member.air_temporary.set_temperature(air.return_temperature())
 

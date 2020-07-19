@@ -273,7 +273,7 @@ datum/gas_reaction/freonfire/react(datum/gas_mixture/air, datum/holder)
 		temperature_scale = 0
 	else
 		temperature_scale = (FREON_MAXIMUM_BURN_TEMPERATURE - temperature)/(FREON_MAXIMUM_BURN_TEMPERATURE - FREON_LOWER_TEMPERATURE) //calculate the scale based on the temperature
-	if(temperature_scale > 0)
+	if(temperature_scale >= 0)
 		oxygen_burn_rate = OXYGEN_BURN_RATE_BASE - temperature_scale
 		if(air.get_moles(/datum/gas/oxygen) > air.get_moles(/datum/gas/freon)*FREON_OXYGEN_FULLBURN)
 			freon_burn_rate = (air.get_moles(/datum/gas/freon)*temperature_scale)/FREON_BURN_RATE_DELTA
@@ -286,7 +286,7 @@ datum/gas_reaction/freonfire/react(datum/gas_mixture/air, datum/holder)
 			air.set_moles(/datum/gas/oxygen, QUANTIZE(air.get_moles(/datum/gas/oxygen) - (freon_burn_rate * oxygen_burn_rate)))
 			air.set_moles(/datum/gas/carbon_dioxide, air.get_moles(/datum/gas/carbon_dioxide) + freon_burn_rate)
 
-			if(temperature < 150 && temperature > 130 && prob(2))
+			if(temperature < 160 && temperature > 120 && prob(2))
 				new /obj/item/stack/sheet/hot_ice(location)
 
 			energy_released += FIRE_FREON_ENERGY_RELEASED * (freon_burn_rate)
@@ -379,35 +379,68 @@ datum/gas_reaction/freonfire/react(datum/gas_mixture/air, datum/holder)
 			air.set_temperature(clamp(((air.return_temperature()*old_heat_capacity + reaction_energy)/new_heat_capacity),TCMB,INFINITY))
 		return REACTING
 
-/datum/gas_reaction/nitrylformation //The formation of nitryl. Endothermic. Requires N2O as a catalyst.
+/datum/gas_reaction/nitrousformation //formationn of n2o, esothermic, requires bz as catalyst
+	priority = 3
+	name = "Nitrous Oxide formation"
+	id = "nitrousformation"
+
+/datum/gas_reaction/nitrousformation/init_reqs()
+	min_requirements = list(
+		/datum/gas/oxygen = 10,
+		/datum/gas/nitrogen = 20,
+		/datum/gas/bz = 5,
+		"TEMP" = 200
+	)
+
+/datum/gas_reaction/nitrousformation/react(datum/gas_mixture/air)
+	var/temperature = air.return_temperature()
+	var/old_heat_capacity = air.heat_capacity()
+	var/heat_efficency = min(temperature/(FIRE_MINIMUM_TEMPERATURE_TO_EXIST*100), air.get_moles(/datum/gas/oxygen) ,air.get_moles(/datum/gas/nitrogen))
+	var/energy_used = heat_efficency * NITROUS_FORMATION_ENERGY
+	if ((air.get_moles(/datum/gas/oxygen) - heat_efficency < 0 )|| (air.get_moles(/datum/gas/nitrogen) - heat_efficency < 0)) //Shouldn't produce gas from nothing.
+		return NO_REACTION
+	if (temperature > 250) //maximum allowed temperature for the reaction
+		return NO_REACTION
+	air.adjust_moles(/datum/gas/oxygen, -heat_efficency)
+	air.adjust_moles(/datum/gas/nitrogen, -heat_efficency * 2)
+	air.adjust_moles(/datum/gas/nitrous_oxide, heat_efficency)
+
+	if(energy_used > 0)
+		var/new_heat_capacity = air.heat_capacity()
+		if(new_heat_capacity > MINIMUM_HEAT_CAPACITY)
+			air.set_temperature(max(((temperature * old_heat_capacity + energy_used) / new_heat_capacity),TCMB)) //the air heats up when reacting
+		return REACTING
+
+/datum/gas_reaction/nitrylformation //The formation of nitryl. Endothermic. Requires bz.
 	priority = 3
 	name = "Nitryl formation"
 	id = "nitrylformation"
 
 /datum/gas_reaction/nitrylformation/init_reqs()
 	min_requirements = list(
-		/datum/gas/oxygen = 20,
+		/datum/gas/oxygen = 10,
 		/datum/gas/nitrogen = 20,
-		/datum/gas/pluoxium = 5,
-		"TEMP" = FIRE_MINIMUM_TEMPERATURE_TO_EXIST*60
+		/datum/gas/bz = 5,
+		"TEMP" = FIRE_MINIMUM_TEMPERATURE_TO_EXIST * 60
 	)
 
 /datum/gas_reaction/nitrylformation/react(datum/gas_mixture/air)
 	var/temperature = air.return_temperature()
 
 	var/old_heat_capacity = air.heat_capacity()
-	var/heat_efficency = min(temperature/(FIRE_MINIMUM_TEMPERATURE_TO_EXIST*60),air.get_moles(/datum/gas/oxygen),air.get_moles(/datum/gas/nitrogen))
+	var/heat_efficency = min(temperature/(FIRE_MINIMUM_TEMPERATURE_TO_EXIST*100),air.get_moles(/datum/gas/oxygen),air.get_moles(/datum/gas/nitrogen))
 	var/energy_used = heat_efficency*NITRYL_FORMATION_ENERGY
 	if ((air.get_moles(/datum/gas/oxygen) - heat_efficency < 0 )|| (air.get_moles(/datum/gas/nitrogen) - heat_efficency < 0)) //Shouldn't produce gas from nothing.
 		return NO_REACTION
-	air.adjust_moles(/datum/gas/oxygen, -heat_efficency)
+	air.adjust_moles(/datum/gas/oxygen, -heat_efficency * 2)
 	air.adjust_moles(/datum/gas/nitrogen, -heat_efficency)
-	air.adjust_moles(/datum/gas/nitryl, heat_efficency*2)
+	air.adjust_moles(/datum/gas/bz, -heat_efficency * 0.05)
+	air.adjust_moles(/datum/gas/nitryl, heat_efficency)
 
 	if(energy_used > 0)
 		var/new_heat_capacity = air.heat_capacity()
 		if(new_heat_capacity > MINIMUM_HEAT_CAPACITY)
-			air.set_temperature(max(((temperature*old_heat_capacity - energy_used)/new_heat_capacity),TCMB))
+			air.set_temperature(max(((temperature * old_heat_capacity - energy_used) / new_heat_capacity),TCMB)) //the air cools down when reacting
 		return REACTING
 
 /datum/gas_reaction/bzformation //Formation of BZ by combining plasma and tritium at low pressures. Exothermic.
@@ -455,7 +488,7 @@ datum/gas_reaction/freonfire/react(datum/gas_mixture/air, datum/holder)
 		/datum/gas/plasma = 40,
 		/datum/gas/carbon_dioxide = 20,
 		/datum/gas/bz = 20,
-		"TEMP" = FIRE_MINIMUM_TEMPERATURE_TO_EXIST
+		"TEMP" = FIRE_MINIMUM_TEMPERATURE_TO_EXIST + 100
 		)
 
 /datum/gas_reaction/freonformation/react(datum/gas_mixture/air)
@@ -467,7 +500,7 @@ datum/gas_reaction/freonfire/react(datum/gas_mixture/air, datum/holder)
 		return NO_REACTION
 	air.adjust_moles(/datum/gas/plasma, -(heat_efficency * 5))
 	air.adjust_moles(/datum/gas/carbon_dioxide, -heat_efficency)
-	air.adjust_moles(/datum/gas/bz, -(heat_efficency * 0.5))
+	air.adjust_moles(/datum/gas/bz, -(heat_efficency * 0.25))
 	air.adjust_moles(/datum/gas/freon, heat_efficency * 2)
 
 	if(energy_used > 0)

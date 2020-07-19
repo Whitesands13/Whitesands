@@ -5,8 +5,8 @@
 	desc = "A canister for the storage of gas."
 	icon_state = "yellow"
 	density = TRUE
-	ui_x = 420
-	ui_y = 405
+	ui_x = 300
+	ui_y = 232
 
 	var/valve_open = FALSE
 	var/obj/machinery/atmospherics/components/binary/passive_gate/pump
@@ -113,7 +113,7 @@
 /obj/machinery/portable_atmospherics/canister/nob
 	name = "hyper-noblium canister"
 	desc = "Hyper-Noblium. More noble than all other gases."
-	icon_state = "freon"
+	icon_state = "nob"
 	gas_type = /datum/gas/hypernoblium
 
 /obj/machinery/portable_atmospherics/canister/nitryl
@@ -210,7 +210,7 @@
 	pump = new(src, FALSE)
 	pump.on = TRUE
 	pump.machine_stat = 0
-	pump.build_network()
+	SSair.add_to_rebuild_queue(pump)
 
 /obj/machinery/portable_atmospherics/canister/Destroy()
 	qdel(pump)
@@ -250,6 +250,7 @@
 	else if(pressure >= 10)
 		. += "can-o0"
 	WaspStation End */
+
 
 /obj/machinery/portable_atmospherics/canister/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > temperature_resistance)
@@ -340,7 +341,7 @@
 															datum/tgui/master_ui = null, datum/ui_state/state = GLOB.physical_state)
 	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
-		ui = new(user, src, ui_key, "canister", name, ui_x, ui_y, master_ui, state)
+		ui = new(user, src, ui_key, "Canister", name, ui_x, ui_y, master_ui, state)
 		ui.open()
 
 /obj/machinery/portable_atmospherics/canister/ui_data()

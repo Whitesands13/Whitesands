@@ -642,7 +642,9 @@
 /obj/structure/firelock_frame/border
 	name = "firelock frame"
 	icon = 'icons/obj/doors/edge_Doorfire.dmi'
-	icon_state = "door_frame"
+	icon_state = "frame1"
+	firelock_type = /obj/machinery/door/firedoor/border_only/closed
+	flags_1 = ON_BORDER_1
 
 /obj/structure/firelock_frame/border/ComponentInitialize()
 	. = ..()
@@ -653,9 +655,6 @@
 		to_chat(user, "<span class='warning'>It is fastened to the floor!</span>")
 		return FALSE
 	return TRUE
-
-/obj/structure/firelock_frame/border/update_icon()
-	return
 
 /obj/structure/firelock_frame/window
 	name = "window firelock frame"

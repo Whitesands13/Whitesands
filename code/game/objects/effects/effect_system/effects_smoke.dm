@@ -229,9 +229,9 @@
 		for(var/atom/movable/AM in T)
 			if(AM.type == src.type)
 				continue
-			reagents.reaction(AM, TOUCH, fraction)
+			reagents.expose(AM, TOUCH, fraction)
 
-		reagents.reaction(T, TOUCH, fraction)
+		reagents.expose(T, TOUCH, fraction)
 		return 1
 
 /obj/effect/particle_effect/smoke/chem/smoke_mob(mob/living/carbon/M)
@@ -244,7 +244,7 @@
 		return 0
 	var/fraction = 1/initial(lifetime)
 	reagents.copy_to(C, fraction*reagents.total_volume)
-	reagents.reaction(M, INGEST, fraction)
+	reagents.expose(M, INGEST, fraction)
 	return 1
 
 
