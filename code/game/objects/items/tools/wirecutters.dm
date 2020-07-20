@@ -24,13 +24,13 @@
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 30)
 	var/random_color = TRUE
 	var/static/list/wirecutter_colors = list(
-		"blue" = "#1861d5",
-		"red" = "#951710",
-		"pink" = "#d5188d",
-		"brown" = "#a05212",
-		"green" = "#0e7f1b",
-		"cyan" = "#18a2d5",
-		"yellow" = "#d58c18"
+		"blue" = "#8080ff",
+		"red" = "#ff666e",
+		"pink" = "#fd99ff",
+		"brown" = "#b38459",
+		"green" = "#9fe3a9",
+		"cyan" = "#96ffef",
+		"yellow" = "#ffe366"
 	)
 
 

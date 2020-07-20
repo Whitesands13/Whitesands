@@ -25,13 +25,13 @@
 	item_flags = EYE_STAB
 	var/random_color = TRUE //if the screwdriver uses random coloring
 	var/static/list/screwdriver_colors = list(
-		"blue" = rgb(24, 97, 213),
-		"red" = rgb(255, 0, 0),
-		"pink" = rgb(213, 24, 141),
-		"brown" = rgb(160, 82, 18),
-		"green" = rgb(14, 127, 27),
-		"cyan" = rgb(24, 162, 213),
-		"yellow" = rgb(255, 165, 0)
+		"blue" = "#8080ff",
+		"red" = "#ff666e",
+		"pink" = "#fd99ff",
+		"brown" = "#b38459",
+		"green" = "#9fe3a9",
+		"cyan" = "#96ffef",
+		"yellow" = "#ffe366"
 	)
 
 /obj/item/screwdriver/suicide_act(mob/user)
