@@ -231,3 +231,10 @@ GLOBAL_LIST_INIT(glass_sheet_types, typecacheof(list(
 //Wasp Begin
 #define isspacepod(A) (istype(A, /obj/spacepod))
 //Wasp End
+
+#define isbook(O) (is_type_in_typecache(O, GLOB.book_types))
+
+GLOBAL_LIST_INIT(book_types, typecacheof(list(
+	/obj/item/book,
+	/obj/item/spellbook,
+	/obj/item/storage/book)))
