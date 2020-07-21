@@ -136,7 +136,7 @@ GLOBAL_LIST_EMPTY(turbolifts)
 	smooth = SMOOTH_TRUE
 
 /turf/closed/indestructible/turbolift/afterShuttleMove()
-	queue_smooth(src)
+	QUEUE_SMOOTH(src)
 	..()
 
 /obj/machinery/computer/turbolift/Destroy()
