@@ -1449,10 +1449,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			to_chat(user, "<span class='danger'>You knock [target] down!</span>")
 			var/knockdown_duration = 40 + (target.getStaminaLoss() + (target.getBruteLoss()*0.5))*0.8 //50 total damage = 40 base stun + 40 stun modifier = 80 stun duration, which is the old base duration
 			target.apply_effect(knockdown_duration, EFFECT_KNOCKDOWN, armor_block)
-			target.forcesay(GLOB.hit_appends)
 			log_combat(user, target, "got a stun punch with their previous punch")
-		else if(!(target.mobility_flags & MOBILITY_STAND))
-			target.forcesay(GLOB.hit_appends)
 
 /datum/species/proc/spec_unarmedattacked(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	return
@@ -1700,8 +1697,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 						H.w_uniform.add_mob_blood(H)
 						H.update_inv_w_uniform()
 
-		if(Iforce > 10 || Iforce >= 5 && prob(33))
-			H.forcesay(GLOB.hit_appends)	//forcesay checks stat already.
 	return TRUE
 
 /datum/species/proc/apply_damage(damage, damagetype = BRUTE, def_zone = null, blocked, mob/living/carbon/human/H, forced = FALSE, spread_damage = FALSE, break_modifier = 1)
