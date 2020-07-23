@@ -72,7 +72,7 @@
 	return TRUE
 
 //BYPASS CHECKS ALSO PREVENTS BURNOUT!
-/obj/item/assembly/flash/proc/AOE_flash(bypass_checks = FALSE, range = 2, power = 5, targeted = FALSE, mob/user)
+/obj/item/assembly/flash/proc/AOE_flash(bypass_checks = FALSE, range = 2, power = 3, targeted = FALSE, mob/user)
 	if(!bypass_checks && !try_use_flash())
 		return FALSE
 	var/list/mob/targets = get_flash_targets(get_turf(src), range, FALSE)
