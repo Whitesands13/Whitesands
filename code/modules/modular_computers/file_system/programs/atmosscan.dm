@@ -21,6 +21,7 @@
 		data["AirTemp"] = round(environment.return_temperature()-T0C)
 		if (total_moles)
 			for(var/id in environment.get_gases())
+				var/gas_level = environment.get_moles(id)/total_moles
 				if(gas_level > 0)
 					airlist += list(list("name" = "[GLOB.meta_gas_info[id][META_GAS_NAME]]", "percentage" = round(gas_level*100, 0.01)))
 		data["AirData"] = airlist
