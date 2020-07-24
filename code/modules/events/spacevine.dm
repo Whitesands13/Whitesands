@@ -6,7 +6,11 @@
 	min_players = 10
 
 /datum/round_event/spacevine
-	fakeable = FALSE
+	fakeable = TRUE
+	announceWhen = 1
+
+/datum/round_event/spacevine/announce(fake)
+	priority_announce("Unidentified plant based lifeform detected aboard the station, contact your local botanist.")
 
 /datum/round_event/spacevine/start()
 	var/list/turfs = list() //list of all the empty floor turfs in the hallway areas
@@ -146,8 +150,13 @@
 	quality = NEGATIVE
 
 /datum/spacevine_mutation/aggressive_spread/on_spread(obj/structure/spacevine/holder, turf/target)
-	target.ex_act(severity, null, src) // vine immunity handled at /mob/ex_act
-
+	switch(severity)
+		if(EXPLODE_DEVASTATE)
+			SSexplosions.highturf += target
+		if(EXPLODE_HEAVY)
+			SSexplosions.medturf += target
+		if(EXPLODE_LIGHT)
+			SSexplosions.lowturf += target
 /datum/spacevine_mutation/aggressive_spread/on_buckle(obj/structure/spacevine/holder, mob/living/buckled)
 	buckled.ex_act(severity, null, src)
 
