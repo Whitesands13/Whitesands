@@ -104,7 +104,7 @@
 		if(prob(35))
 			phrase_buffer += "You should read [B.title]. It's [pick(list("hilarious", "wonderful", "atrocious", "interesting"))]."
 		qdel(B)
-	if(phrase_buffer.length == 0)
+	if(phrase_buffer.len == 0)
 		phrase_buffer += "I can't find anything to read!"
 	return phrase_buffer //and I mean really actually kill me with a gun or knife or something else that can kill people
 
