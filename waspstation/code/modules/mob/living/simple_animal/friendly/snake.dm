@@ -104,6 +104,8 @@
 		if(prob(35))
 			phrase_buffer += "You should read [B.title]. It's [pick(list("hilarious", "wonderful", "atrocious", "interesting"))]."
 		qdel(B)
+	if(phrase_buffer.length == 0)
+		phrase_buffer += "I can't find anything to read!"
 	return phrase_buffer //and I mean really actually kill me with a gun or knife or something else that can kill people
 
 /mob/living/simple_animal/hostile/retaliate/poison/snake/bookworm/handle_automated_speech(override)
@@ -128,7 +130,7 @@
 			var/textdata = strip_booktext(B.dat, 25)
 			if(!(textdata in speak))
 				speak.Remove(pick(speak))
-				speak.Add("[textdata]...")
+				speak.Add("[textdata]")
 				say("[textdata]...")
 				if(user in enemies)
 					enemies -= user
