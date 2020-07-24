@@ -95,7 +95,7 @@
 	. = ..()
 
 /mob/living/simple_animal/hostile/retaliate/poison/snake/bookworm/proc/get_phrases() //if someone sees this, be sure to actually literally really kill me
-	var/phrase_buffer = list()
+	var/list/phrase_buffer = list()
 	create_random_books(20, src, TRUE)
 	for(var/obj/item/book/B in contents)
 		phrase_buffer += "[strip_booktext(B.dat, 25)]..."
@@ -104,7 +104,7 @@
 		if(prob(35))
 			phrase_buffer += "You should read [B.title]. It's [pick(list("hilarious", "wonderful", "atrocious", "interesting"))]."
 		qdel(B)
-	if(phrase_buffer.len == 0)
+	if(!phrase_buffer.len)
 		phrase_buffer += "I can't find anything to read!"
 	return phrase_buffer //and I mean really actually kill me with a gun or knife or something else that can kill people
 
