@@ -6,6 +6,7 @@
 
 /datum/objective/hack_apc/New(var/text)
 	target_count = rand(10, CONFIG_GET(number/max_malf_apc_hack_obj))
+	explanation_text = "Hack [target_count] APCs by the end of the round. You may still spend the processing power as normal."
 	..()
 
 /datum/objective/hack_apc/check_completion()

@@ -64,6 +64,7 @@ const ApcContent = (props, context) => {
     || powerStatusMap[0];
   const channelArray = data.powerChannels || [];
   const malfStatus = malfMap[data.malfStatus] || malfMap[0];
+  const malfMaskHackStatus = data.malfMaskHackStatus;
   const adjustedCellChange = data.powerCellStatus / 100;
   if (data.failTime > 0) {
     return (
@@ -176,12 +177,13 @@ const ApcContent = (props, context) => {
                 color="bad"
                 onClick={() => act(malfStatus.action)} />
             )}
-            {!!data.malfStatus && data.malfStatus.action === 'occupy' && (
+            {!!data.malfStatus && data.malfStatus === 2 && (
               <Button
                 icon="eye-slash"
                 content="Mask Override Subroutines"
                 color="bad"
-                onClick={() => act("hack_hide")} />
+                disabled={data.malfMaskHackStatus !== 0}
+                onClick={() => act("hide_hack")} />
             )}
             <Button
               icon="lightbulb-o"

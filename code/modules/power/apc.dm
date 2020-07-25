@@ -57,7 +57,7 @@
 	damage_deflection = 10
 	resistance_flags = FIRE_PROOF
 	interaction_flags_machine = INTERACT_MACHINE_WIRES_IF_OPEN | INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OPEN_SILICON
-	ui_x = 450
+	ui_x = 550
 	ui_y = 460
 
 	FASTDMM_PROP(\
@@ -891,6 +891,7 @@
 		"coverLocked" = coverlocked,
 		"siliconUser" = user.has_unlimited_silicon_privilege || user.using_power_flow_console(),
 		"malfStatus" = get_malf_status(user),
+		"malfMaskHackStatus" = malfhackhide,
 		"emergencyLights" = !emergency_lights,
 		"nightshiftLights" = nightshift_lights,
 
@@ -1086,7 +1087,7 @@
 /obj/machinery/power/apc/proc/malfhidehack(mob/living/silicon/ai/malf)
 	if(!istype(malf))
 		return
-	if(get_malf_status(malf) != 1)
+	if(get_malf_status(malf) <= 1)
 		return
 	if(malf.malfhacking)
 		to_chat(malf, "<span class='warning'>You cannot mask your presence in this APC while hacking another!</span>")
