@@ -1,6 +1,6 @@
 /obj/item/storage/portable_chem_mixer
 	name = "Portable Chemical Mixer"
-	desc = "A portable device that dispenses and mixes chemicals. Requires a vortex anomaly core. All necessary reagents need to be supplied with beakers. A label indicates that a screwdriver is required to open it for refills. This device can be worn on a belt. The letters 'S&T' are imprinted on the side."
+	desc = "A portable device that dispenses and mixes chemicals. Can be upgraded to hold more beakers by inserting a vortex anomaly core. All necessary reagents need to be supplied with beakers. A label indicates that a screwdriver is required to open it for refills. This device can be worn on a belt. The letters 'S&T' are imprinted on the side."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "portablechemicalmixer_open"
 	w_class = WEIGHT_CLASS_HUGE
@@ -14,15 +14,13 @@
 	var/obj/item/reagent_containers/beaker = null	///Creating an empty slot for a beaker that can be added to dispense into
 	var/amount = 30	///The amount of reagent that is to be dispensed currently
 
-	var/anomaly_core_present = FALSE	///TRUE if an anomaly core has been added
-	
 	var/list/dispensable_reagents = list()	///List in which all currently dispensable reagents go
 
 /obj/item/storage/portable_chem_mixer/ComponentInitialize()
 	. = ..()
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	STR.max_combined_w_class = 200
-	STR.max_items = 50
+	STR.max_items = 10
 	STR.insert_preposition = "in"
 	STR.set_holdable(list(
 		/obj/item/reagent_containers/glass/beaker,
@@ -37,13 +35,11 @@
 		..()
 
 /obj/item/storage/portable_chem_mixer/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/raw_anomaly_core/vortex) && !anomaly_core_present)
-		anomaly_core_present = TRUE
+	if(istype(I, /obj/item/assembly/signaler/anomaly/vortex))
+		var/datum/component/storage/STR = GetComponent(/datum/component/storage)
+		STR.max_items = STR.max_items + 40
 		QDEL_NULL(I)
-		to_chat(user, "<span class='notice'>You insert the vortex anomaly core. The device is now functional. A screwdriver is needed to open and close the device for refills.</span>")
-		return
-	if(!anomaly_core_present)
-		to_chat(user, "<span class='warning'>A vortex anomaly core has to be inserted to activate this device.</span>")
+		to_chat(user, "<span class='notice'>You insert the vortex anomaly core, and the storage space inside [src] seems to grow much larger!</span>")
 		return
 	var/locked = SEND_SIGNAL(src, COMSIG_IS_STORAGE_LOCKED)
 	if (I.tool_behaviour == TOOL_SCREWDRIVER)
@@ -123,9 +119,7 @@
 	return TRUE
 
 /obj/item/storage/portable_chem_mixer/attack_hand(mob/user)
-	if(!anomaly_core_present)
-		to_chat(user, "<span class='warning'>A vortex anomaly core has to be inserted to activate this device.</span>")
-	else if(loc == user)
+	if(loc == user)
 		var/locked = SEND_SIGNAL(src, COMSIG_IS_STORAGE_LOCKED)
 		if (locked)
 			ui_interact(user)
@@ -133,9 +127,6 @@
 	return ..()
 
 /obj/item/storage/portable_chem_mixer/attack_self(mob/user)
-	if(!anomaly_core_present)
-		to_chat(user, "<span class='warning'>A vortex anomaly core has to be inserted to activate this device.</span>")
-		return
 	if(loc == user)
 		var/locked = SEND_SIGNAL(src, COMSIG_IS_STORAGE_LOCKED)
 		if (locked)
@@ -145,7 +136,7 @@
 			to_chat(user, "<span class='notice'>The portable chemical mixer is currently open and its contents can be accessed.</span>")
 			return
 	return
-	
+
 /obj/item/storage/portable_chem_mixer/MouseDrop(obj/over_object)
 	. = ..()
 	if(ismob(loc))
@@ -214,7 +205,7 @@
 					source.trans_to(beaker, to_transfer)
 					actual -= to_transfer
 					if (actual <= 0)
-						break					
+						break
 			. = TRUE
 		if("remove")
 			var/amount = text2num(params["amount"])
