@@ -95,7 +95,7 @@
 
 	var/prying_so_hard = FALSE
 
-	rad_flags = RAD_PROTECT_CONTENTS | RAD_NO_CONTAMINATE
+	flags_1 = RAD_PROTECT_CONTENTS_1 | RAD_NO_CONTAMINATE_1
 	rad_insulation = RAD_MEDIUM_INSULATION
 
 	var/static/list/airlock_overlays = list()
