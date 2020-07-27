@@ -12,6 +12,8 @@ GLOBAL_LIST_INIT(dwarf_last, world.file2list("strings/names/dwarf_last.txt")) //
 	limbs_id = "human"
 	use_skintones = 1
 	armor = 15 //True dwarves are a bit sturdier than humans
+	burnmod = 0.5
+	heatmod = 0.5
 	speedmod = 0.5 //They are also slower
 	punchdamagelow = 5
 	punchdamagehigh = 15 //and a bit stronger
