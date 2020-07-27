@@ -42467,18 +42467,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/ai_monitored/security/armory)
-"dbX" = (
-/obj/machinery/atmospherics/components/unary/vent_pump/on,
-/obj/structure/sink{
-	dir = 4;
-	pixel_x = -12;
-	pixel_y = 2
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 9
-	},
-/turf/open/floor/plasteel/white,
-/area/science/xenobiology)
 "dca" = (
 /obj/machinery/firealarm{
 	pixel_y = 26
@@ -51757,6 +51745,18 @@
 /obj/item/toy/cards/deck,
 /turf/open/floor/plasteel,
 /area/security/prison)
+"gMt" = (
+/obj/structure/sink{
+	dir = 4;
+	pixel_x = -12;
+	pixel_y = 2
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 9
+	},
+/obj/machinery/atmospherics/components/unary/vent_pump,
+/turf/open/floor/plasteel/white,
+/area/science/xenobiology)
 "gMX" = (
 /obj/effect/turf_decal/tile/yellow{
 	dir = 1
@@ -79257,32 +79257,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/security/prison)
-"tVW" = (
-/obj/machinery/doorButtons/access_button{
-	idDoor = "xeno_airlock_interior";
-	idSelf = "xeno_airlock_control";
-	name = "Access Button";
-	pixel_x = 29;
-	pixel_y = -8;
-	req_access_txt = "55"
-	},
-/obj/machinery/firealarm{
-	pixel_y = 24
-	},
-/obj/machinery/atmospherics/components/unary/vent_scrubber/on,
-/obj/machinery/light{
-	dir = 4
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 5
-	},
-/obj/machinery/advanced_airlock_controller{
-	dir = 8;
-	exterior_pressure = 101.325;
-	pixel_x = 24
-	},
-/turf/open/floor/plasteel/white,
-/area/science/xenobiology)
 "tVY" = (
 /obj/structure/closet/crate,
 /obj/item/target/alien,
@@ -86460,6 +86434,32 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/department/science/central)
+"xCg" = (
+/obj/machinery/doorButtons/access_button{
+	idDoor = "xeno_airlock_interior";
+	idSelf = "xeno_airlock_control";
+	name = "Access Button";
+	pixel_x = 29;
+	pixel_y = -8;
+	req_access_txt = "55"
+	},
+/obj/machinery/firealarm{
+	pixel_y = 24
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 5
+	},
+/obj/machinery/advanced_airlock_controller{
+	dir = 8;
+	exterior_pressure = 101.325;
+	pixel_x = 24
+	},
+/obj/machinery/atmospherics/components/unary/vent_pump/siphon,
+/turf/open/floor/plasteel/white,
+/area/science/xenobiology)
 "xCD" = (
 /obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/manifold/yellow/visible{
@@ -119914,7 +119914,7 @@ rcB
 uAU
 rcB
 cRi
-dbX
+gMt
 dcg
 dcs
 cRi
@@ -120428,7 +120428,7 @@ rcB
 rcB
 rcB
 cRi
-tVW
+xCg
 fga
 dcu
 cRi
