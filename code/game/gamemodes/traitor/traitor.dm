@@ -38,7 +38,7 @@
 	var/total_ready_players = 0;
 	for(var/i in GLOB.new_player_list)
 		var/mob/dead/new_player/player = i
-		if(player.ready == PLAYER_READY_TO_PLAY && player.mind)
+		if(player.ready == PLAYER_READY_TO_PLAY)
 			total_ready_players++
 
 	if(CONFIG_GET(flag/protect_roles_from_antagonist))
@@ -52,7 +52,7 @@
 					protected_jobs += "Chief Engineer"
 		restricted_jobs += protected_jobs
 
-	if(CONFIG_GET(number/traitor_malf_ai_min_pop) < total_ready_players)
+	if(CONFIG_GET(number/traitor_malf_ai_min_pop) > total_ready_players)
 		restricted_jobs += "AI"
 
 	if(CONFIG_GET(flag/protect_assistant_from_antagonist))
