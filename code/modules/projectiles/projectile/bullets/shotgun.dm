@@ -18,10 +18,11 @@
 /obj/projectile/bullet/shotgun_stunslug
 	name = "stunslug"
 	damage = 5
-	paralyze = 100
+	knockdown = 40
 	stutter = 5
 	jitter = 20
-	range = 7
+	stamina = 45
+	range = 4
 	icon_state = "spark"
 	color = "#FFFF00"
 
@@ -83,7 +84,7 @@
 		qdel(src)
 
 /obj/projectile/bullet/pellet/shotgun_improvised
-	tile_dropoff = 0.55		//Come on it does 6 damage don't be like that.
+	//tile_dropoff = 0.55		//Come on it does 6 damage don't be like that.
 	damage = 6
 
 /obj/projectile/bullet/pellet/shotgun_improvised/Initialize()
