@@ -438,21 +438,6 @@
 "ace" = (
 /turf/closed/wall/r_wall,
 /area/maintenance/solars/starboard/fore)
-"ach" = (
-/obj/machinery/atmospherics/components/binary/pump/on{
-	dir = 1
-	},
-/obj/machinery/airlock_sensor/incinerator_toxmix{
-	pixel_x = -24
-	},
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
-	dir = 4
-	},
-/obj/machinery/advanced_airlock_controller/mix_chamber{
-	pixel_y = 24
-	},
-/turf/open/floor/engine,
-/area/science/mixing/chamber)
 "aco" = (
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
@@ -81403,22 +81388,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/engine/atmos)
-"ghd" = (
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
-/obj/machinery/camera{
-	c_tag = "Virology - Containment Lock";
-	dir = 8;
-	name = "virology camera";
-	network = list("ss13","medbay")
-	},
-/obj/effect/turf_decal/delivery,
-/obj/machinery/advanced_airlock_controller{
-	dir = 8;
-	exterior_pressure = 101.325;
-	pixel_x = 24
-	},
-/turf/open/floor/plasteel,
-/area/medical/virology)
 "ghm" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/turf_decal/stripes/line{
@@ -83196,6 +83165,17 @@
 	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/starboard)
+"gOK" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
+/obj/machinery/camera{
+	c_tag = "Virology - Containment Lock";
+	dir = 8;
+	name = "virology camera";
+	network = list("ss13","medbay")
+	},
+/obj/effect/turf_decal/delivery,
+/turf/open/floor/plasteel,
+/area/medical/virology)
 "gOQ" = (
 /obj/structure/bed,
 /obj/item/bedsheet/medical,
@@ -84050,24 +84030,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/engine/atmospherics_engine)
-"hcX" = (
-/obj/structure/sink{
-	dir = 4;
-	pixel_x = -12
-	},
-/obj/structure/mirror{
-	pixel_x = -28
-	},
-/obj/machinery/shower{
-	dir = 8;
-	name = "emergency shower"
-	},
-/obj/effect/turf_decal/bot,
-/obj/machinery/atmospherics/components/unary/vent_pump/siphon{
-	dir = 4
-	},
-/turf/open/floor/plasteel,
-/area/medical/virology)
 "hdH" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/conveyor{
@@ -90096,6 +90058,18 @@
 	},
 /turf/open/floor/plasteel,
 /area/crew_quarters/fitness/recreation)
+"jcD" = (
+/obj/machinery/atmospherics/components/binary/pump/on{
+	dir = 1
+	},
+/obj/machinery/airlock_sensor/incinerator_toxmix{
+	pixel_x = -24
+	},
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
+	dir = 4
+	},
+/turf/open/floor/engine,
+/area/science/mixing/chamber)
 "jcV" = (
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
@@ -111658,25 +111632,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/engine/break_room)
-"qBO" = (
-/obj/structure/sink{
-	dir = 4;
-	pixel_x = -12
-	},
-/obj/machinery/shower{
-	dir = 8;
-	name = "emergency shower"
-	},
-/obj/machinery/firealarm{
-	dir = 4;
-	pixel_x = -24
-	},
-/obj/effect/turf_decal/bot,
-/obj/machinery/atmospherics/components/unary/vent_pump{
-	dir = 1
-	},
-/turf/open/floor/plasteel,
-/area/medical/virology)
 "qBT" = (
 /obj/structure/table/reinforced,
 /obj/machinery/door/window/brigdoor/southright{
@@ -114378,6 +114333,25 @@
 	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/central)
+"rzX" = (
+/obj/structure/sink{
+	dir = 4;
+	pixel_x = -12
+	},
+/obj/machinery/shower{
+	dir = 8;
+	name = "emergency shower"
+	},
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = -24
+	},
+/obj/effect/turf_decal/bot,
+/obj/machinery/atmospherics/components/unary/vent_pump/on{
+	dir = 1
+	},
+/turf/open/floor/plasteel,
+/area/medical/virology)
 "rzY" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
@@ -122067,6 +122041,24 @@
 	},
 /turf/open/floor/plating/airless,
 /area/space/nearstation)
+"ukB" = (
+/obj/structure/sink{
+	dir = 4;
+	pixel_x = -12
+	},
+/obj/structure/mirror{
+	pixel_x = -28
+	},
+/obj/machinery/shower{
+	dir = 8;
+	name = "emergency shower"
+	},
+/obj/effect/turf_decal/bot,
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on{
+	dir = 4
+	},
+/turf/open/floor/plasteel,
+/area/medical/virology)
 "ukR" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -124377,24 +124369,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/engine/atmospherics_engine)
-"uZQ" = (
-/obj/machinery/atmospherics/components/binary/pump{
-	dir = 4
-	},
-/obj/machinery/light/small{
-	dir = 1
-	},
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/airlock_sensor/incinerator_atmos{
-	pixel_y = 24
-	},
-/obj/machinery/atmospherics/pipe/simple/general/hidden,
-/obj/machinery/advanced_airlock_controller/mix_chamber{
-	dir = 4;
-	pixel_x = -24
-	},
-/turf/open/floor/engine,
-/area/maintenance/disposal/incinerator)
 "van" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
@@ -126342,6 +126316,20 @@
 	},
 /turf/open/floor/plasteel,
 /area/security/prison)
+"vKa" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	dir = 4
+	},
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/airlock_sensor/incinerator_atmos{
+	pixel_y = 24
+	},
+/obj/machinery/atmospherics/pipe/simple/general/hidden,
+/turf/open/floor/engine,
+/area/maintenance/disposal/incinerator)
 "vKd" = (
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden{
 	dir = 4
@@ -154394,7 +154382,7 @@ ajr
 aad
 tse
 nSh
-uZQ
+vKa
 fzV
 aJG
 fLR
@@ -166304,7 +166292,7 @@ svv
 sfo
 qnx
 eJc
-ach
+jcD
 eJc
 cKQ
 rUD
@@ -179428,8 +179416,8 @@ bpt
 dNU
 dOI
 dPn
-qBO
-hcX
+rzX
+ukB
 dRZ
 dPq
 aad
@@ -179942,7 +179930,7 @@ hcn
 dNW
 dOJ
 dPp
-ghd
+gOK
 lAE
 dSb
 dPq

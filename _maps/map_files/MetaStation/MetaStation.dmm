@@ -37816,21 +37816,6 @@
 	},
 /turf/open/floor/plasteel/white/corner,
 /area/hallway/secondary/entry)
-"cGG" = (
-/obj/structure/closet/emcloset,
-/obj/item/radio/intercom{
-	pixel_x = -28
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 10
-	},
-/obj/machinery/advanced_airlock_controller{
-	dir = 1;
-	exterior_pressure = 101.325;
-	pixel_y = -24
-	},
-/turf/open/floor/plasteel/white,
-/area/medical/virology)
 "cGO" = (
 /turf/open/floor/plasteel/white/side{
 	dir = 8
@@ -46570,6 +46555,25 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/security/warden)
+"edn" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/structure/sign/warning/fire{
+	pixel_x = -32
+	},
+/obj/machinery/atmospherics/components/binary/pump/on{
+	dir = 1
+	},
+/obj/machinery/airlock_sensor/incinerator_atmos{
+	pixel_x = -8;
+	pixel_y = 24
+	},
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
+	dir = 4
+	},
+/turf/open/floor/engine,
+/area/maintenance/disposal/incinerator)
 "edR" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
@@ -50207,6 +50211,16 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/science/xenobiology)
+"fVH" = (
+/obj/structure/closet/emcloset,
+/obj/item/radio/intercom{
+	pixel_x = -28
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 10
+	},
+/turf/open/floor/plasteel/white,
+/area/medical/virology)
 "fWk" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -50970,20 +50984,6 @@
 	},
 /turf/open/floor/plasteel/kitchen_coldroom,
 /area/crew_quarters/kitchen/coldroom)
-"guC" = (
-/obj/machinery/airlock_sensor/incinerator_toxmix{
-	pixel_y = 24
-	},
-/obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/obj/machinery/atmospherics/components/binary/pump/on{
-	dir = 4
-	},
-/obj/machinery/advanced_airlock_controller{
-	dir = 4;
-	pixel_x = -24
-	},
-/turf/open/floor/engine,
-/area/science/mixing/chamber)
 "guS" = (
 /obj/structure/window/reinforced{
 	dir = 4
@@ -51745,18 +51745,6 @@
 /obj/item/toy/cards/deck,
 /turf/open/floor/plasteel,
 /area/security/prison)
-"gMt" = (
-/obj/structure/sink{
-	dir = 4;
-	pixel_x = -12;
-	pixel_y = 2
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 9
-	},
-/obj/machinery/atmospherics/components/unary/vent_pump,
-/turf/open/floor/plasteel/white,
-/area/science/xenobiology)
 "gMX" = (
 /obj/effect/turf_decal/tile/yellow{
 	dir = 1
@@ -68742,6 +68730,18 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/science/research)
+"oTU" = (
+/obj/structure/sink{
+	dir = 4;
+	pixel_x = -12;
+	pixel_y = 2
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 9
+	},
+/obj/machinery/atmospherics/components/unary/vent_pump/on,
+/turf/open/floor/plasteel/white,
+/area/science/xenobiology)
 "oUn" = (
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden,
 /obj/structure/disposalpipe/sorting/mail/flip{
@@ -70867,6 +70867,27 @@
 	},
 /turf/open/floor/plasteel,
 /area/engine/atmos)
+"pXH" = (
+/obj/machinery/doorButtons/access_button{
+	idDoor = "xeno_airlock_interior";
+	idSelf = "xeno_airlock_control";
+	name = "Access Button";
+	pixel_x = 29;
+	pixel_y = -8;
+	req_access_txt = "55"
+	},
+/obj/machinery/firealarm{
+	pixel_y = 24
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 5
+	},
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on,
+/turf/open/floor/plasteel/white,
+/area/science/xenobiology)
 "pXV" = (
 /obj/machinery/navbeacon{
 	codes_txt = "delivery;dir=8";
@@ -77550,29 +77571,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/quartermaster/storage)
-"tfP" = (
-/obj/machinery/light/small{
-	dir = 8
-	},
-/obj/structure/sign/warning/fire{
-	pixel_x = -32
-	},
-/obj/machinery/atmospherics/components/binary/pump/on{
-	dir = 1
-	},
-/obj/machinery/airlock_sensor/incinerator_atmos{
-	pixel_x = -8;
-	pixel_y = 24
-	},
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
-	dir = 4
-	},
-/obj/machinery/advanced_airlock_controller{
-	dir = 1;
-	pixel_y = -24
-	},
-/turf/open/floor/engine,
-/area/maintenance/disposal/incinerator)
 "tfW" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on,
 /obj/structure/cable{
@@ -79719,6 +79717,16 @@
 	},
 /turf/open/floor/plasteel,
 /area/hydroponics/garden)
+"ukC" = (
+/obj/machinery/airlock_sensor/incinerator_toxmix{
+	pixel_y = 24
+	},
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/machinery/atmospherics/components/binary/pump/on{
+	dir = 4
+	},
+/turf/open/floor/engine,
+/area/science/mixing/chamber)
 "ukD" = (
 /obj/machinery/atmospherics/pipe/simple/green/visible{
 	dir = 4
@@ -86434,32 +86442,6 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/department/science/central)
-"xCg" = (
-/obj/machinery/doorButtons/access_button{
-	idDoor = "xeno_airlock_interior";
-	idSelf = "xeno_airlock_control";
-	name = "Access Button";
-	pixel_x = 29;
-	pixel_y = -8;
-	req_access_txt = "55"
-	},
-/obj/machinery/firealarm{
-	pixel_y = 24
-	},
-/obj/machinery/light{
-	dir = 4
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 5
-	},
-/obj/machinery/advanced_airlock_controller{
-	dir = 8;
-	exterior_pressure = 101.325;
-	pixel_x = 24
-	},
-/obj/machinery/atmospherics/components/unary/vent_pump/siphon,
-/turf/open/floor/plasteel/white,
-/area/science/xenobiology)
 "xCD" = (
 /obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/manifold/yellow/visible{
@@ -108334,7 +108316,7 @@ nMO
 dzK
 cFL
 oFf
-cGG
+fVH
 clK
 cdm
 cKn
@@ -119914,7 +119896,7 @@ rcB
 uAU
 rcB
 cRi
-gMt
+oTU
 dcg
 dcs
 cRi
@@ -120428,7 +120410,7 @@ rcB
 rcB
 rcB
 cRi
-xCg
+pXH
 fga
 dcu
 cRi
@@ -120666,7 +120648,7 @@ cgU
 cBw
 cCx
 cDk
-guC
+ukC
 cFp
 cGk
 cHf
@@ -127586,7 +127568,7 @@ aiT
 aju
 apP
 cjb
-tfP
+edn
 cjb
 atF
 cgz
