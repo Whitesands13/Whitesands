@@ -207,14 +207,10 @@ GLOBAL_LIST_EMPTY(PDAs)
 	var/datum/asset/spritesheet/assets = get_asset_datum(/datum/asset/spritesheet/simple/pda)
 	assets.send(user)
 
-	var/datum/asset/spritesheet/emoji_s = get_asset_datum(/datum/asset/spritesheet/goonchat)
-	emoji_s.send(user) //Already sent by chat but no harm doing this
-
 	user.set_machine(src)
 
 	var/dat = "" // WaspStation Edit - PDA Redesign
 	dat += assets.css_tag()
-	dat += emoji_s.css_tag()
 
 	dat += "[PDAIMG(refresh)]   <a href='byond://?src=[REF(src)];choice=Refresh'>Refresh</a>"
 
