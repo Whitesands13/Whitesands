@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #define CART_SECURITY	(1<<0)
 #define CART_ENGINE	(1<<1)
 #define CART_ATMOS	(1<<2)
@@ -5,6 +6,16 @@
 #define CART_CLOWN	(1<<5)
 #define CART_MIME	(1<<6)
 #define CART_JANITOR	(1<<7)
+=======
+#define CART_SECURITY			(1<<0)
+#define CART_ENGINE				(1<<1)
+#define CART_ATMOS				(1<<2)
+#define CART_MEDICAL			(1<<3)
+#define CART_MANIFEST			(1<<4)
+#define CART_CLOWN				(1<<5)
+#define CART_MIME				(1<<6)
+#define CART_JANITOR			(1<<7)
+>>>>>>> parent of fcf2dbf... [READY] Mime PDAs only accept emojis for messages, mime cartridge comes with an emoji guidebook (#47177)
 #define CART_REAGENT_SCANNER	(1<<8)
 #define CART_NEWSCASTER			(1<<9)
 #define CART_REMOTE_DOOR		(1<<10)
@@ -42,7 +53,6 @@
 	var/list/powermonitors = list()
 	var/message1	// used for status_displays
 	var/message2
-	var/emoji_preview = "" //which emoji will be sent to chat in a preview
 	var/list/stored_data = list()
 	var/current_channel
 
@@ -543,17 +553,6 @@ Code:
 		if (54) // Beepsky, Medibot, Floorbot, and Cleanbot access
 			menu = "<h4>[PDAIMG(medbot)] Bots Interlink</h4>"
 			bot_control()
-		if (55) // Emoji Guidebook for mimes
-			menu = "<h4>[PDAIMG(emoji)] Emoji Guidebook</h4>"
-			var/static/list/emoji_icon_states
-			var/breakcounter = FALSE
-			if(!emoji_icon_states)
-				emoji_icon_states = icon_states(icon('icons/emoji.dmi'))
-			menu += "<br> To use an emoji in a pda message, refer to the guide and add \":\" around the emoji. Click on any of the emojis to preview it.<br>"
-			for(var/emoji in emoji_icon_states)
-				var/preview_link = "<A href='byond://?src=[REF(src)];emoji=[emoji]'>[emoji]</a>" //broken, on opening the menu it sends every single emoji because it is executing the proc to find the choice as soon as it is loaded
-				menu += "[breakcounter ? "<br> " : ""][preview_link][breakcounter ? " || " : "" ]"
-				breakcounter = !breakcounter
 		if (99) //Newscaster message permission error
 			menu = "<h5> ERROR : NOT AUTHORIZED [host_pda.id ? "" : "- ID SLOT EMPTY"] </h5>"
 
@@ -641,11 +640,6 @@ Code:
 			current_channel = host_pda.msg_input()
 			host_pda.Topic(null,list("choice"=num2text(host_pda.mode)))
 			return
-
-	//emoji previews
-	if(href_list["emoji"])
-		var/parse = emoji_parse(":[href_list["emoji"]]:")
-		to_chat(usr, parse)
 
 	//Bot control section! Viciously ripped from radios for being laggy and terrible.
 	if(href_list["op"])
