@@ -67,11 +67,6 @@ GLOBAL_LIST_EMPTY(PDAs)
 	var/hidden = FALSE // Is the PDA hidden from the PDA list?
 	var/emped = FALSE
 	var/equipped = FALSE  //used here to determine if this is the first time its been picked up
-<<<<<<< HEAD
-	var/allow_emojis = FALSE //if the pda can send emojis and actually have them parsed as such
-	var/sort_by_job = FALSE // If this is TRUE, will sort PDA list by job.
-=======
->>>>>>> parent of fcf2dbf... [READY] Mime PDAs only accept emojis for messages, mime cartridge comes with an emoji guidebook (#47177)
 
 	var/obj/item/card/id/id = null //Making it possible to slot an ID card into the PDA so it can function as both.
 	var/ownjob = null //related to above
@@ -677,15 +672,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 		if(signal.data["automated"])
 			reply = "\[Automated Message\]"
 
-<<<<<<< HEAD
-		var/inbound_message = signal.format_message()
-		if(signal.data["emojis"] == TRUE)//so will not parse emojis as such from pdas that don't send emojis
-			inbound_message = emoji_parse(inbound_message)
-
-		to_chat(L, "[icon2html(src)] <b>PDA message from [hrefstart][signal.data["name"]] ([signal.data["job"]])[hrefend], </b>[inbound_message] [reply]")
-=======
 		to_chat(L, "[icon2html(src)] <b>Message from [hrefstart][signal.data["name"]] ([signal.data["job"]])[hrefend], </b>[signal.format_message()] [reply]")
->>>>>>> parent of fcf2dbf... [READY] Mime PDAs only accept emojis for messages, mime cartridge comes with an emoji guidebook (#47177)
 
 	update_icon()
 	add_overlay(icon_alert)

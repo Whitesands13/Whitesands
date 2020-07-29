@@ -30,27 +30,3 @@
 		break
 	return parsed
 
-<<<<<<< HEAD
-/proc/emoji_sanitize(text) //cuts any text that would not be parsed as an emoji
-	. = text
-	if(!CONFIG_GET(flag/emojis))
-		return
-	var/static/list/emojis = icon_states(icon('icons/emoji.dmi'))
-	var/final = "" //only tags are added to this
-	var/pos = 1
-	var/search = 0
-	while(1)
-		search = findtext(text, ":", pos)
-		if(search)
-			pos = search
-			search = findtext(text, ":", pos + length(text[pos]))
-			if(search)
-				var/word = lowertext(copytext(text, pos + length(text[pos]), search))
-				if(word in emojis)
-					final += lowertext(copytext(text, pos, search + length(text[search])))
-				pos = search + length(text[search])
-				continue
-		break
-	return final
-=======
->>>>>>> parent of fcf2dbf... [READY] Mime PDAs only accept emojis for messages, mime cartridge comes with an emoji guidebook (#47177)
