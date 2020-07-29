@@ -67,6 +67,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 	var/hidden = FALSE // Is the PDA hidden from the PDA list?
 	var/emped = FALSE
 	var/equipped = FALSE  //used here to determine if this is the first time its been picked up
+	var/sort_by_job = FALSE // If this is TRUE, will sort PDA list by job.
 
 	var/obj/item/card/id/id = null //Making it possible to slot an ID card into the PDA so it can function as both.
 	var/ownjob = null //related to above
