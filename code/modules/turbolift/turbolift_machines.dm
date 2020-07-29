@@ -133,7 +133,7 @@ GLOBAL_LIST_EMPTY(turbolifts)
 	icon = 'icons/turf/walls/wall.dmi'
 	icon_state = "wall"
 	canSmoothWith = list(/turf/closed/indestructible/turbolift)
-	smooth = SMOOTH_TRUE
+	smoothing_flags = SMOOTH_TRUE
 
 /turf/closed/indestructible/turbolift/afterShuttleMove()
 	QUEUE_SMOOTH(src)

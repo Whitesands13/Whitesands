@@ -101,7 +101,7 @@
 	var/chat_color_darkened
 
 	///Icon-smoothing behavior.
-	var/smooth = SMOOTH_FALSE
+	var/smoothing_flags = NONE
 	///Smoothing variable
 	var/top_left_corner
 	///Smoothing variable
@@ -257,7 +257,7 @@
 	targeted_by = null
 	QDEL_NULL(light)
 
-	if(smooth & SMOOTH_QUEUED)
+	if(smoothing_flags & SMOOTH_QUEUED)
 		SSicon_smooth.remove_from_queues(src)
 
 	return ..()
