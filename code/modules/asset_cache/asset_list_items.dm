@@ -79,7 +79,6 @@
 		"signaler"		= 'icons/pda_icons/pda_signaler.png',
 		"status"		= 'icons/pda_icons/pda_status.png',
 		"dronephone"	= 'icons/pda_icons/pda_dronephone.png',
-		"emoji"			= 'icons/pda_icons/pda_emoji.png'
 	)
 
 /datum/asset/spritesheet/simple/paper
