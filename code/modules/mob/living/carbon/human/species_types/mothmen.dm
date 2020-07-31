@@ -47,6 +47,8 @@
 	. = ..()
 	if(.) //if the mob is immune to fire, don't burn wings off.
 		return
+	if(!("moth_wings" in H.dna.species.mutant_bodyparts)) //if they don't have wings, you can't burn em, can ye
+		return
 	if(H.dna.features["moth_wings"] != "Burnt Off" && H.bodytemperature >= 500 && H.fire_stacks > 0) //do not go into the extremely hot light. you will not survive
 		to_chat(H, "<span class='danger'>Your precious wings start to char!</span>")
 		H.dna.features["moth_wings"] = "Burnt Off"
