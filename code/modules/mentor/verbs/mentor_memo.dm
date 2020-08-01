@@ -51,6 +51,8 @@
 				return
 			log_admin("[key_name(src)] has set a mentor memo: [memotext]")
 			message_admins("[key_name_admin(src)] has set a mentor memo:<br>[memotext]")
+			qdel(query_memocheck)
+			qdel(query_memoadd)
 		if("Edit")
 			var/datum/DBQuery/query_memolist = SSdbcore.NewQuery("SELECT ckey FROM [format_table_name("mentor_memo")]")
 			if(!query_memolist.Execute())
@@ -89,6 +91,9 @@
 					return
 				log_admin("[key_name(src)] has edited [target_ckey == src.ckey ? "their" : "[target_ckey]'s'"] mentor memo from [old_memo] to [new_memo]")
 				message_admins("[key_name_admin(src)] has edited [target_ckey == src.ckey ? "their" : "[target_ckey]'s'"] mentor memo from<br>[old_memo]<br>to<br>[new_memo]")
+				qdel(update_query)
+			qdel(query_memolist)
+			qdel(query_memofind)
 		if("Show")
 			var/datum/DBQuery/query_memoshow = SSdbcore.NewQuery("SELECT ckey, memotext, timestamp, last_editor FROM [format_table_name("mentor_memo")]")
 			if(!query_memoshow.Execute())
@@ -134,3 +139,5 @@
 				return
 			log_admin("[key_name(src)] has removed [target_ckey == src.ckey ? "their" : "[target_ckey]'s'"] mentor memo.")
 			message_admins("[key_name_admin(src)] has removed [target_ckey == src.ckey ? "their" : "[target_ckey]'s'"]'s mentor memo.")
+			qdel(query_memodellist)
+			qdel(query_memodel)
