@@ -4,13 +4,13 @@
 	color = "#FFFF00"
 	nodamage = FALSE
 	hitsound = 'sound/weapons/taserhit.ogg'
-	range = 7
+	range = 4
 	tracer_type = /obj/effect/projectile/tracer/stun
 	muzzle_type = /obj/effect/projectile/muzzle/stun
 	impact_type = /obj/effect/projectile/impact/stun
 
 	var/confusion_amt = 10		// Wasp Edit Begin - Nerfs tasers
-	var/stamina_loss_amt = 60
+	var/stamina_loss_amt = 50
 	var/apply_stun_delay = 2 SECONDS
 	var/stun_time = 5 SECONDS
 
@@ -39,7 +39,7 @@
 
 			attack_cooldown_check = world.time + attack_cooldown
 
-		
+
 
 /obj/projectile/energy/electrode/proc/apply_stun_effect_end(mob/living/target)
 	var/trait_check = HAS_TRAIT(target, TRAIT_STUNRESISTANCE) //var since we check it in out to_chat as well as determine stun duration
@@ -54,3 +54,12 @@
 /obj/projectile/energy/electrode/on_range() //to ensure the bolt sparks when it reaches the end of its range if it didn't hit a target yet
 	do_sparks(1, TRUE, src)
 	..()
+
+/obj/projectile/energy/electrode/weak
+	name = "weak electrode"
+	icon_state = "spark"
+	color = "#FFFF00"
+	nodamage = FALSE
+	hitsound = 'sound/weapons/taserhit.ogg'
+	range = 4
+	stamina_loss_amt = 5

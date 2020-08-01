@@ -1,11 +1,13 @@
 /obj/projectile/bullet/shotgun_slug
 	name = "12g shotgun slug"
-	damage = 60
+	damage = 45
+	tile_dropoff = 2
 
 /obj/projectile/bullet/shotgun_beanbag
 	name = "beanbag slug"
 	damage = 5
-	stamina = 55
+	stamina = 50
+	tile_dropoff_s = 2
 
 /obj/projectile/bullet/incendiary/shotgun
 	name = "incendiary slug"
@@ -56,35 +58,24 @@
 	explosion(target, -1, 0, 1)
 	return BULLET_ACT_HIT
 
-/obj/projectile/bullet/pellet
-	var/tile_dropoff = 0.75
-	var/tile_dropoff_s = 0.5
-
 /obj/projectile/bullet/pellet/shotgun_buckshot
 	name = "buckshot pellet"
-	damage = 12.5
+	damage = 10.5
+	tile_dropoff = 2.5
 
 /obj/projectile/bullet/pellet/shotgun_rubbershot
 	name = "rubbershot pellet"
 	damage = 3
 	stamina = 11
+	tile_dropoff = 2.5
 
 /obj/projectile/bullet/pellet/shotgun_incapacitate
 	name = "incapacitating pellet"
 	damage = 1
 	stamina = 6
 
-/obj/projectile/bullet/pellet/Range()
-	..()
-	if(damage > 0)
-		damage -= tile_dropoff
-	if(stamina > 0)
-		stamina -= tile_dropoff_s
-	if(damage < 0 && stamina < 0)
-		qdel(src)
-
 /obj/projectile/bullet/pellet/shotgun_improvised
-	//tile_dropoff = 0.55		//Come on it does 6 damage don't be like that.
+	tile_dropoff = 1	//Come on it does 6 damage don't be like that.
 	damage = 6
 
 /obj/projectile/bullet/pellet/shotgun_improvised/Initialize()

@@ -12,6 +12,10 @@
 	e_cost = 2000
 	select_name = "kill"
 
+/obj/item/ammo_casing/energy/laser/weak
+	projectile_type = /obj/projectile/beam/laser/weak
+	e_cost = 2000
+
 /obj/item/ammo_casing/energy/laser/hos
 	e_cost = 1200
 

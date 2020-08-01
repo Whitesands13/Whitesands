@@ -175,10 +175,10 @@
 
 	var/cooldown_check = 0 // Used interally, you don't want to modify
 
-	var/cooldown = 40 // Default wait time until can stun again.
-	var/knockdown_time_carbon = (1.5 SECONDS) // Knockdown length for carbons.
+	var/cooldown = 30 // Default wait time until can stun again.
+	var/knockdown_time_carbon = (0 SECONDS) // Knockdown length for carbons.
 	var/stun_time_silicon = (5 SECONDS) // If enabled, how long do we stun silicons.
-	var/stamina_damage = 55 // Do we deal stamina damage.
+	var/stamina_damage = 35 // Do we deal stamina damage.
 	var/affect_silicon = FALSE // Does it stun silicons.
 	var/on_sound // "On" sound, played when switching between able to stun or not.
 	var/on_stun_sound = "sound/effects/woodhit.ogg" // Default path to sound for when we stun.
@@ -394,6 +394,7 @@
 	force = 5
 
 	cooldown = 25
+	knockdown_time_carbon = (2 SECONDS)
 	stamina_damage = 85
 	affect_silicon = TRUE
 	on_sound = 'sound/weapons/contractorbatonextend.ogg'

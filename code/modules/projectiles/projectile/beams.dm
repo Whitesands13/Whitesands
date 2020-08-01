@@ -20,6 +20,11 @@
 	muzzle_type = /obj/effect/projectile/muzzle/laser
 	impact_type = /obj/effect/projectile/impact/laser
 
+/obj/projectile/beam/laser/weak
+	name = "weak laser"
+	icon_state = "laser"
+	damage = 10
+
 /obj/projectile/beam/laser/heavylaser
 	name = "heavy laser"
 	icon_state = "heavylaser"
@@ -71,7 +76,7 @@
 /obj/projectile/beam/disabler
 	name = "disabler beam"
 	icon_state = "omnilaser"
-	damage = 20
+	damage = 30
 	damage_type = STAMINA
 	flag = "energy"
 	hitsound = 'sound/weapons/tap.ogg'
