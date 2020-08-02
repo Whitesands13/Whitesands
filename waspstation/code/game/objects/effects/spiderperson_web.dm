@@ -7,7 +7,7 @@
     max_integrity = 20
 
 /obj/structure/spider_player/New()
-	icon_state = pick(list("stickyweb1", "stickyweb2")
+	icon_state = pick(list("stickyweb1", "stickyweb2"))
 
 /obj/structure/spider_player/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
 	if(damage_type == BURN)//the stickiness of the web mutes all attack sounds except fire damage type
