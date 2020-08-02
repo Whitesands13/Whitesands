@@ -19,7 +19,7 @@
 			if(BURN)
 				damage_amount *= 2
 			if(BRUTE)
-				damage_amount *= 0.1
+				damage_amount *= 0.5
 	. = ..()
 
 /obj/structure/spider_player/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
