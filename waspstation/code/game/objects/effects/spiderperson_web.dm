@@ -54,7 +54,7 @@
 	. = ..()
 
 /obj/structure/spider_player/cocoon/container_resist(mob/living/user)
-	var/breakout_time = 3000 // DECI not DECA ffs
+	var/breakout_time = 1000 // DECI not DECA ffs
 	user.changeNext_move(CLICK_CD_BREAKOUT)
 	user.last_special = world.time + CLICK_CD_BREAKOUT
 	to_chat(user, "<span class='notice'>You struggle against the tight bonds... (This will take about [DisplayTimeText(breakout_time)].)</span>")
