@@ -225,6 +225,5 @@ GLOBAL_LIST_INIT(spider_last, world.file2list("strings/names/spider_last.txt"))
 	results = list(/datum/reagent/mutationtoxin/arachnid = 1)
 	required_reagents = list(
 		/datum/reagent/mutationtoxin/unstable = 1,
-		/datum/reagent/toxin/heparin = 10,
-		/datum/reagent/toxin/lipolicide = 20
+		/datum/reagent/toxin/heparin = 10
 	)
