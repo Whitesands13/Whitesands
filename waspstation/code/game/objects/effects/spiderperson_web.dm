@@ -1,11 +1,13 @@
 /obj/structure/spider_player
     name = "large web"
     icon = 'icons/effects/effects.dmi'
-    icon_state = "stickyweb1"
     desc = "It's stringy and sticky, but the threads are larger than what spiderlings could produce."
     anchored = TRUE
     density = FALSE
     max_integrity = 20
+
+/obj/structure/spider_player/New()
+	icon_state = pick(list("stickyweb1", "stickyweb2")
 
 /obj/structure/spider_player/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
 	if(damage_type == BURN)//the stickiness of the web mutes all attack sounds except fire damage type
