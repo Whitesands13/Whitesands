@@ -61,13 +61,13 @@
 /obj/projectile/bullet/pellet/shotgun_buckshot
 	name = "buckshot pellet"
 	damage = 10.5
-	tile_dropoff = 2.5
+	tile_dropoff = 2
 
 /obj/projectile/bullet/pellet/shotgun_rubbershot
 	name = "rubbershot pellet"
 	damage = 3
 	stamina = 11
-	tile_dropoff = 2.5
+	tile_dropoff = 2
 
 /obj/projectile/bullet/pellet/shotgun_incapacitate
 	name = "incapacitating pellet"
