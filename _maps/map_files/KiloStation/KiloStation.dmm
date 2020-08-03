@@ -11,6 +11,17 @@
 /obj/structure/reagent_dispensers/watertank,
 /turf/open/floor/plasteel/dark,
 /area/engine/engineering)
+"aac" = (
+/obj/machinery/atmospherics/pipe/manifold/supply/hidden{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1,
+/obj/structure/cable{
+	icon_state = "2-4"
+	},
+/mob/living/simple_animal/bot/secbot/pingsky,
+/turf/open/floor/engine,
+/area/ai_monitored/turret_protected/aisat_interior)
 "aad" = (
 /turf/closed/wall/r_wall/rust,
 /area/security/brig)
@@ -25,9 +36,114 @@
 "aag" = (
 /turf/closed/wall/r_wall/rust,
 /area/security/warden)
+"aah" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/mob/living/simple_animal/hostile/poison/giant_spider/hunter{
+	desc = "Furry and black, it makes you shudder to look at it. This one has sparkling purple eyes, and looks abnormally thin and frail.";
+	environment_smash = 0;
+	health = 60;
+	maxHealth = 60;
+	melee_damage_lower = 5;
+	melee_damage_upper = 10;
+	name = "scrawny spider"
+	},
+/turf/open/floor/plating,
+/area/maintenance/department/electrical)
+"aai" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/cable{
+	icon_state = "0-8"
+	},
+/mob/living/simple_animal/hostile/poison/giant_spider/hunter{
+	desc = "Furry and black, it makes you shudder to look at it. This one has sparkling purple eyes, and looks abnormally thin and frail.";
+	environment_smash = 0;
+	health = 60;
+	maxHealth = 60;
+	melee_damage_lower = 5;
+	melee_damage_upper = 10;
+	name = "scrawny spider"
+	},
+/turf/open/floor/plating,
+/area/maintenance/department/electrical)
 "aaj" = (
 /turf/closed/wall,
 /area/security/brig)
+"aak" = (
+/obj/structure/flora/junglebush,
+/obj/structure/flora/ausbushes/sunnybush,
+/obj/item/reagent_containers/food/snacks/grown/banana,
+/obj/structure/flora/ausbushes/ywflowers,
+/obj/machinery/atmospherics/components/unary/vent_pump/on,
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/mob/living/carbon/monkey,
+/turf/open/floor/grass,
+/area/medical/virology)
+"aal" = (
+/obj/structure/bed/dogbed/ian,
+/obj/machinery/power/apc{
+	areastring = "/area/crew_quarters/heads/head_of_personnel";
+	dir = 1;
+	name = "Head of Personnel's Office APC";
+	pixel_y = 24
+	},
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/mob/living/simple_animal/pet/dog/corgi/Ian{
+	dir = 8
+	},
+/turf/open/floor/wood,
+/area/crew_quarters/heads/head_of_personnel)
+"aam" = (
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/mob/living/simple_animal/bot/secbot{
+	arrest_type = 1;
+	health = 45;
+	icon_state = "secbot1";
+	idcheck = 1;
+	name = "Warden Armsky";
+	weaponscheck = 1
+	},
+/turf/open/floor/plasteel/showroomfloor,
+/area/ai_monitored/security/armory)
+"aan" = (
+/obj/structure/rack,
+/obj/item/gun/ballistic/shotgun/riot{
+	pixel_x = -3;
+	pixel_y = 3
+	},
+/obj/item/gun/ballistic/shotgun/riot,
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/bot,
+/obj/structure/window/reinforced,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/item/gun/ballistic/automatic/pistol/commander/no_mag,
+/obj/item/gun/ballistic/automatic/pistol/commander/no_mag,
+/turf/open/floor/plasteel/showroomfloor,
+/area/ai_monitored/security/armory)
 "aao" = (
 /obj/structure/chair{
 	dir = 4
@@ -7337,32 +7453,6 @@
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/open/floor/plasteel/dark,
 /area/engine/break_room)
-"aCz" = (
-/obj/structure/rack,
-/obj/item/gun/ballistic/shotgun/riot{
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/gun/ballistic/shotgun/riot,
-/obj/item/gun/ballistic/shotgun/riot{
-	pixel_x = 3;
-	pixel_y = -3
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/bot,
-/obj/structure/window/reinforced,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/plasteel/showroomfloor,
-/area/ai_monitored/security/armory)
 "aCA" = (
 /obj/effect/turf_decal/bot,
 /obj/machinery/portable_atmospherics/canister/nitrogen,
@@ -31996,23 +32086,6 @@
 	},
 /turf/open/floor/circuit/red,
 /area/ai_monitored/turret_protected/ai)
-"cek" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/mob/living/simple_animal/hostile/poison/giant_spider/hunter{
-	desc = "Furry and black, it makes you shudder to look at it. This one has sparkling purple eyes, and looks abnormally thin and frail.";
-	environment_smash = 0;
-	health = 60;
-	maxHealth = 60;
-	melee_damage_lower = 5;
-	melee_damage_upper = 10;
-	name = "scrawny spider"
-	},
-/obj/structure/cable{
-	icon_state = "1-2"
-	},
-/turf/open/floor/plating,
-/area/maintenance/department/electrical)
 "ceo" = (
 /obj/effect/landmark/start/ai/secondary,
 /obj/item/radio/intercom{
@@ -56620,18 +56693,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/engine/break_room)
-"jHO" = (
-/obj/structure/flora/junglebush,
-/obj/structure/flora/ausbushes/sunnybush,
-/obj/item/reagent_containers/food/snacks/grown/banana,
-/obj/structure/flora/ausbushes/ywflowers,
-/obj/machinery/atmospherics/components/unary/vent_pump/on,
-/mob/living/carbon/monkey,
-/obj/structure/cable{
-	icon_state = "4-8"
-	},
-/turf/open/floor/grass,
-/area/medical/virology)
 "jHP" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
@@ -59406,26 +59467,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/security/main)
-"kTU" = (
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/mob/living/simple_animal/bot/secbot{
-	arrest_type = 1;
-	health = 45;
-	icon_state = "secbot1";
-	idcheck = 1;
-	name = "Warden Armsky";
-	weaponscheck = 1
-	},
-/obj/structure/cable{
-	icon_state = "1-2"
-	},
-/turf/open/floor/plasteel/showroomfloor,
-/area/ai_monitored/security/armory)
 "kUo" = (
 /obj/effect/turf_decal/bot,
 /obj/structure/tank_dispenser,
@@ -84192,22 +84233,6 @@
 	},
 /turf/open/floor/plating,
 /area/science/xenobiology)
-"vJT" = (
-/obj/effect/decal/cleanable/dirt,
-/mob/living/simple_animal/hostile/poison/giant_spider/hunter{
-	desc = "Furry and black, it makes you shudder to look at it. This one has sparkling purple eyes, and looks abnormally thin and frail.";
-	environment_smash = 0;
-	health = 60;
-	maxHealth = 60;
-	melee_damage_lower = 5;
-	melee_damage_upper = 10;
-	name = "scrawny spider"
-	},
-/obj/structure/cable{
-	icon_state = "0-8"
-	},
-/turf/open/floor/plating,
-/area/maintenance/department/electrical)
 "vKh" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
@@ -89100,17 +89125,6 @@
 	icon_state = "platingdmg3"
 	},
 /area/maintenance/starboard)
-"xUm" = (
-/obj/machinery/atmospherics/pipe/manifold/supply/hidden{
-	dir = 8
-	},
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1,
-/mob/living/simple_animal/bot/secbot/pingsky,
-/obj/structure/cable{
-	icon_state = "2-4"
-	},
-/turf/open/floor/engine,
-/area/ai_monitored/turret_protected/aisat_interior)
 "xUI" = (
 /obj/effect/decal/cleanable/oil,
 /obj/effect/decal/cleanable/dirt,
@@ -89363,22 +89377,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/hallway/primary/aft)
-"xYb" = (
-/obj/structure/bed/dogbed/ian,
-/obj/machinery/power/apc{
-	areastring = "/area/crew_quarters/heads/head_of_personnel";
-	dir = 1;
-	name = "Head of Personnel's Office APC";
-	pixel_y = 24
-	},
-/mob/living/simple_animal/pet/dog/corgi/Ian{
-	dir = 8
-	},
-/obj/structure/cable{
-	icon_state = "0-2"
-	},
-/turf/open/floor/wood,
-/area/crew_quarters/heads/head_of_personnel)
 "xYS" = (
 /obj/effect/turf_decal/bot,
 /obj/machinery/holopad/secure,
@@ -111094,7 +111092,7 @@ bPI
 mOs
 paz
 alx
-aCz
+aan
 ftO
 bdK
 aka
@@ -111607,7 +111605,7 @@ iCr
 aka
 alE
 nSk
-kTU
+aam
 yaf
 pgc
 czY
@@ -111822,7 +111820,7 @@ piF
 aTW
 bgE
 aPf
-jHO
+aak
 blB
 bsE
 buw
@@ -118261,7 +118259,7 @@ bbs
 atT
 atT
 atj
-xYb
+aal
 gWC
 gzn
 oEP
@@ -118451,7 +118449,7 @@ gNM
 xCF
 acw
 pJs
-xUm
+aac
 xAL
 nqO
 lxM
@@ -130809,7 +130807,7 @@ aeu
 cLs
 ljq
 emI
-cek
+aah
 qcS
 elo
 xOn
@@ -131068,7 +131066,7 @@ cLs
 cLH
 cMg
 cMt
-vJT
+aai
 cMr
 cLs
 akI

@@ -2,6 +2,31 @@
 "aaa" = (
 /turf/open/space/basic,
 /area/space)
+"aab" = (
+/obj/structure/rack,
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
+/obj/item/storage/box/rubbershot,
+/obj/item/storage/box/rubbershot,
+/obj/item/storage/box/rubbershot,
+/obj/item/storage/box/rubbershot,
+/obj/item/storage/box/rubbershot,
+/obj/item/storage/box/rubbershot,
+/obj/item/gun/ballistic/shotgun/riot,
+/obj/item/gun/ballistic/shotgun/riot,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/obj/item/gun/ballistic/automatic/pistol/commander/no_mag,
+/obj/item/gun/ballistic/automatic/pistol/commander/no_mag,
+/turf/open/floor/plasteel/dark,
+/area/ai_monitored/security/armory)
 "aac" = (
 /obj/effect/landmark/carpspawn,
 /turf/open/space,
@@ -23,6 +48,28 @@
 /obj/structure/lattice,
 /turf/open/space,
 /area/space/nearstation)
+"aah" = (
+/obj/machinery/navbeacon{
+	codes_txt = "delivery;dir=8";
+	dir = 8;
+	freq = 1400;
+	location = "QM #1"
+	},
+/obj/machinery/door/window/northleft,
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/effect/turf_decal/delivery,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/mob/living/simple_animal/bot/mulebot{
+	beacon_freq = 1400;
+	home_destination = "QM #1";
+	suffix = "#1"
+	},
+/turf/open/floor/plasteel,
+/area/quartermaster/storage)
 "aai" = (
 /obj/structure/grille/broken,
 /obj/structure/lattice,
@@ -88,10 +135,41 @@
 /obj/item/storage/crayons,
 /turf/open/floor/plasteel,
 /area/storage/art)
+"aap" = (
+/obj/machinery/navbeacon{
+	codes_txt = "delivery;dir=8";
+	dir = 8;
+	freq = 1400;
+	location = "QM #3"
+	},
+/obj/effect/turf_decal/delivery,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/mob/living/simple_animal/bot/mulebot{
+	home_destination = "QM #3";
+	suffix = "#3"
+	},
+/turf/open/floor/plasteel,
+/area/quartermaster/storage)
 "aaq" = (
 /obj/structure/lattice/catwalk,
 /turf/open/space,
 /area/solar/port/fore)
+"aar" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/machinery/ai_slipper{
+	uses = 10
+	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
+/mob/living/simple_animal/bot/secbot/pingsky,
+/turf/open/floor/plasteel/dark,
+/area/ai_monitored/turret_protected/aisat_interior)
 "aas" = (
 /obj/machinery/firealarm{
 	dir = 4;
@@ -163,6 +241,20 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
 /area/security/prison)
+"aaB" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 10
+	},
+/obj/effect/turf_decal/tile/blue,
+/obj/effect/turf_decal/tile/blue{
+	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/mob/living/simple_animal/bot/cleanbot/medbay,
+/turf/open/floor/plasteel/white,
+/area/medical/storage)
 "aaC" = (
 /obj/structure/sink/kitchen{
 	desc = "A sink used for washing one's hands and face. It looks rusty and home-made";
@@ -173,6 +265,22 @@
 	icon_state = "platingdmg3"
 	},
 /area/security/prison)
+"aaD" = (
+/obj/effect/turf_decal/tile/blue{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	icon_state = "1-4"
+	},
+/mob/living/simple_animal/pet/cat/Runtime,
+/turf/open/floor/plasteel/cafeteria,
+/area/crew_quarters/heads/cmo)
 "aaE" = (
 /obj/machinery/biogenerator,
 /obj/machinery/light/small{
@@ -189,6 +297,21 @@
 /obj/machinery/vending/boozeomat,
 /turf/closed/wall,
 /area/crew_quarters/bar)
+"aaG" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/mob/living/carbon/monkey,
+/turf/open/floor/plasteel/freezer,
+/area/medical/virology)
+"aaH" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/mob/living/carbon/monkey,
+/turf/open/floor/plasteel/freezer,
+/area/medical/virology)
 "aaL" = (
 /obj/effect/turf_decal/tile/bar,
 /obj/effect/turf_decal/tile/bar{
@@ -57362,20 +57485,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/engine/atmos)
-"iAV" = (
-/obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/obj/machinery/ai_slipper{
-	uses = 10
-	},
-/mob/living/simple_animal/bot/secbot/pingsky,
-/obj/structure/cable/yellow{
-	icon_state = "4-8"
-	},
-/obj/structure/cable/yellow{
-	icon_state = "2-4"
-	},
-/turf/open/floor/plasteel/dark,
-/area/ai_monitored/turret_protected/aisat_interior)
 "iBi" = (
 /obj/machinery/requests_console{
 	department = "Genetics";
@@ -60086,13 +60195,6 @@
 	},
 /turf/open/floor/wood,
 /area/bridge/showroom/corporate)
-"kgR" = (
-/mob/living/carbon/monkey,
-/obj/structure/cable{
-	icon_state = "1-2"
-	},
-/turf/open/floor/plasteel/freezer,
-/area/medical/virology)
 "kgS" = (
 /obj/machinery/airalarm{
 	dir = 4;
@@ -60318,33 +60420,6 @@
 	},
 /turf/open/floor/plasteel/freezer,
 /area/crew_quarters/toilet/restrooms)
-"kkM" = (
-/obj/structure/rack,
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
-/obj/item/storage/box/rubbershot,
-/obj/item/storage/box/rubbershot,
-/obj/item/storage/box/rubbershot,
-/obj/item/storage/box/rubbershot,
-/obj/item/storage/box/rubbershot,
-/obj/item/storage/box/rubbershot,
-/obj/item/gun/ballistic/shotgun/riot{
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/gun/ballistic/shotgun/riot,
-/obj/item/gun/ballistic/shotgun/riot,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
-/turf/open/floor/plasteel/dark,
-/area/ai_monitored/security/armory)
 "klh" = (
 /obj/effect/turf_decal/tile/yellow{
 	dir = 1
@@ -64790,14 +64865,6 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/starboard)
-"mHq" = (
-/obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/mob/living/carbon/monkey,
-/obj/structure/cable{
-	icon_state = "4-8"
-	},
-/turf/open/floor/plasteel/freezer,
-/area/medical/virology)
 "mHy" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
@@ -70441,23 +70508,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/engine/atmos)
-"pXV" = (
-/obj/machinery/navbeacon{
-	codes_txt = "delivery;dir=8";
-	dir = 8;
-	freq = 1400;
-	location = "QM #3"
-	},
-/obj/effect/turf_decal/delivery,
-/mob/living/simple_animal/bot/mulebot{
-	home_destination = "QM #3";
-	suffix = "#3"
-	},
-/obj/structure/cable{
-	icon_state = "1-2"
-	},
-/turf/open/floor/plasteel,
-/area/quartermaster/storage)
 "pYf" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/cable{
@@ -76474,28 +76524,6 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/medical/pharmacy)
-"twL" = (
-/obj/machinery/navbeacon{
-	codes_txt = "delivery;dir=8";
-	dir = 8;
-	freq = 1400;
-	location = "QM #1"
-	},
-/obj/machinery/door/window/northleft,
-/obj/machinery/light{
-	dir = 4
-	},
-/obj/effect/turf_decal/delivery,
-/mob/living/simple_animal/bot/mulebot{
-	beacon_freq = 1400;
-	home_destination = "QM #1";
-	suffix = "#1"
-	},
-/obj/structure/cable{
-	icon_state = "1-2"
-	},
-/turf/open/floor/plasteel,
-/area/quartermaster/storage)
 "txc" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
@@ -79784,20 +79812,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/storage/tcom)
-"vEA" = (
-/obj/machinery/atmospherics/pipe/simple/supply/hidden{
-	dir = 10
-	},
-/obj/effect/turf_decal/tile/blue,
-/obj/effect/turf_decal/tile/blue{
-	dir = 8
-	},
-/mob/living/simple_animal/bot/cleanbot/medbay,
-/obj/structure/cable{
-	icon_state = "1-2"
-	},
-/turf/open/floor/plasteel/white,
-/area/medical/storage)
 "vEB" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
@@ -80460,22 +80474,6 @@
 	},
 /turf/open/floor/plating,
 /area/crew_quarters/dorms)
-"vWV" = (
-/obj/effect/turf_decal/tile/blue{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/blue{
-	dir = 8
-	},
-/mob/living/simple_animal/pet/cat/Runtime,
-/obj/structure/cable{
-	icon_state = "1-2"
-	},
-/obj/structure/cable{
-	icon_state = "1-4"
-	},
-/turf/open/floor/plasteel/cafeteria,
-/area/crew_quarters/heads/cmo)
 "vWZ" = (
 /obj/structure/chair/comfy/black{
 	dir = 4
@@ -101258,7 +101256,7 @@ aaa
 aaa
 aaa
 wTL
-kgR
+aaG
 lHW
 eVv
 eBO
@@ -101516,7 +101514,7 @@ aaa
 aaa
 cBR
 cCM
-mHq
+aaH
 pzB
 cFB
 hnm
@@ -103759,9 +103757,9 @@ gSw
 ayl
 aHi
 rqw
-twL
+aah
 dRI
-pXV
+aap
 oia
 ekB
 aPY
@@ -107405,7 +107403,7 @@ jxt
 wQy
 oIN
 dMD
-vEA
+aaB
 jWT
 vjr
 jDA
@@ -108697,7 +108695,7 @@ gGD
 cfP
 lQs
 wHC
-vWV
+aaD
 mQU
 sBz
 www
@@ -111959,7 +111957,7 @@ aeq
 ank
 kPt
 elG
-kkM
+aab
 tHh
 vEB
 ajw
@@ -139245,7 +139243,7 @@ bip
 blI
 blG
 bnC
-iAV
+aar
 wXj
 tba
 ezD
