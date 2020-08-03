@@ -23,7 +23,7 @@
 /obj/projectile/beam/laser/weak
 	name = "weak laser"
 	icon_state = "laser"
-	damage = 10
+	damage = 12
 
 /obj/projectile/beam/laser/heavylaser
 	name = "heavy laser"
