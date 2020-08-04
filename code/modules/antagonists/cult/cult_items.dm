@@ -88,8 +88,8 @@
 	throw_speed = 1
 	throw_range = 3
 	sharpness = IS_SHARP
-	light_color = "#ff0000"
-	attack_verb = list("cleaved", "slashed", "torn", "hacked", "ripped", "diced", "carved")
+	light_color = COLOR_RED
+	attack_verb = list("cleaved", "slashed", "tore", "lacerated", "hacked", "ripped", "diced", "carved")
 	icon_state = "cultbastard"
 	item_state = "cultbastard"
 	hitsound = 'sound/weapons/bladeslice.ogg'
