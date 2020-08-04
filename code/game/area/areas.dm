@@ -68,8 +68,8 @@
 	var/firedoors_last_closed_on = 0
 	/// Can the Xenobio management console transverse this area by default?
 	var/xenobiology_compatible = FALSE
-	/// typecache to limit the areas that atoms in this area can smooth with, used for shuttles IIRC
-	var/list/canSmoothWithAreas
+	///Boolean to limit the areas (subtypes included) that atoms in this area can smooth with. Used for shuttles.
+	var/area_limited_icon_smoothing = FALSE
 
 	/// Wasp Addition - Color on minimaps, if it's null (which is default) it makes one at random.
 	var/minimap_color
@@ -141,7 +141,6 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 	icon_state = ""
 	layer = AREA_LAYER
 	map_name = name // Save the initial (the name set in the map) name of the area.
-	canSmoothWithAreas = typecacheof(canSmoothWithAreas)
 
 	if(requires_power)
 		luminosity = 0
