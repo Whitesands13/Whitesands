@@ -15,7 +15,7 @@
 			var/turf/turf_source = get_turf(user)
 			for(var/P in SSmobs.dead_players_by_zlevel[turf_source.z])
 				var/mob/M = P
-				if(get_dist(M, turf_source) <= world.view - 1)
+				if((get_dist(M, turf_source) <= world.view - 1) && isdead(M))
 					M.playsound_local(turf_source, 'waspstation/sound/voice/speen.ogg', 50, 1)
 			return
 		playsound(user, 'waspstation/sound/voice/speen.ogg', 50, 1, -1)
