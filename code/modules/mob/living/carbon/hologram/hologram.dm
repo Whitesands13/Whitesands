@@ -224,7 +224,7 @@
 
 /mob/living/simple_animal/hologram/medical
 	job_type = new /datum/job/doctor
-	dex_item = /obj/item/storage/belt/medical/paramedic
+	dex_item = /obj/item/storage/belt/medical/surgery
 
 /mob/living/simple_animal/hologram/bar
 	job_type = new /datum/job/bartender
