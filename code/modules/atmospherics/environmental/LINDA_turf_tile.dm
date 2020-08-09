@@ -32,9 +32,6 @@
 	var/planetary_atmos = FALSE //air will revert to initial_gas_mix over time
 
 	var/list/atmos_overlay_types //gas IDs of current active gas overlays
-	#ifdef TRACK_MAX_SHARE
-	var/max_share = 0
-	#endif
 
 	is_openturf = TRUE
 
