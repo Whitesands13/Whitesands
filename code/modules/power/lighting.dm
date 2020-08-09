@@ -241,6 +241,9 @@
 
 	var/obj/effect/overlay/vis/glowybit		// the light overlay
 
+	var/bulb_vacuum_colour = "#4F82FF"	// colour of the light when air alarm is set to severe
+	var/bulb_vacuum_brightness = 8
+
 /obj/machinery/light/broken
 	status = LIGHT_BROKEN
 	icon_state = "tube-broken"
@@ -334,8 +337,10 @@
 	switch(status)		// set icon_states
 		if(LIGHT_OK)
 			var/area/A = get_area(src)
-			if(emergency_mode || (A && A.fire))
+			if(emergency_mode || (A?.fire))
 				icon_state = "[base_state]_emergency"
+			else if (A?.vacuum)
+				icon_state = "[base_state]_vacuum"
 			else
 				icon_state = "[base_state]"
 		if(LIGHT_EMPTY)
@@ -367,6 +372,9 @@
 		var/area/A = get_area(src)
 		if (A && A.fire)
 			CO = bulb_emergency_colour
+		else if (A?.vacuum)
+			CO = bulb_vacuum_colour
+			BR = bulb_vacuum_brightness
 		else if (nightshift_enabled)
 			BR = nightshift_brightness
 			PO = nightshift_light_power
