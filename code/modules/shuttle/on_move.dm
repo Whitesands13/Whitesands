@@ -105,6 +105,7 @@ All ShuttleMove procs go here
 
 	loc = newT
 
+
 	return TRUE
 
 // Called on atoms after everything has been moved
@@ -185,6 +186,8 @@ All ShuttleMove procs go here
 
 /obj/machinery/door/airlock/afterShuttleMove(turf/oldT, list/movement_force, shuttle_dir, shuttle_preferred_direction, move_dir, rotation)
 	. = ..()
+	update_aac_docked(oldT)
+	update_aac_docked()
 	var/current_area = get_area(src)
 	for(var/obj/machinery/door/airlock/A in orange(1, src))  // does not include src
 		if(get_area(A) != current_area)  // does not include double-wide airlocks unless actually docked
@@ -251,7 +254,7 @@ All ShuttleMove procs go here
 			A.atmosinit()
 			if(A.returnPipenet())
 				A.addMember(src)
-		build_network()
+		SSair.add_to_rebuild_queue(src)
 	else
 		// atmosinit() calls update_icon(), so we don't need to call it
 		update_icon()
@@ -335,8 +338,8 @@ All ShuttleMove procs go here
 /obj/structure/cable/afterShuttleMove(turf/oldT, list/movement_force, shuttle_dir, shuttle_preferred_direction, move_dir, rotation)
 	. = ..()
 /* Smartwire Revert - Do not TG Marge this
-	connect_wire(TRUE)
-	propogate_if_no_network()
+	Connect_cable(TRUE)
+	propagate_if_no_network()
 */
 
 /obj/structure/shuttle/beforeShuttleMove(turf/newT, rotation, move_mode, obj/docking_port/mobile/moving_dock)

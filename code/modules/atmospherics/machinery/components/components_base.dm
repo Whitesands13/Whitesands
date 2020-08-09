@@ -18,8 +18,7 @@
 	..()
 
 	for(var/i in 1 to device_type)
-		var/datum/gas_mixture/A = new
-		A.volume = 200
+		var/datum/gas_mixture/A = new(200)
 		airs[i] = A
 
 /obj/machinery/atmospherics/components/Initialize()
@@ -124,7 +123,7 @@
 		var/times_lost = 0
 		for(var/i in 1 to device_type)
 			var/datum/gas_mixture/air = airs[i]
-			lost += pressures*environment.volume/(air.temperature * R_IDEAL_GAS_EQUATION)
+			lost += pressures*environment.return_volume()/(air.return_temperature() * R_IDEAL_GAS_EQUATION)
 			times_lost++
 		var/shared_loss = lost/times_lost
 
@@ -156,7 +155,7 @@
 		var/datum/pipeline/parent = parents[i]
 		if(!parent)
 			WARNING("Component is missing a pipenet! Rebuilding...")
-			build_network()
+			SSair.add_to_rebuild_queue(src)
 			parent = parents[i]
 		parent.update = 1
 

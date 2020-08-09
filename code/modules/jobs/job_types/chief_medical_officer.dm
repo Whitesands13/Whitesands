@@ -42,7 +42,7 @@
 	alt_uniform = /obj/item/clothing/under/rank/medical/doctor/blue //Wasp Edit - Alt Uniforms
 	shoes = /obj/item/clothing/shoes/sneakers/brown
 	suit = /obj/item/clothing/suit/toggle/labcoat/cmo
-	alt_suit = /obj/item/clothing/suit/apron/surgical
+	alt_suit = /obj/item/clothing/suit/toggle/labcoat/mad // Wasp Edit - Alt-Job Titles
 	dcoat = /obj/item/clothing/suit/hooded/wintercoat/medical //Wasp Edit - Alt Uniforms
 	l_hand = /obj/item/storage/firstaid/medical
 	suit_store = /obj/item/flashlight/pen
@@ -52,13 +52,14 @@
 	satchel = /obj/item/storage/backpack/satchel/med
 	duffelbag = /obj/item/storage/backpack/duffelbag/med
 	courierbag = /obj/item/storage/backpack/messenger/med
+	box = /obj/item/storage/box/survival/medical
 
 	chameleon_extras = list(/obj/item/gun/syringe, /obj/item/stamp/cmo)
 
 /datum/outfit/job/cmo/hardsuit
 	name = "Chief Medical Officer (Hardsuit)"
 
-	mask = /obj/item/clothing/mask/breath
+	mask = /obj/item/clothing/mask/breath/medical
 	suit = /obj/item/clothing/suit/space/hardsuit/medical/cmo
 	suit_store = /obj/item/tank/internals/oxygen
 	r_pocket = /obj/item/flashlight/pen

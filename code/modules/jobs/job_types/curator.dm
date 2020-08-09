@@ -7,15 +7,15 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-	selection_color = "#dddddd"
 	wiki_page = "Curator" //WaspStation Edit - Wikilinks/Warning
+	selection_color = "#bbe291"
 
 	outfit = /datum/outfit/job/curator
 
 	access = list(ACCESS_LIBRARY, ACCESS_CONSTRUCTION, ACCESS_MINING_STATION)
 	minimal_access = list(ACCESS_LIBRARY, ACCESS_CONSTRUCTION, ACCESS_MINING_STATION)
 	paycheck = PAYCHECK_EASY
-	paycheck_department = ACCOUNT_CIV
+	paycheck_department = ACCOUNT_SRV
 
 	display_order = JOB_DISPLAY_ORDER_CURATOR
 
@@ -46,3 +46,16 @@
 		return
 
 	H.grant_all_languages(TRUE, TRUE, TRUE, LANGUAGE_CURATOR)
+
+/datum/outfit/job/curator/journalist
+	name = "Curator (Journalist)"
+	uniform = /obj/item/clothing/under/suit/checkered
+	head = /obj/item/clothing/head/fedora
+	neck = /obj/item/camera
+	l_hand = /obj/item/taperecorder
+	l_pocket = /obj/item/newspaper
+	backpack_contents = list(
+		/obj/item/choice_beacon/hero = 1,
+		/obj/item/soapstone = 1,
+		/obj/item/tape = 1
+	)

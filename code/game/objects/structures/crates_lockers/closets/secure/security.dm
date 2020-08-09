@@ -22,9 +22,6 @@
 	new /obj/item/clothing/shoes/sneakers/brown(src)
 	new /obj/item/clothing/under/rank/command/captain(src)
 	new /obj/item/clothing/under/rank/command/captain/skirt(src)
-	new /obj/item/clothing/under/plasmaman/command(src) //WS edit plasmaman customization begin
-	new /obj/item/clothing/under/plasmaman/command/skirt(src)
-	new /obj/item/clothing/head/helmet/space/plasmaman/command(src) //WS edit plasmaman customization end
 	new /obj/item/clothing/suit/armor/vest/capcarapace(src)
 	new /obj/item/clothing/head/caphat(src)
 	new /obj/item/clothing/under/rank/command/captain/parade(src)
@@ -57,9 +54,6 @@
 	new /obj/item/clothing/head/beret/hop(src) //Waspstation edit - More Berets
 	new /obj/item/clothing/under/rank/command/head_of_personnel(src) //WaspStation Edit - Better Command Uniforms
 	new /obj/item/clothing/under/rank/command/head_of_personnel/skirt(src) //WaspStation Edit - Better Command Uniforms
-	new /obj/item/clothing/under/plasmaman/hop(src) //WS edit begin
-	new /obj/item/clothing/under/plasmaman/hop/skirt(src)
-	new /obj/item/clothing/head/helmet/space/plasmaman/hop(src) //WS edit end
 	new /obj/item/clothing/head/hopcap(src)
 	new /obj/item/cartridge/head_of_personnel(src)
 	new /obj/item/radio/headset/heads/head_of_personnel(src)
@@ -73,7 +67,7 @@
 	new /obj/item/gun/energy/e_gun/mini(src) //WaspStation Edit - Gives HoP a mini egun
 	new /obj/item/clothing/neck/petcollar(src)
 	new /obj/item/pet_carrier(src)
-	new /obj/item/door_remote/civillian(src)
+	new /obj/item/door_remote/civilian(src)
 	new /obj/item/circuitboard/machine/techfab/department/service(src)
 	new /obj/item/storage/photo_album/HoP(src)
 
@@ -99,9 +93,6 @@
 	new /obj/item/clothing/under/rank/security/head_of_security/skirt(src)
 	new /obj/item/clothing/under/rank/security/head_of_security/alt(src)
 	new /obj/item/clothing/under/rank/security/head_of_security/alt/skirt(src)
-	new /obj/item/clothing/under/plasmaman/security/hos(src) //WS edit begin
-	new /obj/item/clothing/under/plasmaman/security/hos/skirt(src)
-	new /obj/item/clothing/head/helmet/space/plasmaman/security/hos(src) //WS edit end
 	new /obj/item/clothing/head/HoS(src)
 	new /obj/item/clothing/glasses/hud/security/sunglasses/eyepatch(src)
 	new /obj/item/clothing/glasses/hud/security/sunglasses/gars/supergars(src)
@@ -215,18 +206,6 @@
 
 /obj/structure/closet/secure_closet/detective/PopulateContents()
 	..()
-	new /obj/item/clothing/under/rank/security/detective(src)
-	new /obj/item/clothing/under/rank/security/detective/skirt(src)
-	new /obj/item/clothing/suit/det_suit(src)
-	new /obj/item/clothing/head/fedora/det_hat(src)
-	new /obj/item/clothing/gloves/color/black(src)
-	new /obj/item/clothing/under/rank/security/detective/grey(src)
-	new /obj/item/clothing/under/rank/security/detective/grey/skirt(src)
-	new /obj/item/clothing/accessory/waistcoat(src)
-	new /obj/item/clothing/suit/det_suit/grey(src)
-	new /obj/item/clothing/suit/det_suit/noir(src)
-	new /obj/item/clothing/head/fedora(src)
-	new /obj/item/clothing/shoes/laceup(src)
 	new /obj/item/storage/box/evidence(src)
 	new /obj/item/radio/headset/headset_sec(src)
 	new /obj/item/detective_scanner(src)
@@ -241,6 +220,7 @@
 	new	/obj/item/clothing/neck/tie/black(src)
 	new /obj/item/clothing/neck/tie/detective(src)
 	new /obj/item/storage/box/rxglasses/spyglasskit(src)
+
 /obj/structure/closet/secure_closet/injection
 	name = "lethal injections"
 	req_access = list(ACCESS_HOS)

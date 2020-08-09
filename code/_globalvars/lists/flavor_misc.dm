@@ -35,6 +35,7 @@ GLOBAL_LIST_EMPTY(wings_list)
 GLOBAL_LIST_EMPTY(wings_open_list)
 GLOBAL_LIST_EMPTY(r_wings_list)
 GLOBAL_LIST_EMPTY(moth_wings_list)
+GLOBAL_LIST_EMPTY(moth_fluff_list)
 GLOBAL_LIST_EMPTY(moth_markings_list)
 GLOBAL_LIST_EMPTY(caps_list)
 GLOBAL_LIST_EMPTY(squid_face_list)
@@ -244,9 +245,9 @@ GLOBAL_LIST_INIT(TAGGERLOCATIONS, list("Disposals",
 	"Experimentor Lab", "Toxins", "Dormitories", "Virology",
 	"Xenobiology", "Law Office","Detective's Office"))
 
-GLOBAL_LIST_INIT(station_prefixes, world.file2list("strings/station_prefixes.txt") + "")
+GLOBAL_LIST_INIT(station_prefixes, world.file2list("strings/station_prefixes.txt"))
 
-GLOBAL_LIST_INIT(station_names, world.file2list("strings/station_names.txt" + ""))
+GLOBAL_LIST_INIT(station_names, world.file2list("strings/station_names.txt"))
 
 GLOBAL_LIST_INIT(station_suffixes, world.file2list("strings/station_suffixes.txt"))
 

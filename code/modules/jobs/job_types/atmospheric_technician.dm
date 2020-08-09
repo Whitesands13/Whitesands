@@ -16,7 +16,8 @@
 
 	access = list(ACCESS_ENGINE, ACCESS_ENGINE_EQUIP, ACCESS_TECH_STORAGE, ACCESS_MAINT_TUNNELS, ACCESS_MECH_ENGINE,
 									ACCESS_EXTERNAL_AIRLOCKS, ACCESS_CONSTRUCTION, ACCESS_ATMOSPHERICS, ACCESS_MINERAL_STOREROOM)
-	minimal_access = list(ACCESS_ATMOSPHERICS, ACCESS_MAINT_TUNNELS, ACCESS_CONSTRUCTION, ACCESS_MECH_ENGINE, ACCESS_MINERAL_STOREROOM)
+	minimal_access = list(ACCESS_ATMOSPHERICS, ACCESS_MAINT_TUNNELS, ACCESS_EXTERNAL_AIRLOCKS, ACCESS_ENGINE,
+									ACCESS_ENGINE_EQUIP, ACCESS_CONSTRUCTION, ACCESS_MECH_ENGINE, ACCESS_MINERAL_STOREROOM)
 	paycheck = PAYCHECK_MEDIUM
 	paycheck_department = ACCOUNT_ENG
 	display_order = JOB_DISPLAY_ORDER_ATMOSPHERIC_TECHNICIAN
@@ -49,3 +50,13 @@
 	suit = /obj/item/clothing/suit/space/hardsuit/engine/atmos
 	suit_store = /obj/item/tank/internals/oxygen
 	internals_slot = ITEM_SLOT_SUITSTORE
+
+/datum/outfit/job/atmos/firefighter
+	name = "Atmospheric Technician (Firefighter)"
+	uniform = /obj/item/clothing/under/rank/engineering/engineer/hazard
+	head = /obj/item/clothing/head/hardhat/red
+	l_hand = /obj/item/extinguisher
+
+/datum/outfit/job/atmos/lifesupportspecialist
+	name = "Atmospheric Technician (Life Support Specialist)"
+	backpack_contents = list(/obj/item/modular_computer/tablet/preset/advanced=1, /obj/item/storage/box/survival=2)

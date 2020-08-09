@@ -141,6 +141,11 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 
 #define isclown(A) (istype(A, /mob/living/simple_animal/hostile/retaliate/clown))
 
+//Waspstation Begin - Custom Simplemobs
+
+#define isborer(A) (istype(A, /mob/living/simple_animal/borer))
+
+//Wasp end
 
 //Misc mobs
 #define isobserver(A) (istype(A, /mob/dead/observer))
@@ -159,6 +164,12 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define isobj(A) istype(A, /obj) //override the byond proc because it returns true on children of /atom/movable that aren't objs
 
 #define isitem(A) (istype(A, /obj/item))
+
+#define isgrenade(A) (istype(A, /obj/item/grenade))
+
+#define islandmine(A) (istype(A, /obj/effect/mine))
+
+#define isammocasing(A) (istype(A, /obj/item/ammo_casing))
 
 #define isidcard(I) (istype(I, /obj/item/card/id))
 

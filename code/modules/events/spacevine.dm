@@ -6,7 +6,11 @@
 	min_players = 10
 
 /datum/round_event/spacevine
-	fakeable = FALSE
+	fakeable = TRUE
+	announceWhen = 1
+
+/datum/round_event/spacevine/announce(fake)
+	priority_announce("Unidentified plant based lifeform detected aboard the station, contact your local botanist.")
 
 /datum/round_event/spacevine/start()
 	var/list/turfs = list() //list of all the empty floor turfs in the hallway areas
@@ -146,8 +150,13 @@
 	quality = NEGATIVE
 
 /datum/spacevine_mutation/aggressive_spread/on_spread(obj/structure/spacevine/holder, turf/target)
-	target.ex_act(severity, null, src) // vine immunity handled at /mob/ex_act
-
+	switch(severity)
+		if(EXPLODE_DEVASTATE)
+			SSexplosions.highturf += target
+		if(EXPLODE_HEAVY)
+			SSexplosions.medturf += target
+		if(EXPLODE_LIGHT)
+			SSexplosions.lowturf += target
 /datum/spacevine_mutation/aggressive_spread/on_buckle(obj/structure/spacevine/holder, mob/living/buckled)
 	buckled.ex_act(severity, null, src)
 
@@ -170,10 +179,7 @@
 	var/turf/open/floor/T = holder.loc
 	if(istype(T))
 		var/datum/gas_mixture/GM = T.air
-		if(!GM.gases[/datum/gas/oxygen])
-			return
-		GM.gases[/datum/gas/oxygen][MOLES] = max(GM.gases[/datum/gas/oxygen][MOLES] - severity * holder.energy, 0)
-		GM.garbage_collect()
+		GM.set_moles(/datum/gas/oxygen, max(GM.get_moles(/datum/gas/oxygen) - severity * holder.energy, 0))
 
 /datum/spacevine_mutation/nitro_eater
 	name = "nitrogen consuming"
@@ -185,10 +191,7 @@
 	var/turf/open/floor/T = holder.loc
 	if(istype(T))
 		var/datum/gas_mixture/GM = T.air
-		if(!GM.gases[/datum/gas/nitrogen])
-			return
-		GM.gases[/datum/gas/nitrogen][MOLES] = max(GM.gases[/datum/gas/nitrogen][MOLES] - severity * holder.energy, 0)
-		GM.garbage_collect()
+		GM.set_moles(/datum/gas/nitrogen, max(GM.get_moles(/datum/gas/nitrogen) - severity * holder.energy, 0))
 
 /datum/spacevine_mutation/carbondioxide_eater
 	name = "CO2 consuming"
@@ -200,10 +203,7 @@
 	var/turf/open/floor/T = holder.loc
 	if(istype(T))
 		var/datum/gas_mixture/GM = T.air
-		if(!GM.gases[/datum/gas/carbon_dioxide])
-			return
-		GM.gases[/datum/gas/carbon_dioxide][MOLES] = max(GM.gases[/datum/gas/carbon_dioxide][MOLES] - severity * holder.energy, 0)
-		GM.garbage_collect()
+		GM.set_moles(/datum/gas/carbon_dioxide, max(GM.get_moles(/datum/gas/carbon_dioxide) - severity * holder.energy, 0))
 
 /datum/spacevine_mutation/plasma_eater
 	name = "toxins consuming"
@@ -215,10 +215,7 @@
 	var/turf/open/floor/T = holder.loc
 	if(istype(T))
 		var/datum/gas_mixture/GM = T.air
-		if(!GM.gases[/datum/gas/plasma])
-			return
-		GM.gases[/datum/gas/plasma][MOLES] = max(GM.gases[/datum/gas/plasma][MOLES] - severity * holder.energy, 0)
-		GM.garbage_collect()
+		GM.set_moles(/datum/gas/plasma, max(GM.get_moles(/datum/gas/plasma) - severity * holder.energy, 0))
 
 /datum/spacevine_mutation/thorns
 	name = "thorny"

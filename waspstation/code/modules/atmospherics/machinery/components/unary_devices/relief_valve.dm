@@ -49,10 +49,10 @@
 	else if(!opened && our_pressure >= open_pressure)
 		opened = TRUE
 		update_icon_nopipes()
-	if(opened && air_contents.temperature > 0)
+	if(opened && air_contents.return_temperature() > 0)
 		var/datum/gas_mixture/environment = loc.return_air()
 		var/pressure_delta = our_pressure - environment.return_pressure()
-		var/transfer_moles = pressure_delta*200/(air_contents.temperature * R_IDEAL_GAS_EQUATION)
+		var/transfer_moles = pressure_delta*200/(air_contents.return_temperature() * R_IDEAL_GAS_EQUATION)
 		if(transfer_moles > 0)
 			var/datum/gas_mixture/removed = air_contents.remove(transfer_moles)
 
@@ -64,7 +64,7 @@
 /obj/machinery/atmospherics/components/unary/relief_valve/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
 	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
-		ui = new(user, src, ui_key, "atmos_relief", name, 335, 115, master_ui, state)
+		ui = new(user, src, ui_key, "AtmosRelief", name, 335, 115, master_ui, state)
 		ui.open()
 
 /obj/machinery/atmospherics/components/unary/relief_valve/ui_data()

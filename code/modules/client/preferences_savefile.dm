@@ -5,7 +5,7 @@
 //	You do not need to raise this if you are adding new values that have sane defaults.
 //	Only raise this value when changing the meaning/format/name/layout of an existing value
 //	where you would want the updater procs below to run
-#define SAVEFILE_VERSION_MAX	33
+#define SAVEFILE_VERSION_MAX	34
 
 /*
 SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Carn
@@ -55,6 +55,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	if(current_version < 33)
 		toggles |= SOUND_ENDOFROUND
+
+	if(current_version < 34)
+		auto_fit_viewport = TRUE
 
 /datum/preferences/proc/update_character(current_version, savefile/S)
 	if(current_version < 19)
@@ -165,6 +168,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["lastchangelog"]		>> lastchangelog
 	S["UI_style"]			>> UI_style
 	S["hotkeys"]			>> hotkeys
+	S["chat_on_map"]		>> chat_on_map
+	S["max_chat_length"]	>> max_chat_length
+	S["see_chat_non_mob"] 	>> see_chat_non_mob
 	S["tgui_fancy"]			>> tgui_fancy
 	S["tgui_lock"]			>> tgui_lock
 	S["buttons_locked"]		>> buttons_locked
@@ -213,6 +219,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	lastchangelog	= sanitize_text(lastchangelog, initial(lastchangelog))
 	UI_style		= sanitize_inlist(UI_style, GLOB.available_ui_styles, GLOB.available_ui_styles[1])
 	hotkeys			= sanitize_integer(hotkeys, 0, 1, initial(hotkeys))
+	chat_on_map		= sanitize_integer(chat_on_map, 0, 1, initial(chat_on_map))
+	max_chat_length = sanitize_integer(max_chat_length, 1, CHAT_MESSAGE_MAX_LENGTH, initial(max_chat_length))
+	see_chat_non_mob	= sanitize_integer(see_chat_non_mob, 0, 1, initial(see_chat_non_mob))
 	tgui_fancy		= sanitize_integer(tgui_fancy, 0, 1, initial(tgui_fancy))
 	tgui_lock		= sanitize_integer(tgui_lock, 0, 1, initial(tgui_lock))
 	buttons_locked	= sanitize_integer(buttons_locked, 0, 1, initial(buttons_locked))
@@ -233,7 +242,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	crew_objectives		= sanitize_integer(crew_objectives, 0, 1, initial(crew_objectives))
 	pda_style		= sanitize_inlist(pda_style, GLOB.pda_styles, initial(pda_style))
 	pda_color		= sanitize_hexcolor(pda_color, 6, 1, initial(pda_color))
-	key_bindings 	= sanitize_islist(key_bindings, list())
+	key_bindings 	= sanitize_keybindings(key_bindings)
 
 
 	if(!purchased_gear)
@@ -259,6 +268,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["lastchangelog"], lastchangelog)
 	WRITE_FILE(S["UI_style"], UI_style)
 	WRITE_FILE(S["hotkeys"], hotkeys)
+	WRITE_FILE(S["chat_on_map"], chat_on_map)
+	WRITE_FILE(S["max_chat_length"], max_chat_length)
+	WRITE_FILE(S["see_chat_non_mob"], see_chat_non_mob)
 	WRITE_FILE(S["tgui_fancy"], tgui_fancy)
 	WRITE_FILE(S["tgui_lock"], tgui_lock)
 	WRITE_FILE(S["buttons_locked"], buttons_locked)
@@ -357,6 +369,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["feature_lizard_body_markings"]	>> features["body_markings"]
 	S["feature_lizard_legs"]			>> features["legs"]
 	S["feature_moth_wings"]				>> features["moth_wings"]
+	S["feature_moth_fluff"]				>> features["moth_fluff"]
 	S["feature_moth_markings"]			>> features["moth_markings"]
 	S["feature_spider_legs"]			>> features["spider_legs"]
 	S["feature_spider_spinneret"]		>> features["spider_spinneret"]
@@ -365,6 +378,14 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["feature_ipc_screen"]			>> features["ipc_screen"]
 	S["feature_ipc_antenna"]				>> features["ipc_antenna"]
 	S["feature_ipc_chassis"]				>> features["ipc_chassis"]
+	S["alt_titles_preferences"]			>> alt_titles_preferences
+	alt_titles_preferences = SANITIZE_LIST(alt_titles_preferences)
+	if(SSjob)
+		for(var/datum/job/job in sortList(SSjob.occupations, /proc/cmp_job_display_asc))
+			if(alt_titles_preferences[job.title])
+				if(!(alt_titles_preferences[job.title] in job.alt_titles))
+					alt_titles_preferences.Remove(job.title)
+
 	if(!CONFIG_GET(flag/join_with_mutant_humans))
 		features["tail_human"] = "none"
 		features["ears"] = "none"
@@ -455,6 +476,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	features["body_markings"] 	= sanitize_inlist(features["body_markings"], GLOB.body_markings_list)
 	features["feature_lizard_legs"]	= sanitize_inlist(features["legs"], GLOB.legs_list, "Normal Legs")
 	features["moth_wings"] 	= sanitize_inlist(features["moth_wings"], GLOB.moth_wings_list, "Plain")
+	features["moth_fluff"] 	= sanitize_inlist(features["moth_fluff"], GLOB.moth_fluff_list, "Plain")
 	features["spider_legs"] = sanitize_inlist(features["spider_legs"], GLOB.spider_legs_list, "Plain")
 	features["spider_spinneret"] = sanitize_inlist(features["spider_spinneret"], GLOB.spider_spinneret_list, "Plain")
 	features["spider_mandibles"]	= sanitize_inlist(features["spider_mandibles"], GLOB.spider_mandibles_list, "Plain")
@@ -518,6 +540,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["feature_lizard_body_markings"]	, features["body_markings"])
 	WRITE_FILE(S["feature_lizard_legs"]			, features["legs"])
 	WRITE_FILE(S["feature_moth_wings"]			, features["moth_wings"])
+	WRITE_FILE(S["feature_moth_fluff"]			, features["moth_fluff"])
 	WRITE_FILE(S["feature_moth_markings"]		, features["moth_markings"])
 	WRITE_FILE(S["feature_spider_legs"]			, features["spider_legs"])
 	WRITE_FILE(S["feature_spider_spinneret"]	, features["spider_spinneret"])
@@ -526,6 +549,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["feature_ipc_screen"]			, features["ipc_screen"])
 	WRITE_FILE(S["feature_ipc_antenna"]			, features["ipc_antenna"])
 	WRITE_FILE(S["feature_ipc_chassis"]			, features["ipc_chassis"])
+
+	//Alternate job titles
+	WRITE_FILE(S["alt_titles_preferences"]		,alt_titles_preferences)
 
 	//Flavor text
 	WRITE_FILE(S["feature_flavor_text"], features["flavor_text"])
@@ -548,6 +574,14 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	return TRUE
 
+
+/proc/sanitize_keybindings(value)
+	var/list/base_bindings = sanitize_islist(value,list())
+	for(var/key in base_bindings)
+		base_bindings[key] = base_bindings[key] & GLOB.keybindings_by_name
+		if(!length(base_bindings[key]))
+			base_bindings -= key
+	return base_bindings
 
 #undef SAVEFILE_VERSION_MAX
 #undef SAVEFILE_VERSION_MIN

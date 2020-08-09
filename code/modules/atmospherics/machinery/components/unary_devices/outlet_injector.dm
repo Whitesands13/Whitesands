@@ -26,6 +26,20 @@
 	ui_x = 310
 	ui_y = 115
 
+/obj/machinery/atmospherics/components/unary/outlet_injector/CtrlClick(mob/user)
+	if(can_interact(user))
+		on = !on
+		investigate_log("was turned [on ? "on" : "off"] by [key_name(user)]", INVESTIGATE_ATMOS)
+		update_icon()
+	return ..()
+
+/obj/machinery/atmospherics/components/unary/outlet_injector/AltClick(mob/user)
+	if(can_interact(user))
+		volume_rate = MAX_TRANSFER_RATE
+		investigate_log("was set to [volume_rate] L/s by [key_name(user)]", INVESTIGATE_ATMOS)
+		update_icon()
+	return ..()
+
 /obj/machinery/atmospherics/components/unary/outlet_injector/Destroy()
 	SSradio.remove_object(src,frequency)
 	return ..()
@@ -51,8 +65,8 @@
 
 	var/datum/gas_mixture/air_contents = airs[1]
 
-	if(air_contents.temperature > 0)
-		var/transfer_moles = (air_contents.return_pressure())*volume_rate/(air_contents.temperature * R_IDEAL_GAS_EQUATION)
+	if(air_contents.return_temperature() > 0)
+		var/transfer_moles = (air_contents.return_pressure())*volume_rate/(air_contents.return_temperature() * R_IDEAL_GAS_EQUATION)
 
 		var/datum/gas_mixture/removed = air_contents.remove(transfer_moles)
 
@@ -70,8 +84,8 @@
 
 	injecting = 1
 
-	if(air_contents.temperature > 0)
-		var/transfer_moles = (air_contents.return_pressure())*volume_rate/(air_contents.temperature * R_IDEAL_GAS_EQUATION)
+	if(air_contents.return_temperature() > 0)
+		var/transfer_moles = (air_contents.return_pressure())*volume_rate/(air_contents.return_temperature() * R_IDEAL_GAS_EQUATION)
 		var/datum/gas_mixture/removed = air_contents.remove(transfer_moles)
 		loc.assume_air(removed)
 		update_parents()
@@ -116,13 +130,13 @@
 		on = !on
 
 	if("inject" in signal.data)
-		spawn inject()
+		INVOKE_ASYNC(src, .proc/inject)
 		return
 
 	if("set_volume_rate" in signal.data)
 		var/number = text2num(signal.data["set_volume_rate"])
 		var/datum/gas_mixture/air_contents = airs[1]
-		volume_rate = clamp(number, 0, air_contents.volume)
+		volume_rate = clamp(number, 0, air_contents.return_volume())
 
 	addtimer(CALLBACK(src, .proc/broadcast_status), 2)
 
@@ -134,7 +148,7 @@
 																		datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
 	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
-		ui = new(user, src, ui_key, "atmos_pump", name, ui_x, ui_y, master_ui, state)
+		ui = new(user, src, ui_key, "AtmosPump", name, ui_x, ui_y, master_ui, state)
 		ui.open()
 
 /obj/machinery/atmospherics/components/unary/outlet_injector/ui_data()

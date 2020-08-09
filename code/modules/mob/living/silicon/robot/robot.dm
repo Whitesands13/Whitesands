@@ -191,6 +191,12 @@
 	cell = null
 	return ..()
 
+/mob/living/silicon/robot/Topic(href, href_list)
+	. = ..()
+	//Show alerts window if user clicked on "Show alerts" in chat
+	if (href_list["showalerts"])
+		robot_alerts()
+
 /mob/living/silicon/robot/proc/pick_module()
 	if(module.type != /obj/item/robot_module)
 		return
@@ -225,9 +231,11 @@
 	var/changed_name = ""
 	if(custom_name)
 		changed_name = custom_name
-	if(changed_name == "" && C && C.prefs.custom_names["cyborg"] != DEFAULT_CYBORG_NAME)
-		if(apply_pref_name("cyborg", C))
-			return //built in camera handled in proc
+	if(SSticker.anonymousnames) //only robotic renames will allow for anything other than the anonymous one
+		changed_name = anonymous_ai_name(is_ai = FALSE)
+	if(!changed_name && C && C.prefs.custom_names["cyborg"] != DEFAULT_CYBORG_NAME)
+		apply_pref_name("cyborg", C)
+		return //built in camera handled in proc
 	if(!changed_name)
 		changed_name = get_standard_name()
 
@@ -413,34 +421,7 @@
 /mob/living/silicon/robot/regenerate_icons()
 	return update_icons()
 
-/mob/living/silicon/robot/update_icons()
-	cut_overlays()
-	icon_state = module.cyborg_base_icon
-	//Waspstation changes - Thanks Cit - Allows modules to use different icon files
-	icon = (module.cyborg_icon_override ? module.cyborg_icon_override : initial(icon))
-	//End Wasp Changes
-	if(stat != DEAD && !(IsUnconscious() || IsStun() || IsParalyzed() || low_power_mode)) //Not dead, not stunned.
-		if(!eye_lights)
-			eye_lights = new()
-		if(lamp_intensity > 2)
-			eye_lights.icon_state = "[module.special_light_key ? "[module.special_light_key]":"[module.cyborg_base_icon]"]_l"
-		else
-			eye_lights.icon_state = "[module.special_light_key ? "[module.special_light_key]":"[module.cyborg_base_icon]"]_e"
-		eye_lights.icon = icon
-		add_overlay(eye_lights)
-
-	if(opened)
-		if(wiresexposed)
-			add_overlay("ov-opencover +w")
-		else if(cell)
-			add_overlay("ov-opencover +c")
-		else
-			add_overlay("ov-opencover -c")
-	if(hat)
-		var/mutable_appearance/head_overlay = hat.build_worn_icon(default_layer = 20, default_icon_file = 'icons/mob/clothing/head.dmi')
-		head_overlay.pixel_y += hat_offset
-		add_overlay(head_overlay)
-	update_fire()
+// /mob/living/silicon/robot/update_icons() <--- Wasp - Moved to modular for borg icons
 
 /mob/living/silicon/robot/proc/self_destruct()
 	if(emagged)
@@ -915,7 +896,7 @@
   * * AI - AI unit that initiated the deployment into the AI shell
   */
 /mob/living/silicon/robot/proc/deploy_init(mob/living/silicon/ai/AI)
-	real_name = "[AI.real_name] Shell-[ident]"
+	real_name = "[AI.real_name] [designation] Shell-[ident]"
 	name = real_name
 	if(!QDELETED(builtInCamera))
 		builtInCamera.c_tag = real_name	//update the camera name too
@@ -1032,7 +1013,7 @@
 
 
 /mob/living/silicon/robot/proc/TryConnectToAI()
-	connected_ai = select_active_ai_with_fewest_borgs()
+	connected_ai = select_active_ai_with_fewest_borgs(z)
 	if(connected_ai)
 		connected_ai.connected_robots += src
 		lawsync()

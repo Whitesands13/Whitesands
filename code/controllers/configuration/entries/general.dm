@@ -8,6 +8,10 @@
 /datum/config_entry/flag/auto_deadmin_players
 	protection = CONFIG_ENTRY_LOCKED
 
+/datum/config_entry/number/auto_deadmin_timegate
+	config_entry_value = null
+	protection = CONFIG_ENTRY_LOCKED
+
 /datum/config_entry/flag/auto_deadmin_antagonists
 	protection = CONFIG_ENTRY_LOCKED
 
@@ -39,6 +43,11 @@
 
 /datum/config_entry/flag/hub	// if the game appears on the hub or not
 
+/datum/config_entry/number/max_hub_pop //At what pop to take hub off the server
+	config_entry_value = 0 //0 means disabled
+	integer = TRUE
+	min_val = 0
+
 /datum/config_entry/flag/log_ooc	// log OOC channel
 
 /datum/config_entry/flag/log_access	// log login/logout
@@ -67,6 +76,8 @@
 /datum/config_entry/flag/log_attack	// log attack messages
 
 /datum/config_entry/flag/log_emote	// log emotes
+
+/datum/config_entry/flag/log_econ	// log economy actions
 
 /datum/config_entry/flag/log_adminchat	// log admin chat messages
 	protection = CONFIG_ENTRY_LOCKED
@@ -234,6 +245,8 @@
 
 /datum/config_entry/string/discordurl
 	config_entry_value = "https://discord.gg/husVWe8"
+
+/datum/config_entry/string/centcom_ban_db	// URL for the CentCom Galactic Ban DB API
 
 /datum/config_entry/string/roundstatsurl
 
@@ -521,7 +534,7 @@
 
 /datum/config_entry/string/discord_roleid
 
-//Begin Wasp Edit 
+//Begin Wasp Edit
 /datum/config_entry/flag/minimaps_enabled
 	config_entry_value = TRUE
 //End Wasp Edit

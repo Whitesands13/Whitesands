@@ -7,9 +7,9 @@
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the head of personnel"
-	selection_color = "#dddddd"
 	special_notice = "You are not a security officer. However, you represent the law and can defend those who are mishandled by security in court." //WaspStation Edit - Wikilinks/Warning
 	wiki_page = "Lawyer" //WaspStation Edit - Wikilinks/Warning
+	selection_color = "#bbe291"
 	var/lawyers = 0 //Counts lawyer amount
 
 	outfit = /datum/outfit/job/lawyer
@@ -17,7 +17,7 @@
 	access = list(ACCESS_LAWYER, ACCESS_COURT, ACCESS_SEC_DOORS)
 	minimal_access = list(ACCESS_LAWYER, ACCESS_COURT, ACCESS_SEC_DOORS)
 	paycheck = PAYCHECK_EASY
-	paycheck_department = ACCOUNT_CIV
+	paycheck_department = ACCOUNT_SRV
 	mind_traits = list(TRAIT_LAW_ENFORCEMENT_METABOLISM)
 
 	display_order = JOB_DISPLAY_ORDER_LAWYER
@@ -49,3 +49,11 @@
 	if(J.lawyers>1)
 		uniform = /obj/item/clothing/under/rank/civilian/lawyer/purpsuit
 		suit = /obj/item/clothing/suit/toggle/lawyer/purple
+
+
+/datum/outfit/job/lawyer/corporaterepresentative
+	uniform = /obj/item/clothing/under/suit/black
+	suit = /obj/item/clothing/suit/toggle/lawyer/black
+	neck = /obj/item/clothing/neck/tie/blue
+	l_hand = /obj/item/clipboard
+	r_pocket = /obj/item/pen/fountain

@@ -68,7 +68,7 @@
 	var/can_receive = TRUE
 	var/obj/item/card/id/access_card = null
 	var/chassis = "repairbot"
-	var/list/possible_chassis = list("cat" = TRUE, "mouse" = TRUE, "monkey" = TRUE, "corgi" = FALSE, "fox" = FALSE, "repairbot" = TRUE, "rabbit" = TRUE, "bat" = FALSE, "butterfly" = FALSE, "hawk" = FALSE, "lizard" = FALSE, "duffel" = TRUE)		//assoc value is whether it can be picked up.
+	var/list/possible_chassis = list("cat" = TRUE, "mouse" = TRUE, "monkey" = TRUE, "corgi" = FALSE, "fox" = FALSE, "repairbot" = TRUE, "rabbit" = TRUE, "bat" = FALSE, "butterfly" = FALSE, "hawk" = FALSE, "lizard" = FALSE, "duffel" = TRUE, "snake" = FALSE)		//assoc value is whether it can be picked up.
 
 	var/emitterhealth = 20
 	var/emittermaxhealth = 20
@@ -156,14 +156,15 @@
 	return TRUE
 
 /mob/living/silicon/pai/Login()
-	..()
+	. = ..()
+	if(!. || !client)
+		return FALSE
 	usr << browse_rsc('html/paigrid.png')			// Go ahead and cache the interface resources as early as possible
-	if(client)
-		client.perspective = EYE_PERSPECTIVE
-		if(holoform)
-			client.eye = src
-		else
-			client.eye = card
+	client.perspective = EYE_PERSPECTIVE
+	if(holoform)
+		client.eye = src
+	else
+		client.eye = card
 
 /mob/living/silicon/pai/Stat()
 	..()

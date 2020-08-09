@@ -444,7 +444,13 @@ SUBSYSTEM_DEF(job)
 	if(living_mob.mind)
 		living_mob.mind.assigned_role = rank
 
-	to_chat(M, "<b>You are the [rank].</b>")
+	//Wasp begin - Alt job titles
+	var/display_rank = rank
+	if(M.client && M.client.prefs && M.client.prefs.alt_titles_preferences[rank])
+		display_rank = M.client.prefs.alt_titles_preferences[rank]
+	//Wasp end
+
+	to_chat(M, "<b>You are the [display_rank].</b>")
 	if(job)
 		var/new_mob = job.equip(living_mob, null, null, joined_late , null, M.client)//silicons override this proc to return a mob
 		if(ismob(new_mob))
@@ -462,7 +468,7 @@ SUBSYSTEM_DEF(job)
 			else
 				handle_auto_deadmin_roles(M.client, rank)
 
-		to_chat(M, "<b>As the [rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>")
+		to_chat(M, "<b>As the [display_rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>")
 		job.radio_help_message(M)
 		if(job.req_admin_notify)
 			to_chat(M, "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>")
@@ -471,7 +477,7 @@ SUBSYSTEM_DEF(job)
 
 		//WaspStation Begin - Wikilinks and Special notice
 		if(job.special_notice)
-			to_chat(M, "<span class='userdanger'>[job.special_notice]</span>")
+			to_chat(M, "<span class='danger'>[job.special_notice]</span>")
 		if(job.wiki_page)
 			to_chat(M, "<span class='notice'><a href=[CONFIG_GET(string/wikiurl)]/[job.wiki_page]>Wiki Page</a></span>")
 		//WaspStation End
@@ -491,13 +497,20 @@ SUBSYSTEM_DEF(job)
 	if(!C?.holder)
 		return TRUE
 	var/datum/job/job = GetJob(rank)
+
+	var/timegate_expired = FALSE
+	// allow only forcing deadminning in the first X seconds of the round if auto_deadmin_timegate is set in config
+	var/timegate = CONFIG_GET(number/auto_deadmin_timegate)
+	if(timegate && (world.time - SSticker.round_start_time > timegate))
+		timegate_expired = TRUE
+
 	if(!job)
 		return
-	if((job.auto_deadmin_role_flags & DEADMIN_POSITION_HEAD) && (CONFIG_GET(flag/auto_deadmin_heads) || (C.prefs?.toggles & DEADMIN_POSITION_HEAD)))
+	if((job.auto_deadmin_role_flags & DEADMIN_POSITION_HEAD) && ((CONFIG_GET(flag/auto_deadmin_heads) && !timegate_expired) || (C.prefs?.toggles & DEADMIN_POSITION_HEAD)))
 		return C.holder.auto_deadmin()
-	else if((job.auto_deadmin_role_flags & DEADMIN_POSITION_SECURITY) && (CONFIG_GET(flag/auto_deadmin_security) || (C.prefs?.toggles & DEADMIN_POSITION_SECURITY)))
+	else if((job.auto_deadmin_role_flags & DEADMIN_POSITION_SECURITY) && ((CONFIG_GET(flag/auto_deadmin_security) && !timegate_expired) || (C.prefs?.toggles & DEADMIN_POSITION_SECURITY)))
 		return C.holder.auto_deadmin()
-	else if((job.auto_deadmin_role_flags & DEADMIN_POSITION_SILICON) && (CONFIG_GET(flag/auto_deadmin_silicons) || (C.prefs?.toggles & DEADMIN_POSITION_SILICON))) //in the event there's ever psuedo-silicon roles added, ie synths.
+	else if((job.auto_deadmin_role_flags & DEADMIN_POSITION_SILICON) && ((CONFIG_GET(flag/auto_deadmin_silicons) && !timegate_expired) || (C.prefs?.toggles & DEADMIN_POSITION_SILICON))) //in the event there's ever psuedo-silicon roles added, ie synths.
 		return C.holder.auto_deadmin()
 
 /datum/controller/subsystem/job/proc/setup_officer_positions()
