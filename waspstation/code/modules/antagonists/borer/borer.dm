@@ -487,7 +487,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 /mob/living/simple_animal/borer/verb/hide()
 	set category = "Borer"
 	set name = "Hide"
-	set desc = "Become invisible to the common eye."
+	set desc = "Allows borers to hide beneath tables or certain items. Toggled on or off."
 
 	if(victim)
 		to_chat(src, "<span class='warning'>You cannot do this while you're inside a host.</span>")
@@ -1018,7 +1018,7 @@ GLOBAL_VAR_INIT(total_borer_hosts_needed, 3)
 
 /datum/action/innate/borer/toggle_hide
 	name = "Toggle Hide"
-	desc = "Become invisible to the common eye. Toggled on or off."
+	desc = "Allows borers to hide beneath tables or certain items. Toggled on or off."
 	button_icon_state = "borer_hiding_false"
 
 /datum/action/innate/borer/toggle_hide/Activate()
