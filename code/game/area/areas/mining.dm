@@ -5,6 +5,7 @@
 	has_gravity = STANDARD_GRAVITY
 	lighting_colour_tube = "#ffe8d2"
 	lighting_colour_bulb = "#ffdcb7"
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | FLORA_ALLOWED
 
 /area/mine/explored
 	name = "Mine"
@@ -18,6 +19,7 @@
 	outdoors = TRUE
 	flags_1 = NONE
 	ambientsounds = MINING
+	area_flags = VALID_TERRITORY | UNIQUE_AREA
 
 /area/mine/unexplored
 	name = "Mine"
@@ -31,6 +33,7 @@
 	outdoors = TRUE
 	flags_1 = NONE
 	ambientsounds = MINING
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | FLORA_ALLOWED | TUNNELS_ALLOWED
 
 /area/mine/lobby
 	name = "Mining Station"
@@ -84,7 +87,7 @@
 	icon_state = "mining"
 	has_gravity = STANDARD_GRAVITY
 	flags_1 = NONE
-	blob_allowed = FALSE
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | FLORA_ALLOWED
 
 /area/lavaland/surface
 	name = "Lavaland"
@@ -118,6 +121,8 @@
 
 /area/lavaland/surface/outdoors/unexplored/danger //megafauna will also spawn here
 	icon_state = "danger"
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | TUNNELS_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED | MEGAFAUNA_SPAWN_ALLOWED
 
 /area/lavaland/surface/outdoors/explored
 	name = "Lavaland Labor Camp"
+	area_flags = VALID_TERRITORY | UNIQUE_AREA
