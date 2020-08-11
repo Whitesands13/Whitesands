@@ -197,6 +197,8 @@
 #define COMSIG_MOVABLE_DISPOSING "movable_disposing"
 ///called when the movable sucessfully has it's anchored var changed, from base atom/movable/set_anchored(): (value)
 #define COMSIG_MOVABLE_SET_ANCHORED "movable_set_anchored"
+///from base of atom/movable/setGrabState(): (newstate)
+#define COMSIG_MOVABLE_SET_GRAB_STATE "living_set_grab_state"
 
 // /mob signals
 #define COMSIG_MOB_LOGIN "mob_login"							//from base of /mob/Login(): ()
@@ -232,27 +234,46 @@
 	#define SPEECH_LANGUAGE 5
 	#define SPEECH_IGNORE_SPAM 6
 	#define SPEECH_FORCED 7 */
-#define COMSIG_MOB_DEADSAY "mob_deadsay" // from /mob/say_dead(): (mob/speaker, message)
-	#define MOB_DEADSAY_SIGNAL_INTERCEPT 1
-#define COMSIG_MOB_EMOTE "mob_emote" // from /mob/living/emote(): ()
-#define COMSIG_MOB_SWAP_HANDS "mob_swap_hands"					//from base of mob/swap_hand(): (obj/item)
-	#define COMPONENT_BLOCK_SWAP 1
 
-// /mob/living signals
-#define COMSIG_LIVING_RESIST "living_resist"					//from base of mob/living/resist() (/mob/living)
-#define COMSIG_LIVING_LOOK_UP "living_look_up"					//from base of mob/living/look_up() (/mob/living)
-#define COMSIG_LIVING_IGNITED "living_ignite"					//from base of mob/living/IgniteMob() (/mob/living)
-#define COMSIG_LIVING_EXTINGUISHED "living_extinguished"		//from base of mob/living/ExtinguishMob() (/mob/living)
-#define COMSIG_LIVING_ELECTROCUTE_ACT "living_electrocute_act"		//from base of mob/living/electrocute_act(): (shock_damage, source, siemens_coeff, flags)
-#define COMSIG_LIVING_SHOCK_PREVENTED "living_shock_prevented"  //sent when items with siemen coeff. of 0 block a shock: (power_source, source, siemens_coeff, dist_check)
-#define COMSIG_LIVING_MINOR_SHOCK "living_minor_shock"			//sent by stuff like stunbatons and tasers: ()
-#define COMSIG_LIVING_REVIVE "living_revive"					//from base of mob/living/revive() (full_heal, admin_revive)
-#define COMSIG_LIVING_REGENERATE_LIMBS "living_regen_limbs"		//from base of /mob/living/regenerate_limbs(): (noheal, excluded_limbs)
-#define COMSIG_LIVING_ATTACH_LIMB "living_attach_limb"			//from base of /obj/item/bodypart/proc/attach_limb(): (new_limb, special) allows you to fail limb attachment
+///from /mob/say_dead(): (mob/speaker, message)
+#define COMSIG_MOB_DEADSAY "mob_deadsay"
+	#define MOB_DEADSAY_SIGNAL_INTERCEPT (1<<0)
+///from /mob/living/emote(): ()
+#define COMSIG_MOB_EMOTE "mob_emote"
+///from base of mob/swap_hand(): (obj/item)
+#define COMSIG_MOB_SWAP_HANDS "mob_swap_hands"
+	#define COMPONENT_BLOCK_SWAP (1<<0)
+
+///from base of mob/living/resist() (/mob/living)
+#define COMSIG_LIVING_RESIST "living_resist"
+///from base of mob/living/look_up() (/mob/living)
+#define COMSIG_LIVING_LOOK_UP "living_look_up"
+///from base of mob/living/IgniteMob() (/mob/living)
+#define COMSIG_LIVING_IGNITED "living_ignite"
+///from base of mob/living/ExtinguishMob() (/mob/living)
+#define COMSIG_LIVING_EXTINGUISHED "living_extinguished"
+///from base of mob/living/electrocute_act(): (shock_damage, source, siemens_coeff, flags)
+#define COMSIG_LIVING_ELECTROCUTE_ACT "living_electrocute_act"
+///sent when items with siemen coeff. of 0 block a shock: (power_source, source, siemens_coeff, dist_check)
+#define COMSIG_LIVING_SHOCK_PREVENTED "living_shock_prevented"
+///sent by stuff like stunbatons and tasers: ()
+#define COMSIG_LIVING_MINOR_SHOCK "living_minor_shock"
+///from base of mob/living/revive() (full_heal, admin_revive)
+#define COMSIG_LIVING_REVIVE "living_revive"
+///from base of /mob/living/regenerate_limbs(): (noheal, excluded_limbs)
+#define COMSIG_LIVING_REGENERATE_LIMBS "living_regen_limbs"
+///from base of /obj/item/bodypart/proc/attach_limb(): (new_limb, special) allows you to fail limb attachment
+#define COMSIG_LIVING_ATTACH_LIMB "living_attach_limb"
 	#define COMPONENT_NO_ATTACH 1
-#define COMSIG_PROCESS_BORGCHARGER_OCCUPANT "living_charge"		//sent from borg recharge stations: (amount, repairs)
-#define COMSIG_MOB_CLIENT_LOGIN "comsig_mob_client_login"		//sent when a mob/login() finishes: (client)
-#define COMSIG_BORG_SAFE_DECONSTRUCT "borg_safe_decon"			//sent from borg mobs to itself, for tools to catch an upcoming destroy() due to safe decon (rather than detonation)
+///from base of mob/living/set_buckled(): (new_buckled)
+#define COMSIG_LIVING_SET_BUCKLED "living_set_buckled"
+
+///sent from borg recharge stations: (amount, repairs)
+#define COMSIG_PROCESS_BORGCHARGER_OCCUPANT "living_charge"
+///sent when a mob/login() finishes: (client)
+#define COMSIG_MOB_CLIENT_LOGIN "comsig_mob_client_login"
+///sent from borg mobs to itself, for tools to catch an upcoming destroy() due to safe decon (rather than detonation)
+#define COMSIG_BORG_SAFE_DECONSTRUCT "borg_safe_decon"
 
 //ALL OF THESE DO NOT TAKE INTO ACCOUNT WHETHER AMOUNT IS 0 OR LOWER AND ARE SENT REGARDLESS!
 #define COMSIG_LIVING_STATUS_STUN "living_stun"					//from base of mob/living/Stun() (amount, update, ignore)
