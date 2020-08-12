@@ -1035,13 +1035,16 @@
 
 /datum/reagent/medicine/bicaridinep
 	name = "Bicaridine Plus"
-	description = "Restores bruising. Overdose causes it instead. More effective than standardized Bicaridine."
+	description = "Restores bruising and slowly stems bleeding. Overdose causes it instead. More effective than standardized Bicaridine."
 	reagent_state = LIQUID
 	color = "#bf0000"
 	overdose_threshold = 25
 
 /datum/reagent/medicine/bicaridinep/on_mob_life(mob/living/carbon/M)
 	M.adjustBruteLoss(-2*REM, 0)
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		H.bleed_rate = max(H.bleed_rate - .25, 0) 
 	..()
 	. = 1
 
@@ -1076,6 +1079,8 @@
 
 /datum/reagent/medicine/dexalinp/on_mob_life(mob/living/carbon/M)
 	M.adjustOxyLoss(-2*REM, 0)
+	if(C.blood_volume < BLOOD_VOLUME_NORMAL)
+		C.blood_volume += 1     //twice the rate of regular iron 
 	..()
 	. = 1
 
