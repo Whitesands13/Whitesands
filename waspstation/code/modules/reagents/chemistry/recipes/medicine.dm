@@ -26,7 +26,7 @@
 
 /datum/chemical_reaction/dexalinp
 	results = list(/datum/reagent/medicine/dexalinp = 3)
-	required_reagents = list(/datum/reagents/medicine/dexalin = 1, /datum/reagent/carbon = 1, /datum/reagent/iron = 1)
+	required_reagents = list(/datum/reagent/medicine/dexalin = 1, /datum/reagent/carbon = 1, /datum/reagent/iron = 1)
 
 /datum/chemical_reaction/tricordrazine
 	results = list(/datum/reagent/medicine/tricordrazine = 3)
@@ -34,7 +34,7 @@
 
 /datum/chemical_reaction/tetracordrazine
 	results = list(/datum/reagent/medicine/tetracordrazine = 4)
-	required_reagents = list(/datum/reagent/medicine/tricordrazine = 3, datum/reagent/medicine/dexalin = 1)
+	required_reagents = list(/datum/reagent/medicine/tricordrazine = 3, /datum/reagent/medicine/dexalin = 1)
 /datum/chemical_reaction/synthflesh
 	results = list(/datum/reagent/medicine/synthflesh = 3)
 	required_reagents = list(/datum/reagent/blood = 1, /datum/reagent/carbon = 1, /datum/reagent/medicine/styptic_powder = 1)
