@@ -1044,7 +1044,7 @@
 	M.adjustBruteLoss(-2*REM, 0)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		H.bleed_rate = max(H.bleed_rate - .25, 0) 
+		H.bleed_rate = max(H.bleed_rate - 0.25, 0) 
 	..()
 	. = 1
 
@@ -1079,8 +1079,8 @@
 
 /datum/reagent/medicine/dexalinp/on_mob_life(mob/living/carbon/M)
 	M.adjustOxyLoss(-2*REM, 0)
-	if(C.blood_volume < BLOOD_VOLUME_NORMAL)
-		C.blood_volume += 1     //twice the rate of regular iron 
+	if(ishuman(M) && M.blood_volume < BLOOD_VOLUME_NORMAL)
+		M.blood_volume += 1
 	..()
 	. = 1
 
@@ -1539,6 +1539,14 @@
 	color = "#FFFFD0"
 	metabolization_rate = 1.5 * REAGENTS_METABOLISM
 
+/datum/reagent/medicine/silibinin/expose_mob(mob/living/carbon/M, method=INJECT, reac_volume)
+	if(method != INJECT)
+		return
+	
+	M.adjustOrganLoss(ORGAN_SLOT_LIVER, -1)  //on injection, will heal the liver. This will (hopefully) fix dead livers.
+	
+	..()
+
 /datum/reagent/medicine/silibinin/on_mob_life(mob/living/carbon/M)
 	M.adjustOrganLoss(ORGAN_SLOT_LIVER, -2)//Add a chance to cure liver trauma once implemented.
 	..()
@@ -1549,17 +1557,17 @@
 	description = "A purple mixture of short polyelectrolyte chains not easily synthesized in the laboratory. It is valued as an intermediate in the synthesis of the cutting edge pharmaceuticals."
 	reagent_state = SOLID
 	color = "#9423FF"
-	metabolization_rate = 0.25 * REAGENTS_METABOLISM
+	metabolization_rate = 0.15 * REAGENTS_METABOLISM
 	overdose_threshold = 50
 	taste_description = "numbing bitterness"
 
 /datum/reagent/medicine/polypyr/on_mob_life(mob/living/carbon/M) //I wanted a collection of small positive effects, this is as hard to obtain as coniine after all.
 	M.adjustOrganLoss(ORGAN_SLOT_LUNGS, -0.25)
-	M.adjustBruteLoss(-0.35, 0)
+	M.adjustBruteLoss(-0.5, 0)
 	if(prob(50))
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
-			H.bleed_rate = max(H.bleed_rate - 1, 0)
+			H.bleed_rate = max(H.bleed_rate - 2, 0)
 	..()
 	. = 1
 
