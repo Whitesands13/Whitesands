@@ -4,7 +4,7 @@
 
 /datum/chemical_reaction/bicaridinep
 	results = list(/datum/reagent/medicine/bicaridinep = 3)
-	required_reagents = list(/datum/reagent/bicaridine = 1, /datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/sodiumchloride = 1)
+	required_reagents = list(/datum/reagent/medicine/bicaridine = 1, /datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/sodiumchloride = 1)
 	required_catalysts = list(/datum/reagent/toxin/plasma = 1)
 
 /datum/chemical_reaction/kelotane
@@ -26,7 +26,7 @@
 
 /datum/chemical_reaction/dexalinp
 	results = list(/datum/reagent/medicine/dexalinp = 3)
-	required_reagents = list(/datum/reagent/medicine/dexalin = 1, /datum/reagent/carbon = 1, /datum/reagent/iron = 1)
+	required_reagents = list(/datum/reagents/medicine/dexalin = 1, /datum/reagent/carbon = 1, /datum/reagent/iron = 1)
 
 /datum/chemical_reaction/tricordrazine
 	results = list(/datum/reagent/medicine/tricordrazine = 3)
