@@ -2346,7 +2346,8 @@
 		var/obj/item/paper/P = new /obj/item/paper(null) //hopefully the null loc won't cause trouble for us
 
 		if(!fax)
-			var/list/departmentoptions = GLOB.alldepartments + "All Departments"
+			var/obj/machinery/photocopier/faxmachine/randfax = GLOB.allfaxes[1]
+			var/list/departmentoptions = randfax.alldepartments + "All Departments"
 			destination = input(usr, "To which department?", "Choose a department", "") as null|anything in departmentoptions
 			if(!destination)
 				qdel(P)
