@@ -52,16 +52,21 @@
 /obj/machinery/meter,
 /turf/open/floor/plasteel,
 /area/engine/engineering)
-"ho" = (
+"cY" = (
 /obj/machinery/door/airlock/engineering/glass{
 	name = "Supermatter Engine Room";
 	req_access_txt = "10"
 	},
-/obj/machinery/door/firedoor/border_only{
-	dir = 1
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
+	dir = 9
 	},
-/obj/machinery/door/firedoor/border_only,
-/turf/open/floor/engine,
+/obj/machinery/door/firedoor/border_only{
+	dir = 4
+	},
+/obj/machinery/door/firedoor/border_only{
+	dir = 8
+	},
+/turf/open/floor/plasteel/dark,
 /area/engine/engineering)
 "hs" = (
 /obj/structure/sign/warning/vacuum/external{
@@ -108,17 +113,6 @@
 /obj/structure/lattice/catwalk,
 /turf/open/space/basic,
 /area/space/nearstation)
-"on" = (
-/obj/machinery/door/airlock/engineering/glass{
-	name = "Supermatter Engine Room";
-	req_access_txt = "10"
-	},
-/obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/firedoor/border_only{
-	dir = 1
-	},
-/turf/open/floor/engine,
-/area/engine/engineering)
 "pR" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/visible,
 /turf/open/floor/plating/airless,
@@ -187,6 +181,17 @@
 	},
 /turf/open/floor/plasteel,
 /area/engine/engineering)
+"zh" = (
+/obj/machinery/door/airlock/engineering/glass{
+	name = "Supermatter Engine Room";
+	req_access_txt = "10"
+	},
+/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor/border_only{
+	dir = 1
+	},
+/turf/open/floor/plasteel/dark,
+/area/engine/engineering)
 "zU" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /obj/effect/spawner/structure/window/plasma/reinforced,
@@ -226,22 +231,6 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /turf/open/floor/plating,
 /area/engine/engineering)
-"Iu" = (
-/obj/machinery/door/firedoor/border_only{
-	dir = 8
-	},
-/obj/machinery/door/firedoor/border_only{
-	dir = 4
-	},
-/obj/machinery/door/airlock/engineering/glass{
-	name = "Supermatter Engine Room";
-	req_access_txt = "10"
-	},
-/obj/structure/cable{
-	icon_state = "4-8"
-	},
-/turf/open/floor/engine,
-/area/engine/engineering)
 "Iv" = (
 /obj/structure/table,
 /obj/item/clothing/gloves/color/yellow,
@@ -258,22 +247,6 @@
 /area/engine/engineering)
 "Jc" = (
 /turf/open/floor/plasteel,
-/area/engine/engineering)
-"Jd" = (
-/obj/machinery/door/airlock/engineering/glass{
-	name = "Supermatter Engine Room";
-	req_access_txt = "10"
-	},
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
-	dir = 9
-	},
-/obj/machinery/door/firedoor/border_only{
-	dir = 4
-	},
-/obj/machinery/door/firedoor/border_only{
-	dir = 8
-	},
-/turf/open/floor/engine,
 /area/engine/engineering)
 "JG" = (
 /turf/closed/wall/r_wall,
@@ -389,6 +362,22 @@
 /obj/structure/grille,
 /turf/open/space,
 /area/space/nearstation)
+"Zq" = (
+/obj/machinery/door/firedoor/border_only{
+	dir = 8
+	},
+/obj/machinery/door/firedoor/border_only{
+	dir = 4
+	},
+/obj/machinery/door/airlock/engineering/glass{
+	name = "Supermatter Engine Room";
+	req_access_txt = "10"
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plasteel/dark,
+/area/engine/engineering)
 
 (1,1,1) = {"
 SD
@@ -645,7 +634,7 @@ qp
 (10,1,1) = {"
 SD
 Lp
-Iu
+Zq
 iV
 tr
 tr
@@ -839,7 +828,7 @@ XA
 qp
 "}
 (17,1,1) = {"
-on
+zh
 Jc
 Jc
 Jc
@@ -895,7 +884,7 @@ XA
 qp
 "}
 (19,1,1) = {"
-ho
+qx
 Jc
 Jc
 Jc
@@ -1093,7 +1082,7 @@ qp
 (26,1,1) = {"
 Ku
 BW
-Jd
+cY
 ak
 tr
 tr

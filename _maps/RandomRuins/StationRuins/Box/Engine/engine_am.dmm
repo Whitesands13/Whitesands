@@ -20,18 +20,6 @@
 "dk" = (
 /turf/open/space/basic,
 /area/space)
-"dD" = (
-/obj/machinery/atmospherics/pipe/simple/orange/visible{
-	dir = 4
-	},
-/obj/machinery/door/airlock/external{
-	name = "Engineering External Access";
-	req_access_txt = "10;13"
-	},
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
-/obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/turf/open/floor/plating,
-/area/engine/engineering)
 "dO" = (
 /obj/structure/lattice/catwalk,
 /turf/open/space/basic,
@@ -93,6 +81,22 @@
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/plating,
 /area/engine/engineering)
+"hR" = (
+/obj/machinery/atmospherics/pipe/simple/orange/visible{
+	dir = 4
+	},
+/obj/machinery/door/airlock/external{
+	name = "Engineering External Access";
+	req_access_txt = "10;13"
+	},
+/obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor/border_only{
+	dir = 1
+	},
+/turf/open/floor/plating,
+/area/engine/engineering)
 "ix" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 9
@@ -148,6 +152,14 @@
 /obj/item/multitool,
 /turf/open/floor/engine,
 /area/engine/engineering)
+"ko" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 4
+	},
+/obj/machinery/light,
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/plasteel,
+/area/engine/engineering)
 "kA" = (
 /obj/structure/table,
 /obj/item/clothing/gloves/color/yellow,
@@ -173,15 +185,6 @@
 /obj/effect/turf_decal/box/red,
 /turf/open/floor/engine,
 /area/engine/engineering)
-"og" = (
-/obj/machinery/atmospherics/pipe/simple/supply/hidden{
-	dir = 4
-	},
-/obj/machinery/light,
-/obj/effect/turf_decal/stripes/line,
-/obj/structure/closet/radiation,
-/turf/open/floor/plasteel,
-/area/engine/engineering)
 "op" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
@@ -205,6 +208,12 @@
 /obj/structure/table,
 /obj/item/book/manual/wiki/engineering_singulo_tesla,
 /obj/item/geiger_counter,
+/turf/open/floor/plasteel,
+/area/engine/engineering)
+"pR" = (
+/obj/machinery/atmospherics/pipe/manifold/supply/hidden{
+	dir = 1
+	},
 /turf/open/floor/plasteel,
 /area/engine/engineering)
 "pT" = (
@@ -280,6 +289,11 @@
 	},
 /turf/open/floor/plating,
 /area/engine/engineering)
+"rz" = (
+/obj/machinery/light,
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/plasteel,
+/area/engine/engineering)
 "sb" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -289,18 +303,8 @@
 "sg" = (
 /turf/closed/wall/r_wall,
 /area/engine/engineering)
-"uu" = (
-/obj/structure/closet/radiation,
-/turf/open/floor/plasteel,
-/area/engine/engineering)
 "wd" = (
 /turf/closed/wall,
-/area/engine/engineering)
-"wn" = (
-/obj/machinery/light,
-/obj/effect/turf_decal/stripes/line,
-/obj/structure/closet/radiation,
-/turf/open/floor/plasteel,
 /area/engine/engineering)
 "wW" = (
 /obj/effect/turf_decal/stripes/line{
@@ -377,6 +381,16 @@
 /obj/effect/turf_decal/box/red,
 /turf/open/floor/engine,
 /area/engine/engineering)
+"Cd" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/machinery/button/door{
+	id = "SupermatterExternal";
+	name = "Shutters Control";
+	pixel_x = -25;
+	req_access_txt = "11"
+	},
+/turf/open/floor/plasteel,
+/area/engine/engineering)
 "CU" = (
 /obj/machinery/atmospherics/components/unary/vent_pump{
 	dir = 1
@@ -419,17 +433,6 @@
 	id = "SupermatterExternal";
 	name = "radiation shutters"
 	},
-/turf/open/floor/plasteel,
-/area/engine/engineering)
-"HV" = (
-/obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/obj/machinery/button/door{
-	id = "SupermatterExternal";
-	name = "Shutters Control";
-	pixel_x = -25;
-	req_access_txt = "11"
-	},
-/obj/structure/closet/radiation,
 /turf/open/floor/plasteel,
 /area/engine/engineering)
 "IL" = (
@@ -521,13 +524,6 @@
 /obj/structure/cable/yellow,
 /turf/open/floor/engine,
 /area/engine/engineering)
-"OB" = (
-/obj/machinery/atmospherics/pipe/manifold/supply/hidden{
-	dir = 1
-	},
-/obj/structure/closet/radiation,
-/turf/open/floor/plasteel,
-/area/engine/engineering)
 "Pr" = (
 /obj/machinery/light/small{
 	dir = 4
@@ -541,6 +537,13 @@
 /area/engine/engineering)
 "PE" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/turf/open/floor/plasteel,
+/area/engine/engineering)
+"PM" = (
+/obj/machinery/atmospherics/pipe/manifold4w/supply/hidden,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plasteel,
 /area/engine/engineering)
 "PY" = (
@@ -568,11 +571,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /turf/open/floor/plating,
-/area/engine/engineering)
-"Sz" = (
-/obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/obj/structure/closet/radiation,
-/turf/open/floor/plasteel,
 /area/engine/engineering)
 "SA" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
@@ -603,17 +601,6 @@
 /obj/effect/turf_decal/box/red,
 /turf/open/floor/engine,
 /area/engine/engineering)
-"UL" = (
-/obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/obj/machinery/button/door{
-	id = "SupermatterExternal";
-	name = "Shutters Control";
-	pixel_x = 25;
-	req_access_txt = "11"
-	},
-/obj/structure/closet/radiation,
-/turf/open/floor/plasteel,
-/area/engine/engineering)
 "VA" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -632,12 +619,26 @@
 	},
 /turf/open/floor/plating,
 /area/engine/engineering)
+"WH" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/machinery/button/door{
+	id = "SupermatterExternal";
+	name = "Shutters Control";
+	pixel_x = 25;
+	req_access_txt = "11"
+	},
+/turf/open/floor/plasteel,
+/area/engine/engineering)
 "WV" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /turf/open/floor/plasteel,
+/area/engine/engineering)
+"Xf" = (
+/obj/effect/spawner/structure/window/plasma/reinforced/shutters,
+/turf/open/floor/plating,
 /area/engine/engineering)
 "Xy" = (
 /obj/machinery/light{
@@ -673,14 +674,6 @@
 	icon_state = "4-8"
 	},
 /turf/closed/wall/r_wall,
-/area/engine/engineering)
-"Zt" = (
-/obj/machinery/atmospherics/pipe/manifold4w/supply/hidden,
-/obj/structure/cable/yellow{
-	icon_state = "4-8"
-	},
-/obj/structure/closet/radiation,
-/turf/open/floor/plasteel,
 /area/engine/engineering)
 
 (1,1,1) = {"
@@ -939,7 +932,7 @@ dk
 TD
 SA
 QA
-wn
+rz
 Al
 sg
 sg
@@ -998,7 +991,7 @@ kc
 kc
 Jg
 oN
-jv
+Xf
 dk
 dk
 dk
@@ -1026,7 +1019,7 @@ QA
 QA
 HA
 oN
-jv
+Xf
 dk
 dk
 dk
@@ -1048,14 +1041,14 @@ dk
 dk
 "}
 (14,1,1) = {"
-Sz
-Zt
-UL
+PE
+PM
+WH
 PE
 Dj
 oN
-jv
-jv
+Xf
+Xf
 dk
 dk
 dk
@@ -1083,7 +1076,7 @@ jj
 sg
 jv
 jv
-jv
+Xf
 dk
 dk
 dk
@@ -1111,7 +1104,7 @@ Xy
 wW
 sb
 rq
-jv
+Xf
 dk
 dk
 dk
@@ -1139,7 +1132,7 @@ xA
 xA
 hs
 hv
-jv
+Xf
 dk
 dk
 dk
@@ -1167,7 +1160,7 @@ Uw
 Qw
 pF
 hv
-jv
+Xf
 dk
 dk
 dk
@@ -1195,7 +1188,7 @@ kn
 nJ
 BN
 hv
-jv
+Xf
 dk
 dk
 dk
@@ -1223,7 +1216,7 @@ mN
 cC
 MS
 xT
-jv
+Xf
 dk
 dk
 dk
@@ -1251,7 +1244,7 @@ jj
 sg
 jv
 jv
-jv
+Xf
 dk
 dk
 dk
@@ -1272,14 +1265,14 @@ dk
 dk
 "}
 (22,1,1) = {"
-uu
-OB
-HV
+QA
+pR
+Cd
 PE
 Dj
 oN
-jv
-jv
+Xf
+Xf
 dk
 dk
 dk
@@ -1306,7 +1299,7 @@ QA
 QA
 HA
 oN
-jv
+Xf
 dk
 dk
 dk
@@ -1334,7 +1327,7 @@ PY
 kc
 Jg
 oN
-jv
+Xf
 dk
 dk
 dk
@@ -1387,7 +1380,7 @@ dk
 kc
 Yk
 ix
-og
+ko
 BG
 Fi
 Fi
@@ -1416,7 +1409,7 @@ TD
 TD
 TD
 iA
-dD
+hR
 CU
 gD
 dO
@@ -1476,8 +1469,8 @@ pT
 wd
 sg
 sg
-dk
-dk
+sg
+sg
 dk
 dk
 dk

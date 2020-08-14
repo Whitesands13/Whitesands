@@ -114,12 +114,6 @@
 /obj/machinery/atmospherics/pipe/simple/dark/visible,
 /turf/open/floor/plating,
 /area/engine/engineering)
-"dK" = (
-/obj/machinery/atmospherics/components/unary/outlet_injector{
-	dir = 1
-	},
-/turf/open/floor/engine,
-/area/engine/engineering)
 "dO" = (
 /obj/machinery/atmospherics/pipe/manifold4w/cyan/visible,
 /turf/open/floor/plasteel,
@@ -599,6 +593,22 @@
 	},
 /turf/open/floor/plating,
 /area/engine/engineering)
+"rn" = (
+/obj/machinery/door/airlock/engineering/glass{
+	name = "Supermatter Engine Room";
+	req_access_txt = "10"
+	},
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
+	dir = 9
+	},
+/obj/machinery/door/firedoor/border_only{
+	dir = 4
+	},
+/obj/machinery/door/firedoor/border_only{
+	dir = 8
+	},
+/turf/open/floor/plasteel/dark,
+/area/engine/engineering)
 "rA" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /obj/effect/turf_decal/stripes/corner{
@@ -776,51 +786,19 @@
 /obj/structure/lattice,
 /turf/open/space,
 /area/space/nearstation)
-"xO" = (
+"ye" = (
 /obj/machinery/atmospherics/pipe/simple/orange/visible,
 /obj/machinery/camera{
-	c_tag = "Engineering - Engine Port";
+	c_tag = "Engineering - Engine Central";
 	dir = 8;
 	network = list("ss13","engine")
 	},
 /turf/open/floor/plasteel,
 /area/engine/engineering)
-"yg" = (
-/obj/machinery/door/airlock/engineering/glass{
-	name = "Supermatter Engine Room";
-	req_access_txt = "10"
-	},
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
-	dir = 9
-	},
-/obj/machinery/door/firedoor/border_only{
-	dir = 4
-	},
-/obj/machinery/door/firedoor/border_only{
-	dir = 8
-	},
-/turf/open/floor/engine,
-/area/engine/engineering)
 "yt" = (
 /obj/structure/table/wood,
 /obj/item/reagent_containers/food/drinks/soda_cans/thirteenloko,
 /turf/open/floor/plasteel,
-/area/engine/engineering)
-"yy" = (
-/obj/machinery/door/firedoor/border_only{
-	dir = 8
-	},
-/obj/machinery/door/firedoor/border_only{
-	dir = 4
-	},
-/obj/machinery/door/airlock/engineering/glass{
-	name = "Supermatter Engine Room";
-	req_access_txt = "10"
-	},
-/obj/structure/cable{
-	icon_state = "4-8"
-	},
-/turf/open/floor/engine,
 /area/engine/engineering)
 "yS" = (
 /turf/closed/wall,
@@ -853,17 +831,6 @@
 /obj/structure/lattice,
 /turf/open/space/basic,
 /area/space/nearstation)
-"Ai" = (
-/obj/machinery/door/airlock/engineering/glass{
-	name = "Supermatter Engine Room";
-	req_access_txt = "10"
-	},
-/obj/machinery/door/firedoor/border_only{
-	dir = 1
-	},
-/obj/machinery/door/firedoor/border_only,
-/turf/open/floor/engine,
-/area/engine/engineering)
 "Ax" = (
 /obj/machinery/light{
 	dir = 4
@@ -916,10 +883,6 @@
 /obj/effect/decal/cleanable/oil,
 /turf/open/floor/plasteel,
 /area/engine/engineering)
-"CJ" = (
-/obj/machinery/atmospherics/pipe/simple/scrubbers/visible,
-/turf/open/floor/plating,
-/area/engine/engineering)
 "CR" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 4
@@ -965,17 +928,6 @@
 	dir = 4
 	},
 /turf/open/floor/plasteel,
-/area/engine/engineering)
-"FB" = (
-/obj/machinery/door/airlock/engineering/glass{
-	name = "Supermatter Engine Room";
-	req_access_txt = "10"
-	},
-/obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/firedoor/border_only{
-	dir = 1
-	},
-/turf/open/floor/engine,
 /area/engine/engineering)
 "Ga" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
@@ -1064,6 +1016,22 @@
 	},
 /turf/open/floor/plasteel,
 /area/engine/engineering)
+"Hh" = (
+/obj/machinery/door/firedoor/border_only{
+	dir = 8
+	},
+/obj/machinery/door/firedoor/border_only{
+	dir = 4
+	},
+/obj/machinery/door/airlock/engineering/glass{
+	name = "Supermatter Engine Room";
+	req_access_txt = "10"
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plasteel/dark,
+/area/engine/engineering)
 "Hz" = (
 /obj/effect/decal/cleanable/oil,
 /obj/effect/turf_decal/stripes/corner,
@@ -1078,12 +1046,6 @@
 	},
 /obj/item/stack/cable_coil,
 /turf/open/floor/plasteel,
-/area/engine/engineering)
-"Ic" = (
-/obj/machinery/atmospherics/components/unary/outlet_injector/atmos/engine_waste{
-	dir = 1
-	},
-/turf/open/floor/plating,
 /area/engine/engineering)
 "Il" = (
 /obj/item/kirbyplants/random,
@@ -1311,6 +1273,12 @@
 /obj/machinery/atmospherics/pipe/manifold/cyan/visible,
 /turf/open/floor/plasteel,
 /area/engine/engineering)
+"NF" = (
+/obj/machinery/atmospherics/components/unary/outlet_injector/on{
+	dir = 1
+	},
+/turf/open/floor/engine,
+/area/engine/engineering)
 "NH" = (
 /obj/machinery/atmospherics/pipe/simple/cyan/visible,
 /obj/effect/turf_decal/stripes/line,
@@ -1485,6 +1453,12 @@
 /obj/machinery/portable_atmospherics/canister/toxins,
 /turf/open/floor/plasteel,
 /area/engine/engineering)
+"RM" = (
+/obj/machinery/atmospherics/components/unary/outlet_injector/atmos/engine_waste{
+	dir = 1
+	},
+/turf/open/floor/plating/airless,
+/area/engine/engineering)
 "RO" = (
 /obj/machinery/atmospherics/pipe/simple/orange/visible{
 	dir = 4
@@ -1643,6 +1617,10 @@
 /obj/machinery/portable_atmospherics/canister/nitrous_oxide,
 /turf/open/floor/plasteel,
 /area/engine/engineering)
+"Xo" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/visible,
+/turf/open/floor/plating/airless,
+/area/engine/engineering)
 "XW" = (
 /obj/machinery/atmospherics/components/binary/pump{
 	name = "Hot to Burn Chamber"
@@ -1672,6 +1650,17 @@
 	},
 /turf/open/space/basic,
 /area/space/nearstation)
+"YR" = (
+/obj/machinery/door/airlock/engineering/glass{
+	name = "Supermatter Engine Room";
+	req_access_txt = "10"
+	},
+/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor/border_only{
+	dir = 1
+	},
+/turf/open/floor/plasteel/dark,
+/area/engine/engineering)
 "Zq" = (
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/heat_exchanging/simple{
@@ -1952,7 +1941,7 @@ cG
 (10,1,1) = {"
 Dj
 DN
-yy
+Hh
 sq
 KN
 KN
@@ -2146,7 +2135,7 @@ RY
 cG
 "}
 (17,1,1) = {"
-FB
+YR
 PS
 wP
 AN
@@ -2202,7 +2191,7 @@ RY
 cG
 "}
 (19,1,1) = {"
-Ai
+Gf
 PS
 vP
 AN
@@ -2236,7 +2225,7 @@ Ye
 SX
 MZ
 lS
-xO
+ye
 IN
 Mv
 TB
@@ -2331,7 +2320,7 @@ PZ
 di
 gh
 di
-dK
+NF
 QF
 Ut
 Uy
@@ -2400,7 +2389,7 @@ cG
 (26,1,1) = {"
 mZ
 sl
-yg
+rn
 jO
 KN
 KN
@@ -2412,8 +2401,8 @@ zB
 pg
 fA
 Lu
-CJ
-Ic
+Xo
+RM
 Aa
 cG
 xI

@@ -1,20 +1,4 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"al" = (
-/obj/structure/sign/warning/vacuum/external{
-	pixel_x = 32
-	},
-/obj/machinery/atmospherics/components/unary/vent_pump{
-	dir = 1
-	},
-/turf/open/floor/plating,
-/area/engine/engineering)
-"ap" = (
-/obj/effect/spawner/structure/window/plasma/reinforced,
-/obj/structure/cable/yellow{
-	icon_state = "1-2"
-	},
-/turf/open/floor/plating,
-/area/engine/engineering)
 "ay" = (
 /obj/machinery/camera/emp_proof{
 	c_tag = "Engine - South East";
@@ -40,6 +24,22 @@
 	dir = 5
 	},
 /turf/open/floor/engine,
+/area/engine/engineering)
+"ca" = (
+/obj/machinery/atmospherics/pipe/simple/orange/visible{
+	dir = 4
+	},
+/obj/machinery/door/airlock/external{
+	name = "Engineering External Access";
+	req_access_txt = "10;13"
+	},
+/obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/machinery/door/firedoor/border_only{
+	dir = 1
+	},
+/obj/machinery/door/firedoor/border_only,
+/turf/open/floor/plating,
 /area/engine/engineering)
 "cc" = (
 /obj/structure/lattice/catwalk,
@@ -327,18 +327,6 @@
 /obj/structure/sign/warning/radiation/rad_area,
 /turf/closed/wall/r_wall,
 /area/engine/engineering)
-"oi" = (
-/obj/machinery/atmospherics/pipe/simple/orange/visible{
-	dir = 4
-	},
-/obj/machinery/door/airlock/external{
-	name = "Engineering External Access";
-	req_access_txt = "10;13"
-	},
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
-/obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/turf/open/floor/plating,
-/area/engine/engineering)
 "ok" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -455,6 +443,10 @@
 	},
 /turf/open/space/basic,
 /area/space/nearstation)
+"sB" = (
+/obj/effect/spawner/structure/window/plasma/reinforced/shutters,
+/turf/open/floor/plating,
+/area/engine/engineering)
 "tb" = (
 /obj/structure/table,
 /obj/item/clothing/suit/radiation,
@@ -631,17 +623,6 @@
 	},
 /turf/open/floor/plating/airless,
 /area/engine/engineering)
-"zO" = (
-/obj/machinery/light/small{
-	dir = 4
-	},
-/obj/machinery/advanced_airlock_controller{
-	dir = 1;
-	pixel_y = -24
-	},
-/obj/structure/closet/emcloset/anchored,
-/turf/open/floor/plating,
-/area/engine/engineering)
 "Bw" = (
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 1
@@ -786,6 +767,17 @@
 	},
 /obj/structure/cable{
 	icon_state = "4-8"
+	},
+/turf/open/floor/plating,
+/area/engine/engineering)
+"IL" = (
+/obj/machinery/light/small{
+	dir = 4
+	},
+/obj/structure/closet/emcloset/anchored,
+/obj/machinery/advanced_airlock_controller{
+	dir = 1;
+	pixel_y = -24
 	},
 /turf/open/floor/plating,
 /area/engine/engineering)
@@ -951,6 +943,13 @@
 	},
 /turf/open/floor/plating/airless,
 /area/engine/engineering)
+"Qg" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/effect/spawner/structure/window/plasma/reinforced/shutters,
+/turf/open/floor/plating,
+/area/engine/engineering)
 "Qw" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
@@ -1111,6 +1110,15 @@
 	},
 /turf/open/space/basic,
 /area/space/nearstation)
+"YG" = (
+/obj/machinery/atmospherics/components/unary/vent_pump{
+	dir = 1
+	},
+/obj/structure/sign/warning/vacuum/external{
+	pixel_x = 32
+	},
+/turf/open/floor/plating,
+/area/engine/engineering)
 "YX" = (
 /obj/machinery/door/airlock/external{
 	name = "Engineering External Access";
@@ -1362,7 +1370,7 @@ aS
 Vk
 Vk
 jR
-al
+YG
 Bw
 zi
 zi
@@ -1447,7 +1455,7 @@ Pu
 Pu
 UL
 pi
-KG
+sB
 zi
 rk
 CB
@@ -1475,7 +1483,7 @@ GI
 GI
 lx
 pi
-KG
+sB
 zi
 Lw
 Lw
@@ -1503,8 +1511,8 @@ zl
 CQ
 Ks
 KV
-KG
-KG
+sB
+sB
 Lw
 lJ
 Uu
@@ -1532,7 +1540,7 @@ tm
 yl
 KG
 KG
-KG
+sB
 Lw
 fZ
 OB
@@ -1560,7 +1568,7 @@ qf
 SY
 dz
 Mv
-KG
+sB
 Lw
 Jp
 ww
@@ -1588,7 +1596,7 @@ yM
 jI
 nQ
 Lf
-KG
+sB
 Lw
 fZ
 Lw
@@ -1616,7 +1624,7 @@ aE
 iP
 lM
 VU
-ap
+Qg
 qj
 cc
 ww
@@ -1644,7 +1652,7 @@ eZ
 JB
 iN
 Lf
-KG
+sB
 Lw
 fZ
 Lw
@@ -1672,7 +1680,7 @@ ib
 HO
 wP
 es
-KG
+sB
 Lw
 FM
 ww
@@ -1700,7 +1708,7 @@ tm
 yl
 KG
 KG
-KG
+sB
 Lw
 fZ
 OB
@@ -1727,8 +1735,8 @@ Tz
 CQ
 Ks
 KV
-KG
-KG
+sB
+sB
 Lw
 hy
 Uu
@@ -1755,7 +1763,7 @@ GI
 GI
 lx
 pi
-KG
+sB
 zi
 Lw
 Lw
@@ -1783,7 +1791,7 @@ KF
 Pu
 ql
 pi
-KG
+sB
 zi
 rk
 CB
@@ -1865,7 +1873,7 @@ aS
 aS
 aS
 ul
-oi
+ca
 Co
 YX
 zi
@@ -1894,7 +1902,7 @@ aS
 aS
 GI
 lP
-zO
+IL
 eN
 vD
 vD

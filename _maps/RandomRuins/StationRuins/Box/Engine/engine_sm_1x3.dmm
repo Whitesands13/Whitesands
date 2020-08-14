@@ -1093,11 +1093,6 @@
 	},
 /turf/open/floor/plating,
 /area/engine/engineering)
-"Ft" = (
-/obj/machinery/atmospherics/pipe/simple/cyan/visible,
-/obj/effect/turf_decal/stripes/line,
-/turf/open/floor/engine,
-/area/engine/engineering)
 "FD" = (
 /obj/machinery/atmospherics/pipe/manifold/cyan/visible{
 	dir = 1
@@ -1559,6 +1554,17 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/engine/engineering)
+"Px" = (
+/obj/machinery/atmospherics/pipe/simple/cyan/visible,
+/obj/effect/turf_decal/stripes/line,
+/obj/machinery/button/door{
+	id = "engsm";
+	name = "Radiation Shutters Control";
+	pixel_y = -24;
+	req_access_txt = "10"
+	},
+/turf/open/floor/engine,
+/area/engine/engineering)
 "PS" = (
 /obj/machinery/atmospherics/pipe/simple/general/visible{
 	dir = 6
@@ -1582,18 +1588,6 @@
 /obj/structure/table,
 /obj/item/stack/sheet/metal/fifty,
 /turf/open/floor/plasteel/dark,
-/area/engine/engineering)
-"Qj" = (
-/obj/machinery/button/door{
-	id = "engsm";
-	name = "Radiation Shutters Control";
-	pixel_y = -24;
-	req_access_txt = "10"
-	},
-/obj/machinery/atmospherics/pipe/manifold/cyan/visible{
-	dir = 1
-	},
-/turf/open/floor/engine,
 /area/engine/engineering)
 "Qu" = (
 /obj/machinery/atmospherics/pipe/simple/cyan/visible{
@@ -2520,8 +2514,8 @@ GC
 uU
 id
 Uu
-Qj
-Ft
+aI
+Px
 Ma
 WD
 ak

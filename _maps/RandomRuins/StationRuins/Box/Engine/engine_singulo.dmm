@@ -3,17 +3,6 @@
 /obj/structure/lattice,
 /turf/open/space/basic,
 /area/space/nearstation)
-"aL" = (
-/obj/machinery/light/small{
-	dir = 8
-	},
-/obj/structure/closet/emcloset/anchored,
-/obj/machinery/advanced_airlock_controller{
-	dir = 1;
-	pixel_y = -24
-	},
-/turf/open/floor/plating,
-/area/engine/engineering)
 "cq" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
@@ -39,7 +28,17 @@
 	},
 /turf/open/floor/plating,
 /area/engine/engineering)
-"dB" = (
+"cC" = (
+/obj/machinery/light/small{
+	dir = 4
+	},
+/obj/structure/closet/emcloset/anchored,
+/obj/structure/sign/warning/vacuum/external{
+	pixel_x = 32
+	},
+/turf/open/floor/plating,
+/area/engine/engineering)
+"dO" = (
 /obj/machinery/atmospherics/pipe/simple/orange/visible{
 	dir = 4
 	},
@@ -49,6 +48,10 @@
 	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/machinery/door/firedoor/border_only{
+	dir = 1
+	},
+/obj/machinery/door/firedoor/border_only,
 /turf/open/floor/plating,
 /area/engine/engineering)
 "el" = (
@@ -74,6 +77,16 @@
 /obj/item/book/manual/wiki/engineering_singulo_tesla,
 /obj/item/geiger_counter,
 /turf/open/floor/plasteel,
+/area/engine/engineering)
+"gp" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/structure/closet/emcloset/anchored,
+/obj/structure/sign/warning/vacuum/external{
+	pixel_x = -32
+	},
+/turf/open/floor/plating,
 /area/engine/engineering)
 "gB" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
@@ -185,13 +198,6 @@
 /obj/structure/cable,
 /turf/open/floor/engine,
 /area/engine/engineering)
-"nB" = (
-/obj/effect/spawner/structure/window/plasma/reinforced,
-/obj/structure/cable/yellow{
-	icon_state = "1-2"
-	},
-/turf/open/floor/plating,
-/area/engine/engineering)
 "nH" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 6
@@ -278,6 +284,16 @@
 	},
 /turf/open/floor/plating,
 /area/engine/engineering)
+"tZ" = (
+/obj/machinery/atmospherics/components/unary/vent_pump{
+	dir = 1
+	},
+/obj/machinery/advanced_airlock_controller{
+	dir = 8;
+	pixel_x = 24
+	},
+/turf/open/floor/plating,
+/area/engine/engineering)
 "uh" = (
 /obj/structure/cable/yellow{
 	icon_state = "2-8"
@@ -308,6 +324,13 @@
 /area/engine/engineering)
 "vy" = (
 /turf/open/floor/plasteel,
+/area/engine/engineering)
+"vN" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/effect/spawner/structure/window/plasma/reinforced/shutters,
+/turf/open/floor/plating,
 /area/engine/engineering)
 "wf" = (
 /obj/structure/cable/yellow{
@@ -449,6 +472,16 @@
 "CO" = (
 /obj/structure/sign/warning/electricshock,
 /turf/closed/wall/r_wall,
+/area/engine/engineering)
+"CS" = (
+/obj/machinery/atmospherics/components/unary/vent_pump{
+	dir = 1
+	},
+/obj/machinery/advanced_airlock_controller{
+	dir = 4;
+	pixel_x = -24
+	},
+/turf/open/floor/plating,
 /area/engine/engineering)
 "CT" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
@@ -596,17 +629,6 @@
 	},
 /turf/closed/wall/r_wall,
 /area/engine/engineering)
-"IL" = (
-/obj/machinery/light/small{
-	dir = 4
-	},
-/obj/machinery/advanced_airlock_controller{
-	dir = 1;
-	pixel_y = -24
-	},
-/obj/structure/closet/emcloset/anchored,
-/turf/open/floor/plating,
-/area/engine/engineering)
 "Jl" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -664,15 +686,6 @@
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/plasteel,
 /area/engine/engineering)
-"Lw" = (
-/obj/machinery/atmospherics/components/unary/vent_pump{
-	dir = 1
-	},
-/obj/structure/sign/warning/vacuum/external{
-	pixel_x = -32
-	},
-/turf/open/floor/plating,
-/area/engine/engineering)
 "LL" = (
 /obj/structure/lattice,
 /obj/structure/sign/warning/radiation/rad_area{
@@ -725,15 +738,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/engine/engineering)
-"Ox" = (
-/obj/structure/sign/warning/vacuum/external{
-	pixel_x = 32
-	},
-/obj/machinery/atmospherics/components/unary/vent_pump{
-	dir = 1
-	},
-/turf/open/floor/plating,
-/area/engine/engineering)
 "OO" = (
 /obj/machinery/camera/emp_proof{
 	c_tag = "Engine - North West";
@@ -751,6 +755,10 @@
 /obj/machinery/power/rad_collector/anchored,
 /turf/open/floor/plating/airless,
 /area/space/nearstation)
+"Po" = (
+/obj/effect/spawner/structure/window/plasma/reinforced/shutters,
+/turf/open/floor/plating,
+/area/engine/engineering)
 "Pt" = (
 /turf/closed/wall/r_wall,
 /area/engine/engineering)
@@ -1191,7 +1199,7 @@ Bp
 Ux
 Lp
 QU
-aL
+gp
 Pt
 KX
 KX
@@ -1219,7 +1227,7 @@ Bp
 sx
 sx
 cu
-Ox
+tZ
 zz
 lz
 lz
@@ -1304,7 +1312,7 @@ xs
 xs
 Oq
 El
-in
+Po
 lz
 ky
 aI
@@ -1332,7 +1340,7 @@ vy
 vy
 yE
 PW
-in
+Po
 lz
 xe
 Oo
@@ -1360,8 +1368,8 @@ Yz
 ho
 ET
 nn
-in
-in
+Po
+Po
 Ka
 ky
 Wk
@@ -1389,7 +1397,7 @@ Fy
 Fq
 in
 in
-in
+Po
 Ka
 Wk
 hu
@@ -1417,7 +1425,7 @@ SQ
 sP
 Zk
 lM
-in
+Po
 Ka
 ky
 Wk
@@ -1445,7 +1453,7 @@ MQ
 VI
 CB
 JV
-in
+Po
 Ka
 ky
 Wk
@@ -1473,7 +1481,7 @@ Fh
 wf
 eD
 nc
-nB
+vN
 MU
 Sa
 Sa
@@ -1501,7 +1509,7 @@ lP
 YV
 Hk
 JV
-in
+Po
 Ka
 ky
 Wk
@@ -1529,7 +1537,7 @@ Jl
 tw
 iP
 Aw
-in
+Po
 Ka
 ky
 Wk
@@ -1557,7 +1565,7 @@ Fy
 Fq
 in
 in
-in
+Po
 Ka
 Wk
 hu
@@ -1584,8 +1592,8 @@ JS
 ho
 ET
 nn
-in
-in
+Po
+Po
 Ka
 ky
 Wk
@@ -1612,7 +1620,7 @@ vy
 vy
 yE
 PW
-in
+Po
 lz
 uh
 Oo
@@ -1640,7 +1648,7 @@ nH
 xs
 Vn
 El
-in
+Po
 lz
 ky
 aI
@@ -1722,8 +1730,8 @@ Bp
 Bp
 Bp
 Ss
-dB
-Lw
+dO
+CS
 Yg
 lz
 lz
@@ -1751,7 +1759,7 @@ Bp
 Bp
 vy
 QG
-IL
+cC
 Pt
 KX
 KX
