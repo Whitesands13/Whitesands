@@ -28,8 +28,3 @@
 
 /obj/effect/projectile/muzzle/wormhole
 	icon_state = "wormhole_g"
-
-//Wasp - Hitscan Emitters
-/obj/effect/projectile/muzzle/laser/emitter
-	name = "emitter flash"
-	icon_state = "muzzle_emitter"

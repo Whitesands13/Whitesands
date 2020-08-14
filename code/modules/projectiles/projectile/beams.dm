@@ -123,15 +123,6 @@
 /obj/projectile/beam/emitter/singularity_pull()
 	return //don't want the emitters to miss
 
-//Wasp Edit - Hitscan Emitters
-/obj/projectile/beam/emitter/hitscan
-	hitscan = TRUE
-	tracer_type = /obj/effect/projectile/tracer/laser/emitter
-	muzzle_type = /obj/effect/projectile/muzzle/laser/emitter
-	impact_type = /obj/effect/projectile/impact/laser/emitter
-	impact_effect_type = null
-//Wasp End
-
 /obj/projectile/beam/lasertag
 	name = "laser tag beam"
 	icon_state = "omnilaser"
