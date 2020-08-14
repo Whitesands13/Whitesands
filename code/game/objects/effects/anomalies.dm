@@ -265,13 +265,13 @@
 /obj/effect/anomaly/pyro/anomalyEffect()
 	..()
 	ticks++
-	if(ticks < 25)
+	if(ticks < 25) // WaspStation Edit - Pyroclastic Rebalance
 		return
 	else
 		ticks = 0
 	var/turf/open/T = get_turf(src)
 	if(istype(T))
-		T.atmos_spawn_air("o2=5;plasma=5;TEMP=700")
+		T.atmos_spawn_air("o2=5;plasma=5;TEMP=700") // WaspStation Edit - Pyroclastic Rebalance
 
 /obj/effect/anomaly/pyro/detonate()
 	INVOKE_ASYNC(src, .proc/makepyroslime)
