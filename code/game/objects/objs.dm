@@ -38,7 +38,7 @@
 	vis_flags = VIS_INHERIT_PLANE //when this be added to vis_contents of something it inherit something.plane, important for visualisation of obj in openspace.
 
 	FASTDMM_PROP(\
-		pinned_vars = list("name")\
+		pinned_vars = list("name", "dir")\
 	)
 
 /obj/vv_edit_var(vname, vval)
