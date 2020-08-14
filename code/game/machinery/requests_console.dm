@@ -71,8 +71,8 @@ GLOBAL_LIST_EMPTY(req_console_ckey_departments)
 
 	FASTDMM_PROP(\
 		set_instance_vars(\
-			pixel_x = dir == EAST ? 32 : (dir == WEST ? -32 : INSTANCE_VAR_DEFAULT),\
-			pixel_y = dir == NORTH ? 32 : (dir == SOUTH ? -32 : INSTANCE_VAR_DEFAULT)\
+			pixel_x = dir & EAST ? 32 : (dir & WEST ? -32 : INSTANCE_VAR_DEFAULT),\
+			pixel_y = dir & NORTH ? 32 : (dir & SOUTH ? -32 : INSTANCE_VAR_DEFAULT)\
 		),\
 		dir_amount = 8\
     )
