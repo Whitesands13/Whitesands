@@ -336,7 +336,7 @@
 		to_chat(user, "<span class='notice'>You tear off a strip of gauze and make a rag.</span>")
 		G.use(1)
 		return
-	
+
 	if(istype(O, /obj/item/stack/ore/glass))
 		new /obj/item/stack/sheet/sandblock(loc)
 		to_chat(user, "<span class='notice'>You wet the sand in the sink and form it into a block.</span>")
@@ -475,6 +475,8 @@
 /obj/structure/curtain/attack_hand(mob/user)
 	. = ..()
 	if(.)
+		return
+	if(!allowed(user))
 		return
 	playsound(loc, 'sound/effects/curtain.ogg', 50, TRUE)
 	toggle()
