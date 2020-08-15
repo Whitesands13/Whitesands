@@ -152,7 +152,7 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 					ijob = 80
 
 				if (nanite_sensors || U.sensor_mode >= SENSOR_LIVING)
-					life_status = (!H.stat ? TRUE : FALSE)
+					life_status = ((H.stat < DEAD) ? TRUE : FALSE) //So anything less that dead is marked as alive. (Soft crit, concious, unconcious)
 				else
 					life_status = null
 
@@ -197,3 +197,4 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 			AI.ai_camera_track(params["name"])
 
 #undef SENSORS_UPDATE_PERIOD
+
