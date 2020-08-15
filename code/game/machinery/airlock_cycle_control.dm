@@ -44,7 +44,7 @@
 #define VENT_INT_BOUND	2
 #define VENT_NO_BOUND	3
 
-#define	BUILD_NO_CIRCUIT 0		// See var/buildstage declaration
+#define BUILD_NO_CIRCUIT 0		// See var/buildstage declaration
 #define BUILD_NO_WIRES 1
 #define BUILD_COMPLETE 2
 
@@ -244,7 +244,7 @@
 			var/turf/T2 = get_step(T, cdir)
 			if(!T2)
 				continue
-			if(T2.loc != T.loc && (locate(/obj/machinery/door/airlock) in T2))		// If we're not on our own space and we find an airlock, we're golden
+			if(T2.loc != T.loc && (locate(/obj/machinery/door/airlock) in T2))		// If we're in a different area and we find an airlock, we're golden
 				is_docked = TRUE
 				break
 		if(is_docked)
