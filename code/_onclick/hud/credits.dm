@@ -28,7 +28,8 @@ GLOBAL_LIST(end_titles)
 	set name = "Hide Credits"
 	set category = "OOC"
 	verbs -= /client/proc/ClearCredits
-	QDEL_LIST(credits)
+	if(credits)
+		QDEL_LIST(credits)
 
 /obj/screen/credit
 	icon_state = "blank"
