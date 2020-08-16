@@ -7,10 +7,6 @@
 /obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/shuttle/supply)
-"d" = (
-/obj/structure/shuttle/engine/propulsion,
-/turf/open/floor/plating/airless,
-/area/shuttle/supply)
 "e" = (
 /turf/template_noop,
 /area/template_noop)
@@ -47,6 +43,13 @@
 	},
 /turf/open/floor/mineral/titanium/blue,
 /area/shuttle/supply)
+"w" = (
+/obj/structure/shuttle/engine/heater{
+	dir = 1
+	},
+/obj/structure/window/reinforced,
+/turf/open/floor/plating/airless,
+/area/shuttle/supply)
 "F" = (
 /obj/machinery/door/airlock/titanium{
 	name = "Supply Shuttle Airlock";
@@ -56,18 +59,17 @@
 /obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/shuttle/supply)
-"M" = (
-/obj/structure/shuttle/engine/heater,
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/turf/open/floor/plating/airless,
-/area/shuttle/supply)
 "O" = (
 /turf/closed/wall/mineral/titanium,
 /area/shuttle/supply)
 "T" = (
 /turf/open/floor/mineral/titanium/blue,
+/area/shuttle/supply)
+"V" = (
+/obj/structure/shuttle/engine/propulsion{
+	dir = 1
+	},
+/turf/open/floor/plating/airless,
 /area/shuttle/supply)
 "W" = (
 /obj/machinery/door/poddoor{
@@ -89,18 +91,19 @@
 /area/shuttle/supply)
 
 (1,1,1) = {"
-O
-O
-O
-O
-O
-O
-O
-O
-O
 e
+O
+O
+O
+O
+O
+O
+O
+O
+O
 "}
 (2,1,1) = {"
+V
 O
 T
 T
@@ -110,33 +113,33 @@ T
 T
 T
 O
-d
 "}
 (3,1,1) = {"
+V
+w
+T
+T
+T
+T
+T
+T
+T
 O
-T
-T
-T
-T
-T
-T
-T
-M
-d
 "}
 (4,1,1) = {"
+V
+w
+T
+T
+T
+T
+T
+T
+T
 O
-T
-T
-T
-T
-T
-T
-T
-M
-d
 "}
 (5,1,1) = {"
+V
 O
 Z
 T
@@ -146,9 +149,9 @@ T
 T
 Z
 O
-d
 "}
 (6,1,1) = {"
+e
 O
 O
 g
@@ -158,5 +161,4 @@ F
 W
 O
 O
-e
 "}
