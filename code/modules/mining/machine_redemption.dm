@@ -53,6 +53,8 @@
 		. += "<span class='notice'>Alt-click to rotate the input and output direction.</span>"
 
 /obj/machinery/mineral/ore_redemption/proc/smelt_ore(obj/item/stack/ore/O)
+	if(QDELETED(O))
+		return
 	var/datum/component/material_container/mat_container = materials.mat_container
 	if (!mat_container)
 		return
@@ -140,6 +142,8 @@
 	signal.send_to_receivers()
 
 /obj/machinery/mineral/ore_redemption/pickup_item(datum/source, atom/movable/target, atom/oldLoc)
+	if(QDELETED(target))
+		return
 	if(!materials.mat_container || panel_open || !powered())
 		return
 
@@ -158,6 +162,8 @@
 
 /obj/machinery/mineral/ore_redemption/default_unfasten_wrench(mob/user, obj/item/I)
 	. = ..()
+	if(. != SUCCESSFUL_UNFASTEN)
+		return
 	if(anchored)
 		register_input_turf() // someone just wrenched us down, re-register the turf
 	else
