@@ -268,10 +268,16 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 		if(X.prefs.toggles & SOUND_ADMINHELP)
 			SEND_SOUND(X, sound('sound/effects/adminhelp.ogg'))
 		window_flash(X, ignorepref = TRUE)
-		to_chat(X, admin_msg, confidential = TRUE)
+		to_chat(X,
+			type = MESSAGE_TYPE_ADMINPM,
+			html = admin_msg,
+			confidential = TRUE)
 
 	//show it to the person adminhelping too
-	to_chat(initiator, "<span class='adminnotice'>PM to-<b>Admins</b>: <span class='linkify'>[msg]</span></span>", confidential = TRUE)
+	to_chat(initiator,
+		type = MESSAGE_TYPE_ADMINPM,
+		html = "<span class='adminnotice'>PM to-<b>Admins</b>: <span class='linkify'>[msg]</span></span>",
+		confidential = TRUE)
 	SSblackbox.LogAhelp(id, "Ticket Opened", msg, null, initiator.ckey)
 
 //Reopen a closed ticket
@@ -613,7 +619,22 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 			continue
 		if(target_servers && !(I in target_servers))
 			continue
-		world.Export("[servers[I]]?[list2params(message)]")
+		world.send_cross_comms(I, message)
+
+/// Sends a message to a given cross comms server by name (by name for security).
+/world/proc/send_cross_comms(server_name, list/message, auth = TRUE)
+	set waitfor = FALSE
+	if (auth)
+		var/comms_key = CONFIG_GET(string/comms_key)
+		if(!comms_key)
+			debug_world_log("Server cross-comms message not sent for lack of configured key")
+			return
+		message["key"] = comms_key
+	var/list/servers = CONFIG_GET(keyed_list/cross_server)
+	var/server_url = servers[server_name]
+	if (!server_url)
+		CRASH("Invalid cross comms config: [server_name]")
+	world.Export("[server_url]?[list2params(message)]")
 
 
 /proc/tgsadminwho()
