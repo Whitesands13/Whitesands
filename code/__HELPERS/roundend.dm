@@ -212,24 +212,13 @@
 		speed_round = TRUE
 
 	for(var/client/C in GLOB.clients)
-		if(!C.credits)
-			C.RollCredits()
 		C.playtitlemusic(40)
-
 		C.process_endround_metacoin()
-
-		if(CONFIG_GET(flag/allow_crew_objectives))
-			var/mob/M = C.mob
-			if(M?.mind?.current && LAZYLEN(M.mind.crew_objectives))
-				for(var/datum/objective/crew/CO in M.mind.crew_objectives)
-					if(CO.check_completion())
-						C.inc_metabalance(METACOIN_CO_REWARD, reason="Completed your crew objective!")
-						break
-					else
-						C.inc_metabalance(0, reason="Failed your crew objective...")
 
 		if(speed_round)
 			C.give_award(/datum/award/achievement/misc/speed_round, C.mob)
+
+	RollCredits()
 
 	var/popcount = gather_roundend_feedback()
 	display_report(popcount)
@@ -410,6 +399,16 @@
 		else
 			parts += "<div class='panel redborder'>"
 			parts += "<span class='redtext'>You did not survive the events on [station_name()]...</span>"
+
+		if(CONFIG_GET(flag/allow_crew_objectives))
+			if(M.mind.current && LAZYLEN(M.mind.crew_objectives))
+				for(var/datum/objective/crew/CO in M.mind.crew_objectives)
+					if(CO.check_completion())
+						parts += "<br><br><B>Your optional objective</B>: [CO.explanation_text] <span class='greentext'><B>Success!</B></span><br>"
+						C.inc_metabalance(METACOIN_CO_REWARD, reason="Completed your crew objective!")
+					else
+						parts += "<br><br><B>Your optional objective</B>: [CO.explanation_text] <span class='redtext'><B>Failed.</B></span><br>"
+
 	else
 		parts += "<div class='panel stationborder'>"
 	parts += "<br>"
