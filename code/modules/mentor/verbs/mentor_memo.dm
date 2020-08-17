@@ -114,6 +114,7 @@
 				to_chat(src, "No memos found in database.")
 				return
 			to_chat(src, output)
+			qdel(query_memoshow)
 		if("Remove")
 			var/datum/DBQuery/query_memodellist = SSdbcore.NewQuery("SELECT ckey FROM [format_table_name("mentor_memo")]")
 			if(!query_memodellist.Execute())
