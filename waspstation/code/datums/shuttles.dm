@@ -10,18 +10,6 @@
 		return TRUE
 	return FALSE
 
-/datum/map_template/shuttle/cargo/packed
-	suffix = "packed"
-	name = "supply shuttle (Packedstation)"
-
-/datum/map_template/shuttle/mining/packed
-	suffix = "packed"
-	name = "mining shuttle (Packedstation)"
-
-/datum/map_template/shuttle/arrival/packed
-	suffix = "packed"
-	name = "arrival shuttle (Packedstation)"
-
 /datum/map_template/shuttle/emergency/packed
 	suffix = "packed"
 	name = "Packedstation emergency shuttle"
