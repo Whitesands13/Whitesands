@@ -12,11 +12,7 @@
 	if(.)
 		user.spin(20, 1)
 		if(isobserver(user) && prob(90)) //Speening in their grave
-			var/turf/turf_source = get_turf(user)
-			for(var/P in SSmobs.dead_players_by_zlevel[turf_source.z])
-				var/mob/M = P
-				if((get_dist(M, turf_source) <= world.view - 1) && isdead(M))
-					M.playsound_local(turf_source, 'waspstation/sound/voice/speen.ogg', 50, 1)
+			user.playsound_local(get_turf(user), 'waspstation/sound/voice/speen.ogg', 50, TRUE)
 			return
 		playsound(user, 'waspstation/sound/voice/speen.ogg', 50, 1, -1)
 		if((iscyborg(user) || isanimal(user)) && user.has_buckled_mobs())
