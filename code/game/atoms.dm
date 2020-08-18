@@ -1446,3 +1446,7 @@
 		var/mouseparams = list2params(paramslist)
 		usr_client.Click(src, loc, null, mouseparams)
 		return TRUE
+
+///Called when something resists while this atom is its loc
+/atom/proc/container_resist_act(mob/living/user)
+
