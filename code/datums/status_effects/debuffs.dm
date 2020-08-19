@@ -524,6 +524,8 @@
 	to_chat(owner, "<span class='warning'>You snap out of your trance!</span>")
 
 /datum/status_effect/trance/proc/hypnotize(datum/source, list/hearing_args)
+	SIGNAL_HANDLER
+
 	if(!owner.can_hear())
 		return
 	if(hearing_args[HEARING_SPEAKER] == owner)
