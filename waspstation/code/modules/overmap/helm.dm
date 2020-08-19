@@ -8,66 +8,24 @@
 	ui_x = 870
 	ui_y = 708
 
-	var/obj/structure/overmap/current_ship
+	///The ship
+	var/obj/structure/overmap/ship/current_ship
 	var/list/concurrent_users = list()
+	///Is this for viewing only?
+	var/viewer = FALSE
 
-	// Stuff needed to render the map
-	var/map_name
-	var/const/default_map_size = 15
-	var/obj/screen/map_view/cam_screen
-	var/obj/screen/plane_master/lighting/cam_plane_master
-	var/obj/screen/background/cam_background
+	var/docked
 
 	var/id = "main"
 
 /obj/machinery/computer/helm/Initialize()
 	. = ..()
-	// Map name has to start and end with an A-Z character,
-	// and definitely NOT with a square bracket or even a number.
-	// I wasted 6 hours on this. :agony:
-	map_name = "helm_console_[REF(src)]_map"
-	// Initialize map objects
-	cam_screen = new
-	cam_screen.name = "screen"
-	cam_screen.assigned_map = map_name
-	cam_screen.del_on_map_removal = FALSE
-	cam_screen.screen_loc = "[map_name]:1,1"
-	cam_plane_master = new
-	cam_plane_master.name = "plane_master"
-	cam_plane_master.assigned_map = map_name
-	cam_plane_master.del_on_map_removal = FALSE
-	cam_plane_master.screen_loc = "[map_name]:CENTER"
-	cam_background = new
-	cam_background.assigned_map = map_name
-	cam_background.del_on_map_removal = FALSE
-	// Process each overmap fire
-	for(var/S in SSovermap.ships)
-		var/obj/structure/overmap/ship = S
-		if(ship.id == id)
-			current_ship = ship
-			if(!current_ship.helm)
-				current_ship.helm = src
+	set_ship()
 
-/obj/machinery/computer/helm/Destroy()
-	qdel(cam_screen)
-	qdel(cam_plane_master)
-	qdel(cam_background)
-	return ..()
-
-/obj/machinery/computer/helm/proc/update_location()
-	if(concurrent_users)
-		var/list/visible_turfs = list()
-		for(var/turf/T in view(current_ship.sensor_range, current_ship))
-			visible_turfs += T
-
-		var/list/bbox = get_bbox_of_atoms(visible_turfs)
-		var/size_x = bbox[3] - bbox[1] + 1
-		var/size_y = bbox[4] - bbox[2] + 1
-
-		cam_screen.vis_contents = visible_turfs
-		cam_background.icon_state = "clear"
-		cam_background.fill_rect(1, 1, size_x, size_y)
-		return TRUE
+/obj/machinery/computer/helm/proc/set_ship(obj/structure/overmap/ship/ship)
+	if(!ship)
+		ship = SSovermap.get_overmap_object_by_id(id)
+	current_ship = ship
 
 /obj/machinery/computer/helm/ui_interact(\
 		mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
@@ -86,26 +44,45 @@
 			playsound(src, 'sound/machines/terminal_on.ogg', 25, FALSE)
 			use_power(active_power_usage)
 		// Register map objects
-		user.client.register_map_obj(cam_screen)
-		user.client.register_map_obj(cam_plane_master)
-		user.client.register_map_obj(cam_background)
+		if(current_ship)
+			user.client.register_map_obj(current_ship.cam_screen)
+			user.client.register_map_obj(current_ship.cam_plane_master)
+			user.client.register_map_obj(current_ship.cam_background)
 		// Open UI
 		ui = new(user, src, ui_key, "HelmConsole", name, ui_x, ui_y, master_ui, state)
 		ui.open()
 
 /obj/machinery/computer/helm/ui_data(mob/user)
-	var/list/data = list()
-	data["heading"] = dir2angle(current_ship.get_heading())
-	data["speed"] = current_ship.get_speed() * 1000
-	data["maxspeed"] = current_ship.max_speed * 1000
-	data["eta"] = current_ship.get_eta()
-	data["stopped"] = current_ship.is_still()
-	return data
+	. = list()
+	.["shipInfo"] = list(
+		name = current_ship.name,
+		integrity = current_ship.integrity,
+		sensor_range = current_ship.sensor_range,
+		ref = REF(current_ship)
+	)
+	.["otherInfo"] = list()
+	for (var/object in current_ship.close_overmap_objects)
+		var/obj/structure/overmap/O = object
+		var/list/other_data = list(
+			name = O.name,
+			integrity = O.integrity,
+			ref = REF(O)
+		)
+		.["otherInfo"] += list(other_data)
+	if(istype(/obj/structure/overmap/ship, current_ship))
+		.["heading"] = dir2angle(current_ship.get_heading())
+		.["speed"] = current_ship.get_speed() * 1000
+		.["maxspeed"] = current_ship.max_speed * 1000
+		.["eta"] = current_ship.get_eta()
+		.["stopped"] = current_ship.is_still()
+		.["x"] = current_ship.x
+		.["y"] = current_ship.y
 
-/obj/machinery/computer/helm/ui_static_data()
-	var/list/data = list()
-	data["mapRef"] = map_name
-	return data
+/obj/machinery/computer/helm/ui_static_data(mob/user)
+	. = list()
+	.["canFly"] = istype(/obj/structure/overmap/ship, current_ship)
+	.["isViewer"] = viewer
+	.["mapRef"] = current_ship.map_name
 
 /obj/machinery/computer/helm/ui_act(action, params)
 	. = ..()
@@ -113,16 +90,14 @@
 		return
 
 	switch(action)
+		if("reconnect")
+			set_ship()
+		if("refresh")
+			current_ship.get_close_objects()
+		if("change_sensor_range")
+			current_ship.sensor_range = text2num(params["sensor_range"])
 		if("change_heading")
-			var/direction = text2num(params["dir"])
-			current_ship.accelerate(direction)
-		if("speed_change")
-			var/newspeed = text2num(params["newspeed"])
-			if(newspeed > (current_ship.get_speed() * 1000))
-				current_ship.accelerate(current_ship.dir, newspeed)
-			else
-				current_ship.decelerate()
-
+			current_ship.accelerate(text2num(params["dir"]))
 		if("stop")
 			current_ship.decelerate()
 
@@ -132,7 +107,8 @@
 	// Living creature or not, we remove you anyway.
 	concurrent_users -= user_ref
 	// Unregister map objects
-	user.client.clear_map(map_name)
+	if(current_ship)
+		user.client.clear_map(current_ship.map_name)
 	// Turn off the console
 	if(length(concurrent_users) == 0 && is_living)
 		playsound(src, 'sound/machines/terminal_off.ogg', 25, FALSE)
