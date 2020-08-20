@@ -11,10 +11,10 @@ export const HelmConsole = (props, context) => {
     <Window resizable>
       <div className="CameraConsole__left">
         <Window.Content>
-          {!!true && (
+          {!data.isViewer && (
             <ShipControlContent />
           )}
-          {!!true && (
+          {!!data.canFly && (
             <ShipContent />
           )}
           <SharedContent />
@@ -35,7 +35,7 @@ export const HelmConsole = (props, context) => {
 
 const SharedContent = (props, context) => {
   const { act, data } = useBackend(context);
-  const { shipInfo = [], otherInfo = [] } = data;
+  const { isViewer, shipInfo = [], otherInfo = [] } = data;
   return (
     <Fragment>
       <Section title={shipInfo.name ? shipInfo.name : "Ship Info"}>
@@ -51,13 +51,12 @@ const SharedContent = (props, context) => {
               value={shipInfo.integrity} />
           </LabeledList.Item>
           <LabeledList.Item label="Sensor Range">
-            <Slider
+            <ProgressBar
               value={shipInfo.sensor_range}
               minValue={1}
-              maxValue={12}
-              onChange={value => act('change_sensor_range', {
-                sensor_range: value,
-              })} />
+              maxValue={8}>
+              <AnimatedNumber value={shipInfo.sensor_range} />
+            </ProgressBar>
           </LabeledList.Item>
         </LabeledList>
       </Section>
@@ -66,6 +65,7 @@ const SharedContent = (props, context) => {
         buttons={(
           <Button
             content="Refresh"
+            disabled={isViewer}
             onClick={() => act('refresh')} />
         )}>
         <Table>
@@ -98,7 +98,12 @@ const SharedContent = (props, context) => {
                 )}
               </Table.Cell>
               <Table.Cell>
-                <Button icon="circle" />
+                <Button
+                  icon="circle"
+                  disabled={isViewer}
+                  onClick={() => act('dock', {
+                    ship_to_dock: ship.ref,
+                  })} />
               </Table.Cell>
             </Table.Row>
           ))}
@@ -147,8 +152,15 @@ const ShipContent = (props, context) => {
 // Arrow directional controls
 const ShipControlContent = (props, context) => {
   const { act, data } = useBackend(context);
+  let flyable = true;
   return (
-    <Section title="Navigation">
+    <Section
+      title="Navigation"
+      buttons={(
+        <Button
+          content="Undock"
+          onClick={() => act('undock')} />
+      )}>
       <Grid width="1px">
         <Grid.Column>
           <Button
@@ -156,6 +168,7 @@ const ShipControlContent = (props, context) => {
             icon="arrow-left"
             iconRotation={45}
             mb={1}
+            disabled={!flyable}
             onClick={() => act('change_heading', {
               dir: 9,
             })} />
@@ -163,6 +176,7 @@ const ShipControlContent = (props, context) => {
             fluid
             icon="arrow-left"
             mb={1}
+            disabled={!flyable}
             onClick={() => act('change_heading', {
               dir: 8,
             })} />
@@ -171,6 +185,7 @@ const ShipControlContent = (props, context) => {
             icon="arrow-down"
             iconRotation={45}
             mb={1}
+            disabled={!flyable}
             onClick={() => act('change_heading', {
               dir: 10,
             })} />
@@ -180,6 +195,7 @@ const ShipControlContent = (props, context) => {
             fluid
             icon="arrow-up"
             mb={1}
+            disabled={!flyable}
             onClick={() => act('change_heading', {
               dir: 1,
             })} />
@@ -187,12 +203,13 @@ const ShipControlContent = (props, context) => {
             fluid
             icon="circle"
             mb={1}
-            disabled={data.stopped}
+            disabled={data.stopped || !flyable}
             onClick={() => act('stop')} />
           <Button
             fluid
             icon="arrow-down"
             mb={1}
+            disabled={!flyable}
             onClick={() => act('change_heading', {
               dir: 2,
             })} />
@@ -203,6 +220,7 @@ const ShipControlContent = (props, context) => {
             icon="arrow-up"
             iconRotation={45}
             mb={1}
+            disabled={!flyable}
             onClick={() => act('change_heading', {
               dir: 5,
             })} />
@@ -210,6 +228,7 @@ const ShipControlContent = (props, context) => {
             fluid
             icon="arrow-right"
             mb={1}
+            disabled={!flyable}
             onClick={() => act('change_heading', {
               dir: 4,
             })} />
@@ -218,6 +237,7 @@ const ShipControlContent = (props, context) => {
             icon="arrow-right"
             iconRotation={45}
             mb={1}
+            disabled={!flyable}
             onClick={() => act('change_heading', {
               dir: 6,
             })} />

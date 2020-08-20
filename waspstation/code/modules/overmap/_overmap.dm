@@ -1,8 +1,8 @@
-#define MAIN_OVERMAP_OBJECT_ID "main"
 /* OVERMAP TURFS */
 /turf/open/overmap
 	icon = 'waspstation/icons/turf/overmap.dmi'
 	icon_state = "overmap0"
+	initial_gas_mix = AIRLESS_ATMOS
 
 /turf/open/overmap/edge
 	opacity = 1
@@ -47,7 +47,7 @@
 	var/obj/machinery/computer/helm/helm
 	///ID
 	var/id
-	///If we need to render a map for cameras and helms for this object
+	///~~If we need to render a map for cameras and helms for this object~~ basically can you look at and use this as a ship or station
 	var/render_map = FALSE
 	///The range of the view shown to helms and viewscreens (subject to be relegated to something else)
 	var/sensor_range = 4
@@ -63,18 +63,13 @@
 	var/obj/screen/plane_master/lighting/cam_plane_master
 	var/obj/screen/background/cam_background
 
-/obj/structure/overmap/Initialize()
+/obj/structure/overmap/Initialize(mapload, _id)
 	. = ..()
-	return INITIALIZE_HINT_LATELOAD
-
-/obj/structure/overmap/LateInitialize()
-	. = ..()
-	SSovermap.objects += src
 	START_PROCESSING(SSovermap, src)
 	if(id == MAIN_OVERMAP_OBJECT_ID)
 		name = station_name()
 	if(!id)
-		id = "overmap_object_[length(SSovermap.objects)++]"
+		id = "overmap_object_[SSovermap.processing.len + 1]"
 	if(render_map)	// Initialize map objects
 		map_name = "overmap_[id]_map"
 		cam_screen = new
@@ -93,7 +88,6 @@
 
 /obj/structure/overmap/Destroy()
 	. = ..()
-	SSovermap.objects -= src
 	STOP_PROCESSING(SSovermap, src)
 	if(render_map)
 		QDEL_NULL(cam_screen)
@@ -140,6 +134,21 @@
 			continue
 		close_overmap_objects += object
 
-/obj/structure/overmap/station/main //there should only be ONE of these in a given game.
+/obj/structure/overmap/dockable
+	///Linked Zlevel(s), if any
+	var/list/zlevels = list()
+
+/obj/structure/overmap/dockable/main //there should only be ONE of these in a given game.
 	id = MAIN_OVERMAP_OBJECT_ID
 	render_map = TRUE
+
+/obj/structure/overmap/dockable/main/LateInitialize(mapload, _id)
+	. = ..()
+	zlevels |= SSmapping.levels_by_trait(ZTRAIT_STATION)
+
+/obj/structure/overmap/dockable/planet
+	icon_state = "globe"
+
+/obj/structure/overmap/dockable/planet/lavaland/LateInitialize(mapload, _id)
+	. = ..()
+	zlevels |= SSmapping.levels_with_traits(ZTRAITS_LAVALAND)

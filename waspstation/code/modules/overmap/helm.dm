@@ -13,19 +13,29 @@
 	var/list/concurrent_users = list()
 	///Is this for viewing only?
 	var/viewer = FALSE
-
-	var/docked
-
-	var/id = "main"
+	///The overmap object/shuttle ID
+	var/id
 
 /obj/machinery/computer/helm/Initialize()
 	. = ..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/machinery/computer/helm/LateInitialize()
+	. = ..()
 	set_ship()
 
-/obj/machinery/computer/helm/proc/set_ship(obj/structure/overmap/ship/ship)
-	if(!ship)
-		ship = SSovermap.get_overmap_object_by_id(id)
-	current_ship = ship
+/obj/machinery/computer/helm/proc/set_ship()
+	var/obj/docking_port/port = SSshuttle.get_containing_shuttle(src)
+	var/area/A = get_area(src)
+	if(port)
+		id = port.id
+	else if(is_station_level(z) && !A?.outdoors)
+		id = MAIN_OVERMAP_OBJECT_ID
+	else
+		return
+	current_ship = SSovermap.get_overmap_object_by_id(id)
+	if(!current_ship.shuttle)
+		current_ship.shuttle = port
 
 /obj/machinery/computer/helm/ui_interact(\
 		mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
@@ -69,7 +79,10 @@
 			ref = REF(O)
 		)
 		.["otherInfo"] += list(other_data)
-	if(istype(/obj/structure/overmap/ship, current_ship))
+
+	if(istype(current_ship, /obj/structure/overmap/ship))
+		.["state"] = current_ship.state
+		.["docked"] = current_ship.docked ? TRUE : FALSE
 		.["heading"] = dir2angle(current_ship.get_heading())
 		.["speed"] = current_ship.get_speed() * 1000
 		.["maxspeed"] = current_ship.max_speed * 1000
@@ -90,8 +103,11 @@
 		return
 
 	switch(action)
-		if("reconnect")
-			set_ship()
+		if("dock")
+			var/obj/structure/overmap/to_dock = locate(params["ship_to_dock"])
+			say(current_ship.dock(to_dock))
+		if("undock")
+			say(current_ship.undock())
 		if("refresh")
 			current_ship.get_close_objects()
 		if("change_sensor_range")
@@ -113,3 +129,11 @@
 	if(length(concurrent_users) == 0 && is_living)
 		playsound(src, 'sound/machines/terminal_off.ogg', 25, FALSE)
 		use_power(0)
+
+/obj/machinery/computer/helm/viewscreen
+	name = "ship viewscreen"
+	icon = 'icons/obj/stationobjs.dmi'
+	icon_state = "telescreen"
+	layer = SIGN_LAYER
+	density = FALSE
+	viewer = TRUE
