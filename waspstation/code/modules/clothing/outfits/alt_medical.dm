@@ -87,7 +87,7 @@
 	dcoat = null
 	l_hand = null
 	suit_store = null
-	neck = /obj/item/clothing/neck/tie/blue
+	neck = /obj/item/clothing/neck/tie/orange
 
 	backpack_contents = list(/obj/item/clothing/glasses/science=1)
 
