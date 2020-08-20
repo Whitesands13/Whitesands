@@ -204,6 +204,15 @@
 	category = list("initial", "Electronics")
 	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING
 
+/datum/design/aac_electronics
+	name = "Airlock Controller Electronics"
+	id = "aac_electronics"
+	build_type = AUTOLATHE | PROTOLATHE
+	materials = list(/datum/material/iron = 50, /datum/material/glass = 50)
+	build_path = /obj/item/electronics/advanced_airlock_controller
+	category = list("initial", "Electronics")
+	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING
+
 /datum/design/firealarm_electronics
 	name = "Fire Alarm Electronics"
 	id = "firealarm_electronics"
@@ -709,6 +718,14 @@
 	build_type = AUTOLATHE
 	materials = list(/datum/material/iron = 14000, /datum/material/glass = 8000)
 	build_path = /obj/item/wallframe/newscaster
+	category = list("initial", "Construction")
+
+/datum/design/bounty_board_frame
+	name = "Bounty Board Frame"
+	id = "bountyboard_frame"
+	build_type = AUTOLATHE
+	materials = list(/datum/material/iron = 14000, /datum/material/glass = 8000)
+	build_path = /obj/item/wallframe/bounty_board
 	category = list("initial", "Construction")
 
 /datum/design/syringe

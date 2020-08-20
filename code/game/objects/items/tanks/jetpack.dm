@@ -22,8 +22,7 @@
 
 /obj/item/tank/jetpack/populate_gas()
 	if(gas_type)
-		air_contents.assert_gas(gas_type)
-		air_contents.gases[gas_type][MOLES] = ((6 * ONE_ATMOSPHERE) * volume / (R_IDEAL_GAS_EQUATION * T20C))
+		air_contents.set_moles(gas_type, ((6 * ONE_ATMOSPHERE) * volume / (R_IDEAL_GAS_EQUATION * T20C)))
 
 /obj/item/tank/jetpack/ui_action_click(mob/user, action)
 	if(istype(action, /datum/action/item_action/toggle_jetpack))
@@ -109,7 +108,7 @@
 /obj/item/tank/jetpack/suicide_act(mob/user)
 	if (istype(user, /mob/living/carbon/human/))
 		var/mob/living/carbon/human/H = user
-		H.forcesay("WHAT THE FUCK IS CARBON DIOXIDE?")
+		H.say("WHAT THE FUCK IS CARBON DIOXIDE?")
 		H.visible_message("<span class='suicide'>[user] is suffocating [user.p_them()]self with [src]! It looks like [user.p_they()] didn't read what that jetpack says!</span>")
 		return (OXYLOSS)
 	else
