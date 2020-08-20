@@ -80,8 +80,6 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/datum/admins/proc/open_borgopanel
 	)
 
-GLOBAL_LIST_INIT(mentor_verbs, list(/client/proc/cmd_mentor_pm_panel, /client/proc/show_mentor_memo, /client/proc/cmd_mentor_say))
-GLOBAL_PROTECT(mentor_verbs)
 GLOBAL_LIST_INIT(admin_verbs_ban, list(/client/proc/unban_panel, /client/proc/ban_panel, /client/proc/stickybanpanel))
 GLOBAL_PROTECT(admin_verbs_ban)
 GLOBAL_LIST_INIT(admin_verbs_sounds, list(/client/proc/play_local_sound, /client/proc/play_direct_mob_sound, /client/proc/play_sound, /client/proc/set_round_end_sound))
@@ -173,6 +171,10 @@ GLOBAL_PROTECT(admin_verbs_debug)
 	/client/proc/cmd_display_overlay_log,
 	/client/proc/reload_configuration,
 	/datum/admins/proc/create_or_modify_area,
+#ifdef REFERENCE_TRACKING
+	/datum/admins/proc/view_refs,
+	/datum/admins/proc/view_del_failures,
+#endif
 	)
 GLOBAL_LIST_INIT(admin_verbs_possess, list(/proc/possess, /proc/release))
 GLOBAL_PROTECT(admin_verbs_possess)
@@ -187,6 +189,7 @@ GLOBAL_LIST_INIT(admin_verbs_hideable, list(
 	/client/proc/reset_ooc,
 	/client/proc/deadmin,
 	/datum/admins/proc/show_traitor_panel,
+	/datum/admins/proc/show_skill_panel,
 	/datum/admins/proc/toggleenter,
 	/datum/admins/proc/toggleguests,
 	/datum/admins/proc/announce,
@@ -727,3 +730,28 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 	log_admin("[key_name(usr)] has [AI_Interact ? "activated" : "deactivated"] Admin AI Interact")
 	message_admins("[key_name_admin(usr)] has [AI_Interact ? "activated" : "deactivated"] their AI interaction")
+
+/client/proc/stabilize_atmos()
+	set name = "Stabilize Atmos"
+	set category = "Admin"
+	set desc = "Resets the air contents of every turf in view to normal. Closes all canisters in view."
+
+	if(!check_rights(R_ADMIN))
+		return
+
+	var/turf/T = get_turf(usr.loc)
+	message_admins("[key_name_admin(usr)] stabilized atmos at [AREACOORD(T)]")
+	log_game("[key_name_admin(usr)] stabilized atmos at [AREACOORD(T)]")
+
+	var/datum/gas_mixture/GM = new
+	for(var/turf/open/F in view())
+		if(F.blocks_air)
+		//skip walls
+			continue
+		GM.parse_gas_string(F.initial_gas_mix)
+		F.copy_air(GM)
+		F.update_visuals()
+
+	for(var/obj/machinery/portable_atmospherics/canister/can in view())
+		can.valve_open = FALSE
+		can.update_icon()

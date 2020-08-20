@@ -6,7 +6,10 @@ import { InterfaceLockNoticeBox } from './common/InterfaceLockNoticeBox';
 
 export const Apc = (props, context) => {
   return (
-    <Window resizable>
+    <Window
+      width={450}
+      height={445}
+      resizable>
       <Window.Content scrollable>
         <ApcContent />
       </Window.Content>
@@ -64,6 +67,7 @@ const ApcContent = (props, context) => {
     || powerStatusMap[0];
   const channelArray = data.powerChannels || [];
   const malfStatus = malfMap[data.malfStatus] || malfMap[0];
+  const malfMaskHackStatus = data.malfMaskHackStatus;
   const adjustedCellChange = data.powerCellStatus / 100;
   if (data.failTime > 0) {
     return (
@@ -82,7 +86,6 @@ const ApcContent = (props, context) => {
       </NoticeBox>
     );
   }
-
   return (
     <Fragment>
       <InterfaceLockNoticeBox />
@@ -176,38 +179,48 @@ const ApcContent = (props, context) => {
                 color="bad"
                 onClick={() => act(malfStatus.action)} />
             )}
+            {!!data.malfStatus && data.malfStatus === 2 && (
+              <Button
+                icon="eye-slash"
+                content="Mask Override Subroutines"
+                color="bad"
+                disabled={data.malfMaskHackStatus !== 0}
+                onClick={() => act("hide_hack")} />
+            )}
             <Button
               icon="lightbulb-o"
               content="Overload"
               onClick={() => act('overload')} />
           </Fragment>
         )}>
-        <LabeledList.Item
-          label="Cover Lock"
-          buttons={(
-            <Button
-              icon={data.coverLocked ? 'lock' : 'unlock'}
-              content={data.coverLocked ? 'Engaged' : 'Disengaged'}
-              disabled={locked}
-              onClick={() => act('cover')} />
-          )} />
-        <LabeledList.Item
-          label="Emergency Lighting"
-          buttons={(
-            <Button
-              icon="lightbulb-o"
-              content={data.emergencyLights ? 'Enabled' : 'Disabled'}
-              disabled={locked}
-              onClick={() => act('emergency_lighting')} />
-          )} />
-        <LabeledList.Item
-          label="Night Shift Lighting"
-          buttons={(
-            <Button
-              icon="lightbulb-o"
-              content={data.nightshiftLights ? 'Enabled' : 'Disabled'}
-              onClick={() => act('toggle_nightshift')} />
-          )} />
+        <LabeledList>
+          <LabeledList.Item
+            label="Cover Lock"
+            buttons={(
+              <Button
+                icon={data.coverLocked ? 'lock' : 'unlock'}
+                content={data.coverLocked ? 'Engaged' : 'Disengaged'}
+                disabled={locked}
+                onClick={() => act('cover')} />
+            )} />
+          <LabeledList.Item
+            label="Emergency Lighting"
+            buttons={(
+              <Button
+                icon="lightbulb-o"
+                content={data.emergencyLights ? 'Enabled' : 'Disabled'}
+                disabled={locked}
+                onClick={() => act('emergency_lighting')} />
+            )} />
+          <LabeledList.Item
+            label="Night Shift Lighting"
+            buttons={(
+              <Button
+                icon="lightbulb-o"
+                content={data.nightshiftLights ? 'Enabled' : 'Disabled'}
+                onClick={() => act('toggle_nightshift')} />
+            )} />
+        </LabeledList>
       </Section>
     </Fragment>
   );
