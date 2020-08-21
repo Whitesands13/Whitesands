@@ -16,26 +16,27 @@
 	///The overmap object/shuttle ID
 	var/id
 
-/obj/machinery/computer/helm/Initialize()
+/obj/machinery/computer/helm/Initialize(mapload)
 	. = ..()
-	return INITIALIZE_HINT_LATELOAD
-
-/obj/machinery/computer/helm/LateInitialize()
-	. = ..()
-	set_ship()
+	LAZYADD(SSovermap.helms, src)
+	if(!mapload)
+		set_ship()
 
 /obj/machinery/computer/helm/proc/set_ship()
-	var/obj/docking_port/port = SSshuttle.get_containing_shuttle(src)
-	var/area/A = get_area(src)
-	if(port)
-		id = port.id
-	else if(is_station_level(z) && !A?.outdoors)
-		id = MAIN_OVERMAP_OBJECT_ID
-	else
-		return
+	if(!id)
+		var/obj/docking_port/port = SSshuttle.get_containing_shuttle(src)
+		var/area/A = get_area(src)
+		if(port)
+			id = port.id
+		else if(is_station_level(z) && !A?.outdoors)
+			id = MAIN_OVERMAP_OBJECT_ID
+		else
+			return
 	current_ship = SSovermap.get_overmap_object_by_id(id)
-	if(!current_ship.shuttle)
-		current_ship.shuttle = port
+
+/obj/machinery/computer/helm/Destroy()
+	. = ..()
+	LAZYREMOVE(SSovermap.helms, src)
 
 /obj/machinery/computer/helm/ui_interact(\
 		mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
@@ -66,6 +67,7 @@
 	. = list()
 	.["shipInfo"] = list(
 		name = current_ship.name,
+		class = istype(current_ship, /obj/structure/overmap/ship) ? "ship" : istype(current_ship, /obj/structure/overmap/planet) ? "planet" : "station",
 		integrity = current_ship.integrity,
 		sensor_range = current_ship.sensor_range,
 		ref = REF(current_ship)

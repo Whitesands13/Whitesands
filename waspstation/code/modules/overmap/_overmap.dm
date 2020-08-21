@@ -43,9 +43,7 @@
 	desc = "An unknown celestial object."
 	icon = 'waspstation/icons/effects/overmap.dmi'
 	icon_state = "object"
-	///The main helm currently controlling or viewing the vessel
-	var/obj/machinery/computer/helm/helm
-	///ID
+	///ID, literally the most important thing
 	var/id
 	///~~If we need to render a map for cameras and helms for this object~~ basically can you look at and use this as a ship or station
 	var/render_map = FALSE
@@ -53,6 +51,8 @@
 	var/sensor_range = 4
 	///Integrity percentage (out of 100, duh)
 	var/integrity = 100
+	///Armor value, reduces integrity damage
+	var/overmap_armor = list("impact" = 1, "electric" = 1)
 
 	///List of other overmap objects in the same tile
 	var/list/close_overmap_objects = list()
@@ -63,11 +63,13 @@
 	var/obj/screen/plane_master/lighting/cam_plane_master
 	var/obj/screen/background/cam_background
 
-/obj/structure/overmap/Initialize(mapload, _id)
+/obj/structure/overmap/Initialize(mapload, _id = null)
 	. = ..()
 	START_PROCESSING(SSovermap, src)
 	if(id == MAIN_OVERMAP_OBJECT_ID)
 		name = station_name()
+	if(_id)
+		id = _id
 	if(!id)
 		id = "overmap_object_[SSovermap.processing.len + 1]"
 	if(render_map)	// Initialize map objects
@@ -94,7 +96,14 @@
 		QDEL_NULL(cam_plane_master)
 		QDEL_NULL(cam_background)
 
+/obj/structure/overmap/Move(atom/newloc, direct)
+	. = ..()
+	update_screen()
+
 /obj/structure/overmap/process()
+	update_screen()
+
+/obj/structure/overmap/proc/update_screen()
 	if(render_map)
 		var/list/visible_turfs = list()
 		for(var/turf/T in view(sensor_range, src))
@@ -111,16 +120,16 @@
 
 /obj/structure/overmap/Crossed(atom/movable/AM, oldloc)
 	. = ..()
-	if(istype(AM, /obj/structure/overmap))
+	if(istype(loc, /turf/) && istype(AM, /obj/structure/overmap))
 		var/obj/structure/overmap/other = AM
 		if(other == src)
 			return
 		other.close_overmap_objects += src
 		close_overmap_objects += other
 
-/obj/structure/overmap/Uncross(atom/movable/AM, atom/newloc)
+/obj/structure/overmap/Uncrossed(atom/movable/AM, atom/newloc)
 	. = ..()
-	if(istype(AM, /obj/structure/overmap))
+	if(istype(loc, /turf/) && istype(AM, /obj/structure/overmap))
 		var/obj/structure/overmap/other = AM
 		if(other == src)
 			return
@@ -134,21 +143,25 @@
 			continue
 		close_overmap_objects += object
 
-/obj/structure/overmap/dockable
-	///Linked Zlevel(s), if any
-	var/list/zlevels = list()
+/obj/structure/overmap/proc/recieve_damage(amount)
+	integrity = max(integrity - (amount / overmap_armor), 0)
 
-/obj/structure/overmap/dockable/main //there should only be ONE of these in a given game.
+/obj/structure/overmap/main //there should only be ONE of these in a given game.
+	name = "Space Station 13"
 	id = MAIN_OVERMAP_OBJECT_ID
 	render_map = TRUE
 
-/obj/structure/overmap/dockable/main/LateInitialize(mapload, _id)
+/obj/structure/overmap/main/Initialize(mapload, _id)
 	. = ..()
-	zlevels |= SSmapping.levels_by_trait(ZTRAIT_STATION)
+	if(SSovermap.main)
+		WARNING("Multiple main overmap objects spawned!")
+	else
+		SSovermap.main = src
 
-/obj/structure/overmap/dockable/planet
+/obj/structure/overmap/planet
 	icon_state = "globe"
 
-/obj/structure/overmap/dockable/planet/lavaland/LateInitialize(mapload, _id)
-	. = ..()
-	zlevels |= SSmapping.levels_with_traits(ZTRAITS_LAVALAND)
+/obj/structure/overmap/planet/lavaland
+	name = "Lavaland"
+	id = "lavaland"
+	color = COLOR_ORANGE

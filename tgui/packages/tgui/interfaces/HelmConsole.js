@@ -14,7 +14,7 @@ export const HelmConsole = (props, context) => {
           {!data.isViewer && (
             <ShipControlContent />
           )}
-          {!!data.canFly && (
+          {(data.state === 'flying') && (
             <ShipContent />
           )}
           <SharedContent />
@@ -76,9 +76,11 @@ const SharedContent = (props, context) => {
             <Table.Cell>
               Integrity
             </Table.Cell>
-            <Table.Cell>
-              Action
-            </Table.Cell>
+            {!isViewer && (
+              <Table.Cell>
+                Action
+              </Table.Cell>
+            )}
           </Table.Row>
           {otherInfo.map(ship => (
             <Table.Row key={ship.name}>
@@ -97,14 +99,16 @@ const SharedContent = (props, context) => {
                     value={ship.integrity} />
                 )}
               </Table.Cell>
-              <Table.Cell>
-                <Button
-                  icon="circle"
-                  disabled={isViewer}
-                  onClick={() => act('dock', {
-                    ship_to_dock: ship.ref,
-                  })} />
-              </Table.Cell>
+              {!isViewer && (
+                <Table.Cell>
+                  <Button
+                    icon="circle"
+                    disabled={isViewer || (data.speed > 0)}
+                    onClick={() => act('dock', {
+                      ship_to_dock: ship.ref,
+                    })} />
+                </Table.Cell>
+              )}
             </Table.Row>
           ))}
         </Table>
@@ -133,7 +137,7 @@ const ShipContent = (props, context) => {
           </ProgressBar>
         </LabeledList.Item>
         <LabeledList.Item label="Heading">
-          <AnimatedNumber value={heading} />
+          <AnimatedNumber value={heading ? heading : "None"} />
         </LabeledList.Item>
         <LabeledList.Item label="Position">
           X
@@ -152,13 +156,14 @@ const ShipContent = (props, context) => {
 // Arrow directional controls
 const ShipControlContent = (props, context) => {
   const { act, data } = useBackend(context);
-  let flyable = true;
+  let flyable = (data.state !== 'idle');
   return (
     <Section
       title="Navigation"
       buttons={(
         <Button
           content="Undock"
+          disabled={flyable}
           onClick={() => act('undock')} />
       )}>
       <Grid width="1px">

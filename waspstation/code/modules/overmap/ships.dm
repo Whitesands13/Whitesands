@@ -26,7 +26,8 @@
 	var/state = SHIP_IDLE
 	///The time the shuttle started launching
 	var/dock_change_start_time
-
+	///Areas events should effect and such
+	var/list/area/ship_areas = list()
 
 	///The current speed in x/y direction (in grid squares per... second?)
 	var/speed = list(0,0)
@@ -43,18 +44,26 @@
 
 	var/burn_delay = 0.5 SECONDS
 
-/obj/structure/overmap/ship/Initialize(mapload, _id)
+/obj/structure/overmap/ship/Initialize(mapload, _id, _shuttle = null)
 	. = ..()
-	SSovermap.ships += src
-	shuttle = SSshuttle.getShuttle(id)
+	LAZYADD(SSovermap.ships, src)
+	if(_shuttle)
+		shuttle = _shuttle
+
+/obj/structure/overmap/ship/proc/initial_load()
 	if(istype(loc, /obj/structure/overmap))
 		docked = loc
+	if(!shuttle)
+		shuttle = SSshuttle.getShuttle(id)
 	if(shuttle)
 		name = shuttle.name
+		for(var/one_area in shuttle.shuttle_areas)
+			if(shuttle.shuttle_areas[one_area])
+				LAZYADD(ship_areas, one_area)
 
 /obj/structure/overmap/ship/Destroy()
 	. = ..()
-	SSovermap.ships -= src
+	LAZYREMOVE(SSovermap.ships, src)
 
 /obj/structure/overmap/ship/proc/dock(obj/structure/overmap/to_dock)
 	if(!is_still())
@@ -63,7 +72,7 @@
 	if(SSshuttle.getDock("[id]_[to_dock.id]"))
 		dock_to_use = SSshuttle.getDock("[id]_[to_dock.id]")
 	else if(SSshuttle.getDock("whiteship_[to_dock.id]"))
-		dock_to_use = SSshuttle.getDock("[id]_[to_dock.id]")
+		dock_to_use = SSshuttle.getDock("whiteship_[to_dock.id]")
 	else
 		return "Error finding valid docking port!"
 
@@ -88,11 +97,16 @@
 	state = SHIP_UNDOCKING
 	return "Beginning undocking procedures..."
 
+/* BEWARE ALL YE WHO PASS THIS LINE */
+// This code needs to be reworked before it gets merged. I'm serious.
+
 /obj/structure/overmap/ship/proc/is_still()
 	return !MOVING(speed[1]) && !MOVING(speed[2])
 
 /obj/structure/overmap/ship/process()
 	..()
+	if(docked && integrity < initial(integrity))
+		integrity++
 	if((world.time >= dock_change_start_time)) //Handler for undocking and docking timer
 		switch(state)
 			if(SHIP_DOCKING)
@@ -169,11 +183,11 @@
 	var/nx = x
 	var/ny = y
 	var/low_edge = 2
-	var/high_edge = SSovermap.size - 1
+	var/high_edge = SSovermap.size
 
 	if((dir & WEST) && x == low_edge)
 		nx = high_edge
-	else if((dir & EAST) && x == high_edge)
+	else if((dir & EAST) && x == high_edge - 1)
 		nx = low_edge
 	if((dir & SOUTH)  && y == low_edge)
 		ny = high_edge
@@ -192,6 +206,8 @@
 		dir = get_heading()
 	else
 		icon_state = initial(icon_state)
+
+/* YE OLDE LINE OF WARNING ENDS HERE */
 
 /obj/structure/overmap/ship/rendered
 	render_map = TRUE

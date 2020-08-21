@@ -326,9 +326,6 @@
 	initial_engines = count_engines()
 	current_engines = initial_engines
 
-	if(is_station_level(z))
-		new /obj/structure/overmap/ship/rendered(SSovermap.get_main(), id)
-
 	#ifdef DOCKING_PORT_HIGHLIGHT
 	highlight("#0f0")
 	#endif
