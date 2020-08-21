@@ -74,7 +74,7 @@
 /obj/item/clothing/under/suit/ce/skirt
 	name = "engineering coordinator skirtsuit"
 	desc = "A skirtsuit with engineering colors, worn by those who lead and have survived the engineering department."
-	icon_state = "senior_medical_skirt"
+	icon_state = "engineering_coordinator_skirt"
 
 	body_parts_covered = CHEST|GROIN|ARMS
 	can_adjust = FALSE
