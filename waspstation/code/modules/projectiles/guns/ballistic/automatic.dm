@@ -4,9 +4,9 @@
 	icon_state = "solar"
 	icon = 'waspstation/icons/obj/guns/projectile.dmi'
 	item_state = "arg"
-	mag_type = /obj/item/ammo_box/magazine/csrifle
+	mag_type = /obj/item/ammo_box/magazine/rifle47x33mm
 	can_suppress = FALSE
-	fire_rate = 5
+	fire_rate = 4
 	actions_types = list()
 	can_bayonet = FALSE
 	mag_display = TRUE
@@ -31,4 +31,4 @@
 	icon_state = "solm9c"
 	weapon_weight = WEAPON_LIGHT
 	w_class = WEIGHT_CLASS_SMALL
-	mag_type = /obj/item/ammo_box/magazine/m9c
+	mag_type = /obj/item/ammo_box/magazine/pistol556mm
