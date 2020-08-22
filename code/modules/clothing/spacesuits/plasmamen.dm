@@ -45,8 +45,12 @@
 	tint = 2
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 100, "rad" = 0, "fire" = 100, "acid" = 75)
 	resistance_flags = FIRE_PROOF
-	var/brightness_on = 4 //luminosity when the light is on
-	var/on = FALSE
+	light_system = MOVABLE_LIGHT
+	light_range = 4
+	light_on = FALSE
+	light_color = "#FFCC66"
+	light_power = 0.8
+	var/helmet_on = FALSE
 	var/smile = FALSE
 	var/smile_color = "#FF0000"
 	var/visor_icon = "envisor"
@@ -68,9 +72,9 @@
 
 /obj/item/clothing/head/helmet/space/plasmaman/proc/toggle_welding_screen(mob/living/user)
 	if(weldingvisortoggle(user))
-		if(on)
+		if(helmet_on)
 			to_chat(user, "<span class='notice'>Your helmet's torch can't pass through your welding visor!</span>")
-			on = FALSE
+			helmet_on = FALSE
 			playsound(src, 'sound/mecha/mechmove03.ogg', 50, TRUE) //Visors don't just come from nothing
 			update_icon()
 		else
@@ -114,19 +118,19 @@
 		return TRUE
 
 /obj/item/clothing/head/helmet/space/plasmaman/attack_self(mob/user)
-	on = !on
-	icon_state = "[initial(icon_state)][on ? "-light":""]"
+	helmet_on = !helmet_on
+	icon_state = "[initial(icon_state)][helmet_on ? "-light":""]"
 	item_state = icon_state
 	user.update_inv_head() //So the mob overlay updates
 
-	if(on)
+	if(helmet_on)
 		if(!up)
 			to_chat(user, "<span class='notice'>Your helmet's torch can't pass through your welding visor!</span>")
-			set_light(0)
+			set_light_on(FALSE)
 		else
-			set_light(brightness_on, 0.8, "#FFCC66")
+			set_light_on(TRUE)
 	else
-		set_light(0)
+		set_light_on(FALSE)
 
 	for(var/X in actions)
 		var/datum/action/A=X
@@ -272,37 +276,37 @@
 	desc = "An envirosuit helmet made for the most important plasmaman of them all."
 	icon_state = "command_envirohelm"
 	item_state = "command_envirohelm"
-	
+
 /obj/item/clothing/head/helmet/space/plasmaman/engineering/ce
 	name = "chief engineers envirohelmet"
 	desc = "An envirosuit helmet made for the tutored plasmaman."
 	icon_state = "ce_envirohelm"
 	item_state = "ce_envirohelm"
-	
+
 /obj/item/clothing/head/helmet/space/plasmaman/cmo
 	name = "chief medical officers envirohelmet"
 	desc = "An envirosuit helmet made for the taxed plasmaman."
 	icon_state = "cmo_envirohelm"
 	item_state = "cmo_envirohelm"
-	
+
 /obj/item/clothing/head/helmet/space/plasmaman/security/hos
 	name = "head of securitys helmet"
 	desc = "An envirosuit helmet made for the right and honorable plasmaman."
 	icon_state = "hos_envirohelm"
 	item_state = "hos_envirohelm"
-	
+
 /obj/item/clothing/head/helmet/space/plasmaman/rd
 	name = "research directors envirosuit helmet"
 	desc = "An envirosuit helmet made for the erudite plasmaman."
 	icon_state = "rd_envirohelm"
 	item_state = "rd_envirohelm"
-	
+
 /obj/item/clothing/head/helmet/space/plasmaman/hop
 	name = "head of personnels envirosuit helmet"
 	desc = "An envirosuit helmet made for the complacent plasmaman."
 	icon_state = "hop_envirohelm"
 	item_state = "hop_envirohelm"
-	
+
 /obj/item/clothing/head/helmet/space/plasmaman/security/secmed
 	name = "brig physician envirosuit helmet"
 	desc = "An envirosuit helmet made for the sanctioned plasmaman."

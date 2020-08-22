@@ -9,8 +9,8 @@
 #define LIGHT_BROKEN 2
 #define LIGHT_BURNED 3
 
-#define BROKEN_SPARKS_MIN (30 SECONDS)
-#define BROKEN_SPARKS_MAX (90 SECONDS)
+#define BROKEN_SPARKS_MIN (3 MINUTES)
+#define BROKEN_SPARKS_MAX (9 MINUTES)
 
 /obj/item/wallframe/light_fixture
 	name = "light fixture frame"
@@ -117,6 +117,10 @@
 			cell = W
 			add_fingerprint(user)
 		return
+	else if (istype(W, /obj/item/light))
+		to_chat(user, "<span class='warning'>This [name] isn't finished being setup!</span>")
+		return
+
 	switch(stage)
 		if(1)
 			if(W.tool_behaviour == TOOL_WRENCH)

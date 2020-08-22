@@ -20,13 +20,14 @@
 	sharpness = IS_SHARP
 	actions_types = list(/datum/action/item_action/toggle_light)
 	obj_flags = UNIQUE_RENAME
+	light_system = MOVABLE_LIGHT
+	light_range = 5
 	light_on = FALSE
 	var/list/trophies = list()
 	var/charged = TRUE
 	var/charge_time = 15
 	var/detonation_damage = 50
 	var/backstab_bonus = 30
-	var/brightness_on = 5
 	var/wielded = FALSE // track wielded status on item
 
 /obj/item/kinetic_crusher/Initialize()
@@ -146,14 +147,8 @@
 /obj/item/kinetic_crusher/ui_action_click(mob/user, actiontype)
 	set_light_on(!light_on)
 	playsound(user, 'sound/weapons/empty.ogg', 100, TRUE)
-	update_brightness(user)
 	update_icon()
 
-/obj/item/kinetic_crusher/proc/update_brightness(mob/user = null)
-	if(light_on)
-		set_light(brightness_on)
-	else
-		set_light(0)
 
 /obj/item/kinetic_crusher/update_icon_state()
 	item_state = "crusher[wielded]" // this is not icon_state and not supported by 2hcomponent
