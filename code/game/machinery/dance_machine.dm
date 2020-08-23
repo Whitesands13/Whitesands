@@ -146,7 +146,7 @@
 				return TRUE
 
 /obj/machinery/jukebox/proc/activate_music()
-	var/jukeboxslottotake = SSjukeboxes.addjukebox(src, selection) //Wasp Edit Cit #7367
+	var/jukeboxslottotake = SSjukeboxes.addjukebox(src, selection, 2) //Wasp Edit Cit #7367 & #7458
 	if(jukeboxslottotake)
 		active = TRUE
 		update_icon()
