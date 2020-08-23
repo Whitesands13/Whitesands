@@ -5,7 +5,7 @@
 	icon_state = "jukebox"
 	verb_say = "states"
 	density = TRUE
-	req_access = list(ACCESS_BAR)
+	req_one_access = list(ACCESS_BAR, ACCESS_KITCHEN, ACCESS_HYDROPONICS, ACCESS_ENGINE, ACCESS_CARGO, ACCESS_THEATRE) //Wasp Edit Cit #7905
 	var/active = FALSE
 	var/list/rangers = list()
 	var/stop = 0
@@ -428,6 +428,8 @@
 	lying_prev = 0
 
 /obj/machinery/jukebox/proc/dance_over()
+	SSjukeboxes.removejukebox(SSjukeboxes.findjukeboxindex(src)) //Wasp Edit Cit #7604
+	STOP_PROCESSING(SSobj, src)
 	for(var/mob/living/L in rangers)
 		if(!L || !L.client)
 			continue
@@ -442,8 +444,6 @@
 /obj/machinery/jukebox/process()
 	if(active && world.time >= stop) //Wasp Edit Cit #7367
 		active = FALSE
-		SSjukeboxes.removejukebox(SSjukeboxes.findjukeboxindex(src)) //Wasp Edit Cit #7367
-		STOP_PROCESSING(SSobj, src)
 		dance_over()
 		playsound(src,'sound/machines/terminal_off.ogg',50,TRUE)
 		update_icon()
