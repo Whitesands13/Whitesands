@@ -6,17 +6,15 @@ import { Table } from '../components/Table';
 
 export const HelmConsole = (props, context) => {
   const { act, data, config } = useBackend(context);
-  const { canFly, mapRef } = data;
+  const { canFly, mapRef, isViewer } = data;
   return (
     <Window resizable>
       <div className="CameraConsole__left">
         <Window.Content>
-          {!data.isViewer && (
+          {!isViewer && canFly && (
             <ShipControlContent />
           )}
-          {(data.state === 'flying') && (
-            <ShipContent />
-          )}
+          <ShipContent />
           <SharedContent />
         </Window.Content>
       </div>
@@ -58,6 +56,11 @@ const SharedContent = (props, context) => {
               <AnimatedNumber value={shipInfo.sensor_range} />
             </ProgressBar>
           </LabeledList.Item>
+          {shipInfo.mass && (
+            <LabeledList.Item label="Mass">
+              <AnimatedNumber value={shipInfo.mass} />
+            </LabeledList.Item>
+          )}
         </LabeledList>
       </Section>
       <Section
@@ -120,36 +123,107 @@ const SharedContent = (props, context) => {
 // Content included on helms when they're controlling ships
 const ShipContent = (props, context) => {
   const { act, data } = useBackend(context);
-  const { speed, heading, eta, x, y } = data;
+  const { isViewer, engineInfo, speed, heading, eta, x, y } = data;
   return (
-    <Section title="Velocity">
-      <LabeledList>
-        <LabeledList.Item label="Speed">
-          <ProgressBar
-            ranges={{
-              good: [0, 4],
-              average: [5, 6],
-              bad: [7, Infinity],
-            }}
-            maxValue={10}
-            value={speed}>
-            <AnimatedNumber value={speed} />
-          </ProgressBar>
-        </LabeledList.Item>
-        <LabeledList.Item label="Heading">
-          <AnimatedNumber value={heading ? heading : "None"} />
-        </LabeledList.Item>
-        <LabeledList.Item label="Position">
-          X
-          <AnimatedNumber value={x} />
-          /Y
-          <AnimatedNumber value={y} />
-        </LabeledList.Item>
-        <LabeledList.Item label="Next">
-          <AnimatedNumber value={eta} />
-        </LabeledList.Item>
-      </LabeledList>
-    </Section>
+    <Fragment>
+      <Section title="Velocity">
+        <LabeledList>
+          <LabeledList.Item label="Speed">
+            <ProgressBar
+              ranges={{
+                good: [0, 4],
+                average: [5, 6],
+                bad: [7, Infinity],
+              }}
+              maxValue={10}
+              value={speed}>
+              <AnimatedNumber value={speed} />
+              spM
+            </ProgressBar>
+          </LabeledList.Item>
+          <LabeledList.Item label="Heading">
+            <AnimatedNumber value={heading ? heading : "None"} />
+          </LabeledList.Item>
+          <LabeledList.Item label="Position">
+            X
+            <AnimatedNumber value={x} />
+            /Y
+            <AnimatedNumber value={y} />
+          </LabeledList.Item>
+          <LabeledList.Item label="Next">
+            <AnimatedNumber
+              value={eta > 1000 ? "N/A" : eta / 10}
+              format={value => Math.round(value)} />
+            s
+          </LabeledList.Item>
+        </LabeledList>
+      </Section>
+      <Section title="Engines">
+        <Table>
+          <Table.Row bold>
+            <Table.Cell>
+              Name
+            </Table.Cell>
+            <Table.Cell>
+              Fuel
+            </Table.Cell>
+            {!isViewer && (
+              <Table.Cell>
+                Toggle
+              </Table.Cell>
+            )}
+          </Table.Row>
+          {engineInfo.map(engine => (
+            <Table.Row key={engine.name}>
+              <Table.Cell>
+                {engine.name}
+              </Table.Cell>
+              <Table.Cell>
+                {!!engine.fuel && (
+                  <ProgressBar
+                    ranges={{
+                      good: [501, Infinity],
+                      average: [251, 500],
+                      bad: [-Infinity, 250],
+                    }}
+                    maxValue={1000}
+                    value={engine.fuel}>
+                    <AnimatedNumber
+                      value={engine.fuel}
+                      format={value => Math.round(value)} />
+                    mols
+                  </ProgressBar>
+                )}
+              </Table.Cell>
+              <Table.Cell>
+                {!isViewer && (
+                  <Button
+                    icon="circle"
+                    color={engine.enabled ? "good" : "bad"}
+                    onClick={() => act('toggle_engine', {
+                      engine: engine.ref,
+                    })} />
+                )}
+              </Table.Cell>
+            </Table.Row>
+          ))}
+          <Table.Row>
+            <Table.Cell>
+              Total Thrust:
+            </Table.Cell>
+            <Table.Cell>
+              <AnimatedNumber value={data.shipInfo.est_thrust} />
+              kN
+            </Table.Cell>
+            <Table.Cell>
+              <AnimatedNumber
+                value={data.shipInfo.est_thrust / data.shipInfo.mass * 100} />
+              spM/burn
+            </Table.Cell>
+          </Table.Row>
+        </Table>
+      </Section>
+    </Fragment>
   );
 };
 

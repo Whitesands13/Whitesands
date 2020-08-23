@@ -26,9 +26,10 @@
 	var/state = SHIP_IDLE
 	///The time the shuttle started launching
 	var/dock_change_start_time
-	///Areas events should effect and such
-	var/list/area/ship_areas = list()
-
+	///Vessel approximate mass
+	var/mass
+	///Vessel estimated thrust
+	var/est_thrust
 	///The current speed in x/y direction (in grid squares per... second?)
 	var/speed = list(0,0)
 	///Max possible speed (PLACEHOLDER)
@@ -37,12 +38,8 @@
 	var/min_speed = 1/(2 MINUTES)
 	///The last time the vessel moved
 	var/last_movement = list(0,0)
-	///Acceleration (PLACEHOLDER)
-	var/acceleration = 1/(30 SECONDS)
 	///icon_state that's shown when the vessel is moving
 	var/moving_state = "ship_moving"
-
-	var/burn_delay = 0.5 SECONDS
 
 /obj/structure/overmap/ship/Initialize(mapload, _id, _shuttle = null)
 	. = ..()
@@ -50,6 +47,9 @@
 	if(_shuttle)
 		shuttle = _shuttle
 
+/**
+  * Called by SSovermap, this ensures that SSshuttle will be available for getting shuttles.
+  */
 /obj/structure/overmap/ship/proc/initial_load()
 	if(istype(loc, /obj/structure/overmap))
 		docked = loc
@@ -57,21 +57,22 @@
 		shuttle = SSshuttle.getShuttle(id)
 	if(shuttle)
 		name = shuttle.name
-		for(var/one_area in shuttle.shuttle_areas)
-			if(shuttle.shuttle_areas[one_area])
-				LAZYADD(ship_areas, one_area)
+		calculate_mass()
 
 /obj/structure/overmap/ship/Destroy()
 	. = ..()
 	LAZYREMOVE(SSovermap.ships, src)
 
+/**
+  * Docks the shuttle by requesting a port at the requested spot.
+  */
 /obj/structure/overmap/ship/proc/dock(obj/structure/overmap/to_dock)
 	if(!is_still())
 		return "Ship must be stopped to dock!"
 	var/dock_to_use
 	if(SSshuttle.getDock("[id]_[to_dock.id]"))
 		dock_to_use = SSshuttle.getDock("[id]_[to_dock.id]")
-	else if(SSshuttle.getDock("whiteship_[to_dock.id]"))
+	else if(SSshuttle.getDock("whiteship_[to_dock.id]")) //TODO: needs to be changed to `default_id`
 		dock_to_use = SSshuttle.getDock("whiteship_[to_dock.id]")
 	else
 		return "Error finding valid docking port!"
@@ -83,6 +84,9 @@
 	state = SHIP_DOCKING
 	return "Commencing docking..."
 
+/**
+  * Undocks the shuttle by launching the shuttle with no destination (this causes it to remain in transit)
+  */
 /obj/structure/overmap/ship/proc/undock()
 	if(!is_still()) //how the hell would it even be moving
 		return "Ship must be stopped to undock!"
@@ -97,14 +101,51 @@
 	state = SHIP_UNDOCKING
 	return "Beginning undocking procedures..."
 
+/**
+  * Burns the engines in one direction, accelerating in that direction.
+  * If no dir variable is provided, it decelerates the vessel.
+  */
+/obj/structure/overmap/ship/proc/burn_engines(n_dir = null)
+	var/thrust_used = 0 //The amount of thrust that the engines will provide with one burn
+	if(mass == 0)
+		calculate_mass()
+	for(var/obj/machinery/shuttle/engine/E in shuttle.engine_list)
+		if(!E.enabled)
+			continue
+		if(E.attached_heater)
+			var/obj/machinery/atmospherics/components/unary/shuttle/heater/resolved_heater = E.attached_heater.resolve()
+			if(!resolved_heater.hasFuel(E.fuel_use * E.thrust)) //if there's not enough fuel, don't burn
+				continue
+			resolved_heater.consumeFuel(E.fuel_use * E.thrust)
+		E.fireEngine()
+		thrust_used = thrust_used + E.thrust
+	est_thrust = thrust_used //cheeky way of rechecking the thrust, check it every time it's used
+	thrust_used = (thrust_used / 10) / max(mass, 1)
+	if(n_dir)
+		accelerate(n_dir, thrust_used)
+	else
+		decelerate(thrust_used)
+
+/**
+  * Calculates the mass based on the amount of turfs in the shuttle's areas
+  */
+/obj/structure/overmap/ship/proc/calculate_mass()
+	. = 0
+	var/list/areas = shuttle.shuttle_areas
+	for(var/shuttleArea in areas)
+		. += length(get_area_turfs(shuttleArea))
+	mass = .
+
 /* BEWARE ALL YE WHO PASS THIS LINE */
 // This code needs to be reworked before it gets merged. I'm serious.
 
 /obj/structure/overmap/ship/proc/is_still()
 	return !MOVING(speed[1]) && !MOVING(speed[2])
 
-/obj/structure/overmap/ship/process()
-	..()
+/**
+  * Handles all movement, called by the SSovermap subsystem
+  */
+/obj/structure/overmap/ship/proc/process_movement()
 	if(docked && integrity < initial(integrity))
 		integrity++
 	if((world.time >= dock_change_start_time)) //Handler for undocking and docking timer
@@ -125,11 +166,10 @@
 		var/turf/newloc = locate(x + deltas[1], y + deltas[2], z)
 		if(newloc)
 			Move(newloc)
-			handle_wraparound()
 		update_icon()
 
 /obj/structure/overmap/ship/proc/get_speed()
-	return round(sqrt(speed[1] ** 2 + speed[2] ** 2), SHIP_MOVE_RESOLUTION)
+	return round(sqrt(speed[1] ** 2 + speed[2] ** 2), SHIP_MOVE_RESOLUTION) / 2
 
 /obj/structure/overmap/ship/proc/get_heading()
 	var/direction = 0
@@ -146,7 +186,7 @@
 	return direction
 
 /obj/structure/overmap/ship/proc/get_eta()
-	var/eta
+	var/eta = INFINITY
 	for(var/i=1, i<=2, i++)
 		if(MOVING(speed[i]))
 			eta = min(last_movement[i] - world.time + 1/abs(speed[i]), eta)
@@ -157,17 +197,17 @@
 	CHANGE_SPEED_BY(speed[2], n_y)
 	update_icon()
 
-/obj/structure/overmap/ship/proc/accelerate(direction, target)
+/obj/structure/overmap/ship/proc/accelerate(direction, acceleration)
 	if(direction & EAST)
-		adjust_speed(min(acceleration, target - acceleration), 0)
+		adjust_speed(acceleration, 0)
 	if(direction & WEST)
-		adjust_speed(max(-acceleration, target + acceleration), 0)
+		adjust_speed(-acceleration, 0)
 	if(direction & NORTH)
-		adjust_speed(0, min(acceleration, target - acceleration))
+		adjust_speed(0, acceleration)
 	if(direction & SOUTH)
-		adjust_speed(0, max(-acceleration, target + acceleration))
+		adjust_speed(0, -acceleration)
 
-/obj/structure/overmap/ship/proc/decelerate()
+/obj/structure/overmap/ship/proc/decelerate(acceleration)
 	if(((speed[1]) || (speed[2])))
 		if (speed[1])
 			adjust_speed(-SIGN(speed[1]) * min(acceleration, abs(speed[1])), 0)
@@ -191,7 +231,7 @@
 		nx = low_edge
 	if((dir & SOUTH)  && y == low_edge)
 		ny = high_edge
-	else if((dir & NORTH) && y == high_edge)
+	else if((dir & NORTH) && y == high_edge - 1)
 		ny = low_edge
 	if((x == nx) && (y == ny))
 		return //we're not flying off anywhere
@@ -210,6 +250,13 @@
 /* YE OLDE LINE OF WARNING ENDS HERE */
 
 /obj/structure/overmap/ship/rendered
+	render_map = TRUE
+
+/obj/structure/overmap/ship/shuttle
+	icon_state = "shuttle"
+	moving_state = "shuttle_moving"
+
+/obj/structure/overmap/ship/shuttle/rendered
 	render_map = TRUE
 
 #undef SHIP_IDLE

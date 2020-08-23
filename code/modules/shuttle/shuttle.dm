@@ -326,6 +326,14 @@
 	initial_engines = count_engines()
 	current_engines = initial_engines
 
+	if(!mapload)
+		if(is_station_level(z))
+			new /obj/structure/overmap/ship/shuttle/rendered(SSovermap.main, id, src)
+		else if(is_mining_level(z))
+			new /obj/structure/overmap/ship/shuttle/rendered(SSovermap.get_overmap_object_by_id("lavaland"), id, src)
+		else
+			new /obj/structure/overmap/ship/shuttle/rendered(get_random_station_turf())
+
 	#ifdef DOCKING_PORT_HIGHLIGHT
 	highlight("#0f0")
 	#endif
@@ -818,9 +826,13 @@
 
 // Losing all initial engines should get you 2
 // Adding another set of engines at 0.5 time
-/obj/docking_port/mobile/proc/alter_engines(mod)
+/obj/docking_port/mobile/proc/alter_engines(mod, engine)
 	if(mod == 0)
 		return
+	if(mod < 0)
+		LAZYREMOVE(engine_list, engine)
+	else
+		LAZYADD(engine_list, engine)
 	var/old_coeff = engine_coeff
 	engine_coeff = get_engine_coeff(current_engines,mod)
 	current_engines = max(0,current_engines + mod)
@@ -836,6 +848,10 @@
 			if(!QDELETED(E))
 				engine_list += E
 				. += E.engine_power
+		for(var/obj/machinery/shuttle/engine/E in areaInstance.contents)
+			if(!QDELETED(E))
+				engine_list += E
+				. += E.thruster_active ? 1 : 0
 
 // Double initial engines to get to 0.5 minimum
 // Lose all initial engines to get to 2

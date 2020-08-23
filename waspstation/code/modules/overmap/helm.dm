@@ -22,7 +22,9 @@
 	if(!mapload)
 		set_ship()
 
-/obj/machinery/computer/helm/proc/set_ship()
+/obj/machinery/computer/helm/proc/set_ship(_id)
+	if(_id)
+		id = _id
 	if(!id)
 		var/obj/docking_port/port = SSshuttle.get_containing_shuttle(src)
 		var/area/A = get_area(src)
@@ -42,6 +44,8 @@
 		mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
 		datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
 	// Update UI
+	if(!current_ship)
+		set_ship()
 	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
 		var/user_ref = REF(user)
@@ -67,7 +71,7 @@
 	. = list()
 	.["shipInfo"] = list(
 		name = current_ship.name,
-		class = istype(current_ship, /obj/structure/overmap/ship) ? "ship" : istype(current_ship, /obj/structure/overmap/planet) ? "planet" : "station",
+		class = istype(current_ship, /obj/structure/overmap/ship) ? "ship" : istype(current_ship, /obj/structure/overmap/level/planet) ? "planet" : "station",
 		integrity = current_ship.integrity,
 		sensor_range = current_ship.sensor_range,
 		ref = REF(current_ship)
@@ -92,10 +96,26 @@
 		.["stopped"] = current_ship.is_still()
 		.["x"] = current_ship.x
 		.["y"] = current_ship.y
+		.["shipInfo"] += list(
+			mass = current_ship.mass,
+			est_thrust = current_ship.est_thrust
+		)
+		.["engineInfo"] = list()
+		for(var/obj/machinery/shuttle/engine/E in current_ship.shuttle.engine_list)
+			var/obj/machinery/atmospherics/components/unary/shuttle/heater/H = E.attached_heater.resolve()
+			if(!E.thruster_active)
+				continue
+			var/list/engine_data = list(
+				name = E.name,
+				fuel = H ? H.getGas() : FALSE,
+				enabled = E.enabled,
+				ref = REF(E)
+			)
+			.["engineInfo"] += list(engine_data)
 
 /obj/machinery/computer/helm/ui_static_data(mob/user)
 	. = list()
-	.["canFly"] = istype(/obj/structure/overmap/ship, current_ship)
+	.["canFly"] = istype(current_ship, /obj/structure/overmap/ship)
 	.["isViewer"] = viewer
 	.["mapRef"] = current_ship.map_name
 
@@ -110,14 +130,17 @@
 			say(current_ship.dock(to_dock))
 		if("undock")
 			say(current_ship.undock())
+		if("reload_ship")
+			set_ship()
+		if("toggle_engine")
+			var/obj/machinery/shuttle/engine/E = locate(params["engine"])
+			E.enabled = !E.enabled
 		if("refresh")
 			current_ship.get_close_objects()
-		if("change_sensor_range")
-			current_ship.sensor_range = text2num(params["sensor_range"])
 		if("change_heading")
-			current_ship.accelerate(text2num(params["dir"]))
+			current_ship.burn_engines(text2num(params["dir"]))
 		if("stop")
-			current_ship.decelerate()
+			current_ship.burn_engines()
 
 /obj/machinery/computer/helm/ui_close(mob/user)
 	var/user_ref = REF(user)

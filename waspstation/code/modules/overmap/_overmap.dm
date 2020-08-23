@@ -36,24 +36,41 @@
 		if(x == SSovermap.size)
 			I.pixel_x = 5*i + 2
 		overlays += I
+/* OVERMAP AREA */
+/area/overmap
+	name = "Overmap"
+	icon_state = "yellow"
+	requires_power = FALSE
+	noteleport = TRUE
+	blob_allowed = FALSE
+	flags_1 = NONE
 
-/* OVERMAP OBJECTS */
+/**
+  * # Overmap objects
+  *
+  * Everything visible on the overmap: stations, ships, ruins, events, and more.
+  *
+  * This base class should be the parent of all objects present on the overmap.
+  * For the control counterparts, see [/obj/machinery/computer/helm].
+  * For the shuttle counterparts (ONLY USED FOR SHIPS), see [/obj/docking_port/mobile].
+  *
+  */
 /obj/structure/overmap
 	name = "overmap object"
 	desc = "An unknown celestial object."
 	icon = 'waspstation/icons/effects/overmap.dmi'
 	icon_state = "object"
+	layer = FLOOR_PLANE
 	///ID, literally the most important thing
 	var/id
 	///~~If we need to render a map for cameras and helms for this object~~ basically can you look at and use this as a ship or station
 	var/render_map = FALSE
 	///The range of the view shown to helms and viewscreens (subject to be relegated to something else)
 	var/sensor_range = 4
-	///Integrity percentage (out of 100, duh)
+	///Integrity percentage, do NOT modify. Use [/obj/structure/overmap/proc/receive_damage] instead.
 	var/integrity = 100
-	///Armor value, reduces integrity damage
-	var/overmap_armor = list("impact" = 1, "electric" = 1)
-
+	///Armor value, reduces integrity damage taken
+	var/overmap_armor = 1
 	///List of other overmap objects in the same tile
 	var/list/close_overmap_objects = list()
 
@@ -65,13 +82,13 @@
 
 /obj/structure/overmap/Initialize(mapload, _id = null)
 	. = ..()
-	START_PROCESSING(SSovermap, src)
+	LAZYADD(SSovermap.overmap_objects, src)
 	if(id == MAIN_OVERMAP_OBJECT_ID)
 		name = station_name()
 	if(_id)
 		id = _id
 	if(!id)
-		id = "overmap_object_[SSovermap.processing.len + 1]"
+		id = "overmap_object_[SSovermap.ships.len + 1]"
 	if(render_map)	// Initialize map objects
 		map_name = "overmap_[id]_map"
 		cam_screen = new
@@ -87,22 +104,26 @@
 		cam_background = new
 		cam_background.assigned_map = map_name
 		cam_background.del_on_map_removal = FALSE
+		update_screen()
 
 /obj/structure/overmap/Destroy()
 	. = ..()
-	STOP_PROCESSING(SSovermap, src)
+	LAZYREMOVE(SSovermap.overmap_objects, src)
 	if(render_map)
 		QDEL_NULL(cam_screen)
 		QDEL_NULL(cam_plane_master)
 		QDEL_NULL(cam_background)
 
+/**
+  * Done to ensure the connected helms are updated appropriately
+  */
 /obj/structure/overmap/Move(atom/newloc, direct)
 	. = ..()
 	update_screen()
 
-/obj/structure/overmap/process()
-	update_screen()
-
+/**
+  * Updates the screen object, which is displayed on all connected helms
+  */
 /obj/structure/overmap/proc/update_screen()
 	if(render_map)
 		var/list/visible_turfs = list()
@@ -118,6 +139,9 @@
 		cam_background.fill_rect(1, 1, size_x, size_y)
 		return TRUE
 
+/**
+  * When something crosses another overmap object, add it to the nearby objects list, which are used by events and docking
+  */
 /obj/structure/overmap/Crossed(atom/movable/AM, oldloc)
 	. = ..()
 	if(istype(loc, /turf/) && istype(AM, /obj/structure/overmap))
@@ -127,6 +151,9 @@
 		other.close_overmap_objects += src
 		close_overmap_objects += other
 
+/**
+  * See [/obj/structure/overmap/Crossed]
+  */
 /obj/structure/overmap/Uncrossed(atom/movable/AM, atom/newloc)
 	. = ..()
 	if(istype(loc, /turf/) && istype(AM, /obj/structure/overmap))
@@ -136,6 +163,9 @@
 		other.close_overmap_objects -= src
 		close_overmap_objects -= other
 
+/**
+  * Manual method of getting the close overmap objects. Warning: doesn't work reliably
+  */
 /obj/structure/overmap/proc/get_close_objects()
 	close_overmap_objects.Cut()
 	for(var/obj/structure/overmap/object in get_turf(src))
@@ -143,25 +173,56 @@
 			continue
 		close_overmap_objects += object
 
+/**
+  * Reduces overmap object integrity by X amount, divided by armor
+  * * amount - amount of damage to apply to the ship
+  */
 /obj/structure/overmap/proc/recieve_damage(amount)
 	integrity = max(integrity - (amount / overmap_armor), 0)
 
-/obj/structure/overmap/main //there should only be ONE of these in a given game.
+/**
+  * ## Z-level linked overmap object
+  *
+  * These are exactly what they say on the tin, overmap objects that are linked to one or more z-levels.
+  * There is nothing special on this side, but overmap ships treat them differently from all other overmap objects,
+  * such as the fact they can dock on said z-level.
+  *
+  */
+/obj/structure/overmap/level
+	///List of linked Z-levels (z number), used to dock
+	var/list/linked_levels = list()
+	render_map = TRUE //this is done because it's not expensive to load the map once since levels don't move
+
+/obj/structure/overmap/level/Initialize(mapload, _id, list/_zs)
+	if(_zs)
+		LAZYADD(linked_levels, _zs)
+	else if(!linked_levels)
+		WARNING("Overmap zlevel initialized with no linked level")
+		return INITIALIZE_HINT_QDEL
+	..()
+
+/obj/structure/overmap/level/ruin
+	name = "energy signature"
+	icon_state = "event"
+
+/obj/structure/overmap/level/main //there should only be ONE of these in a given game.
 	name = "Space Station 13"
 	id = MAIN_OVERMAP_OBJECT_ID
-	render_map = TRUE
 
-/obj/structure/overmap/main/Initialize(mapload, _id)
-	. = ..()
+/**
+  * Ensures there is only ONE main station object
+  */
+/obj/structure/overmap/level/main/Initialize(mapload, _id)
 	if(SSovermap.main)
-		WARNING("Multiple main overmap objects spawned!")
+		WARNING("Multiple main overmap objects spawned")
 	else
 		SSovermap.main = src
+	..()
 
-/obj/structure/overmap/planet
+/obj/structure/overmap/level/planet
 	icon_state = "globe"
 
-/obj/structure/overmap/planet/lavaland
+/obj/structure/overmap/level/planet/lavaland
 	name = "Lavaland"
 	id = "lavaland"
 	color = COLOR_ORANGE
