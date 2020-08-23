@@ -11,7 +11,7 @@
 	var/stop = 0
 	var/datum/track/selection = null
 	/// Volume of the songs played
-	var/volume = 100
+	var/volume = 70
 
 /obj/machinery/jukebox/disco
 	name = "radiant dance machine mark IV"
@@ -227,7 +227,7 @@
 	for(var/i in 1 to 10)
 		spawn_atom_to_turf(/obj/effect/temp_visual/hierophant/telegraph/edge, src, 1, FALSE)
 		sleep(5)
-		if(QDELETED(src))
+		if(QDELETED(src)) //Wasp Edit Cit #11039
 			return
 
 #define DISCO_INFENO_RANGE (rand(85, 115)*0.01)
