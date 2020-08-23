@@ -76,14 +76,14 @@ SUBSYSTEM_DEF(mapping)
 		add_new_zlevel("Empty Area [space_levels_so_far]", ZTRAITS_SPACE)
 		var/turf/T = locate(world.maxx / 2, world.maxy / 2, z_list.len)
 		var/obj/docking_port/stationary/z_port = new(T)
-		z_port.id = "z[z_list.len]_whiteship"
+		z_port.id = "whiteship_z[z_list.len]"
 	// and one level with no ruins
 	for (var/i in 1 to config.space_empty_levels)
 		++space_levels_so_far
 		empty_space = add_new_zlevel("Empty Area [space_levels_so_far]", list(ZTRAIT_LINKAGE = CROSSLINKED))
 		var/turf/T = locate(world.maxx / 2, world.maxy / 2, z_list.len)
 		var/obj/docking_port/stationary/z_port = new(T)
-		z_port.id = "z[z_list.len]_whiteship"
+		z_port.id = "whiteship_z[z_list.len]"
 
 	// Pick a random away mission.
 	if(CONFIG_GET(flag/roundstart_away))
@@ -267,7 +267,7 @@ SUBSYSTEM_DEF(mapping)
 		add_new_zlevel("Empty Area [space_levels_so_far]", ZTRAITS_SPACE)
 		var/turf/T = locate(world.maxx / 2, world.maxy / 2, z_list.len)
 		var/obj/docking_port/stationary/z_port = new(T)
-		z_port.id = "z[z_list.len]_whiteship"
+		z_port.id = "whiteship_z[z_list.len]"
 
 	for(var/minetype in config.minetypes)
 		if(minetype == "random")

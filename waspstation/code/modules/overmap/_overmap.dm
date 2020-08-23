@@ -60,7 +60,6 @@
 	desc = "An unknown celestial object."
 	icon = 'waspstation/icons/effects/overmap.dmi'
 	icon_state = "object"
-	layer = FLOOR_PLANE
 	///ID, literally the most important thing
 	var/id
 	///~~If we need to render a map for cameras and helms for this object~~ basically can you look at and use this as a ship or station
@@ -83,6 +82,7 @@
 /obj/structure/overmap/Initialize(mapload, _id = null)
 	. = ..()
 	LAZYADD(SSovermap.overmap_objects, src)
+	filters = filter(type = "blend")
 	if(id == MAIN_OVERMAP_OBJECT_ID)
 		name = station_name()
 	if(_id)
@@ -203,10 +203,13 @@
 
 /obj/structure/overmap/level/ruin
 	name = "energy signature"
+	desc = "A strange energy signature. Could be anything, or nothing at all."
 	icon_state = "event"
 
 /obj/structure/overmap/level/main //there should only be ONE of these in a given game.
 	name = "Space Station 13"
+	desc = "Nanotrasen's top-secret plasma research and extraction facility. Most likely the reason you're here."
+	icon_state = "station"
 	id = MAIN_OVERMAP_OBJECT_ID
 
 /**
@@ -220,9 +223,12 @@
 	..()
 
 /obj/structure/overmap/level/planet
+	name = "planet"
+	desc = "An unknown planet."
 	icon_state = "globe"
 
 /obj/structure/overmap/level/planet/lavaland
 	name = "Lavaland"
+	desc = "A lava-covered planet known for its plentiful natural resources among dangerous fauna."
 	id = "lavaland"
 	color = COLOR_ORANGE
