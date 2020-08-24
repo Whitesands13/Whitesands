@@ -36,7 +36,14 @@ const SharedContent = (props, context) => {
   const { isViewer, shipInfo = [], otherInfo = [] } = data;
   return (
     <Fragment>
-      <Section title={shipInfo.name ? shipInfo.name : "Ship Info"}>
+      <Section
+        title={shipInfo.name ? shipInfo.name : "Ship Info"}
+        buttons={(
+          <Button
+            content="Refresh"
+            disabled={isViewer}
+            onClick={() => act('reload_ship')} />
+        )}>
         <LabeledList>
           <LabeledList.Item label="Integrity">
             <ProgressBar
@@ -63,14 +70,7 @@ const SharedContent = (props, context) => {
           )}
         </LabeledList>
       </Section>
-      <Section
-        title="Radar"
-        buttons={(
-          <Button
-            content="Refresh"
-            disabled={isViewer}
-            onClick={() => act('refresh')} />
-        )}>
+      <Section title="Radar">
         <Table>
           <Table.Row bold>
             <Table.Cell>
@@ -123,7 +123,7 @@ const SharedContent = (props, context) => {
 // Content included on helms when they're controlling ships
 const ShipContent = (props, context) => {
   const { act, data } = useBackend(context);
-  const { isViewer, engineInfo, speed, heading, eta, x, y } = data;
+  const { isViewer, engineInfo, shipInfo, speed, heading, eta, x, y } = data;
   return (
     <Fragment>
       <Section title="Velocity">
@@ -158,7 +158,14 @@ const ShipContent = (props, context) => {
           </LabeledList.Item>
         </LabeledList>
       </Section>
-      <Section title="Engines">
+      <Section
+        title="Engines"
+        buttons={(
+          <Button
+            content="Refresh"
+            disabled={isViewer}
+            onClick={() => act('reload_engines')} />
+        )}>
         <Table>
           <Table.Row bold>
             <Table.Cell>
@@ -212,12 +219,12 @@ const ShipContent = (props, context) => {
               Total Thrust:
             </Table.Cell>
             <Table.Cell>
-              <AnimatedNumber value={data.shipInfo.est_thrust} />
+              <AnimatedNumber value={shipInfo.est_thrust} />
               kN
             </Table.Cell>
             <Table.Cell>
               <AnimatedNumber
-                value={data.shipInfo.est_thrust / data.shipInfo.mass * 100} />
+                value={shipInfo.est_thrust / shipInfo.mass * 100} />
               spM/burn
             </Table.Cell>
           </Table.Row>

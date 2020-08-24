@@ -109,6 +109,7 @@
   */
 /obj/structure/overmap/ship/proc/burn_engines(n_dir = null)
 	var/thrust_used = 0 //The amount of thrust that the engines will provide with one burn
+	refresh_engines()
 	if(mass == 0)
 		calculate_mass()
 	for(var/obj/machinery/shuttle/engine/E in shuttle.engine_list)
@@ -132,8 +133,11 @@
   * Just double checks all the engines on the shuttle
   */
 /obj/structure/overmap/ship/proc/refresh_engines()
+	var/calculated_thrust
 	for(var/obj/machinery/shuttle/engine/E in shuttle.engine_list)
 		E.check_setup()
+		calculated_thrust += E.thrust
+	est_thrust = calculated_thrust
 
 /**
   * Calculates the mass based on the amount of turfs in the shuttle's areas

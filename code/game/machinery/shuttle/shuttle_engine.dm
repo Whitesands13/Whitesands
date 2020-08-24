@@ -133,6 +133,8 @@
 	var/heat_cap = env.heat_capacity()
 	var/req_power = abs(env.return_temperature() - ENGINE_HEAT_TARGET) * heat_cap
 	req_power = min(req_power, ENGINE_HEATING_POWER)
+	if(heat_cap <= 0)
+		return
 	var/deltaTemperature = req_power / heat_cap
 	if(deltaTemperature < 0)
 		return

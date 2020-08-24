@@ -291,7 +291,7 @@
 	id = "shuttle_route_upgrade_void"
 	display_name = "Nullspace Breaching Upgrade"
 	description = "Research into voidspace tunnelling, allowing us to significantly reduce flight times."
-	prereq_ids = list("shuttle_route_upgrade_hyper", "alientech")
+	prereq_ids = list("alientech")
 	design_ids = list("engine_void")
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 12500)
 	export_price = 5000

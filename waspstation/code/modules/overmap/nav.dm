@@ -46,8 +46,11 @@
 	..()
 
 /obj/machinery/computer/camera_advanced/shuttle_docker/nav/attack_hand(mob/user)
-	if(!shuttleId)
+	if(!shuttleId || !current_ship)
 		to_chat(user, "<span class='warning'>No shuttle linked!</span>")
+		return
+	if(current_ship.docked)
+		to_chat(user, "<span class='warning'>Cannot select docking position while already docked.</span>")
 		return
 	current_target = locate() in current_ship.close_overmap_objects
 	if(!current_target)
@@ -55,7 +58,8 @@
 		return
 	jumpto_ports = list("[shuttleId]_[current_target.id]", "whiteship_[current_target.id]")
 	shuttlePortId = "[shuttleId]_[current_target.id]"
+	shuttlePortName = "[current_ship] [current_target.id] dock"
 	z_lock = LAZYCOPY(current_target.linked_levels)
 	my_port = SSshuttle.getDock(shuttlePortId)
-	eyeobj.setLoc(my_port ? get_turf(my_port) : locate(eyeobj.x, eyeobj.y, pick(z_lock)))
+	eyeobj.setLoc(my_port ? get_turf(my_port) : locate(eyeobj ? eyeobj.x : round(world.maxx / 2), eyeobj ? eyeobj.y ? round(world.maxy / 2), pick(z_lock)))
 	return ..()
