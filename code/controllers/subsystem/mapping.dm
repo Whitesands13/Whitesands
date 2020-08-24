@@ -74,14 +74,14 @@ SUBSYSTEM_DEF(mapping)
 	while (space_levels_so_far < config.space_ruin_levels)
 		++space_levels_so_far
 		add_new_zlevel("Empty Area [space_levels_so_far]", ZTRAITS_SPACE)
-		var/turf/T = locate(world.maxx / 2, world.maxy / 2, z_list.len)
+		var/turf/T = locate(round(world.maxx / 2), round(world.maxy / 2), z_list.len)
 		var/obj/docking_port/stationary/z_port = new(T)
 		z_port.id = "whiteship_z[z_list.len]"
 	// and one level with no ruins
 	for (var/i in 1 to config.space_empty_levels)
 		++space_levels_so_far
 		empty_space = add_new_zlevel("Empty Area [space_levels_so_far]", list(ZTRAIT_LINKAGE = CROSSLINKED))
-		var/turf/T = locate(world.maxx / 2, world.maxy / 2, z_list.len)
+		var/turf/T = locate(round(world.maxx / 2), round(world.maxy / 2), z_list.len)
 		var/obj/docking_port/stationary/z_port = new(T)
 		z_port.id = "whiteship_z[z_list.len]"
 
@@ -265,7 +265,7 @@ SUBSYSTEM_DEF(mapping)
 	while (world.maxz < (5 - 1) && space_levels_so_far < config.space_ruin_levels)
 		++space_levels_so_far
 		add_new_zlevel("Empty Area [space_levels_so_far]", ZTRAITS_SPACE)
-		var/turf/T = locate(world.maxx / 2, world.maxy / 2, z_list.len)
+		var/turf/T = locate(round(world.maxx / 2), round(world.maxy / 2), z_list.len)
 		var/obj/docking_port/stationary/z_port = new(T)
 		z_port.id = "whiteship_z[z_list.len]"
 

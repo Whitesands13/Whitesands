@@ -58,12 +58,12 @@ GLOBAL_LIST_EMPTY(custom_shuttle_machines)		//Machines that require updating (He
 		if(shuttle_create_docking_port(target, user))
 			to_chat(user, "<span class='notice'>Shuttle created!</span>")
 		return
-	else if(istype(target, /obj/machinery/computer/camera_advanced/shuttle_docker/custom))
+	else if(istype(target, /obj/machinery/computer/camera_advanced/shuttle_docker/nav))
 		if(!linkedShuttleId)
 			to_chat(user, "<span class='warning'>Error, no defined shuttle linked to device!</span>")
 			return
-		var/obj/machinery/computer/camera_advanced/shuttle_docker/custom/console = target
-		console.linkShuttle(linkedShuttleId)
+		var/obj/machinery/computer/camera_advanced/shuttle_docker/nav/console = target
+		console.link_shuttle(linkedShuttleId)
 		to_chat(user, "<span class='notice'>Console linked successfully!</span>")
 		return
 	else if(istype(target, /obj/machinery/computer/helm))

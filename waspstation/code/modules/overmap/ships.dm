@@ -58,6 +58,7 @@
 	if(shuttle)
 		name = shuttle.name
 		calculate_mass()
+		refresh_engines()
 
 /obj/structure/overmap/ship/Destroy()
 	. = ..()
@@ -76,7 +77,8 @@
 		dock_to_use = SSshuttle.getDock("whiteship_[to_dock.id]")
 	else
 		return "Error finding valid docking port!"
-
+	if(!shuttle.check_dock(dock_to_use, TRUE))
+		return "Error with docking port. Try using a docking computer if one is available."
 	shuttle.request(dock_to_use)
 	docked = to_dock
 
@@ -120,11 +122,18 @@
 		E.fireEngine()
 		thrust_used = thrust_used + E.thrust
 	est_thrust = thrust_used //cheeky way of rechecking the thrust, check it every time it's used
-	thrust_used = (thrust_used / 10) / max(mass, 1)
+	thrust_used = (thrust_used / 20) / max(mass, 1)
 	if(n_dir)
 		accelerate(n_dir, thrust_used)
 	else
 		decelerate(thrust_used)
+
+/**
+  * Just double checks all the engines on the shuttle
+  */
+/obj/structure/overmap/ship/proc/refresh_engines()
+	for(var/obj/machinery/shuttle/engine/E in shuttle.engine_list)
+		E.check_setup()
 
 /**
   * Calculates the mass based on the amount of turfs in the shuttle's areas

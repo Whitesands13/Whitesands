@@ -11,6 +11,8 @@ SUBSYSTEM_DEF(overmap)
 	var/list/ships = list()
 	///List of all helms, to be adjusted
 	var/list/helms = list()
+	///List of all nav computers to initialize
+	var/list/navs = list()
 	///List of all events
 	var/list/events = list()
 
@@ -41,6 +43,10 @@ SUBSYSTEM_DEF(overmap)
 	for(var/helm in helms)
 		var/obj/machinery/computer/helm/H = helm
 		H.set_ship()
+
+	for(var/nav in navs)
+		var/obj/machinery/computer/camera_advanced/shuttle_docker/nav/N = nav
+		N.link_shuttle()
 
 	return ..()
 

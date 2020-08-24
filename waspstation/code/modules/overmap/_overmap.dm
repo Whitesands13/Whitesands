@@ -82,7 +82,6 @@
 /obj/structure/overmap/Initialize(mapload, _id = null)
 	. = ..()
 	LAZYADD(SSovermap.overmap_objects, src)
-	filters = filter(type = "blend")
 	if(id == MAIN_OVERMAP_OBJECT_ID)
 		name = station_name()
 	if(_id)
