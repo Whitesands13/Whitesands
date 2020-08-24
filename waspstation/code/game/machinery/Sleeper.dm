@@ -70,7 +70,7 @@
 	if (!state_open && user == occupant)
 		container_resist(user)
 
-/obj/machinery/sleeper/relaymove(mob/user)
+/obj/machinery/sleeper/relaymove(mob/living/user, direction)
 	if (!state_open)
 		container_resist(user)
 

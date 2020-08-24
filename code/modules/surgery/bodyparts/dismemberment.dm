@@ -87,7 +87,7 @@
 	var/atom/Tsec = owner.drop_location()
 	var/mob/living/carbon/C = owner
 	update_limb(1)
-	C.bodyparts -= src
+	C.remove_bodypart(src)
 
 	if(held_index)
 		if(C.hand_bodyparts[held_index] == src)
@@ -283,7 +283,7 @@
 	. = TRUE
 	moveToNullspace()
 	owner = C
-	C.bodyparts += src
+	C.add_bodypart(src)
 	if(held_index)
 		if(held_index > C.hand_bodyparts.len)
 			C.hand_bodyparts.len = held_index
