@@ -24,11 +24,15 @@
 				handle_mood()
 				handle_speech()
 
-// Unlike most of the simple animals, slimes support UNCONSCIOUS
+
+// Unlike most of the simple animals, slimes support UNCONSCIOUS. This is an ugly hack.
 /mob/living/simple_animal/slime/update_stat()
-	if(stat == UNCONSCIOUS && health > 0)
-		return
-	..()
+	switch(stat)
+		if(UNCONSCIOUS, HARD_CRIT)
+			if(health > 0)
+				return
+	return ..()
+
 
 /mob/living/simple_animal/slime/proc/AIprocess()  // the master AI process
 
@@ -136,22 +140,24 @@
 		var/bz_percentage = environment.total_moles() ? (environment.get_moles(/datum/gas/bz) / environment.total_moles()) : 0
 		var/stasis = (bz_percentage >= 0.05 && bodytemperature < (T0C + 100)) || force_stasis
 
-		if(stat == CONSCIOUS && stasis)
-			to_chat(src, "<span class='danger'>Nerve gas in the air has put you in stasis!</span>")
-			set_stat(UNCONSCIOUS)
-			powerlevel = 0
-			rabid = 0
-			update_mobility()
-			regenerate_icons()
-		else if(stat == UNCONSCIOUS && !stasis)
-			to_chat(src, "<span class='notice'>You wake up from the stasis.</span>")
-			set_stat(CONSCIOUS)
-			update_mobility()
-			regenerate_icons()
+		switch(stat)
+			if(CONSCIOUS)
+				if(stasis)
+					to_chat(src, "<span class='danger'>Nerve gas in the air has put you in stasis!</span>")
+					set_stat(UNCONSCIOUS)
+					powerlevel = 0
+					rabid = FALSE
+					update_mobility()
+					regenerate_icons()
+			if(UNCONSCIOUS, HARD_CRIT)
+				if(!stasis)
+					to_chat(src, "<span class='notice'>You wake up from the stasis.</span>")
+					set_stat(CONSCIOUS)
+					update_mobility()
+					regenerate_icons()
 
 	updatehealth()
 
-	return //TODO: DEFERRED
 
 /mob/living/simple_animal/slime/handle_status_effects()
 	..()

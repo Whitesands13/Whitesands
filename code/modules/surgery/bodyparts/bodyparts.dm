@@ -476,7 +476,7 @@
 	bone_break_threshold = 35 // Beefier bones
 
 /obj/item/bodypart/chest/can_dismember(obj/item/I)
-	if(!((owner.stat == DEAD) || owner.InFullCritical()))
+	if(owner.stat <= HARD_CRIT)
 		return FALSE
 	return ..()
 
