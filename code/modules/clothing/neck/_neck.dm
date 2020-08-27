@@ -8,8 +8,8 @@
 	cuttable = TRUE
 	clothamnt = 2
 
-/obj/item/clothing/neck/worn_overlays(isinhands = FALSE)
-	. = list()
+/obj/item/clothing/neck/worn_overlays(isinhands = FALSE, icon_file, used_state) //Wasp Edit - Cit #11379
+	. = ..()
 	if(!isinhands)
 		if(body_parts_covered & HEAD)
 			if(damaged_clothes)

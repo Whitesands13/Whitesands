@@ -77,7 +77,7 @@
 			playsound(src, 'sound/mecha/mechmove03.ogg', 50, TRUE) //Visors don't just come from nothing
 			update_icon()
 
-/obj/item/clothing/head/helmet/space/plasmaman/worn_overlays(isinhands)
+/obj/item/clothing/head/helmet/space/plasmaman/worn_overlays(isinhands, icon_file, used_state) //Wasp Edit - Cit #11379
 	. = ..()
 	if(!isinhands && !up)
 		. += mutable_appearance('icons/mob/clothing/head.dmi', visor_icon)
@@ -103,7 +103,7 @@
 		if(smile == TRUE)
 			to_chat(user, "<span class='warning'>Seems like someone already drew something on this helmet's visor!</span>")
 
-/obj/item/clothing/head/helmet/space/plasmaman/worn_overlays(isinhands)
+/obj/item/clothing/head/helmet/space/plasmaman/worn_overlays(isinhands, icon_file, used_state) //Wasp Edit - Cit #11379
 	. = ..()
 	if(!isinhands && smile)
 		var/mutable_appearance/M = mutable_appearance('icons/mob/clothing/head.dmi', smile_state)
@@ -283,37 +283,37 @@
 	desc = "An envirosuit helmet made for the most important plasmaman of them all."
 	icon_state = "command_envirohelm"
 	item_state = "command_envirohelm"
-	
+
 /obj/item/clothing/head/helmet/space/plasmaman/engineering/ce
 	name = "chief engineers envirohelmet"
 	desc = "An envirosuit helmet made for the tutored plasmaman."
 	icon_state = "ce_envirohelm"
 	item_state = "ce_envirohelm"
-	
+
 /obj/item/clothing/head/helmet/space/plasmaman/cmo
 	name = "chief medical officers envirohelmet"
 	desc = "An envirosuit helmet made for the taxed plasmaman."
 	icon_state = "cmo_envirohelm"
 	item_state = "cmo_envirohelm"
-	
+
 /obj/item/clothing/head/helmet/space/plasmaman/security/hos
 	name = "head of securitys helmet"
 	desc = "An envirosuit helmet made for the right and honorable plasmaman."
 	icon_state = "hos_envirohelm"
 	item_state = "hos_envirohelm"
-	
+
 /obj/item/clothing/head/helmet/space/plasmaman/rd
 	name = "research directors envirosuit helmet"
 	desc = "An envirosuit helmet made for the erudite plasmaman."
 	icon_state = "rd_envirohelm"
 	item_state = "rd_envirohelm"
-	
+
 /obj/item/clothing/head/helmet/space/plasmaman/hop
 	name = "head of personnels envirosuit helmet"
 	desc = "An envirosuit helmet made for the complacent plasmaman."
 	icon_state = "hop_envirohelm"
 	item_state = "hop_envirohelm"
-	
+
 /obj/item/clothing/head/helmet/space/plasmaman/security/secmed
 	name = "brig physician envirosuit helmet"
 	desc = "An envirosuit helmet made for the sanctioned plasmaman."

@@ -759,7 +759,7 @@
 			var/mob/living/carbon/human/C = loc
 			C.update_inv_wear_suit()
 
-/obj/item/clothing/suit/space/hardsuit/shielded/worn_overlays(isinhands)
+/obj/item/clothing/suit/space/hardsuit/shielded/worn_overlays(isinhands, icon_file, used_state) //Wasp Edit - Cit #11379
 	. = list()
 	if(!isinhands)
 		. += mutable_appearance('icons/effects/effects.dmi', shield_state, MOB_LAYER + 0.01)

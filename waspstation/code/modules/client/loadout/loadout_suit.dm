@@ -12,6 +12,11 @@
 	display_name = "winter coat"
 	path = /obj/item/clothing/suit/hooded/wintercoat
 
+/datum/gear/suit/coat/polychromic
+	display_name = "polychromic winter coat"
+	path = /obj/item/clothing/suit/hooded/wintercoat/polychromic
+	cost = 5000
+
 //JACKETS
 /datum/gear/suit/jacket
 	subtype_path = /datum/gear/suit/jacket

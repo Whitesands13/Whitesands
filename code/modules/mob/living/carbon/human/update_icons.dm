@@ -529,7 +529,7 @@ generate/load female uniform sprites matching all previously decided variables
 
 	//Get the overlays for this item when it's being worn
 	//eg: ammo counters, primed grenade flashes, etc.
-	var/list/worn_overlays = worn_overlays(isinhands, file2use)
+	var/list/worn_overlays = worn_overlays(isinhands, file2use, t_state) //Wasp Edit - Cit #11379
 	if(worn_overlays && worn_overlays.len)
 		standing.overlays.Add(worn_overlays)
 

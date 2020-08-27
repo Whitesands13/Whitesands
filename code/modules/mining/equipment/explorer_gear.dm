@@ -107,7 +107,7 @@
 	glass_overlay.appearance_flags = RESET_COLOR
 	. += glass_overlay
 
-/obj/item/clothing/head/helmet/space/hostile_environment/worn_overlays(isinhands)
+/obj/item/clothing/head/helmet/space/hostile_environment/worn_overlays(isinhands, icon_file, used_state) //Wasp Edit - Cit #11379
 	. = ..()
 	if(!isinhands)
 		var/mutable_appearance/M = mutable_appearance('icons/mob/clothing/head.dmi', "hostile_env_glass")

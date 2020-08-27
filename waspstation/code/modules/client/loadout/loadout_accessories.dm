@@ -76,3 +76,11 @@
 	description = "Only the truly insane would wear this around their neck."
 	path = /obj/item/clothing/neck/petcollar
 	cost = 5000
+
+//Polychromic
+
+/datum/gear/accessory/polychromic/cloak
+	display_name = "polychromatic cloak"
+	description = "For when you want to show off your horrible colour coordination skills."
+	path = /obj/item/clothing/neck/cloak/polychromic
+	cost = 10000 //Yes, it's more expensive because there is only ONE cloak and like, a ton of jumpsuit slot items.

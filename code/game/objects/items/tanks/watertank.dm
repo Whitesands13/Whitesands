@@ -367,8 +367,8 @@
 		turn_on()
 
 //Todo : cache these.
-/obj/item/reagent_containers/chemtank/worn_overlays(var/isinhands = FALSE) //apply chemcolor and level
-	. = list()
+/obj/item/reagent_containers/chemtank/worn_overlays( var/isinhands = FALSE, icon_file, used_state) //apply chemcolor and level //Wasp Edit - Cit #11379
+	. = ..()
 	//inhands + reagent_filling
 	if(!isinhands && reagents.total_volume)
 		var/mutable_appearance/filling = mutable_appearance('icons/obj/reagentfillings.dmi', "backpackmob-10")

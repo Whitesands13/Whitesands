@@ -5,7 +5,7 @@
 	. = ..()
 	if(!istype(target, /obj/item))
 		return ELEMENT_INCOMPATIBLE
-	RegisterSignal(target, COMSIG_ATOM_UPDATED_ICON, .proc/update_onmob)
+	RegisterSignal(target, COMSIG_ATOM_UPDATED_ICON, .proc/update_onmob, override = TRUE) //Wasp Edit - Cit #11379 - Part of Polychromic port
 
 /datum/element/update_icon_updates_onmob/proc/update_onmob(obj/item/target)
 	if(ismob(target.loc))

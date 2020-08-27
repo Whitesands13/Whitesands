@@ -47,8 +47,8 @@
 			playsound(user, 'sound/weapons/genhit2.ogg', 50, TRUE)
 		return(BRUTELOSS)
 
-/obj/item/clothing/shoes/worn_overlays(isinhands = FALSE)
-	. = list()
+/obj/item/clothing/shoes/worn_overlays(isinhands = FALSE, icon_file, used_state) //Wasp Edit - Cit #11379
+	. = ..()
 	if(!isinhands)
 		var/bloody = FALSE
 		if(HAS_BLOOD_DNA(src))

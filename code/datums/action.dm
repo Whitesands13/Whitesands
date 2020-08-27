@@ -6,12 +6,14 @@
 /datum/action
 	var/name = "Generic Action"
 	var/desc = null
-	var/obj/target = null
+	var/atom/target = null //Wasp - Cit #11379
 	var/check_flags = NONE
 	var/processing = FALSE
 	var/obj/screen/movable/action_button/button = null
 	var/buttontooltipstyle = ""
 	var/transparent_when_unavailable = TRUE
+	var/use_target_appearance = FALSE //Wasp - Cit #11379
+	var/list/target_appearance_matrix //Wasp - if set, will be used to transform the target button appearance as an arglist.
 
 	var/button_icon = 'icons/mob/actions/backgrounds.dmi' //This is the file for the BACKGROUND icon
 	var/background_icon_state = ACTION_BUTTON_DEFAULT_BACKGROUND //And this is the state for the background icon
@@ -87,7 +89,7 @@
 /datum/action/proc/Trigger()
 	if(!IsAvailable())
 		return FALSE
-	if(SEND_SIGNAL(src, COMSIG_ACTION_TRIGGER, src) & COMPONENT_ACTION_BLOCK_TRIGGER)
+	if(SEND_SIGNAL(src, COMSIG_ACTION_TRIGGER, target) & COMPONENT_ACTION_BLOCK_TRIGGER) //Wasp - Cit #11379
 		return FALSE
 	return TRUE
 
@@ -113,29 +115,44 @@
 	return TRUE
 
 /datum/action/proc/UpdateButtonIcon(status_only = FALSE, force = FALSE)
-	if(button)
-		if(!status_only)
-			button.name = name
-			button.desc = desc
-			if(owner && owner.hud_used && background_icon_state == ACTION_BUTTON_DEFAULT_BACKGROUND)
-				var/list/settings = owner.hud_used.get_action_buttons_icons()
-				if(button.icon != settings["bg_icon"])
-					button.icon = settings["bg_icon"]
-				if(button.icon_state != settings["bg_state"])
-					button.icon_state = settings["bg_state"]
-			else
-				if(button.icon != button_icon)
-					button.icon = button_icon
-				if(button.icon_state != background_icon_state)
-					button.icon_state = background_icon_state
+//Wasp - Cit #11379
+	if(!button)
+		return
+	if(!status_only)
+		button.name = name
+		button.desc = desc
+		if(owner && owner.hud_used && background_icon_state == ACTION_BUTTON_DEFAULT_BACKGROUND)
+			var/list/settings = owner.hud_used.get_action_buttons_icons()
+			if(button.icon != settings["bg_icon"])
+				button.icon = settings["bg_icon"]
+			if(button.icon_state != settings["bg_state"])
+				button.icon_state = settings["bg_state"]
+		else
+			if(button.icon != button_icon)
+				button.icon = button_icon
+			if(button.icon_state != background_icon_state)
+				button.icon_state = background_icon_state
 
+		if(!use_target_appearance)
 			ApplyIcon(button, force)
 
-		if(!IsAvailable())
-			button.color = transparent_when_unavailable ? rgb(128,0,0,128) : rgb(128,0,0)
-		else
-			button.color = rgb(255,255,255,255)
-			return 1
+		else if(target && button.appearance_cache != target.appearance) //replace with /ref comparison if this is not valid.
+			var/mutable_appearance/M = new(target)
+			M.layer = FLOAT_LAYER
+			M.plane = FLOAT_PLANE
+			if(target_appearance_matrix)
+				var/list/L = target_appearance_matrix
+				M.transform = matrix(L[1], L[2], L[3], L[4], L[5], L[6])
+			button.cut_overlays()
+			button.add_overlay(M)
+			button.appearance_cache = target.appearance
+
+	if(!IsAvailable(TRUE))
+		button.color = transparent_when_unavailable ? rgb(128,0,0,128) : rgb(128,0,0)
+	else
+		button.color = rgb(255,255,255,255)
+		return 1
+//Wasp end - Cit #11379
 
 /datum/action/proc/ApplyIcon(obj/screen/movable/action_button/current_button, force = FALSE)
 	if(icon_icon && button_icon_state && ((current_button.button_icon_state != button_icon_state) || force))
@@ -150,6 +167,7 @@
 /datum/action/item_action
 	check_flags = AB_CHECK_RESTRAINED|AB_CHECK_STUN|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 	button_icon_state = null
+	use_target_appearance = TRUE //Wasp end - Cit #11379
 	// If you want to override the normal icon being the item
 	// then change this to an icon state
 
@@ -173,6 +191,8 @@
 		I.ui_action_click(owner, src)
 	return 1
 
+//Wasp end - Cit #11379
+/*
 /datum/action/item_action/ApplyIcon(obj/screen/movable/action_button/current_button, force)
 	if(button_icon && button_icon_state)
 		// If set, use the custom icon that we set instead
@@ -189,6 +209,7 @@
 		I.layer = old_layer
 		I.plane = old_plane
 		current_button.appearance_cache = I.appearance
+*/
 
 /datum/action/item_action/toggle_light
 	name = "Toggle Light"

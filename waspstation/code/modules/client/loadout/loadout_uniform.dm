@@ -111,3 +111,59 @@
 	display_name = "tacticool turtleneck"
 	path = /obj/item/clothing/under/syndicate/tacticool
 	cost = 10000
+
+//Polychromic stuff
+/datum/gear/uniform/polychromic
+	subtype_path = /datum/gear/uniform/polychromic
+	cost = 5000
+
+/datum/gear/uniform/polychromic/jumpsuit
+	display_name = "polychromic tri-tone jumpsuit"
+	description = "A fancy jumpsuit made with polychromic threads."
+	path = /obj/item/clothing/under/misc/polyjumpsuit
+
+/datum/gear/uniform/polychromic/skirt
+	display_name = "polychromic skirt"
+	description = "A fancy skirt made with polychromic threads."
+	path = /obj/item/clothing/under/dress/skirt/polychromic
+
+/datum/gear/uniform/polychromic/pleated
+	display_name = "polychromic pleated skirt"
+	description = "A magnificent pleated skirt complements the woolen polychromatic sweater."
+	path = /obj/item/clothing/under/misc/polyjumpsuit
+
+/datum/gear/uniform/polychromic/shorts
+	display_name = "polychromic athletic shorts"
+	description = "95% Polychrome, 5% Spandex!"
+	path = /obj/item/clothing/under/shorts/polychromic
+
+/datum/gear/uniform/polychromic/buttonup
+	display_name = "polychromic button-up shirt"
+	description = "A fancy button-up shirt made with polychromic threads."
+	path = /obj/item/clothing/under/misc/poly_shirt
+
+/datum/gear/uniform/polychromic/buttonup
+	display_name = "polychromic kilt"
+	description = "It's not a skirt!"
+	path = /obj/item/clothing/under/costume/kilt/polychromic
+
+//Degenerate
+/datum/gear/uniform/polychromic/pantsu
+	display_name = "polychromic panties" //This is totally cursed by Mald "totally" signed off on this - BFAT
+	description = "Topless striped panties. Now with 120% more polychrome!"
+	path = /obj/item/clothing/under/shorts/polychromic/pantsu
+
+/datum/gear/uniform/polychromic/bottomless
+	display_name = "polychromic bottomless shirt" //But hey, at least the boys can air out too
+	description = "Great for showing off your underwear in dubious style."
+	path = /obj/item/clothing/under/misc/poly_bottomless
+
+/datum/gear/uniform/polychromic/tanktop
+	display_name = "polychromic tank top" //Honestly, we have such a wide variety of underwear....
+	description = "For those lazy summer days."
+	path = /obj/item/clothing/under/misc/poly_tanktop
+
+/datum/gear/uniform/polychromic/femtanktop
+	display_name = "polychromic feminine tank top" //and the Darkholme outfit exists.
+	description = "Great for showing off your chest in style. Not recommended for males."
+	path = /obj/item/clothing/under/misc/poly_tanktop/female

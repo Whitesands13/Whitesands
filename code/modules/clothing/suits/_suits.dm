@@ -13,7 +13,7 @@
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/exo // WaspStation Edit - Exowear Pockets
 
 
-/obj/item/clothing/suit/worn_overlays(isinhands = FALSE)
+/obj/item/clothing/suit/worn_overlays(isinhands = FALSE, icon_file, used_state) //Wasp Edit - Cit #11379
 	. = list()
 	if(!isinhands)
 		if(damaged_clothes)

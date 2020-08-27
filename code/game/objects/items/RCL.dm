@@ -127,6 +127,16 @@
 			icon_state = "rcl-0"
 			item_state = "rcl-0"
 
+//Wasp Edit - Cit #11379
+/obj/item/rcl/worn_overlays(isinhands, icon_file, used_state)
+	. = ..()
+	if(!isinhands || !(loaded?.amount))
+		return
+	var/mutable_appearance/cable_overlay = mutable_appearance(icon_file, "rcl-[CEILING(loaded.amount/(max_amount/3), 1)]")
+	cable_overlay.color = GLOB.cable_colors[colors[current_color_index]]
+	. += cable_overlay
+//Wasp End
+
 /obj/item/rcl/proc/is_empty(mob/user, loud = 1)
 	update_icon()
 	if(!loaded || !loaded.amount)

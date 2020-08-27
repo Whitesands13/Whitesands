@@ -26,8 +26,8 @@
 	user.visible_message("<span class='suicide'>\the [src] are forcing [user]'s hands around [user.p_their()] neck! It looks like the gloves are possessed!</span>")
 	return OXYLOSS
 
-/obj/item/clothing/gloves/worn_overlays(isinhands = FALSE)
-	. = list()
+/obj/item/clothing/gloves/worn_overlays(isinhands = FALSE, icon_file, used_state) //Wasp Edit - Cit #11379
+	. = ..()
 	if(!isinhands)
 		if(damaged_clothes)
 			. += mutable_appearance('icons/effects/item_damage.dmi', "damagedgloves")

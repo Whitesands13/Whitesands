@@ -238,8 +238,8 @@
 		icon = S.icon
 		icon_state = S.icon_state
 
-/obj/item/clothing/head/wig/worn_overlays(isinhands = FALSE, file2use)
-	. = list()
+/obj/item/clothing/head/wig/worn_overlays(isinhands = FALSE, icon_file, used_state) //Wasp Edit - Cit #11379
+	. = ..()
 	if(!isinhands)
 		var/datum/sprite_accessory/S = GLOB.hairstyles_list[hairstyle]
 		if(!S)

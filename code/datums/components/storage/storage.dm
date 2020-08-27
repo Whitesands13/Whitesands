@@ -803,7 +803,7 @@
 		return
 	user.visible_message("<span class='warning'>[user] draws [I] from [parent]!</span>", "<span class='notice'>You draw [I] from [parent].</span>")
 
-/datum/component/storage/proc/action_trigger(datum/signal_source, datum/action/source)
+/datum/component/storage/proc/action_trigger(datum/action/source, obj/target) //Wasp end - Cit #11379
 	gather_mode_switch(source.owner)
 	return COMPONENT_ACTION_BLOCK_TRIGGER
 
