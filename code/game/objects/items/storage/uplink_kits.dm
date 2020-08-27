@@ -591,3 +591,22 @@
 	new /obj/item/storage/belt/soulstone/full/purified(src)
 	new /obj/item/sbeacondrop/constructshell(src)
 	new /obj/item/sbeacondrop/constructshell(src)
+
+/obj/item/storage/box/syndie_kit/punisher //WS edit - species restricted
+	name = "Executioners' envirosuit"
+	desc = "From someone who's had enough of reading people their rights."
+
+/obj/item/storage/box/syndie_kit/punisher/PopulateContents()
+	new /obj/item/clothing/suit/armor/vest/punisher(src)
+	new /obj/item/clothing/under/plasmaman/punisher(src)
+	new /obj/item/clothing/head/helmet/space/plasmaman/punisher(src)
+	new /obj/item/clothing/gloves/tackler/combat/insulated(src)
+	new /obj/item/clothing/shoes/combat(src)
+
+/obj/item/storage/box/syndie_kit/mothtoxin //WS edit - species restricted
+	name = "moth chemical kit"
+
+/obj/item/storage/box/syndie_kit/mothtoxin/PopulateContents()
+	new /obj/item/reagent_containers/glass/bottle/mothtoxin(src)
+	new /obj/item/reagent_containers/syringe(src)
+	new /obj/item/reagent_containers/dropper(src)
