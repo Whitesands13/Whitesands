@@ -61,5 +61,6 @@
 	shuttlePortName = "[current_ship] [current_target.id] dock"
 	z_lock = LAZYCOPY(current_target.linked_levels)
 	my_port = SSshuttle.getDock(shuttlePortId)
-	eyeobj.setLoc(my_port ? get_turf(my_port) : locate(eyeobj ? eyeobj.x : round(world.maxx / 2), eyeobj ? eyeobj.y ? round(world.maxy / 2), pick(z_lock)))
+	if(eyeobj)
+		eyeobj.setLoc(my_port ? get_turf(my_port) : locate(eyeobj.x, eyeobj.y, pick(z_lock)))
 	return ..()
