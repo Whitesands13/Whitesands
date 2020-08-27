@@ -107,3 +107,12 @@
 	pb_knockback = 12
 	recoil = 2
 	fire_sound_volume = 50
+
+/obj/item/gun/ballistic/shotgun/riot/folding
+	name = "folding shotgun"
+	desc = "A spring-loaded latch allows this typical pump-action shotgun to be very quickly broken down and carried in a folded state."
+	icon = 'waspstation/icons/obj/guns/projectile.dmi'
+	icon_state = "foldingshotgun"
+	item_state = "shotgun"
+	w_class = WEIGHT_CLASS_NORMAL
+	slot_flags = ITEM_SLOT_BELT
