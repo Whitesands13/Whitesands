@@ -1679,20 +1679,49 @@ GLOBAL_LIST_INIT(uplink_items, subtypesof(/datum/uplink_item))
 	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 	surplus = 0
 
+/datum/uplink_item/race_restricted/foldingshotgun
+	name = "Folding Shotgun"
+	desc = "A reproduction of an ancient design dating back to the Great War, a spring-loaded latch allows this pump-action shotgun to be very quickly put together and broken down to be carried in a folded state, with a 20 inch barrel and 6-round tube magazine that comes loaded with rubber shot."
+	cost = 10
+	item = /obj/item/gun/ballistic/shotgun/riot/folding
+	restricted_species = list("human")
+
 /datum/uplink_item/race_restricted/syndilamp
 	name = "Extra-Bright Lantern"
 	desc = "We heard that moths such as yourself really like lamps, so we decided to grant you early access to a prototype \
 	Syndicate brand \"Extra-Bright Lantern™\". Enjoy."
-	cost = 2
+	cost = 1
 	item = /obj/item/flashlight/lantern/syndicate
 	restricted_species = list("moth")
+
+/datum/uplink_item/race_restricted/mothtoxin
+	name = "Moth Mutagen"
+	desc = "There is no moth hivemind."
+	cost = 3
+	item = /obj/item/storage/box/syndie_kit/mothtoxin
+	restricted_species = list("moth")
+
+/datum/uplink_item/race_restricted/ethereal_grenade
+	name = "Ethereal Dance Grenade"
+	desc = "Our psychoacousticians have cunningly stuffed the heavily concentrated testosterone of multiple ethereals into a grenade-sized package. Activating it will cause anyone nearby to break out into a fit of dancing fever."
+	cost = 4
+	item = /obj/item/grenade/discogrenade
+	restricted_species = list("ethereal")
 
 /datum/uplink_item/race_restricted/syndigenetics
 	name = "Fire Breath"
 	desc = "One of our subsidiaries, 23AndMe, have recently found the formula of backtracking lizard's genetic trail and giving them the ability to breathe fire, much like their dragon ancestors."
-	cost = 5
+	cost = 3
 	item = /obj/item/dnainjector/firebreath
 	restricted_species = list("lizard")
+
+/datum/uplink_item/race_restricted/vigilante
+	name = "Executioners' Envirosuit"
+	desc = "The one of a kind design of a still anonymous vigilante, inspired from the smoothskin's infiltrator kit but modified and upgraded for proper use by you. All wrongdoers should come to know you well."
+	item = /obj/item/storage/box/syndie_kit/punisher
+	cost = 6
+	limited_stock = 1
+	restricted_species = list("plasmaman")
 
 // Role-specific items
 /datum/uplink_item/role_restricted
