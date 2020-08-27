@@ -28,3 +28,21 @@
 	tc = 10
 	uplink_type = /obj/item/uplink/nuclear
 	uplink_slot = ITEM_SLOT_BELT
+
+/obj/item/clothing/under/plasmaman/punisher
+	name = "Executioners' plasma envirosuit"
+	desc = "A custom made plasmaman containment suit designed from a head of security's envirosuit, with devilstrand silk, very tough, good at insulating, and protects exceptionally well."
+	icon = 'waspstation/icons/obj/clothing/under/syndicate.dmi'
+	mob_overlay_icon = 'waspstation/icons/mob/clothing/under/syndicate.dmi'
+	icon_state = "punisher_envirosuit"
+	item_state = "punisher_envirosuit"
+	armor = list("melee" = 10, "bullet" = 10, "laser" = 10, "energy" = 10, "bomb" = 10, "bio" = 100, "rad" = 0, "fire" = 100, "acid" = 100)
+
+/obj/item/clothing/head/helmet/space/plasmaman/punisher
+	name = "Executioners' plasma envirosuit helmet"
+	desc = "Those who do wrong to others...the traitors, the changelings, spies, tiders...you will come to know me well. Oganesson CXVIII is dead. Call me...the Executioner."
+	icon = 'waspstation/icons/obj/clothing/hats.dmi'
+	mob_overlay_icon = 'waspstation/icons/mob/clothing/head.dmi'
+	icon_state = "punisher_envirohelm"
+	item_state = "punisher_envirohelm"
+	armor = list("melee" = 40, "bullet" = 40, "laser" = 30, "energy" = 40, "bomb" = 70, "bio" = 100, "rad" = 0, "fire" = 100, "acid" = 100)
