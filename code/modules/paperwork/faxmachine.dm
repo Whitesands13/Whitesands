@@ -1,4 +1,5 @@
 GLOBAL_LIST_EMPTY(allfaxes)
+GLOBAL_LIST_EMPTY(alldepartments)
 
 /obj/machinery/photocopier/faxmachine
 	name = "fax machine"
@@ -36,15 +37,13 @@ GLOBAL_LIST_EMPTY(allfaxes)
 	var/list/static/admin_departments = list("Central Command")
 	///Departments that redirect to admins that are accessible by any emagged long-range faxes.
 	var/list/static/hidden_admin_departments = list("Syndicate")
-	///List of all fax departments
-	var/list/static/alldepartments = list()
 
 /obj/machinery/photocopier/faxmachine/Initialize()
 	. = ..()
 	GLOB.allfaxes += src
 
-	if(!(("[department]" in alldepartments) || ("[department]" in admin_departments)))
-		LAZYADD(alldepartments, department)
+	if(!(("[department]" in GLOB.alldepartments) || ("[department]" in admin_departments)) && department != "Unknown")
+		LAZYADD(GLOB.alldepartments, department)
 
 /obj/machinery/photocopier/faxmachine/longrange
 	name = "long range fax machine"
@@ -130,7 +129,7 @@ GLOBAL_LIST_EMPTY(allfaxes)
 		if("dept")
 			if(is_authenticated)
 				var/lastdestination = destination
-				var/list/combineddepartments = alldepartments.Copy()
+				var/list/combineddepartments = GLOB.alldepartments.Copy()
 				if(long_range_enabled)
 					combineddepartments += admin_departments.Copy()
 
