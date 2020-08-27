@@ -123,7 +123,7 @@
 
 /datum/element/polychromic/proc/set_color(atom/source, mob/user)
 	var/choice = input(user,"Polychromic options", "Recolor [source]") as null|anything in overlays_names
-	if(!choice || QDELETED(source) || !user.canUseTopic(source, BE_CLOSE, NO_DEXTERY))
+	if(!choice || QDELETED(source) || !user.canUseTopic(source, BE_CLOSE, NO_DEXTERITY))
 		return
 	var/index = overlays_names.Find(choice)
 	var/list/L = colors_by_atom[source]
@@ -132,7 +132,7 @@
 	var/mutable_appearance/M = L[index]
 	var/old_color = istype(M) ? M.color : M
 	var/ncolor = input(user, "Polychromic options", "Choose [choice] Color", old_color) as color|null
-	if(!ncolor || QDELETED(source) || !colors_by_atom[source] || !user.canUseTopic(source, BE_CLOSE, NO_DEXTERY))
+	if(!ncolor || QDELETED(source) || !colors_by_atom[source] || !user.canUseTopic(source, BE_CLOSE, NO_DEXTERITY))
 		return
 	ncolor = sanitize_hexcolor(ncolor, 6, TRUE, old_color)
 	if(istype(M))
@@ -144,7 +144,7 @@
 	return TRUE
 
 /datum/element/polychromic/proc/grant_user_action(atom/source, mob/user, slot)
-	if(slot == SLOT_IN_BACKPACK || slot == SLOT_LEGCUFFED || slot == SLOT_HANDCUFFED || slot == SLOT_GENERC_DEXTROUS_STORAGE)
+	if(slot == ITEM_SLOT_BACKPACK || slot == ITEM_SLOT_LEGCUFFED || slot == ITEM_SLOT_HANDCUFFED || slot == ITEM_SLOT_DEX_STORAGE)
 		return
 	var/datum/action/polychromic/P = actions_by_atom[source]
 	if(!P)
