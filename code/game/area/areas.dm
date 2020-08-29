@@ -73,7 +73,7 @@
 
 	/// Wasp Addition - Color on minimaps, if it's null (which is default) it makes one at random.
 	var/minimap_color
-	
+
 	var/list/power_usage
 
 	var/lighting_colour_tube = "#FFF6ED"
@@ -82,6 +82,10 @@
 	var/lighting_brightness_tube = 10
 	var/lighting_brightness_bulb = 6
 	var/lighting_brightness_night = 6
+
+	///This datum, if set, allows terrain generation behavior to be ran on Initialize()
+	var/datum/map_generator/map_generator
+
 
 /**
   * A list of teleport locations
@@ -180,6 +184,9 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 /area/LateInitialize()
 	power_change()		// all machines set to current power level, also updates icon
 	update_beauty()
+	if(map_generator)
+		map_generator = new map_generator()
+		map_generator.generate_terrain(get_area_turfs(src))
 
 /**
   * Register this area as belonging to a z level
