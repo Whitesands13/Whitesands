@@ -237,6 +237,7 @@
 
 /datum/reagent/medicine/silver_sulfadiazine/on_mob_life(mob/living/carbon/M)
 	M.adjustFireLoss(-2*REM, 0)
+	M.adjustStaminaLoss(0.6*REM, 0)
 	..()
 	. = 1
 
@@ -292,6 +293,7 @@
 
 /datum/reagent/medicine/styptic_powder/on_mob_life(mob/living/carbon/M)
 	M.adjustBruteLoss(-2*REM, 0)
+	M.adjustStaminaLoss(0.6*REM, 0)
 	..()
 	. = 1
 
