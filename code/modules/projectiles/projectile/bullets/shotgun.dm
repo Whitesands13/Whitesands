@@ -1,11 +1,12 @@
 /obj/projectile/bullet/shotgun_slug
 	name = "12g shotgun slug"
-	damage = 60
+	damage = 30
+	armour_penetration = 10
 
 /obj/projectile/bullet/shotgun_beanbag
 	name = "beanbag slug"
 	damage = 5
-	stamina = 55
+	stamina = 50
 
 /obj/projectile/bullet/incendiary/shotgun
 	name = "incendiary slug"
@@ -18,10 +19,11 @@
 /obj/projectile/bullet/shotgun_stunslug
 	name = "stunslug"
 	damage = 5
-	paralyze = 100
+	stamina = 40
+	knockdown = 10
 	stutter = 5
 	jitter = 20
-	range = 7
+	range = 4
 	icon_state = "spark"
 	color = "#FFFF00"
 
@@ -29,7 +31,7 @@
 	name = "meteorslug"
 	icon = 'icons/obj/meteor.dmi'
 	icon_state = "dust"
-	damage = 30
+	damage = 25
 	paralyze = 15
 	knockdown = 80
 	hitsound = 'sound/effects/meteorimpact.ogg'
@@ -56,17 +58,17 @@
 	return BULLET_ACT_HIT
 
 /obj/projectile/bullet/pellet
-	var/tile_dropoff = 0.75
-	var/tile_dropoff_s = 0.5
+	var/tile_dropoff = 0.8
+	var/tile_dropoff_s = 0.6
 
 /obj/projectile/bullet/pellet/shotgun_buckshot
 	name = "buckshot pellet"
-	damage = 12.5
+	damage = 8
 
 /obj/projectile/bullet/pellet/shotgun_rubbershot
 	name = "rubbershot pellet"
-	damage = 3
-	stamina = 11
+	damage = 1
+	stamina = 8
 
 /obj/projectile/bullet/pellet/shotgun_incapacitate
 	name = "incapacitating pellet"
@@ -83,7 +85,6 @@
 		qdel(src)
 
 /obj/projectile/bullet/pellet/shotgun_improvised
-	tile_dropoff = 0.55		//Come on it does 6 damage don't be like that.
 	damage = 6
 
 /obj/projectile/bullet/pellet/shotgun_improvised/Initialize()
