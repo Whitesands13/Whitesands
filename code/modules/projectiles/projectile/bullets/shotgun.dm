@@ -58,8 +58,8 @@
 	return BULLET_ACT_HIT
 
 /obj/projectile/bullet/pellet
-	var/tile_dropoff = 0.8
-	var/tile_dropoff_s = 0.8
+	var/tile_dropoff = 0.8		// Wasp Edit - Shotgun Nerf
+	var/tile_dropoff_s = 0.8		// Wasp Edit - Shotgun Nerf
 
 /obj/projectile/bullet/pellet/shotgun_buckshot
 	name = "buckshot pellet"
