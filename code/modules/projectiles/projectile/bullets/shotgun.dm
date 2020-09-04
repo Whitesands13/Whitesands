@@ -67,8 +67,8 @@
 
 /obj/projectile/bullet/pellet/shotgun_rubbershot
 	name = "rubbershot pellet"
-	damage = 1
-	stamina = 7
+	damage = 1		// Wasp Edit - Shotgun Nerf
+	stamina = 7		// Wasp Edit - Shotgun Nerf
 
 /obj/projectile/bullet/pellet/shotgun_incapacitate
 	name = "incapacitating pellet"
