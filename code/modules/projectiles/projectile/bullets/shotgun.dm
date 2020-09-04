@@ -1,6 +1,7 @@
 /obj/projectile/bullet/shotgun_slug
 	name = "12g shotgun slug"
 	damage = 30
+	armour_penetration = 10
 
 /obj/projectile/bullet/shotgun_beanbag
 	name = "beanbag slug"
@@ -9,11 +10,11 @@
 
 /obj/projectile/bullet/incendiary/shotgun
 	name = "incendiary slug"
-	damage = 15
+	damage = 20
 
 /obj/projectile/bullet/incendiary/shotgun/dragonsbreath
 	name = "dragonsbreath pellet"
-	damage = 3
+	damage = 5
 
 /obj/projectile/bullet/shotgun_stunslug
 	name = "stunslug"
