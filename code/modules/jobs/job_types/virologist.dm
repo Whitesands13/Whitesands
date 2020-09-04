@@ -1,8 +1,6 @@
 /datum/job/virologist
 	title = "Virologist"
-	flag = VIROLOGIST
 	department_head = list("Chief Medical Officer")
-	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -42,3 +40,11 @@
 	duffelbag = /obj/item/storage/backpack/duffelbag/med
 	courierbag = /obj/item/storage/backpack/messenger/viro
 	box = /obj/item/storage/box/survival/medical
+
+/datum/outfit/job/virologist/pathologist
+	name = "Virologist (Pathologist)"
+
+	uniform = /obj/item/clothing/under/suit/pathologist
+	alt_uniform = null
+	shoes = /obj/item/clothing/shoes/laceup
+	neck = /obj/item/clothing/neck/tie/green
