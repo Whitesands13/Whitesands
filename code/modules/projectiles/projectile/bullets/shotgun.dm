@@ -4,7 +4,7 @@
 
 /obj/projectile/bullet/shotgun_beanbag
 	name = "beanbag slug"
-	damage = 5
+	damage = 1
 	stamina = 30
 
 /obj/projectile/bullet/incendiary/shotgun
