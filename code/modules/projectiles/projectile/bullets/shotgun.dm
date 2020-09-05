@@ -1,7 +1,6 @@
 /obj/projectile/bullet/shotgun_slug
 	name = "12g shotgun slug"
 	damage = 45					// Wasp Edit - Shotgun Nerf
-	armour_penetration = -10	// Wasp Edit - Shotgun Nerf
 
 /obj/projectile/bullet/shotgun_beanbag
 	name = "beanbag slug"
