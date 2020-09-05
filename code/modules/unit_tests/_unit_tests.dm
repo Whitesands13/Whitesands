@@ -6,6 +6,7 @@
 #include "bespoke_id.dm"
 #include "chain_pull_through_space.dm"
 #include "component_tests.dm"
+#include "emoting.dm"
 #include "plantgrowth_tests.dm"
 #include "reagent_id_typos.dm"
 #include "reagent_recipe_collisions.dm"
