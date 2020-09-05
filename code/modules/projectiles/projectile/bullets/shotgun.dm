@@ -23,7 +23,7 @@
 	knockdown = 10
 	stutter = 5
 	jitter = 20
-	range = 4
+	range = 4		// Wasp Edit - Shotgun Nerf
 	icon_state = "spark"
 	color = "#FFFF00"
 
