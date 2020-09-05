@@ -43,6 +43,7 @@ const taskDm = new Task('dm')
   .depends('code/**')
   .depends('goon/**')
   .depends('html/**')
+  .depends('whitesands/code/**') // WS Edit - Adds modularized folders to CBT checking
   .depends('interface/**')
   .depends('tgui/public/tgui.html')
   .depends('tgui/public/*.bundle.*')
