@@ -31,7 +31,7 @@
 	name = "meteorslug"
 	icon = 'icons/obj/meteor.dmi'
 	icon_state = "dust"
-	damage = 25
+	damage = 25		// Wasp Edit - Shotgun Nerf
 	paralyze = 15
 	knockdown = 80
 	hitsound = 'sound/effects/meteorimpact.ogg'
