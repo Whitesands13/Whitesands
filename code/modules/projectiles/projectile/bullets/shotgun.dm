@@ -19,8 +19,8 @@
 /obj/projectile/bullet/shotgun_stunslug
 	name = "stunslug"
 	damage = 5
-	stamina = 40
-	knockdown = 10
+	stamina = 40		// Wasp Edit - Shotgun Nerf
+	knockdown = 10		// Wasp Edit - Shotgun Nerf
 	stutter = 5
 	jitter = 20
 	range = 4		// Wasp Edit - Shotgun Nerf
