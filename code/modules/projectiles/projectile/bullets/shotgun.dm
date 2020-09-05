@@ -88,8 +88,9 @@
 		qdel(src)
 
 /obj/projectile/bullet/pellet/shotgun_improvised
-	tile_dropoff = 0.5		//Come on it does 5 damage don't be like that.		// Wasp Edit - Shotgun nerf
-	damage = 5			// Wasp Edit - Shotgun nerf
+	tile_dropoff = 0.45		//Come on it does 4.5 damage don't be like that.		// Wasp Edit - Shotgun nerf
+	damage = 4.5			// Wasp Edit - Shotgun nerf
+	armour_penetration = -20		// Wasp Edit - Shotgun nerf
 
 /obj/projectile/bullet/pellet/shotgun_improvised/Initialize()
 	. = ..()
