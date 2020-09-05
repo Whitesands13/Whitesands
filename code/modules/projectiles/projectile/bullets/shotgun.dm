@@ -6,7 +6,7 @@
 /obj/projectile/bullet/shotgun_beanbag
 	name = "beanbag slug"
 	damage = 5
-	stamina = 50
+	stamina = 50		// Wasp Edit - Shotgun Nerf
 
 /obj/projectile/bullet/incendiary/shotgun
 	name = "incendiary slug"
