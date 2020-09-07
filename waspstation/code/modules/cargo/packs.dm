@@ -229,6 +229,51 @@
 					/obj/item/ammo_box/magazine/wt550m9/wtic)
 	dangerous = TRUE
 
+/datum/supply_pack/security/co9mm_ammo
+	name = "9mm Commander Ammo Crate"
+	desc = "Contains five modified M1911 eight-round magazines for the standard-issue Commander pistol. Requires Security access to open."
+	contains = list(/obj/item/ammo_box/magazine/co9mm,
+					/obj/item/ammo_box/magazine/co9mm,
+					/obj/item/ammo_box/magazine/co9mm,
+					/obj/item/ammo_box/magazine/co9mm,
+					/obj/item/ammo_box/magazine/co9mm)
+	cost = 2000
+	dangerous = TRUE
+
+/datum/supply_pack/security/shotgun_ammo_nonlethal
+	name = "Non-lethal Shotgun Ammo Crate"
+	desc = "Contains two boxes of both rubber and beanbag shells for use in non-lethal engagement. Requires Security access to open."
+	contains = list(/obj/item/storage/box/rubbershot,
+					/obj/item/storage/box/rubbershot,
+					/obj/item/storage/box/beanbag,
+					/obj/item/storage/box/beanbag)
+	cost = 1500
+
+/datum/supply_pack/security/armory/shotgun_ammo_lethal
+	name = "Lethal Shotgun Ammo Crate"
+	desc = "Contains two boxes of both buckshot and slug shells for use in lethal persuasion. Requires Armory access to open."
+	contains = list(/obj/item/storage/box/lethalshot,
+					/obj/item/storage/box/lethalshot,
+					/obj/item/storage/box/slugshot,
+					/obj/item/storage/box/slugshot)
+	cost = 4000
+	dangerous = TRUE
+
+/datum/supply_pack/misc/traitor_ammo
+	name = "Syndicate-Grade Ammo Crate"
+	desc = "Contains three 10mm stechkin magazines, two .357 magnum speedloaders, and a box of buckshot for good measure. Comes in a re-usable coffin."
+	contains = list(/obj/item/ammo_box/magazine/m10mm,
+					/obj/item/ammo_box/magazine/m10mm,
+					/obj/item/ammo_box/magazine/m10mm,
+					/obj/item/ammo_box/a357,
+					/obj/item/ammo_box/a357,
+					/obj/item/storage/box/lethalshot)
+	cost = 3500
+	crate_name = "For the soon-to-be departed"
+	crate_type = /obj/structure/closet/crate/coffin
+	dangerous = TRUE
+	hidden = TRUE
+
 /obj/item/stock_parts/cell/inducer_supply
 	maxcharge = 5000
 	charge = 5000
