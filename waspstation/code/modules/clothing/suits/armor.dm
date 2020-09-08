@@ -6,11 +6,11 @@
 	icon_state = "blueshield"
 	item_state = "blueshield"
 
-/obj/item/clothing/suit/armor/vest/terra
-	name = "terragov armor vest"
-	desc = "An armor used by TerraGov's marines. Inferior ceramics make this heavier armor only as protective as the armors on the station."
-	icon_state = "terraarmor"
-	item_state = "terraarmor"
+/obj/item/clothing/suit/armor/vest/solgov
+	name = "SolGov armor vest"
+	desc = "A standard armor vest fielded for SolGov's infantry. It's kind of uncomfortable."
+	icon_state = "solarmor"
+	item_state = "solarmor"
 	icon = 'waspstation/icons/obj/clothing/suits.dmi'
 	mob_overlay_icon = 'waspstation/icons/mob/clothing/suits.dmi'
-	
+
