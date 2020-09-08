@@ -53,7 +53,7 @@
 	head = null
 	belt = /obj/item/gun/ballistic/automatic/solar
 	r_pocket = /obj/item/gun/ballistic/automatic/pistol/solgov
-	l_pocket = /obj/item/melee/transforming/energy/ctf/solgov=1
+	l_pocket = /obj/item/melee/transforming/energy/ctf/solgov
 	backpack_contents = list(/obj/item/crowbar/power,\
 		/obj/item/ammo_box/magazine/rifle47x33mm=3,\
 		/obj/item/grenade/c4/x4=2,\
