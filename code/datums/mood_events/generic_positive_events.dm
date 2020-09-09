@@ -193,3 +193,7 @@
 /datum/mood_event/confident_mane
 	description = "<span class='nicegreen'>I'm feeling confident with a head full of hair.</span>\n"
 	mood_change = 2
+/datum/mood_event/dkickflip
+	description = "<span class='nicegreen'>I just witnessed the most RAD thing ever.</span>\n"
+	mood_change = 5
+	timeout = 2 MINUTES
