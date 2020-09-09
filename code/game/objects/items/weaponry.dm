@@ -534,6 +534,10 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	///The vehicle counterpart for the board
 	var/board_item_type = /obj/vehicle/ridden/scooter/skateboard
 
+/obj/item/melee/skateboard/suicide_act(mob/living/carbon/user)
+	user.visible_message("<span class='suicide'>[user] begins attempting to preform a double kickflip! It looks like [user.p_theyre()] trying to commit suicide!</span>")
+	return BRUTELOSS
+
 /obj/item/melee/skateboard/attack_self(mob/user)
 	var/obj/vehicle/ridden/scooter/skateboard/S = new board_item_type(get_turf(user))//this probably has fucky interactions with telekinesis but for the record it wasnt my fault
 	S.buckle_mob(user)
