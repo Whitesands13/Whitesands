@@ -163,21 +163,12 @@
 		close_overmap_objects -= other
 
 /**
-  * Manual method of getting the close overmap objects. Warning: doesn't work reliably
-  */
-/obj/structure/overmap/proc/get_close_objects()
-	close_overmap_objects.Cut()
-	for(var/obj/structure/overmap/object in get_turf(src))
-		if(src)
-			continue
-		close_overmap_objects += object
-
-/**
   * Reduces overmap object integrity by X amount, divided by armor
   * * amount - amount of damage to apply to the ship
   */
 /obj/structure/overmap/proc/recieve_damage(amount)
 	integrity = max(integrity - (amount / overmap_armor), 0)
+	//TODO: add check for if there's no mobs in a ship with no integrity to delete (or make into a ruin?)
 
 /**
   * ## Z-level linked overmap object
@@ -214,9 +205,10 @@
 /**
   * Ensures there is only ONE main station object
   */
-/obj/structure/overmap/level/main/Initialize(mapload, _id)
+/obj/structure/overmap/level/main/Initialize(mapload, _id, list/_zs)
 	if(SSovermap.main)
-		WARNING("Multiple main overmap objects spawned")
+		WARNING("Multiple main overmap objects spawned, deleting extras.")
+		return INITIALIZE_HINT_QDEL
 	else
 		SSovermap.main = src
 	..()
@@ -229,5 +221,5 @@
 /obj/structure/overmap/level/planet/lavaland
 	name = "Lavaland"
 	desc = "A lava-covered planet known for its plentiful natural resources among dangerous fauna."
-	id = "lavaland"
+	id = AWAY_OVERMAP_OBJECT_ID_LAVALAND
 	color = COLOR_ORANGE

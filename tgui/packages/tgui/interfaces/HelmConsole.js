@@ -11,10 +11,12 @@ export const HelmConsole = (props, context) => {
     <Window resizable>
       <div className="CameraConsole__left">
         <Window.Content>
-          {!isViewer && canFly && (
+          {canFly && !isViewer && (
             <ShipControlContent />
           )}
-          <ShipContent />
+          {canFly && (
+            <ShipContent />
+          )}
           <SharedContent />
         </Window.Content>
       </div>
@@ -45,6 +47,9 @@ const SharedContent = (props, context) => {
             onClick={() => act('reload_ship')} />
         )}>
         <LabeledList>
+          <LabeledList.Item label="Class">
+            {shipInfo.class}
+          </LabeledList.Item>
           <LabeledList.Item label="Integrity">
             <ProgressBar
               ranges={{
@@ -107,8 +112,8 @@ const SharedContent = (props, context) => {
                   <Button
                     icon="circle"
                     disabled={isViewer || (data.speed > 0)}
-                    onClick={() => act('dock', {
-                      ship_to_dock: ship.ref,
+                    onClick={() => act('act_overmap', {
+                      ship_to_act: ship.ref,
                     })} />
                 </Table.Cell>
               )}

@@ -87,6 +87,7 @@
 		.["otherInfo"] += list(other_data)
 
 	if(istype(current_ship, /obj/structure/overmap/ship))
+		.["canFly"] = TRUE
 		.["state"] = current_ship.state
 		.["docked"] = current_ship.docked ? TRUE : FALSE
 		.["heading"] = dir2angle(current_ship.get_heading())
@@ -115,7 +116,6 @@
 
 /obj/machinery/computer/helm/ui_static_data(mob/user)
 	. = list()
-	.["canFly"] = istype(current_ship, /obj/structure/overmap/ship)
 	.["isViewer"] = viewer
 	.["mapRef"] = current_ship.map_name
 
@@ -125,9 +125,9 @@
 		return
 
 	switch(action)
-		if("dock")
-			var/obj/structure/overmap/to_dock = locate(params["ship_to_dock"])
-			say(current_ship.dock(to_dock))
+		if("act_overmap")
+			var/obj/structure/overmap/to_act = locate(params["ship_to_act"])
+			say(current_ship.dock(to_act))
 		if("undock")
 			say(current_ship.undock())
 		if("reload_ship")

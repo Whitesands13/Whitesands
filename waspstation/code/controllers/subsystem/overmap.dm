@@ -33,8 +33,7 @@ SUBSYSTEM_DEF(overmap)
 	create_map()
 	for(var/shuttle in SSshuttle.mobile)
 		var/obj/docking_port/mobile/M = shuttle
-		if(is_station_level(M.z))
-			new /obj/structure/overmap/ship/rendered(SSovermap.main, M.id, M)
+		setup_shuttle_ship(M)
 
 	for(var/ship in ships)
 		var/obj/structure/overmap/ship/S = ship
@@ -59,9 +58,23 @@ SUBSYSTEM_DEF(overmap)
 	if(events_enabled)
 		for(var/event in events)
 			var/obj/structure/overmap/event/E = event
-			if(E.close_overmap_objects)
+			if(E.affect_multiple_times && E.close_overmap_objects)
 				E.apply_effect()
 
+/**
+  * Creates an overmap ship object for the provided mobile docking port if one does not already exist.
+  * * Shuttle: The docking port to create an overmap object for
+  */
+/datum/controller/subsystem/overmap/proc/setup_shuttle_ship(obj/docking_port/mobile/shuttle)
+	var/docked_object = get_overmap_object_by_z(shuttle.z)
+	if(docked_object)
+		shuttle.current_ship = new /obj/structure/overmap/ship/shuttle/rendered(docked_object, shuttle.id, shuttle)
+	else if(!is_centcom_level(shuttle.z) && !istype(shuttle, /obj/docking_port/mobile/arrivals))
+		shuttle.current_ship = new /obj/structure/overmap/ship/shuttle/rendered(get_unused_overmap_square(), shuttle.id, shuttle)
+
+/**
+  * The proc that creates all the objects on the overmap, split into seperate procs for redundancy.
+  */
 /datum/controller/subsystem/overmap/proc/create_map()
 	spawn_events()
 	spawn_ruin_levels()
@@ -97,7 +110,7 @@ SUBSYSTEM_DEF(overmap)
   */
 /datum/controller/subsystem/overmap/proc/spawn_station()
 	var/obj/structure/overmap/level/main/station = new(get_unused_overmap_square(), null, SSmapping.levels_by_trait(ZTRAIT_STATION))
-	var/obj/structure/overmap/level/planet/lavaland/lavaland = new(get_step(station, pick(GLOB.alldirs))) //no promise lavaland is safe from events
+	var/obj/structure/overmap/level/planet/lavaland/lavaland = new(get_step(station, pick(GLOB.alldirs)), null, SSmapping.levels_by_trait(ZTRAIT_MINING)) //no promise lavaland is safe from events
 	if(!istype(get_area(lavaland), /area/overmap))
 		lavaland.Move(get_unused_overmap_square()) //you're fucked now, it could be ANYWHERE
 
@@ -131,6 +144,15 @@ SUBSYSTEM_DEF(overmap)
 /datum/controller/subsystem/overmap/proc/get_overmap_object_by_id(id)
 	for(var/obj/structure/overmap/object in overmap_objects)
 		if(object.id == id)
+			return object
+
+/**
+  * Gets the corresponding overmap object that shares the provided z level
+  * * zlevel - The Z-level of the overmap object you want to find
+  */
+/datum/controller/subsystem/overmap/proc/get_overmap_object_by_z(zlevel)
+	for(var/obj/structure/overmap/level/object in overmap_objects)
+		if(zlevel in object.linked_levels)
 			return object
 
 /datum/controller/subsystem/overmap/Recover()

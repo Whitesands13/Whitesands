@@ -64,6 +64,13 @@
 	. = ..()
 	LAZYREMOVE(SSovermap.ships, src)
 
+/*
+/obj/structure/overmap/ship/proc/overmap_act(mob/user, obj/structure/overmap/to_act)
+	var/dockable = istype(to_act, /obj/structure/overmap/level)
+	var/interactable =
+	if(istype(to_act))
+*/
+
 /**
   * Docks the shuttle by requesting a port at the requested spot.
   */
@@ -110,7 +117,7 @@
 /obj/structure/overmap/ship/proc/burn_engines(n_dir = null)
 	var/thrust_used = 0 //The amount of thrust that the engines will provide with one burn
 	refresh_engines()
-	if(mass == 0)
+	if(!mass)
 		calculate_mass()
 	for(var/obj/machinery/shuttle/engine/E in shuttle.engine_list)
 		if(!E.enabled)
@@ -149,8 +156,25 @@
 		. += length(get_area_turfs(shuttleArea))
 	mass = .
 
+/obj/structure/overmap/ship/proc/check_loc()
+	var/docked_object = SSovermap.get_overmap_object_by_z(shuttle.z)
+	if(docked_object == loc) //The docked object is correct, move along
+		return TRUE
+	if(!docked_object && !docked) //The shuttle is in transit, and the ship is not docked to anything, move along
+		return TRUE
+	if(docked && !docked_object) //The overmap object thinks it's docked to something, but it really isn't. Move to a random tile on the overmap
+		Move(SSovermap.get_unused_overmap_square())
+		docked = null
+		return FALSE
+	if(!docked && docked_object) //The overmap object thinks it's NOT docked to something, but it actually is. Move to the correct place.
+		Move(docked_object)
+		docked = docked_object
+		return FALSE
+
+
 /* BEWARE ALL YE WHO PASS THIS LINE */
 // This code needs to be reworked before it gets merged. I'm serious.
+
 
 /obj/structure/overmap/ship/proc/is_still()
 	return !MOVING(speed[1]) && !MOVING(speed[2])
@@ -163,7 +187,9 @@
 		integrity++
 	if((world.time >= dock_change_start_time)) //Handler for undocking and docking timer
 		switch(state)
-			if(SHIP_DOCKING)
+			if(SHIP_DOCKING) //so that the shuttle is truly docked first
+				if(shuttle.mode != SHUTTLE_DOCKED)
+					return
 				Move(docked)
 				state = SHIP_IDLE
 			if(SHIP_UNDOCKING)

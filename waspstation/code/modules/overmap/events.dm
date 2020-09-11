@@ -7,10 +7,16 @@
 	var/chance_to_affect = 0
 	///Chance to spread to nearby tiles if spawned
 	var/spread_chance = 0
+	///The event to run when the station gets hit by an event
+	var/datum/round_event_control/station_event
 
 /obj/structure/overmap/event/Initialize(mapload, _id)
 	. = ..()
 	LAZYADD(SSovermap.events, src)
+
+/obj/structure/overmap/event/Del()
+	. = ..()
+	LAZYREMOVE(SSovermap.events, src)
 
 /obj/structure/overmap/event/proc/apply_effect()
 	if(affect_multiple_times)
@@ -21,10 +27,16 @@
 /obj/structure/overmap/event/proc/affect_ship(obj/structure/overmap/ship/S)
 	return
 
+/obj/structure/overmap/event/proc/ship_action(obj/structure/overmap/ship/S, mob/user)
+	return
+
 /obj/structure/overmap/event/Crossed(atom/movable/AM, oldloc)
 	. = ..()
-	if(istype(AM, /obj/structure/overmap))
+	if(istype(AM, /obj/structure/overmap/ship))
 		affect_ship(AM)
+	else if(istype(AM, /obj/structure/overmap/level/main))
+		var/datum/round_event_control/E = new station_event()
+		E.runEvent()
 
 ///METEOR STORMS - Bounces harmlessly off the shield... unless your shield is breached
 /obj/structure/overmap/event/meteor
@@ -33,6 +45,7 @@
 	affect_multiple_times = TRUE
 	chance_to_affect = 5
 	spread_chance = 50
+	station_event = /datum/round_event_control/meteor_wave/threatening
 	var/max_damage = 15
 	var/min_damage = 5
 
@@ -57,12 +70,14 @@
 
 /obj/structure/overmap/event/meteor/minor
 	name = "asteroid storm (minor)"
+	station_event = /datum/round_event_control/meteor_wave
 	max_damage = 10
 	min_damage = 3
 
 /obj/structure/overmap/event/meteor/major
 	name = "asteroid storm (major)"
 	spread_chance = 25
+	station_event = /datum/round_event_control/meteor_wave/catastrophic
 	max_damage = 25
 	min_damage = 10
 
@@ -71,6 +86,7 @@
 	name = "ion storm (moderate)"
 	icon_state = "ion1"
 	spread_chance = 20
+	station_event = /datum/round_event_control/ion_storm
 	var/strength = 3
 
 /obj/structure/overmap/event/emp/Initialize(mapload, _id)
@@ -97,6 +113,7 @@
 	name = "electrical storm (moderate)"
 	icon_state = "electrical1"
 	spread_chance = 30
+	station_event = /datum/round_event_control/grid_check
 	var/max_damage = 15
 	var/min_damage = 5
 
@@ -130,3 +147,34 @@
 	spread_chance = 15
 	max_damage = 20
 	min_damage = 10
+
+/obj/structure/overmap/event/nebula
+	name = "nebula"
+	icon_state = "nebula"
+	spread_chance = 75
+	opacity = TRUE
+
+/obj/structure/overmap/event/wormhole
+	name = "wormhole"
+	icon_state = "wormhole"
+	spread_chance = 0
+	///The currently linked wormhole
+	var/obj/structure/overmap/event/wormhole/other_wormhole
+	///Amount of times a ship can pass through before it collapses
+	var/stability
+
+/obj/structure/overmap/event/wormhole/Initialize(mapload, _id, _other_wormhole)
+	. = ..()
+	if(_other_wormhole)
+		other_wormhole = _other_wormhole
+	if(!other_wormhole)
+		other_wormhole = new(SSovermap.get_unused_overmap_square(), "[id]_exit", src)
+
+/obj/structure/overmap/event/wormhole/affect_ship(obj/structure/overmap/ship/S)
+	if(--stability <= 0)
+		S.recieve_damage(rand(20, 30))
+		S.Move(SSovermap.get_unused_overmap_square())
+		QDEL_NULL(other_wormhole)
+		return qdel(src)
+	other_wormhole.stability = stability
+	S.Move(get_step(other_wormhole, S.dir))

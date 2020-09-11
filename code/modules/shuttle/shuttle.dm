@@ -294,6 +294,9 @@
 	var/can_move_docking_ports = FALSE
 	var/list/hidden_turfs = list()
 
+	///The linked overmap object, if there is one
+	var/obj/structure/overmap/ship/current_ship
+
 /obj/docking_port/mobile/proc/register()
 	SSshuttle.mobile += src
 
@@ -327,12 +330,7 @@
 	current_engines = initial_engines
 
 	if(!mapload)
-		if(is_station_level(z))
-			new /obj/structure/overmap/ship/shuttle/rendered(SSovermap.main, id, src)
-		else if(is_mining_level(z))
-			new /obj/structure/overmap/ship/shuttle/rendered(SSovermap.get_overmap_object_by_id("lavaland"), id, src)
-		else
-			new /obj/structure/overmap/ship/shuttle/rendered(get_random_station_turf())
+		SSovermap.setup_shuttle_ship(src)
 
 	#ifdef DOCKING_PORT_HIGHLIGHT
 	highlight("#0f0")
