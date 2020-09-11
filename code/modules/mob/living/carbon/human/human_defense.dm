@@ -740,9 +740,9 @@
 		var/no_damage
 		if(status == "OK" || status == "no damage")
 			no_damage = TRUE
-		var/isdisabled = " "
-		if(LB.is_disabled())
-			isdisabled = " is disabled "
+		var/isdisabled = ""
+		if(LB.bodypart_disabled)
+			isdisabled = " is disabled"
 			if(no_damage)
 				isdisabled += " but otherwise "
 			else

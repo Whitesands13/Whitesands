@@ -25,7 +25,16 @@
 	var/bone_status = BONE_FLAG_NO_BONES // Is it fine, broken, splinted, or just straight up fucking gone
 	var/bone_break_threshold = 30
 
-	var/bodypart_disabled = BODYPART_NOT_DISABLED //If disabled, limb is as good as missing
+	///If disabled, limb is as good as missing.
+	var/bodypart_disabled = FALSE
+	///Multiplied by max_damage it returns the threshold which defines a limb being disabled or not. From 0 to 1.
+	var/disable_threshold = 1
+	///Controls whether bodypart_disabled makes sense or not for this limb.
+	var/can_be_disabled = FALSE
+	///Multiplied by max_damage it returns the threshold which defines a limb being disabled or not. From 0 to 1.
+	var/disable_threshold = 1
+	///Controls whether bodypart_disabled makes sense or not for this limb.
+	var/can_be_disabled = FALSE
 	var/body_damage_coeff = 1 //Multiplier of the limb's damage that gets applied to the mob
 	var/stam_damage_coeff = 0.75
 	var/brutestate = 0
@@ -69,6 +78,20 @@
 	var/medium_burn_msg = "blistered"
 	var/heavy_burn_msg = "peeling away"
 
+/obj/item/bodypart/Initialize(mapload)
+	. = ..()
+	if(can_be_disabled)
+		RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS), .proc/on_paralysis_trait_gain)
+		RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS), .proc/on_paralysis_trait_loss)
+
+
+/obj/item/bodypart/Destroy()
+	if(owner)
+		owner.remove_bodypart(src)
+		set_owner(null)
+	return ..()
+
+
 /obj/item/bodypart/examine(mob/user)
 	. = ..()
 	if(brute_dam > DAMAGE_PRECISION)
@@ -76,14 +99,10 @@
 	if(burn_dam > DAMAGE_PRECISION)
 		. += "<span class='warning'>This limb has [burn_dam > 30 ? "severe" : "minor"] burns.</span>"
 
+
 /obj/item/bodypart/blob_act()
 	take_damage(max_damage)
 
-/obj/item/bodypart/Destroy()
-	if(owner)
-		owner.remove_bodypart(src)
-		owner = null
-	return ..()
 
 /obj/item/bodypart/attack(mob/living/carbon/C, mob/user)
 	if(ishuman(C))
@@ -131,14 +150,6 @@
 		playsound(T, 'sound/misc/splort.ogg', 50, TRUE, -1)
 	for(var/obj/item/I in src)
 		I.forceMove(T)
-
-/obj/item/bodypart/proc/consider_processing()
-	if(stamina_dam > DAMAGE_PRECISION)
-		. = TRUE
-	//else if.. else if.. so on.
-	else
-		. = FALSE
-	needs_processing = .
 
 //Return TRUE to get whatever mob this is in to update health.
 /obj/item/bodypart/proc/on_life(stam_regen)
@@ -192,17 +203,19 @@
 	burn_dam += burn
 
 	//We've dealt the physical damages, if there's room lets apply the stamina damage.
-	stamina_dam += round(clamp(stamina, 0, max_stamina_damage - stamina_dam), DAMAGE_PRECISION)
+	if(stamina)
+		set_stamina_dam(stamina_dam + round(clamp(stamina, 0, max_stamina_damage - stamina_dam), DAMAGE_PRECISION))
 
 
-	if(owner && updating_health)
-		owner.updatehealth()
-		if(stamina > DAMAGE_PRECISION)
-			owner.update_stamina()
-			owner.stam_regen_start_time = world.time + STAMINA_REGEN_BLOCK_TIME
-			. = TRUE
-	consider_processing()
-	update_disabled()
+	if(owner)
+		if(can_be_disabled)
+			update_disabled()
+		if(updating_health)
+			owner.updatehealth()
+			if(stamina > DAMAGE_PRECISION)
+				owner.update_stamina()
+				owner.stam_regen_start_time = world.time + STAMINA_REGEN_BLOCK_TIME
+				. = TRUE
 	return update_bodypart_damage_state() || .
 
 //Heals brute and burn damage for the organ. Returns 1 if the damage-icon states changed at all.
@@ -210,22 +223,52 @@
 //Cannot remove negative damage (i.e. apply damage)
 /obj/item/bodypart/proc/heal_damage(brute, burn, stamina, required_status, updating_health = TRUE)
 
-	if(required_status && (status != required_status)) //So we can only heal certain kinds of limbs, ie robotic vs organic.
+	if(required_status && status != required_status) //So we can only heal certain kinds of limbs, ie robotic vs organic.
 		return
 
-	brute_dam	= round(max(brute_dam - brute, 0), DAMAGE_PRECISION)
-	burn_dam	= round(max(burn_dam - burn, 0), DAMAGE_PRECISION)
-	stamina_dam = round(max(stamina_dam - stamina, 0), DAMAGE_PRECISION)
-	if(owner && updating_health)
-		owner.updatehealth()
-	if(owner.dna && owner.dna.species && (REVIVESBYHEALING in owner.dna.species.species_traits))
-		if(owner.health > 0 && !owner.hellbound)
-			owner.revive(0)
-			owner.cure_husk(0) // If it has REVIVESBYHEALING, it probably can't be cloned. No husk cure.
-	consider_processing()
-	update_disabled()
+	if(brute)
+		set_brute_dam(round(max(brute_dam - brute, 0), DAMAGE_PRECISION))
+	if(burn)
+		set_burn_dam(round(max(burn_dam - burn, 0), DAMAGE_PRECISION))
+	if(stamina)
+		set_stamina_dam(round(max(stamina_dam - stamina, 0), DAMAGE_PRECISION))
+
+	if(owner)
+		if(can_be_disabled)
+			update_disabled()
+		if(updating_health)
+			owner.updatehealth()
 	cremation_progress = min(0, cremation_progress - ((brute_dam + burn_dam)*(100/max_damage)))
 	return update_bodypart_damage_state()
+
+
+///Proc to hook behavior associated to the change of the brute_dam variable's value.
+/obj/item/bodypart/proc/set_brute_dam(new_value)
+	if(brute_dam == new_value)
+		return
+	. = brute_dam
+	brute_dam = new_value
+
+
+///Proc to hook behavior associated to the change of the burn_dam variable's value.
+/obj/item/bodypart/proc/set_burn_dam(new_value)
+	if(burn_dam == new_value)
+		return
+	. = burn_dam
+	burn_dam = new_value
+
+
+///Proc to hook behavior associated to the change of the stamina_dam variable's value.
+/obj/item/bodypart/proc/set_stamina_dam(new_value)
+	if(stamina_dam == new_value)
+		return
+	. = stamina_dam
+	stamina_dam = new_value
+	if(stamina_dam > DAMAGE_PRECISION)
+		needs_processing = TRUE
+	else
+		needs_processing = FALSE
+
 
 //Returns total damage.
 /obj/item/bodypart/proc/get_damage(include_stamina = FALSE)
@@ -234,32 +277,159 @@
 		total = max(total, stamina_dam)
 	return total
 
+
 //Checks disabled status thresholds
 /obj/item/bodypart/proc/update_disabled()
-	if(!isnull(set_disabled(is_disabled()))) //set_disabled will return null when there's no change
-		owner.update_mobility()
-
-/obj/item/bodypart/proc/is_disabled()
+	if(!can_be_disabled)
+		set_disabled(FALSE)
+		CRASH("update_disabled called with can_be_disabled false")
 	if(HAS_TRAIT(src, TRAIT_PARALYSIS))
-		return BODYPART_DISABLED_PARALYSIS
-	if(can_dismember() && !HAS_TRAIT(owner, TRAIT_NOLIMBDISABLE))
-		. = bodypart_disabled //inertia, to avoid limbs healing 0.1 damage and being re-enabled
-		if((get_damage(TRUE) >= max_damage) || (HAS_TRAIT(owner, TRAIT_EASYLIMBDISABLE) && (get_damage(TRUE) >= (max_damage * 0.6)))) //Easy limb disable disables the limb at 40% health instead of 0%
-			return BODYPART_DISABLED_DAMAGE
-		if(bodypart_disabled && (get_damage(TRUE) <= (max_damage * 0.5)))
-			return BODYPART_NOT_DISABLED
-	else
-		return BODYPART_NOT_DISABLED
+		set_disabled(TRUE)
+		return
 
+	var/total_damage = max(brute_dam + burn_dam, stamina_dam)
+
+	if(total_damage >= max_damage * disable_threshold) //Easy limb disable disables the limb at 40% health instead of 0%
+		if(!last_maxed)
+			if(owner.stat < UNCONSCIOUS)
+				owner.emote("scream")
+			last_maxed = TRUE
+		set_disabled(TRUE)
+		return
+
+	if(bodypart_disabled && total_damage <= max_damage * 0.8) // reenabled at 80% now instead of 50% as of wounds update
+		last_maxed = FALSE
+		set_disabled(FALSE)
+
+///Proc to change the value of the `disabled` variable and react to the event of its change.
 /obj/item/bodypart/proc/set_disabled(new_disabled)
-	if(isnull(new_disabled) || bodypart_disabled == new_disabled)
+	if(bodypart_disabled == new_disabled)
 		return
 	. = bodypart_disabled
 	bodypart_disabled = new_disabled
-	if(bodypart_disabled && owner.get_item_for_held_index(held_index))
-		owner.dropItemToGround(owner.get_item_for_held_index(held_index))
+
+	if(!owner)
+		return
+	if(bodypart_disabled)
+		if(!.)
+			owner.update_mobility()
+	else if (.)
+		owner.update_mobility()
 	owner.update_health_hud() //update the healthdoll
 	owner.update_body()
+
+///Proc to change the value of the `owner` variable and react to the event of its change.
+/obj/item/bodypart/proc/set_owner(new_owner)
+	if(owner == new_owner)
+		return FALSE //`null` is a valid option, so we need to use a num var to make it clear no change was made.
+	. = owner
+	owner = new_owner
+	var/needs_update_disabled = FALSE //Only really relevant if there's an owner
+	if(.)
+		var/mob/living/carbon/old_owner = .
+		if(can_be_disabled)
+			if(HAS_TRAIT(old_owner, TRAIT_EASYLIMBWOUND))
+				disable_threshold = initial(disable_threshold)
+				needs_update_disabled = TRUE
+			UnregisterSignal(old_owner, list(
+				SIGNAL_REMOVETRAIT(TRAIT_EASYLIMBWOUND),
+				SIGNAL_ADDTRAIT(TRAIT_EASYLIMBWOUND),
+				))
+		if(initial(can_be_disabled))
+			if(HAS_TRAIT(old_owner, TRAIT_NOLIMBDISABLE))
+				if(!owner || !HAS_TRAIT(owner, TRAIT_NOLIMBDISABLE))
+					set_can_be_disabled(initial(can_be_disabled))
+					needs_update_disabled = TRUE
+			UnregisterSignal(old_owner, list(
+				SIGNAL_REMOVETRAIT(TRAIT_NOLIMBDISABLE),
+				SIGNAL_ADDTRAIT(TRAIT_NOLIMBDISABLE),
+				))
+	if(owner)
+		if(can_be_disabled)
+			if(HAS_TRAIT(owner, TRAIT_EASYLIMBWOUND))
+				disable_threshold = 0.6
+				needs_update_disabled = TRUE
+			RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_EASYLIMBWOUND), .proc/on_owner_easylimbwound_trait_loss)
+			RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_EASYLIMBWOUND), .proc/on_owner_easylimbwound_trait_gain)
+		if(initial(can_be_disabled))
+			if(HAS_TRAIT(owner, TRAIT_NOLIMBDISABLE))
+				set_can_be_disabled(FALSE)
+				needs_update_disabled = FALSE
+			RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_NOLIMBDISABLE), .proc/on_owner_nolimbdisable_trait_loss)
+			RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_NOLIMBDISABLE), .proc/on_owner_nolimbdisable_trait_gain)
+		if(needs_update_disabled)
+			update_disabled()
+
+
+///Proc to change the value of the `can_be_disabled` variable and react to the event of its change.
+/obj/item/bodypart/proc/set_can_be_disabled(new_can_be_disabled)
+	if(can_be_disabled == new_can_be_disabled)
+		return
+	. = can_be_disabled
+	can_be_disabled = new_can_be_disabled
+	if(can_be_disabled)
+		if(owner)
+			if(HAS_TRAIT(owner, TRAIT_NOLIMBDISABLE))
+				CRASH("set_can_be_disabled to TRUE with for limb whose owner has TRAIT_NOLIMBDISABLE")
+			RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS), .proc/on_paralysis_trait_gain)
+			RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS), .proc/on_paralysis_trait_loss)
+			if(HAS_TRAIT(owner, TRAIT_EASYLIMBWOUND))
+				disable_threshold = 0.6
+			RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_EASYLIMBWOUND), .proc/on_owner_easylimbwound_trait_loss)
+			RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_EASYLIMBWOUND), .proc/on_owner_easylimbwound_trait_gain)
+		update_disabled()
+	else if(.)
+		if(owner)
+			UnregisterSignal(owner, list(
+				SIGNAL_ADDTRAIT(TRAIT_PARALYSIS),
+				SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS),
+				SIGNAL_REMOVETRAIT(TRAIT_EASYLIMBWOUND),
+				SIGNAL_ADDTRAIT(TRAIT_EASYLIMBWOUND),
+				))
+		set_disabled(FALSE)
+
+
+///Called when TRAIT_PARALYSIS is added to the limb.
+/obj/item/bodypart/proc/on_paralysis_trait_gain(obj/item/bodypart/source)
+	SIGNAL_HANDLER
+	if(can_be_disabled)
+		set_disabled(TRUE)
+
+
+///Called when TRAIT_PARALYSIS is removed from the limb.
+/obj/item/bodypart/proc/on_paralysis_trait_loss(obj/item/bodypart/source)
+	SIGNAL_HANDLER
+	if(can_be_disabled)
+		update_disabled()
+
+
+///Called when TRAIT_NOLIMBDISABLE is added to the owner.
+/obj/item/bodypart/proc/on_owner_nolimbdisable_trait_gain(mob/living/carbon/source)
+	SIGNAL_HANDLER
+	set_can_be_disabled(FALSE)
+
+
+///Called when TRAIT_NOLIMBDISABLE is removed from the owner.
+/obj/item/bodypart/proc/on_owner_nolimbdisable_trait_loss(mob/living/carbon/source)
+	SIGNAL_HANDLER
+	set_can_be_disabled(initial(can_be_disabled))
+
+
+///Called when TRAIT_EASYLIMBWOUND is added to the owner.
+/obj/item/bodypart/proc/on_owner_easylimbwound_trait_gain(mob/living/carbon/source)
+	SIGNAL_HANDLER
+	disable_threshold = 0.6
+	if(can_be_disabled)
+		update_disabled()
+
+
+///Called when TRAIT_EASYLIMBWOUND is removed from the owner.
+/obj/item/bodypart/proc/on_owner_easylimbwound_trait_loss(mob/living/carbon/source)
+	SIGNAL_HANDLER
+	disable_threshold = initial(disable_threshold)
+	if(can_be_disabled)
+		update_disabled()
+
 
 //Updates an organ's brute/burn states for use by update_damage_overlays()
 //Returns 1 if we need to update overlays. 0 otherwise.
