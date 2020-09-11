@@ -274,6 +274,26 @@
 	dangerous = TRUE
 	hidden = TRUE
 
+/datum/supply_pack/misc/contraband_ammo
+	name = "Major Ursa's Surplus Munitions Pack"
+	desc = "You have \"under-counter\" gun, but no more to shoot from it? No worry comrade, we have you covered."
+	cost = 4999
+	contains = list(/obj/item/ammo_box/a762,
+					/obj/item/ammo_box/n762,
+					/obj/item/ammo_box/magazine/m10mm/rifle,
+					/obj/item/ammo_box/c45,
+					/obj/item/ammo_box/magazine/m50,
+					/obj/item/ammo_box/magazine/tommygunm45,
+					/obj/item/ammo_box/foambox/riot)
+	dangerous = TRUE
+	contraband = TRUE
+	crate_type = /obj/structure/closet/crate/wooden
+
+/datum/supply_pack/misc/contraband_ammo/fill(obj/structure/closet/crate/C)
+	for(var/i = 1 to 10)
+		var/item = pick(contains)
+		new item(C)
+
 /obj/item/stock_parts/cell/inducer_supply
 	maxcharge = 5000
 	charge = 5000
