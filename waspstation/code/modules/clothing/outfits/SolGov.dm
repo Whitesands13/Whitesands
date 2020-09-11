@@ -20,12 +20,12 @@
 /datum/outfit/solgov/commander
 	name = "SolGov Commander"
 	id = /obj/item/card/id/solgov/commander
-	uniform = /obj/item/clothing/under/solgov
-	suit = /obj/item/clothing/suit/armor/vest/solgov
+	uniform = /obj/item/clothing/under/solgov/formal/terragov
+	suit = /obj/item/clothing/suit/armor/vest/solgov/formal/terragov
 	glasses = /obj/item/clothing/glasses/sunglasses
 	ears = /obj/item/radio/headset
 	gloves = /obj/item/clothing/gloves/combat
-	head = /obj/item/clothing/head/helmet/solgov
+	head = /obj/item/clothing/head/solgov/terragov
 	r_pocket = /obj/item/gun/ballistic/automatic/pistol/solgov
 	l_pocket = /obj/item/ammo_box/magazine/pistol556mm
 	shoes = /obj/item/clothing/shoes/jackboots
@@ -35,7 +35,9 @@
 	backpack_contents = list(/obj/item/crowbar/power,\
 		/obj/item/melee/baton/loaded=1,\
 		/obj/item/grenade/c4/x4=2,\
-		/obj/item/ammo_box/magazine/pistol556mm=1)
+		/obj/item/ammo_box/magazine/pistol556mm=1,\
+		/obj/item/megaphone=1,\
+		/obj/item/clothing/head/beret/solgov/terragov=1)
 
 /datum/outfit/solgov/elite
 	name = "SolGov Elite"
@@ -50,11 +52,11 @@
 	back = /obj/item/storage/backpack
 	box = /obj/item/storage/box/survival
 	mask = /obj/item/clothing/mask/gas
-	head = null
+	head = /obj/item/clothing/head/beret/solgov/terragov
 	belt = /obj/item/gun/ballistic/automatic/solar
 	r_pocket = /obj/item/gun/ballistic/automatic/pistol/solgov
 	l_pocket = /obj/item/melee/transforming/energy/ctf/solgov
 	backpack_contents = list(/obj/item/crowbar/power,\
-		/obj/item/ammo_box/magazine/rifle47x33mm=3,\
+		/obj/item/ammo_box/magazine/rifle47x33mm=2,\
 		/obj/item/grenade/c4/x4=2,\
 		/obj/item/ammo_box/magazine/pistol556mm=2)

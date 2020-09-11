@@ -1,10 +1,10 @@
 /obj/item/clothing/under/solgov
-	icon = 'waspstation/icons/obj/clothing/under/SolGov.dmi'
-	mob_overlay_icon = 'waspstation/icons/mob/clothing/under/SolGov.dmi'
-	icon_state = "infantry"
-	item_state = "infantry"
-	name = "\improper SolGov jumpsuit"
-	desc = "It's a jumpsuit for SolGov's officers. Not comfortable at all, but armored."
+	icon = 'waspstation/icons/obj/clothing/under/solgov.dmi'
+	mob_overlay_icon = 'waspstation/icons/mob/clothing/under/solgov.dmi'
+	icon_state = "fatigues"
+	item_state = "fatigues"
+	name = "\improper SolGov fatigues"
+	desc = "Standard combat uniform for SolGov's officers."
 	armor = list("melee" = 10, "bullet" = 5, "laser" = 5,"energy" = 5, "bomb" = 5, "bio" = 0, "rad" = 0, "fire" = 30, "acid" = 30)
 	strip_delay = 50
 	can_adjust = FALSE
@@ -15,3 +15,14 @@
 	icon_state = "elite"
 	item_state = "elite"
 
+/obj/item/clothing/under/solgov/formal
+	name = "\improper SolGov formal uniform"
+	desc = "A formal SolGov uniform, for special occasions."
+	icon_state = "formal_solgov"
+	item_state = "formal_solgov"
+
+/obj/item/clothing/under/solgov/formal/terragov
+	name = "\improper TerraGov formal uniform"
+	desc = "A formal SolGov uniform, for special occasions. This one is still colored in original TerraGov green."
+	icon_state = "formal_terragov"
+	item_state = "formal_terragov"
