@@ -1,8 +1,6 @@
 /datum/job/paramedic
 	title = "Paramedic"
-	flag = PARAMEDIC
 	department_head = list("Chief Medical Officer")
-	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
@@ -46,3 +44,8 @@
 	box = /obj/item/storage/box/survival/medical
 
 	chameleon_extras = /obj/item/gun/syringe
+
+/datum/outfit/job/paramedic/emt
+	name = "Paramedic (Emergency Medical Technician)"
+
+	uniform = /obj/item/clothing/under/rank/medical/paramedic/emt
