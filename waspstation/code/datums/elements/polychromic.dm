@@ -107,7 +107,7 @@
 	else
 		overlays += colors_by_atom[source]
 
-/datum/element/polychromic/proc/apply_worn_overlays(obj/item/source, isinhands, icon, used_state, style_flags, list/overlays)
+/datum/element/polychromic/proc/apply_worn_overlays(obj/item/source, isinhands, icon, used_state, list/overlays)
 	if(poly_flags & (isinhands ? POLYCHROMIC_NO_HELD : POLYCHROMIC_NO_WORN))
 		return
 	var/f_icon = worn_file || icon
@@ -181,6 +181,7 @@
 
 /datum/action/polychromic
 	name = "Modify Polychromic Colors"
+	button_icon = 'waspstation/icons/mob/actions/backgrounds.dmi'
 	background_icon_state = "bg_polychromic"
 	use_target_appearance = TRUE
 	button_icon_state = null

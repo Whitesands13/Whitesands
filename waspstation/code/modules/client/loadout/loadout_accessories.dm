@@ -79,7 +79,7 @@
 
 //Polychromic
 
-/datum/gear/accessory/polychromic/cloak
+/datum/gear/accessory/polycloak
 	display_name = "polychromatic cloak"
 	description = "For when you want to show off your horrible colour coordination skills."
 	path = /obj/item/clothing/neck/cloak/polychromic
