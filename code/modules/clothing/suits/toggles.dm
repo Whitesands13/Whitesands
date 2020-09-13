@@ -38,7 +38,6 @@
 	..()
 
 /obj/item/clothing/suit/hooded/proc/RemoveHood()
-	src.icon_state = "[initial(icon_state)]"
 	suittoggled = FALSE
 	if(hood)
 		if(ishuman(hood.loc))
@@ -47,9 +46,15 @@
 			H.update_inv_wear_suit()
 		else
 			hood.forceMove(src)
-		for(var/X in actions)
-			var/datum/action/A = X
-			A.UpdateButtonIcon()
+		update_icon() //Wasp Edit - Cit #11899
+//Wasp Edit - Cit #11899
+/obj/item/clothing/suit/hooded/update_icon_state()
+	icon_state = "[initial(icon_state)]"
+	if(ishuman(hood?.loc))
+		var/mob/living/carbon/human/H = hood.loc
+		if(H.head == hood)
+			icon_state += "_t"
+//End Wasp
 
 /obj/item/clothing/suit/hooded/dropped()
 	..()
@@ -67,11 +72,8 @@
 				return
 			else if(H.equip_to_slot_if_possible(hood,ITEM_SLOT_HEAD,0,0,1))
 				suittoggled = TRUE
-				src.icon_state = "[initial(icon_state)]_t"
+				update_icon() //Wasp Edit - Cit #11899
 				H.update_inv_wear_suit()
-				for(var/X in actions)
-					var/datum/action/A = X
-					A.UpdateButtonIcon()
 	else
 		RemoveHood()
 
@@ -132,8 +134,8 @@
 
 //Hardsuit toggle code
 /obj/item/clothing/suit/space/hardsuit/Initialize()
-	helmet = MakeHelmet() //Wasp Edit Start - Cit #11379 - Part of Polychromic port
 	. = ..()
+	helmet = MakeHelmet() //Wasp Edit Start - Cit #11379 - Part of Polychromic port
 
 /obj/item/clothing/suit/space/hardsuit/Destroy()
 	if(helmet)

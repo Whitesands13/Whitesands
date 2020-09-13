@@ -166,6 +166,15 @@
 	examine_list += "<span class='notice'>Alt-click to recolor it.</span>"
 
 /datum/element/polychromic/proc/register_helmet(atom/source, obj/item/clothing/head/H)
+	if(!isitem(H)) //backup in case if it messes up somehow
+		if(istype(source,/obj/item/clothing/suit/hooded)) //so how come it be like this, where toggleable headslots are named separately (helmet/hood) anyways?
+			var/obj/item/clothing/suit/hooded/sourcesuit = source
+			H = sourcesuit.hood
+		else if(istype(source,/obj/item/clothing/suit/space/hardsuit))
+			var/obj/item/clothing/suit/space/hardsuit/sourcesuit = source
+			H = sourcesuit.helmet
+		else
+			return
 	suit_by_helmet[H] = source
 	helmet_by_suit[source] = H
 	colors_by_atom[H] = colors_by_atom[source]
