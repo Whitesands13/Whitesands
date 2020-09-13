@@ -1072,7 +1072,7 @@
 
 /datum/reagent/medicine/dexalinp
 	name = "Dexalin Plus"
-	description = "Restores oxygen loss. Overdose causes it instead. More effective than standardized Dexalin."
+	description = "Restores oxygen loss and purges Lexorin. Overdose causes it instead. More effective than standardized Dexalin."
 	reagent_state = LIQUID
 	color = "#0040FF"
 	overdose_threshold = 25
@@ -1081,7 +1081,8 @@
 	M.adjustOxyLoss(-2*REM, 0)
 	if(ishuman(M) && M.blood_volume < BLOOD_VOLUME_NORMAL)
 		M.blood_volume += 1
-	M.remove_reagent(/datum/reagent/toxin/lexorin,3)
+	if(holder.has_reagent(/datum/reagent/toxin/lexorin))
+		holder.remove_reagent(/datum/reagent/toxin/lexorin, 3)
 	..()
 	. = 1
 
