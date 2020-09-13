@@ -1044,7 +1044,7 @@
 	M.adjustBruteLoss(-2*REM, 0)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		H.bleed_rate = max(H.bleed_rate - 0.25, 0) 
+		H.bleed_rate = max(H.bleed_rate - 0.25, 0)
 	..()
 	. = 1
 
@@ -1081,6 +1081,7 @@
 	M.adjustOxyLoss(-2*REM, 0)
 	if(ishuman(M) && M.blood_volume < BLOOD_VOLUME_NORMAL)
 		M.blood_volume += 1
+	M.remove_reagent(/datum/reagent/toxin/lexorin,3)
 	..()
 	. = 1
 
@@ -1542,9 +1543,9 @@
 /datum/reagent/medicine/silibinin/expose_mob(mob/living/carbon/M, method=INJECT, reac_volume)
 	if(method != INJECT)
 		return
-	
+
 	M.adjustOrganLoss(ORGAN_SLOT_LIVER, -1)  //on injection, will heal the liver. This will (hopefully) fix dead livers.
-	
+
 	..()
 
 /datum/reagent/medicine/silibinin/on_mob_life(mob/living/carbon/M)
@@ -1637,7 +1638,7 @@
 	..()
 	ADD_TRAIT(L, TRAIT_SLEEPIMMUNE, type)
 	ADD_TRAIT(L, TRAIT_STUNRESISTANCE, type)
-	M.add_movespeed_modifier(/datum/movespeed_modifier/reagent/hepanephrodaxon) */ 
+	M.add_movespeed_modifier(/datum/movespeed_modifier/reagent/hepanephrodaxon) */
 
 /datum/reagent/medicine/bonefixingjuice
 	name = "C4L-Z1UM Agent"
