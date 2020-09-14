@@ -19,6 +19,10 @@
 "aS" = (
 /turf/template_noop,
 /area/template_noop)
+"aW" = (
+/obj/machinery/holopad/emergency/engineering,
+/turf/open/floor/plating/airless,
+/area/engine/engineering)
 "bV" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
@@ -127,33 +131,6 @@
 	},
 /turf/open/space/basic,
 /area/space/nearstation)
-"fU" = (
-/obj/machinery/light{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/machinery/camera/emp_proof{
-	c_tag = "Engine - Particle Accelerator";
-	dir = 6;
-	network = list("ss13","engine")
-	},
-/obj/machinery/atmospherics/pipe/simple/supply/hidden{
-	dir = 4
-	},
-/obj/structure/cable/yellow{
-	icon_state = "2-8"
-	},
-/obj/machinery/the_singularitygen/tesla,
-/obj/machinery/button/door{
-	id = "SupermatterExternal";
-	name = "Shutters Control";
-	pixel_y = 30;
-	req_access_txt = "11"
-	},
-/turf/open/floor/plating,
-/area/engine/engineering)
 "fZ" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/cable/yellow{
@@ -415,12 +392,6 @@
 	},
 /turf/open/floor/plating,
 /area/engine/engineering)
-"qj" = (
-/obj/structure/cable/yellow{
-	icon_state = "1-2"
-	},
-/turf/open/floor/plating/airless,
-/area/space/nearstation)
 "ql" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on{
 	dir = 1
@@ -543,6 +514,13 @@
 	dir = 9
 	},
 /turf/open/space/basic,
+/area/space/nearstation)
+"uk" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/machinery/holopad/emergency/engineering,
+/turf/open/floor/plating/airless,
 /area/space/nearstation)
 "ul" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
@@ -790,6 +768,34 @@
 	},
 /turf/open/floor/plating,
 /area/engine/engineering)
+"HT" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/machinery/camera/emp_proof{
+	c_tag = "Engine - Particle Accelerator";
+	dir = 6;
+	network = list("ss13","engine")
+	},
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
+/obj/machinery/the_singularitygen/tesla,
+/obj/machinery/button/door{
+	id = "SupermatterExternal";
+	name = "Shutters Control";
+	pixel_y = 30;
+	req_access_txt = "11"
+	},
+/obj/machinery/holopad/emergency/engineering,
+/turf/open/floor/plating,
+/area/engine/engineering)
 "Jp" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/cable/yellow{
@@ -968,6 +974,10 @@
 /obj/item/clothing/gloves/color/yellow,
 /turf/open/floor/plasteel,
 /area/engine/engineering)
+"Rx" = (
+/obj/machinery/holopad/emergency/engineering,
+/turf/open/floor/plating/airless,
+/area/space/nearstation)
 "SY" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -982,6 +992,10 @@
 	icon_state = "4-8"
 	},
 /turf/open/floor/plating,
+/area/engine/engineering)
+"Tm" = (
+/obj/machinery/holopad/emergency/engineering,
+/turf/open/floor/plasteel,
 /area/engine/engineering)
 "Tz" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
@@ -1417,7 +1431,7 @@ Dz
 ok
 gE
 eN
-zi
+aW
 zi
 CB
 rk
@@ -1429,7 +1443,7 @@ rk
 rk
 CB
 rk
-zi
+aW
 FV
 eN
 vD
@@ -1469,7 +1483,7 @@ rk
 zf
 iD
 GI
-GI
+Tm
 lx
 pi
 sB
@@ -1479,7 +1493,7 @@ Lw
 Lw
 Lw
 Lw
-Lw
+Rx
 kQ
 Lw
 Lw
@@ -1607,14 +1621,14 @@ rk
 "}
 (18,1,1) = {"
 eN
-fU
+HT
 yN
 aE
 iP
 lM
 VU
 Qg
-qj
+uk
 cc
 ww
 NK
@@ -1624,7 +1638,7 @@ Lw
 NK
 HA
 fO
-Lw
+Rx
 CB
 zM
 eN
@@ -1749,7 +1763,7 @@ rk
 GI
 Qw
 GI
-GI
+Tm
 lx
 pi
 sB
@@ -1759,7 +1773,7 @@ Lw
 Lw
 Lw
 Lw
-Lw
+Rx
 eC
 Lw
 Lw
@@ -1809,7 +1823,7 @@ Me
 Cw
 fD
 eN
-zi
+aW
 zi
 CB
 rk
@@ -1821,7 +1835,7 @@ rk
 rk
 CB
 rk
-zi
+aW
 ay
 eN
 vD
