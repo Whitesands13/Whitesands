@@ -148,7 +148,7 @@ WaspStation End */
 
 /datum/chemical_reaction/regen_jelly
 	results = list(/datum/reagent/medicine/regen_jelly = 1)
-	required_reagents = list(/datum/reagent/medicine/tricordrazine = 1, /datum/reagent/toxin/slimejelly = 1)
+	required_reagents = list(/datum/reagent/medicine/tetracordrazine = 1, /datum/reagent/toxin/slimejelly = 1)
 
 /datum/chemical_reaction/regen_jelly2
 	results = list(/datum/reagent/medicine/regen_jelly = 2)
