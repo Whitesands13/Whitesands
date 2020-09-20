@@ -81,6 +81,16 @@
 			. += ""
 			. += "Chemical Storage: [changeling.chem_charges]/[changeling.chem_storage]"
 			. += "Absorbed DNA: [changeling.absorbedcount]"
+     
+		// WaspStation Begin - Display Ethereal Charge
+		if(istype(src))
+			var/datum/species/ethereal/eth_species = src.dna?.species
+			if(istype(eth_species))
+				var/obj/item/organ/stomach/ethereal/stomach = src.getorganslot(ORGAN_SLOT_STOMACH)
+				if(istype(stomach))
+					. += "Crystal Charge: [round(stomach.crystal_charge, 0.1)]"
+		// WaspStation End
+     
 	//NINJACODE
 	if(istype(wear_suit, /obj/item/clothing/suit/space/space_ninja)) //Only display if actually a ninja.
 		var/obj/item/clothing/suit/space/space_ninja/SN = wear_suit
