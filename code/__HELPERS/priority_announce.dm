@@ -26,10 +26,17 @@
 			else
 				GLOB.news_network.SubmitArticle(title + "<br><br>" + text, "Central Command", "Station Announcements", null)
 
+	// Waspstation Begin - Make cap's announcement use id name
+	var/user_id = "Unknown"
+	var/obj/item/card/id/I = usr.get_idcard(TRUE)
+	if(I && istype(I))
+		user_id = "[I.registered_name] ([I.assignment])"
+	// Waspstation End
+
 	announcement += "<br><span class='alert'>[html_encode(text)]</span><br>"
 	announcement += "<br>"
 	if(user)
-		announcement += "<span class='alert'>-[user.name] ([user.job])</span><br>"
+		announcement += "<span class='alert'>-[user_id]</span><br>"             // Waspstation Edit - Make cap's announcement use id name
 
 	var/s = sound(sound)
 	for(var/mob/M in GLOB.player_list)
