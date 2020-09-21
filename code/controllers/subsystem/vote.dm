@@ -271,11 +271,13 @@ SUBSYSTEM_DEF(vote)
 				generated_actions += V
 			return TRUE
 		else
-			var/list/valid_clients = list(GLOB.clients)
-			for(var/C in valid_clients)
+			var/list/valid_clients = GLOB.clients.Copy()
+			for(var/c in valid_clients)
+				var/client/C = c
 				if(C.mob && (isobserver(C.mob) || isnewplayer(C.mob)) && !IsAdminGhost(C.mob))
 					valid_clients -= C
-			for(var/C in valid_clients)
+			for(var/c in valid_clients)
+				var/client/C = c
 				to_chat(C.mob, vote_message)
 				var/datum/action/vote/V = new
 				if(question)
