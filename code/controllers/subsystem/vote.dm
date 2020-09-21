@@ -193,7 +193,7 @@ SUBSYSTEM_DEF(vote)
 				return vote
 	return FALSE
 
-/datum/controller/subsystem/vote/proc/initiate_vote(vote_type, initiator_key, ghost_vote_allowed = TRUE)
+/datum/controller/subsystem/vote/proc/initiate_vote(vote_type, initiator_key, observer_vote_allowed = TRUE)
 	if(!Master.current_runlevel) //Server is still intializing.
 		to_chat(usr, "<span class='warning'>Cannot start vote, server is not done initializing.</span>")
 		return FALSE
@@ -256,9 +256,9 @@ SUBSYSTEM_DEF(vote)
 		log_vote(text)
 
 		// WaspStation Begin - Ghost Vote Rework
-		var/vote_message =  "\n<font color='purple'><b>[text]</b>\nType <b>vote</b> or click <a href='?src=[REF(src)]'>here</a> to place your votes.\nYou have [DisplayTimeText(vp)] to vote.</font>"
 		var/vp = CONFIG_GET(number/vote_period)
-		if(ghost_vote_allowed)
+		var/vote_message =  "\n<font color='purple'><b>[text]</b>\nType <b>vote</b> or click <a href='?src=[REF(src)]'>here</a> to place your votes.\nYou have [DisplayTimeText(vp)] to vote.</font>"
+		if(observer_vote_allowed)
 			to_chat(world, vote_message)
 			time_remaining = round(vp/10)
 			for(var/c in GLOB.clients)
