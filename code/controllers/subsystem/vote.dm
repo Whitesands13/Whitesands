@@ -284,7 +284,7 @@ SUBSYSTEM_DEF(vote)
 			var/list/valid_clients = GLOB.clients.Copy()
 			for(var/c in valid_clients)
 				var/client/C = c
-				if(C.mob && (isobserver(C.mob) || isnewplayer(C.mob)) && !IsAdminGhost(C.mob))
+				if(C.mob && (isobserver(C.mob) || isnewplayer(C.mob) || ismouse(C.mob)) && !IsAdminGhost(C.mob))
 					valid_clients -= C
 			for(var/c in valid_clients)
 				var/client/C = c
