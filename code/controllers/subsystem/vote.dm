@@ -224,6 +224,16 @@ SUBSYSTEM_DEF(vote)
 
 			//WS Begin - Autotransfer
 			if("transfer")
+				var/list/ignore_vote = list(
+					SHUTTLE_IGNITING,
+					SHUTTLE_CALL,
+					SHUTTLE_ENDGAME,
+					SHUTTLE_ESCAPE,
+					SHUTTLE_DOCKED,
+					SHUTTLE_PREARRIVAL
+				)
+				if(SSshuttle.emergency.mode in ignore_vote)
+					return FALSE
 				choices.Add("Initiate Crew Transfer","Continue Playing")
 			//WS End
 
