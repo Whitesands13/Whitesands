@@ -273,7 +273,7 @@ SUBSYSTEM_DEF(vote)
 		else
 			var/list/valid_clients = list(GLOB.clients)
 			for(var/C in valid_clients)
-				if(C.mob && (isobserver(C.mob) || isnewplayer(C.mob))
+				if(C.mob && (isobserver(C.mob) || isnewplayer(C.mob)) && !IsAdminGhost(C.mob))
 					valid_clients -= C
 			for(var/C in valid_clients)
 				to_chat(C.mob, vote_message)
