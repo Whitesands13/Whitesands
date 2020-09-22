@@ -36,8 +36,8 @@ export const Sleeper = (props, context) => {
   } = data;
   return (
     <Window
-      width={645}
-      height={400}
+      width={495}
+      height={550}
       resizable>
       <Window.Content scrollable>
         <Section
