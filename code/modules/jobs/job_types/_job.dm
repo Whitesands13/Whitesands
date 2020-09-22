@@ -186,7 +186,7 @@
 	//Equip the rest of the gear
 	H.dna.species.before_equip_job(src, H, visualsOnly)
 
-	if(outfit && preference_source?.prefs?.alt_titles_preferences[title])
+	if(outfit && preference_source?.prefs?.alt_titles_preferences[title] && !outfit_override)
 		var/outfitholder = "[outfit]/[ckey(preference_source.prefs.alt_titles_preferences[title])]"
 		if(text2path(outfitholder) || !outfitholder)
 			outfit_override = text2path(outfitholder)
