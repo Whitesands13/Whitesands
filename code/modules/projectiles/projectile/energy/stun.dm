@@ -1,4 +1,4 @@
-/obj/projectile/energy/electrode
+/obj/projectile/energy/electrode //wasp station edit
 	name = "electrode"
 	icon_state = "spark"
 	color = "#FFFF00"
