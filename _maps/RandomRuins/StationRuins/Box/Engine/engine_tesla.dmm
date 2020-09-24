@@ -19,16 +19,19 @@
 "aS" = (
 /turf/template_noop,
 /area/template_noop)
-"aW" = (
-/obj/machinery/holopad/emergency/engineering,
-/turf/open/floor/plating/airless,
-/area/engine/engineering)
 "bV" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
 	},
 /turf/open/floor/engine,
 /area/engine/engineering)
+"bX" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/machinery/holopad,
+/turf/open/floor/plating/airless,
+/area/space/nearstation)
 "ca" = (
 /obj/machinery/atmospherics/pipe/simple/orange/visible{
 	dir = 4
@@ -214,6 +217,33 @@
 	},
 /turf/open/floor/engine,
 /area/engine/engineering)
+"jN" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/machinery/camera/emp_proof{
+	c_tag = "Engine - Particle Accelerator";
+	dir = 6;
+	network = list("ss13","engine")
+	},
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
+/obj/machinery/the_singularitygen/tesla,
+/obj/machinery/button/door{
+	id = "SupermatterExternal";
+	name = "Shutters Control";
+	pixel_y = 30;
+	req_access_txt = "11"
+	},
+/turf/open/floor/plating,
+/area/engine/engineering)
 "jR" = (
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/machinery/door/airlock/external{
@@ -268,6 +298,10 @@
 	dir = 4
 	},
 /turf/closed/wall,
+/area/engine/engineering)
+"mc" = (
+/obj/machinery/holopad,
+/turf/open/floor/plasteel,
 /area/engine/engineering)
 "mD" = (
 /obj/structure/lattice/catwalk,
@@ -515,13 +549,6 @@
 	},
 /turf/open/space/basic,
 /area/space/nearstation)
-"uk" = (
-/obj/structure/cable/yellow{
-	icon_state = "1-2"
-	},
-/obj/machinery/holopad/emergency/engineering,
-/turf/open/floor/plating/airless,
-/area/space/nearstation)
 "ul" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 10
@@ -535,6 +562,10 @@
 /obj/structure/grille,
 /turf/open/floor/plating/airless,
 /area/engine/engineering)
+"vS" = (
+/obj/machinery/holopad,
+/turf/open/floor/plating/airless,
+/area/space/nearstation)
 "wm" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /obj/structure/rack,
@@ -768,34 +799,6 @@
 	},
 /turf/open/floor/plating,
 /area/engine/engineering)
-"HT" = (
-/obj/machinery/light{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/machinery/camera/emp_proof{
-	c_tag = "Engine - Particle Accelerator";
-	dir = 6;
-	network = list("ss13","engine")
-	},
-/obj/machinery/atmospherics/pipe/simple/supply/hidden{
-	dir = 4
-	},
-/obj/structure/cable/yellow{
-	icon_state = "2-8"
-	},
-/obj/machinery/the_singularitygen/tesla,
-/obj/machinery/button/door{
-	id = "SupermatterExternal";
-	name = "Shutters Control";
-	pixel_y = 30;
-	req_access_txt = "11"
-	},
-/obj/machinery/holopad/emergency/engineering,
-/turf/open/floor/plating,
-/area/engine/engineering)
 "Jp" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/cable/yellow{
@@ -913,6 +916,10 @@
 /obj/structure/lattice/catwalk,
 /turf/open/space/basic,
 /area/space/nearstation)
+"Ou" = (
+/obj/machinery/holopad,
+/turf/open/floor/plating/airless,
+/area/engine/engineering)
 "OA" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
@@ -974,10 +981,6 @@
 /obj/item/clothing/gloves/color/yellow,
 /turf/open/floor/plasteel,
 /area/engine/engineering)
-"Rx" = (
-/obj/machinery/holopad/emergency/engineering,
-/turf/open/floor/plating/airless,
-/area/space/nearstation)
 "SY" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -992,10 +995,6 @@
 	icon_state = "4-8"
 	},
 /turf/open/floor/plating,
-/area/engine/engineering)
-"Tm" = (
-/obj/machinery/holopad/emergency/engineering,
-/turf/open/floor/plasteel,
 /area/engine/engineering)
 "Tz" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
@@ -1431,7 +1430,7 @@ Dz
 ok
 gE
 eN
-aW
+Ou
 zi
 CB
 rk
@@ -1443,7 +1442,7 @@ rk
 rk
 CB
 rk
-aW
+Ou
 FV
 eN
 vD
@@ -1483,7 +1482,7 @@ rk
 zf
 iD
 GI
-Tm
+mc
 lx
 pi
 sB
@@ -1493,7 +1492,7 @@ Lw
 Lw
 Lw
 Lw
-Rx
+vS
 kQ
 Lw
 Lw
@@ -1621,14 +1620,14 @@ rk
 "}
 (18,1,1) = {"
 eN
-HT
+jN
 yN
 aE
 iP
 lM
 VU
 Qg
-uk
+bX
 cc
 ww
 NK
@@ -1638,7 +1637,7 @@ Lw
 NK
 HA
 fO
-Rx
+vS
 CB
 zM
 eN
@@ -1763,7 +1762,7 @@ rk
 GI
 Qw
 GI
-Tm
+mc
 lx
 pi
 sB
@@ -1773,7 +1772,7 @@ Lw
 Lw
 Lw
 Lw
-Rx
+vS
 eC
 Lw
 Lw
@@ -1823,7 +1822,7 @@ Me
 Cw
 fD
 eN
-aW
+Ou
 zi
 CB
 rk
@@ -1835,7 +1834,7 @@ rk
 rk
 CB
 rk
-aW
+Ou
 ay
 eN
 vD

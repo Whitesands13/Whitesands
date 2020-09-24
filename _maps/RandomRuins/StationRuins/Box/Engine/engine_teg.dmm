@@ -131,6 +131,12 @@
 /obj/machinery/atmospherics/pipe/simple/dark/visible,
 /turf/open/floor/plating,
 /area/engine/engineering)
+"dp" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	name = "Hot to Burn Chamber"
+	},
+/turf/open/floor/plasteel,
+/area/engine/engineering)
 "dO" = (
 /obj/machinery/atmospherics/pipe/manifold4w/cyan/visible,
 /turf/open/floor/plasteel,
@@ -303,11 +309,6 @@
 /obj/item/flashlight,
 /turf/open/floor/plasteel,
 /area/engine/engineering)
-"hG" = (
-/obj/machinery/atmospherics/pipe/manifold/scrubbers/visible,
-/obj/machinery/holopad/emergency/engineering,
-/turf/open/floor/plasteel,
-/area/engine/engineering)
 "hN" = (
 /obj/machinery/atmospherics/components/binary/pump{
 	dir = 4
@@ -345,6 +346,11 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
+/turf/open/floor/plasteel,
+/area/engine/engineering)
+"ix" = (
+/obj/machinery/atmospherics/pipe/manifold/scrubbers/visible,
+/obj/machinery/holopad,
 /turf/open/floor/plasteel,
 /area/engine/engineering)
 "iF" = (
@@ -391,6 +397,21 @@
 	dir = 4
 	},
 /turf/open/floor/plating,
+/area/engine/engineering)
+"jR" = (
+/obj/machinery/button/ignition/incinerator{
+	id = "TEG_igniter";
+	pixel_x = -5;
+	pixel_y = -24
+	},
+/obj/machinery/button/door{
+	id = "TEG_Vent";
+	pixel_x = 6;
+	pixel_y = -24
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/holopad,
+/turf/open/floor/plasteel,
 /area/engine/engineering)
 "jT" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/visible,
@@ -467,20 +488,6 @@
 /area/engine/engineering)
 "mj" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/turf/open/floor/plasteel,
-/area/engine/engineering)
-"ml" = (
-/obj/machinery/button/ignition/incinerator{
-	id = "TEG_igniter";
-	pixel_x = -5;
-	pixel_y = -24
-	},
-/obj/machinery/button/door{
-	id = "TEG_Vent";
-	pixel_x = 6;
-	pixel_y = -24
-	},
-/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
 /area/engine/engineering)
 "mO" = (
@@ -751,13 +758,6 @@
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on{
 	dir = 4
 	},
-/turf/open/floor/plasteel,
-/area/engine/engineering)
-"uq" = (
-/obj/machinery/atmospherics/components/binary/pump{
-	name = "Hot to Burn Chamber"
-	},
-/obj/machinery/holopad/emergency/engineering,
 /turf/open/floor/plasteel,
 /area/engine/engineering)
 "uz" = (
@@ -1175,13 +1175,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/engine/engineering)
-"Hu" = (
-/obj/machinery/atmospherics/pipe/simple/orange/visible{
-	dir = 4
-	},
-/obj/machinery/holopad/emergency/engineering,
-/turf/open/floor/plasteel,
-/area/engine/engineering)
 "Hz" = (
 /obj/effect/decal/cleanable/oil,
 /obj/effect/turf_decal/stripes/corner,
@@ -1267,6 +1260,10 @@
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden{
 	dir = 8
 	},
+/turf/open/floor/plasteel,
+/area/engine/engineering)
+"JW" = (
+/obj/machinery/holopad,
 /turf/open/floor/plasteel,
 /area/engine/engineering)
 "Ka" = (
@@ -1404,6 +1401,11 @@
 /obj/machinery/portable_atmospherics/canister/toxins,
 /turf/open/floor/plasteel,
 /area/engine/engineering)
+"ML" = (
+/obj/structure/chair/office,
+/obj/machinery/holopad,
+/turf/open/floor/plasteel,
+/area/engine/engineering)
 "MZ" = (
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden,
 /turf/open/floor/plasteel,
@@ -1535,10 +1537,6 @@
 	dir = 1
 	},
 /turf/open/floor/plating,
-/area/engine/engineering)
-"Qo" = (
-/obj/machinery/holopad/emergency/engineering,
-/turf/open/floor/plasteel,
 /area/engine/engineering)
 "Qt" = (
 /turf/open/space,
@@ -1674,11 +1672,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/engine/engineering)
-"Td" = (
-/obj/structure/chair/office,
-/obj/machinery/holopad/emergency/engineering,
-/turf/open/floor/plasteel,
-/area/engine/engineering)
 "Te" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 4
@@ -1699,6 +1692,13 @@
 /obj/effect/turf_decal/tile/yellow{
 	dir = 1
 	},
+/turf/open/floor/plasteel,
+/area/engine/engineering)
+"Tj" = (
+/obj/machinery/atmospherics/pipe/simple/orange/visible{
+	dir = 4
+	},
+/obj/machinery/holopad,
 /turf/open/floor/plasteel,
 /area/engine/engineering)
 "TB" = (
@@ -2293,7 +2293,7 @@ cG
 mb
 GK
 eJ
-Qo
+JW
 vc
 vc
 jv
@@ -2303,7 +2303,7 @@ Hz
 li
 ZQ
 jv
-Qo
+JW
 Dd
 cr
 Dd
@@ -2363,7 +2363,7 @@ yS
 yS
 Nf
 WL
-Qo
+JW
 Dd
 eC
 KN
@@ -2410,7 +2410,7 @@ Wp
 Wp
 kZ
 am
-hG
+ix
 Mo
 vz
 rA
@@ -2499,7 +2499,7 @@ cr
 Mr
 Dd
 Fb
-ml
+jR
 KN
 KN
 KN
@@ -2517,7 +2517,7 @@ cG
 sq
 th
 ez
-Hu
+Tj
 jx
 Xu
 Vj
@@ -2527,7 +2527,7 @@ Ru
 Lj
 fY
 tV
-uq
+dp
 di
 gh
 ox
@@ -2634,7 +2634,7 @@ KN
 KN
 KN
 uI
-Td
+ML
 yt
 zB
 pg
