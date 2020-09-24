@@ -1,2 +1,3 @@
 #define JOB_DISPLAY_ORDER_LIEUTENANT 3.5 //After HoP
 #define JOB_DISPLAY_ORDER_BRIG_PHYS 34.5 //After SecOfficer
+#define JOB_DISPLAY_ORDER_DRONE 17.5 //After Cyborg

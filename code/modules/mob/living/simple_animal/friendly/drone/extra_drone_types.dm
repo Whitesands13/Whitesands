@@ -105,6 +105,7 @@
 	icon_state = "drone_maint_hat"
 	mob_name = "derelict drone"
 	mob_type = /mob/living/simple_animal/drone/derelict
+	initial_language_holder = /datum/language_holder/drone/derelict
 	anchored = TRUE
 	short_desc = "You are a drone on Kosmicheskaya Stantsiya 13."
 	flavour_text = "Something has brought you out of hibernation, and the station is in gross disrepair."

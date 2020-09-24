@@ -245,6 +245,14 @@ Key procs
 
 /datum/language_holder/drone
 	understood_languages = list(/datum/language/drone = list(LANGUAGE_ATOM),
+								/datum/language/machine = list(LANGUAGE_ATOM),
+								/datum/language/common = list(LANGUAGE_ATOM))
+	spoken_languages = list(/datum/language/drone = list(LANGUAGE_ATOM))
+	blocked_languages = list()
+
+//Wasp Edit - Separating roundstart drones from derelict
+/datum/language_holder/drone/derelict
+	understood_languages = list(/datum/language/drone = list(LANGUAGE_ATOM),
 								/datum/language/machine = list(LANGUAGE_ATOM))
 	spoken_languages = list(/datum/language/drone = list(LANGUAGE_ATOM))
 	blocked_languages = list(/datum/language/common = list(LANGUAGE_ATOM))

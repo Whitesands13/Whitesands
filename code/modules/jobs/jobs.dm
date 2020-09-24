@@ -63,6 +63,7 @@ GLOBAL_LIST_INIT(security_positions, list(
 GLOBAL_LIST_INIT(nonhuman_positions, list(
 	"AI",
 	"Cyborg",
+	"Drone", //Wasp Edit - Roundstart Drones
 	ROLE_PAI))
 
 // job categories for rendering the late join menu

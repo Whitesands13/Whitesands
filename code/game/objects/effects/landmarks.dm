@@ -217,6 +217,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	primary_ai = FALSE
 	latejoin_active = FALSE
 
+/obj/effect/landmark/start/drone
+	name = "Drone"
+	icon_state = "Drone"
+
 /obj/effect/landmark/start/brig_phys
 	name = "Brig Physician"
 	icon_state = "Brig Physician"
