@@ -324,3 +324,31 @@
 /obj/item/organ/tongue/ethereal/Initialize(mapload)
 	. = ..()
 	languages_possible = languages_possible_ethereal
+
+
+/obj/item/organ/tongue/felinid//Boomer code, taken from this PR 'https://github.com/tgstation/tgstation/pull/53587', modified, and put here by MaltVineger
+	name = "cat tongue"
+	desc = "Generally found in the mouths of degenerates."
+	say_mod = "meows"
+	modifies_speech = TRUE
+
+/obj/item/organ/tongue/felinid/handle_speech(datum/source, list/speech_args)
+	var/static/regex/felinid_l2w = new("l", "g")
+	var/static/regex/felinid_L2W = new("L", "g")
+	var/static/regex/felinid_r2w = new("r", "g")
+	var/static/regex/felinid_R2W = new("R", "g")
+	var/static/regex/felinid_nya = new("(n)(\[aeiou])", "g")//Thanks to Shadowtail117
+	var/static/regex/felinid_Nya = new("(N)(\[aeiou])", "g")//
+	var/static/regex/felinid_NYA = new("(N)(\[AEIOU])", "g")//
+	var/static/regex/felinid_nyA = new("(n)(\[AEIOU])", "g")//
+	var/message = speech_args[SPEECH_MESSAGE]
+	if(message[1] != "*")
+		message = felinid_l2w.Replace(message, "w")
+		message = felinid_L2W.Replace(message, "W")
+		message = felinid_r2w.Replace(message, "w")
+		message = felinid_R2W.Replace(message, "W")
+		message = felinid_nya.Replace(message, "$1y$2")//Thanks to Shadowtail117
+		message = felinid_Nya.Replace(message, "$1y$2")//
+		message = felinid_NYA.Replace(message, "$1Y$2")//
+		message = felinid_nyA.Replace(message, "$1y$2")//
+	speech_args[SPEECH_MESSAGE] = message//end of Boomer code
