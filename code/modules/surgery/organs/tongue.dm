@@ -339,10 +339,8 @@
 	var/static/regex/felinid_NYA = new("(N)(\[AEIOU])", "g")
 	var/message = speech_args[SPEECH_MESSAGE]
 	if(message[1] != "*")
-		message = felinid_l2w.Replace(message, "w")
-		message = felinid_L2W.Replace(message, "W")
-		message = felinid_r2w.Replace(message, "w")
-		message = felinid_R2W.Replace(message, "W")
+		message = felinid_lr2w.Replace(message, "w")
+		message = felinid_LR2W.Replace(message, "W")
 		message = felinid_nya.Replace(message, "$1y$2")//Thanks to Shadowtail117
 		message = felinid_Nya.Replace(message, "$1y$2")//
 		message = felinid_NYA.Replace(message, "$1Y$2")//
