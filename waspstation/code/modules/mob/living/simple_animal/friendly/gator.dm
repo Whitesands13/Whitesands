@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/retaliate/gator/bookworm
+/mob/living/simple_animal/hostile/retaliate/gator/steppy
 	name = "Steppy"
 	desc = "Cargo's pet gator. Is he being detained!?"
 	icon = 'waspstation/icons/mob/pets.dmi'
