@@ -341,8 +341,6 @@
 	if(message[1] != "*")
 		message = felinid_lr2w.Replace(message, "w")
 		message = felinid_LR2W.Replace(message, "W")
-		message = felinid_nya.Replace(message, "$1y$2")//Thanks to Shadowtail117
-		message = felinid_Nya.Replace(message, "$1y$2")//
-		message = felinid_NYA.Replace(message, "$1Y$2")//
-		message = felinid_nyA.Replace(message, "$1y$2")//
+		message = felinid_nya.Replace(message, "$1$3y$2$4")
+		message = felinid_NYA.Replace(message, "$1Y$2")
 	speech_args[SPEECH_MESSAGE] = message//end of Boomer code
