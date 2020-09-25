@@ -333,10 +333,8 @@
 	modifies_speech = TRUE
 
 /obj/item/organ/tongue/felinid/handle_speech(datum/source, list/speech_args)
-	var/static/regex/felinid_l2w = new("l", "g")
-	var/static/regex/felinid_L2W = new("L", "g")
-	var/static/regex/felinid_r2w = new("r", "g")
-	var/static/regex/felinid_R2W = new("R", "g")
+	var/static/regex/felinid_lr2w = new("([lr])", "g")
+	var/static/regex/felinid_LR2W = new("([LR])", "g")
 	var/static/regex/felinid_nya = new("(n)(\[aeiou])", "g")//Thanks to Shadowtail117
 	var/static/regex/felinid_Nya = new("(N)(\[aeiou])", "g")//
 	var/static/regex/felinid_NYA = new("(N)(\[AEIOU])", "g")//
