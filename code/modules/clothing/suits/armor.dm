@@ -278,7 +278,7 @@
 	item_state = "rus_armor"
 	armor = list("melee" = 35, "bullet" = 30, "laser" = 30, "energy" = 30, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50)//wasp edit
 
-/obj/item/clothing/suit/armor/vest/russian
+/obj/item/clothing/suit/armor/vest/russian_coat
 	name = "russian battle coat"
 	desc = "Used in extremly cold fronts, made out of real bears."
 	icon_state = "rus_coat"
