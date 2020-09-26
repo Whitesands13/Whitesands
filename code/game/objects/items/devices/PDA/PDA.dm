@@ -207,7 +207,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 	var/datum/asset/spritesheet/assets = get_asset_datum(/datum/asset/spritesheet/simple/pda)
 	assets.send(user)
 
-	var/datum/asset/spritesheet/emoji_s = get_asset_datum(/datum/asset/spritesheet/goonchat)
+	var/datum/asset/spritesheet/emoji_s = get_asset_datum(/datum/asset/spritesheet/chat)
 	emoji_s.send(user) //Already sent by chat but no harm doing this
 
 	user.set_machine(src)
@@ -246,7 +246,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 				dat += "<li><a href='byond://?src=[REF(src)];choice=2'>[PDAIMG(mail)] Messenger</a></li>"
 				dat += "<li><a href='byond://?src=[REF(src)];choice=41'>[PDAIMG(notes)] View Crew Manifest</a></li>"
 				dat += "<li><a href='byond://?src=[REF(src)];choice=6'>[PDAIMG(skills)]Skill Tracker</a></li>"
-				
+
 				if(cartridge)
 					if(cartridge.access)
 						dat += "<h4>Job Specific Functions</h4>"
@@ -566,6 +566,17 @@ GLOBAL_LIST_EMPTY(PDAs)
 					if("2")		// Eject pAI device
 						usr.put_in_hands(pai)
 						to_chat(usr, "<span class='notice'>You remove the pAI from the [name].</span>")
+
+// WaspStation Start -- Skill Cloak Fix
+//SKILL FUNCTIONS===================================
+
+			if("SkillReward")
+				var/type = text2path(href_list["skill"])
+				var/datum/skill/S = GetSkillRef(type)
+				var/datum/mind/mind = U.mind
+				var/new_level = mind.get_skill_level(type)
+				S.try_skill_reward(mind, new_level)
+// WaspStation End
 
 //LINK FUNCTIONS===================================
 
