@@ -44,7 +44,8 @@
 	return data
 
 /datum/computer_file/program/borg_monitor/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
 
 	switch(action)

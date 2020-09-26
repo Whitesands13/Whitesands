@@ -64,7 +64,8 @@
 	return data
 
 /datum/computer_file/program/radar/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
 
 	switch(action)

@@ -50,7 +50,8 @@
 	return data
 
 /obj/machinery/computer/emergency_shuttle/ui_act(action, params, datum/tgui/ui)
-	if(..())
+	. = ..()
+	if(.)
 		return
 	if(ENGINES_STARTED) // past the point of no return
 		return

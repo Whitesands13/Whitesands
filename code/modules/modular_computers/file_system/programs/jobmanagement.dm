@@ -49,7 +49,8 @@
 	return FALSE
 
 /datum/computer_file/program/job_management/ui_act(action, params, datum/tgui/ui)
-	if(..())
+	. = ..()
+	if(.)
 		return
 
 	var/authed = FALSE

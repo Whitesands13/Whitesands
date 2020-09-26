@@ -32,8 +32,9 @@
 	data["bountydata"] = bountyinfo
 	return data
 
-/datum/computer_file/program/bounty/ui_act(action,params)
-	if(..())
+/datum/computer_file/program/bounty/ui_act(action,params)	//When a button is clicked (claim or Print bounties)
+	. = ..()
+	if(.)
 		return
 	switch(action)
 		if("ClaimBounty")

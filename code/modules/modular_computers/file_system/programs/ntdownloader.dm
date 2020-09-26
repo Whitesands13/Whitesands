@@ -104,8 +104,9 @@
 	download_completion += download_netspeed
 
 /datum/computer_file/program/ntnetdownload/ui_act(action, params)
-	if(..())
-		return 1
+	. = ..()
+	if(.)
+		return
 	switch(action)
 		if("PRG_downloadfile")
 			if(!downloaded_file)
