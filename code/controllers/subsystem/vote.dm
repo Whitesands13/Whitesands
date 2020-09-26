@@ -198,6 +198,7 @@ SUBSYSTEM_DEF(vote)
 		to_chat(usr, "<span class='warning'>Cannot start vote, server is not done initializing.</span>")
 		return FALSE
 	var/admin = FALSE
+	var/ghost_vote_default_ok = TRUE
 	var/ckey = ckey(initiator_key)
 	if(GLOB.admin_datums[ckey])
 		admin = TRUE
@@ -214,7 +215,6 @@ SUBSYSTEM_DEF(vote)
 				to_chat(usr, "<span class='warning'>A vote was initiated recently, you must wait [DisplayTimeText(next_allowed_time-world.time)] before a new vote can be started!</span>")
 				return FALSE
 
-		SEND_SOUND(world, sound('sound/misc/notice2.ogg'))//WS Edit - Autotransfer
 		reset()
 		switch(vote_type)
 			if("restart")
@@ -234,6 +234,7 @@ SUBSYSTEM_DEF(vote)
 				)
 				if(SSshuttle.emergency.mode in ignore_vote)
 					return FALSE
+				ghost_vote_default_ok = FALSE
 				choices.Add("Initiate Crew Transfer","Continue Playing")
 			//WS End
 
@@ -268,8 +269,9 @@ SUBSYSTEM_DEF(vote)
 		// WaspStation Begin - Ghost Vote Rework
 		var/vp = CONFIG_GET(number/vote_period)
 		var/vote_message =  "\n<font color='purple'><b>[text]</b>\nType <b>vote</b> or click <a href='?src=[REF(src)]'>here</a> to place your votes.\nYou have [DisplayTimeText(vp)] to vote.</font>"
-		if(observer_vote_allowed)
+		if(observer_vote_allowed || ghost_vote_default_ok)
 			to_chat(world, vote_message)
+			SEND_SOUND(world, sound('sound/misc/notice2.ogg'))
 			time_remaining = round(vp/10)
 			for(var/c in GLOB.clients)
 				var/client/C = c
@@ -288,6 +290,7 @@ SUBSYSTEM_DEF(vote)
 					valid_clients -= C
 			for(var/c in valid_clients)
 				var/client/C = c
+				SEND_SOUND(C, sound('sound/misc/notice2.ogg'))
 				to_chat(C.mob, vote_message)
 				var/datum/action/vote/V = new
 				if(question)
