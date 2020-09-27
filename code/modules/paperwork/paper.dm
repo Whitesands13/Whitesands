@@ -112,7 +112,7 @@
 	set category = "Object"
 	set src in usr
 
-	if(!usr.can_read(src) || usr.incapacitated(TRUE, TRUE) || (isobserver(usr) && !isAdminGhostAI(usr)))
+	if(!usr.can_read(src) || usr.incapacitated(TRUE, TRUE) || (isobserver(usr) && !check_rights_for(usr, R_ADMIN)))
 		return
 	if(ishuman(usr))
 		var/mob/living/carbon/human/H = usr
@@ -153,20 +153,20 @@
 		return UI_CLOSE
 	if(!in_range(user,src))
 		return UI_CLOSE
-	if(user.incapacitated(TRUE, TRUE) || (isobserver(user) && !isAdminGhostAI(user)))
+	if(user.incapacitated(TRUE, TRUE) || (isobserver(user) && !check_rights_for(usr, R_ADMIN)))
 		return UI_UPDATE
 	// Even harder to read if your blind...braile? humm
 	// .. or if you cannot read
 	if(!user.can_read(src))
 		return UI_CLOSE
-	if(in_contents_of(/obj/machinery/door/airlock))
+	if(in_contents_of(/obj/machinery/door/airlock) || in_contents_of(/obj/machinery/photocopier/faxmachine))
 		return UI_INTERACTIVE
 	return ..()
 
 
 
 /obj/item/paper/can_interact(mob/user)
-	if(in_contents_of(/obj/machinery/door/airlock))
+	if(in_contents_of(/obj/machinery/door/airlock) || in_contents_of(/obj/machinery/photocopier/faxmachine))
 		return TRUE
 	return ..()
 
