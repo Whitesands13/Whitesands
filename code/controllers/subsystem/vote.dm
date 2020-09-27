@@ -198,7 +198,6 @@ SUBSYSTEM_DEF(vote)
 		to_chat(usr, "<span class='warning'>Cannot start vote, server is not done initializing.</span>")
 		return FALSE
 	var/admin = FALSE
-	var/ghost_vote_default_ok = TRUE
 	var/ckey = ckey(initiator_key)
 	if(GLOB.admin_datums[ckey])
 		admin = TRUE
@@ -234,7 +233,6 @@ SUBSYSTEM_DEF(vote)
 				)
 				if(SSshuttle.emergency.mode in ignore_vote)
 					return FALSE
-				ghost_vote_default_ok = FALSE
 				choices.Add("Initiate Crew Transfer","Continue Playing")
 			//WS End
 
@@ -286,7 +284,7 @@ SUBSYSTEM_DEF(vote)
 			var/list/valid_clients = GLOB.clients.Copy()
 			for(var/c in valid_clients)
 				var/client/C = c
-				if(C.mob && (isobserver(C.mob) || isnewplayer(C.mob) || ismouse(C.mob)) && !IsAdminGhost(C.mob))
+				if(C.mob && (isobserver(C.mob) || isnewplayer(C.mob) || ismouse(C.mob)) && !check_rights_for(C, R_ADMIN))
 					valid_clients -= C
 			for(var/c in valid_clients)
 				var/client/C = c
