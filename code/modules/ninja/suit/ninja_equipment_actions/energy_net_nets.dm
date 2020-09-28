@@ -7,7 +7,7 @@
   * players to a gay baby jail in which they could never leave, but such feature has since
   * been removed, because it was pretty gay.
   */
- 
+
 /obj/structure/energy_net
 	name = "energy net"
 	desc = "It's a net made of green energy."
@@ -36,7 +36,7 @@
 /obj/structure/energy_net/Destroy()
 	if(!QDELETED(affecting))
 		affecting.visible_message("<span class='notice'>[affecting.name] is recovered from the energy net!</span>", "<span class='notice'>You are recovered from the energy net!</span>", "<span class='hear'>You hear an unusual grunting.</span>")
-    	affecting = null
+		affecting = null
 	return ..()
 
 /obj/structure/energy_net/attack_paw(mob/user)
