@@ -1,4 +1,4 @@
-/datum/antagonist/ninja
+/datum/antagonist/ninja // this whole thing is one big WS edit
 	name = "Space Ninja"
 	antagpanel_category = "Space Ninja"
 	job_rank = ROLE_NINJA
