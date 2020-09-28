@@ -19,6 +19,6 @@
 	list_reagents = list(/datum/reagent/medicine/antitoxin = 30)
 
 /obj/item/reagent_containers/glass/bottle/dexalin
-	name = "bicaridine bottle"
+	name = "dexalin bottle"
 	desc = "A small bottle. Contains dexalin, used to treat minor oxygen deprivation."
 	list_reagents = list(/datum/reagent/medicine/dexalin = 30)

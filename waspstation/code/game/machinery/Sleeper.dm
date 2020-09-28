@@ -23,6 +23,7 @@
 	var/list/starting_beakers = list(
 		/obj/item/reagent_containers/glass/bottle/antitoxin,
 		/obj/item/reagent_containers/glass/bottle/bicaridine,
+		/obj/item/reagent_containers/glass/bottle/dexalin,
 		/obj/item/reagent_containers/glass/bottle/epinephrine,
 		/obj/item/reagent_containers/glass/bottle/kelotane,
 		/obj/item/reagent_containers/glass/bottle/morphine)
