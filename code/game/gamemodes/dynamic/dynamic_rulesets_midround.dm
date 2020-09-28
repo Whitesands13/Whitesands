@@ -502,7 +502,7 @@
 //                                          //
 //////////////////////////////////////////////
 
-/datum/dynamic_ruleset/midround/from_ghosts/space_ninja
+/datum/dynamic_ruleset/midround/from_ghosts/space_ninja //WS edit - adds ninja to dynamic
 	name = "Space Ninja"
 	antag_datum = /datum/antagonist/ninja
 	antag_flag = "Space Ninja"
