@@ -1,14 +1,10 @@
-
-/*
-
-Contents:
-- The Ninja Space Mask
-- Ninja Space Mask speech modification
-
-*/
-
-
-
+/**
+ * # WS edit Ninja Mask
+ *
+ * Space ninja's mask. Other than looking cool, doesn't do anything.
+ * A mask which is unique to the space ninja's starting kit. Functions as a gas mask.
+ *
+ */
 
 /obj/item/clothing/mask/gas/space_ninja
 	name = "ninja mask"
