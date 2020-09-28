@@ -8,7 +8,7 @@
 
 #define DRAIN_RD_HACK_FAILED	"RDHACKFAIL"
 
-//Tells whether or not someone is a space ninja
+// WS edot - tells whether or not someone is a space ninja
 #define IS_SPACE_NINJA(ninja) (ninja.mind && ninja.mind.has_antag_datum(/datum/antagonist/ninja))
 
 //Defines for the suit's unique abilities
