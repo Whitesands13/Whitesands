@@ -5,32 +5,26 @@
 	icon = 'icons/obj/tapes.dmi'
 	icon_state = "tape_w"
 	item_flags = NOBLUDGEON
-	amount = 5
-	max_amount = 5
-	resistance_flags = FLAMMABLE
+	amount = 10
+	max_amount = 10
 	grind_results = list(/datum/reagent/cellulose = 5)
+	usesound = 'waspstation/sound/items/tape.ogg'
 
 	var/stop_bleed = 600
-	var/nonorganic_heal = 10
+	var/nonorganic_heal = 5
 	var/self_delay = 30 //! Also used for the tapecuff delay
 	var/other_delay = 10
 	var/prefix = "sticky"
-	var/tapesound = 'waspstation/sound/items/tape.ogg'
 	var/list/conferred_embed = EMBED_HARMLESS
 	var/overwrite_existing = FALSE
 
-/obj/item/stack/tape/attack(mob/living/M, mob/living/user)
-	if(!istype(M))
+/obj/item/stack/tape/attack(mob/living/carbon/C, mob/living/user)
+	if(!istype(C))
 		return
 
 	//Bootleg bandage
 	if(user.a_intent == INTENT_HELP)
-		try_heal(M, user)
-
-	//! ANYTHING THAT NEEDS CARBON BELOW HERE
-	if(!iscarbon(M))
-		return
-	var/mob/living/carbon/C = M
+		try_heal(C, user)
 
 	//Relatable suffering
 	if((HAS_TRAIT(user, TRAIT_CLUMSY) && prob(25)))
@@ -44,7 +38,7 @@
 				to_chat(user, "<span class='warning'>There is something covering [C]s mouth!</span>")
 				return
 			if(use(1))
-				playsound(loc, tapesound, 30, TRUE, -2)
+				playsound(loc, usesound, 30, TRUE, -2)
 				if(do_mob(user, C, other_delay) && (!C.is_mouth_covered() || !C.is_muzzled()))
 					apply_gag(C, user)
 					C.visible_message("<span class='notice'>[user] tapes [C]s mouth shut.</span>", \
@@ -60,11 +54,11 @@
 				apply_tapecuffs(user, user)
 				return
 			if(C.get_num_arms(FALSE) >= 2 || C.get_arm_ignore())
-				if(use(4))
+				if(use(5))
 					C.visible_message("<span class='danger'>[user] is trying to put [src.name] on [C]!</span>", \
 										"<span class='userdanger'>[user] is trying to put [src.name] on you!</span>")
 
-					playsound(loc, tapesound, 30, TRUE, -2)
+					playsound(loc, usesound, 30, TRUE, -2)
 					if(do_mob(user, C, self_delay) && (C.get_num_arms(FALSE) >= 2 || C.get_arm_ignore()))
 						apply_tapecuffs(C, user)
 						C.visible_message("<span class='notice'>[user] tapecuffs [C].</span>", \
@@ -79,28 +73,27 @@
 			else
 				to_chat(user, "<span class='warning'>[C] doesn't have two hands...</span>")
 
-/obj/item/stack/tape/proc/try_heal(mob/living/M, mob/user)
-	if(M == user)
-		playsound(loc, tapesound, 30, TRUE, -2)
+/obj/item/stack/tape/proc/try_heal(mob/living/carbon/C, mob/user)
+	if(C == user)
+		playsound(loc, usesound, 30, TRUE, -2)
 		user.visible_message("<span class='notice'>[user] starts to apply \the [src] on [user.p_them()]self...</span>", "<span class='notice'>You begin applying \the [src] on yourself...</span>")
-		if(!do_mob(user, M, self_delay, extra_checks=CALLBACK(M, /mob/living/proc/can_inject, user, TRUE)))
+		if(!do_mob(user, C, self_delay, extra_checks=CALLBACK(C, /mob/living/proc/can_inject, user, TRUE)))
 			return
 	else if(other_delay)
-		user.visible_message("<span class='notice'>[user] starts to apply \the [src] on [M].</span>", "<span class='notice'>You begin applying \the [src] on [M]...</span>")
-		if(!do_mob(user, M, other_delay, extra_checks=CALLBACK(M, /mob/living/proc/can_inject, user, TRUE)))
+		user.visible_message("<span class='notice'>[user] starts to apply \the [src] on [C].</span>", "<span class='notice'>You begin applying \the [src] on [C]...</span>")
+		if(!do_mob(user, C, other_delay, extra_checks=CALLBACK(C, /mob/living/proc/can_inject, user, TRUE)))
 			return
 
-	if(heal(M, user))
-		log_combat(user, M, "tape bandaged", src.name)
+	if(heal(C, user))
+		log_combat(user, C, "tape bandaged", src.name)
 		use(1)
 
-/obj/item/stack/tape/proc/heal(mob/living/M, mob/user)
-	if(M.stat == DEAD)
+/obj/item/stack/tape/proc/heal(mob/living/carbon/C, mob/user)
+	if(C.stat == DEAD)
 		to_chat(user, "<span class='notice'>There isn't enough [src] in the universe to fix that...</span>")
 		return
-	if(!iscarbon(M))
+	if(!iscarbon(C))
 		return
-	var/mob/living/carbon/C = M
 	var/obj/item/bodypart/affecting = C.get_bodypart(check_zone(user.zone_selected))
 	if(!affecting) //Missing limb?
 		to_chat(user, "<span class='warning'>[C] doesn't have \a [parse_zone(user.zone_selected)]!</span>")
@@ -110,16 +103,16 @@
 			var/mob/living/carbon/human/H = C
 			if(!H.bleedsuppress && H.bleed_rate)
 				H.suppress_bloodloss(stop_bleed)
-				to_chat(user, "<span class='notice'>You tape up the bleeding of [M]!</span>")
+				to_chat(user, "<span class='notice'>You tape up the bleeding of [C]!</span>")
 				return TRUE
-		to_chat(user, "<span class='warning'>[M] has a problem \the [src] won't fix!</span>")
+		to_chat(user, "<span class='warning'>[C] has a problem \the [src] won't fix!</span>")
 	else //Robotic patch-up
 		if(affecting.brute_dam)
 			user.visible_message("<span class='notice'>[user] applies \the [src] on [C]'s [affecting.name].</span>", "<span class='green'>You apply \the [src] on [C]'s [affecting.name].</span>")
 			if(affecting.heal_damage(nonorganic_heal))
 				C.update_damage_overlays()
 			return TRUE
-		to_chat(user, "<span class='warning'>[src] can't patch what [M] has...</span>")
+		to_chat(user, "<span class='warning'>[src] can't patch what [C] has...</span>")
 
 /obj/item/stack/tape/proc/apply_gag(mob/living/carbon/target, mob/user)
 	if(target.is_muzzled() || target.is_mouth_covered())
@@ -171,7 +164,7 @@
 /obj/item/restraints/handcuffs/tape
 	name = "tapecuffs"
 	desc = "Seems you are in a sticky situation."
-	breakouttime = 20 SECONDS
+	breakouttime = 15 SECONDS
 	trashtype = /obj/item/restraints/handcuffs/tape/used
 	flags_1 = NONE
 
@@ -183,3 +176,24 @@
 	user.visible_message("<span class='danger'>[user] rips off the tape around [user.p_their()] hands!</span>", \
 							"<span class='userdanger'>You tear off the [src] and free yourself!</span>")
 	. = ..()
+
+/obj/item/stack/tape/industrial
+	name = "duct tape"
+	singular_name = "duct tape"
+	desc = "This roll of silver sorcery can fix just about anything."
+	icon_state = "tape_w"
+
+	stop_bleed = 800
+	nonorganic_heal = 20
+	prefix = "super sticky"
+	usesound = 'waspstation/sound/items/tape.ogg'
+	conferred_embed = EMBED_HARMLESS_SUPERIOR
+
+/obj/item/stack/tape/afterattack(obj/item/I, mob/living/user)
+	. = ..()
+	if(I.obj_integrity < I.max_integrity)
+		to_chat(user, "<span class='notice'>Nothing a little [src] can't fix...</span>")
+		play_tool_sound(I, 30)
+		if(src.use_tool(I, user, other_delay, 1))
+			I.obj_integrity += nonorganic_heal
+			to_chat(user, "<span class='notice'>You patch up the [I] with a bit of [src].</span>")
