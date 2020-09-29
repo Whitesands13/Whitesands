@@ -249,8 +249,10 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 //Hallway
 
 /area/hallway
-	lighting_colour_tube = "#fdf3ea"
-	lighting_colour_bulb = "#ffebd6"
+	lighting_colour_tube = "#ffce99"
+	lighting_colour_bulb = "#ffdbb4"
+	lighting_brightness_tube = 7
+
 
 /area/hallway/primary/aft
 	name = "Aft Primary Hallway"
@@ -307,6 +309,9 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "Bridge"
 	icon_state = "bridge"
 	ambientsounds = list('sound/ambience/signal.ogg')
+	lighting_colour_tube = "#ffce99"
+	lighting_colour_bulb = "#ffdbb4"
+	lighting_brightness_tube = 6
 
 /area/lieutenant
 	name = "Lieutenant's Office"
@@ -364,12 +369,15 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 //Crew
 
+/area/crew_quarters
+	lighting_colour_tube = "#ffce99"
+	lighting_colour_bulb = "#ffdbb4"
+	lighting_brightness_tube = 6
+
 /area/crew_quarters/dorms
 	name = "Dormitories"
 	icon_state = "Sleep"
 	safe = TRUE
-	lighting_colour_tube = "#fff4d6"
-	lighting_colour_bulb = "#ffebc1"
 
 /area/crew_quarters/dorms/barracks
 	name = "Sleep Barracks"
@@ -474,8 +482,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "Library"
 	icon_state = "library"
 	flags_1 = CULT_PERMITTED_1
-	lighting_colour_tube = "#fff1cc"
-	lighting_colour_bulb = "#ffe9b9"
+	lighting_colour_tube = "#ffce99"
+	lighting_colour_bulb = "#ffdbb4"
 
 /area/library/lounge
 	name = "Library Lounge"
