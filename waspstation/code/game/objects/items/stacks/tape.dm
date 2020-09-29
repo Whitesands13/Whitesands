@@ -1,9 +1,9 @@
 /obj/item/stack/tape
 	name = "packaging tape"
-	singular_name = "packaging tape"
+	singular_name = "tape strip"
 	desc = "Sticks things together with minimal effort."
-	icon = 'icons/obj/tapes.dmi'
-	icon_state = "tape_w"
+	icon = 'waspstation/icons/obj/tapes.dmi'
+	icon_state = "tape"
 	item_flags = NOBLUDGEON
 	amount = 10
 	max_amount = 10
@@ -179,14 +179,12 @@
 
 /obj/item/stack/tape/industrial
 	name = "duct tape"
-	singular_name = "duct tape"
 	desc = "This roll of silver sorcery can fix just about anything."
-	icon_state = "tape_w"
+	icon_state = "tape_d"
 
 	stop_bleed = 800
 	nonorganic_heal = 20
 	prefix = "super sticky"
-	usesound = 'waspstation/sound/items/tape.ogg'
 	conferred_embed = EMBED_HARMLESS_SUPERIOR
 
 /obj/item/stack/tape/afterattack(obj/item/I, mob/living/user)
@@ -197,3 +195,13 @@
 		if(src.use_tool(I, user, other_delay, 1))
 			I.obj_integrity += nonorganic_heal
 			to_chat(user, "<span class='notice'>You patch up the [I] with a bit of [src].</span>")
+
+/obj/item/stack/tape/industrial/electrical
+	name = "electrical tape"
+	desc = "Specialty insulated strips of adhesive plastic. Made for securing cables."
+	icon_state = "tape_e"
+
+	stop_bleed = 400
+	nonorganic_heal = 10
+	prefix = "insulated sticky"
+	siemens_coefficient = 0
