@@ -193,8 +193,10 @@
 		to_chat(user, "<span class='notice'>Nothing a little [src] can't fix...</span>")
 		play_tool_sound(I, 30)
 		if(src.use_tool(I, user, other_delay, 1))
-			I.obj_integrity += nonorganic_heal
+			I.AddComponent(/datum/component/taped, src)
 			to_chat(user, "<span class='notice'>You patch up the [I] with a bit of [src].</span>")
+	else
+		to_chat(user, "<span class='notice'>[I] looks fine enough to me.</span>")
 
 /obj/item/stack/tape/industrial/electrical
 	name = "electrical tape"
@@ -205,3 +207,12 @@
 	nonorganic_heal = 10
 	prefix = "insulated sticky"
 	siemens_coefficient = 0
+
+/obj/item/stack/tape/industrial/pro
+	name = "professional-grade duct tape"
+	desc = "Now THIS is engineering."
+	icon_state = "tape_y"
+
+	stop_bleed = 1000
+	nonorganic_heal = 30
+	prefix = "industry-standard sticky"
