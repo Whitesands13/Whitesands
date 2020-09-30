@@ -140,21 +140,25 @@
 
 	if(do_after(user, 30, target=I))
 		use(1)
-		if(istype(I, /obj/item/clothing/gloves/fingerless))
-			var/obj/item/clothing/gloves/tackler/offbrand/O = new /obj/item/clothing/gloves/tackler/offbrand
-			to_chat(user, "<span class='notice'>You turn [I] into [O] with [src].</span>")
-			QDEL_NULL(I)
+		wrap_item(I, user)
+
+/obj/item/stack/tape/proc/wrap_item(obj/item/I, mob/living/user)
+	if(istype(I, /obj/item/clothing/gloves/fingerless))
+		var/obj/item/clothing/gloves/tackler/offbrand/O = new /obj/item/clothing/gloves/tackler/offbrand
+		to_chat(user, "<span class='notice'>You turn [I] into [O] with [src].</span>")
+		QDEL_NULL(I)
+		if(!user.equip_to_slot_if_possible(O, ITEM_SLOT_GLOVES, 0))
 			user.put_in_hands(O)
-			return
+		return
 
-		I.embedding = conferred_embed
-		I.updateEmbedding()
-		to_chat(user, "<span class='notice'>You finish wrapping [I] with [src].</span>")
-		I.name = "[prefix] [I.name]"
+	I.embedding = conferred_embed
+	I.updateEmbedding()
+	to_chat(user, "<span class='notice'>You finish wrapping [I] with [src].</span>")
+	I.name = "[prefix] [I.name]"
 
-		if(istype(I, /obj/item/grenade))
-			var/obj/item/grenade/sticky_bomb = I
-			sticky_bomb.sticky = TRUE
+	if(istype(I, /obj/item/grenade))
+		var/obj/item/grenade/sticky_bomb = I
+		sticky_bomb.sticky = TRUE
 
 /obj/item/clothing/mask/muzzle/tape
 	name = "tape muzzle"
@@ -207,6 +211,20 @@
 	nonorganic_heal = 10
 	prefix = "insulated sticky"
 	siemens_coefficient = 0
+
+/obj/item/stack/tape/industrial/electrical/wrap_item(obj/item/I, mob/living/user)
+	if(istype(I, /obj/item/clothing/gloves/color))
+		var/obj/item/clothing/gloves/color/yellow/sprayon/tape/O = new /obj/item/clothing/gloves/color/yellow/sprayon/tape
+		to_chat(user, "<span class='notice'>You turn [I] into [O] with [src].</span>")
+		QDEL_NULL(I)
+		user.put_in_hands(O)
+		return
+
+	I.embedding = conferred_embed
+	I.updateEmbedding()
+	to_chat(user, "<span class='notice'>You finish wrapping [I] with [src].</span>")
+	I.name = "[prefix] [I.name]"
+	I.siemens_coefficient = 0
 
 /obj/item/stack/tape/industrial/pro
 	name = "professional-grade duct tape"

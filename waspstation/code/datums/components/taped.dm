@@ -31,7 +31,7 @@
 	I.obj_integrity = min((I.obj_integrity + tape_used.nonorganic_heal), I.max_integrity)
 	taped_integrity += tape_used.nonorganic_heal
 
-	var/icon/tape_marks = icon(I.icon, I.icon_state)
+	var/icon/tape_marks = icon(initial(I.icon), initial(I.icon_state))
 	tape_marks.Blend("#fff", ICON_ADD)
 	tape_marks.Blend(icon('waspstation/icons/obj/tapes.dmi', "[tape_used.icon_state]_mask"), ICON_MULTIPLY)
 	taped_icon = new(tape_marks)
@@ -46,7 +46,7 @@
 	remove_tape()
 
 /datum/component/taped/proc/examine_tape(datum/source, mob/user, list/examine_list)
-	examine_list += "<span class='warning'>A bunch of \the [tape_used] is holding this thing together!</span>"
+	examine_list += "<span class='warning'>A bunch of [tape_used] is holding this thing together!</span>"
 
 /datum/component/taped/proc/remove_tape()
 	var/obj/item/I = parent
