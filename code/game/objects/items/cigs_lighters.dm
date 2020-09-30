@@ -884,14 +884,16 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			reagents.flags |= NO_REACT
 			icon_state = "[vapecolor]_vape"
 			item_state = "[vapecolor]_vape"
-			src.update_icon_state()
+
 		else
 			user.visible_message("<span class='notice'>[user] turns off [user.p_their()] [src] with a holographic gust from [user.p_their()] [O].</span>",
 								 "<span class='notice'>You turn off your [src] with a holographic gust from your [O].</span>")
 			reagents.flags &= NO_REACT
 			icon_state = "[vapecolor]_vapeoff"
 			item_state = "[vapecolor]_vapeoff"
-			src.update_icon_state() //End Waspstation edit - Lightable e-cigarettes
+		src.update_icon_state()
+		user.update_inv_wear_mask()
+		user.update_inv_hands() //End Waspstation edit - Lightable e-cigarettes
 
 
 /obj/item/clothing/mask/vape/emag_act(mob/user)// I WON'T REGRET WRITTING THIS, SURLY.
