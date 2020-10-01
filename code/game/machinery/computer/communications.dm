@@ -265,17 +265,17 @@
 					if("auto")
 						SSnightshift.can_fire = TRUE
 						SSnightshift.fire()
-						log_game("[keyname(usr)] has returned the night shift to automatic running.")
+						log_game("[key_name(usr)] has returned the night shift to automatic running.")
 						message_admins("[ADMIN_LOOKUPFLW(usr)] has returned the night shift to automatic running.")
 					if("on")
 						SSnightshift.can_fire = FALSE
 						SSnightshift.update_nightshift(TRUE, TRUE)
-						log_game("[keyname(usr)] has overridden the night shift to be on.")
+						log_game("[key_name(usr)] has overridden the night shift to be on.")
 						message_admins("[ADMIN_LOOKUPFLW(usr)] has overridden the night shift to be on.")
 					if("off")
 						SSnightshift.can_fire = FALSE
 						SSnightshift.update_nightshift(FALSE, TRUE)
-						log_game("[keyname(usr)] has overridden the night shift to be off.")
+						log_game("[key_name(usr)] has overridden the night shift to be off.")
 						message_admins("[ADMIN_LOOKUPFLW(usr)] has overridden the night shift to be off.")
 					else
 						CRASH("Invalid href supplied!")
