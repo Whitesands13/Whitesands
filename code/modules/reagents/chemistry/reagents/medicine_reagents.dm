@@ -199,7 +199,7 @@
 	..()
 	. = 1
 
-/datum/reagent/medicine/rezadone/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
+/datum/reagent/medicine/rezadone/expose_mob(mob/living/M, method=TOUCH, reac_volume)
 	. = ..()
 	if(iscarbon(M))
 		var/mob/living/carbon/patient = M
@@ -221,7 +221,7 @@
 	color = "#C8A5DC"
 	overdose_threshold = 45
 
-/datum/reagent/medicine/silver_sulfadiazine/reaction_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1)
+/datum/reagent/medicine/silver_sulfadiazine/expose_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1)
 	if(iscarbon(M) && M.stat != DEAD)
 		if(method in list(INGEST, VAPOR, INJECT))
 			M.adjustToxLoss(0.5*reac_volume)
@@ -275,7 +275,7 @@
 	color = "#FF9696"
 	overdose_threshold = 45
 
-/datum/reagent/medicine/styptic_powder/reaction_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1)
+/datum/reagent/medicine/styptic_powder/expose_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1)
 	if(iscarbon(M) && M.stat != DEAD)
 		if(method in list(INGEST, VAPOR, INJECT))
 			M.adjustToxLoss(0.5*reac_volume)
@@ -356,7 +356,7 @@
 	..()
 	return TRUE
 
-/datum/reagent/medicine/mine_salve/reaction_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1)
+/datum/reagent/medicine/mine_salve/expose_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1)
 	if(iscarbon(M) && M.stat != DEAD)
 		if(method in list(INGEST, VAPOR, INJECT))
 			M.adjust_nutrition(-5)
@@ -384,7 +384,7 @@
 	reagent_state = LIQUID
 	color = "#FFEBEB"
 
-/datum/reagent/medicine/synthflesh/reaction_mob(mob/living/M, method=TOUCH, reac_volume,show_message = 1)
+/datum/reagent/medicine/synthflesh/expose_mob(mob/living/M, method=TOUCH, reac_volume,show_message = 1)
 	if(iscarbon(M))
 		if (M.stat == DEAD)
 			show_message = 0
@@ -394,6 +394,9 @@
 			if(show_message)
 				to_chat(M, "<span class='danger'>You feel your burns and bruises healing! It stings like hell!</span>")
 			SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "painful_medicine", /datum/mood_event/painful_medicine)
+			if(HAS_TRAIT_FROM(M, TRAIT_HUSK, "burn") && M.getFireLoss() < THRESHOLD_UNHUSK && (M.reagents.get_reagent_amount(/datum/reagent/medicine/synthflesh) + reac_volume >= 100))
+				M.cure_husk("burn")
+				M.visible_message("<span class='nicegreen'>A rubbery liquid coats [M]'s burns. [M] looks a lot healthier!")
 	..()
 
 /datum/reagent/medicine/charcoal
@@ -493,11 +496,10 @@
 	taste_description = "acid"
 
 /datum/reagent/medicine/calomel/on_mob_life(mob/living/carbon/M)
-	for(var/datum/reagent/R in M.reagents.reagent_list)
-		if(R != src)
-			M.reagents.remove_reagent(R.type,2.5)
+	for(var/datum/reagent/toxin/R in M.reagents.reagent_list)
+		M.reagents.remove_reagent(R.type,3)
 	if(M.health > 20)
-		M.adjustToxLoss(2.5*REM, 0)
+		M.adjustToxLoss(1*REM, 0)
 		. = 1
 	..()
 
@@ -882,7 +884,7 @@
 	taste_description = "magnets"
 	harmful = TRUE
 
-/datum/reagent/medicine/strange_reagent/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
+/datum/reagent/medicine/strange_reagent/expose_mob(mob/living/M, method=TOUCH, reac_volume)
 	if(M.stat != DEAD)
 		return ..()
 	if(M.suiciding || M.hellbound) //they are never coming back
@@ -1013,21 +1015,41 @@
 	M.reagents.remove_reagent(/datum/reagent/consumable/sugar, 3)
 	..()
 
-//Trek Chems, used primarily by medibots. Only heals a specific damage type, but is very efficient.
+//Trek Chems, simple to mix but weak as healing. Second tier trekchems will heal faster.
 /datum/reagent/medicine/bicaridine
 	name = "Bicaridine"
 	description = "Restores bruising. Overdose causes it instead."
 	reagent_state = LIQUID
-	color = "#C8A5DC"
+	color = "#bf0000"
 	overdose_threshold = 30
 
 /datum/reagent/medicine/bicaridine/on_mob_life(mob/living/carbon/M)
-	M.adjustBruteLoss(-2*REM, 0)
+	M.adjustBruteLoss(-0.5*REM, 0)
 	..()
 	. = 1
 
 /datum/reagent/medicine/bicaridine/overdose_process(mob/living/M)
-	M.adjustBruteLoss(4*REM, FALSE, FALSE, BODYPART_ORGANIC)
+	M.adjustBruteLoss(2*REM, FALSE, FALSE, BODYPART_ORGANIC)
+	..()
+	. = 1
+
+/datum/reagent/medicine/bicaridinep
+	name = "Bicaridine Plus"
+	description = "Restores bruising and slowly stems bleeding. Overdose causes it instead. More effective than standardized Bicaridine."
+	reagent_state = LIQUID
+	color = "#bf0000"
+	overdose_threshold = 25
+
+/datum/reagent/medicine/bicaridinep/on_mob_life(mob/living/carbon/M)
+	M.adjustBruteLoss(-2*REM, 0)
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		H.bleed_rate = max(H.bleed_rate - 0.25, 0)
+	..()
+	. = 1
+
+/datum/reagent/medicine/bicaridinep/overdose_process(mob/living/M)
+	M.adjustBruteLoss(6*REM, FALSE, FALSE, BODYPART_ORGANIC)
 	..()
 	. = 1
 
@@ -1035,70 +1057,91 @@
 	name = "Dexalin"
 	description = "Restores oxygen loss. Overdose causes it instead."
 	reagent_state = LIQUID
-	color = "#C8A5DC"
+	color = "#0080FF"
 	overdose_threshold = 30
 
 /datum/reagent/medicine/dexalin/on_mob_life(mob/living/carbon/M)
-	M.adjustOxyLoss(-2*REM, 0)
+	M.adjustOxyLoss(-0.5*REM, 0)
 	..()
 	. = 1
 
 /datum/reagent/medicine/dexalin/overdose_process(mob/living/M)
-	M.adjustOxyLoss(4*REM, 0)
+	M.adjustOxyLoss(2*REM, 0)
 	..()
 	. = 1
 
 /datum/reagent/medicine/dexalinp
 	name = "Dexalin Plus"
-	description = "Restores oxygen loss. Overdose causes it instead. It is highly effective."
+	description = "Restores oxygen loss and purges Lexorin. Overdose causes it instead. More effective than standardized Dexalin."
 	reagent_state = LIQUID
 	color = "#0040FF"
 	overdose_threshold = 25
 
 /datum/reagent/medicine/dexalinp/on_mob_life(mob/living/carbon/M)
-	M.adjustOxyLoss(-4*REM, 0)
+	M.adjustOxyLoss(-2*REM, 0)
+	if(ishuman(M) && M.blood_volume < BLOOD_VOLUME_NORMAL)
+		M.blood_volume += 1
+	if(holder.has_reagent(/datum/reagent/toxin/lexorin))
+		holder.remove_reagent(/datum/reagent/toxin/lexorin, 3)
 	..()
 	. = 1
 
 /datum/reagent/medicine/dexalinp/overdose_process(mob/living/M)
-	M.adjustOxyLoss(8*REM, 0)
+	M.adjustOxyLoss(6*REM, 0)
 	..()
 	. = 1
 
 /datum/reagent/medicine/kelotane
 	name = "Kelotane"
-	description = "Restores fire damage. Overdose causes it instead."
+	description = "Heals burn damage. Overdose causes it instead."
 	reagent_state = LIQUID
-	color = "#C8A5DC"
+	color = "#FFa800"
 	overdose_threshold = 30
 
 /datum/reagent/medicine/kelotane/on_mob_life(mob/living/carbon/M)
-	M.adjustFireLoss(-2*REM, 0)
+	M.adjustFireLoss(-0.5*REM, 0)
 	..()
 	. = 1
 
 /datum/reagent/medicine/kelotane/overdose_process(mob/living/M)
-	M.adjustFireLoss(4*REM, FALSE, FALSE, BODYPART_ORGANIC)
+	M.adjustFireLoss(2*REM, FALSE, FALSE, BODYPART_ORGANIC)
+	..()
+	. = 1
+
+/datum/reagent/medicine/dermaline
+	name = "Dermaline"
+	description = "Heals burn damage. Overdose causes it instead. Superior to standardized Kelotane in healing capacity."
+	reagent_state = LIQUID
+	color = "#FF8000"
+	overdose_threshold = 25
+
+/datum/reagent/medicine/dermaline/on_mob_life(mob/living/carbon/M)
+	M.adjustFireLoss(-2*REM, 0)
+	..()
+	. = 1
+
+/datum/reagent/medicine/dermaline/overdose_process(mob/living/M)
+	M.adjustFireLoss(6*REM, FALSE, FALSE, BODYPART_ORGANIC)
 	..()
 	. = 1
 
 /datum/reagent/medicine/antitoxin
-	name = "Anti-Toxin"
+	name = "Dylovene"
 	description = "Heals toxin damage and removes toxins in the bloodstream. Overdose causes toxin damage."
 	reagent_state = LIQUID
-	color = "#C8A5DC"
+	color = "#00a000"
 	overdose_threshold = 30
 	taste_description = "a roll of gauze"
 
 /datum/reagent/medicine/antitoxin/on_mob_life(mob/living/carbon/M)
-	M.adjustToxLoss(-2*REM, 0)
+	M.adjustToxLoss(-0.5*REM, 0)
 	for(var/datum/reagent/toxin/R in M.reagents.reagent_list)
 		M.reagents.remove_reagent(R.type,1)
 	..()
 	. = 1
 
 /datum/reagent/medicine/antitoxin/overdose_process(mob/living/M)
-	M.adjustToxLoss(4*REM, 0) // End result is 2 toxin loss taken, because it heals 2 and then removes 4.
+	M.adjustToxLoss(2*REM, 0) // End result is 1.5 toxin loss taken, because it heals 0.5 and then removes 2.
 	..()
 	. = 1
 
@@ -1115,28 +1158,33 @@
 
 /datum/reagent/medicine/tricordrazine
 	name = "Tricordrazine"
-	description = "Has a high chance to heal all types of damage. Overdose instead causes it."
+	description = "A weak dilutant that slowly heals brute, burn, and toxin damage."
 	reagent_state = LIQUID
 	color = "#C8A5DC"
-	overdose_threshold = 30
-	taste_description = "grossness"
+	taste_description = "water that has been standing still in a glass on a counter overnight"
 
 /datum/reagent/medicine/tricordrazine/on_mob_life(mob/living/carbon/M)
 	if(prob(80))
-		M.adjustBruteLoss(-1*REM, 0)
-		M.adjustFireLoss(-1*REM, 0)
-		M.adjustOxyLoss(-1*REM, 0)
-		M.adjustToxLoss(-1*REM, 0)
+		M.adjustBruteLoss(-0.25*REM, 0)
+		M.adjustFireLoss(-0.25*REM, 0)
+		M.adjustToxLoss(-0.25*REM, 0)
 		. = 1
 	..()
+/datum/reagent/medicine/tetracordrazine //waspstation edit: Yes
+	name = "Tetracordrazine"
+	description = "A weak dilutant similar to Tricordrazine that slowly heals all damage types."
+	reagent_state = LIQUID
+	color = "#C8A5DC"
+	taste_description = "bottled water that has been sitting out in the sun with a single chili flake in it"
 
-/datum/reagent/medicine/tricordrazine/overdose_process(mob/living/M)
-	M.adjustToxLoss(2*REM, 0)
-	M.adjustOxyLoss(2*REM, 0)
-	M.adjustBruteLoss(2*REM, FALSE, FALSE, BODYPART_ORGANIC)
-	M.adjustFireLoss(2*REM, FALSE, FALSE, BODYPART_ORGANIC)
+/datum/reagent/medicine/tetracordrazine/on_mob_life(mob/living/carbon/M)
+	if(prob(80))
+		M.adjustBruteLoss(-0.25*REM, 0)
+		M.adjustFireLoss(-0.25*REM, 0)
+		M.adjustToxLoss(-0.25*REM, 0)
+		M.adjustOxyLoss(-0.5*REM, 0)
+		. = 1
 	..()
-	. = 1
 
 /datum/reagent/medicine/regen_jelly
 	name = "Regenerative Jelly"
@@ -1145,7 +1193,7 @@
 	color = "#CC23FF"
 	taste_description = "jelly"
 
-/datum/reagent/medicine/regen_jelly/reaction_mob(mob/living/M, reac_volume)
+/datum/reagent/medicine/regen_jelly/expose_mob(mob/living/M, reac_volume)
 	if(M && ishuman(M) && reac_volume >= 0.5)
 		var/mob/living/carbon/human/H = M
 		H.hair_color = "C2F"
@@ -1493,6 +1541,14 @@
 	color = "#FFFFD0"
 	metabolization_rate = 1.5 * REAGENTS_METABOLISM
 
+/datum/reagent/medicine/silibinin/expose_mob(mob/living/carbon/M, method=INJECT, reac_volume)
+	if(method != INJECT)
+		return
+
+	M.adjustOrganLoss(ORGAN_SLOT_LIVER, -1)  //on injection, will heal the liver. This will (hopefully) fix dead livers.
+
+	..()
+
 /datum/reagent/medicine/silibinin/on_mob_life(mob/living/carbon/M)
 	M.adjustOrganLoss(ORGAN_SLOT_LIVER, -2)//Add a chance to cure liver trauma once implemented.
 	..()
@@ -1503,21 +1559,21 @@
 	description = "A purple mixture of short polyelectrolyte chains not easily synthesized in the laboratory. It is valued as an intermediate in the synthesis of the cutting edge pharmaceuticals."
 	reagent_state = SOLID
 	color = "#9423FF"
-	metabolization_rate = 0.25 * REAGENTS_METABOLISM
+	metabolization_rate = 0.15 * REAGENTS_METABOLISM
 	overdose_threshold = 50
 	taste_description = "numbing bitterness"
 
 /datum/reagent/medicine/polypyr/on_mob_life(mob/living/carbon/M) //I wanted a collection of small positive effects, this is as hard to obtain as coniine after all.
 	M.adjustOrganLoss(ORGAN_SLOT_LUNGS, -0.25)
-	M.adjustBruteLoss(-0.35, 0)
+	M.adjustBruteLoss(-0.5, 0)
 	if(prob(50))
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
-			H.bleed_rate = max(H.bleed_rate - 1, 0)
+			H.bleed_rate = max(H.bleed_rate - 2, 0)
 	..()
 	. = 1
 
-/datum/reagent/medicine/polypyr/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
+/datum/reagent/medicine/polypyr/expose_mob(mob/living/M, method=TOUCH, reac_volume)
 	if(method == TOUCH || method == VAPOR)
 		if(M && ishuman(M) && reac_volume >= 0.5)
 			var/mob/living/carbon/human/H = M
@@ -1532,25 +1588,26 @@
 
 /datum/reagent/medicine/carthatoline
 	name = "Carthatoline"
-	description = "Carthatoline is strong evacuant used to treat severe poisoning."
+	description = "An evacuant that induces vomiting and purges toxins, as well as healing toxin damage. Superior to Dylovene. Overdose causes toxin damage."
 	reagent_state = LIQUID
 	color = "#225722"
+	overdose_threshold = 25
 
 /datum/reagent/medicine/carthatoline/on_mob_life(mob/living/carbon/M)
-	M.adjustToxLoss(-5*REM, 0)
+	M.adjustToxLoss(-2*REM, 0)
 	if(M.getToxLoss() && prob(10))
 		M.vomit(1)
 	for(var/datum/reagent/toxin/R in M.reagents.reagent_list)
-		M.reagents.remove_reagent(R.type,1)
+		M.reagents.remove_reagent(R.type,2)
 	..()
 	. = 1
 
 /datum/reagent/medicine/carthatoline/overdose_process(mob/living/M)
-	M.adjustToxLoss(10*REM, 0) // End result is 5 toxin loss taken, because it heals 5 and then removes 10.
+	M.adjustToxLoss(6*REM, 0) // End result is 4 toxin loss taken. Do your own math.
 	..()
 	. = 1
 
-/datum/reagent/medicine/hepanephrodaxon
+/* /datum/reagent/medicine/hepanephrodaxon    //Waspstation edit: Temporary removal of overloaded chem
 	name = "Hepanephrodaxon"
 	description = "Used to repair the common tissues involved in filtration."
 	taste_description = "glue"
@@ -1582,7 +1639,7 @@
 	..()
 	ADD_TRAIT(L, TRAIT_SLEEPIMMUNE, type)
 	ADD_TRAIT(L, TRAIT_STUNRESISTANCE, type)
-	M.add_movespeed_modifier(/datum/movespeed_modifier/reagent/hepanephrodaxon)
+	M.add_movespeed_modifier(/datum/movespeed_modifier/reagent/hepanephrodaxon) */
 
 /datum/reagent/medicine/bonefixingjuice
 	name = "C4L-Z1UM Agent"

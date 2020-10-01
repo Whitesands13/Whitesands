@@ -7,6 +7,8 @@
 		////////////////
 		//ADMIN THINGS//
 		////////////////
+	/// hides the byond verb panel as we use our own custom version
+	show_verb_panel = FALSE
 	///Contains admin info. Null if client is not an admin.
 	var/datum/admins/holder = null
  	///Needs to implement InterceptClickOn(user,params,atom) proc
@@ -103,9 +105,6 @@
 	///Used for limiting the rate of clicks sends by the client to avoid abuse
 	var/list/clicklimiter
 
-	///goonchat chatoutput of the client
-	var/datum/chatOutput/chatOutput
-
  	///lazy list of all credit object bound to this client
 	var/list/credits
 
@@ -125,3 +124,49 @@
 	var/keysend_tripped = FALSE
 	///custom movement keys for this client
 	var/list/movement_keys = list()
+
+	///Autoclick list of two elements, first being the clicked thing, second being the parameters.
+	var/list/atom/selected_target[2]
+	///Autoclick variable referencing the associated item.
+	var/obj/item/active_mousedown_item = null
+	///Used in MouseDrag to preserve the original mouse click parameters
+	var/mouseParams = ""
+	///Used in MouseDrag to preserve the last mouse-entered location.
+	var/mouseLocation = null
+	///Used in MouseDrag to preserve the last mouse-entered object.
+	var/mouseObject = null
+	//Middle-mouse-button click dragtime control for aimbot exploit detection.
+	var/middragtime = 0
+	//Middle-mouse-button clicked object control for aimbot exploit detection.
+	var/atom/middragatom
+
+	/// Messages currently seen by this client
+	var/list/seen_messages
+
+	/// datum wrapper for client view
+	var/datum/viewData/view_size
+
+	/// list of tabs containing spells and abilities
+	var/list/spell_tabs = list()
+	/// list of tabs containing verbs
+	var/list/verb_tabs = list()
+	///A lazy list of atoms we've examined in the last EXAMINE_MORE_TIME (default 1.5) seconds, so that we will call [atom/proc/examine_more()] instead of [atom/proc/examine()] on them when examining
+	var/list/recent_examines
+
+	var/list/parallax_layers
+	var/list/parallax_layers_cached
+	var/atom/movable/movingmob
+	var/turf/previous_turf
+	///world.time of when we can state animate()ing parallax again
+	var/dont_animate_parallax
+	///world.time of last parallax update
+	var/last_parallax_shift
+	///ds between parallax updates
+	var/parallax_throttle = 0
+	var/parallax_movedir = 0
+	var/parallax_layers_max = 4
+	var/parallax_animate_timer
+
+	/// rate limiting for the crew manifest
+	var/crew_manifest_delay
+

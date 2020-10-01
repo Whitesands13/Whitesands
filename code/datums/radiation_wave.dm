@@ -118,7 +118,6 @@
 		// modify the ignored_things list in __HELPERS/radiation.dm instead
 		var/static/list/blacklisted = typecacheof(list(
 			/turf,
-			/mob,
 			/obj/structure/cable,
 			/obj/machinery/atmospherics,
 			/obj/item/ammo_casing,
@@ -127,21 +126,23 @@
 			))
 		if(!can_contaminate || !can_contam || blacklisted[thing.type])
 			continue
-		if(thing.rad_flags & RAD_NO_CONTAMINATE || SEND_SIGNAL(thing, COMSIG_ATOM_RAD_CONTAMINATING, strength) & COMPONENT_BLOCK_CONTAMINATION)
+		if(thing.flags_1 & RAD_NO_CONTAMINATE_1 || SEND_SIGNAL(thing, COMSIG_ATOM_RAD_CONTAMINATING, strength) & COMPONENT_BLOCK_CONTAMINATION)
 			continue
 
 		if(contamination_strength > remaining_contam)
 			contamination_strength = remaining_contam
 		if(SEND_SIGNAL(thing, COMSIG_ATOM_RAD_CONTAMINATING, strength) & COMPONENT_BLOCK_CONTAMINATION)
 			continue
-		if((thing.rad_flags & RAD_NO_CONTAMINATE) || SEND_SIGNAL(thing, COMSIG_ATOM_RAD_CONTAMINATING, strength) & COMPONENT_BLOCK_CONTAMINATION)
+		if(thing.flags_1 & RAD_NO_CONTAMINATE_1 || SEND_SIGNAL(thing, COMSIG_ATOM_RAD_CONTAMINATING, strength) & COMPONENT_BLOCK_CONTAMINATION)
 			continue
 		contam_atoms += thing
 	var/did_contam = 0
 	if(can_contam)
-		var/rad_strength = ((strength-RAD_MINIMUM_CONTAMINATION) * RAD_CONTAMINATION_STR_COEFFICIENT)/contam_atoms.len
-		for(var/k in 1 to contam_atoms.len)
-			var/atom/thing = contam_atoms[k]
-			thing.AddComponent(/datum/component/radioactive, rad_strength, source)
-			did_contam = 1
+		var/num_targets = contam_atoms.len		// Waspstation Edit Begin - Fix radiation runtime
+		if(num_targets)			// Check that theres something to contaminate
+			var/rad_strength = ((strength-RAD_MINIMUM_CONTAMINATION) * RAD_CONTAMINATION_STR_COEFFICIENT)/ num_targets
+			for(var/k in 1 to num_targets)
+				var/atom/thing = contam_atoms[k]
+				thing.AddComponent(/datum/component/radioactive, rad_strength, source)
+				did_contam = 1			// Waspstation Edit End
 	return did_contam

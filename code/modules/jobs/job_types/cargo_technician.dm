@@ -1,8 +1,6 @@
 /datum/job/cargo_tech
 	title = "Cargo Technician"
-	flag = CARGOTECH
 	department_head = list("Head of Personnel")
-	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 3
 	spawn_positions = 2
@@ -30,4 +28,4 @@
 	alt_suit = /obj/item/clothing/suit/hazardvest
 	dcoat = /obj/item/clothing/suit/hooded/wintercoat/cargo //Wasp Edit - Alt Uniforms
 	l_hand = /obj/item/export_scanner
-
+	backpack_contents = list(/obj/item/modular_computer/tablet/preset/cargo=1)

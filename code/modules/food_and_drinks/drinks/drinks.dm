@@ -4,7 +4,7 @@
 /obj/item/reagent_containers/food/drinks
 	name = "drink"
 	desc = "yummy"
-	icon = 'icons/obj/drinks.dmi'
+	icon = 'waspstation/icons/obj/drinks.dmi'
 	icon_state = null
 	lefthand_file = 'icons/mob/inhands/misc/food_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/food_righthand.dmi'
@@ -47,8 +47,7 @@
 
 	var/fraction = min(gulp_size/reagents.total_volume, 1)
 	checkLiked(fraction, M)
-	reagents.reaction(M, INGEST, fraction)
-	reagents.trans_to(M, gulp_size, transfered_by = user)
+	reagents.trans_to(M, gulp_size, transfered_by = user, method = INGEST)
 	playsound(M.loc,'sound/items/drink.ogg', rand(10,50), TRUE)
 	return TRUE
 
@@ -112,7 +111,7 @@
 		return
 	var/obj/item/broken_bottle/B = new (loc)
 	B.icon_state = icon_state
-	var/icon/I = new('icons/obj/drinks.dmi', src.icon_state)
+	var/icon/I = new('waspstation/icons/obj/drinks.dmi', src.icon_state)
 	I.Blend(B.broken_outline, ICON_OVERLAY, rand(5), 1)
 	I.SwapColor(rgb(255, 0, 220, 255), rgb(0, 0, 0, 0))
 	B.icon = I
@@ -257,7 +256,7 @@
 /obj/item/reagent_containers/food/drinks/waterbottle
 	name = "bottle of water"
 	desc = "A bottle of water filled at an old Earth bottling facility."
-	icon = 'icons/obj/drinks.dmi'
+	icon = 'waspstation/icons/obj/drinks.dmi'
 	icon_state = "smallbottle"
 	item_state = "bottle"
 	list_reagents = list(/datum/reagent/water = 49.5, /datum/reagent/fluorine = 0.5)//see desc, don't think about it too hard
@@ -444,7 +443,7 @@
 		return
 	var/obj/item/broken_bottle/B = new (loc)
 	B.icon_state = icon_state
-	var/icon/I = new('icons/obj/drinks.dmi', src.icon_state)
+	var/icon/I = new('waspstation/icons/obj/drinks.dmi', src.icon_state)
 	I.Blend(B.broken_outline, ICON_OVERLAY, rand(5), 1)
 	I.SwapColor(rgb(255, 0, 220, 255), rgb(0, 0, 0, 0))
 	B.icon = I
@@ -503,7 +502,7 @@
 /obj/item/reagent_containers/food/drinks/colocup
 	name = "colo cup"
 	desc = "A cheap, mass produced style of cup, typically used at parties. They never seem to come out red, for some reason..."
-	icon = 'icons/obj/drinks.dmi'
+	icon = 'waspstation/icons/obj/drinks.dmi'
 	icon_state = "colocup"
 	lefthand_file = 'icons/mob/inhands/misc/food_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/food_righthand.dmi'
@@ -576,6 +575,15 @@
 	spillable = FALSE
 	isGlass = FALSE
 	custom_price = 45
+	var/pierced = FALSE
+	obj_flags = CAN_BE_HIT
+
+
+/obj/item/reagent_containers/food/drinks/soda_cans/random/Initialize()
+	..()
+	var/T = pick(subtypesof(/obj/item/reagent_containers/food/drinks/soda_cans) - /obj/item/reagent_containers/food/drinks/soda_cans/random)
+	new T(loc)
+	return INITIALIZE_HINT_QDEL
 
 /obj/item/reagent_containers/food/drinks/soda_cans/random/Initialize()
 	..()
@@ -615,7 +623,25 @@
 		crushed_can.icon_state = icon_state
 		qdel(src)
 		return TRUE
+	var/chugged = reagents.total_volume
 	. = ..()
+	if(is_drainable() && pierced && chugged)
+		M.changeNext_move(CLICK_CD_RAPID)
+		if(iscarbon(M))
+			var/mob/living/carbon/broh = M
+			broh.adjustOxyLoss(2)
+			broh.losebreath++
+			switch(broh.losebreath)
+				if(-INFINITY to 0)
+				if(1 to 2)
+					if(prob(30))
+						user.visible_message("<b>[broh]</b>'s eyes water as [broh.p_they()] chug the can of [src]!")
+				if(3 to 6)
+					if(prob(20))
+						user.visible_message("<b>[broh]</b> makes \an [pick(list("uncomfortable", "gross", "troubling"))] gurgling noise as [broh.p_they()] chug the can of [src]!")
+				if(9 to INFINITY)
+					broh.vomit(2, stun=FALSE)
+
 
 /obj/item/reagent_containers/food/drinks/soda_cans/bullet_act(obj/projectile/P)
 	. = ..()
@@ -637,6 +663,24 @@
 	if(!is_drainable())
 		open_soda(user)
 	return ..()
+
+/obj/item/reagent_containers/food/drinks/soda_cans/attacked_by(obj/item/I, mob/living/user)
+	if(I.sharpness && !pierced && user && user.a_intent != INTENT_HARM)
+		user.visible_message("<b>[user]</b> pierces [src] with [I].", "<span class='notice'>You pierce \the [src] with [I].</span>")
+		playsound(src, "can_open", 50, TRUE)
+		pierced = TRUE
+		return
+	else if(I.force)
+		user.visible_message("<b>[user]</b> crushes [src] with [I]! Party foul!", "<span class='warning'>You crush \the [src] with [I]! Party foul!</span>")
+		playsound(src, "can_open", 50, TRUE)
+		var/obj/item/trash/can/crushed_can = new /obj/item/trash/can(src.loc)
+		crushed_can.icon_state = icon_state
+		var/atom/throw_target = get_edge_target_turf(crushed_can, pick(GLOB.alldirs))
+		crushed_can.throw_at(throw_target, rand(1,3), 7)
+		qdel(src)
+		return
+
+	. = ..()
 
 /obj/item/reagent_containers/food/drinks/soda_cans/cola
 	name = "Space Cola"

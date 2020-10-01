@@ -88,7 +88,7 @@
 	/// Internals box. Will be inserted at the start of backpack_contents
 	var/box
 
-	/** 
+	/**
 	  * Any implants the mob should start implanted with
 	  *
 	  * Format of this list is (typepath, typepath, typepath)
@@ -151,8 +151,8 @@
   *
   * If visualsOnly is true, you can omit any work that doesn't visually appear on the character sprite
   */
-/datum/outfit/proc/equip(mob/living/carbon/human/H, visualsOnly = FALSE)
-	pre_equip(H, visualsOnly)
+/datum/outfit/proc/equip(mob/living/carbon/human/H, visualsOnly = FALSE, client/preference_source = null) //WaspStation Edit - Alt-Job Titles
+	pre_equip(H, visualsOnly, preference_source)
 
 	//Start with uniform,suit,backpack for additional slots
 	if(uniform)
@@ -221,7 +221,7 @@
 		var/obj/item/clothing/suit/space/hardsuit/HS = H.wear_suit
 		HS.ToggleHelmet()
 
-	post_equip(H, visualsOnly)
+	post_equip(H, visualsOnly, preference_source) // Wasp Edit - Alt-Job Titles
 
 	if(!visualsOnly)
 		apply_fingerprints(H)

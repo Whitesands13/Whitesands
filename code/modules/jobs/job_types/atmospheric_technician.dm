@@ -1,8 +1,6 @@
 /datum/job/atmos
 	title = "Atmospheric Technician"
-	flag = ATMOSTECH
 	department_head = list("Chief Engineer")
-	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 3
 	spawn_positions = 2
@@ -15,8 +13,9 @@
 	outfit = /datum/outfit/job/atmos
 
 	access = list(ACCESS_ENGINE, ACCESS_ENGINE_EQUIP, ACCESS_TECH_STORAGE, ACCESS_MAINT_TUNNELS, ACCESS_MECH_ENGINE,
-									ACCESS_EXTERNAL_AIRLOCKS, ACCESS_CONSTRUCTION, ACCESS_ATMOSPHERICS, ACCESS_MINERAL_STOREROOM)
-	minimal_access = list(ACCESS_ATMOSPHERICS, ACCESS_MAINT_TUNNELS, ACCESS_CONSTRUCTION, ACCESS_MECH_ENGINE, ACCESS_MINERAL_STOREROOM)
+									ACCESS_EXTERNAL_AIRLOCKS, ACCESS_CONSTRUCTION, ACCESS_ATMOSPHERICS, ACCESS_MINERAL_STOREROOM, ACCESS_EVA)
+	minimal_access = list(ACCESS_ATMOSPHERICS, ACCESS_MAINT_TUNNELS, ACCESS_EXTERNAL_AIRLOCKS, ACCESS_ENGINE,
+									ACCESS_ENGINE_EQUIP, ACCESS_CONSTRUCTION, ACCESS_MECH_ENGINE, ACCESS_MINERAL_STOREROOM)
 	paycheck = PAYCHECK_MEDIUM
 	paycheck_department = ACCOUNT_ENG
 	display_order = JOB_DISPLAY_ORDER_ATMOSPHERIC_TECHNICIAN
@@ -49,3 +48,25 @@
 	suit = /obj/item/clothing/suit/space/hardsuit/engine/atmos
 	suit_store = /obj/item/tank/internals/oxygen
 	internals_slot = ITEM_SLOT_SUITSTORE
+
+/datum/outfit/job/atmos/firefighter
+	name = "Atmospheric Technician (Firefighter)"
+	uniform = /obj/item/clothing/under/rank/engineering/engineer/hazard
+	head = /obj/item/clothing/head/hardhat/red
+	l_hand = /obj/item/extinguisher
+
+/datum/outfit/job/atmos/lifesupportspecialist
+	name = "Atmospheric Technician (Life Support Specialist)"
+	backpack_contents = list(/obj/item/modular_computer/tablet/preset/advanced=1, /obj/item/storage/box/survival=2)
+
+/datum/outfit/job/atmos/senioratmospherics
+	name = "Atmospheric Technician (Senior Atmospheric Technician)"
+
+	belt = null
+	uniform = /obj/item/clothing/under/suit/senior_atmos
+	alt_uniform = null
+	suit = /obj/item/clothing/suit/toggle/lawyer/atmos
+	alt_suit = /obj/item/clothing/suit/hazardvest
+	neck = /obj/item/clothing/neck/tie/light_blue
+
+	backpack_contents = list(/obj/item/modular_computer/tablet/preset/advanced=1, /obj/item/storage/belt/utility/atmostech=1)

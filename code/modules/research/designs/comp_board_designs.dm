@@ -12,7 +12,7 @@
 	id = "arcade_battle"
 	build_path = /obj/item/circuitboard/computer/arcade/battle
 	category = list("Computer Boards")
-	departmental_flags = DEPARTMENTAL_FLAG_ALL
+
 
 /datum/design/board/orion_trail
 	name = "Computer Design (Orion Trail Arcade Machine)"
@@ -20,7 +20,7 @@
 	id = "arcade_orion"
 	build_path = /obj/item/circuitboard/computer/arcade/orion_trail
 	category = list("Computer Boards")
-	departmental_flags = DEPARTMENTAL_FLAG_ALL
+
 
 /datum/design/board/seccamera
 	name = "Computer Design (Security Camera)"
@@ -97,12 +97,13 @@
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL | DEPARTMENTAL_FLAG_SCIENCE
 
 /datum/design/board/cloning
-	name = "cloning console"
+	name = "Computer Design (Cloning Console)"
 	desc = "Used to clone people and manage DNA."
 	id = "cloning"
 	build_path = /obj/item/circuitboard/computer/cloning
 	category = list("Computer Boards")
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
+
 /datum/design/board/comconsole
 	name = "Computer Design (Communications)"
 	desc = "Allows for the construction of circuit boards used to build a communications console."
@@ -165,7 +166,7 @@
 	id = "slotmachine"
 	build_path = /obj/item/circuitboard/computer/slot_machine
 	category = list("Computer Boards")
-	departmental_flags = DEPARTMENTAL_FLAG_ALL
+
 
 /datum/design/board/powermonitor
 	name = "Computer Design (Power Monitor)"
@@ -285,7 +286,7 @@
 	id = "libraryconsole"
 	build_path = /obj/item/circuitboard/computer/libraryconsole
 	category = list("Computer Boards")
-	departmental_flags = DEPARTMENTAL_FLAG_ALL
+
 
 /datum/design/board/apc_control
 	name = "Computer Design (APC Control)"

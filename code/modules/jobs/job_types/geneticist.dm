@@ -1,8 +1,6 @@
 /datum/job/geneticist
 	title = "Geneticist"
-	flag = GENETICIST
-	department_head = list("Chief Medical Officer", "Research Director")
-	department_flag = MEDSCI
+	department_head = list("Chief Medical Officer")		// Wasp Edit - More Gen/Sci Split
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
@@ -14,10 +12,10 @@
 
 	outfit = /datum/outfit/job/geneticist
 
-	access = list(ACCESS_MEDICAL, ACCESS_MORGUE, ACCESS_CHEMISTRY, ACCESS_GENETICS, ACCESS_CLONING, ACCESS_MECH_MEDICAL, ACCESS_RESEARCH, ACCESS_XENOBIOLOGY, ACCESS_ROBOTICS, ACCESS_MINERAL_STOREROOM, ACCESS_TECH_STORAGE) //WaspStation edit - Gen/Sci Split
+	access = list(ACCESS_MEDICAL, ACCESS_MORGUE, ACCESS_CHEMISTRY, ACCESS_GENETICS, ACCESS_CLONING, ACCESS_MECH_MEDICAL, ACCESS_RESEARCH, ACCESS_XENOBIOLOGY, ACCESS_ROBOTICS, ACCESS_MINERAL_STOREROOM, ACCESS_TECH_STORAGE, ACCESS_EVA) //WaspStation edit - Gen/Sci Split
 	minimal_access = list(ACCESS_MEDICAL, ACCESS_MORGUE, ACCESS_GENETICS, ACCESS_CLONING, ACCESS_MECH_MEDICAL, ACCESS_MINERAL_STOREROOM, ACCESS_PHARMACY) //WaspStation edit - Gen/Sci Split
 	paycheck = PAYCHECK_MEDIUM
-	paycheck_department = ACCOUNT_SCI
+	paycheck_department = ACCOUNT_MED		// Wasp Edit - Connects gen to med budget
 
 	display_order = JOB_DISPLAY_ORDER_GENETICIST
 

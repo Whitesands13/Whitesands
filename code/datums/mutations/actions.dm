@@ -42,9 +42,8 @@
 /obj/effect/proc_holder/spell/targeted/olfaction/cast(list/targets, mob/living/user = usr)
 	//can we sniff? is there miasma in the air?
 	var/datum/gas_mixture/air = user.loc.return_air()
-	var/list/cached_gases = air.gases
 
-	if(cached_gases[/datum/gas/miasma])
+	if(air.get_moles(/datum/gas/miasma))
 		user.adjust_disgust(sensitivity * 45)
 		to_chat(user, "<span class='warning'>With your overly sensitive nose, you get a whiff of stench and feel sick! Try moving to a cleaner area!</span>")
 		return
@@ -371,14 +370,9 @@
 
 	var/obj/item/bodypart/L = spikey.checkembedded()
 
-	L.embedded_objects -= spikey
 	//this is where it would deal damage, if it transfers chems it removes itself so no damage
 	spikey.forceMove(get_turf(L))
 	transfered.visible_message("<span class='notice'>[spikey] falls out of [transfered]!</span>")
-	if(!transfered.has_embedded_objects())
-		transfered.clear_alert("embeddedobject")
-		SEND_SIGNAL(transfered, COMSIG_CLEAR_MOOD_EVENT, "embedded")
-	spikey.unembedded()
 
 //spider webs
 /datum/mutation/human/webbing

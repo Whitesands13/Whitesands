@@ -58,6 +58,14 @@
 	C.update_hair()
 
 /obj/item/organ/brain/Remove(mob/living/carbon/C, special = 0, no_id_transfer = FALSE)
+	if(!special)		//Wasp Begin - Borers
+		if(C.has_brain_worms())
+			var/mob/living/simple_animal/borer/B = C.has_brain_worms()
+			if(B.controlling)
+				B.victim.release_control()
+				to_chat(B, "<span class='userdanger'>Your probiscis is ripped out as your host's brain is removed!</span>")
+				B.apply_damage(15)
+			B.leave_victim()		//Wasp End
 	..()
 	for(var/X in traumas)
 		var/datum/brain_trauma/BT = X
@@ -197,10 +205,12 @@
 	if(damage > BRAIN_DAMAGE_MILD)
 		if(prob(damage_delta * (1 + max(0, (damage - BRAIN_DAMAGE_MILD)/100)))) //Base chance is the hit damage; for every point of damage past the threshold the chance is increased by 1% //learn how to do your bloody math properly goddamnit
 			gain_trauma_type(BRAIN_TRAUMA_MILD, natural_gain = TRUE)
+
+	var/is_boosted = (owner && HAS_TRAIT(owner, TRAIT_SPECIAL_TRAUMA_BOOST))
 	if(damage > BRAIN_DAMAGE_SEVERE)
 		if(prob(damage_delta * (1 + max(0, (damage - BRAIN_DAMAGE_SEVERE)/100)))) //Base chance is the hit damage; for every point of damage past the threshold the chance is increased by 1%
-			if(prob(20))
-				gain_trauma_type(BRAIN_TRAUMA_SPECIAL, natural_gain = TRUE)
+			if(prob(20 + (is_boosted * 30)))
+				gain_trauma_type(BRAIN_TRAUMA_SPECIAL, is_boosted ? TRAUMA_RESILIENCE_SURGERY : null, natural_gain = TRUE)
 			else
 				gain_trauma_type(BRAIN_TRAUMA_SEVERE, natural_gain = TRUE)
 

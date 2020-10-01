@@ -12,7 +12,7 @@
 	antag_flag = ROLE_TRAITOR
 	false_report_weight = 20 //Reports of traitors are pretty common.
 	restricted_jobs = list("Cyborg")//They are part of the AI if he is traitor so are they, they use to get double chances
-	protected_jobs = list("Security Officer", "Warden", "Detective", "Head of Security", "Captain", "Head of Personnel", "Brig Physician", "Lieutenant", "Prisoner") // Waspstation edit - Brig Physicians, Second Officer
+	protected_jobs = list("Security Officer", "Warden", "Detective", "Head of Security", "Captain", "Head of Personnel", "Brig Physician", "Lieutenant", "Prisoner")		// Waspstation edit - Brig Physicians, Second Officer
 	required_players = 0
 	required_enemies = 1
 	recommended_enemies = 4
@@ -35,8 +35,25 @@
 
 /datum/game_mode/traitor/pre_setup()
 
+	var/total_ready_players = 0;
+	for(var/i in GLOB.new_player_list)
+		var/mob/dead/new_player/player = i
+		if(player.ready == PLAYER_READY_TO_PLAY)
+			total_ready_players++
+
 	if(CONFIG_GET(flag/protect_roles_from_antagonist))
+		for(var/id in (CONFIG_GET(keyed_list/no_traitor_head)))
+			switch(id)
+				if("chief_medical_officer")
+					protected_jobs += "Chief Medical Officer"
+				if("research_director")
+					protected_jobs += "Research Director"
+				if("chief_engineer")
+					protected_jobs += "Chief Engineer"
 		restricted_jobs += protected_jobs
+
+	if(CONFIG_GET(number/traitor_malf_ai_min_pop) > total_ready_players)
+		restricted_jobs += "AI"
 
 	if(CONFIG_GET(flag/protect_assistant_from_antagonist))
 		restricted_jobs += "Assistant"

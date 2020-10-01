@@ -163,16 +163,13 @@
 		if(T.air)
 			var/datum/gas_mixture/G = T.air
 			if(!distcheck || get_dist(T, location) < blast) // Otherwise we'll get silliness like people using Nanofrost to kill people through walls with cold air
-				G.temperature = temperature
+				G.set_temperature(temperature)
 			T.air_update_turf()
 			for(var/obj/effect/hotspot/H in T)
 				qdel(H)
-			var/list/G_gases = G.gases
-			if(G_gases[/datum/gas/plasma])
-				G.assert_gas(/datum/gas/nitrogen)
-				G_gases[/datum/gas/nitrogen][MOLES] += (G_gases[/datum/gas/plasma][MOLES])
-				G_gases[/datum/gas/plasma][MOLES] = 0
-				G.garbage_collect()
+			if(G.get_moles(/datum/gas/plasma))
+				G.adjust_moles(/datum/gas/nitrogen, G.get_moles(/datum/gas/plasma))
+				G.set_moles(/datum/gas/plasma, 0)
 		if (weldvents)
 			for(var/obj/machinery/atmospherics/components/unary/U in T)
 				if(!isnull(U.welded) && !U.welded) //must be an unwelded vent pump or vent scrubber.
@@ -232,9 +229,9 @@
 		for(var/atom/movable/AM in T)
 			if(AM.type == src.type)
 				continue
-			reagents.reaction(AM, TOUCH, fraction)
+			reagents.expose(AM, TOUCH, fraction)
 
-		reagents.reaction(T, TOUCH, fraction)
+		reagents.expose(T, TOUCH, fraction)
 		return 1
 
 /obj/effect/particle_effect/smoke/chem/smoke_mob(mob/living/carbon/M)
@@ -247,7 +244,7 @@
 		return 0
 	var/fraction = 1/initial(lifetime)
 	reagents.copy_to(C, fraction*reagents.total_volume)
-	reagents.reaction(M, INGEST, fraction)
+	reagents.expose(M, INGEST, fraction)
 	return 1
 
 

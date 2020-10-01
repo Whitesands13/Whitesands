@@ -30,13 +30,6 @@ jobs:
 
       - name: Setup Rust
         uses: hecrj/setup-rust-action@v1.3.2
-        with:
-          default: true
-
-      - name: Setup PHP
-        uses: nanasess/setup-php@v3.0.3
-        with:
-          php_version: 5.6
 
       - name: Install Dependencies
         run: |
@@ -48,13 +41,21 @@ jobs:
         run: |
           tools/travis/check_filedirs.sh tgstation.dme
           tools/travis/check_changelogs.sh
-          find . -name "*.php" -print0 | xargs -0 -n1 php -l
           find . -name "*.json" -not -path "./tgui/node_modules/*" -print0 | xargs -0 python3 ./tools/json_verifier.py
           tools/travis/build_tgui.sh
           tools/travis/check_grep.sh
 
       - name: Run Linter
-        run: ~/dreamchecker
+        id: linter
+        run: |
+          ~/dreamchecker > ${GITHUB_WORKSPACE}/output-annotations.txt 2>&1
+          
+      - name: Annotate Linter
+        uses: WaspStation/DreamAnnotate@v1
+        if: always()
+        with: 
+          outputFile: output-annotations.txt
+
   compile:
     name: Compile All Maps
     runs-on: ubuntu-18.04
@@ -63,7 +64,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          curl https://repogen.simplylinux.ch/txt/bionic/sources_3a64d21a7855de8236118d7d04a3c5fef63083fb.txt | sudo tee /etc/apt/sources.list
+          curl https://raw.githubusercontent.com/WaspStation/WaspStation-1.0/master/.github/sources.list | sudo tee /etc/apt/sources.list
           sudo dpkg --add-architecture i386
           sudo apt-get update
           sudo apt install libstdc++6:i386
@@ -105,11 +106,11 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          curl https://repogen.simplylinux.ch/txt/bionic/sources_3a64d21a7855de8236118d7d04a3c5fef63083fb.txt | sudo tee /etc/apt/sources.list
+          curl https://raw.githubusercontent.com/WaspStation/WaspStation-1.0/master/.github/sources.list | sudo tee /etc/apt/sources.list
           sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
           sudo dpkg --add-architecture i386
           sudo apt-get update
-          sudo apt install libstdc++6:i386 gcc-multilib g++-7 g++-7-multilib libmariadb-client-lgpl-dev:i386 libmariadbd-dev
+          sudo apt install libstdc++6:i386 gcc-multilib g++-7 g++-7-multilib libssl1.1:i386 zlib1g:i386
 
       - name: Cache BYOND
         uses: actions/cache@v1
@@ -126,13 +127,11 @@ jobs:
           echo "::set-env name=LD_LIBRARY_PATH::/home/runner/BYOND/byond/bin:$LD_LIBRARY_PATH"
           echo "::set-env name=MANPATH::/home/runner/BYOND/byond/man:$MANPATH"
           cd $GITHUB_WORKSPACE
-          tools/travis/install_libmariadb.sh
           tools/travis/install_rust_g.sh
           mysql -u root -h 127.0.0.1 -e 'CREATE DATABASE tg_travis;'
           mysql -u root -h 127.0.0.1 tg_travis < SQL/tgstation_schema.sql
           mysql -u root -h 127.0.0.1 -e 'CREATE DATABASE tg_travis_prefixed;'
           mysql -u root -h 127.0.0.1 tg_travis_prefixed < SQL/tgstation_schema_prefixed.sql
-          tools/travis/build_bsql.sh
 
       - name: Compile
         run: |

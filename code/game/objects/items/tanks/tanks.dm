@@ -23,7 +23,7 @@
 	toggle_internals(user)
 
 /obj/item/tank/proc/toggle_internals(mob/user)
-	var/mob/living/carbon/human/H = user
+	var/mob/living/carbon/H = user //Wasp Port - Citadel Internals
 	if(!istype(H))
 		return
 
@@ -33,15 +33,22 @@
 		H.update_internals_hud_icon(0)
 	else
 		if(!H.getorganslot(ORGAN_SLOT_BREATHING_TUBE))
-			if(!H.wear_mask)
-				to_chat(H, "<span class='warning'>You need a mask!</span>")
+			//Wasp Port Begin - Citadel Internals
+			var/obj/item/clothing/check
+			var/internals = FALSE
+
+			for(check in GET_INTERNAL_SLOTS(H))
+				if(istype(check, /obj/item/clothing/mask))
+					var/obj/item/clothing/mask/M = check
+					if(M.mask_adjusted)
+						M.adjustmask(H)
+				if(check.clothing_flags & ALLOWINTERNALS)
+					internals = TRUE
+
+			if(!internals)
+				to_chat(H, "<span class='warning'>You are not wearing an internals mask!</span>")
 				return
-			var/is_clothing = isclothing(H.wear_mask)
-			if(is_clothing && H.wear_mask.mask_adjusted)
-				H.wear_mask.adjustmask(H)
-			if(!is_clothing || !(H.wear_mask.clothing_flags & MASKINTERNALS))
-				to_chat(H, "<span class='warning'>[H.wear_mask] can't use [src]!</span>")
-				return
+			//Wasp Port End - Citadel Internals
 
 		if(H.internal)
 			to_chat(H, "<span class='notice'>You switch your internals to [src].</span>")
@@ -56,7 +63,7 @@
 	. = ..()
 
 	air_contents = new(volume) //liters
-	air_contents.temperature = T20C
+	air_contents.set_temperature(T20C)
 
 	populate_gas()
 
@@ -82,9 +89,9 @@
 			. += "<span class='notice'>If you want any more information you'll need to get closer.</span>"
 		return
 
-	. += "<span class='notice'>The pressure gauge reads [round(src.air_contents.return_pressure(),0.01)] kPa.</span>"
+	. += "<span class='notice'>The gauge reads [round(air_contents.total_moles(), 0.01)] mol at [round(src.air_contents.return_pressure(),0.01)] kPa.</span>"	//yogs can read mols
 
-	var/celsius_temperature = src.air_contents.temperature-T0C
+	var/celsius_temperature = src.air_contents.return_temperature()-T0C
 	var/descriptive
 
 	if (celsius_temperature < 20)
@@ -141,11 +148,13 @@
 	else
 		. = ..()
 
-/obj/item/tank/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
-									datum/tgui/master_ui = null, datum/ui_state/state = GLOB.hands_state)
-	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
+/obj/item/tank/ui_state(mob/user)
+	return GLOB.hands_state
+
+/obj/item/tank/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
-		ui = new(user, src, ui_key, "tanks", name, 400, 120, master_ui, state)
+		ui = new(user, src, "Tank", name)
 		ui.open()
 
 /obj/item/tank/ui_data(mob/user)
@@ -207,10 +216,7 @@
 	if(!air_contents)
 		return null
 
-	var/tank_pressure = air_contents.return_pressure()
-	var/actual_distribute_pressure = clamp(tank_pressure, 0, distribute_pressure)
-
-	var/moles_needed = actual_distribute_pressure*volume_to_return/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
+	var/moles_needed = distribute_pressure*volume_to_return/(R_IDEAL_GAS_EQUATION*air_contents.return_temperature())
 
 	return remove_air(moles_needed)
 

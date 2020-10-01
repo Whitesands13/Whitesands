@@ -2,6 +2,7 @@
 // stores power
 
 #define SMESRATE 0.05			// rate of internal charge to external power
+#define SMESCHARGE 70			// ratio of battery storage to SMES storage		// Wasp Edit - Removes magic number
 
 //Cache defines
 #define SMES_CLEVEL_1		1
@@ -21,8 +22,6 @@
 	density = TRUE
 	use_power = NO_POWER_USE
 	circuit = /obj/item/circuitboard/machine/smes
-	ui_x = 340
-	ui_y = 440
 
 	var/capacity = 5e6 // maximum charge
 	var/charge = 0 // actual charge
@@ -73,12 +72,14 @@
 	for(var/obj/item/stock_parts/cell/PC in component_parts)
 		MC += PC.maxcharge
 		C += PC.charge
-	capacity = MC / (15000) * 1e6
+	capacity = MC * SMESCHARGE			// Wasp Edit - Removes magic number
 	if(!initial(charge) && !charge)
-		charge = C / 15000 * 1e6
+		charge = C						// Wasp Edit - Prevents power duping
 
+/* Wasp Edit - Smartwire Revert
 /obj/machinery/power/smes/should_have_node()
 	return TRUE
+*/
 
 /obj/machinery/power/smes/attackby(obj/item/I, mob/user, params)
 	//opening using screwdriver
@@ -318,32 +319,29 @@
 	return
 
 
-/obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
-										datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
-	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
+/obj/machinery/power/smes/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
-		ui = new(user, src, ui_key, "smes", name, ui_x, ui_y, master_ui, state)
+		ui = new(user, src, "Smes", name)
 		ui.open()
 
 /obj/machinery/power/smes/ui_data()
 	var/list/data = list(
-		"capacityPercent" = round(100*charge/capacity, 0.1),
 		"capacity" = capacity,
+		"capacityPercent" = round(100*charge/capacity, 0.1),
 		"charge" = charge,
-
 		"inputAttempt" = input_attempt,
 		"inputting" = inputting,
 		"inputLevel" = input_level,
 		"inputLevel_text" = DisplayPower(input_level),
 		"inputLevelMax" = input_level_max,
-		"inputAvailable" = DisplayPower(input_available),
-
+		"inputAvailable" = input_available,
 		"outputAttempt" = output_attempt,
 		"outputting" = outputting,
 		"outputLevel" = output_level,
 		"outputLevel_text" = DisplayPower(output_level),
 		"outputLevelMax" = output_level_max,
-		"outputUsed" = DisplayPower(output_used)
+		"outputUsed" = output_used,
 	)
 	return data
 

@@ -87,7 +87,7 @@
 		// make some colorful reagent, and apply it to the lungs
 		L.create_reagents(10)
 		L.reagents.add_reagent(/datum/reagent/colorful_reagent, 10)
-		L.reagents.reaction(L, TOUCH, 1)
+		L.reagents.expose(L, TOUCH, 1)
 
 		// TODO maybe add some colorful vomit?
 
@@ -100,7 +100,7 @@
 	else if(can_use(user) && !L)
 		user.visible_message("<span class='suicide'>[user] is spraying toner on [user.p_them()]self from [src]! It looks like [user.p_theyre()] trying to commit suicide.</span>")
 		user.reagents.add_reagent(/datum/reagent/colorful_reagent, 1)
-		user.reagents.reaction(user, TOUCH, 1)
+		user.reagents.expose(user, TOUCH, 1)
 		return TOXLOSS
 
 	else
@@ -199,10 +199,10 @@
 	stored_decal_total = "[stored_decal][yellow_fix][stored_color]"
 	return
 
-/obj/item/airlock_painter/decal/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = 0, datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
-	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
+/obj/item/airlock_painter/decal/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
-		ui = new(user, src, ui_key, "decal_painter", name, 500, 400, master_ui, state)
+		ui = new(user, src, "DecalPainter", name)
 		ui.open()
 
 /obj/item/airlock_painter/decal/ui_data(mob/user)

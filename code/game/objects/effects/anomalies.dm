@@ -102,6 +102,10 @@
 			step_towards(M,src)
 	for(var/obj/O in range(0,src))
 		if(!O.anchored)
+			if(isturf(O.loc))
+				var/turf/T = O.loc
+				if(T.intact && HAS_TRAIT(O, TRAIT_T_RAY_VISIBLE))
+					continue
 			var/mob/living/target = locate() in view(4,src)
 			if(target && !target.stat)
 				O.throw_at(target, 5, 10)
@@ -261,13 +265,13 @@
 /obj/effect/anomaly/pyro/anomalyEffect()
 	..()
 	ticks++
-	if(ticks < 5)
+	if(ticks < 25) // WaspStation Edit - Pyroclastic Rebalance
 		return
 	else
 		ticks = 0
 	var/turf/open/T = get_turf(src)
 	if(istype(T))
-		T.atmos_spawn_air("o2=5;plasma=5;TEMP=1000")
+		T.atmos_spawn_air("o2=5;plasma=5;TEMP=500") // WaspStation Edit - Pyroclastic Rebalance
 
 /obj/effect/anomaly/pyro/detonate()
 	INVOKE_ASYNC(src, .proc/makepyroslime)
@@ -275,7 +279,7 @@
 /obj/effect/anomaly/pyro/proc/makepyroslime()
 	var/turf/open/T = get_turf(src)
 	if(istype(T))
-		T.atmos_spawn_air("o2=500;plasma=500;TEMP=1000") //Make it hot and burny for the new slime
+		T.atmos_spawn_air("o2=250;plasma=250;TEMP=700") // WaspStation Edit - Pyroclastic Rebalance
 	var/new_colour = pick("red", "orange")
 	var/mob/living/simple_animal/slime/S = new(T, new_colour)
 	S.rabid = TRUE
@@ -319,7 +323,7 @@
 			if(target && !target.stat)
 				O.throw_at(target, 7, 5)
 		else
-			O.ex_act(EXPLODE_HEAVY)
+			SSexplosions.medobj += O
 
 /obj/effect/anomaly/bhole/proc/grav(r, ex_act_force, pull_chance, turf_removal_chance)
 	for(var/t = -r, t < r, t++)
@@ -338,7 +342,13 @@
 	if(prob(pull_chance))
 		for(var/obj/O in T.contents)
 			if(O.anchored)
-				O.ex_act(ex_act_force)
+				switch(ex_act_force)
+					if(EXPLODE_DEVASTATE)
+						SSexplosions.highobj += O
+					if(EXPLODE_HEAVY)
+						SSexplosions.medobj += O
+					if(EXPLODE_LIGHT)
+						SSexplosions.lowobj += O
 			else
 				step_towards(O,src)
 		for(var/mob/living/M in T.contents)
@@ -346,4 +356,10 @@
 
 	//Damaging the turf
 	if( T && prob(turf_removal_chance) )
-		T.ex_act(ex_act_force)
+		switch(ex_act_force)
+			if(EXPLODE_DEVASTATE)
+				SSexplosions.highturf += T
+			if(EXPLODE_HEAVY)
+				SSexplosions.medturf += T
+			if(EXPLODE_LIGHT)
+				SSexplosions.lowturf += T

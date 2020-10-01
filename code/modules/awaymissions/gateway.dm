@@ -275,11 +275,10 @@ GLOBAL_LIST_EMPTY(gateway_destinations)
 	. = ..()
 	try_to_linkup()
 
-/obj/machinery/computer/gateway_control/ui_interact(mob/user, ui_key = "main", datum/tgui/ui, force_open, datum/tgui/master_ui, datum/ui_state/state = GLOB.default_state)
-	. = ..()
-	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
+/obj/machinery/computer/gateway_control/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
-		ui = new(user, src, ui_key, "gateway", name, ui_x, ui_y, master_ui, state)
+		ui = new(user, src, "Gateway", name)
 		ui.open()
 
 /obj/machinery/computer/gateway_control/ui_data(mob/user)
@@ -297,6 +296,8 @@ GLOBAL_LIST_EMPTY(gateway_destinations)
 
 /obj/machinery/computer/gateway_control/ui_act(action, list/params)
 	. = ..()
+	if(.)
+		return
 	switch(action)
 		if("linkup")
 			try_to_linkup()

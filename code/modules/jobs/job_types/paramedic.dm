@@ -1,8 +1,6 @@
 /datum/job/paramedic
 	title = "Paramedic"
-	flag = PARAMEDIC
 	department_head = list("Chief Medical Officer")
-	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
@@ -12,8 +10,8 @@
 
 	outfit = /datum/outfit/job/paramedic
 
-	access = list(ACCESS_MEDICAL, ACCESS_MORGUE, ACCESS_SURGERY, ACCESS_GENETICS, ACCESS_CLONING, ACCESS_MECH_MEDICAL, ACCESS_MINERAL_STOREROOM, ACCESS_MAINT_TUNNELS, ACCESS_EVA, ACCESS_ENGINE, ACCESS_CARGO, ACCESS_HYDROPONICS, ACCESS_RESEARCH) //WaspStation edit - Gen/Sci Split
-	minimal_access = list(ACCESS_MEDICAL, ACCESS_MORGUE, ACCESS_CLONING, ACCESS_MECH_MEDICAL, ACCESS_MINERAL_STOREROOM, ACCESS_MAINT_TUNNELS, ACCESS_EVA, ACCESS_ENGINE, ACCESS_CARGO, ACCESS_HYDROPONICS, ACCESS_RESEARCH)
+	access = list(ACCESS_MEDICAL, ACCESS_MORGUE, ACCESS_SURGERY, ACCESS_GENETICS, ACCESS_CLONING, ACCESS_MECH_MEDICAL, ACCESS_MINERAL_STOREROOM, ACCESS_MAINT_TUNNELS, ACCESS_EVA) //WaspStation edit - Gen/Sci Split + Reduces Paramed access
+	minimal_access = list(ACCESS_MEDICAL, ACCESS_MORGUE, ACCESS_CLONING, ACCESS_MECH_MEDICAL, ACCESS_MINERAL_STOREROOM, ACCESS_MAINT_TUNNELS, ACCESS_EVA)		// Waspstation edit - Reduces paramed access
 	paycheck = PAYCHECK_MEDIUM
 	paycheck_department = ACCOUNT_MED
 
@@ -23,7 +21,7 @@
 	name = "Paramedic"
 	jobtype = /datum/job/paramedic
 
-	ears = /obj/item/radio/headset/headset_med/alt //Waspstation Edit - Paramedic Bling
+	ears = /obj/item/radio/headset/headset_med
 	uniform = /obj/item/clothing/under/rank/medical/paramedic
 	alt_uniform = /obj/item/clothing/under/rank/medical/doctor/blue //Wasp Edit - Alt Uniforms
 	head = /obj/item/clothing/head/soft/paramedic
@@ -43,5 +41,11 @@
 	satchel = /obj/item/storage/backpack/satchel/med
 	duffelbag = /obj/item/storage/backpack/duffelbag/med
 	courierbag = /obj/item/storage/backpack/messenger/para //WaspStation Edit - Paramedic Bling
+	box = /obj/item/storage/box/survival/medical
 
 	chameleon_extras = /obj/item/gun/syringe
+
+/datum/outfit/job/paramedic/emt
+	name = "Paramedic (Emergency Medical Technician)"
+
+	uniform = /obj/item/clothing/under/rank/medical/paramedic/emt

@@ -14,9 +14,7 @@
 	transfer_access = ACCESS_HEADS
 	requires_ntnet = 0
 	size = 8
-	tgui_id = "ntos_card"
-	ui_x = 450
-	ui_y = 520
+	tgui_id = "NtosCard"
 
 	var/is_centcom = FALSE
 	var/minor = FALSE
@@ -281,7 +279,7 @@
 			CARDCON_DEPARTMENT_SCIENCE = GLOB.science_positions,
 			CARDCON_DEPARTMENT_SECURITY = GLOB.security_positions,
 			CARDCON_DEPARTMENT_SUPPLY = GLOB.supply_positions,
-			CARDCON_DEPARTMENT_SERVICE = GLOB.civilian_positions
+			CARDCON_DEPARTMENT_SERVICE = GLOB.service_positions
 		)
 	data["jobs"] = list()
 	for(var/department in departments)

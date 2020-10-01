@@ -386,8 +386,8 @@
 	desc = "The POWER that gamers CRAVE! In partnership with Vlad's Salad."
 	icon_state = "poster39"
 
-/obj/structure/sign/poster/contraband/sun_kist
-	name = "Sun-kist"
+/obj/structure/sign/poster/contraband/starkist
+	name = "Star-kist"
 	desc = "Drink the stars!"
 	icon_state = "poster40"
 
@@ -422,6 +422,11 @@
 	name = "Bounty Hunters"
 	desc = "A poster advertising bounty hunting services. \"I hear you got a problem.\""
 	icon_state = "poster47"
+
+/obj/structure/sign/poster/contraband/steppyflag
+	name = "Steppy Flag"
+	desc = "A poster making a simple statement: \"Fuck around, Find out.\" There's a tiny Cargonia logo in the bottom right."
+	icon_state = "poster48"
 
 /obj/structure/sign/poster/official
 	poster_item_name = "motivational poster"

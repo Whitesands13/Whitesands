@@ -229,7 +229,8 @@ Code:
 <a href='byond://?src=[REF(src)];choice=Signal Code;scode=-1'>-</a>
 [radio.code]
 <a href='byond://?src=[REF(src)];choice=Signal Code;scode=1'>+</a>
-<a href='byond://?src=[REF(src)];choice=Signal Code;scode=5'>+</a><br>"}
+<a href='byond://?src=[REF(src)];choice=Signal Code;scode=5'>+</a><br><br>
+<a href='byond://?src=[REF(src)];choice=Send Signal'>Send Signal</A><BR>"}
 		if (41) //crew manifest
 			menu = "<h4>[PDAIMG(notes)] Crew Manifest</h4>"
 			menu += "<center>[GLOB.data_core.get_manifest_html(monochrome=TRUE)]</center>"
@@ -546,7 +547,7 @@ Code:
 			var/static/list/emoji_icon_states
 			var/static/emoji_table
 			if(!emoji_table)
-				var/datum/asset/spritesheet/sheet = get_asset_datum(/datum/asset/spritesheet/goonchat)
+				var/datum/asset/spritesheet/sheet = get_asset_datum(/datum/asset/spritesheet/chat)
 				var/list/collate = list("<br><table>")
 				for(var/emoji in sortList(icon_states(icon('icons/emoji.dmi'))))
 					var/tag = sheet.icon_tag("emoji-[emoji]")

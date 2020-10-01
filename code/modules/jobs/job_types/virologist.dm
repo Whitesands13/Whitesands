@@ -1,8 +1,6 @@
 /datum/job/virologist
 	title = "Virologist"
-	flag = VIROLOGIST
 	department_head = list("Chief Medical Officer")
-	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -15,7 +13,7 @@
 
 	outfit = /datum/outfit/job/virologist
 
-	access = list(ACCESS_MEDICAL, ACCESS_MORGUE, ACCESS_SURGERY, ACCESS_CHEMISTRY, ACCESS_VIROLOGY, ACCESS_MECH_MEDICAL, ACCESS_GENETICS, ACCESS_CLONING, ACCESS_MINERAL_STOREROOM) //WaspStation edit - Gen/Sci Split
+	access = list(ACCESS_MEDICAL, ACCESS_MORGUE, ACCESS_SURGERY, ACCESS_CHEMISTRY, ACCESS_VIROLOGY, ACCESS_MECH_MEDICAL, ACCESS_GENETICS, ACCESS_CLONING, ACCESS_MINERAL_STOREROOM, ACCESS_EVA) //WaspStation edit - Gen/Sci Split
 	minimal_access = list(ACCESS_MEDICAL, ACCESS_VIROLOGY, ACCESS_MECH_MEDICAL, ACCESS_MINERAL_STOREROOM)
 	paycheck = PAYCHECK_MEDIUM
 	paycheck_department = ACCOUNT_MED
@@ -41,3 +39,12 @@
 	satchel = /obj/item/storage/backpack/satchel/vir
 	duffelbag = /obj/item/storage/backpack/duffelbag/med
 	courierbag = /obj/item/storage/backpack/messenger/viro
+	box = /obj/item/storage/box/survival/medical
+
+/datum/outfit/job/virologist/pathologist
+	name = "Virologist (Pathologist)"
+
+	uniform = /obj/item/clothing/under/suit/pathologist
+	alt_uniform = null
+	shoes = /obj/item/clothing/shoes/laceup
+	neck = /obj/item/clothing/neck/tie/green

@@ -71,7 +71,8 @@
 /obj/bullet_act(obj/projectile/P)
 	. = ..()
 	playsound(src, P.hitsound, 50, TRUE)
-	visible_message("<span class='danger'>[src] is hit by \a [P]!</span>", null, null, COMBAT_MESSAGE_RANGE)
+	if(P.suppressed != SUPPRESSED_VERY)
+		visible_message("<span class='danger'>[src] is hit by \a [P]!</span>", null, null, COMBAT_MESSAGE_RANGE)
 	if(!QDELETED(src)) //Bullet on_hit effect might have already destroyed this object
 		take_damage(P.damage, P.damage_type, P.flag, 0, turn(P.dir, 180), P.armour_penetration)
 
@@ -90,6 +91,10 @@
 	return TRUE
 
 /obj/blob_act(obj/structure/blob/B)
+	if(isturf(loc))
+		var/turf/T = loc
+		if(T.intact && HAS_TRAIT(src, TRAIT_T_RAY_VISIBLE))
+			return
 	take_damage(400, BRUTE, "melee", 0, get_dir(src, B))
 
 /obj/proc/attack_generic(mob/user, damage_amount = 0, damage_type = BRUTE, damage_flag = 0, sound_effect = 1, armor_penetration = 0) //used by attack_alien, attack_animal, and attack_slime
@@ -154,7 +159,7 @@
 	return take_damage(M.force*3, mech_damtype, "melee", play_soundeffect, get_dir(src, M)) // multiplied by 3 so we can hit objs hard but not be overpowered against mobs.
 
 /obj/singularity_act()
-	ex_act(EXPLODE_DEVASTATE)
+	SSexplosions.highobj += src
 	if(src && !QDELETED(src))
 		qdel(src)
 	return 2
@@ -197,6 +202,10 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 ///Called when the obj is exposed to fire.
 /obj/fire_act(exposed_temperature, exposed_volume)
+	if(isturf(loc))
+		var/turf/T = loc
+		if(T.intact && HAS_TRAIT(src, TRAIT_T_RAY_VISIBLE))
+			return
 	if(exposed_temperature && !(resistance_flags & FIRE_PROOF))
 		take_damage(clamp(0.02 * exposed_temperature, 0, 20), BURN, "fire", 0)
 	if(!(resistance_flags & ON_FIRE) && (resistance_flags & FLAMMABLE) && !(resistance_flags & FIRE_PROOF))
@@ -204,6 +213,7 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 		SSfire_burning.processing[src] = src
 		add_overlay(GLOB.fire_overlay, TRUE)
 		return 1
+	return ..()
 
 ///called when the obj is destroyed by fire
 /obj/proc/burn()
@@ -220,7 +230,7 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 		SSfire_burning.processing -= src
 
 ///Called when the obj is hit by a tesla bolt.
-/obj/proc/zap_act(power, zap_flags, shocked_targets)
+/obj/zap_act(power, zap_flags, shocked_targets)
 	if(QDELETED(src))
 		return 0
 	obj_flags |= BEING_SHOCKED

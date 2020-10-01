@@ -38,10 +38,11 @@ GLOBAL_LIST_INIT(sandstone_recipes, list ( \
 	item_state = "sheet-sandstone"
 	throw_speed = 3
 	throw_range = 5
-	custom_materials = list(/datum/material/glass=MINERAL_MATERIAL_AMOUNT)
+	custom_materials = list(/datum/material/sandstone=MINERAL_MATERIAL_AMOUNT)
 	sheettype = "sandstone"
 	merge_type = /obj/item/stack/sheet/mineral/sandstone
 	walltype = /turf/closed/wall/mineral/sandstone
+	material_type = /datum/material/sandstone
 
 /obj/item/stack/sheet/mineral/sandstone/get_main_recipes()
 	. = ..()
@@ -117,6 +118,15 @@ GLOBAL_LIST_INIT(diamond_recipes, list ( \
 /obj/item/stack/sheet/mineral/diamond/get_main_recipes()
 	. = ..()
 	. += GLOB.diamond_recipes
+	
+/obj/item/stack/sheet/mineral/diamond/fifty
+	amount = 50
+
+/obj/item/stack/sheet/mineral/diamond/twenty
+	amount = 20
+
+/obj/item/stack/sheet/mineral/diamond/five
+	amount = 5
 
 /*
  * Uranium
@@ -145,6 +155,15 @@ GLOBAL_LIST_INIT(uranium_recipes, list ( \
 /obj/item/stack/sheet/mineral/uranium/get_main_recipes()
 	. = ..()
 	. += GLOB.uranium_recipes
+	
+/obj/item/stack/sheet/mineral/uranium/fifty
+	amount = 50
+
+/obj/item/stack/sheet/mineral/uranium/twenty
+	amount = 20
+
+/obj/item/stack/sheet/mineral/uranium/five
+	amount = 5
 
 /*
  * Plasma
@@ -190,6 +209,15 @@ GLOBAL_LIST_INIT(plasma_recipes, list ( \
 /obj/item/stack/sheet/mineral/plasma/fire_act(exposed_temperature, exposed_volume)
 	atmos_spawn_air("plasma=[amount*10];TEMP=[exposed_temperature]")
 	qdel(src)
+	
+/obj/item/stack/sheet/mineral/plasma/fifty
+	amount = 50
+
+/obj/item/stack/sheet/mineral/plasma/twenty
+	amount = 20
+
+/obj/item/stack/sheet/mineral/plasma/five
+	amount = 5
 
 /*
  * Gold
@@ -210,6 +238,7 @@ GLOBAL_LIST_INIT(plasma_recipes, list ( \
 GLOBAL_LIST_INIT(gold_recipes, list ( \
 	new/datum/stack_recipe("golden door", /obj/structure/mineral_door/gold, 10, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("gold tile", /obj/item/stack/tile/mineral/gold, 1, 4, 20), \
+	new/datum/stack_recipe("blank plaque", /obj/item/plaque, 1), \
 	new/datum/stack_recipe("HoS Statue", /obj/structure/statue/gold/hos, 5, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("HOP Statue", /obj/structure/statue/gold/head_of_personnel, 5, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("CE Statue", /obj/structure/statue/gold/ce, 5, one_per_turf = 1, on_floor = 1), \
@@ -221,6 +250,15 @@ GLOBAL_LIST_INIT(gold_recipes, list ( \
 /obj/item/stack/sheet/mineral/gold/get_main_recipes()
 	. = ..()
 	. += GLOB.gold_recipes
+
+/obj/item/stack/sheet/mineral/gold/fifty
+	amount = 50
+
+/obj/item/stack/sheet/mineral/gold/twenty
+	amount = 20
+
+/obj/item/stack/sheet/mineral/gold/five
+	amount = 5
 
 /*
  * Silver
@@ -252,6 +290,15 @@ GLOBAL_LIST_INIT(silver_recipes, list ( \
 /obj/item/stack/sheet/mineral/silver/get_main_recipes()
 	. = ..()
 	. += GLOB.silver_recipes
+	
+/obj/item/stack/sheet/mineral/silver/fifty
+	amount = 50
+
+/obj/item/stack/sheet/mineral/silver/twenty
+	amount = 20
+
+/obj/item/stack/sheet/mineral/silver/five
+	amount = 5
 
 /*
  * Clown
@@ -301,6 +348,7 @@ GLOBAL_LIST_INIT(bananium_recipes, list ( \
 
 GLOBAL_LIST_INIT(titanium_recipes, list ( \
 	new/datum/stack_recipe("titanium tile", /obj/item/stack/tile/mineral/titanium, 1, 4, 20), \
+	new/datum/stack_recipe("shuttle seat", /obj/structure/chair/comfy/shuttle, 2, one_per_turf = TRUE, on_floor = TRUE), \
 	))
 
 /obj/item/stack/sheet/mineral/titanium/get_main_recipes()
@@ -309,6 +357,12 @@ GLOBAL_LIST_INIT(titanium_recipes, list ( \
 
 /obj/item/stack/sheet/mineral/titanium/fifty
 	amount = 50
+	
+/obj/item/stack/sheet/mineral/titanium/twenty
+	amount = 20
+
+/obj/item/stack/sheet/mineral/titanium/five
+	amount = 5
 
 /*
  * Plastitanium
@@ -347,12 +401,14 @@ GLOBAL_LIST_INIT(plastitanium_recipes, list ( \
 	name = "snow"
 	icon_state = "sheet-snow"
 	item_state = "sheet-snow"
+	custom_materials = list(/datum/material/snow = MINERAL_MATERIAL_AMOUNT)
 	singular_name = "snow block"
 	force = 1
 	throwforce = 2
 	grind_results = list(/datum/reagent/consumable/ice = 20)
 	merge_type = /obj/item/stack/sheet/mineral/snow
 	walltype = /turf/closed/wall/mineral/snow
+	material_type = /datum/material/snow
 
 GLOBAL_LIST_INIT(snow_recipes, list ( \
 	new/datum/stack_recipe("Snow wall", /turf/closed/wall/mineral/snow, 5, one_per_turf = 1, on_floor = 1), \
@@ -383,6 +439,7 @@ GLOBAL_LIST_INIT(adamantine_recipes, list(
 	singular_name = "adamantine sheet"
 	custom_materials = list(/datum/material/adamantine=MINERAL_MATERIAL_AMOUNT)
 	merge_type = /obj/item/stack/sheet/mineral/adamantine
+	grind_results = list(/datum/reagent/liquidadamantine = 10)
 
 /obj/item/stack/sheet/mineral/adamantine/get_main_recipes()
 	. = ..()

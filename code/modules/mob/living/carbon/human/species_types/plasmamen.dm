@@ -5,7 +5,7 @@
 	sexes = 0
 	meat = /obj/item/stack/sheet/mineral/plasma
 	species_traits = list(NOBLOOD,NOTRANSSTING)
-	inherent_traits = list(TRAIT_RESISTCOLD,TRAIT_RADIMMUNE,TRAIT_NOHUNGER,TRAIT_ALWAYS_CLEAN)
+	inherent_traits = list(TRAIT_RESISTCOLD,TRAIT_RADIMMUNE,TRAIT_GENELESS,TRAIT_NOHUNGER,TRAIT_ALWAYS_CLEAN)
 	inherent_biotypes = MOB_HUMANOID|MOB_MINERAL
 	mutantlungs = /obj/item/organ/lungs/plasmaman
 	mutanttongue = /obj/item/organ/tongue/bone/plasmaman
@@ -45,7 +45,7 @@
 	if((!istype(H.w_uniform, /obj/item/clothing/under/plasmaman) || !istype(H.head, /obj/item/clothing/head/helmet/space/plasmaman) || !istype(H.gloves, /obj/item/clothing/gloves)) && !atmos_sealed)
 		if(environment)
 			if(environment.total_moles())
-				if(environment.gases[/datum/gas/oxygen] && (environment.gases[/datum/gas/oxygen][MOLES]) >= 1) //Same threshhold that extinguishes fire
+				if(environment.get_moles(/datum/gas/oxygen) >= 1) //Same threshold that extinguishes fire
 					H.adjust_fire_stacks(0.5)
 					if(!H.on_fire && H.fire_stacks > 0)
 						H.visible_message("<span class='danger'>[H]'s body reacts with the atmosphere and bursts into flames!</span>","<span class='userdanger'>Your body reacts with the atmosphere and bursts into flame!</span>")
@@ -95,7 +95,7 @@
 			O = new /datum/outfit/plasmaman/security
 
 		if("Brig Physician")
-			O = new /datum/outfit/plasmaman/security
+			O = new /datum/outfit/plasmaman/secmed
 
 		if("Detective")
 			O = new /datum/outfit/plasmaman/detective
@@ -136,11 +136,42 @@
 		if("Atmospheric Technician")
 			O = new /datum/outfit/plasmaman/atmospherics
 
+		if("Captain")
+			O = new /datum/outfit/plasmaman/command
+
+		if("Chief Engineer")
+			O = new /datum/outfit/plasmaman/ce
+
+		if("Chief Medical Officer")
+			O = new /datum/outfit/plasmaman/cmo
+
+		if("Head of Security")
+			O = new /datum/outfit/plasmaman/hos
+
+		if("Research Director")
+			O = new /datum/outfit/plasmaman/rd
+
+		if("Head of Personnel")
+			O = new /datum/outfit/plasmaman/hop
+
 		if("Mime")
 			O = new /datum/outfit/plasmaman/mime
 
 		if("Clown")
 			O = new /datum/outfit/plasmaman/clown
+
+	var/holder		// Wasp Edit Begin - Plasma skirtsuit prefs
+	switch(H.jumpsuit_style)
+		if(PREF_SKIRT)
+			holder = "[O.uniform]/skirt"
+		if(PREF_GREYSUIT)
+			O.head = /obj/item/clothing/head/helmet/space/plasmaman
+			holder = "/obj/item/clothing/under/plasmaman"
+		else
+			holder = "[O.uniform]"
+
+	if(text2path(holder))
+		O.uniform = text2path(holder)		// Wasp Edit End
 
 	H.equipOutfit(O, visualsOnly)
 	H.internal = H.get_item_for_held_index(2)
@@ -192,4 +223,3 @@
 					H.emote("sigh")
 		H.reagents.remove_reagent(chem.type, chem.metabolization_rate)
 		return TRUE
-

@@ -1118,6 +1118,13 @@ WaspStation End */
 	icon_state = "service"
 	build_path = /obj/machinery/rnd/production/techfab/department/service
 
+/obj/item/circuitboard/machine/vendatray
+	name = "Vend-A-Tray (Machine Board)"
+	icon_state = "service"
+	build_path = /obj/structure/displaycase/forsale
+	req_components = list(
+		/obj/item/stock_parts/card_reader = 1)
+
 //Supply
 
 /obj/item/circuitboard/machine/mining_equipment_vendor
@@ -1184,6 +1191,7 @@ WaspStation End */
 	req_components = list(
 		/obj/item/stock_parts/manipulator = 2,
 		/obj/item/stock_parts/matter_bin = 2)
+	needs_anchored = FALSE
 
 /obj/item/circuitboard/machine/abductor
 	name = "alien board (Report This)"

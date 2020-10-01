@@ -179,8 +179,8 @@
 	if(..())
 		if(reagents.total_volume)
 			if(M.reagents)
-				reagents.reaction(M, INJECT, reagents.total_volume)
-				reagents.trans_to(M, reagents.total_volume, transfered_by = user)
+
+				reagents.trans_to(M, reagents.total_volume, transfered_by = user, method = INJECT)
 
 
 /obj/item/pen/sleepy/Initialize()
@@ -237,7 +237,7 @@
 		throwforce = 35
 		playsound(user, 'sound/weapons/saberon.ogg', 5, TRUE)
 		to_chat(user, "<span class='warning'>[src] is now active.</span>")
-	AddElement(/datum/element/embed, embedding)
+	updateEmbedding()
 	update_icon()
 
 /obj/item/pen/edagger/update_icon_state()

@@ -73,7 +73,7 @@
 
 /datum/game_mode/nuclear/set_round_result()
 	..()
-	var result = nuke_team.get_result()
+	var/result = nuke_team.get_result()
 	switch(result)
 		if(NUKE_RESULT_FLUKE)
 			SSticker.mode_result = "loss - syndicate nuked - disk secured"
@@ -122,7 +122,7 @@
 	gloves =  /obj/item/clothing/gloves/combat
 	back = /obj/item/storage/backpack/fireproof
 	ears = /obj/item/radio/headset/syndicate/alt
-	l_pocket = /obj/item/pinpointer/nuke/syndicate
+	l_pocket = /obj/item/modular_computer/tablet/nukeops
 	id = /obj/item/card/id/syndicate
 	belt = /obj/item/gun/ballistic/automatic/pistol
 	backpack_contents = list(/obj/item/storage/box/survival/syndie=1,\
@@ -131,6 +131,7 @@
 	var/tc = 25
 	var/command_radio = FALSE
 	var/uplink_type = /obj/item/uplink/nuclear
+	var/uplink_slot = ITEM_SLOT_BACKPACK //Wasp Edit - Syndicate Interns
 
 
 /datum/outfit/syndicate/leader
@@ -152,12 +153,12 @@
 
 	if(ispath(uplink_type, /obj/item/uplink/nuclear) || tc) // /obj/item/uplink/nuclear understands 0 tc
 		var/obj/item/U = new uplink_type(H, H.key, tc)
-		H.equip_to_slot_or_del(U, ITEM_SLOT_BACKPACK)
+		H.equip_to_slot_or_del(U, uplink_slot) //Wasp Edit - Sydi Interns
 
-	var/obj/item/implant/weapons_auth/W = new/obj/item/implant/weapons_auth(H)
-	W.implant(H)
 	var/obj/item/implant/explosive/E = new/obj/item/implant/explosive(H)
 	E.implant(H)
+	var/obj/item/implant/weapons_auth/W = new/obj/item/implant/weapons_auth(H)
+	W.implant(H)
 	H.faction |= ROLE_SYNDICATE
 	H.update_icons()
 

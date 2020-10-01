@@ -490,7 +490,6 @@
 	name = "Gumball"
 	desc = "Why are you seeing this?!"
 	projectile_type = /obj/projectile/bullet/reusable/gumball
-	click_cooldown_override = 2
 
 
 /obj/projectile/bullet/reusable/gumball
@@ -511,7 +510,6 @@
 	name = "Lollipop"
 	desc = "Why are you seeing this?!"
 	projectile_type = /obj/projectile/bullet/reusable/lollipop
-	click_cooldown_override = 2
 
 /obj/projectile/bullet/reusable/lollipop
 	name = "lollipop"
@@ -631,6 +629,10 @@
 /obj/item/borg/projectile_dampen/equipped()
 	. = ..()
 	host = loc
+
+/obj/item/borg/projectile_dampen/cyborg_unequip(mob/user)
+	deactivate_field()
+	. = ..()
 
 /obj/item/borg/projectile_dampen/on_mob_death()
 	deactivate_field()

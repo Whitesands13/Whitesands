@@ -40,8 +40,8 @@
 
 		if(!lacks_power())
 			var/area/home = get_area(src)
-			if(home.powered(EQUIP))
-				home.use_power(1000, EQUIP)
+			if(home.powered(AREA_USAGE_EQUIP))
+				home.use_power(1000, AREA_USAGE_EQUIP)
 
 			if(aiRestorePowerRoutine >= POWER_RESTORATION_SEARCH_APC)
 				ai_restore_power()
@@ -150,7 +150,7 @@
 				to_chat(src, "<span class='notice'>Receiving control information from APC.</span>")
 				sleep(2)
 				apc_override = 1
-				theAPC.ui_interact(src, state = GLOB.conscious_state)
+				theAPC.ui_interact(src)
 				apc_override = 0
 				aiRestorePowerRoutine = POWER_RESTORATION_APC_FOUND
 		sleep(50)

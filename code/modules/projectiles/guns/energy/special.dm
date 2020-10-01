@@ -1,16 +1,17 @@
 /obj/item/gun/energy/ionrifle
 	name = "ion rifle"
 	desc = "A man-portable anti-armor weapon designed to disable mechanical threats at range."
+	icon = 'waspstation/icons/obj/guns/energy.dmi' //waspstation edit
 	icon_state = "ionrifle"
 	item_state = null	//so the human update icon uses the icon_state instead.
-	shaded_charge = TRUE
-	can_flashlight = TRUE
+	shaded_charge = FALSE
+	ammo_x_offset = 2
+	ammo_y_offset = 2
+	can_flashlight = FALSE
 	w_class = WEIGHT_CLASS_HUGE
 	flags_1 =  CONDUCT_1
 	slot_flags = ITEM_SLOT_BACK
 	ammo_type = list(/obj/item/ammo_casing/energy/ion)
-	flight_x_offset = 17
-	flight_y_offset = 9
 
 /obj/item/gun/energy/ionrifle/emp_act(severity)
 	return
@@ -21,7 +22,10 @@
 	icon_state = "ioncarbine"
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = ITEM_SLOT_BELT
+	ammo_x_offset = 2
+	ammo_y_offset = 0
 	pin = null
+	can_flashlight = TRUE
 	flight_x_offset = 18
 	flight_y_offset = 11
 
@@ -135,6 +139,9 @@
 	toolspeed = 0.7 //plasmacutters can be used as welders, and are faster than standard welders
 	internal_cell = TRUE //so you don't cheese through the need for plasma - WASP EDIT
 	var/charge_weld = 25 //amount of charge used up to start action (multiplied by amount) and per progress_flash_divisor ticks of welding
+	weapon_weight = WEAPON_LIGHT
+	fire_rate = 3
+	automatic = 1
 
 /obj/item/gun/energy/plasmacutter/ComponentInitialize()
 	. = ..()
@@ -279,6 +286,9 @@
 		p_blue = P
 	crosslink()
 
+/obj/item/gun/energy/wormhole_projector/core_inserted
+    firing_core = TRUE
+
 /* 3d printer 'pseudo guns' for borgs */
 
 /obj/item/gun/energy/printer
@@ -290,6 +300,8 @@
 	ammo_type = list(/obj/item/ammo_casing/energy/c3dbullet)
 	can_charge = FALSE
 	use_cyborg_cell = TRUE
+	automatic = 1
+	fire_rate = 6
 
 /obj/item/gun/energy/printer/ComponentInitialize()
 	. = ..()
@@ -300,10 +312,14 @@
 
 /obj/item/gun/energy/temperature
 	name = "temperature gun"
+	icon = 'waspstation/icons/obj/guns/energy.dmi' //waspstation edit
 	icon_state = "freezegun"
 	desc = "A gun that changes temperatures."
 	ammo_type = list(/obj/item/ammo_casing/energy/temp, /obj/item/ammo_casing/energy/temp/hot)
 	cell_type = /obj/item/stock_parts/cell/gun/upgraded
+	ammo_x_offset = 2
+	automatic = 1
+	fire_rate = 4
 	pin = null
 
 /obj/item/gun/energy/temperature/security

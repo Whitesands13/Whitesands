@@ -1,8 +1,6 @@
 /datum/job/ai
 	title = "AI"
-	flag = AI_JF
 	auto_deadmin_role_flags = DEADMIN_POSITION_SILICON
-	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -37,7 +35,10 @@
 			H.forceMove(lateJoinCore.loc)
 			qdel(lateJoinCore)
 	var/mob/living/silicon/ai/AI = H
-	AI.apply_pref_name("ai", M.client)			//If this runtimes oh well jobcode is fucked.
+	if(SSticker.anonymousnames)
+		AI.fully_replace_character_name(AI.real_name, anonymous_ai_name(is_ai = TRUE))
+	else
+		AI.apply_pref_name("ai", M.client)			//If this runtimes oh well jobcode is fucked. //what is this no energy attitude man
 	AI.set_core_display_icon(null, M.client)
 
 	//we may have been created after our borg

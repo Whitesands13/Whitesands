@@ -268,12 +268,12 @@
 			O.custom_name = created_name
 			O.locked = panel_locked
 			if(!aisync)
-				lawsync = 0
+				lawsync = FALSE
 				O.connected_ai = null
 			else
 				O.notify_ai(NEW_BORG)
 				if(forced_ai)
-					O.connected_ai = forced_ai
+					O.set_connected_ai(forced_ai)
 			if(!lawsync)
 				O.lawupdate = 0
 				if(M.laws.id == DEFAULT_AI_LAWID)
@@ -327,10 +327,10 @@
 
 			if(!aisync)
 				lawsync = FALSE
-				O.connected_ai = null
+				O.set_connected_ai(null)
 			else
 				if(forced_ai)
-					O.connected_ai = forced_ai
+					O.set_connected_ai(forced_ai)
 				O.notify_ai(AI_SHELL)
 			if(!lawsync)
 				O.lawupdate = FALSE
@@ -384,7 +384,7 @@
 			created_name = ""
 
 	else if(href_list["Master"])
-		forced_ai = select_active_ai(usr)
+		forced_ai = select_active_ai(usr, z)
 		if(!forced_ai)
 			to_chat(usr, "<span class='alert'>No active AIs detected.</span>")
 

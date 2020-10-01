@@ -1,8 +1,6 @@
 /datum/job/brig_phys
 	title = "Brig Physician"
-	flag = BRIG_PHYS
-	department_head = list("Head of Security", "Cheif Medical Officer")
-	department_flag = ENGSEC
+	department_head = list("Head of Security", "Chief Medical Officer")
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -16,7 +14,7 @@
 
 	outfit = /datum/outfit/job/brig_phys
 
-	access = list(ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_BRIG, ACCESS_COURT, ACCESS_MAINT_TUNNELS, ACCESS_MORGUE, ACCESS_WEAPONS, ACCESS_FORENSICS_LOCKERS, ACCESS_MEDICAL)
+	access = list(ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_BRIG, ACCESS_COURT, ACCESS_MAINT_TUNNELS, ACCESS_MORGUE, ACCESS_WEAPONS, ACCESS_FORENSICS_LOCKERS, ACCESS_MEDICAL, ACCESS_EVA)
 	minimal_access = list(ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_BRIG, ACCESS_COURT, ACCESS_MAINT_TUNNELS, ACCESS_MORGUE, ACCESS_WEAPONS, ACCESS_FORENSICS_LOCKERS, ACCESS_MEDICAL)
 	paycheck = PAYCHECK_HARD
 	paycheck_department = ACCOUNT_SEC

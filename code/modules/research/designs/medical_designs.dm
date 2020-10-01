@@ -91,16 +91,6 @@
 	category = list("Medical Designs")
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL | DEPARTMENTAL_FLAG_SCIENCE
 
-/datum/design/noreactsyringe
-	name = "Cryo Syringe"
-	desc = "An advanced syringe that stops reagents inside from reacting. It can hold up to 20 units."
-	id = "noreactsyringe"
-	build_type = PROTOLATHE
-	materials = list(/datum/material/glass = 2000, /datum/material/gold = 1000)
-	build_path = /obj/item/reagent_containers/syringe/noreact
-	category = list("Medical Designs")
-	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
-
 /datum/design/piercesyringe
 	name = "Piercing Syringe"
 	desc = "A diamond-tipped syringe that pierces armor when launched at high velocity. It can hold up to 10 units."
@@ -129,7 +119,7 @@
 	materials = list(/datum/material/iron = 4000, /datum/material/plasma = 1000)
 	build_path = /obj/item/extinguisher_refill
 	category = list("Medical Designs")
-	departmental_flags = DEPARTMENTAL_FLAG_ALL
+
 
 /datum/design/crewpinpointer
 	name = "Crew Pinpointer"
@@ -193,8 +183,8 @@
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
 
 /datum/design/genescanner
-	name = "Genetic Sequence Analyzer"
-	desc = "A handy hand-held analyzers for quickly determining mutations and collecting the full sequence."
+	name = "Genetic Sequence Scanner"
+	desc = "A convenient hand-held scanner for quickly determining mutations and collecting the target's full genetic sequence."
 	id = "genescanner"
 	build_path = /obj/item/sequence_scanner
 	build_type = PROTOLATHE
@@ -281,6 +271,16 @@
 	materials = list(/datum/material/plastic = 1000)
 	build_path = /obj/item/reagent_containers/blood
 	category = list("Medical Designs")
+
+/datum/design/portable_chem_mixer
+	name = "Portable Chemical Mixer"
+	desc = "A portable device that dispenses and mixes chemicals. Reagents have to be supplied with beakers."
+	id = "portable_chem_mixer"
+	build_type = PROTOLATHE
+	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
+	materials = list(/datum/material/plastic = 5000, /datum/material/iron = 10000, /datum/material/glass = 3000)
+	build_path = /obj/item/storage/portable_chem_mixer
+	category = list("Equipment")
 
 /////////////////////////////////////////
 //////////Cybernetic Implants////////////
@@ -494,7 +494,7 @@
 	materials = list(/datum/material/glass = 500, /datum/material/bananium = 500)
 	build_path = /obj/item/implantcase/sad_trombone
 	category = list("Medical Designs")
-	departmental_flags = DEPARTMENTAL_FLAG_ALL		//if you get bananium you get the sad trombones.
+
 
 /datum/design/implant_chem
 	name = "Chemical Implant Case"
@@ -761,6 +761,20 @@
 	id = "surgery_ligament_reinforcement"
 	surgery = /datum/surgery/advanced/bioware/ligament_reinforcement
 	research_icon_state = "surgery_chest"
+
+/datum/design/surgery/cortex_imprint
+	name = "Cortex Imprint"
+	desc = "A surgical procedure which modifies the cerebral cortex into a redundant neural pattern, making the brain able to bypass damage caused by minor brain traumas."
+	id = "surgery_cortex_imprint"
+	surgery = /datum/surgery/advanced/bioware/cortex_imprint
+	research_icon_state = "surgery_head"
+
+/datum/design/surgery/cortex_folding
+	name = "Cortex Folding"
+	desc = "A surgical procedure which modifies the cerebral cortex into a complex fold, giving space to non-standard neural patterns."
+	id = "surgery_cortex_folding"
+	surgery = /datum/surgery/advanced/bioware/cortex_folding
+	research_icon_state = "surgery_head"
 
 /datum/design/surgery/necrotic_revival
 	name = "Necrotic Revival"

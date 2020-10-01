@@ -107,16 +107,17 @@
 			return
 
 /datum/antagonist/traitor/proc/forge_ai_objectives()
-	var/objective_count = 0
+	var/objective_count = 1
 
-	if(prob(30))
-		objective_count += forge_single_objective()
+	// WaspStation Edit - Malf AI Rework
+	var/datum/objective/hack_apc/apc_objective = new
+	apc_objective.owner = owner
+	add_objective(apc_objective)
 
 	for(var/i = objective_count, i < CONFIG_GET(number/traitor_objectives_amount), i++)
-		var/datum/objective/assassinate/kill_objective = new
-		kill_objective.owner = owner
-		kill_objective.find_target()
-		add_objective(kill_objective)
+		objective_count += forge_single_objective()
+
+	// End WaspStation Edit - Malf AI Rework
 
 	var/datum/objective/survive/exist/exist_objective = new
 	exist_objective.owner = owner
@@ -132,23 +133,24 @@
 
 /datum/antagonist/traitor/proc/forge_single_human_objective() //Returns how many objectives are added
 	.=1
-	if(prob(50))
+	if(prob(40)) // WaspStation Edit - Less Murderbone, more Theft
 		var/list/active_ais = active_ais()
 		if(active_ais.len && prob(100/GLOB.joined_player_list.len))
 			var/datum/objective/destroy/destroy_objective = new
 			destroy_objective.owner = owner
 			destroy_objective.find_target()
 			add_objective(destroy_objective)
-		else if(prob(30))
-			var/datum/objective/maroon/maroon_objective = new
-			maroon_objective.owner = owner
-			maroon_objective.find_target()
-			add_objective(maroon_objective)
-		else
+		else if(prob(25))
 			var/datum/objective/assassinate/kill_objective = new
 			kill_objective.owner = owner
 			kill_objective.find_target()
 			add_objective(kill_objective)
+		else
+			var/datum/objective/maroon/maroon_objective = new
+			maroon_objective.owner = owner
+			maroon_objective.find_target()
+			add_objective(maroon_objective)
+		// End WaspStation Edit - Less Murderbone, more Theft
 	else
 		if(prob(15) && !(locate(/datum/objective/download) in objectives) && !(owner.assigned_role in list("Research Director", "Scientist", "Roboticist")))
 			var/datum/objective/download/download_objective = new
@@ -163,31 +165,34 @@
 
 /datum/antagonist/traitor/proc/forge_single_AI_objective()
 	.=1
-	var/special_pick = rand(1,4)
-	switch(special_pick)
-		if(1)
-			var/datum/objective/block/block_objective = new
-			block_objective.owner = owner
-			add_objective(block_objective)
-		if(2)
-			var/datum/objective/purge/purge_objective = new
-			purge_objective.owner = owner
-			add_objective(purge_objective)
-		if(3)
-			var/datum/objective/robot_army/robot_objective = new
-			robot_objective.owner = owner
-			add_objective(robot_objective)
-		if(4) //Protect and strand a target
-			var/datum/objective/protect/yandere_one = new
-			yandere_one.owner = owner
-			add_objective(yandere_one)
-			yandere_one.find_target()
-			var/datum/objective/maroon/yandere_two = new
-			yandere_two.owner = owner
-			yandere_two.target = yandere_one.target
-			yandere_two.update_explanation_text() // normally called in find_target()
-			add_objective(yandere_two)
-			.=2
+	// WaspStation Edit - Malf AI Rework
+	if(prob(20))
+		var/special_pick = rand(1,3)
+		switch(special_pick)
+			if(1)
+				var/datum/objective/block/block_objective = new
+				block_objective.owner = owner
+				add_objective(block_objective)
+			if(2)
+				var/datum/objective/purge/purge_objective = new
+				purge_objective.owner = owner
+				add_objective(purge_objective)
+			if(3)
+				var/datum/objective/robot_army/robot_objective = new
+				robot_objective.owner = owner
+				add_objective(robot_objective)
+	else //Protect and strand a target
+		var/datum/objective/protect/yandere_one = new
+		yandere_one.owner = owner
+		add_objective(yandere_one)
+		yandere_one.find_target()
+		var/datum/objective/maroon/yandere_two = new
+		yandere_two.owner = owner
+		yandere_two.target = yandere_one.target
+		yandere_two.update_explanation_text() // normally called in find_target()
+		add_objective(yandere_two)
+		.=2
+		// End WaspStation Edit - Malf AI rework
 
 /datum/antagonist/traitor/greet()
 	to_chat(owner.current, "<span class='alertsyndie'>You are the [owner.special_role].</span>")
@@ -351,8 +356,8 @@
 
 /// Proc detailing contract kit buys/completed contracts/additional info
 /datum/antagonist/traitor/proc/contractor_round_end()
-	var result = ""
-	var total_spent_rep = 0
+	var/result = ""
+	var/total_spent_rep = 0
 
 	var/completed_contracts = contractor_hub.contracts_completed
 	var/tc_total = contractor_hub.contract_TC_payed_out + contractor_hub.contract_TC_to_redeem
@@ -389,7 +394,7 @@
 	var/phrases = jointext(GLOB.syndicate_code_phrase, ", ")
 	var/responses = jointext(GLOB.syndicate_code_response, ", ")
 
-	var message = "<br><b>The code phrases were:</b> <span class='bluetext'>[phrases]</span><br>\
+	var/message = "<br><b>The code phrases were:</b> <span class='bluetext'>[phrases]</span><br>\
 					<b>The code responses were:</b> <span class='redtext'>[responses]</span><br>"
 
 	return message

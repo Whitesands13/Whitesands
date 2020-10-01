@@ -204,10 +204,11 @@ GLOBAL_LIST_INIT(arcade_prize_pool, list(
 		dat += "<a href='byond://?src=[REF(src)];charge=1'>Recharge Power</a>"
 
 	dat += "</b></center>"
-	var/datum/browser/popup = new(user, "arcade", "Space Villain 2000")
-	popup.set_content(dat)
-	popup.set_title_image(user.browse_rsc_icon(icon, icon_state))
-	popup.open()
+	if(user.client) //mainly here to avoid a runtime when the player gets gibbed when losing the emag mode.
+		var/datum/browser/popup = new(user, "arcade", "Space Villain 2000")
+		popup.set_content(dat)
+		popup.open()
+
 
 /obj/machinery/computer/arcade/battle/Topic(href, href_list)
 	if(..())
@@ -352,6 +353,14 @@ GLOBAL_LIST_INIT(arcade_prize_pool, list(
 	blocked = FALSE
 	return
 
+/obj/machinery/computer/arcade/battle/examine_more(mob/user)
+	var/list/msg = list("<span class='notice'><i>You notice some writing scribbled on the side of [src]...</i></span>")
+	msg += "\t<span class='info'>smart -> defend, defend, light attack</span>"
+	msg += "\t<span class='info'>shotgun -> defend, defend, power attack</span>"
+	msg += "\t<span class='info'>short temper -> counter, counter, counter</span>"
+	msg += "\t<span class='info'>poisonous -> light attack, light attack, light attack</span>"
+	msg += "\t<span class='info'>chonker -> power attack, power attack, power attack</span>"
+	return msg
 
 /obj/machinery/computer/arcade/battle/emag_act(mob/user)
 	if(obj_flags & EMAGGED)
@@ -376,15 +385,6 @@ GLOBAL_LIST_INIT(arcade_prize_pool, list(
 
 
 // *** THE ORION TRAIL ** //
-
-/obj/item/gamer_pamphlet
-	name = "pamphlet - \'Violent Video Games and You\'"
-	desc = "A pamphlet encouraging the reader to maintain a balanced lifestyle and take care of their mental health, while still enjoying video games in a healthy way. You probably don't need this..."
-	icon = 'icons/obj/bureaucracy.dmi'
-	icon_state = "pamphlet"
-	item_state = "paper"
-	w_class = WEIGHT_CLASS_TINY
-
 
 #define ORION_TRAIL_WINTURN		9
 
@@ -510,7 +510,7 @@ GLOBAL_LIST_INIT(arcade_prize_pool, list(
 
 	if(gamers[gamer] == -1)
 		say("WARNING: Continued antisocial behavior detected: Dispensing self-help literature.")
-		new /obj/item/gamer_pamphlet(get_turf(src))
+		new /obj/item/paper/pamphlet/violent_video_games(drop_location())
 		gamers[gamer]--
 		return
 
@@ -598,7 +598,6 @@ GLOBAL_LIST_INIT(arcade_prize_pool, list(
 		dat += "<P ALIGN=Right><a href='byond://?src=[REF(src)];close=1'>Close</a></P>"
 	var/datum/browser/popup = new(user, "arcade", "The Orion Trail",400,700)
 	popup.set_content(dat)
-	popup.set_title_image(user.browse_rsc_icon(icon, icon_state))
 	popup.open()
 	return
 

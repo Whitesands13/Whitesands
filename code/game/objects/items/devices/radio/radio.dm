@@ -18,6 +18,7 @@
 	var/frequency = FREQ_COMMON
 	var/canhear_range = 3  // The range around the radio in which mobs can hear what it receives.
 	var/emped = 0  // Tracks the number of EMPs currently stacked.
+	var/last_chatter_time // The time since we last played a radio chatter sound. (Waspstation edit - Radio Chatter #434)
 
 	var/broadcasting = FALSE  // Whether the radio will transmit dialogue it hears nearby.
 	var/listening = TRUE  // Whether the radio is currently receiving.
@@ -106,19 +107,15 @@
 	else
 		..()
 
-/obj/item/radio/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
-										datum/tgui/master_ui = null, datum/ui_state/state = GLOB.inventory_state)
-	. = ..()
-	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
+/obj/item/radio/ui_state(mob/user)
+	return GLOB.inventory_state
+
+/obj/item/radio/ui_interact(mob/user, datum/tgui/ui, datum/ui_state/state)
+	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
-		var/ui_width = 360
-		var/ui_height = 106
-		if(subspace_transmission)
-			if (channels.len > 0)
-				ui_height += 6 + channels.len * 21
-			else
-				ui_height += 24
-		ui = new(user, src, ui_key, "radio", name, ui_width, ui_height, master_ui, state)
+		ui = new(user, src, "Radio", name)
+		if(state)
+			ui.set_state(state)
 		ui.open()
 
 /obj/item/radio/ui_data(mob/user)
@@ -251,6 +248,9 @@
 
 	// All radios make an attempt to use the subspace system first
 	signal.send_to_receivers()
+
+	//At this point the signal was transmitted so play a sound			// Wasp Edit - Radio chatter
+	playsound(src, "sound/effects/walkietalkie.ogg", 20, FALSE)			// Wasp Edit - Radio chatter
 
 	// If the radio is subspace-only, that's all it can do
 	if (subspace_transmission)

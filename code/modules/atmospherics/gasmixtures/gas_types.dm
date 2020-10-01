@@ -49,6 +49,8 @@ GLOBAL_LIST_INIT(nonreactive_gases, typecacheof(list(/datum/gas/oxygen, /datum/g
 	var/fusion_power = 0 //How much the gas accelerates a fusion reaction
 	var/rarity = 0 // relative rarity compared to other gases, used when setting up the reactions list.
 
+// If you add or remove gases, update TOTAL_NUM_GASES in the extools code to match! Extools currently expects 14 gas types to exist.
+
 /datum/gas/oxygen
 	id = "o2"
 	specific_heat = 20
@@ -156,7 +158,7 @@ GLOBAL_LIST_INIT(nonreactive_gases, typecacheof(list(/datum/gas/oxygen, /datum/g
 
 /datum/gas/freon
 	id = "freon"
-	specific_heat = 300
+	specific_heat = 600
 	name = "Freon"
 	gas_overlay = "freon"
 	moles_visible = MOLES_GAS_VISIBLE *30

@@ -33,12 +33,12 @@
 			if(!R.emagged)
 				var/new_ai
 				if(user)
-					new_ai = select_active_ai(user)
+					new_ai = select_active_ai(user, R.z)
 				else
-					new_ai = select_active_ai(R)
+					new_ai = select_active_ai(R, R.z)
 				R.notify_ai(DISCONNECT)
 				if(new_ai && (new_ai != R.connected_ai))
-					R.connected_ai = new_ai
+					R.set_connected_ai(new_ai)
 					if(R.shell)
 						R.undeploy() //If this borg is an AI shell, disconnect the controlling AI and assign ti to a new AI
 						R.notify_ai(AI_SHELL)
@@ -67,7 +67,7 @@
 				R.notify_ai(DISCONNECT)
 				if(R.shell)
 					R.undeploy()
-				R.connected_ai = null
+				R.set_connected_ai(null)
 		if(WIRE_LAWSYNC) // Cut the law wire, and the borg will no longer receive law updates from its AI. Repair and it will re-sync.
 			if(mend)
 				if(!R.emagged)

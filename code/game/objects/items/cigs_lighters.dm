@@ -251,7 +251,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 				if (smoke_all)
 					to_smoke = reagents.total_volume/((smoketime * 2) / (dragtime / 10))
 
-				reagents.reaction(C, INGEST, fraction)
+				reagents.expose(C, INGEST, fraction)
 				var/obj/item/organ/lungs/L = C.getorganslot(ORGAN_SLOT_LUNGS)
 				if(L && !(L.organ_flags & ORGAN_SYNTHETIC))
 					C.adjustOrganLoss(ORGAN_SLOT_LUNGS, lung_harm)
@@ -763,6 +763,15 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	overlay_state = "slime"
 	grind_results = list(/datum/reagent/iron = 1, /datum/reagent/fuel = 5, /datum/reagent/medicine/pyroxadone = 5)
 
+/obj/item/lighter/clockwork //Wasp edit: Clockwork Zippo, by Tergius. PR #395
+	name = "bronze zippo"
+	desc = "A zippo plated with brass. I mean bronze. Has a neat red flame!"
+	icon = 'waspstation/icons/obj/cigarettes.dmi'
+	icon_state = "clockworklighter"
+	heat = 2000 //??????????????????
+	light_color = LIGHT_COLOR_RED
+	overlay_state = "clockwork"
+	grind_results = list(/datum/reagent/iron = 1, /datum/reagent/fuel = 5, /datum/reagent/copper = 1)
 
 ///////////
 //ROLLING//
@@ -901,12 +910,12 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			var/mob/living/carbon/C = loc
 			if (src == C.wear_mask) // if it's in the human/monkey mouth, transfer reagents to the mob
 				var/fraction = min(REAGENTS_METABOLISM/reagents.total_volume, 1) //this will react instantly, making them a little more dangerous than cigarettes
-				reagents.reaction(C, INGEST, fraction)
+				reagents.expose(C, INGEST, fraction)
 				if(!reagents.trans_to(C, REAGENTS_METABOLISM))
 					reagents.remove_any(REAGENTS_METABOLISM)
 				if(reagents.get_reagent_amount(/datum/reagent/fuel))
 					//HOT STUFF
-					C.fire_stacks = 2
+					C.adjust_fire_stacks(2)
 					C.IgniteMob()
 
 				if(reagents.get_reagent_amount(/datum/reagent/toxin/plasma)) // the plasma explodes when exposed to fire

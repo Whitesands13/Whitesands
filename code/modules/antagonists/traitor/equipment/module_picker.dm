@@ -1,8 +1,6 @@
 /// The datum and interface for the malf unlock menu, which lets them choose actions to unlock.
 /datum/module_picker
 	var/name = "Malfunction Modules Menu"
-	var/ui_x = 620
-	var/ui_y = 525
 	var/selected_cat
 	var/compact_mode = FALSE
 	var/processing_time = 50
@@ -30,17 +28,19 @@
 
 	return filtered_modules
 
-/datum/module_picker/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
-									datum/tgui/master_ui = null, datum/ui_state/state = GLOB.always_state)
-	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
+/datum/module_picker/ui_state(mob/user)
+	return GLOB.always_state
+
+/datum/module_picker/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
-		ui = new(user, src, ui_key, "malfunction_module_picker", name, ui_x, ui_y, master_ui, state)
+		ui = new(user, src, "MalfunctionModulePicker", name)
 		ui.open()
 
 /datum/module_picker/ui_data(mob/user)
 	var/list/data = list()
-	data["processing_time"] = processing_time
-	data["compact_mode"] = compact_mode
+	data["processingTime"] = processing_time
+	data["compactMode"] = compact_mode
 	return data
 
 /datum/module_picker/ui_static_data(mob/user)
@@ -57,7 +57,6 @@
 				"name" = AM.name,
 				"cost" = AM.cost,
 				"desc" = AM.description,
-				"ref" = REF(AM),
 			))
 		data["categories"] += list(cat)
 
@@ -68,24 +67,23 @@
 		return
 	if(!isAI(usr))
 		return
-
 	switch(action)
 		if("buy")
-			var/list/buyable_modules = list()
+			var/item_name = params["name"]
+			var/list/buyable_items = list()
 			for(var/category in possible_modules)
-				buyable_modules += possible_modules[category]
-			var/module = locate(params["ref"]) in buyable_modules
-			if(!module || !(module in buyable_modules))
-				return
-			var/datum/AI_Module/AM = module
-			purchase_module(usr, AM)
-			. = TRUE
+				buyable_items += possible_modules[category]
+			for(var/key in buyable_items)
+				var/datum/AI_Module/AM = buyable_items[key]
+				if(AM.name == item_name)
+					purchase_module(usr, AM)
+					return TRUE
 		if("select")
 			selected_cat = params["category"]
-			. = TRUE
+			return TRUE
 		if("compact_toggle")
 			compact_mode = !compact_mode
-			. = TRUE
+			return TRUE
 
 /datum/module_picker/proc/purchase_module(mob/living/silicon/ai/AI, datum/AI_Module/AM)
 	if(!istype(AM))

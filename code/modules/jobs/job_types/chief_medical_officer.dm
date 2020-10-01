@@ -1,8 +1,6 @@
 /datum/job/cmo
 	title = "Chief Medical Officer"
-	flag = CMO_JF
 	department_head = list("Captain")
-	department_flag = MEDSCI
 	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD
 	head_announce = list(RADIO_CHANNEL_MEDICAL)
 	faction = "Station"
@@ -42,7 +40,7 @@
 	alt_uniform = /obj/item/clothing/under/rank/medical/doctor/blue //Wasp Edit - Alt Uniforms
 	shoes = /obj/item/clothing/shoes/sneakers/brown
 	suit = /obj/item/clothing/suit/toggle/labcoat/cmo
-	alt_suit = /obj/item/clothing/suit/apron/surgical
+	alt_suit = /obj/item/clothing/suit/toggle/labcoat/mad // Wasp Edit - Alt-Job Titles
 	dcoat = /obj/item/clothing/suit/hooded/wintercoat/medical //Wasp Edit - Alt Uniforms
 	l_hand = /obj/item/storage/firstaid/medical
 	suit_store = /obj/item/flashlight/pen
@@ -52,14 +50,27 @@
 	satchel = /obj/item/storage/backpack/satchel/med
 	duffelbag = /obj/item/storage/backpack/duffelbag/med
 	courierbag = /obj/item/storage/backpack/messenger/med
+	box = /obj/item/storage/box/survival/medical
 
 	chameleon_extras = list(/obj/item/gun/syringe, /obj/item/stamp/cmo)
 
 /datum/outfit/job/cmo/hardsuit
 	name = "Chief Medical Officer (Hardsuit)"
 
-	mask = /obj/item/clothing/mask/breath
-	suit = /obj/item/clothing/suit/space/hardsuit/medical
+	mask = /obj/item/clothing/mask/breath/medical
+	suit = /obj/item/clothing/suit/space/hardsuit/medical/cmo
 	suit_store = /obj/item/tank/internals/oxygen
 	r_pocket = /obj/item/flashlight/pen
 
+/datum/outfit/job/cmo/medicaldirector
+	name = "Chief Medical Officer (Medical Director)"
+
+	uniform = /obj/item/clothing/under/suit/cmo
+	alt_uniform = null
+	shoes = /obj/item/clothing/shoes/laceup
+	suit = /obj/item/clothing/suit/toggle/lawyer/cmo
+	alt_suit = /obj/item/clothing/suit/toggle/labcoat/cmo
+	neck = /obj/item/clothing/neck/tie/blue
+	l_hand = null
+	suit_store = null
+	backpack_contents = list(/obj/item/melee/classic_baton/telescopic=1, /obj/item/storage/firstaid/medical=1, /obj/item/flashlight/pen=1)

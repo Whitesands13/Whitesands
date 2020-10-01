@@ -7,6 +7,7 @@
 	temperature = TCMB
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	heat_capacity = 700000
+	initial_gas_mix = AIRLESS_ATMOS
 
 	FASTDMM_PROP(\
 		pipe_astar_cost = 5\
@@ -38,6 +39,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	icon_state = SPACE_ICON_STATE
 	air = space_gas
+	update_air_ref()
 	vis_contents.Cut() //removes inherited overlays
 	visibilityChanged()
 
@@ -166,18 +168,26 @@
 				ty--
 			DT = locate(tx, ty, destination_z)
 
-		var/atom/movable/AM = A.pulling
+		var/atom/movable/pulling = A.pulling
+		var/atom/movable/puller = A
 		A.forceMove(DT)
-		if(AM)
-			var/turf/T = get_step(A.loc,turn(A.dir, 180))
-			AM.can_be_z_moved = FALSE
-			AM.forceMove(T)
-			A.start_pulling(AM)
-			AM.can_be_z_moved = TRUE
+
+		while (pulling != null)
+			var/next_pulling = pulling.pulling
+
+			var/turf/T = get_step(puller.loc, turn(puller.dir, 180))
+			pulling.can_be_z_moved = FALSE
+			pulling.forceMove(T)
+			puller.start_pulling(pulling)
+			pulling.can_be_z_moved = TRUE
+
+			puller = pulling
+			pulling = next_pulling
 
 		//now we're on the new z_level, proceed the space drifting
 		stoplag()//Let a diagonal move finish, if necessary
 		A.newtonian_move(A.inertia_dir)
+		A.inertia_moving = TRUE
 
 
 /turf/open/space/MakeSlippery(wet_setting, min_wet_time, wet_time_to_add, max_wet_time, permanent)

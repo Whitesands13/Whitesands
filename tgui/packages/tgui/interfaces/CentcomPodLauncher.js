@@ -2,11 +2,26 @@ import { multiline } from 'common/string';
 import { Fragment } from 'inferno';
 import { useBackend } from '../backend';
 import { Button, LabeledList, NoticeBox, Section } from '../components';
+import { Window } from '../layouts';
+
+export const CentcomPodLauncher = () => {
+  return (
+    <Window
+      title="Config/Launch Supply Pod"
+      width={700}
+      height={700}
+      resizable>
+      <Window.Content scrollable>
+        <CentcomPodLauncherContent />
+      </Window.Content>
+    </Window>
+  );
+};
 
 // This is more or less a direct port from old tgui, with some slight
 // text cleanup. But yes, it actually worked like this.
-export const CentcomPodLauncher = props => {
-  const { act, data } = useBackend(props);
+export const CentcomPodLauncherContent = (props, context) => {
+  const { act, data } = useBackend(context);
   return (
     <Fragment>
       <NoticeBox>
@@ -55,7 +70,7 @@ export const CentcomPodLauncher = props => {
               disabled={!data.oldArea}
               onClick={() => act('teleportBack')} />
           </LabeledList.Item>
-          <LabeledList.Item label="Item Mode" >
+          <LabeledList.Item label="Item Mode">
             <Button
               content="Clone Items"
               selected={data.launchClone}
@@ -431,7 +446,7 @@ export const CentcomPodLauncher = props => {
             buttons={(
               <Fragment>
                 <Button
-                  content="undo Pody Bay"
+                  content="undo Pod Bay"
                   tooltip={multiline`
                     Manually undoes the possible things to launch in the
                     pod bay.

@@ -33,6 +33,8 @@
 			return							//gravity checking only our parent would prevent us from triggering they're using magboots / other gravity assisting items that would cause them to still touch us.
 		if(H.buckled) //if they're buckled to something, that something should be checked instead.
 			return
+		if(!(H.mobility_flags & MOBILITY_STAND)) //if were not standing we cant step on the caltrop
+			return
 
 		var/picked_def_zone = pick(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 		var/obj/item/bodypart/O = H.get_bodypart(picked_def_zone)
@@ -47,21 +49,27 @@
 			return
 
 		var/damage = rand(min_damage, max_damage)
-		if(HAS_TRAIT(H, TRAIT_LIGHT_STEP))
+		var/haslightstep = HAS_TRAIT(H, TRAIT_LIGHT_STEP) //Begin Waspstation edit - caltrops don't paralyze people with light step
+		if(haslightstep && !H.incapacitated(ignore_restraints = TRUE))
 			damage *= 0.75
 
 		if(cooldown < world.time - 10) //cooldown to avoid message spam.
 			//var/atom/A = parent		Wasp edit
 			if(!H.incapacitated(ignore_restraints = TRUE))
-				H.visible_message("<span class='danger'>[H] steps on [A].</span>", \
-						"<span class='userdanger'>You step on [A]!</span>")
+				if(haslightstep)
+					H.visible_message("<span class='danger'>[H] carefully steps on [A].</span>",
+									  "<span class='danger'>You carefully step on [A], but it still hurts!</span>")
+				else 
+					H.visible_message("<span class='danger'>[H] steps on [A].</span>", \
+									  "<span class='userdanger'>You step on [A]!</span>")
 			else
 				H.visible_message("<span class='danger'>[H] slides on [A]!</span>", \
 						"<span class='userdanger'>You slide on [A]!</span>")
 
 			cooldown = world.time
 		H.apply_damage(damage, BRUTE, picked_def_zone)
-		H.Paralyze(60)
+		if(!haslightstep)
+			H.Paralyze(60) //End Waspstation edit - caltrops don't paralyze people with light step
 		if(H.pulledby)								// Waspstation Edit Begin - Being pulled over caltrops is logged
 			log_combat(H.pulledby, H, "pulled", A)
 		else

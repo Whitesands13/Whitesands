@@ -27,12 +27,16 @@ SUBSYSTEM_DEF(ticker)
 	var/admin_delay_notice = ""				//a message to display to anyone who tries to restart the world after a delay
 	var/ready_for_reboot = FALSE			//all roundend preparation done with, all that's left is reboot
 
-	var/triai = 0							//Global holder for Triumvirate
+	///If not set to ANON_DISABLED then people spawn with a themed anon name (see anonymousnames.dm)
+	var/anonymousnames = ANON_DISABLED
+	///Boolean to see if the game needs to set up a triumvirate ai (see tripAI.dm)
+	var/triai = FALSE
+
 	var/tipped = 0							//Did we broadcast the tip of the day yet?
 	var/selected_tip						// What will be the tip of the day?
 
 	var/timeLeft						//pregame timer
-	var/start_at
+	//var/start_at		Wasp Edit - Countdown after init
 
 	var/gametime_offset = 432000		//Deciseconds to add to world.time for station time.
 	var/station_time_rate_multiplier = 12		//factor of station time progressal vs real time.
@@ -135,7 +139,7 @@ SUBSYSTEM_DEF(ticker)
 
 		GLOB.syndicate_code_response_regex = codeword_match
 
-	start_at = world.time + (CONFIG_GET(number/lobby_countdown) * 10)
+	//start_at = world.time + (CONFIG_GET(number/lobby_countdown) * 10)		Wasp Edit - Countdown at init
 	if(CONFIG_GET(flag/randomize_shift_time))
 		gametime_offset = rand(0, 23) HOURS
 	else if(CONFIG_GET(flag/shift_time_realtime))
@@ -153,12 +157,13 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/fire()
 	switch(current_state)
 		if(GAME_STATE_STARTUP)
-			if(Master.initializations_finished_with_no_players_logged_in)
-				start_at = world.time + (CONFIG_GET(number/lobby_countdown) * 10)
+			/*if(Master.initializations_finished_with_no_players_logged_in)		Wasp Edit - Countdown after init
+				timeLeft = (CONFIG_GET(number/lobby_countdown) * 10)		Wasp Edit - Countdown after init */
 			for(var/client/C in GLOB.clients)
 				window_flash(C, ignorepref = TRUE) //let them know lobby has opened up.
 			to_chat(world, "<span class='boldnotice'>Welcome to [station_name()]!</span>")
 			send2chat("New round starting on [SSmapping.config.map_name]!", CONFIG_GET(string/chat_announce_new_game))
+			SSredbot.send_discord_message("ooc", "**A new round is beginning on [SSmapping.config.map_name].**")
 			current_state = GAME_STATE_PREGAME
 			//Everyone who wants to be an observer is now spawned
 			create_observers()
@@ -166,7 +171,7 @@ SUBSYSTEM_DEF(ticker)
 		if(GAME_STATE_PREGAME)
 				//lobby stats for statpanels
 			if(isnull(timeLeft))
-				timeLeft = max(0,start_at - world.time)
+				timeLeft = (CONFIG_GET(number/lobby_countdown) * 10)		// Wasp Edit - Countdown after init
 			totalPlayers = LAZYLEN(GLOB.new_player_list)
 			totalPlayersReady = 0
 			for(var/i in GLOB.new_player_list)
@@ -196,7 +201,7 @@ SUBSYSTEM_DEF(ticker)
 			if(!setup())
 				//setup failed
 				current_state = GAME_STATE_STARTUP
-				start_at = world.time + (CONFIG_GET(number/lobby_countdown) * 10)
+				timeLeft = (CONFIG_GET(number/lobby_countdown)) * 10		// Wasp Edit - Countdown after init
 				timeLeft = null
 				Master.SetRunLevel(RUNLEVEL_LOBBY)
 
@@ -298,6 +303,7 @@ SUBSYSTEM_DEF(ticker)
 	SSdbcore.SetRoundStart()
 
 	to_chat(world, "<span class='notice'><B>Welcome to [station_name()], enjoy your stay!</B></span>")
+	SSredbot.send_discord_message("ooc", "**A new round has begun.**")
 	SEND_SOUND(world, sound('sound/ai/welcome.ogg'))
 
 	current_state = GAME_STATE_PLAYING
@@ -351,10 +357,7 @@ SUBSYSTEM_DEF(ticker)
 
 /datum/controller/subsystem/ticker/proc/station_explosion_detonation(atom/bomb)
 	if(bomb)	//BOOM
-		var/turf/epi = bomb.loc
 		qdel(bomb)
-		if(epi)
-			explosion(epi, 0, 256, 512, 0, TRUE, TRUE, 0, TRUE)
 
 /datum/controller/subsystem/ticker/proc/create_characters()
 	for(var/i in GLOB.new_player_list)
@@ -405,6 +408,7 @@ SUBSYSTEM_DEF(ticker)
 			if(living.client)
 				var/obj/screen/splash/S = new(living.client, TRUE)
 				S.Fade(TRUE)
+				living.client.init_verbs()
 			livings += living
 	if(livings.len)
 		addtimer(CALLBACK(src, .proc/release_characters, livings), 30, TIMER_CLIENT_TIME)
@@ -488,6 +492,7 @@ SUBSYSTEM_DEF(ticker)
 
 	delay_end = SSticker.delay_end
 
+	anonymousnames = SSticker.anonymousnames
 	triai = SSticker.triai
 	tipped = SSticker.tipped
 	selected_tip = SSticker.selected_tip
@@ -565,15 +570,15 @@ SUBSYSTEM_DEF(ticker)
 		send2otherserver(news_source, news_message,"News_Report")
 
 /datum/controller/subsystem/ticker/proc/GetTimeLeft()
-	if(isnull(SSticker.timeLeft))
-		return max(0, start_at - world.time)
+	/*if(isnull(SSticker.timeLeft))		Wasp Edit - Countdown after init
+		return max(0, start_at - world.time)*/		//Wasp Edit - Countdown after init
 	return timeLeft
 
 /datum/controller/subsystem/ticker/proc/SetTimeLeft(newtime)
-	if(newtime >= 0 && isnull(timeLeft))	//remember, negative means delayed
+	/*if(newtime >= 0 && isnull(timeLeft))	//remember, negative means delayed		Wasp Edit Begin - Countdown after init
 		start_at = world.time + newtime
-	else
-		timeLeft = newtime
+	else		Wasp Edit - Countdown after init	Wasp Edit End*/
+	timeLeft = newtime
 
 //Everyone who wanted to be an observer gets made one now
 /datum/controller/subsystem/ticker/proc/create_observers()

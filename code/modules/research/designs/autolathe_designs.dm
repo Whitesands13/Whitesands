@@ -155,7 +155,7 @@
 	id = "cable_coil"
 	build_type = AUTOLATHE
 	materials = list(/datum/material/iron = 10, /datum/material/glass = 5)
-	build_path = /obj/item/stack/cable_coil
+	build_path = /obj/item/stack/cable_coil/random //Wasp Edit - Smartwire Revert
 	category = list("initial","Tools","Tool Designs")
 	maxstack = MAXCOIL
 	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_SCIENCE
@@ -201,6 +201,15 @@
 	build_type = AUTOLATHE | PROTOLATHE
 	materials = list(/datum/material/iron = 50, /datum/material/glass = 50)
 	build_path = /obj/item/electronics/airalarm
+	category = list("initial", "Electronics")
+	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING
+
+/datum/design/aac_electronics
+	name = "Airlock Controller Electronics"
+	id = "aac_electronics"
+	build_type = AUTOLATHE | PROTOLATHE
+	materials = list(/datum/material/iron = 50, /datum/material/glass = 50)
+	build_path = /obj/item/electronics/advanced_airlock_controller
 	category = list("initial", "Electronics")
 	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING
 
@@ -253,7 +262,16 @@
 	materials = list(/datum/material/iron = 50, /datum/material/glass = 50)
 	build_path = /obj/item/airlock_painter
 	category = list("initial","Tools","Tool Designs")
-	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING
+	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_SERVICE
+
+/datum/design/airlock_painter/decal
+	name = "Decal Painter"
+	id = "decal_painter"
+	build_type = AUTOLATHE | PROTOLATHE
+	materials = list(/datum/material/iron = 50, /datum/material/glass = 50)
+	build_path = /obj/item/decal_painter
+	category = list("initial","Tools","Tool Designs")
+	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_SERVICE
 
 /datum/design/emergency_oxygen
 	name = "Emergency Oxygen Tank"
@@ -384,7 +402,7 @@
 	build_path = /obj/item/storage/bag/tray
 	category = list("initial","Dinnerware")
 
-/datum/design/tray
+/datum/design/cafeteria_tray
 	name = "Cafeteria Tray"
 	id = "foodtray"
 	build_type = AUTOLATHE
@@ -702,6 +720,14 @@
 	build_path = /obj/item/wallframe/newscaster
 	category = list("initial", "Construction")
 
+/datum/design/bounty_board_frame
+	name = "Bounty Board Frame"
+	id = "bountyboard_frame"
+	build_type = AUTOLATHE
+	materials = list(/datum/material/iron = 14000, /datum/material/glass = 8000)
+	build_path = /obj/item/wallframe/bounty_board
+	category = list("initial", "Construction")
+
 /datum/design/syringe
 	name = "Syringe"
 	id = "syringe"
@@ -737,6 +763,7 @@
 	category = list("initial", "Misc")
 
 //hacked autolathe recipes
+// Waspstation - emagged recipies
 /datum/design/flamethrower
 	name = "Flamethrower"
 	id = "flamethrower"
@@ -783,7 +810,7 @@
 	build_type = AUTOLATHE
 	materials = list(/datum/material/iron = 4000)
 	build_path = /obj/item/ammo_casing/shotgun
-	category = list("hacked", "Security")
+	category = list("emagged", "Security")
 
 /datum/design/buckshot_shell
 	name = "Buckshot Shell"
@@ -791,7 +818,7 @@
 	build_type = AUTOLATHE
 	materials = list(/datum/material/iron = 4000)
 	build_path = /obj/item/ammo_casing/shotgun/buckshot
-	category = list("hacked", "Security")
+	category = list("emagged", "Security")
 
 /datum/design/shotgun_dart
 	name = "Shotgun Dart"
@@ -799,7 +826,7 @@
 	build_type = AUTOLATHE
 	materials = list(/datum/material/iron = 4000)
 	build_path = /obj/item/ammo_casing/shotgun/dart
-	category = list("hacked", "Security")
+	category = list("emagged", "Security")
 
 /datum/design/incendiary_slug
 	name = "Incendiary Slug"
@@ -807,7 +834,7 @@
 	build_type = AUTOLATHE
 	materials = list(/datum/material/iron = 4000)
 	build_path = /obj/item/ammo_casing/shotgun/incendiary
-	category = list("hacked", "Security")
+	category = list("emagged", "Security")
 
 /datum/design/riot_dart
 	name = "Foam Riot Dart"
@@ -831,7 +858,7 @@
 	build_type = AUTOLATHE
 	materials = list(/datum/material/iron = 4000)
 	build_path = /obj/item/ammo_casing/a357
-	category = list("hacked", "Security")
+	category = list("emagged", "Security")
 
 /datum/design/c10mm
 	name = "Ammo Box (10mm)"
@@ -839,7 +866,7 @@
 	build_type = AUTOLATHE
 	materials = list(/datum/material/iron = 30000)
 	build_path = /obj/item/ammo_box/c10mm
-	category = list("hacked", "Security")
+	category = list("emagged", "Security")
 
 /datum/design/c45
 	name = "Ammo Box (.45)"
@@ -847,7 +874,7 @@
 	build_type = AUTOLATHE
 	materials = list(/datum/material/iron = 30000)
 	build_path = /obj/item/ammo_box/c45
-	category = list("hacked", "Security")
+	category = list("emagged", "Security")
 
 /datum/design/c9mm
 	name = "Ammo Box (9mm)"
@@ -855,7 +882,7 @@
 	build_type = AUTOLATHE
 	materials = list(/datum/material/iron = 30000)
 	build_path = /obj/item/ammo_box/c9mm
-	category = list("hacked", "Security")
+	category = list("emagged", "Security")
 
 /datum/design/cleaver
 	name = "Butcher's Cleaver"
@@ -871,7 +898,8 @@
 	build_type = AUTOLATHE
 	materials = list(/datum/material/iron = 100, /datum/material/glass = 100)
 	build_path = /obj/item/toy/crayon/spraycan
-	category = list("initial", "Tools")
+	category = list("initial","Tools","Tool Designs")
+	departmental_flags = DEPARTMENTAL_FLAG_SERVICE
 
 /datum/design/desttagger
 	name = "Destination Tagger"
@@ -1054,6 +1082,30 @@
 	build_type = AUTOLATHE
 	materials = list(/datum/material/iron = 20, /datum/material/glass = 5)
 	build_path = /obj/item/toy/ammo/gun
+	category = list("hacked", "Misc")
+
+/datum/design/toy_balloon
+	name = "Plastic Balloon"
+	id = "toy_balloon"
+	build_type = AUTOLATHE
+	materials = list(/datum/material/plastic = 1200)
+	build_path = /obj/item/toy/balloon
+	category = list("hacked", "Misc")
+
+/datum/design/toy_meteor
+	name = "Plastic Toy Meteor"
+	id = "toy_meteor"
+	build_type = AUTOLATHE
+	materials = list(/datum/material/plastic = 1000)
+	build_path = /obj/item/toy/minimeteor
+	category = list("hacked", "Misc")
+
+/datum/design/toy_armblade
+	name = "Plastic Armblade"
+	id = "toy_armblade"
+	build_type = AUTOLATHE
+	materials = list(/datum/material/plastic = 2000)
+	build_path = /obj/item/toy/foamblade
 	category = list("hacked", "Misc")
 
 /datum/design/plastic_tree

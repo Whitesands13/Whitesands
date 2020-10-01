@@ -39,11 +39,16 @@
 			mentorhelp(msg)	//Mentor we are replying to left. Mentorhelp instead
 		return
 
+	to_chat(GLOB.admins | GLOB.mentors, "<font color='notice'>[src] has started replying to [whom]'s mhelp.</font>")
+
 	//get message text, limit its length.and clean/escape html
 	if(!msg)
 		msg = input(src,"Message:", "Private message") as text|null
+
 		if(!msg)
+			to_chat(GLOB.admins | GLOB.mentors, "<span class='notice'>[src] has stopped their reply to [whom]'s mhelp.</span>")
 			return
+
 		if(!C)
 			if(holder)
 				to_chat(src, "<span class='warning'>Error: Mentor-PM: Client not found.</span>")
@@ -78,6 +83,3 @@
 	for(var/client/X in GLOB.mentors)
 		if(X.key!=key && X.key!=C.key)	//check client/X is an Mentor and isn't the sender or recipient
 			to_chat(X, "<span class='mentornotice'><B>Mentor PM: [key_name(src, X, 0)]-&gt;[key_name(C, X, 0)]:</B> [msg]</span>") //inform X
-	for(var/client/A in GLOB.admins)
-		if(A.key!=key && A.key!=C.key)	//check client/A is an Mentor and isn't the sender or recipient
-			to_chat(A, "<span class='mentornotice'><B>Mentor PM: [key_name(src, A, 0)]-&gt;[key_name(C, A, 0)]:</B> [msg]</span>") //inform A

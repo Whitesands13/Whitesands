@@ -207,7 +207,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 	var/datum/asset/spritesheet/assets = get_asset_datum(/datum/asset/spritesheet/simple/pda)
 	assets.send(user)
 
-	var/datum/asset/spritesheet/emoji_s = get_asset_datum(/datum/asset/spritesheet/goonchat)
+	var/datum/asset/spritesheet/emoji_s = get_asset_datum(/datum/asset/spritesheet/chat)
 	emoji_s.send(user) //Already sent by chat but no harm doing this
 
 	user.set_machine(src)
@@ -245,6 +245,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 				dat += "<li><a href='byond://?src=[REF(src)];choice=1'>[PDAIMG(notes)] Notekeeper</a></li>"
 				dat += "<li><a href='byond://?src=[REF(src)];choice=2'>[PDAIMG(mail)] Messenger</a></li>"
 				dat += "<li><a href='byond://?src=[REF(src)];choice=41'>[PDAIMG(notes)] View Crew Manifest</a></li>"
+				dat += "<li><a href='byond://?src=[REF(src)];choice=6'>[PDAIMG(skills)]Skill Tracker</a></li>"
 
 				if(cartridge)
 					if(cartridge.access)
@@ -332,6 +333,34 @@ GLOBAL_LIST_EMPTY(PDAs)
 				else if(cartridge && cartridge.spam_enabled)
 					dat += "[PDAIMG(mail)]   <a href='byond://?src=[REF(src)];choice=MessageAll'>Send To All</a>"
 
+			if(6)
+				dat += "<h4>[PDAIMG(mail)] ExperTrak® Skill Tracker V4.26.2</h4>"
+				dat += "<i>Thank you for choosing ExperTrak® brand software! ExperTrak® inc. is proud to be a NanoTrasen employee expertise and effectiveness department subsidary!</i>"
+				dat += "<br><br>This software is designed to track and monitor your skill development as a NanoTrasen employee. Your job performance across different fields has been quantified and categorized below.<br>"
+				var/datum/mind/targetmind = user.mind
+				for (var/type in GLOB.skill_types)
+					var/datum/skill/S = GetSkillRef(type)
+					var/lvl_num = targetmind.get_skill_level(type)
+					var/lvl_name = uppertext(targetmind.get_skill_level_name(type))
+					var/exp = targetmind.get_skill_exp(type)
+					var/xp_prog_to_level = targetmind.exp_needed_to_level_up(type)
+					var/xp_req_to_level = 0
+					if (xp_prog_to_level)//is it even possible to level up?
+						xp_req_to_level = SKILL_EXP_LIST[lvl_num+1] - SKILL_EXP_LIST[lvl_num]
+					dat += "<HR><b>[S.name]</b>"
+					dat += "<br><i>[S.desc]</i>"
+					dat += "<ul><li>EMPLOYEE SKILL LEVEL: <b>[lvl_name]</b>"
+					if (exp && xp_req_to_level)
+						var/progress_percent = (xp_req_to_level-xp_prog_to_level)/xp_req_to_level
+						var/overall_percent = exp / SKILL_EXP_LIST[length(SKILL_EXP_LIST)]
+						dat += "<br>PROGRESS TO NEXT SKILL LEVEL:"
+						dat += "<br>" + num2loadingbar(progress_percent) + "([progress_percent*100])%"
+						dat += "<br>OVERALL DEVELOPMENT PROGRESS:"
+						dat += "<br>" + num2loadingbar(overall_percent) + "([overall_percent*100])%"
+					if (lvl_num >= length(SKILL_EXP_LIST) && !(type in targetmind.skills_rewarded))
+						dat += "<br><a href='byond://?src=[REF(src)];choice=SkillReward;skill=[type]'>Contact the Professional [S.title] Association</a>"
+					dat += "</li></ul>"
+
 			if(21)
 				dat += "<h4>[PDAIMG(mail)]   SpaceMessenger V3.9.6</h4>"
 				dat += "[PDAIMG(blank)]   <a href='byond://?src=[REF(src)];choice=Clear'> Clear Messages</a>"
@@ -355,20 +384,19 @@ GLOBAL_LIST_EMPTY(PDAs)
 					dat += "Unable to obtain a reading.<br>"
 				else
 					var/datum/gas_mixture/environment = T.return_air()
-					var/list/env_gases = environment.gases
 
 					var/pressure = environment.return_pressure()
 					var/total_moles = environment.total_moles()
 
 					dat += "Air Pressure: [round(pressure,0.1)] kPa<br>"
 
-					if(total_moles)
-						for(var/id in env_gases)
-							var/gas_level = env_gases[id][MOLES]/total_moles
+					if (total_moles)
+						for(var/id in environment.get_gases())
+							var/gas_level = environment.get_moles(id)/total_moles
 							if(gas_level > 0)
-								dat += "[env_gases[id][GAS_META][META_GAS_NAME]]: [round(gas_level*100, 0.01)]%<br>"
+								dat += "[GLOB.meta_gas_info[id][META_GAS_NAME]]: [round(gas_level*100, 0.01)]%<br>"
 
-					dat += "Temperature: [round(environment.temperature-T0C)]&deg;C<br>"
+					dat += "Temperature: [round(environment.return_temperature()-T0C)]&deg;C<br>"
 				dat += "<br>"
 			else//Else it links to the cart menu proc. Although, it really uses menu hub 4--menu 4 doesn't really exist as it simply redirects to hub.
 				dat += cartridge.generate_menu()
@@ -538,6 +566,17 @@ GLOBAL_LIST_EMPTY(PDAs)
 					if("2")		// Eject pAI device
 						usr.put_in_hands(pai)
 						to_chat(usr, "<span class='notice'>You remove the pAI from the [name].</span>")
+
+// WaspStation Start -- Skill Cloak Fix
+//SKILL FUNCTIONS===================================
+
+			if("SkillReward")
+				var/type = text2path(href_list["skill"])
+				var/datum/skill/S = GetSkillRef(type)
+				var/datum/mind/mind = U.mind
+				var/new_level = mind.get_skill_level(type)
+				S.try_skill_reward(mind, new_level)
+// WaspStation End
 
 //LINK FUNCTIONS===================================
 
@@ -1063,9 +1102,11 @@ GLOBAL_LIST_EMPTY(PDAs)
 		for(var/atom/A in src)
 			A.emp_act(severity)
 	if (!(. & EMP_PROTECT_SELF))
-		emped += 1
-		spawn(200 * severity)
-			emped -= 1
+		emped++
+		addtimer(CALLBACK(src, .proc/emp_end), 200 * severity)
+
+/obj/item/pda/proc/emp_end()
+	emped--
 
 /proc/get_viewable_pdas(sort_by_job = FALSE)
 	. = list()

@@ -37,7 +37,7 @@
 		impact_effect_type = /obj/effect/temp_visual/impact_effect/red_laser/wall
 
 /obj/projectile/beam/weak
-	damage = 15
+	damage = 7			// Waspstation Edit - Shotgun nerf
 
 /obj/projectile/beam/weak/penetrator
 	armour_penetration = 50
@@ -94,7 +94,10 @@
 /obj/projectile/beam/pulse/on_hit(atom/target, blocked = FALSE)
 	. = ..()
 	if (!QDELETED(target) && (isturf(target) || istype(target, /obj/structure/)))
-		target.ex_act(EXPLODE_HEAVY)
+		if(isobj(target))
+			SSexplosions.medobj += target
+		else
+			SSexplosions.medturf += target
 
 /obj/projectile/beam/pulse/shotgun
 	damage = 40
