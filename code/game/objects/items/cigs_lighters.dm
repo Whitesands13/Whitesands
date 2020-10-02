@@ -838,7 +838,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/clothing/mask/vape/attackby(obj/item/O, mob/user, params)
 	if(O.tool_behaviour == TOOL_SCREWDRIVER)
 		if(on)
-			to_chat(user, "span class='warning'>You need to turn \the [src] off first!</span>")
+			to_chat(user, "<span class='warning'>You need to turn \the [src] off first!</span>")
 			return
 		if(!screw)
 			screw = TRUE
