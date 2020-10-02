@@ -67,6 +67,29 @@
 /proc/adminscrub(t,limit=MAX_MESSAGE_LEN)
 	return copytext((html_encode(strip_html_simple(t))),1,limit)
 
+//Begin Waspstation edit - Chat markup
+//Credit to Aurorastation for the regex and idea for the proc
+//Should be in the form of "tag to be replaced" = list("replacement for beginning", "replacement for end")
+var/global/list/markup_tags = list("_"  = list("<i>", "</i>"),
+								   "**" = list("<b>", "</b>"))
+//Should be in the form of "((\\W|^)@)(\[^@\]*)(@(\\W|$)), "g"", where @ is the appropriate tag from markup_tags
+var/global/regex/markup_italics = new ("((\\W|^)\_)(\[^\_\]*)(\_(\\W|$))", "g")
+var/global/regex/markup_bold = new ("((\\W|^)\\*\\*)(\[^\\*\\*\]*)(\\*\\*(\\W|$))", "g")
+//Should have a key in markup_tags as the key and one of the markup_XXX above as the value.
+var/global/list/markup_regex = list("_"  = markup_italics,
+									"**" = markup_bold)
+
+/proc/process_chat_markup(var/message, var/list/ignore = list())
+	if(!CONFIG_GET(flag/chat_markup) || !message)
+		return message
+
+	var/regex/markup
+	for(var/tag in (markup_tags - ignore))
+		markup = markup_regex[tag]
+		message = markup.Replace_char(message, "$2[markup_tags[tag][1]]$3[markup_tags[tag][2]]$5")
+	
+	return message
+//End Waspstation edit - Chat markup
 
 //Returns null if there is any bad text in the string
 /proc/reject_bad_text(text, max_length = 512, ascii_only = TRUE)
