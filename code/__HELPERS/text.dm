@@ -73,7 +73,7 @@
 var/global/list/markup_tags = list("_"  = list("<i>", "</i>"),
 								   "**" = list("<b>", "</b>"))
 //Should be in the form of "((\\W|^)@)(\[^@\]*)(@(\\W|$)), "g"", where @ is the appropriate tag from markup_tags
-var/global/regex/markup_italics = new ("((\\W|^)\_)(\[^\_\]*)(\_(\\W|$))", "g")
+var/global/regex/markup_italics = new ("((\\W|^)_)(\[^_\]*)(_(\\W|$))", "g")
 var/global/regex/markup_bold = new ("((\\W|^)\\*\\*)(\[^\\*\\*\]*)(\\*\\*(\\W|$))", "g")
 //Should have a key in markup_tags as the key and one of the markup_XXX above as the value.
 var/global/list/markup_regex = list("_"  = markup_italics,
