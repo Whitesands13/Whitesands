@@ -9,5 +9,5 @@
 /obj/item/clothing/gloves/color/yellow/sprayon/Shocked()
 	if(prob(50)) //Fear the unpredictable
 		shocks_remaining--
-	if(shocks_remaining < 0)
+	if(shocks_remaining <= 0)
 		qdel(src)
