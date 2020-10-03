@@ -44,3 +44,4 @@
     charges--
     holder.update_action_buttons_icon()
     addtimer(CALLBACK(src, .proc/charge), charge_rate)
+	
