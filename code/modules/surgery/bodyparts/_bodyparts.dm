@@ -25,12 +25,10 @@
 	var/bone_status = BONE_FLAG_NO_BONES // Is it fine, broken, splinted, or just straight up fucking gone
 	var/bone_break_threshold = 30
 
+	/// So we know if we need to scream if this limb hits max damage
+	var/last_maxed
 	///If disabled, limb is as good as missing.
 	var/bodypart_disabled = FALSE
-	///Multiplied by max_damage it returns the threshold which defines a limb being disabled or not. From 0 to 1.
-	var/disable_threshold = 1
-	///Controls whether bodypart_disabled makes sense or not for this limb.
-	var/can_be_disabled = FALSE
 	///Multiplied by max_damage it returns the threshold which defines a limb being disabled or not. From 0 to 1.
 	var/disable_threshold = 1
 	///Controls whether bodypart_disabled makes sense or not for this limb.
@@ -292,7 +290,7 @@
 	if(total_damage >= max_damage * disable_threshold) //Easy limb disable disables the limb at 40% health instead of 0%
 		if(!last_maxed)
 			if(owner.stat < UNCONSCIOUS)
-				owner.emote("scream")
+				owner.manual_emote("scream")
 			last_maxed = TRUE
 		set_disabled(TRUE)
 		return
@@ -328,12 +326,12 @@
 	if(.)
 		var/mob/living/carbon/old_owner = .
 		if(can_be_disabled)
-			if(HAS_TRAIT(old_owner, TRAIT_EASYLIMBWOUND))
+			if(HAS_TRAIT(old_owner, TRAIT_EASYLIMBDISABLE))
 				disable_threshold = initial(disable_threshold)
 				needs_update_disabled = TRUE
 			UnregisterSignal(old_owner, list(
-				SIGNAL_REMOVETRAIT(TRAIT_EASYLIMBWOUND),
-				SIGNAL_ADDTRAIT(TRAIT_EASYLIMBWOUND),
+				SIGNAL_REMOVETRAIT(TRAIT_EASYLIMBDISABLE),
+				SIGNAL_ADDTRAIT(TRAIT_EASYLIMBDISABLE),
 				))
 		if(initial(can_be_disabled))
 			if(HAS_TRAIT(old_owner, TRAIT_NOLIMBDISABLE))
@@ -346,11 +344,11 @@
 				))
 	if(owner)
 		if(can_be_disabled)
-			if(HAS_TRAIT(owner, TRAIT_EASYLIMBWOUND))
+			if(HAS_TRAIT(owner, TRAIT_EASYLIMBDISABLE))
 				disable_threshold = 0.6
 				needs_update_disabled = TRUE
-			RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_EASYLIMBWOUND), .proc/on_owner_easylimbwound_trait_loss)
-			RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_EASYLIMBWOUND), .proc/on_owner_easylimbwound_trait_gain)
+			RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_EASYLIMBDISABLE), .proc/on_owner_easylimbwound_trait_loss)
+			RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_EASYLIMBDISABLE), .proc/on_owner_easylimbwound_trait_gain)
 		if(initial(can_be_disabled))
 			if(HAS_TRAIT(owner, TRAIT_NOLIMBDISABLE))
 				set_can_be_disabled(FALSE)
@@ -373,18 +371,18 @@
 				CRASH("set_can_be_disabled to TRUE with for limb whose owner has TRAIT_NOLIMBDISABLE")
 			RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS), .proc/on_paralysis_trait_gain)
 			RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS), .proc/on_paralysis_trait_loss)
-			if(HAS_TRAIT(owner, TRAIT_EASYLIMBWOUND))
+			if(HAS_TRAIT(owner, TRAIT_EASYLIMBDISABLE))
 				disable_threshold = 0.6
-			RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_EASYLIMBWOUND), .proc/on_owner_easylimbwound_trait_loss)
-			RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_EASYLIMBWOUND), .proc/on_owner_easylimbwound_trait_gain)
+			RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_EASYLIMBDISABLE), .proc/on_owner_easylimbwound_trait_loss)
+			RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_EASYLIMBDISABLE), .proc/on_owner_easylimbwound_trait_gain)
 		update_disabled()
 	else if(.)
 		if(owner)
 			UnregisterSignal(owner, list(
 				SIGNAL_ADDTRAIT(TRAIT_PARALYSIS),
 				SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS),
-				SIGNAL_REMOVETRAIT(TRAIT_EASYLIMBWOUND),
-				SIGNAL_ADDTRAIT(TRAIT_EASYLIMBWOUND),
+				SIGNAL_REMOVETRAIT(TRAIT_EASYLIMBDISABLE),
+				SIGNAL_ADDTRAIT(TRAIT_EASYLIMBDISABLE),
 				))
 		set_disabled(FALSE)
 
@@ -415,7 +413,7 @@
 	set_can_be_disabled(initial(can_be_disabled))
 
 
-///Called when TRAIT_EASYLIMBWOUND is added to the owner.
+///Called when TRAIT_EASYLIMBDISABLE is added to the owner.
 /obj/item/bodypart/proc/on_owner_easylimbwound_trait_gain(mob/living/carbon/source)
 	SIGNAL_HANDLER
 	disable_threshold = 0.6
@@ -423,7 +421,7 @@
 		update_disabled()
 
 
-///Called when TRAIT_EASYLIMBWOUND is removed from the owner.
+///Called when TRAIT_EASYLIMBDISABLE is removed from the owner.
 /obj/item/bodypart/proc/on_owner_easylimbwound_trait_loss(mob/living/carbon/source)
 	SIGNAL_HANDLER
 	disable_threshold = initial(disable_threshold)
