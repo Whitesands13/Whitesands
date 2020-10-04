@@ -9,6 +9,7 @@
 	network_destination = "cyborg remote monitoring"
 	size = 5
 	tgui_id = "NtosCyborgRemoteMonitor"
+	program_icon = "project-diagram"
 
 /datum/computer_file/program/borg_monitor/ui_data(mob/user)
 	var/list/data = get_header_data()

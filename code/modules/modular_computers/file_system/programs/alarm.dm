@@ -8,6 +8,7 @@
 	network_destination = "alarm monitoring network"
 	size = 5
 	tgui_id = "NtosStationAlertConsole"
+	program_icon = "bell"
 	var/has_alert = 0
 	var/alarms = list("Fire" = list(), "Atmosphere" = list(), "Power" = list())
 
