@@ -17,7 +17,7 @@
 /obj/item/clothing/gloves/color/yellow/sprayon/tape/Shocked(mob/user)
 	if(prob(50)) //Fear the unpredictable
 		shocks_remaining--
-	if(shocks_remaining < 0)
+	if(shocks_remaining <= 0)
 		playsound(user, 'sound/items/poster_ripped.ogg', 30)
 		to_chat(user, "<span class='danger'>\The [src] fall appart into useless scraps!</span>")
 		qdel(src)
