@@ -165,6 +165,17 @@
 	pickup_sound = 'sound/items/poster_ripped.ogg'
 	item_flags = DROPDEL
 
+/obj/item/clothing/mask/muzzle/tape/equipped(mob/M, slot)
+	. = ..()
+	if(slot == ITEM_SLOT_HANDS)
+		M.visible_message("<span class='danger'>[M] rips off the tape around [M.p_their()] face!</span>", \
+							"<span class='userdanger'>You tear off the [src] and can speak again!</span>")
+		M.dropItemToGround(src, TRUE, TRUE)
+
+/obj/item/clothing/mask/muzzle/tape/dropped()
+	.=..()
+	qdel(src) //check my sanity
+
 /obj/item/restraints/handcuffs/tape
 	name = "tapecuffs"
 	desc = "Seems you are in a sticky situation."
@@ -191,7 +202,7 @@
 	prefix = "super sticky"
 	conferred_embed = EMBED_HARMLESS_SUPERIOR
 
-/obj/item/stack/tape/afterattack(obj/item/I, mob/living/user)
+/obj/item/stack/tape/industrial/afterattack(obj/item/I, mob/living/user)
 	. = ..()
 	if(I.obj_integrity < I.max_integrity)
 		to_chat(user, "<span class='notice'>Nothing a little [src] can't fix...</span>")
