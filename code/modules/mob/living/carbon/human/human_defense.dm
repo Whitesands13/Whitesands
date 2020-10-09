@@ -160,7 +160,10 @@
 	if(user == src)
 		affecting = get_bodypart(check_zone(user.zone_selected)) //stabbing yourself always hits the right target
 	else
-		affecting = get_bodypart(ran_zone(user.zone_selected))
+		var/zone_hit_chance = 80
+		if(body_position == LYING_DOWN) // half as likely to hit a different zone if they're on the ground
+			zone_hit_chance += 10
+		affecting = get_bodypart(ran_zone(user.zone_selected, zone_hit_chance))
 	var/target_area = parse_zone(check_zone(user.zone_selected)) //our intended target
 	if(affecting)
 		if(I.force && I.damtype != STAMINA && affecting.status == BODYPART_ROBOTIC) // Bodpart_robotic sparks when hit, but only when it does real damage

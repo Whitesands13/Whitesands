@@ -31,3 +31,16 @@
 	var/mob/living/L = user.mob
 	L.stop_look_up()
 	return TRUE
+
+/datum/keybinding/living/rest
+	hotkey_keys = list("U")
+	name = "rest"
+	full_name = "Rest"
+	description = "Lay down, or get up."
+
+/datum/keybinding/living/rest/down(client/user)
+	. = ..()
+	if(.)
+		return
+	var/mob/living/living_mob = user.mob
+	living_mob.toggle_resting()
