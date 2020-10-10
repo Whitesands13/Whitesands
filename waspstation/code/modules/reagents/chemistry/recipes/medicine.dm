@@ -85,3 +85,9 @@
 /datum/chemical_reaction/thializid
 	results = list(/datum/reagent/medicine/thializid = 5)
 	required_reagents = list(/datum/reagent/sulfur = 1, /datum/reagent/fluorine = 1, /datum/reagent/toxin = 1, /datum/reagent/nitrous_oxide = 2)
+
+/datum/chemical_reaction/medsuture/ash
+	required_reagents = list(/datum/reagent/ash_fibers = 10, /datum/reagent/toxin/formaldehyde = 20, /datum/reagent/medicine/polypyr = 15)
+
+/datum/chemical_reaction/medmesh/ash
+	required_reagents = list(/datum/reagent/ash_fibers = 20, /datum/reagent/consumable/aloejuice = 20, /datum/reagent/space_cleaner/sterilizine = 10)

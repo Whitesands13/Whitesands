@@ -127,3 +127,38 @@
 	M.adjust_disgust(3)
 	..()
 	. = 1
+
+/datum/reagent/medicine/soulus
+	name = "Soulus Dust"
+	description = "Ground legion cores."
+	reagent_state = SOLID
+	color = "#302f20"
+	metabolization_rate = REAGENTS_METABOLISM
+	overdose_threshold = 100
+
+/datum/reagent/medicine/soulus/expose_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1)
+	if(iscarbon(M) && M.stat != DEAD)
+		if(method in list(PATCH, TOUCH))
+			if(M.getFireLoss())
+				M.adjustFireLoss(-reac_volume)
+			if(M.getBruteLoss())
+				M.adjustBruteLoss(-reac_volume)
+	if(prob(50))
+		SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "legion", /datum/mood_event/legion_good, name)
+	else
+		SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "legion", /datum/mood_event/legion_bad, name)
+	..()
+
+/datum/reagent/medicine/soulus/on_mob_life(mob/living/carbon/M)
+	M.adjustFireLoss(-1*REM, 0)
+	M.adjustBruteLoss(-1*REM, 0)
+	M.adjustCloneLoss(0.25*REM, 0)
+	..()
+
+/datum/reagent/medicine/soulus/overdose_process(mob/living/M)
+	M.ForceContractDisease(new /datum/disease/transformation/legionvirus(), FALSE, TRUE)
+	..()
+
+/datum/reagent/medicine/soulus/on_mob_end_metabolize(mob/living/M)
+	SEND_SIGNAL(M, COMSIG_CLEAR_MOOD_EVENT, "legion")
+	..()
