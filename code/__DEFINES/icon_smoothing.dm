@@ -124,3 +124,5 @@ DEFINE_BITFIELD(smoothing_flags, list(
 #define SMOOTH_GROUP_SHUTTLE_PARTS S_OBJ(66)			///obj/structure/window/shuttle, /obj/structure/shuttle/engine/heater
 
 #define SMOOTH_GROUP_CLEANABLE_DIRT	S_OBJ(67)			///obj/effect/decal/cleanable/dirt
+
+#define MAX_S_OBJ SMOOTH_GROUP_CLEANABLE_DIRT //Always match this value with the one above it.
