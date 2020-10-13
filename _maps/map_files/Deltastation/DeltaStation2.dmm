@@ -16350,10 +16350,6 @@
 /obj/effect/turf_decal/atmos/carbon_dioxide,
 /turf/open/floor/engine/co2,
 /area/engine/atmos)
-"aXX" = (
-/obj/machinery/air_sensor/atmos/carbon_tank,
-/turf/open/floor/engine/co2,
-/area/engine/atmos)
 "aYg" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 4
@@ -17507,10 +17503,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/engine/atmos)
-"bbN" = (
-/obj/machinery/air_sensor/atmos/oxygen_tank,
-/turf/open/floor/engine/o2,
-/area/engine/atmos)
 "bbO" = (
 /obj/effect/turf_decal/atmos/oxygen,
 /turf/open/floor/engine/o2,
@@ -18355,10 +18347,6 @@
 /area/engine/atmos)
 "bev" = (
 /obj/effect/turf_decal/atmos/plasma,
-/turf/open/floor/engine/plasma,
-/area/engine/atmos)
-"bew" = (
-/obj/machinery/air_sensor/atmos/toxin_tank,
 /turf/open/floor/engine/plasma,
 /area/engine/atmos)
 "bey" = (
@@ -19300,10 +19288,6 @@
 	dir = 4
 	},
 /turf/open/floor/plasteel,
-/area/engine/atmos)
-"bhv" = (
-/obj/machinery/air_sensor/atmos/nitrogen_tank,
-/turf/open/floor/engine/n2,
 /area/engine/atmos)
 "bhw" = (
 /obj/effect/turf_decal/atmos/nitrogen,
@@ -20428,10 +20412,6 @@
 /area/engine/atmos)
 "bkH" = (
 /obj/effect/turf_decal/atmos/nitrous_oxide,
-/turf/open/floor/engine/n2o,
-/area/engine/atmos)
-"bkI" = (
-/obj/machinery/air_sensor/atmos/nitrous_tank,
 /turf/open/floor/engine/n2o,
 /area/engine/atmos)
 "bkP" = (
@@ -77231,6 +77211,11 @@
 	},
 /turf/open/space/basic,
 /area/space/nearstation)
+"eOL" = (
+/obj/machinery/atmospherics/miner/oxygen,
+/obj/machinery/air_sensor/atmos/oxygen_tank,
+/turf/open/floor/engine/o2,
+/area/engine/atmos)
 "eOQ" = (
 /obj/effect/landmark/blobstart,
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden{
@@ -87452,6 +87437,11 @@
 	},
 /turf/open/floor/circuit/green,
 /area/engine/atmospherics_engine)
+"imf" = (
+/obj/machinery/atmospherics/miner/nitrogen,
+/obj/machinery/air_sensor/atmos/nitrogen_tank,
+/turf/open/floor/engine/n2,
+/area/engine/atmos)
 "iml" = (
 /obj/machinery/door/poddoor/preopen{
 	id = "atmoslock";
@@ -89386,6 +89376,11 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/crew_quarters/heads/cmo)
+"iSx" = (
+/obj/machinery/atmospherics/miner/toxins,
+/obj/machinery/air_sensor/atmos/toxin_tank,
+/turf/open/floor/engine/plasma,
+/area/engine/atmos)
 "iST" = (
 /obj/structure/chair/comfy/brown{
 	dir = 1
@@ -91890,6 +91885,11 @@
 	},
 /turf/open/floor/plasteel,
 /area/engine/engineering)
+"jHq" = (
+/obj/machinery/atmospherics/miner/n2o,
+/obj/machinery/air_sensor/atmos/nitrous_tank,
+/turf/open/floor/engine/n2o,
+/area/engine/atmos)
 "jIc" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
@@ -126257,6 +126257,11 @@
 	},
 /turf/open/floor/plasteel,
 /area/security/main)
+"vJI" = (
+/obj/machinery/atmospherics/miner/carbon_dioxide,
+/obj/machinery/air_sensor/atmos/carbon_tank,
+/turf/open/floor/engine/co2,
+/area/engine/atmos)
 "vJU" = (
 /obj/machinery/door/airlock{
 	name = "Bathroom"
@@ -154671,19 +154676,19 @@ aFq
 abj
 aRF
 aWu
-aXW
+vJI
 aWt
 aRF
 bcY
-bev
+iSx
 bcX
 aRF
 biU
-bkH
+jHq
 biT
 aRF
 bpO
-kQk
+brU
 btK
 aRF
 qYo
@@ -154928,19 +154933,19 @@ aFr
 aad
 aRF
 aWv
-aXX
+aXW
 aZP
 aRF
 bcZ
-bew
+bev
 bfT
 aRF
 biV
-bkI
+bkH
 bmI
 aRF
 bpP
-brU
+kQk
 btL
 aRF
 qYo
@@ -161865,15 +161870,15 @@ aad
 aad
 aRF
 aTj
-aUZ
+aVa
 aWS
 aRF
 bak
-bbN
+bbO
 bdn
 aRF
 bgf
-bhv
+bhw
 bjn
 aRF
 aMO
@@ -162122,15 +162127,15 @@ aaa
 aad
 aRF
 aTk
-aVa
+aUZ
 aTl
 aRF
 bal
-bbO
+eOL
 bam
 aRF
 bgg
-bhw
+imf
 bgh
 aRF
 aMN
