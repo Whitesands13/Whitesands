@@ -12,9 +12,12 @@
 	src.tape_used = tape_used
 	set_tape()
 
-/datum/component/taped/InheritComponent(datum/component/taped/C, i_am_original)
+/datum/component/taped/InheritComponent(datum/component/taped/C, i_am_original, obj/item/stack/tape/tape_used)
 	var/obj/I = parent
-	src.tape_used = C.tape_used
+	if(C)
+		src.tape_used = C.tape_used
+	else
+		src.tape_used = tape_used
 	I.cut_overlay(taped_icon)
 	set_tape()
 
