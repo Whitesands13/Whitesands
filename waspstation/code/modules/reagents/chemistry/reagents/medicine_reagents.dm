@@ -162,3 +162,31 @@
 /datum/reagent/medicine/soulus/on_mob_end_metabolize(mob/living/M)
 	SEND_SIGNAL(M, COMSIG_CLEAR_MOOD_EVENT, "legion")
 	..()
+
+/datum/reagent/medicine/puce_essence		// P U C E
+	name = "Pucetylline Essence"
+	description = "Ground essence of puce crystals"
+	reagent_state = SOLID
+	color = "#CC8899"
+	metabolization_rate = 2.5 * REAGENTS_METABOLISM
+	overdose_threshold = 30
+
+/datum/reagent/medicine/puce_essence/on_mob_life(mob/living/carbon/M)
+	M.adjustToxLoss(-0.8*REM, 0)
+	M.adjustCloneLoss(-0.2*REM, 0)
+	for(var/datum/reagent/toxin/R in M.reagents.reagent_list)
+		M.reagents.remove_reagent(R.type,0.25)
+	if(holder.has_reagent(/datum/reagent/medicine/soulus))			// No, you can't chemstack with soulus dust
+		holder.remove_reagent(/datum/reagent/medicine/soulus, 5)		
+	M.add_atom_colour(color, TEMPORARY_COLOUR_PRIORITY)		// Changes color to puce
+	..()
+
+datum/reagent/medicine/puce_essence/expose_atom(atom/A, volume)
+	A.add_atom_colour(color, WASHABLE_COLOUR_PRIORITY)
+	..()
+
+/datum/reagent/medicine/puce_essence/on_mob_end_metabolize(mob/living/M)
+	M.remove_atom_colour(TEMPORARY_COLOUR_PRIORITY, color)		// Removes temporary (not permanent) puce
+
+/datum/reagent/medicine/puce_essence/overdose_process(mob/living/M)
+	M.add_atom_colour(color, FIXED_COLOUR_PRIORITY)		// Eternal puce
