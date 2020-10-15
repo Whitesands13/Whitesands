@@ -1,39 +1,56 @@
 /datum/component/outline
 	dupe_mode = COMPONENT_DUPE_UNIQUE_PASSARGS
 
-	var/duration
+	var/permanent
 
-/datum/component/outline/Initialize(_strength = 1)
+/datum/component/outline/Initialize(perm = FALSE)
 	if(!isatom(parent))
 		return COMPONENT_INCOMPATIBLE
-	duration = 1 SECONDS * _strength
+	src.permanent = perm
 	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, .proc/OnExamine)
+	RegisterSignal(parent, COMSIG_ATOM_EXPOSE_REAGENTS, .proc/OnExposeReagent)
+	RegisterSignal(parent, COMSIG_PARENT_ATTACKBY, .proc/OnAttackBy)
 
 	var/atom/movable/A = parent
 	A.add_filter("rad_glow", 2, list("type"="outline", "color"="#000000", "size"=1))
-	START_PROCESSING(SSdcs, src)
 
 /datum/component/outline/Destroy()
-	STOP_PROCESSING(SSdcs, src)
 	var/atom/movable/A = parent
 	A.remove_filter("rad_glow")
 	return ..()
 
-/datum/component/outline/process()
-	if(duration > 0)
-		duration -= 1
-	else
-		qdel(src)
-		return PROCESS_KILL
-
-/datum/component/outline/InheritComponent(datum/component/C, i_am_original, _strength)
+/datum/component/outline/InheritComponent(datum/component/C, i_am_original, perm)
 	if(!i_am_original)
 		return
 	if(C)
 		var/datum/component/outline/other = C
-		duration += other.duration
+		permanent = other.permanent
 	else
-		duration += 1 SECONDS * _strength
+		permanent = perm
 
 /datum/component/outline/proc/OnExamine(datum/source, mob/user, atom/thing)
-	to_chat(user, "<span class='warning'>That outline is hedious! What caused that?</span>")
+	to_chat(user, "<span class='warning'>That outline is hedious!</span>")
+
+/datum/component/outline/proc/OnAttackBy(datum/source, obj/item/I, mob/user, params)
+	if(!istype(I, /obj/item/soap))
+		return
+
+	var/obj/item/soap/S = I
+	var/clean_speedies = S.cleanspeed * min(user.mind.get_skill_modifier(/datum/skill/cleaning, SKILL_SPEED_MODIFIER)+0.1,1)
+	user.visible_message("<span class='notice'>[user] begins to scrub off the outlines surrounding [parent] with [S].</span>", "<span class='warning'>You begin to scrub out the outlines surrounding [parent] with [S]...</span>")
+	if(do_after(user, clean_speedies, target = parent))
+		user?.mind.adjust_experience(/datum/skill/cleaning, CLEAN_SKILL_GENERIC_WASH_XP)
+		S.decreaseUses(user)
+		Wash()
+		return COMPONENT_NO_AFTERATTACK
+
+/datum/component/outline/proc/OnExposeReagent(list/reagents, datum/reagents/source, method, volume_modifier, show_message)
+	if(source.has_reagent(/datum/reagent/water))
+		source.remove_any(5)
+		Wash()
+
+/datum/component/outline/proc/Wash()
+	var/atom/A = parent
+	playsound(A, 'sound/effects/slosh.ogg', 50, TRUE)
+	A.visible_message("<span class='notice'>The outline around [A] is washed away!")
+	qdel(src)
