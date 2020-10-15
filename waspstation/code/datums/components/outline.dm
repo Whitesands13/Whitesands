@@ -8,15 +8,15 @@
 		return COMPONENT_INCOMPATIBLE
 	src.permanent = perm
 	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, .proc/OnExamine)
-	RegisterSignal(parent, COMSIG_ATOM_EXPOSE_REAGENTS, .proc/OnExposeReagent)
 	RegisterSignal(parent, COMSIG_PARENT_ATTACKBY, .proc/OnAttackBy)
+	RegisterSignal(parent, COMSIG_COMPONENT_CLEAN_ACT, .proc/OnClean)
 
 	var/atom/movable/A = parent
-	A.add_filter("rad_glow", 2, list("type"="outline", "color"="#000000", "size"=1))
+	A.add_filter("sprite-bane", 2, list("type"="outline", "color"="#000000", "size"=1))
 
 /datum/component/outline/Destroy()
 	var/atom/movable/A = parent
-	A.remove_filter("rad_glow")
+	A.remove_filter("sprite-bane")
 	return ..()
 
 /datum/component/outline/InheritComponent(datum/component/C, i_am_original, perm)
@@ -29,7 +29,7 @@
 		permanent = perm
 
 /datum/component/outline/proc/OnExamine(datum/source, mob/user, atom/thing)
-	to_chat(user, "<span class='warning'>That outline is hedious!</span>")
+	to_chat(user, "<span class='warning'>That outline is hideous!</span>")
 
 /datum/component/outline/proc/OnAttackBy(datum/source, obj/item/I, mob/user, params)
 	if(!istype(I, /obj/item/soap))
@@ -41,16 +41,12 @@
 	if(do_after(user, clean_speedies, target = parent))
 		user?.mind.adjust_experience(/datum/skill/cleaning, CLEAN_SKILL_GENERIC_WASH_XP)
 		S.decreaseUses(user)
-		Wash()
+		OnClean(source, CLEAN_MEDIUM)
 		return COMPONENT_NO_AFTERATTACK
 
-/datum/component/outline/proc/OnExposeReagent(list/reagents, datum/reagents/source, method, volume_modifier, show_message)
-	if(source.has_reagent(/datum/reagent/water))
-		source.remove_any(5)
-		Wash()
-
-/datum/component/outline/proc/Wash()
-	var/atom/A = parent
-	playsound(A, 'sound/effects/slosh.ogg', 50, TRUE)
-	A.visible_message("<span class='notice'>The outline around [A] is washed away!")
-	qdel(src)
+/datum/component/outline/proc/OnClean(datum/source, clean_strength)
+	if(clean_strength >= CLEAN_MEDIUM)
+		var/atom/A = parent
+		playsound(A, 'sound/effects/slosh.ogg', 50, TRUE)
+		A.visible_message("<span class='notice'>The outline around [A] is washed away!")
+		qdel(src)
