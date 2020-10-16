@@ -296,13 +296,40 @@
 	category = list("Ammo")
 	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
 
-/datum/design/commanderammo //WS edit - free lethals
-	name = "Commander magazine (9mm)"
-	desc = "A single stack M1911 reproduction magazine, modified to chamber 9mm and fit into Security's Commander sidearms."
-	id = "commanderammo"
+/datum/design/a357 //WS edit - sideline lethals
+	name = ".357 Casing"
+	id = "a357"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 4000)
-	build_path = /obj/item/ammo_box/magazine/co9mm
+	build_path = /obj/item/ammo_casing/a357
+	category = list("Ammo")
+	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
+
+/datum/design/c10mm //WS edit - sideline lethals
+	name = "Ammo Box (10mm)"
+	id = "c10mm"
+	build_type = PROTOLATHE
+	materials = list(/datum/material/iron = 30000)
+	build_path = /obj/item/ammo_box/c10mm
+	category = list("Ammo")
+	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
+
+/datum/design/c45 //WS edit - sideline lethals
+	name = "Ammo Box (.45)"
+	id = "c45"
+	build_type = PROTOLATHE
+	materials = list(/datum/material/iron = 30000)
+	build_path = /obj/item/ammo_box/c45
+	category = list("Ammo")
+	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
+
+/datum/design/c9mm //WS edit - sideline lethals
+	name = "Ammo Box (9mm)"
+	id = "c9mm"
+	build_type = PROTOLATHE
+	materials = list(/datum/material/iron = 30000)
+	build_path = /obj/item/ammo_box/c9mm
+	category = list("Ammo")
 	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
 
 /datum/design/stunshell
@@ -333,42 +360,6 @@
 	materials = list(/datum/material/iron = 2000, /datum/material/silver = 500)
 	build_path = /obj/item/suppressor
 	category = list("Weapons")
-	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-
-/datum/design/a357
-	name = ".357 Casing"
-	id = "a357"
-	build_type = PROTOLATHE
-	materials = list(/datum/material/iron = 4000)
-	build_path = /obj/item/ammo_casing/a357
-	category = list("Ammo")
-	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-
-/datum/design/c10mm
-	name = "Ammo Box (10mm)"
-	id = "c10mm"
-	build_type = PROTOLATHE
-	materials = list(/datum/material/iron = 30000)
-	build_path = /obj/item/ammo_box/c10mm
-	category = list("Ammo")
-	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-
-/datum/design/c45
-	name = "Ammo Box (.45)"
-	id = "c45"
-	build_type = PROTOLATHE
-	materials = list(/datum/material/iron = 30000)
-	build_path = /obj/item/ammo_box/c45
-	category = list("Ammo")
-	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-
-/datum/design/c9mm
-	name = "Ammo Box (9mm)"
-	id = "c9mm"
-	build_type = PROTOLATHE
-	materials = list(/datum/material/iron = 30000)
-	build_path = /obj/item/ammo_box/c9mm
-	category = list("Ammo")
 	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
 
 /datum/design/gravitygun
