@@ -698,7 +698,7 @@
 	attack_verb = list("poked", "shaws")
 	squeak_override = list('waspstation/sound/hornetnoises/hornet_gitgud.ogg'=1, 'waspstation/sound/hornetnoises/hornet_SHAW.ogg'=10) //i have no clue how this works, the intended effect is that "git gud" will play 1 out of 11 times
 
-/ob/item/toy/plush/knight
+/obj/item/toy/plush/knight
 	name = "odd bug plushie"
 	desc = "A cute, soft plush of a little bug. It sounds like this one didn't come with a voice box."
 	icon = 'waspstation/icons/obj/plushes.dmi'
