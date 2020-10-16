@@ -697,6 +697,7 @@
 	icon_state = "plushie_hornet"
 	attack_verb = list("poked", "shaws")
 	squeak_override = list('waspstation/sound/hornetnoises/hornet_gitgud.ogg'=1, 'waspstation/sound/hornetnoises/hornet_SHAW.ogg'=10) //i have no clue how this works, the intended effect is that "git gud" will play 1 out of 11 times
+	gender = FEMALE
 
 /obj/item/toy/plush/knight
 	name = "odd bug plushie"
