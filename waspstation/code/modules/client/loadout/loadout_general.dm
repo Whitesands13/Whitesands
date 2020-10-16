@@ -123,6 +123,16 @@
 	path = /obj/item/toy/plush/moth
 	cost = 1500
 
+/datum/gear/hornet
+	display_name = "toy, marketable hornet plushie"
+	path = /obj/item/toy/plush/hornet
+	cost = 2000
+
+/datum/gear/knight
+	display_name = "toy, marketable knight plushie"
+	path = /obj/item/toy/plush/knight
+	cost = 2000 //imagine not being able to afford the marketable plushes
+
 /datum/gear/flashlight
 	display_name = "tool, flashlight"
 	path = /obj/item/flashlight
