@@ -128,19 +128,19 @@
 	tapecuff.apply_cuffs(target, user, 0)
 	return
 
-/obj/item/stack/tape/afterattack(obj/item/I, mob/living/user)
-	if(!istype(I))
-		return
-
-	if(I.embedding && I.embedding == conferred_embed)
-		to_chat(user, "<span class='warning'>[I] is already coated in [src]!</span>")
-		return
-
-	user.visible_message("<span class='notice'>[user] begins wrapping [I] with [src].</span>", "<span class='notice'>You begin wrapping [I] with [src].</span>")
-
-	if(do_after(user, 30, target=I))
-		use(1)
-		wrap_item(I, user)
+/obj/item/stack/tape/afterattack(obj/O, mob/living/user, proximity)
+	if(!istype(O) || !proximity)
+		return TRUE
+	if(user.a_intent == INTENT_DISARM && istype(O, /obj/item))
+		var/obj/item/I = O
+		if(I.embedding && I.embedding == conferred_embed)
+			to_chat(user, "<span class='warning'>[I] is already coated in [src]!</span>")
+			return
+		user.visible_message("<span class='notice'>[user] begins wrapping [I] with [src].</span>", "<span class='notice'>You begin wrapping [I] with [src].</span>")
+		if(do_after(user, 30, target=I))
+			use(1)
+			wrap_item(I, user)
+			return TRUE
 
 /obj/item/stack/tape/proc/wrap_item(obj/item/I, mob/living/user)
 	if(istype(I, /obj/item/clothing/gloves/fingerless))
@@ -202,16 +202,20 @@
 	prefix = "super sticky"
 	conferred_embed = EMBED_HARMLESS_SUPERIOR
 
-/obj/item/stack/tape/industrial/afterattack(obj/item/I, mob/living/user)
+/obj/item/stack/tape/industrial/afterattack(obj/O, mob/living/user, proximity)
 	. = ..()
-	if(I.obj_integrity < I.max_integrity)
-		to_chat(user, "<span class='notice'>Nothing a little [src] can't fix...</span>")
-		play_tool_sound(I, 30)
-		if(src.use_tool(I, user, other_delay, 1))
-			I.AddComponent(/datum/component/taped, src)
-			to_chat(user, "<span class='notice'>You patch up the [I] with a bit of [src].</span>")
-	else
-		to_chat(user, "<span class='notice'>[I] looks fine enough to me.</span>")
+	if(.)
+		return .
+	if(user.a_intent == INTENT_HELP)
+		if(O.obj_integrity < O.max_integrity)
+			to_chat(user, "<span class='notice'>Nothing a little [src] can't fix...</span>")
+			play_tool_sound(O, 30)
+			if(src.use_tool(O, user, other_delay, 1))
+				O.AddComponent(/datum/component/taped, src)
+				to_chat(user, "<span class='notice'>You patch up the [O] with a bit of [src].</span>")
+				return TRUE
+		else
+			to_chat(user, "<span class='notice'>[O] looks fine enough to me.</span>")
 
 /obj/item/stack/tape/industrial/electrical
 	name = "electrical tape"
