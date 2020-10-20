@@ -4,7 +4,7 @@
 	build_type = AUTOLATHE
 	materials = list(/datum/material/iron = 4000)
 	build_path = /obj/item/ammo_box/magazine/m45
-	category = list("Security")
+	category = list("Imported")
 
 /obj/item/disk/design_disk/ammo_1911
 	name = "Design Disk - 1911 Magazine"
