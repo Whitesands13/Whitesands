@@ -9,8 +9,8 @@
 /obj/item/disk/design_disk/ammo_1911
 	name = "Design Disk - 1911 Magazine"
 	desc = "A design disk containing the pattern for the classic 1911's seven round .45ACP magazine."
-	var/ammo_design = /datum/design/ammo/colt_1911_magazine
 
 /obj/item/disk/design_disk/ammo_1911/Initialize()
 	. = ..()
-	blueprints[1] = ammo_design
+	var/datum/design/colt_1911_magazine/M = new
+	blueprints[1] = M
