@@ -4,7 +4,7 @@
 	desc = "Sticks things together with minimal effort."
 	icon = 'waspstation/icons/obj/tapes.dmi'
 	icon_state = "tape"
-	item_flags = NOBLUDGEON
+	item_flags = NOBLUDGEON | NO_MAT_REDEMPTION
 	amount = 10
 	max_amount = 10
 	grind_results = list(/datum/reagent/cellulose = 5)
