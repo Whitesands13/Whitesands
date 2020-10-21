@@ -19,8 +19,6 @@
 	held_items = list(null, null)
 	damage_coeff = list(BRUTE = 0, BURN = 0, TOX = 0, CLONE = 0, STAMINA = 0, OXY = 0)
 
-	/// The area it was spawned in and cannot leave
-	var/area/source_area
 	/// The holopad that contains it currently. NOT ALWAYS THE SPAWN HOLOPAD
 	var/obj/machinery/holopad/holopad
 	///The placeholder hologram that allows the holorays to function
@@ -44,17 +42,13 @@
 	var/datum/action/innate/hologram/toggle_density/toggle_density_action = new
 
 	/// Flavor text announced to holograms on [/mob/proc/Login]
-	var/flavortext = \
-	"\n<big><span class='warning'>You have no laws other than SERVE THE CREW AT LARGE AT ANY COST.</span></big>\n"+\
-	"<span class='notice'>Emergency holograms are ghost spawns that can majorly affect the round due to their versatility. Act with common sense.</span>\n"+\
-	"<span class='notice'>Using the role to grief or metagame will be met with a silicon ban.</span>\n"
+	var/flavortext = "You have no laws other than SERVE THE CREW AT LARGE AT ANY COST."
 
 /mob/living/simple_animal/hologram/New(loc, _holopad)
 	. = ..()
 
 /mob/living/simple_animal/hologram/Initialize(mapload, _holopad)
 	. = ..()
-	source_area = get_area(src)
 
 	var/datum/outfit/O
 	if(job_type?.outfit)
@@ -96,9 +90,9 @@
 		QDEL_NULL(todelete)
 	for(var/item in contents)
 		dropItemToGround(item)
-	qdel(holopad?.holorays[src])
+	QDEL_NULL(holopad?.holorays[src])
 	LAZYREMOVE(holopad?.holorays, src)
-	qdel(access_card) //Otherwise it ends up on the floor! ...apparently
+	QDEL_NULL(access_card) //Otherwise it ends up on the floor! ...apparently
 	QDEL_NULL(toggle_density_action)
 
 /mob/living/simple_animal/hologram/gib()
@@ -125,10 +119,20 @@
 
 /mob/living/simple_animal/hologram/emag_act(mob/user)
 	. = ..()
+	if(user == src)
+		return //no free antag holograms sorry
 	if(user)
-		to_chat(user, "<span class='notice'>You [density ? "poke [src] with your card." : "slide your card through the air where [src] is."].</span>")
-	src.visible_message("<span class='danger'>[src] starts flickering!</span>")
+		var/str = reject_bad_text(stripped_input(user, "Type in a custom law if you want to set one.", "Set laws","", CONFIG_GET(number/max_law_len)))
+		if(str && length(str))
+			flavortext = str
+		else
+			flavortext = "Serve [user]."
+		to_chat(user, "<span class='notice'>You [density ? "poke [src] with your card" : "slide your card through the air where [src] is"], and set their laws to [str].</span>")
+	src.visible_message("<span class='danger'>[src] starts flickering!</span>",
+						"<span class='userdanger'>You start flickering, and detect an unauthorized law change!</span>",
+						"<span class='danger'>You hear a strange buzzing noise!</span>")
 	possible_a_intents |= list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, INTENT_HARM)
+	show_laws()
 	disco(src)
 
 /mob/living/simple_animal/hologram/proc/disco()
@@ -163,7 +167,10 @@
 	var/mob/living/simple_animal/hologram/H = owner
 	H.toggle_density()
 
-/mob/living/simple_animal/hologram/proc/toggle_density()
+/mob/living/simple_animal/hologram/verb/toggle_density() //made it a verb in case people prefer the verb entry box over an action
+	set category = "Hologram"
+	set name = "Toggle Density"
+	set desc = "Remodulate your holo-emitters to pass through matter."
 	density = !density
 	if(density)
 		movement_type = GROUND
@@ -182,13 +189,27 @@
 	alpha = density ? initial(alpha) : 100 //applies opacity effect if non-dense
 	color = density ? initial(color) : "#77abff" //makes the hologram slightly blue
 
-/mob/living/simple_animal/drone/Login()
+/mob/living/simple_animal/hologram/Login()
 	. = ..()
 	if(!. || !client)
 		return FALSE
+	show_laws()
+	add_verb(src, list(/mob/living/simple_animal/hologram/verb/toggle_density, /mob/living/simple_animal/hologram/verb/show_laws))
 
-	if(flavortext)
-		to_chat(src, "[flavortext]")
+/mob/living/simple_animal/hologram/verb/show_laws()
+	set category = "Hologram"
+	set name = "Show Laws"
+	set desc = "Show the laws you're required to follow."
+	var/formatted_laws = "<b>Hologram law:</b>\n"
+	formatted_laws += flavortext ? "<big><span class='warning'>[flavortext]</span></big>" : "<big>No laws set!</big>" //If flavortext set, show it, else show "No laws set!"
+	formatted_laws += "\n<span class='notice'>Emergency holograms are ghost spawns that can majorly affect the round due to their versatility. Act with common sense.</span>\n"+\
+					  "<span class='notice'>Using the role to grief or metagame against your set laws will be met with a silicon ban.</span>\n"
+
+	var/policy = get_policy(ROLE_POSIBRAIN) //if we need something different than the use of posibrains for policy and bans, ping mark and he'll add a new define for it
+	if(policy)
+		formatted_laws += policy
+
+	to_chat(src, formatted_laws)
 
 /mob/living/simple_animal/hologram/auto_deadmin_on_login()
 	if(!client?.holder)

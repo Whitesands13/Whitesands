@@ -323,7 +323,6 @@ obj/machinery/holopad/secure/Initialize()
 		if("hang_up")
 			if(outgoing_call)
 				outgoing_call.Disconnect(src)
-				return TRUE
 
 /**
   * hangup_all_calls: Disconnects all current holocalls from the holopad
@@ -477,7 +476,8 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	if(istype(AI) && AI.current == src)
 		AI.current = null
 	LAZYREMOVE(masters, user) // Discard AI from the list of those who use holopad
-	QDEL_NULL(holorays[user])
+	if(user in holorays)
+		QDEL_NULL(holorays[user])
 	LAZYREMOVE(holorays, user)
 	SetLightsAndPower()
 	return TRUE

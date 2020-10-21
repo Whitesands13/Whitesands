@@ -46,26 +46,30 @@
 	em.say("Please state the nature of the [em_name] emergency.")
 	calling = FALSE
 	em_starting = FALSE
+	em_active = TRUE
 	SetLightsAndPower()
 
-/obj/machinery/holopad/emergency/attack_hand(mob/living/user)
-	. = ..()
-	if(em)
+/obj/machinery/holopad/emergency/attackby(obj/item/P, mob/user, params)
+	if(em && user.a_intent == INTENT_HARM)
 		em.apply_damage(rand(5,10), BRUTE)
+	. = ..()
 
 /obj/machinery/holopad/emergency/emp_act(severity)
 	. = ..()
 	if(em)
 		em.apply_damage(5*severity)
 
-
 /obj/machinery/holopad/emergency/proc/stop_starting()
 	if(em?.ckey)
+		return
+	if(!em_starting)
 		return
 	SetLightsAndPower()
 	calling = FALSE
 	em_starting = FALSE
+	em_cooldown = TRUE
 	say("Failed to initiate hologram personality matrices. Please try again later.")
+	addtimer(VARSET_CALLBACK(src, em_cooldown, FALSE), 600)
 
 /obj/machinery/holopad/emergency/ui_data(mob/user)
 	var/list/data = ..()
@@ -79,6 +83,9 @@
 	if(.)
 		return
 
+	if(!em)
+		em_active = FALSE
+
 	switch(action)
 		if("em_action")
 			if(!em_active)
@@ -89,12 +96,16 @@
 				calling = TRUE
 				addtimer(CALLBACK(src, .proc/stop_starting), 300)
 			else
-				qdel(em)
+				QDEL_NULL(em)
 				em_cooldown = TRUE
+				em_active = FALSE
 				say("Recharging holoemitters...")
 				addtimer(VARSET_CALLBACK(src, em_cooldown, FALSE), 600)
-			em_active = !em_active
 			return TRUE
+		if("hang_up")
+			if(em_starting)
+				stop_starting()
+				return TRUE
 
 
 /obj/machinery/holopad/emergency/medical
