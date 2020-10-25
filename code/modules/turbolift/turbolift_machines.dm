@@ -132,8 +132,8 @@ GLOBAL_LIST_EMPTY(turbolifts)
 	desc = "A turbolift wall. One of the strongest walls known to man."
 	icon = 'icons/turf/walls/wall.dmi'
 	icon_state = "wall"
-	canSmoothWith = list(/turf/closed/indestructible/turbolift)
-	smoothing_flags = SMOOTH_TRUE
+	canSmoothWith = list(SMOOTH_GROUP_TURBOLIFT)
+	smoothing_groups = list(SMOOTH_GROUP_TURBOLIFT)
 
 /turf/closed/indestructible/turbolift/afterShuttleMove()
 	QUEUE_SMOOTH(src)
