@@ -90,10 +90,9 @@
 
 	keys_held -= _key
 
-	if(!movement_locked)
-		var/movement = movement_keys[_key]
-		if(!(next_move_dir_add & movement))
-			next_move_dir_sub |= movement
+	var/movement = movement_keys[_key]
+	if(!(next_move_dir_add & movement))
+		next_move_dir_sub |= movement
 
 	// We don't do full key for release, because for mod keys you
 	// can hold different keys and releasing any should be handled by the key binding specifically
