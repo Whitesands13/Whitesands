@@ -40,6 +40,7 @@
 	if(ishuman(C))
 		var/mob/living/carbon/human/H = C
 		default_color = "#" + H.dna.features["ethcolor"]
+		// WaspStation Removal -- Multitool Color Change
 		spec_updatehealth(H)
 		RegisterSignal(C, COMSIG_ATOM_EMAG_ACT, .proc/on_emag_act)
 		RegisterSignal(C, COMSIG_ATOM_EMP_ACT, .proc/on_emp_act)
