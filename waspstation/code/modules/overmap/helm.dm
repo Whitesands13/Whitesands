@@ -5,8 +5,6 @@
 	icon_keyboard = "tech_key"
 	circuit = /obj/item/circuitboard/computer/security
 	light_color = LIGHT_COLOR_RED
-	ui_x = 870
-	ui_y = 708
 
 	///The ship
 	var/obj/structure/overmap/ship/current_ship
@@ -40,13 +38,11 @@
 	. = ..()
 	LAZYREMOVE(SSovermap.helms, src)
 
-/obj/machinery/computer/helm/ui_interact(\
-		mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
-		datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
+/obj/machinery/computer/helm/ui_interact(mob/user, datum/tgui/ui)
 	// Update UI
 	if(!current_ship)
 		set_ship()
-	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
+	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		var/user_ref = REF(user)
 		var/is_living = isliving(user)
@@ -64,7 +60,7 @@
 			user.client.register_map_obj(current_ship.cam_plane_master)
 			user.client.register_map_obj(current_ship.cam_background)
 		// Open UI
-		ui = new(user, src, ui_key, "HelmConsole", name, ui_x, ui_y, master_ui, state)
+		ui = new(user, src, "HelmConsole", name)
 		ui.open()
 
 /obj/machinery/computer/helm/ui_data(mob/user)
