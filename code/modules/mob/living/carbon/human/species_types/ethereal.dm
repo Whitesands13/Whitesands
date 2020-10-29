@@ -74,6 +74,7 @@
 		fixed_mut_color = rgb(128,128,128)
 	H.update_body()
 
+// WaspStation Start -- Multitool Color Change
 /datum/species/ethereal/proc/health_adjusted_color(mob/living/carbon/human/H, health_percent, default_color)
 	var/static/unhealthy_color = rgb(237,164,149)
 	var/static/unhealthy_color_red_part   = GetRedPart(unhealthy_color)
