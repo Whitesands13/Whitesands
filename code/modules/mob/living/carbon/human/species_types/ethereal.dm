@@ -1,4 +1,4 @@
-#define ETHEREAL_EMAG_COLORS list("#00ffff", "#ffc0cb", "#9400D3", "#4B0082", "#0000FF", "#00FF00", "#FFFF00", "#FF7F00", "#FF0000")        // WaspStation Edit -- Multitool Color Change
+#define ETHEREAL_EMAG_COLORS list("#00ffff", "#ffc0cb", "#9400D3", "#4B0082", "#0000FF", "#00FF00", "#FFFF00", "#FF7F00", "#FF0000") // WaspStation Edit -- Multitool Color Change
 
 /datum/species/ethereal
 	name = "Ethereal"
@@ -29,8 +29,8 @@
 	hair_alpha = 140
 	var/current_color
 	var/EMPeffect = FALSE
-	var/emag_effect = FALSE // WaspStation Edit -- Multitool Color Change
-	// WaspStation Removal -- Multitool Color Change
+	var/emag_effect = FALSE                          // WaspStation Edit -- Multitool Color Change
+	var/static/unhealthy_color = rgb(237, 164, 149)  // WaspStation Edit -- Multitool Color Change
 	loreblurb = "Ethereals are organic humanoid beings with a blood that has strange luminiscent and electrical properties. \
 				Ethereals are barred from most authority roles on Nanotrasen stations and are not protected by the AI's default Asimov laws."
 	var/drain_time = 0 //used to keep ethereals from spam draining power sources
@@ -63,10 +63,9 @@
 	.=..()
 	if(H.stat != DEAD && !EMPeffect)
 		// WaspStation Start -- Multitool Color Change
-		var/health_percent = max(H.health, 0) / 100
 		if(!emag_effect)
-			current_color = health_adjusted_color(H, health_percent, default_color)
-		H.set_light(1 + (2 * health_percent), 1 + (1 * health_percent), current_color)
+			current_color = health_adjusted_color(H, default_color)
+		set_ethereal_light(H, current_color)
 		fixed_mut_color = copytext_char(current_color, 2)
 		// WaspStation End
 	else
@@ -75,8 +74,9 @@
 	H.update_body()
 
 // WaspStation Start -- Multitool Color Change
-/datum/species/ethereal/proc/health_adjusted_color(mob/living/carbon/human/H, health_percent, default_color)
-	var/static/unhealthy_color = rgb(237,164,149)
+/datum/species/ethereal/proc/health_adjusted_color(mob/living/carbon/human/H, default_color)
+	var/health_percent = max(H.health, 0) / 100
+
 	var/static/unhealthy_color_red_part   = GetRedPart(unhealthy_color)
 	var/static/unhealthy_color_green_part = GetGreenPart(unhealthy_color)
 	var/static/unhealthy_color_blue_part  = GetBluePart(unhealthy_color)
@@ -89,6 +89,14 @@
 	                 unhealthy_color_green_part + ((default_color_green_part - unhealthy_color_green_part) * health_percent),
 	                 unhealthy_color_blue_part  + ((default_color_blue_part  - unhealthy_color_blue_part)  * health_percent))
 	return result
+
+/datum/species/ethereal/proc/set_ethereal_light(mob/living/carbon/human/H, current_color)
+	var/health_percent = max(H.health, 0) / 100
+
+	var/light_range = 1 + (2 * health_percent)
+	var/light_power = 1 + (1 * health_percent)
+
+	H.set_light(light_range, light_power, current_color)
 // WaspStation End
 
 /datum/species/ethereal/proc/on_emp_act(mob/living/carbon/human/H, severity)
@@ -201,11 +209,10 @@
 			to_chat(user, "<span class='danger'>The multitool can't get a lock on [H]'s EM frequency</span>")
 			return
 
-		var/health_percent = max(H.health, 0) / 100
 		if(user != H)
 			// random color change
-			default_color = GLOB.color_list_ethereal[pick(GLOB.color_list_ethereal)]
-			current_color = health_adjusted_color(H, health_percent, default_color)
+			default_color = "#" + GLOB.color_list_ethereal[pick(GLOB.color_list_ethereal)]
+			current_color = health_adjusted_color(H, default_color)
 			spec_updatehealth(H)
 			H.visible_message("<span class='danger'>[H]'s EM frequency is scrambled to a random color.</span>")
 		else
@@ -213,7 +220,7 @@
 			var/new_etherealcolor = input(user, "Choose your ethereal color", "Character Preference") as null|anything in GLOB.color_list_ethereal
 			if(new_etherealcolor)
 				default_color = "#" + GLOB.color_list_ethereal[new_etherealcolor]
-				current_color = health_adjusted_color(H, health_percent, default_color)
+				current_color = health_adjusted_color(H, default_color)
 				spec_updatehealth(H)
 				H.visible_message("<span class='notice'>[H] modulates \his EM frequency to [new_etherealcolor].</span>")
 	else
