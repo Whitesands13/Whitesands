@@ -190,3 +190,40 @@ datum/reagent/medicine/puce_essence/expose_atom(atom/A, volume)
 
 /datum/reagent/medicine/puce_essence/overdose_process(mob/living/M)
 	M.add_atom_colour(color, FIXED_COLOUR_PRIORITY)		// Eternal puce
+
+/datum/reagent/medicine/lavaland_extract
+	name = "Lavaland Extract"
+	description = "An extract of lavaland atmospheric and mineral elements. Heals the user in small doses, but is extremely toxic otherwise."
+	color = "#6B372E" //dark and red like lavaland
+	metabolization_rate = REAGENTS_METABOLISM * 0.5
+	overdose_threshold = 10
+	can_synth = FALSE
+
+/datum/reagent/medicine/lavaland_extract/expose_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1)
+	ADD_TRAIT(M, TRAIT_NOLIMBDISABLE, TRAIT_GENERIC)
+	..()
+
+/datum/reagent/medicine/lavaland_extract/on_mob_end_metabolize(mob/living/M)
+	REMOVE_TRAIT(M, TRAIT_NOLIMBDISABLE, TRAIT_GENERIC)
+	..()
+
+/datum/reagent/medicine/lavaland_extract/on_mob_life(mob/living/carbon/M)
+	M.adjustFireLoss(-1*REM, 0)
+	M.adjustBruteLoss(-1*REM, 0)
+	M.adjustToxLoss(-1*REM, 0)
+	if(M.health <= M.crit_threshold)
+		M.adjustOxyLoss(-1*REM, 0)
+	..()
+	return TRUE
+
+/datum/reagent/medicine/lavaland_extract/overdose_process(mob/living/M)		// Thanks to actioninja
+	if(prob(2) && iscarbon(M))
+		var/selected_part = pick(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
+		var/obj/item/bodypart/bp = M.get_bodypart(selected_part)
+		if(bp)
+			M.visible_message("<span class='warning'>[M] feels a spike of pain!!</span>", "<span class='danger'>You feel a spike of pain!!</span>")
+			bp.receive_damage(0, 0, 200)
+		else	//SUCH A LUST FOR REVENGE!!!
+			to_chat(M, "<span class='warning'>A phantom limb hurts!</span>")
+			M.say("Why are we still here, just to suffer?", forced = /datum/reagent/medicine/lavaland_extract)
+	return ..()

@@ -1306,6 +1306,7 @@
 	..()
 	return TRUE
 
+/*	Wasp edit begin - Lavaland rework
 /datum/reagent/medicine/lavaland_extract
 	name = "Lavaland Extract"
 	description = "An extract of lavaland atmospheric and mineral elements. Heals the user in small doses, but is extremely toxic otherwise."
@@ -1324,6 +1325,7 @@
 	M.adjustToxLoss(3*REM, 0)
 	..()
 	return TRUE
+*/		// Wasp edit end
 
 //used for changeling's adrenaline power
 /datum/reagent/medicine/changelingadrenaline

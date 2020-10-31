@@ -91,3 +91,11 @@
 
 /datum/chemical_reaction/medmesh/ash
 	required_reagents = list(/datum/reagent/ash_fibers = 20, /datum/reagent/consumable/aloejuice = 20, /datum/reagent/space_cleaner/sterilizine = 10)
+
+/datum/chemical_reaction/lavaland_extract
+	results = list(/datum/reagent/medicine/lavaland_extract = 5)
+	required_reagents = list(/datum/reagent/consumable/vitfro = 1, /datum/reagent/medicine/puce_essence = 2,  /datum/reagent/toxin/plasma = 2)
+
+/datum/chemical_reaction/bonefixingjuice
+	results = list(/datum/reagent/medicine/bonefixingjuice = 3)
+	required_reagents = list(/datum/reagent/consumable/entpoly = 1, /datum/reagent/calcium = 1, /datum/reagent/toxin/plasma = 1)
