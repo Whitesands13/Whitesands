@@ -38,5 +38,5 @@
 			//inhand_icon_state = "advmag"
 			desc = "Advanced magnetic boots that have a lighter magnetic pull, placing less burden on the wearer. They are set to fit normal legs."
 			to_chat(user, "<span class='notice'>You set the advanced magboots to Normal mode [src].</span>")
-	I.play_tool_sound(src)
+		I.play_tool_sound(src)
 	. = ..()
