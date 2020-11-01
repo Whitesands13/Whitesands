@@ -1,6 +1,5 @@
 /obj/item/clothing/shoes/magboots
 	icon = 'waspstation/icons/obj/clothing/shoes.dmi'
-	icon_state = 'magboots0'
 
 /obj/item/clothing/shoes/magboots/attackby(obj/item/I, mob/user, params)
 	if(I.tool_behaviour == TOOL_WELDER)
