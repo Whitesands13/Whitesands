@@ -69,4 +69,4 @@
 			to_chat(user, "<span class='notice'>You set the advanced magboots to Normal mode [src].</span>")
 		user.put_in_hands(src)
 		I.play_tool_sound(src)
-	return = ..()
+	return ..()
