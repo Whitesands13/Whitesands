@@ -98,3 +98,6 @@
 	. = ..()
 	if(!ismob(loc))
 		return INITIALIZE_HINT_QDEL
+
+/obj/effect/abstract/directional_lighting
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT

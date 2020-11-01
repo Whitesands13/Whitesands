@@ -59,56 +59,93 @@
 	#define EXAMINE_POSITION_ARTICLE 1
 	#define EXAMINE_POSITION_BEFORE 2
 	//End positions
-	#define COMPONENT_EXNAME_CHANGED 1
-#define COMSIG_ATOM_UPDATE_ICON "atom_update_icon"				///from base of atom/update_icon(): ()
-	#define COMSIG_ATOM_NO_UPDATE_ICON_STATE	1
-	#define COMSIG_ATOM_NO_UPDATE_OVERLAYS		2
-#define COMSIG_ATOM_UPDATE_OVERLAYS "atom_update_overlays"		///from base of atom/update_overlays(): (list/new_overlays)
-#define COMSIG_ATOM_UPDATED_ICON "atom_updated_icon"			///from base of atom/update_icon(): (signalOut, did_anything)
-#define COMSIG_ATOM_ENTERED "atom_entered"						///from base of atom/Entered(): (atom/movable/entering, /atom)
-#define COMSIG_ATOM_EXIT "atom_exit"							///from base of atom/Exit(): (/atom/movable/exiting, /atom/newloc)
-	#define COMPONENT_ATOM_BLOCK_EXIT 1
-#define COMSIG_ATOM_EXITED "atom_exited"						///from base of atom/Exited(): (atom/movable/exiting, atom/newloc)
-#define COMSIG_ATOM_BUMPED "atom_bumped"						///from base of atom/Bumped(): (/atom/movable)
-#define COMSIG_ATOM_EX_ACT "atom_ex_act"						///from base of atom/ex_act(): (severity, target)
-#define COMSIG_ATOM_EMP_ACT "atom_emp_act"						///from base of atom/emp_act(): (severity)
-#define COMSIG_ATOM_FIRE_ACT "atom_fire_act"					///from base of atom/fire_act(): (exposed_temperature, exposed_volume)
-#define COMSIG_ATOM_BULLET_ACT "atom_bullet_act"				///from base of atom/bullet_act(): (/obj/projectile, def_zone)
-#define COMSIG_ATOM_BLOB_ACT "atom_blob_act"					///from base of atom/blob_act(): (/obj/structure/blob)
-#define COMSIG_ATOM_ACID_ACT "atom_acid_act"					///from base of atom/acid_act(): (acidpwr, acid_volume)
-#define COMSIG_ATOM_EMAG_ACT "atom_emag_act"					///from base of atom/emag_act(): (/mob/user)
-#define COMSIG_ATOM_RAD_ACT "atom_rad_act"						///from base of atom/rad_act(intensity)
-#define COMSIG_ATOM_NARSIE_ACT "atom_narsie_act"				///from base of atom/narsie_act(): ()
-#define COMSIG_ATOM_RCD_ACT "atom_rcd_act"						///from base of atom/rcd_act(): (/mob, /obj/item/construction/rcd, passed_mode)
-#define COMSIG_ATOM_SING_PULL "atom_sing_pull"					///from base of atom/singularity_pull(): (S, current_size)
-#define COMSIG_ATOM_BSA_BEAM "atom_bsa_beam_pass"				///from obj/machinery/bsa/full/proc/fire(): ()
-	#define COMSIG_ATOM_BLOCKS_BSA_BEAM 1
-#define COMSIG_ATOM_SET_LIGHT "atom_set_light"					///from base of atom/set_light(): (l_range, l_power, l_color)
-#define COMSIG_ATOM_DIR_CHANGE "atom_dir_change"				///from base of atom/setDir(): (old_dir, new_dir)
-#define COMSIG_ATOM_CONTENTS_DEL "atom_contents_del"			///from base of atom/handle_atom_del(): (atom/deleted)
-#define COMSIG_ATOM_HAS_GRAVITY "atom_has_gravity"				///from base of atom/has_gravity(): (turf/location, list/forced_gravities)
-#define COMSIG_ATOM_RAD_PROBE "atom_rad_probe"					///from proc/get_rad_contents(): ()
-	#define COMPONENT_BLOCK_RADIATION 1
-#define COMSIG_ATOM_RAD_CONTAMINATING "atom_rad_contam"			///from base of datum/radiation_wave/radiate(): (strength)
-	#define COMPONENT_BLOCK_CONTAMINATION 1
-#define COMSIG_ATOM_RAD_WAVE_PASSING "atom_rad_wave_pass"		///from base of datum/radiation_wave/check_obstructions(): (datum/radiation_wave, width)
-  #define COMPONENT_RAD_WAVE_HANDLED 1
-#define COMSIG_ATOM_CANREACH "atom_can_reach"					///from internal loop in atom/movable/proc/CanReach(): (list/next)
+	#define COMPONENT_EXNAME_CHANGED (1<<0)
+///from base of atom/update_icon(): ()
+#define COMSIG_ATOM_UPDATE_ICON "atom_update_icon"
+	#define COMSIG_ATOM_NO_UPDATE_ICON_STATE	(1<<0)
+	#define COMSIG_ATOM_NO_UPDATE_OVERLAYS		(1<<1)
+///from base of atom/update_overlays(): (list/new_overlays)
+#define COMSIG_ATOM_UPDATE_OVERLAYS "atom_update_overlays"
+///from base of atom/update_icon(): (signalOut, did_anything)
+#define COMSIG_ATOM_UPDATED_ICON "atom_updated_icon"
+///from base of atom/Entered(): (atom/movable/entering, /atom)
+#define COMSIG_ATOM_ENTERED "atom_entered"
+///from base of atom/Exit(): (/atom/movable/exiting, /atom/newloc)
+#define COMSIG_ATOM_EXIT "atom_exit"
+	#define COMPONENT_ATOM_BLOCK_EXIT (1<<0)
+///from base of atom/Exited(): (atom/movable/exiting, atom/newloc)
+#define COMSIG_ATOM_EXITED "atom_exited"
+///from base of atom/Bumped(): (/atom/movable)
+#define COMSIG_ATOM_BUMPED "atom_bumped"
+///from base of atom/ex_act(): (severity, target)
+#define COMSIG_ATOM_EX_ACT "atom_ex_act"
+///from base of atom/emp_act(): (severity)
+#define COMSIG_ATOM_EMP_ACT "atom_emp_act"
+///from base of atom/fire_act(): (exposed_temperature, exposed_volume)
+#define COMSIG_ATOM_FIRE_ACT "atom_fire_act"
+///from base of atom/bullet_act(): (/obj/projectile, def_zone)
+#define COMSIG_ATOM_BULLET_ACT "atom_bullet_act"
+///from base of atom/blob_act(): (/obj/structure/blob)
+#define COMSIG_ATOM_BLOB_ACT "atom_blob_act"
+///from base of atom/acid_act(): (acidpwr, acid_volume)
+#define COMSIG_ATOM_ACID_ACT "atom_acid_act"
+///from base of atom/emag_act(): (/mob/user)
+#define COMSIG_ATOM_EMAG_ACT "atom_emag_act"
+///from base of atom/rad_act(intensity)
+#define COMSIG_ATOM_RAD_ACT "atom_rad_act"
+///from base of atom/narsie_act(): ()
+#define COMSIG_ATOM_NARSIE_ACT "atom_narsie_act"
+///from base of atom/rcd_act(): (/mob, /obj/item/construction/rcd, passed_mode)
+#define COMSIG_ATOM_RCD_ACT "atom_rcd_act"
+///from base of atom/singularity_pull(): (S, current_size)
+#define COMSIG_ATOM_SING_PULL "atom_sing_pull"
+///from obj/machinery/bsa/full/proc/fire(): ()
+#define COMSIG_ATOM_BSA_BEAM "atom_bsa_beam_pass"
+	#define COMSIG_ATOM_BLOCKS_BSA_BEAM (1<<0)
+///from base of atom/set_light(): (l_range, l_power, l_color, l_on)
+#define COMSIG_ATOM_SET_LIGHT "atom_set_light"
+///from base of atom/setDir(): (old_dir, new_dir). Called before the direction changes.
+#define COMSIG_ATOM_DIR_CHANGE "atom_dir_change"
+///from base of atom/handle_atom_del(): (atom/deleted)
+#define COMSIG_ATOM_CONTENTS_DEL "atom_contents_del"
+///from base of atom/has_gravity(): (turf/location, list/forced_gravities)
+#define COMSIG_ATOM_HAS_GRAVITY "atom_has_gravity"
+///from proc/get_rad_contents(): ()
+#define COMSIG_ATOM_RAD_PROBE "atom_rad_probe"
+	#define COMPONENT_BLOCK_RADIATION (1<<0)
+///from base of datum/radiation_wave/radiate(): (strength)
+#define COMSIG_ATOM_RAD_CONTAMINATING "atom_rad_contam"
+	#define COMPONENT_BLOCK_CONTAMINATION (1<<0)
+///from base of datum/radiation_wave/check_obstructions(): (datum/radiation_wave, width)
+#define COMSIG_ATOM_RAD_WAVE_PASSING "atom_rad_wave_pass"
+  #define COMPONENT_RAD_WAVE_HANDLED (1<<0)
+///from internal loop in atom/movable/proc/CanReach(): (list/next)
+#define COMSIG_ATOM_CANREACH "atom_can_reach"
 	#define COMPONENT_BLOCK_REACH 1
-#define COMSIG_ATOM_SCREWDRIVER_ACT "atom_screwdriver_act"		///from base of atom/screwdriver_act(): (mob/living/user, obj/item/I)
-#define COMSIG_ATOM_WRENCH_ACT "atom_wrench_act"				///from base of atom/wrench_act(): (mob/living/user, obj/item/I)
-#define COMSIG_ATOM_MULTITOOL_ACT "atom_multitool_act"			///from base of atom/multitool_act(): (mob/living/user, obj/item/I)
-#define COMSIG_ATOM_WELDER_ACT "atom_welder_act"				///from base of atom/welder_act(): (mob/living/user, obj/item/I)
-#define COMSIG_ATOM_WIRECUTTER_ACT "atom_wirecutter_act"		///from base of atom/wirecutter_act(): (mob/living/user, obj/item/I)
-#define COMSIG_ATOM_CROWBAR_ACT "atom_crowbar_act"				///from base of atom/crowbar_act(): (mob/living/user, obj/item/I)
-#define COMSIG_ATOM_ANALYSER_ACT "atom_analyser_act"			///from base of atom/analyser_act(): (mob/living/user, obj/item/I)
-	#define COMPONENT_BLOCK_TOOL_ATTACK 1
-#define COMSIG_ATOM_INTERCEPT_TELEPORT "intercept_teleport"		///called when teleporting into a protected turf: (channel, turf/origin)
-	#define COMPONENT_BLOCK_TELEPORT 1
-#define COMSIG_ATOM_HEARER_IN_VIEW "atom_hearer_in_view"		///called when an atom is added to the hearers on get_hearers_in_view(): (list/processing_list, list/hearers)
-#define COMSIG_ATOM_ORBIT_BEGIN "atom_orbit_begin"           ///called when an atom starts orbiting another atom: (atom)
-#define COMSIG_ATOM_ORBIT_STOP "atom_orbit_stop"           ///called when an atom stops orbiting another atom: (atom)
-/////////////////
+///from base of atom/screwdriver_act(): (mob/living/user, obj/item/I)
+#define COMSIG_ATOM_SCREWDRIVER_ACT "atom_screwdriver_act"
+///from base of atom/wrench_act(): (mob/living/user, obj/item/I)
+#define COMSIG_ATOM_WRENCH_ACT "atom_wrench_act"
+///from base of atom/multitool_act(): (mob/living/user, obj/item/I)
+#define COMSIG_ATOM_MULTITOOL_ACT "atom_multitool_act"
+///from base of atom/welder_act(): (mob/living/user, obj/item/I)
+#define COMSIG_ATOM_WELDER_ACT "atom_welder_act"
+///from base of atom/wirecutter_act(): (mob/living/user, obj/item/I)
+#define COMSIG_ATOM_WIRECUTTER_ACT "atom_wirecutter_act"
+///from base of atom/crowbar_act(): (mob/living/user, obj/item/I)
+#define COMSIG_ATOM_CROWBAR_ACT "atom_crowbar_act"
+///from base of atom/analyser_act(): (mob/living/user, obj/item/I)
+#define COMSIG_ATOM_ANALYSER_ACT "atom_analyser_act"
+	#define COMPONENT_BLOCK_TOOL_ATTACK (1<<0)
+///called when teleporting into a protected turf: (channel, turf/origin)
+#define COMSIG_ATOM_INTERCEPT_TELEPORT "intercept_teleport"
+	#define COMPONENT_BLOCK_TELEPORT (1<<0)
+///called when an atom is added to the hearers on get_hearers_in_view(): (list/processing_list, list/hearers)
+#define COMSIG_ATOM_HEARER_IN_VIEW "atom_hearer_in_view"
+///called when an atom starts orbiting another atom: (atom)
+#define COMSIG_ATOM_ORBIT_BEGIN "atom_orbit_begin"
+///called when an atom stops orbiting another atom: (atom)
+#define COMSIG_ATOM_ORBIT_STOP "atom_orbit_stop"
 ///from base of atom/attack_ghost(): (mob/dead/observer/ghost)
 #define COMSIG_ATOM_ATTACK_GHOST "atom_attack_ghost"
 ///from base of atom/attack_hand(): (mob/user)
