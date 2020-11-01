@@ -42,7 +42,7 @@
 			desc = "Reverse-engineered magnetic boots that have a heavy magnetic pull. Property of Gorlex Marauders. They are set to fit normal legs."
 			to_chat(user, "<span class='notice'>You set the blood-red magboots to Normal mode [src].</span>")
 		I.play_tool_sound(src)
-	return = ..()
+	return ..()
 
 /obj/item/clothing/shoes/magboots/advance/digicompatable //Taken from https://github.com/TheSwain/Fulpstation/pull/470
 	desc = "Advanced magnetic boots that have a lighter magnetic pull, placing less burden on the wearer. They are set to fit normal legs."
