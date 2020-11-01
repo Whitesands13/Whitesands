@@ -1,6 +1,6 @@
 /obj/item/clothing/shoes/magboots/attackby(obj/item/I, mob/user, params)
 	if(I.tool_behaviour == TOOL_WELDER)
-		if (alert(user, "Are you sure you want to weld the [src] into a new shape?", "Weld magboots:", "Yes", "No") != "Yes")
+		if (alert(user, "Are you sure you want to irreversibly weld the [src] to be able to fit digitigrade legs?", "Mold magboots:", "Yes", "No") != "Yes")
 			return
 		I.play_tool_sound(src)
 		to_chat(user, "<span class='notice'>You cut the [src] welded into a shape able to be worn by those with digitigrade legs.</span>")
@@ -47,7 +47,7 @@
 			desc = "Reverse-engineered magnetic boots that have a heavy magnetic pull. Property of Gorlex Marauders. They are set to fit normal legs."
 			to_chat(user, "<span class='notice'>You set the blood-red magboots to Normal mode [src].</span>")
 		I.play_tool_sound(src)
-	. = ..()
+	return = ..()
 
 /obj/item/clothing/shoes/magboots/advance/digicompatable //Taken from https://github.com/TheSwain/Fulpstation/pull/470
 	desc = "Advanced magnetic boots that have a lighter magnetic pull, placing less burden on the wearer. They are set to fit normal legs."
@@ -82,4 +82,4 @@
 			to_chat(user, "<span class='notice'>You set the advanced magboots to Normal mode [src].</span>")
 		user.put_in_hands(src)
 		I.play_tool_sound(src)
-	. = ..()
+	return = ..()
