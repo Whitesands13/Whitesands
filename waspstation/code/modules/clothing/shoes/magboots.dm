@@ -17,7 +17,7 @@
 	desc = "A pair of magboots shaped with a welder to fit a digitigrade."
 	flags_inv = FULL_DIGITIGRADE
 	icon_state = "magboots_digi0"
-	magboot_state = "magbootsdigi"
+	magboot_state = "magboots_digi"
 
 /obj/item/clothing/shoes/magboots/digitigrade/attackby(obj/item/I, mob/user, params)
 	if(I.tool_behaviour == TOOL_WELDER)
@@ -31,7 +31,7 @@
 		if (flags_inv == NOT_DIGITIGRADE)
 			flags_inv = FULL_DIGITIGRADE
 			icon_state = "syndiemag_digi0"
-			magboot_state = "syndiemagdigi"
+			magboot_state = "syndiemag_digi"
 			desc = "Reverse-engineered magnetic boots that have a heavy magnetic pull. Property of Gorlex Marauders. They are set to fit digitigrade legs."
 			to_chat(user, "<span class='notice'>You set the blood-red magboots to Digitigrade mode [src].</span>")
 		else
@@ -40,6 +40,7 @@
 			magboot_state = "syndiemag"
 			desc = "Reverse-engineered magnetic boots that have a heavy magnetic pull. Property of Gorlex Marauders. They are set to fit normal legs."
 			to_chat(user, "<span class='notice'>You set the blood-red magboots to Normal mode [src].</span>")
+		user.put_in_hands(src)
 		I.play_tool_sound(src)
 	return ..()
 
@@ -53,11 +54,13 @@
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 
 /obj/item/clothing/shoes/magboots/advance/digicompatable/attackby(obj/item/I, mob/user, params) //Taken from https://github.com/TheSwain/Fulpstation/pull/470
+	if(I.tool_behaviour == TOOL_WELDER)
+		return
 	if(I.tool_behaviour == TOOL_SCREWDRIVER)
 		if (flags_inv == NOT_DIGITIGRADE)
 			flags_inv = FULL_DIGITIGRADE
 			icon_state = "advmag_digi0"
-			magboot_state = "advmagdigi"
+			magboot_state = "advmag_digi"
 			desc = "Advanced magnetic boots that have a lighter magnetic pull, placing less burden on the wearer. They are set to fit digitigrade legs."
 			to_chat(user, "<span class='notice'>You set the advanced magboots to Digitigrade mode [src].</span>")
 		else
