@@ -4,13 +4,14 @@
 
 /obj/item/clothing/shoes/magboots/attackby(obj/item/I, mob/user, params)
 	if(I.tool_behaviour == TOOL_WELDER)
-		if (alert(user, "Are you sure you want to irreversibly weld the [src] to be able to fit digitigrade legs?", "Mold magboots:", "Yes", "No") != "Yes")
-			return
-		I.play_tool_sound(src)
-		to_chat(user, "<span class='notice'>You weld the [src] into a shape able to be worn by those with digitigrade legs.</span>")
-		var/obj/item/clothing/shoes/magboots/digitigrade/C = new (get_turf(src))
-		user.put_in_hands(C)
-		qdel(src)
+		if(I.use(1))
+			if (alert(user, "Are you sure you want to irreversibly weld the [src] to be able to fit digitigrade legs?", "Mold magboots:", "Yes", "No") != "Yes")
+				return
+			I.play_tool_sound(src)
+			to_chat(user, "<span class='notice'>You weld the [src] into a shape able to be worn by those with digitigrade legs.</span>")
+			var/obj/item/clothing/shoes/magboots/digitigrade/C = new (get_turf(src))
+			user.put_in_hands(C)
+			qdel(src)
 
 
 /obj/item/clothing/shoes/magboots/digitigrade //Ported from https://github.com/TheSwain/Fulpstation/pull/466
