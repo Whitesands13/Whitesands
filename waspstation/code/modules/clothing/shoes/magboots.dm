@@ -12,7 +12,7 @@
 		qdel(src)
 
 
-/obj/item/clothing/shoes/magboots/digitigrade //Taken from https://github.com/TheSwain/Fulpstation/pull/466
+/obj/item/clothing/shoes/magboots/digitigrade //Ported from https://github.com/TheSwain/Fulpstation/pull/466
 	name = "digitigrade magboots"
 	desc = "A pair of magboots shaped with a welder to fit a digitigrade."
 	flags_inv = FULL_DIGITIGRADE
@@ -43,7 +43,7 @@
 		I.play_tool_sound(src)
 	return ..()
 
-/obj/item/clothing/shoes/magboots/advance/digicompatable //Taken from https://github.com/TheSwain/Fulpstation/pull/470
+/obj/item/clothing/shoes/magboots/advance/digicompatable //Ported from https://github.com/TheSwain/Fulpstation/pull/470
 	desc = "Advanced magnetic boots that have a lighter magnetic pull, placing less burden on the wearer. They are set to fit normal legs."
 	name = "Advanced magboots"
 	flags_inv = NOT_DIGITIGRADE
