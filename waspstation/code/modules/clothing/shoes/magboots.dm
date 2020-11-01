@@ -53,7 +53,7 @@
 	slowdown_active = SHOES_SLOWDOWN
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 
-/obj/item/clothing/shoes/magboots/advance/digicompatable/attackby(obj/item/I, mob/user, params) //Taken from https://github.com/TheSwain/Fulpstation/pull/470
+/obj/item/clothing/shoes/magboots/advance/digicompatable/attackby(obj/item/I, mob/user, params) //Ported from https://github.com/TheSwain/Fulpstation/pull/470
 	if(I.tool_behaviour == TOOL_WELDER)
 		return
 	if(I.tool_behaviour == TOOL_SCREWDRIVER)
