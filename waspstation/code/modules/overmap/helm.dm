@@ -31,7 +31,7 @@
 		else if(is_station_level(z) && !A?.outdoors)
 			id = MAIN_OVERMAP_OBJECT_ID
 		else
-			return
+			return FALSE
 	current_ship = SSovermap.get_overmap_object_by_id(id)
 
 /obj/machinery/computer/helm/Destroy()
@@ -59,6 +59,8 @@
 			user.client.register_map_obj(current_ship.cam_screen)
 			user.client.register_map_obj(current_ship.cam_plane_master)
 			user.client.register_map_obj(current_ship.cam_background)
+
+			current_ship.refresh_engines()
 		// Open UI
 		ui = new(user, src, "HelmConsole", name)
 		ui.open()

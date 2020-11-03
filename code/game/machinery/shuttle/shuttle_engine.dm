@@ -143,9 +143,6 @@
 
 /obj/machinery/shuttle/engine/attackby(obj/item/I, mob/living/user, params)
 	check_setup()
-	if(istype(I, /obj/item/multitool) && do_after(user, MIN_TOOL_SOUND_DELAY, target=src))
-		enabled = !enabled
-		to_chat(user, "<span class='notice'>You [enabled ? "enable" : "disable"] [src].")
 	if(default_deconstruction_screwdriver(user, icon_state_open, icon_state_closed, I))
 		return
 	if(default_pry_open(I))
@@ -156,3 +153,9 @@
 	if(default_deconstruction_crowbar(I))
 		return
 	return ..()
+
+/obj/machinery/shuttle/engine/multitool_act(mob/living/user, obj/item/I)
+	. = ..()
+	if(do_after(user, MIN_TOOL_SOUND_DELAY, target=src))
+		enabled = !enabled
+		to_chat(user, "<span class='notice'>You [enabled ? "enable" : "disable"] [src].")

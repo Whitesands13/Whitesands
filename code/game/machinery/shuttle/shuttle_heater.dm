@@ -31,6 +31,10 @@
 	var/gas_type = /datum/gas/plasma
 	var/efficiency_multiplier = 1
 	var/gas_capacity = 0
+	///Whether or not to draw from the attached internals tank
+	var/use_tank = FALSE
+	///The internals tank to draw from
+	var/obj/item/tank/fuel_tank
 
 /obj/machinery/atmospherics/components/unary/shuttle/heater/New()
 	. = ..()
@@ -82,27 +86,33 @@
 
 /obj/machinery/atmospherics/components/unary/shuttle/heater/examine(mob/user)
 	. = ..()
-	var/datum/gas_mixture/air_contents = airs[1]
-	. += "The engine heater's gas dial reads [air_contents.get_moles(gas_type)] moles of gas.<br>"
+	. += "It looks like the fuel source can be toggled with an alt-click."
+	. += "The engine heater's gas dial reads [getGas()] moles of gas.<br>"
 
 /obj/machinery/atmospherics/components/unary/shuttle/heater/proc/getGas()
-	var/datum/gas_mixture/air_contents = airs[1]
+	var/datum/gas_mixture/air_contents = use_tank ? fuel_tank?.air_contents : airs[1]
+	if(!air_contents)
+		return
 	return air_contents.get_moles(gas_type)
 
 /obj/machinery/atmospherics/components/unary/shuttle/heater/proc/updateGasStats()
-	var/datum/gas_mixture/air_contents = airs[1]
+	var/datum/gas_mixture/air_contents = use_tank ? fuel_tank?.air_contents : airs[1]
 	if(!air_contents)
 		return
 	air_contents.set_volume(gas_capacity)
 	air_contents.set_temperature(T20C)
 
-/obj/machinery/atmospherics/components/unary/shuttle/heater/proc/hasFuel(var/required)
-	var/datum/gas_mixture/air_contents = airs[1]
-	var/moles = air_contents.total_moles()
+/obj/machinery/atmospherics/components/unary/shuttle/heater/proc/hasFuel(required)
+	var/datum/gas_mixture/air_contents = use_tank ? fuel_tank?.air_contents : airs[1]
+	if(!air_contents)
+		return
+	var/moles = air_contents?.total_moles()
 	return moles >= required
 
-/obj/machinery/atmospherics/components/unary/shuttle/heater/proc/consumeFuel(var/amount)
-	var/datum/gas_mixture/air_contents = airs[1]
+/obj/machinery/atmospherics/components/unary/shuttle/heater/proc/consumeFuel(amount)
+	var/datum/gas_mixture/air_contents = use_tank ? fuel_tank?.air_contents : airs[1]
+	if(!air_contents)
+		return
 	air_contents.remove(amount)
 	return
 
@@ -119,6 +129,11 @@
 		return
 	return ..()
 
+/obj/machinery/atmospherics/components/unary/shuttle/heater/AltClick(mob/living/L)
+	. = ..()
+	use_tank = !use_tank
+	to_chat(L, "<span class='notice'>You switch [src] to draw fuel from [use_tank ? "the attached tank" : "the atmospherics system"].")
+
 /obj/machinery/atmospherics/components/unary/shuttle/heater/proc/update_adjacent_engines()
 	var/engine_turf
 	switch(dir)
@@ -134,3 +149,8 @@
 		return
 	for(var/obj/machinery/shuttle/engine/E in engine_turf)
 		E.check_setup()
+
+/obj/machinery/atmospherics/components/unary/shuttle/heater/tank/Initialize()
+	. = ..()
+	fuel_tank = new /obj/item/tank/internals/plasma(src)
+	use_tank = TRUE
