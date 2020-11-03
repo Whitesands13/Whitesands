@@ -17,7 +17,7 @@
 /obj/item/clothing/shoes/magboots/digitigrade //Ported from https://github.com/TheSwain/Fulpstation/pull/466
 	name = "digitigrade magboots"
 	desc = "A pair of magboots shaped with a welder to fit a digitigrade."
-	flags_inv = FULL_DIGITIGRADE
+	is_digitigrade = 2
 	icon_state = "magboots_digi0"
 	magboot_state = "magboots_digi"
 
@@ -30,15 +30,15 @@
 	if(I.tool_behaviour == TOOL_WELDER)
 		return
 	if(I.tool_behaviour == TOOL_SCREWDRIVER)
-		if(!(src in user.get_equipped_items(FALSE)))
-			if (flags_inv == NOT_DIGITIGRADE)
-				flags_inv = FULL_DIGITIGRADE
+		if(src != user.get_item_by_slot(ITEM_SLOT_FEET))
+			if(!(obj_flags & DIGITIGRADE))
+				obj_flags |= DIGITIGRADE
 				icon_state = "syndiemag_digi[magpulse]"
 				magboot_state = "syndiemag_digi"
 				desc = "Reverse-engineered magnetic boots that have a heavy magnetic pull. Property of Gorlex Marauders. They are set to fit digitigrade legs."
 				to_chat(user, "<span class='notice'>You set the blood-red magboots to Digitigrade mode [src].</span>")
 			else
-				flags_inv = NOT_DIGITIGRADE
+				obj_flags = null
 				icon_state = "syndiemag[magpulse]"
 				magboot_state = "syndiemag"
 				desc = "Reverse-engineered magnetic boots that have a heavy magnetic pull. Property of Gorlex Marauders. They are set to fit normal legs."
@@ -51,7 +51,6 @@
 /obj/item/clothing/shoes/magboots/advance/digicompatable //Ported from https://github.com/TheSwain/Fulpstation/pull/470
 	desc = "Advanced magnetic boots that have a lighter magnetic pull, placing less burden on the wearer. They are set to fit normal legs."
 	name = "Advanced magboots"
-	flags_inv = NOT_DIGITIGRADE
 	icon_state = "advmag0"
 	magboot_state = "advmag"
 	slowdown_active = SHOES_SLOWDOWN
@@ -61,15 +60,15 @@
 	if(I.tool_behaviour == TOOL_WELDER)
 		return
 	if(I.tool_behaviour == TOOL_SCREWDRIVER)
-		if(!(src in user.get_equipped_items(FALSE)))
-			if (flags_inv == NOT_DIGITIGRADE)
-				flags_inv = FULL_DIGITIGRADE
+		if(src != user.get_item_by_slot(ITEM_SLOT_FEET))
+			if(!(DIGITIGRADE & obj_flags))
+				obj_flags |= DIGITIGRADE
 				icon_state = "advmag_digi[magpulse]"
 				magboot_state = "advmag_digi"
 				desc = "Advanced magnetic boots that have a lighter magnetic pull, placing less burden on the wearer. They are set to fit digitigrade legs."
 				to_chat(user, "<span class='notice'>You set the advanced magboots to Digitigrade mode [src].</span>")
 			else
-				flags_inv = NOT_DIGITIGRADE
+				obj_flags = null
 				icon_state = "advmag[magpulse]"
 				magboot_state = "advmag"
 				desc = "Advanced magnetic boots that have a lighter magnetic pull, placing less burden on the wearer. They are set to fit normal legs."

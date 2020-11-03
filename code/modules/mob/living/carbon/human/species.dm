@@ -1015,8 +1015,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				return FALSE
 			if(num_legs < 2)
 				return FALSE
-			if((DIGITIGRADE in species_traits) == (I.flags_inv != FULL_DIGITIGRADE)) //WaspStation Start - Digitigrade Magboots
-				if(I.flags_inv != PARTIAL_DIGITIGRADE)
+			if((DIGITIGRADE in species_traits) == (I.obj_flags != DIGITIGRADE)) //WaspStation Start - Digitigrade Magboots
+				if(!(DIGITIGRADE_COMPATIBLE & I.obj_flags))
 					if(!disable_warning)
 						to_chat(H, "<span class='warning'>These shoes aren't compatible with your feet!</span>")
 					return FALSE //WaspStation End - Digitigrade Magboots

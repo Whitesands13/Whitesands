@@ -100,7 +100,6 @@
 #define NOT_DIGITIGRADE				0
 #define FULL_DIGITIGRADE			1
 #define SQUISHED_DIGITIGRADE		2
-#define PARTIAL_DIGITIGRADE			3 //WaspStation Edit - Digitigrade Magboots
 
 //flags for covering body parts
 #define GLASSESCOVERSEYES	(1<<0)
