@@ -237,7 +237,7 @@
 
 /datum/supply_pack/security
 	group = "Security"
-	access_any = ACCESS_FORENSICS_LOCKERS
+	access = ACCESS_FORENSICS_LOCKERS
 	crate_type = /obj/structure/closet/crate/secure/gear
 
 /datum/supply_pack/security/ammo
