@@ -95,7 +95,7 @@
 		if(H.get_item_by_slot(ITEM_SLOT_FEET) && H.get_item_by_slot(ITEM_SLOT_ICLOTHING))
 			var/obj/item/clothing/shoes/S = H.get_item_by_slot(ITEM_SLOT_FEET)
 			if(("legs" in H.dna.species.mutant_bodyparts) && H.dna.features["legs"] == "Digitigrade Legs")
-				if((DIGITIGRADE & S.obj_flags) || (DIGITIGRADE_COMPATIBLE & S.obj_flags))
+				if((DIGITIGRADE_SHOE & S.obj_flags) || (DIGITIGRADE_COMPATIBLE & S.obj_flags))
 					S.digi_alt(H, 1)									//WaspStation end - Digitigrade magboots
 
 /obj/item/clothing/under/dropped(mob/user)
@@ -112,7 +112,7 @@
 		if(H.get_item_by_slot(ITEM_SLOT_FEET) && H.get_item_by_slot(ITEM_SLOT_ICLOTHING))
 			var/obj/item/clothing/shoes/S = H.get_item_by_slot(ITEM_SLOT_FEET)
 			if(("legs" in H.dna.species.mutant_bodyparts) && H.dna.features["legs"] == "Digitigrade Legs")
-				if((DIGITIGRADE & S.obj_flags) || (DIGITIGRADE_COMPATIBLE & S.obj_flags))
+				if((DIGITIGRADE_SHOE & S.obj_flags) || (DIGITIGRADE_COMPATIBLE & S.obj_flags))
 					S.digi_alt(H, 0)									//WaspStation end - Digitigrade magboots
 
 	..()

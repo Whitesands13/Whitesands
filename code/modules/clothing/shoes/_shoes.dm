@@ -82,7 +82,7 @@
 		our_alert = user.throw_alert("shoealert", /obj/screen/alert/shoes/untied)
 		RegisterSignal(src, COMSIG_SHOES_STEP_ACTION, .proc/check_trip, override=TRUE)
 
-	if((DIGITIGRADE & obj_flags) || (DIGITIGRADE_COMPATIBLE & obj_flags))	//WaspStation start - Digitigrade magboots
+	if((DIGITIGRADE_SHOE & obj_flags) || (DIGITIGRADE_COMPATIBLE & obj_flags))	//WaspStation start - Digitigrade magboots
 		var/mob/living/carbon/human/H = user
 		if(H.get_item_by_slot(ITEM_SLOT_FEET) && H.get_item_by_slot(ITEM_SLOT_ICLOTHING))
 			var/obj/item/clothing/under/S = H.get_item_by_slot(ITEM_SLOT_ICLOTHING)
@@ -101,7 +101,7 @@
 	if(offset && equipped_before_drop)
 		restore_offsets(user)
 
-	if((DIGITIGRADE & obj_flags) || (DIGITIGRADE_COMPATIBLE & obj_flags))	//WaspStation start - Digitigrade magboots
+	if((DIGITIGRADE_SHOE & obj_flags) || (DIGITIGRADE_COMPATIBLE & obj_flags))	//WaspStation start - Digitigrade magboots
 		var/mob/living/carbon/human/H = user
 		if(H.get_item_by_slot(ITEM_SLOT_FEET) && H.get_item_by_slot(ITEM_SLOT_ICLOTHING))
 			var/obj/item/clothing/under/S = H.get_item_by_slot(ITEM_SLOT_ICLOTHING)

@@ -31,8 +31,8 @@
 		return
 	if(I.tool_behaviour == TOOL_SCREWDRIVER)
 		if(src != user.get_item_by_slot(ITEM_SLOT_FEET))
-			if(!(obj_flags & DIGITIGRADE))
-				obj_flags |= DIGITIGRADE
+			if(!(DIGITIGRADE_SHOE & obj_flags))
+				obj_flags |= DIGITIGRADE_SHOE
 				icon_state = "syndiemag_digi[magpulse]"
 				magboot_state = "syndiemag_digi"
 				desc = "Reverse-engineered magnetic boots that have a heavy magnetic pull. Property of Gorlex Marauders. They are set to fit digitigrade legs."
@@ -61,8 +61,8 @@
 		return
 	if(I.tool_behaviour == TOOL_SCREWDRIVER)
 		if(src != user.get_item_by_slot(ITEM_SLOT_FEET))
-			if(!(DIGITIGRADE & obj_flags))
-				obj_flags |= DIGITIGRADE
+			if(!(DIGITIGRADE_SHOE & obj_flags))
+				obj_flags |= DIGITIGRADE_SHOE
 				icon_state = "advmag_digi[magpulse]"
 				magboot_state = "advmag_digi"
 				desc = "Advanced magnetic boots that have a lighter magnetic pull, placing less burden on the wearer. They are set to fit digitigrade legs."
