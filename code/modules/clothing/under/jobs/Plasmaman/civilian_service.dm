@@ -151,3 +151,15 @@
 	desc = "It's very colourful on the inside."
 	icon_state = "mime_enviroskirt"
 	item_state = "mime_enviroskirt"
+
+/obj/item/clothing/under/plasmaman/lieutenant
+	name = "lieutenants envirosuit"
+	desc = "A navy blue envirosuit with chlorophyll green trimmings."
+	icon_state = "lt_envirosuit"
+	item_state = "lt_envirosuit"
+
+/obj/item/clothing/under/plasmaman/lieutenant/skirt
+	name = "lieutenants enviroskirt"
+	desc = "A navy blue envirosuit with chlorophyll green trimmings and a poofy skirt, just as blue to match."
+	icon_state = "lt_enviroskirt"
+	item_state = "lt_enviroskirt"
