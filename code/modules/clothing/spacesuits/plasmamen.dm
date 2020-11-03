@@ -325,3 +325,4 @@
 	desc = "an envirosuit helmet made for the sentinel plasmaman."
 	icon_state = "lt_envirohelm"
 	item_state = "lt_envirohelm"
+	
