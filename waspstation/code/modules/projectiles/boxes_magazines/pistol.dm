@@ -12,5 +12,5 @@
 
 /obj/item/disk/design_disk/ammo_1911/Initialize()
 	. = ..()
-	var/datum/design/colt_1911_magazine/M = new
+	var/datum/design/ammo/colt_1911_magazine/M = new
 	blueprints[1] = M
