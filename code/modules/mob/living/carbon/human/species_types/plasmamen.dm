@@ -159,6 +159,9 @@
 
 		if("Clown")
 			O = new /datum/outfit/plasmaman/clown
+		
+		if("Lieutenant")
+			O = new /datum/outfit/plasmaman/lieutenant
 
 	var/holder		// Wasp Edit Begin - Plasma skirtsuit prefs
 	switch(H.jumpsuit_style)
