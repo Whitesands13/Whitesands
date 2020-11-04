@@ -144,7 +144,7 @@
 /datum/supply_pack/materials/titanium50
 	name = "50 Titanium Sheets"
 	desc = "Used for making big boy tanks and tools."
-	cost = 1000
+	cost = 10000
 	contains = list(/obj/item/stack/sheet/mineral/titanium/fifty)
 	crate_name = "titanium sheets crate"
 
