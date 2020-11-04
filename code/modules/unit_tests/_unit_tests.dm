@@ -24,6 +24,7 @@
 #include "bespoke_id.dm"
 #include "binary_insert.dm"
 #include "chain_pull_through_space.dm"
+#include "combat.dm"
 #include "component_tests.dm"
 #include "emoting.dm"
 #include "keybinding_init.dm"

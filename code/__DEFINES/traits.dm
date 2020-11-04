@@ -78,11 +78,11 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 //mob traits
 #define TRAIT_KNOCKEDOUT		"knockedout" //Forces the user to stay unconscious.
 #define TRAIT_IMMOBILIZED		"immobilized" //Prevents voluntary movement.
+#define TRAIT_PERFECT_ATTACKER "perfect_attacker" /// Doesn't miss attacks
 #define TRAIT_INCAPACITATED		"incapacitated"
 #define TRAIT_BLIND 			"blind"
 #define TRAIT_MUTE				"mute"
 #define TRAIT_EMOTEMUTE			"emotemute"
-#define TRAIT_DEAF				"deaf"
 #define TRAIT_NEARSIGHT			"nearsighted"
 #define TRAIT_FAT				"fat"
 #define TRAIT_HUSK				"husk"
