@@ -88,7 +88,7 @@
 /datum/supply_pack/materials/plasma50
 	name = "50 Plasma Sheets"
 	desc = "You're supposed to be mining this, not buying it."
-	cost = 15000
+	cost = 25000
 	contains = list(/obj/item/stack/sheet/mineral/plasma/fifty)
 	crate_name = "bulk plasma sheets crate"
 
