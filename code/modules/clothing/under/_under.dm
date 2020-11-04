@@ -90,14 +90,6 @@
 		if(attached_accessory.above_suit)
 			H.update_inv_wear_suit()
 
-	if((HIDEJUMPSUIT in flags_inv) || (LEGS & body_parts_covered)) 	//WaspStation start - Digitigrade magboots
-		var/mob/living/carbon/human/H = user
-		if(H.get_item_by_slot(ITEM_SLOT_FEET) && H.get_item_by_slot(ITEM_SLOT_ICLOTHING))
-			var/obj/item/clothing/shoes/S = H.get_item_by_slot(ITEM_SLOT_FEET)
-			if(("legs" in H.dna.species.mutant_bodyparts) && H.dna.features["legs"] == "Digitigrade Legs")
-				if((DIGITIGRADE_SHOE & S.obj_flags) || (DIGITIGRADE_COMPATIBLE & S.obj_flags))
-					S.digi_alt(H, 1)									//WaspStation end - Digitigrade magboots
-
 /obj/item/clothing/under/dropped(mob/user)
 	if(attached_accessory)
 		attached_accessory.on_uniform_dropped(src, user)
@@ -106,14 +98,6 @@
 			H.fan_hud_set_fandom()
 			if(attached_accessory.above_suit)
 				H.update_inv_wear_suit()
-
-	if((HIDEJUMPSUIT in flags_inv) || (LEGS & body_parts_covered)) 	//WaspStation start - Digitigrade magboots
-		var/mob/living/carbon/human/H = user
-		if(H.get_item_by_slot(ITEM_SLOT_FEET) && H.get_item_by_slot(ITEM_SLOT_ICLOTHING))
-			var/obj/item/clothing/shoes/S = H.get_item_by_slot(ITEM_SLOT_FEET)
-			if(("legs" in H.dna.species.mutant_bodyparts) && H.dna.features["legs"] == "Digitigrade Legs")
-				if((DIGITIGRADE_SHOE & S.obj_flags) || (DIGITIGRADE_COMPATIBLE & S.obj_flags))
-					S.digi_alt(H, 0)									//WaspStation end - Digitigrade magboots
 
 	..()
 
