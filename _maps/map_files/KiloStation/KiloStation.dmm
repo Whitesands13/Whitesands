@@ -40245,6 +40245,13 @@
 /obj/item/hand_labeler,
 /turf/open/floor/plasteel/dark,
 /area/medical/surgery)
+"eXT" = (
+/obj/machinery/atmospherics/miner/nitrogen,
+/obj/machinery/air_sensor/atmos/nitrogen_tank,
+/turf/open/floor/engine/n2{
+	initial_gas_mix = "n2=1000;TEMP=293.15"
+	},
+/area/engine/atmos)
 "eYM" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
@@ -51670,6 +51677,13 @@
 /obj/item/camera,
 /turf/open/floor/plasteel/dark,
 /area/crew_quarters/heads/captain)
+"jiy" = (
+/obj/machinery/atmospherics/miner/n2o,
+/obj/machinery/air_sensor/atmos/nitrous_tank,
+/turf/open/floor/engine/n2o{
+	initial_gas_mix = "n2o=1000;TEMP=293.15"
+	},
+/area/engine/atmos)
 "jjj" = (
 /obj/structure/sign/warning/vacuum/external,
 /obj/effect/spawner/structure/window/reinforced/shutters,
@@ -68967,6 +68981,13 @@
 	icon_state = "platingdmg1"
 	},
 /area/maintenance/port/aft)
+"pwm" = (
+/obj/machinery/atmospherics/miner/oxygen,
+/obj/machinery/air_sensor/atmos/oxygen_tank,
+/turf/open/floor/engine/o2{
+	initial_gas_mix = "o2=1000;TEMP=293.15"
+	},
+/area/engine/atmos)
 "pwn" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1,
@@ -69954,13 +69975,6 @@
 /obj/item/storage/fancy/candle_box,
 /turf/open/floor/plating,
 /area/maintenance/port/fore)
-"pRf" = (
-/obj/machinery/atmospherics/miner/nitrogen,
-/obj/machinery/air_sensor/atmos/nitrogen_tank,
-/turf/open/floor/engine/n2{
-	initial_gas_mix = "n2=1000;TEMP=293.15"
-	},
-/area/engine/atmos)
 "pRg" = (
 /obj/machinery/atmospherics/components/binary/pump{
 	desc = "A pump that moves gas by pressure. Shower not included.";
@@ -72523,13 +72537,6 @@
 /obj/machinery/space_heater,
 /turf/open/floor/plating,
 /area/maintenance/port/aft)
-"qOW" = (
-/obj/machinery/atmospherics/miner/n2o,
-/obj/machinery/air_sensor/atmos/nitrous_tank,
-/turf/open/floor/engine/n2o{
-	initial_gas_mix = "n2o=1000;TEMP=293.15"
-	},
-/area/engine/atmos)
 "qPb" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer1{
 	dir = 8
@@ -73523,13 +73530,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/maintenance/port/aft)
-"rhU" = (
-/obj/machinery/atmospherics/miner/oxygen,
-/obj/machinery/air_sensor/atmos/oxygen_tank,
-/turf/open/floor/engine/o2{
-	initial_gas_mix = "o2=1000;TEMP=293.15"
-	},
-/area/engine/atmos)
 "rhX" = (
 /obj/effect/turf_decal/tile/yellow,
 /obj/effect/turf_decal/tile/yellow{
@@ -76580,6 +76580,13 @@
 	},
 /turf/open/floor/engine,
 /area/engine/engineering)
+"snq" = (
+/obj/machinery/atmospherics/miner/carbon_dioxide,
+/obj/machinery/air_sensor/atmos/carbon_tank,
+/turf/open/floor/engine/co2{
+	initial_gas_mix = "co2=1000;TEMP=293.15"
+	},
+/area/engine/atmos)
 "soo" = (
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
@@ -78893,6 +78900,13 @@
 	icon_state = "platingdmg1"
 	},
 /area/maintenance/port/fore)
+"tiH" = (
+/obj/machinery/atmospherics/miner/toxins,
+/obj/machinery/air_sensor/atmos/toxin_tank,
+/turf/open/floor/engine/plasma{
+	initial_gas_mix = "plasma=1000;TEMP=293.15"
+	},
+/area/engine/atmos)
 "tjj" = (
 /obj/machinery/door/airlock/command{
 	name = "Chief Engineer's Office";
@@ -80819,13 +80833,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/crew_quarters/bar/atrium)
-"tNY" = (
-/obj/machinery/atmospherics/miner/carbon_dioxide,
-/obj/machinery/air_sensor/atmos/carbon_tank,
-/turf/open/floor/engine/co2{
-	initial_gas_mix = "co2=1000;TEMP=293.15"
-	},
-/area/engine/atmos)
 "tOf" = (
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
@@ -85490,13 +85497,6 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/port/aft)
-"vOw" = (
-/obj/machinery/atmospherics/miner/toxins,
-/obj/machinery/air_sensor/atmos/toxin_tank,
-/turf/open/floor/engine/plasma{
-	initial_gas_mix = "plasma=1000;TEMP=293.15"
-	},
-/area/engine/atmos)
 "vOC" = (
 /obj/effect/decal/cleanable/blood/old,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
@@ -117587,11 +117587,11 @@ bFS
 bFa
 aFM
 aDz
-pRf
+eXT
 aML
 aFM
 aDC
-rhU
+pwm
 aMO
 aFM
 aMY
@@ -120430,7 +120430,7 @@ pqO
 nsM
 cBA
 aFm
-tNY
+snq
 aFc
 caK
 acK
@@ -121458,7 +121458,7 @@ pqO
 nsM
 cBA
 aFn
-vOw
+tiH
 aFd
 ccT
 acK
@@ -122486,7 +122486,7 @@ pqO
 nsM
 cBA
 aFo
-qOW
+jiy
 aFe
 ctr
 acK
