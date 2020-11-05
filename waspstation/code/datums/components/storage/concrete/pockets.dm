@@ -27,7 +27,7 @@
 	max_items = 2
 	max_w_class = WEIGHT_CLASS_BULKY
 
-/datum/component/storage/concrete/pockets/holster/lt/Initialize()
+/datum/component/storage/concrete/pockets/holster/solgov/Initialize()
 	original_parent = parent
 	. = ..()
 	can_hold = typecacheof(list(

@@ -366,7 +366,7 @@
 	return list("Assistant", "Captain", "Head of Personnel", "Bartender", "Cook", "Botanist", "Quartermaster", "Cargo Technician",
 				"Shaft Miner", "Clown", "Mime", "Janitor", "Curator", "Lawyer", "Chaplain", "Chief Engineer", "Station Engineer",
 				"Atmospheric Technician", "Chief Medical Officer", "Medical Doctor", "Chemist", "Geneticist", "Virologist", "Paramedic", "Prisoner", "Psychologist", //WaspStation Edit - Brig Phys / Lieutenant
-				"Research Director", "Scientist", "Roboticist", "Head of Security", "Warden", "Detective", "Security Officer", "Brig Physician", "Lieutenant") //WaspStation Edit - Brig Phys / Lieutenant
+				"Research Director", "Scientist", "Roboticist", "Head of Security", "Warden", "Detective", "Security Officer", "Brig Physician", "Solgov Representative") //WaspStation Edit - Brig Phys / Lieutenant
 
 /proc/get_all_job_icons() //For all existing HUD icons
 	return get_all_jobs() + list("Emergency Response Team Commander", "Security Response Officer", "Engineering Response Officer", "Medical Response Officer", "Entertainment Response Officer", "Religious Response Officer", "Janitorial Response Officer", "Death Commando")
@@ -384,6 +384,6 @@
 	if(jobName in get_all_centcom_jobs()) //Return with the NT logo if it is a CentCom job
 		return "CentCom"
 	for(var/datum/job/J in SSjob.occupations)
-		if((jobName in J.alt_titles) || (jobName == J.senior_title))
+		if((jobName in J.alt_titles) || (jobName == J.senior_title) && (J.title in get_all_job_icons()))
 			return J.title
 	return "Unknown" //Return unknown if none of the above apply

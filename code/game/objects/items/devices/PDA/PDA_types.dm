@@ -195,6 +195,11 @@
 	note = "Congratulations, your station has chosen the Thinktronic 5290 WGW-11 Series E-reader and Personal Data Assistant!"
 	silent = TRUE //Quiet in the library!
 
+/obj/item/pda/solgov
+	name = "solgov officer PDA"
+	default_cartridge = /obj/item/cartridge/lawyer
+	icon_state = "pda-solgov"
+
 /obj/item/pda/clear
 	name = "clear PDA"
 	icon_state = "pda-clear"
