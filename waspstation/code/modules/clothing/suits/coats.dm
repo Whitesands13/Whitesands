@@ -55,6 +55,7 @@
 	item_state = "coat_solgov"
 	icon = 'waspstation/icons/obj/clothing/suits.dmi'
 	mob_overlay_icon = 'waspstation/icons/mob/clothing/suits.dmi'
+	blood_overlay_type = "coat"
 	togglename = "buttons"
 	armor = list("melee" = 35, "bullet" = 30, "laser" = 30, "energy" = 40, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50)
 

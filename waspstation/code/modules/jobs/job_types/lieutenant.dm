@@ -10,6 +10,7 @@ Solgov Representative
 	supervisors = "The Captain, Solgov, and Space Law"
 	selection_color = "#b6b6e6"
 	special_notice = "Monitor the station and ensure the security team and command staff are abiding by space law. Report any misbehaviour to Solgov."
+	wiki_page = "Government_Attaché"
 	minimal_player_age = 7
 	exp_requirements = 180
 	exp_type = EXP_TYPE_CREW
