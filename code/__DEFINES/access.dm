@@ -85,8 +85,8 @@
 
 /// Cloning room and clone pod ejection
 #define ACCESS_CLONING 68
-/// Lieutenant's Office
-#define ACCESS_LIEUTENANT 90 //Let's give em plenty of room, now
+/// SGR Office
+#define ACCESS_SOLGOV 90 //Let's give em plenty of room, now
 
 
 

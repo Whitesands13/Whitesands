@@ -1,11 +1,3 @@
-/obj/item/clothing/suit/armor/vest/lieutenant
-	name = "lieutenant's armor"
-	desc = "An armored vest with the lieutenant's insignia imprinted on it."
-	icon = 'waspstation/icons/obj/clothing/suits.dmi'
-	mob_overlay_icon = 'waspstation/icons/mob/clothing/suits.dmi'
-	icon_state = "blueshield"
-	item_state = "blueshield"
-
 /obj/item/clothing/suit/armor/vest/solgov
 	name = "\improper SolGov armor vest"
 	desc = "A standard armor vest fielded for SolGov's infantry."
@@ -13,3 +5,9 @@
 	item_state = "armor_solgov"
 	icon = 'waspstation/icons/obj/clothing/suits.dmi'
 	mob_overlay_icon = 'waspstation/icons/mob/clothing/suits.dmi'
+
+/obj/item/clothing/suit/armor/vest/solgov/rep
+	name = "\improper SolGov Inspector armor vest"
+	desc = "A type I armor vest emblazoned with the Solgov logo."
+	icon_state = "armor_solgov_alt"
+	item_state = "armor_solgov_alt"
