@@ -1,4 +1,4 @@
-//Lieutenant
+//SolGov Rep
 
 /obj/item/clothing/suit/solgov_trenchcoat
 	name = "solgov trenchcoat"

@@ -5,11 +5,6 @@
 	item_state = "holster"
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/holster
 
-/obj/item/clothing/accessory/holster/solgov
-	name = "solgov officer shoulder holster"
-	desc = "A modified shoulder holster designed to fit a small pistol."
-	pocket_storage_component_path = /datum/component/storage/concrete/pockets/holster/solgov
-
 /obj/item/clothing/accessory/holster/detective
 	name = "detective's shoulder holster"
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/holster/detective
@@ -19,7 +14,6 @@
 	new /obj/item/gun/ballistic/revolver/detective(src)
 	new /obj/item/ammo_box/c38(src)
 	new /obj/item/ammo_box/c38(src)
-
 
 /obj/item/clothing/accessory/holster/nukie
 	name = "operative holster"
