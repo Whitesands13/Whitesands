@@ -198,6 +198,7 @@
 /obj/item/pda/solgov
 	name = "solgov officer PDA"
 	default_cartridge = /obj/item/cartridge/lawyer
+	inserted_item = /obj/item/pen/fountain/solgov
 	icon_state = "pda-solgov"
 
 /obj/item/pda/clear
