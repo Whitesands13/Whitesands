@@ -180,21 +180,18 @@
 	if(density && has_hatch && (mover.pass_flags & PASSDOORHATCH))
 		return TRUE //If this airlock is closed, has hatches, and this creature can go through hatches, then we let it through without opening the airlock
 
-/obj/machinery/door/airlock/Cross(atom/movable/mover)
+/obj/machinery/door/airlock/Crossed(atom/movable/mover)
 	. = ..()
 	if(density && has_hatch && (mover.pass_flags & PASSDOORHATCH) && !hatchstate)
 		hatchstate = 1
 		update_icon()
 		playsound(loc, hatch_open_sound, 40, 1, -1)
-		//addtimer(CALLBACK(src, .proc/close_hatch), 20, TIMER_OVERRIDE|TIMER_UNIQUE) //hatch stays open for 2 seconds
 		if(mover.layer != initial(mover.layer))
 			return
 		mover.layer = UNDERDOOR
 
-/obj/machinery/door/airlock/Uncross(atom/movable/mover, atom/newloc)
+/obj/machinery/door/airlock/Uncrossed(atom/movable/mover)
 	. = ..()
-	if(newloc == loc)
-		return
 	if(density && has_hatch && (mover.pass_flags & PASSDOORHATCH))
 		mover.layer = initial(mover.layer)
 		close_hatch()
