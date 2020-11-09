@@ -106,7 +106,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	var/list/ignoring = list()
 
-	var/clientfps = 0
+	var/clientfps = 60 // WaspStation Edit - Client FPS Tweak
 
 	var/parallax
 
@@ -1560,7 +1560,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 				if("flavor_text")
 					var/msg = stripped_multiline_input(usr, "Set the flavor text in your 'examine' verb. This can also be used for OOC notes and preferences!", "Flavor Text", features["flavor_text"], 4096, TRUE)
-					if(!isnull(msg))
+					if(msg) //Waspstation edit - "Cancel" does not clear flavor text
 						features["flavor_text"] = html_decode(msg)
 
 				if("hair")
@@ -1876,7 +1876,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						preferred_map = maplist[pickedmap]
 
 				if ("clientfps")
-					var/desiredfps = input(user, "Choose your desired fps. (0 = synced with server tick rate (currently:[world.fps]))", "Character Preference", clientfps)  as null|num
+					var/desiredfps = input(user, "Choose your desired fps. (0 = default, 60 FPS))", "Character Preference", clientfps)  as null|num // WaspStation Edit - Client FPS Tweak -
 					if (!isnull(desiredfps))
 						clientfps = desiredfps
 						parent.fps = desiredfps
