@@ -18,7 +18,7 @@
 //  Generic non-item
 /obj/item/storage/bag
 	slot_flags = ITEM_SLOT_BELT
-	w_class = WEIGHT_CLASS_BULKY
+	w_class = WEIGHT_CLASS_NORMAL
 
 /obj/item/storage/bag/ComponentInitialize()
 	. = ..()
@@ -104,7 +104,6 @@
 	icon_state = "minebag"
 	//WaspStation end
 	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_POCKETS
-	w_class = WEIGHT_CLASS_NORMAL
 	component_type = /datum/component/storage/concrete/stack
 	var/spam_protection = FALSE //If this is TRUE, the holder won't receive any messages when they fail to pick up ore through crossing it
 	var/mob/listeningTo
@@ -377,7 +376,7 @@
 	. = ..()
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	STR.max_combined_w_class = 200
-	STR.max_items = 50
+	STR.max_items = 25
 	STR.insert_preposition = "in"
 	STR.set_holdable(list(
 		/obj/item/reagent_containers/pill,
@@ -407,7 +406,7 @@
 	. = ..()
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	STR.max_combined_w_class = 200
-	STR.max_items = 25
+	STR.max_items = 20
 	STR.insert_preposition = "in"
 	STR.set_holdable(list(
 		/obj/item/slime_extract,
