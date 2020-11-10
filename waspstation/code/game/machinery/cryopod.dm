@@ -206,19 +206,22 @@ GLOBAL_LIST_EMPTY(cryopod_computers)
 
 /obj/machinery/cryopod/JoinPlayerHere(mob/M, buckle)
 	close_machine(M, TRUE)
-	..()
+
+/obj/machinery/cryopod/latejoin/Initialize()
+	. = ..()
+	new /obj/effect/landmark/latejoin(src)
 
 /obj/machinery/cryopod/close_machine(mob/user, exiting = FALSE)
-	if(exiting && istype(user, /mob/living/carbon))
-		var/mob/living/carbon/C = user
-		C.SetSleeping(10)
-		to_chat(occupant, "<span class='boldnotice'>You begin to wake from cryosleep...</span>")
-		icon_state = "cryopod"
-		return
 	if(!control_computer)
 		find_control_computer(TRUE)
 	if((isnull(user) || istype(user)) && state_open && !panel_open)
 		..(user)
+		if(exiting && istype(user, /mob/living/carbon))
+			var/mob/living/carbon/C = user
+			C.SetSleeping(10)
+			to_chat(occupant, "<span class='boldnotice'>You begin to wake from cryosleep...</span>")
+			icon_state = "cryopod"
+			return		
 		var/mob/living/mob_occupant = occupant
 		if(mob_occupant && mob_occupant.stat != DEAD)
 			to_chat(occupant, "<span class='boldnotice'>You feel cool air surround you. You go numb as your senses turn inward.</span>")
