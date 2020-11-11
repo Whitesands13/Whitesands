@@ -218,7 +218,7 @@ GLOBAL_LIST_EMPTY(cryopod_computers)
 		..(user)
 		if(exiting && istype(user, /mob/living/carbon))
 			var/mob/living/carbon/C = user
-			C.SetSleeping(10)
+			C.SetSleeping(50)
 			to_chat(occupant, "<span class='boldnotice'>You begin to wake from cryosleep...</span>")
 			icon_state = "cryopod"
 			return		
