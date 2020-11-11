@@ -144,8 +144,7 @@
 	update_icon()
 
 /obj/item/gun/energy/screwdriver_act(mob/living/user, obj/item/I)
-	. = ..()
-	if(!internal_cell)
+	if(cell && !internal_cell && !gun_light && !bayonet)
 		to_chat(user, "<span class='notice'>You begin unscrewing and pulling out the cell...</span>")
 		if(I.use_tool(src, user, unscrewing_time, volume=100))
 			to_chat(user, "<span class='notice'>You remove the power cell.</span>")

@@ -216,8 +216,6 @@
 	if(parent_attached_to)
 		if(parent_attached_to == current_holder)
 			UnregisterSignal(current_holder, list(COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_MOVED))
-		if(directional)
-			RegisterSignal(parent_attached_to, COMSIG_ATOM_DIR_CHANGE, .proc/on_holder_dir_change, override = TRUE)
 		RegisterSignal(parent_attached_to, COMSIG_PARENT_QDELETING, .proc/on_parent_attached_to_qdel)
 		RegisterSignal(parent_attached_to, COMSIG_MOVABLE_MOVED, .proc/on_parent_attached_to_moved)
 	check_holder()
