@@ -689,6 +689,7 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
+/obj/item/reagent_containers/spray/cleaner,
 /turf/open/floor/plasteel/white,
 /area/medical)
 "aeY" = (
@@ -2350,12 +2351,14 @@
 /turf/open/floor/plasteel/dark,
 /area/ai_monitored/turret_protected/ai_upload)
 "anA" = (
-/obj/structure/closet/crate/freezer/blood,
 /obj/effect/turf_decal/tile/blue{
 	dir = 1
 	},
 /obj/machinery/light/small{
 	dir = 1
+	},
+/obj/machinery/smartfridge/organ{
+	pixel_y = 32
 	},
 /turf/open/floor/plasteel/white,
 /area/medical/surgery)
@@ -8909,14 +8912,18 @@
 /turf/open/floor/plasteel,
 /area/hallway/primary/port)
 "gkf" = (
-/obj/effect/turf_decal/tile/blue{
-	dir = 1
-	},
 /obj/machinery/airalarm/directional/west,
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer3{
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment,
+/obj/vehicle/ridden/wheelchair{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/obj/effect/turf_decal/bot,
 /turf/open/floor/plasteel/white,
 /area/medical)
 "gkg" = (
@@ -9056,7 +9063,6 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
 	dir = 10
 	},
-/obj/machinery/airalarm/directional/east,
 /obj/machinery/camera{
 	c_tag = "Medbay - Recovery Room";
 	dir = 8;
@@ -10541,6 +10547,7 @@
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
+/obj/item/reagent_containers/spray/cleaner,
 /turf/open/floor/plasteel/white,
 /area/medical/sleeper)
 "jdI" = (
@@ -10836,6 +10843,8 @@
 	name = "atmospherics camera"
 	},
 /obj/structure/table,
+/obj/item/stack/sheet/metal/fifty,
+/obj/item/stack/sheet/glass/fifty,
 /turf/open/floor/plasteel/dark,
 /area/engine/atmos)
 "jEZ" = (
@@ -11776,6 +11785,7 @@
 /obj/effect/decal/cleanable/blood/old,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1,
 /obj/machinery/stasis,
+/obj/machinery/airalarm/directional/east,
 /turf/open/floor/plasteel/white,
 /area/medical/sleeper)
 "kZW" = (
@@ -13569,7 +13579,7 @@
 	dir = 1
 	},
 /obj/machinery/door/firedoor/border_only,
-/turf/closed/wall/r_wall,
+/turf/open/floor/plasteel/dark,
 /area/engine/transit_tube)
 "onC" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
@@ -17515,6 +17525,10 @@
 	},
 /turf/open/floor/plating,
 /area/engine/atmos)
+"uVN" = (
+/obj/machinery/smartfridge/bloodbank/preloaded,
+/turf/closed/wall,
+/area/medical/sleeper)
 "uWc" = (
 /obj/machinery/door/airlock/security/glass{
 	name = "Gear Room";
@@ -18839,6 +18853,7 @@
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
+/obj/item/reagent_containers/spray/cleaner,
 /turf/open/floor/plasteel/white,
 /area/medical/chemistry)
 "wYg" = (
@@ -52703,7 +52718,7 @@ aYD
 xrY
 abV
 abV
-abV
+uVN
 abV
 aej
 aeU
