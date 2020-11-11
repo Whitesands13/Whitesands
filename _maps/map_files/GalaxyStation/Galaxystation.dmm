@@ -11181,13 +11181,16 @@
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer3{
 	dir = 1
 	},
-/obj/structure/closet/crate,
 /obj/item/canvas/nineteenXnineteen,
 /obj/item/canvas/twentythreeXnineteen,
 /obj/item/canvas/twentythreeXtwentythree,
 /obj/item/storage/crayons,
 /obj/item/choice_beacon/hero,
 /obj/item/book/codex_gigas,
+/obj/structure/closet/crate/secure{
+	name = "library crate";
+	req_access_txt = "37"
+	},
 /turf/open/floor/wood,
 /area/crew_quarters/dorms)
 "kdG" = (
@@ -19911,7 +19914,7 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
-/obj/machinery/computer/prisoner{
+/obj/machinery/computer/prisoner/management{
 	dir = 8
 	},
 /turf/open/floor/plasteel/dark,
