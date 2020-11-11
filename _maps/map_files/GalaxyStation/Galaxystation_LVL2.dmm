@@ -2701,6 +2701,7 @@
 	dir = 8
 	},
 /obj/effect/turf_decal/bot,
+/obj/item/caution,
 /turf/open/floor/plasteel,
 /area/maintenance/fore/upper)
 "ht" = (
@@ -3042,6 +3043,7 @@
 /area/maintenance/fore/upper)
 "ig" = (
 /obj/effect/spawner/lootdrop/grille_or_trash,
+/obj/item/caution,
 /turf/open/floor/plating{
 	icon_state = "panelscorched"
 	},
@@ -3895,6 +3897,9 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
+/obj/structure/disposalpipe/segment{
+	dir = 5
+	},
 /turf/open/floor/plasteel,
 /area/maintenance/fore/upper)
 "jS" = (
@@ -3906,6 +3911,9 @@
 	},
 /obj/structure/cable{
 	icon_state = "4-8"
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
 	},
 /turf/open/floor/plating,
 /area/maintenance/fore/upper)
@@ -3921,6 +3929,9 @@
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 10
 	},
 /turf/open/floor/plating,
 /area/maintenance/fore/upper)
@@ -4299,6 +4310,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
+/obj/structure/disposalpipe/segment,
 /turf/open/floor/plasteel,
 /area/maintenance/fore/upper)
 "kQ" = (
@@ -5086,6 +5098,7 @@
 /obj/structure/cable{
 	icon_state = "2-4"
 	},
+/obj/structure/disposalpipe/segment,
 /turf/open/floor/plasteel,
 /area/maintenance/fore/upper)
 "mP" = (
@@ -5483,6 +5496,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
+/obj/structure/disposalpipe/segment,
 /turf/open/floor/plasteel,
 /area/maintenance/fore/upper)
 "nG" = (
@@ -5792,6 +5806,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
+/obj/structure/disposalpipe/segment,
 /turf/open/floor/plating,
 /area/maintenance/fore/upper)
 "oq" = (
@@ -6006,6 +6021,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
+/obj/structure/disposalpipe/segment,
 /turf/open/floor/plating,
 /area/maintenance/fore/upper)
 "oO" = (
@@ -7328,14 +7344,21 @@
 /turf/open/floor/plasteel,
 /area/security/checkpoint/auxiliary)
 "rN" = (
-/obj/structure/chair{
-	dir = 8
-	},
 /obj/effect/turf_decal/tile/red{
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/red,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1,
+/obj/machinery/door/window/brigdoor/security/cell/westleft{
+	name = "prisoner delivery chute door"
+	},
+/obj/structure/disposalpipe/trunk{
+	dir = 4
+	},
+/obj/machinery/disposal/deliveryChute{
+	dir = 8;
+	name = "prisoner delivery chute"
+	},
 /turf/open/floor/plasteel,
 /area/security/checkpoint/auxiliary)
 "rO" = (
@@ -7663,6 +7686,9 @@
 /obj/item/assembly/flash/handheld,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
 	dir = 9
+	},
+/obj/structure/window/reinforced/spawner/west{
+	dir = 1
 	},
 /turf/open/floor/plasteel,
 /area/security/checkpoint/auxiliary)
@@ -8685,11 +8711,6 @@
 /obj/structure/table/wood,
 /obj/item/book/manual/wiki/security_space_law,
 /obj/item/camera/detective,
-/obj/structure/curtain/bounty{
-	name = "hard-boiled curtain";
-	pixel_y = -32;
-	req_access_txt = "4"
-	},
 /turf/open/floor/carpet,
 /area/security/detectives_office)
 "vf" = (
@@ -12810,6 +12831,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 9
 	},
+/obj/item/caution,
 /turf/open/floor/plasteel,
 /area/maintenance/aft/upper)
 "Fo" = (
@@ -12850,11 +12872,6 @@
 /obj/item/clothing/glasses/hud/security,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
 	dir = 4
-	},
-/obj/structure/curtain/bounty{
-	name = "hard-boiled curtain";
-	pixel_y = 32;
-	req_access_txt = "4"
 	},
 /obj/item/book/manual/wiki/detective,
 /turf/open/floor/carpet,
@@ -13300,6 +13317,25 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/crew_quarters/heads/chief)
+"GL" = (
+/obj/machinery/light/small{
+	brightness = 3;
+	dir = 1;
+	light_color = "#c9d3e8"
+	},
+/turf/open/openspace,
+/area/crew_quarters/bar/atrium)
+"GQ" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 9
+	},
+/turf/open/floor/plasteel,
+/area/maintenance/fore/upper)
 "GT" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/structure/cable{
@@ -13516,14 +13552,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/hallway/secondary/command)
-"HW" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/machinery/door/poddoor/preopen{
-	id = "detectivewindows";
-	name = "Detective Privacy Blast door"
-	},
-/turf/open/floor/plating,
-/area/security/detectives_office)
 "Id" = (
 /obj/effect/turf_decal/tile/red{
 	dir = 8
@@ -14464,7 +14492,8 @@
 /area/crew_quarters/dorms)
 "MQ" = (
 /obj/machinery/door/airlock/medical/glass{
-	name = "Infirmary"
+	name = "Infirmary";
+	req_access_txt = "63"
 	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -14515,9 +14544,6 @@
 /obj/effect/turf_decal/tile/red,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
 	dir = 9
-	},
-/obj/structure/curtain/cloth{
-	pixel_y = -32
 	},
 /turf/open/floor/plasteel/white,
 /area/security/brig)
@@ -15115,15 +15141,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/engine/engineering)
-"PV" = (
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/curtain/cloth{
-	pixel_y = -32
-	},
-/turf/open/floor/plasteel,
-/area/security/brig)
 "Qf" = (
 /obj/effect/spawner/lootdrop/maintenance,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
@@ -15269,6 +15286,11 @@
 	},
 /turf/open/floor/carpet,
 /area/crew_quarters/dorms)
+"Rb" = (
+/obj/effect/spawner/lootdrop/grille_or_trash,
+/obj/item/caution,
+/turf/open/floor/plating,
+/area/maintenance/fore/upper)
 "Rc" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -15438,11 +15460,6 @@
 	pixel_y = -26;
 	req_access_txt = "4"
 	},
-/obj/structure/curtain/bounty{
-	name = "hard-boiled curtain";
-	pixel_y = -32;
-	req_access_txt = "4"
-	},
 /turf/open/floor/carpet,
 /area/security/detectives_office)
 "RK" = (
@@ -15577,6 +15594,11 @@
 	},
 /turf/open/floor/engine/hull,
 /area/space/nearstation)
+"SB" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/disposalpipe/trunk/multiz/down,
+/turf/open/floor/plating,
+/area/maintenance/fore/upper)
 "SC" = (
 /obj/effect/spawner/structure/window/hollow/directional{
 	dir = 5
@@ -15845,6 +15867,12 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/central)
+"Tt" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/closed/wall/r_wall,
+/area/security/checkpoint/auxiliary)
 "Tx" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/structure/cable{
@@ -15989,8 +16017,20 @@
 /area/quartermaster/office)
 "Uq" = (
 /obj/effect/spawner/structure/window/reinforced,
+/obj/structure/curtain/cloth{
+	req_access_txt = "63"
+	},
 /turf/open/floor/plating,
 /area/security/brig)
+"Uu" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/structure/disposalpipe/segment,
+/turf/open/floor/plating,
+/area/maintenance/fore/upper)
 "Ux" = (
 /obj/effect/turf_decal/tile/green{
 	dir = 4
@@ -16439,11 +16479,6 @@
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
 	dir = 10
 	},
-/obj/structure/curtain/bounty{
-	name = "hard-boiled curtain";
-	pixel_y = 32;
-	req_access_txt = "4"
-	},
 /turf/open/floor/carpet,
 /area/security/detectives_office)
 "WK" = (
@@ -16702,6 +16737,7 @@
 	pixel_y = -24
 	},
 /obj/structure/cable,
+/obj/item/caution,
 /turf/open/floor/plating{
 	icon_state = "platingdmg1"
 	},
@@ -16881,9 +16917,6 @@
 /obj/machinery/firealarm{
 	dir = 8;
 	pixel_x = -26
-	},
-/obj/structure/curtain/cloth{
-	pixel_y = -32
 	},
 /turf/open/floor/plasteel/white,
 /area/security/brig)
@@ -47414,7 +47447,7 @@ cb
 gl
 cb
 hU
-jb
+SB
 jR
 bx
 lQ
@@ -47682,7 +47715,7 @@ lQ
 lQ
 lQ
 lQ
-lQ
+Tt
 lQ
 lQ
 lQ
@@ -47931,7 +47964,7 @@ hg
 hg
 jT
 kP
-hg
+Uu
 mO
 nF
 op
@@ -47939,7 +47972,7 @@ oN
 kP
 kP
 nF
-ja
+GQ
 sw
 sZ
 tz
@@ -52055,7 +52088,7 @@ nQ
 oC
 te
 tF
-uF
+GL
 uF
 uF
 uF
@@ -53324,7 +53357,7 @@ dD
 dD
 dD
 dD
-gD
+Rb
 jg
 jU
 lf
@@ -57435,7 +57468,7 @@ Ne
 Uq
 fL
 gI
-HW
+gf
 Fr
 jr
 kn
@@ -57688,17 +57721,17 @@ ab
 bg
 bP
 cK
-PV
+bP
 Uq
 fL
 gI
-HW
+gf
 WG
 js
 ko
 lp
 ve
-HW
+gf
 nQ
 oC
 oC
@@ -57955,7 +57988,7 @@ jt
 kp
 cj
 RG
-HW
+gf
 nQ
 oC
 oC
