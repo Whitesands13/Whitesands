@@ -175,7 +175,7 @@
 			burn *= 2
 
 	// Is the damage greater than the threshold, and if so, probability of damage + item force
-	if((brute_dam > bone_break_threshold) && prob(brute_dam + break_modifier))
+	if(((brute_dam > bone_break_threshold) && prob(brute_dam + break_modifier) && !HAS_TRAIT(owner, TRAIT_NOBREAK)) || HAS_TRAIT(owner, TRAIT_ALLBREAK))
 		break_bone()
 
 	var/can_inflict = max_damage - get_damage()

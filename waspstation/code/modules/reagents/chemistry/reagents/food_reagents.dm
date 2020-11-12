@@ -27,3 +27,16 @@
 /datum/reagent/consumable/pyre_elementum/on_mob_end_metabolize(mob/living/M)
 	SEND_SIGNAL(M, COMSIG_CLEAR_MOOD_EVENT, "pyre_elementum")
 	..()
+
+/datum/reagent/consumable/fervor
+	name = "Fervor Ignium"
+	description = "Healing chem made from mushrooms."
+	color = "#b6a076"
+	taste_description = "mushrooms"
+	var/hunger_drain = -1
+
+/datum/reagent/consumable/fervor/on_mob_life(mob/living/carbon/M)
+	if(M.nutrition && (M.nutrition + hunger_drain > 0))
+		M.adjust_nutrition(hunger_drain)
+		M.adjustBruteLoss(-1.6*REM, 0)
+		M.adjustFireLoss(-1.6*REM, 0)

@@ -163,6 +163,19 @@
 	SEND_SIGNAL(M, COMSIG_CLEAR_MOOD_EVENT, "legion")
 	..()
 
+/datum/reagent/medicine/soulus/pure
+	name = "Purified Soulus Dust"
+	description = "Ground legion cores."
+	reagent_state = SOLID
+	color = "#302f20"
+	metabolization_rate = REAGENTS_METABOLISM
+	overdose_threshold = 100
+
+/datum/reagent/medicine/soulus/on_mob_life(mob/living/carbon/M)
+	M.adjustFireLoss(-1*REM, 0)
+	M.adjustBruteLoss(-1*REM, 0)
+	..()
+
 /datum/reagent/medicine/puce_essence		// P U C E
 	name = "Pucetylline Essence"
 	description = "Ground essence of puce crystals"
@@ -191,13 +204,32 @@ datum/reagent/medicine/puce_essence/expose_atom(atom/A, volume)
 /datum/reagent/medicine/puce_essence/overdose_process(mob/living/M)
 	M.add_atom_colour(color, FIXED_COLOUR_PRIORITY)		// Eternal puce
 
+/datum/reagent/medicine/puce_essence/chartreuse		// C H A R T R E U S E
+	name = "Chartreuse Solution"
+	description = "Ground essence of puce crystals"
+	reagent_state = SOLID
+	color = "#DFFF00"
+	metabolization_rate = 2.5 * REAGENTS_METABOLISM
+	overdose_threshold = 30
+
+/datum/reagent/medicine/puce_essence/chartreuse/on_mob_life(mob/living/carbon/M)		// Yes, you can chemstack with soulus dust
+	M.adjustToxLoss(-1.6*REM, 0)
+	M.adjustCloneLoss(-0.8*REM, 0)
+	for(var/datum/reagent/toxin/R in M.reagents.reagent_list)
+		M.reagents.remove_reagent(R.type,1)
+	M.add_atom_colour(color, TEMPORARY_COLOUR_PRIORITY)		// Changes color to chartreuse
+	..()
+
+/datum/reagent/medicine/puce_essence/overdose_process(mob/living/M)
+	M.add_atom_colour(color, FIXED_COLOUR_PRIORITY)		// Eternal chartreuse
+	M.set_drugginess(15)		// Also druggy
+
 /datum/reagent/medicine/lavaland_extract
 	name = "Lavaland Extract"
 	description = "An extract of lavaland atmospheric and mineral elements. Heals the user in small doses, but is extremely toxic otherwise."
 	color = "#6B372E" //dark and red like lavaland
 	metabolization_rate = REAGENTS_METABOLISM * 0.5
 	overdose_threshold = 10
-	can_synth = FALSE
 
 /datum/reagent/medicine/lavaland_extract/expose_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1)
 	ADD_TRAIT(M, TRAIT_NOLIMBDISABLE, TRAIT_GENERIC)
@@ -227,3 +259,65 @@ datum/reagent/medicine/puce_essence/expose_atom(atom/A, volume)
 			to_chat(M, "<span class='warning'>A phantom limb hurts!</span>")
 			M.say("Why are we still here, just to suffer?", forced = /datum/reagent/medicine/lavaland_extract)
 	return ..()
+
+/datum/reagent/medicine/skeletons_boon
+	name = "Skeleton’s Boon"
+	description = "A strong chem that strengthens the bones."
+	color = "#dbdfa2"
+	metabolization_rate = REAGENTS_METABOLISM * 0.125
+	overdose_threshold = 50
+	var/plasma_armor = 33
+	var/skele_armor = 20
+	var/added_armor = 0
+
+/datum/reagent/medicine/skeletons_boon/expose_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1)
+	ADD_TRAIT(M, TRAIT_NOBREAK, TRAIT_GENERIC)
+	if(isplasmaman(M))
+		var/mob/living/carbon/human/H = M
+		H.physiology.armor.melee += plasma_armor
+		H.physiology.armor.bullet += plasma_armor
+		added_armor = plasma_armor
+	if(isskeleton(M))
+		var/mob/living/carbon/human/H = M
+		H.physiology.armor.melee += skele_armor
+		H.physiology.armor.bullet += skele_armor
+		added_armor = skele_armor
+	..()
+
+/datum/reagent/medicine/skeletons_boon/on_mob_end_metabolize(mob/living/M)
+	REMOVE_TRAIT(M, TRAIT_NOBREAK, TRAIT_GENERIC)
+	REMOVE_TRAIT(M, TRAIT_ALLBREAK, TRAIT_GENERIC)
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		H.physiology.armor.melee -= added_armor
+		H.physiology.armor.bullet -= added_armor		// No, you can't change species to get a permanant brute resist
+	..()
+
+/datum/reagent/medicine/lavaland_extract/overdose_process(mob/living/M)
+	ADD_TRAIT(M, TRAIT_ALLBREAK, TRAIT_GENERIC)
+	return . = ..()
+
+/datum/reagent/medicine/molten_bubbles
+	name = "Molten Bubbles"
+	description = "Refreshing softdrink made for the desert."
+	color = "#3d1916"
+	metabolization_rate = REAGENTS_METABOLISM
+
+/datum/reagent/medicine/molten_bubbles/on_mob_life(mob/living/carbon/M)
+	M.adjustFireLoss(-1*REM, 0)
+	M.adjustBruteLoss(-1*REM, 0)
+	if(M.bodytemperature > M.get_body_temp_normal(apply_change=FALSE))
+		M.adjust_bodytemperature(-10 * TEMPERATURE_DAMAGE_COEFFICIENT, M.get_body_temp_normal(apply_change=FALSE))
+	else if(M.bodytemperature < (M.get_body_temp_normal(apply_change=FALSE) + 1))
+		M.adjust_bodytemperature(10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0, M.get_body_temp_normal(apply_change=FALSE))
+	return TRUE
+
+/datum/reagent/medicine/molten_bubbles/plasma
+	name = "Plasma Bubbles"
+	description = "Molten Bubbles with the refreshing taste of plasma."
+	color = "#852e63"
+
+/datum/reagent/medicine/molten_bubbles/sand
+	name = "SandBlast Sarsaparilla"
+	description = "Extra refreshing for those long desert days."
+	color = "#af9938"
