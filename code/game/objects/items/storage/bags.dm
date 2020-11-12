@@ -200,7 +200,6 @@
 /obj/item/storage/bag/plants/ComponentInitialize()
 	. = ..()
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_w_class = WEIGHT_CLASS_NORMAL
 	STR.max_combined_w_class = 50
 	STR.max_items = 100
 	STR.set_holdable(list(
