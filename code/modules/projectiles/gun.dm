@@ -147,7 +147,7 @@
 	return TRUE
 
 /obj/item/gun/proc/shoot_with_empty_chamber(mob/living/user as mob|obj)
-	to_chat(user, "<span class='danger'>*[dry_fire_text]*</span>")
+	to_chat(user, "<span class='danger'>*[dry_fire_text]*</span>")		// Wasp Edit - Dry firing
 	playsound(src, dry_fire_sound, 30, TRUE)
 
 
