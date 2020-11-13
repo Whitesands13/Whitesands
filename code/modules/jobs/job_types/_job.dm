@@ -115,7 +115,7 @@
 					continue // Handled in pre_equip
 				//End WaspStation Edit - Fix Loadout Uniforms not spawning ID/PDA
 				if(G.slot)
-					if(!H.equip_to_slot_or_del(G.spawn_item(H), G.slot))
+					if(!H.equip_to_slot_or_del(G.spawn_item(H, owner = H), G.slot))
 						gear_leftovers += G
 				else
 					gear_leftovers += G
@@ -126,7 +126,7 @@
 	if(gear_leftovers?.len)
 		for(var/datum/gear/G in gear_leftovers)
 			var/metadata = M.client.prefs.equipped_gear[G.display_name]
-			var/item = G.spawn_item(null, metadata)
+			var/item = G.spawn_item(null, metadata, owner = H)
 			var/atom/placed_in = human.equip_or_collect(item)
 
 			if(istype(placed_in))
@@ -145,7 +145,7 @@
 
 			var/obj/item/storage/B = (locate() in H)
 			if(B)
-				G.spawn_item(B, metadata)
+				G.spawn_item(B, metadata, owner = H)
 				to_chat(M, "<span class='notice'>Placing [G.display_name] in [B.name]!</span>")
 				continue
 
