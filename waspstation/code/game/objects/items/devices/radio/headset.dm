@@ -1,14 +1,14 @@
 //solgov
 /obj/item/radio/headset/solgov
-	name = "\improper Solgov Offical's headset"
-	desc = "A Solgov Official's headset."
+	name = "\improper SolGov Offical's headset"
+	desc = "A SolGov Official's headset."
 	icon = 'waspstation/icons/obj/radio.dmi'
 	icon_state = "solgov_headset"
 	keyslot = new /obj/item/encryptionkey/solgov
 
 /obj/item/radio/headset/solgov/alt
-	name = "\improper Solgov Officer's bowman headset"
-	desc = "A Solgov Officer's headset. Protects ears from flashbangs."
+	name = "\improper SolGov Officer's bowman headset"
+	desc = "A SolGov Officer's headset. Protects ears from flashbangs."
 	icon_state = "solgov_headset_alt"
 
 /obj/item/radio/headset/solgov/alt/ComponentInitialize()

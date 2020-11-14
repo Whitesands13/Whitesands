@@ -1,15 +1,15 @@
 /*
-Solgov Representative
+SolGov Representative
 */
 
 /datum/job/solgov
-	title = "Solgov Representative"
+	title = "SolGov Representative"
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "The Captain, Solgov, and Space Law"
+	supervisors = "The Captain, SolGov, and Space Law"
 	selection_color = "#b6b6e6"
-	special_notice = "Monitor the station and ensure the security team and command staff are abiding by space law. Report any misbehaviour to Solgov."
+	special_notice = "Monitor the station and ensure the security team and command staff are abiding by space law. Report any misbehaviour to SolGov."
 	wiki_page = "Government_Attaché"
 	minimal_player_age = 7
 	exp_requirements = 180
@@ -27,7 +27,7 @@ Solgov Representative
 	display_order = JOB_DISPLAY_ORDER_SOLGOV
 
 /datum/outfit/job/solgov
-	name = "Solgov Representative"
+	name = "SolGov Representative"
 	jobtype = /datum/job/solgov
 
 	id = /obj/item/card/id/silver

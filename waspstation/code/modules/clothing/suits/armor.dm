@@ -8,6 +8,6 @@
 
 /obj/item/clothing/suit/armor/vest/solgov/rep
 	name = "\improper SolGov Inspector armor vest"
-	desc = "A type I armor vest emblazoned with the Solgov logo."
+	desc = "A type I armor vest emblazoned with the SolGov logo."
 	icon_state = "armor_alt_solgov"
 	item_state = "armor_alt_solgov"

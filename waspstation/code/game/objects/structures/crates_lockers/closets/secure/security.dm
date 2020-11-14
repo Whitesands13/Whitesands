@@ -19,7 +19,7 @@
 	new /obj/item/clothing/gloves/color/latex/nitrile(src)
 
 /obj/structure/closet/secure_closet/lieutenant
-	name = "solgov official's locker"
+	name = "SolGov official's locker"
 	req_access = list(ACCESS_SOLGOV)
 	icon_state = "solgov"
 
