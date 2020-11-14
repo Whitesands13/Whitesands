@@ -222,8 +222,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "Brig Physician"
 
 /obj/effect/landmark/start/lieutenant
-	name = "Solgov Representative"
-	icon_state = "Solgov Representative"
+	name = "SolGov Representative"
+	icon_state = "SolGov Representative"
 
 //Department Security spawns
 
