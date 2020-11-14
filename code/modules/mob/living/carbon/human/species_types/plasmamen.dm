@@ -159,6 +159,9 @@
 
 		if("Clown")
 			O = new /datum/outfit/plasmaman/clown
+		
+		if("Lieutenant")	//WS edit plasmaman customization
+			O = new /datum/outfit/plasmaman/lieutenant	//WS edit plasmaman customization
 
 	var/holder		// Wasp Edit Begin - Plasma skirtsuit prefs
 	switch(H.jumpsuit_style)
@@ -206,7 +209,7 @@
 				if(1)
 					H.say(pick("oof.", "ouch.", "my bones.", "oof ouch.", "oof ouch my bones."), forced = /datum/reagent/toxin/bonehurtingjuice)
 				if(2)
-					H.emote("me", 1, pick("oofs silently.", "looks like their bones hurt.", "grimaces, as though their bones hurt."))
+					H.manual_emote(pick("oofs silently.", "looks like their bones hurt.", "grimaces, as though their bones hurt."))
 				if(3)
 					to_chat(H, "<span class='warning'>Your bones hurt!</span>")
 		if(chem.overdosed)

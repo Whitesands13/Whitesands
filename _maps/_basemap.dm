@@ -12,6 +12,7 @@
 		#include "map_files\MetaStation\MetaStation.dmm"
 		#include "map_files\PubbyStation\PubbyStation.dmm"
 		#include "map_files\BoxStation\BoxStation.dmm"
+		#include "map_files\PackedStation\PackedStation.dmm"
 		#include "map_files\GalaxyStation\Galaxystation.dmm"
 		#include "map_files\GalaxyStation\Galaxystation_LVL2.dmm"
 
