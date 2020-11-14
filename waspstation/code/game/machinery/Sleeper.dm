@@ -123,6 +123,7 @@
 	else if(chembag && istype(W, /obj/item/reagent_containers) && !(W.item_flags & ABSTRACT) && W.is_open_container())
 		user.transferItemToLoc(W, chembag)
 		to_chat(user, "<span class='notice'>You put [W] into [src]'s [chembag].</span>")
+		update_contents()
 	return ..()
 
 /obj/machinery/sleeper/CtrlClick(mob/user)
