@@ -12,6 +12,5 @@
 /obj/effect/decal/cleanable/squid_ink/proc/AfterSlip(mob/living/M)
 	M.AddComponent(/datum/component/outline)
 	M.playsound_local(get_turf(src), 'sound/effects/splat.ogg', 50, 1)
-	M.visible_message("<span class='warning'>[M.name] gets covered in squid ink, leaving a hedious outline around them!</span>", "<span class='warning'>You get squid ink all over yourself, it's horrible!</span>")
-
+	M.visible_message("<span class='warning'>[M.name] gets covered in squid ink, leaving a hideous outline around them!</span>", "<span class='warning'>You get squid ink all over yourself, it's horrible!</span>")
 
