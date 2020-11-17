@@ -80,6 +80,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_IMMOBILIZED		"immobilized" //Prevents voluntary movement.
 #define TRAIT_PERFECT_ATTACKER "perfect_attacker" /// Doesn't miss attacks
 #define TRAIT_INCAPACITATED		"incapacitated"
+#define TRAIT_DEAF				"deaf"
 #define TRAIT_BLIND 			"blind"
 #define TRAIT_MUTE				"mute"
 #define TRAIT_EMOTEMUTE			"emotemute"
