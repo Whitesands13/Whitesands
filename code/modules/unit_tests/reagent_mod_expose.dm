@@ -3,11 +3,11 @@
 /datum/reagent/method_patch_test
 	name = "method patch test"
 
-/datum/reagent/method_patch_test/expose_mob(mob/living/target, methods = PATCH, reac_volume, show_message = TRUE)
+/datum/reagent/method_patch_test/expose_mob(mob/living/target, method = PATCH, reac_volume, show_message = TRUE)
 	. = ..()
-	if(methods & PATCH)
+	if(method == PATCH)
 		target.health = 90
-	if(methods & INJECT)
+	if(method == INJECT)
 		target.health = 80
 
 /datum/unit_test/reagent_mob_expose/Run()
@@ -34,7 +34,7 @@
 	TEST_ASSERT_EQUAL(human.drowsyness, 0, "Human is drowsy at the start of testing")
 	drink.reagents.clear_reagents()
 	drink.reagents.add_reagent(/datum/reagent/nitrous_oxide, 10)
-	drink.reagents.trans_to(human, 10, methods = VAPOR)
+	drink.reagents.trans_to(human, 10, method = VAPOR)
 	TEST_ASSERT_NOTEQUAL(human.drowsyness, 0, "Human is not drowsy after exposure to vapors")
 
 	// PATCH

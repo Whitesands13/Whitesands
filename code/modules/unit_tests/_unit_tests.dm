@@ -28,7 +28,6 @@
 #include "emoting.dm"
 #include "keybinding_init.dm"
 #include "machine_disassembly.dm"
-#include "metabolizing.dm"
 #include "outfit_sanity.dm"
 #include "pills.dm"
 #include "plantgrowth_tests.dm"
