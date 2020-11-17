@@ -32,6 +32,8 @@ export const Sleeper = (props, context) => {
     open,
     occupant = {},
     occupied,
+    stasis,
+    canStasis,
     cell = {},
   } = data;
   return (
@@ -43,7 +45,12 @@ export const Sleeper = (props, context) => {
         <Section
           title={occupant.name ? occupant.name : 'No Occupant'}
           minHeight="210px"
-          buttons={!!occupant.stat && (
+          buttons={!!occupied && !!canStasis && (
+            <Button
+              onClick={() => act('toggleStasis')}
+              color={stasis && 'good'}
+              content={"Toggle Stasis"} />
+          ) || !!occupant.stat && (
             <Box
               inline
               bold
@@ -75,6 +82,13 @@ export const Sleeper = (props, context) => {
                       color="bad" />
                   </LabeledList.Item>
                 ))}
+                {!!canStasis && !!occupant.stat && (
+                  <LabeledList.Item
+                    label="Status"
+                    color={occupant.statstate}>
+                    {occupant.stat}
+                  </LabeledList.Item>
+                )}
                 <LabeledList.Item
                   label="Cells"
                   color={occupant.cloneLoss ? 'bad' : 'good'}>

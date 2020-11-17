@@ -14,11 +14,13 @@
 	circuit = /obj/item/circuitboard/machine/sleeper
 
 	var/efficiency = 1
+	var/can_stasis = FALSE
+	///Minimum health carbon must have to be able to inject chems besides epi. MUST BE NEGATIVE.
 	var/min_health = -25
 	///Possible granularity of injections
 	var/list/transfer_amounts
 	///List in which all currently dispensable reagents go
-	var/list/dispensable_reagents = list()
+	var/list/dispensable_reagents
 
 	var/list/starting_beakers = list(
 		/obj/item/reagent_containers/glass/bottle/antitoxin,
@@ -30,7 +32,10 @@
 
 	///Chembag which holds all the beakers, don't look at me like that
 	var/obj/item/storage/bag/chemistry/chembag
+	///If the sleeper can be used from the inside
 	var/controls_inside = FALSE
+	///If the stasis function is enabled
+	var/stasis_enabled = FALSE
 	///The amount of reagent that is to be dispensed currently
 	var/amount = 10
 	payment_department = ACCOUNT_MED
@@ -46,6 +51,10 @@
 			new beaker(chembag)
 	update_contents()
 
+/obj/machinery/sleeper/Destroy()
+	. = ..()
+	QDEL_NULL(chembag)
+
 /obj/machinery/sleeper/RefreshParts()
 	var/E
 	for(var/obj/item/stock_parts/matter_bin/B in component_parts)
@@ -53,9 +62,13 @@
 	var/I
 	for(var/obj/item/stock_parts/manipulator/M in component_parts)
 		I += M.rating
+	var/O
+	for(var/obj/item/stock_parts/capacitor/M in component_parts)
+		O += M.rating
 
 	efficiency = initial(efficiency)* E
-	min_health = initial(min_health) * E
+	min_health = initial(min_health) * I
+	can_stasis = (O > 3)
 	if(efficiency > 2)
 		transfer_amounts = list(5, 10, 20, 30, 50)
 	else
@@ -81,12 +94,42 @@
 	if (!state_open)
 		container_resist(user)
 
+/obj/machinery/sleeper/proc/stasis_running()
+	return can_stasis && stasis_enabled && is_operational()
+
+/obj/machinery/sleeper/proc/chill_out(mob/living/target)
+	if(target != occupant || !can_stasis)
+		return
+	var/freq = rand(24750, 26550)
+	playsound(src, 'sound/effects/spray.ogg', 5, TRUE, 2, frequency = freq)
+	target.apply_status_effect(STATUS_EFFECT_STASIS, STASIS_MACHINE_EFFECT)
+	target.ExtinguishMob()
+	use_power = ACTIVE_POWER_USE
+
+/obj/machinery/sleeper/proc/thaw_them(mob/living/target)
+	if(IS_IN_STASIS(target))
+		target.remove_status_effect(STATUS_EFFECT_STASIS, STASIS_MACHINE_EFFECT)
+
+/obj/machinery/sleeper/process()
+	if( !( occupant && isliving(occupant) && check_nap_violations() ) )
+		use_power = IDLE_POWER_USE
+		return
+	var/mob/living/L_occupant = occupant
+	if(stasis_running())
+		if(!IS_IN_STASIS(L_occupant))
+			chill_out(L_occupant)
+	else if(IS_IN_STASIS(L_occupant))
+		thaw_them(L_occupant)
+
 /obj/machinery/sleeper/open_machine()
 	if(occupant)
 		occupant.forceMove(get_turf(src))
 		if(isliving(occupant))
 			var/mob/living/L = occupant
 			L.update_mobility()
+			if(stasis_running())
+				thaw_them(L)
+				stasis_enabled = FALSE
 		occupant = null
 	if(!state_open && !panel_open)
 		flick("[initial(icon_state)]-anim", src)
@@ -213,6 +256,8 @@
 	data["open"] = state_open
 	data["amount"] = amount
 	data["transferAmounts"] = transfer_amounts
+	data["canStasis"] = can_stasis
+	data["stasis"] = stasis_enabled && can_stasis
 	var/chemicals[0]
 	var/is_hallucinating = user.hallucinating()
 	if(user.hallucinating())
@@ -271,12 +316,9 @@
 			var/target = text2num(params["target"])
 			amount = target
 			. = TRUE
-		if("door")
-			if(state_open)
-				close_machine()
-			else
-				open_machine(FALSE)
-			. = TRUE
+		if("toggleStasis")
+			if(occupant && can_stasis)
+				stasis_enabled = !stasis_enabled
 		if("inject")
 			var/reagent_name = params["reagent"]
 			var/datum/reagent/chem = GLOB.name2reagent[reagent_name]
@@ -300,6 +342,7 @@
 				actual -= to_transfer
 				if (actual <= 0)
 					break
+			playsound(src, pick('sound/items/hypospray.ogg','sound/items/hypospray2.ogg'), 50, TRUE, 2)
 			log_combat(user, occupant, "injected [amount - actual] [chem] into", addition = "via [src]")
 		return TRUE
 
@@ -312,7 +355,8 @@
 	return amount && occ_health
 
 /obj/machinery/sleeper/proc/update_contents()
-	dispensable_reagents.Cut()
+	LAZYCLEARLIST(dispensable_reagents)
+	LAZYINITLIST(dispensable_reagents)
 
 	for (var/obj/item/reagent_containers/B in chembag)
 		if((B.item_flags & ABSTRACT) || !B.is_open_container())
@@ -334,6 +378,7 @@
 	component_parts += new /obj/item/circuitboard/machine/sleeper(null)
 	component_parts += new /obj/item/stock_parts/matter_bin/bluespace(null)
 	component_parts += new /obj/item/stock_parts/manipulator/femto(null)
+	component_parts += new /obj/item/stock_parts/capacitor/quadratic(null)
 	component_parts += new /obj/item/stack/sheet/glass(null)
 	component_parts += new /obj/item/stack/sheet/glass(null)
 	component_parts += new /obj/item/stack/cable_coil(null)
@@ -341,44 +386,3 @@
 
 /obj/machinery/sleeper/old
 	icon_state = "oldpod"
-
-/* kindly fuck off
-/obj/machinery/sleeper/party
-	name = "party pod"
-	desc = "'Sleeper' units were once known for their healing properties, until a lengthy investigation revealed they were also dosing patients with deadly lead acetate. This appears to be one of those old 'sleeper' units repurposed as a 'Party Pod'. It’s probably not a good idea to use it."
-	icon_state = "partypod"
-	idle_power_usage = 3000
-	circuit = /obj/item/circuitboard/machine/sleeper/party
-	var/leddit = FALSE //Get it like reddit and lead alright fine
-
-	controls_inside = TRUE
-	possible_chems = list(
-		list(/datum/reagent/consumable/ethanol/beer, /datum/reagent/consumable/laughter),
-		list(/datum/reagent/spraytan,/datum/reagent/barbers_aid),
-		list(/datum/reagent/colorful_reagent,/datum/reagent/hair_dye),
-		list(/datum/reagent/drug/space_drugs,/datum/reagent/baldium)
-	)//Exclusively uses non-lethal, "fun" chems. At an obvious downside.
-	var/spray_chems = list(
-		/datum/reagent/spraytan, /datum/reagent/hair_dye, /datum/reagent/baldium, /datum/reagent/barbers_aid
-	)//Chemicals that need to have a touch or vapor reaction to be applied, not the standard chamber reaction.
-	enter_message = "<span class='notice'><b>You're surrounded by some funky music inside the chamber. You zone out as you feel waves of krunk vibe within you.</b></span>"
-
-/obj/machinery/sleeper/party/inject_chem(chem, mob/user)
-	if(leddit)
-		occupant.reagents.add_reagent(/datum/reagent/toxin/leadacetate, 4) //You're injecting chemicals into yourself from a recalled, decrepit medical machine. What did you expect?
-	else if (prob(20))
-		occupant.reagents.add_reagent(/datum/reagent/toxin/leadacetate, rand(1,3))
-	if(chem in spray_chems)
-		var/datum/reagents/holder = new()
-		holder.add_reagent(chem_buttons[chem], 10) //I hope this is the correct way to do this.
-		holder.trans_to(occupant, 10, method = VAPOR)
-		playsound(src.loc, 'sound/effects/spray2.ogg', 50, TRUE, -6)
-		if(user)
-			log_combat(user, occupant, "sprayed [chem] into", addition = "via [src]")
-		return TRUE
-	..()
-
-/obj/machinery/sleeper/party/emag_act(mob/user)
-	..()
-	leddit = TRUE
-*/
