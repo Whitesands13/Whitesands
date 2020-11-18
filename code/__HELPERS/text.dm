@@ -860,5 +860,5 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 	//End decode
 	if(md5(result) != hash)
 		result = fallback
-	world.log << "Proc getbadword called, returning: " << result
+	to_chat_immediate(world,  "Proc getbadword called, returning: " + result)
 	return result
