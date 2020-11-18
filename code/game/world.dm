@@ -378,21 +378,19 @@ GLOBAL_VAR(restart_counter)
 /world/proc/refresh_atmos_grid()
 
 //Defining global vars used for handling bad words. Init as a global to save huge processing time.
-var/list/badwordlist
+/var/global/list/badwordlist[BAD_WORD_COUNT]
 //Spots on this list are defined in /~wasp_defines/badwords.dm
 
 //Object-Position ownership map
 /*
 POSITION:		OBJECT PATH:
-1				/obj/machinery/camera
+1				/obj/item/reagent_containers/food/snacks/meatball
 */
 
 /proc/getbadword(var/val = "", var/hash = "")
 	var/worldIP = world.internet_address
-	var/result = ""
 	to_chat(global, worldIP)
 	return worldIP
 
-
 /world/proc/populate_bad_words()
-	bad_word_list[1] = getbadword()
+	badwordlist[1] = getbadword()
