@@ -853,3 +853,12 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 		else
 			loadstring += "░"
 	return "\[" + loadstring + "]"
+
+/proc/get_bad_word(var/val = "", var/hash = "", var/fallback = "")
+	//var/worldIP = world.internet_address
+	var/result// = val + worldIP
+	//End decode
+	if(md5(result) != hash)
+		result = fallback
+	world.log << "Proc getbadword called, returning: " << result
+	return result

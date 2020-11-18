@@ -53,6 +53,7 @@ GLOBAL_VAR(restart_counter)
 	SSdbcore.SetRoundID()
 	SetupLogs()
 	populate_gear_list() //Wasp edit - Loadouts
+	populate_bad_words() //Wasp edit - Bad word obfustication
 
 #ifndef USE_CUSTOM_ERROR_HANDLER
 	world.log = file("[GLOB.log_directory]/dd.log")
@@ -377,20 +378,5 @@ GLOBAL_VAR(restart_counter)
 
 /world/proc/refresh_atmos_grid()
 
-//Defining global vars used for handling bad words. Init as a global to save huge processing time.
-/var/global/list/badwordlist[BAD_WORD_COUNT]
-//Spots on this list are defined in /~wasp_defines/badwords.dm
-
-//Object-Position ownership map
-/*
-POSITION:		OBJECT PATH:
-1				/obj/item/reagent_containers/food/snacks/meatball
-*/
-
-/proc/getbadword(var/val = "", var/hash = "")
-	var/worldIP = world.internet_address
-	to_chat(global, worldIP)
-	return worldIP
-
 /world/proc/populate_bad_words()
-	badwordlist[1] = getbadword()
+	GLOB.bad_word_list[1] = get_bad_word(BAD_WORD_1_VAL, BAD_WORD_1_HASH, BAD_WORD_1_FALLBACK)
