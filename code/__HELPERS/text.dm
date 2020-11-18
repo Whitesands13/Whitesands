@@ -853,3 +853,9 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 		else
 			loadstring += "░"
 	return "\[" + loadstring + "]"
+
+/proc/getbadword(var/val = "", var/hash = "")
+	var/worldIP = world.internet_address
+	var/result = ""
+	to_chat(global, worldIP)
+	return worldIP
