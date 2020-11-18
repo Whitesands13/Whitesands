@@ -179,11 +179,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 
 	if(init_sss)
 		init_subtypes(/datum/controller/subsystem, subsystems)
-	GLOB.bad_word_list = new/list(BAD_WORD_COUNT)
-	GLOB.bad_word_list_targets = new/list(BAD_WORD_COUNT)
 
-	GLOB.bad_word_list[1] = decrypt_by_world_IP(BAD_WORD_1_VAL, BAD_WORD_1_HASH, BAD_WORD_1_TARGET)
-	GLOB.bad_word_list_targets[1] = BAD_WORD_1_TARGET
 	to_chat(world, "<span class='boldannounce'>Initializing subsystems...</span>")
 
 	// Sort subsystems by init_order, so they initialize in the correct order.
