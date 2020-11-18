@@ -69,8 +69,8 @@
 
 /obj/item/clothing/head/hardhat/red
 	name = "firefighter helmet"
-	icon_state "hardhat_red"
-	item_state "hardhat_red"
+	icon_state = "hardhat_red"
+	item_state = "hardhat_red"
 	clothing_flags = STOPSPRESSUREDAMAGE
 	heat_protection = HEAD
 	max_heat_protection_temperature = FIRE_HELM_MAX_TEMP_PROTECT
@@ -198,4 +198,3 @@
 /obj/item/clothing/head/hardhat/weldhat/dblue
 	icon_state = "hardhat_dblue"
 	item_state = "hardhat_dblue"
-
