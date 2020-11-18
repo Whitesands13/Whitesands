@@ -509,9 +509,9 @@ GLOBAL_LIST_INIT(pda_styles, sortList(list(MONO, VT, ORBITRON, SHARE)))
 //And the target name to change
 #define BAD_WORD_COUNT		1
 //All new entries need to be added to the populate_bad_words proc in game/world.dm
-#define BAD_WORD_1_VAL  	"Decrypt target"
-#define BAD_WORD_1_HASH 	"Decrypt hash"
-#define BAD_WORD_1_TARGET	"Decryption fail"
+#define BAD_WORD_1_VAL  	"test"
+#define BAD_WORD_1_HASH 	"0391a1e58f324b3a0c79d32dd09436bd45bfc773"
+#define BAD_WORD_1_TARGET	"meatball"
 
 //Object-Position ownership map
 /*

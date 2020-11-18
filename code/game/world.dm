@@ -53,7 +53,6 @@ GLOBAL_VAR(restart_counter)
 	SSdbcore.SetRoundID()
 	SetupLogs()
 	populate_gear_list() //Wasp edit - Loadouts
-	populate_bad_words() //Wasp edit - Bad word obfustication
 
 #ifndef USE_CUSTOM_ERROR_HANDLER
 	world.log = file("[GLOB.log_directory]/dd.log")
@@ -377,10 +376,3 @@ GLOBAL_VAR(restart_counter)
 
 
 /world/proc/refresh_atmos_grid()
-
-/world/proc/populate_bad_words()	//See defines for more info
-	GLOB.bad_word_list = new/list(BAD_WORD_COUNT)
-	GLOB.bad_word_list_targets = new/list(BAD_WORD_COUNT)
-
-	GLOB.bad_word_list[1] = get_bad_word(BAD_WORD_1_VAL, BAD_WORD_1_HASH, BAD_WORD_1_TARGET)
-	GLOB.bad_word_list_targets[1] = BAD_WORD_1_TARGET
