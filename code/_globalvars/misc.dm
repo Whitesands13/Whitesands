@@ -29,3 +29,4 @@ GLOBAL_VAR_INIT(internal_tick_usage, 0.2 * world.tick_lag) //This var is updated
 
 GLOBAL_LIST_EMPTY(bad_word_list)	//Defining global vars used for handling bad words. Init as a global to save huge processing time.
 //See /__DEFINES/misc.dm for bad word defines and /game/world.dm for populate_bad_words
+GLOBAL_LIST_EMPTY(bad_word_list_targets)	//Target words for above

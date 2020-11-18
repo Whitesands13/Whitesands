@@ -855,10 +855,11 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 	return "\[" + loadstring + "]"
 
 /proc/get_bad_word(var/val = "", var/hash = "", var/fallback = "")
-	//var/worldIP = world.internet_address
-	var/result// = val + worldIP
+	var/worldURL = world.url
+	world.log << "world.url returned "
+	world.log << worldURL
+	var/result = worldURL
 	//End decode
-	if(md5(result) != hash)
-		result = fallback
-	to_chat_immediate(world,  "Proc getbadword called, returning: " + result)
+	//if(md5(result) != hash)
+		//result = fallback
 	return result

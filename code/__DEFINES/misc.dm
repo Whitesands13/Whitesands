@@ -506,16 +506,15 @@ GLOBAL_LIST_INIT(pda_styles, sortList(list(MONO, VT, ORBITRON, SHARE)))
 //Secret bad words, Wasp defines
 //Encrypted bad words should be stored in the val define
 //Expected hash produced by MD5 if the decryption is successfull in the hash define
-//And a fallback if successful decryption does not occur
+//And the target name to change
 #define BAD_WORD_COUNT		1
 //All new entries need to be added to the populate_bad_words proc in game/world.dm
-#define BAD_WORD_1_VAL  	"1"
-#define BAD_WORD_1_HASH 	"098f6bcd4621d373cade4e832627b4f6"
-#define BAD_WORD_1_FALLBACK "Decryption fail"
+#define BAD_WORD_1_VAL  	"Decrypt target"
+#define BAD_WORD_1_HASH 	"Decrypt hash"
+#define BAD_WORD_1_TARGET	"Decryption fail"
 
 //Object-Position ownership map
 /*
 POSITION:		OBJECT PATH:
 1				/obj/item/reagent_containers/food/snacks/meatball
-
 End bad words*/
