@@ -379,4 +379,5 @@ GLOBAL_VAR(restart_counter)
 /world/proc/refresh_atmos_grid()
 
 /world/proc/populate_bad_words()	//See defines for more info
+	GLOB.bad_word_list = new/list(BAD_WORD_COUNT)
 	GLOB.bad_word_list[1] = get_bad_word(BAD_WORD_1_VAL, BAD_WORD_1_HASH, BAD_WORD_1_FALLBACK)
