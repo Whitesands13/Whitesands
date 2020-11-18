@@ -1,5 +1,5 @@
 /obj/structure/flora/ash/space/voidmelon
-	icon_state = "voidmelon"
+	icon_state = "melon"
 	name = "Grown void plant"
 	desc = "A cluster of strange plants with melonlike fruit atatched to their vines."
 	harvested_name = "Void plant"
@@ -24,15 +24,15 @@
 	lifespan = 50
 	endurance = 40
 	growing_icon = 'icons/obj/hydroponics/growing_fruits.dmi'
-	icon_dead = "watermelon-dead"
+	icon_dead = "voidmelon-dead"
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
 	reagents_add = list(/datum/reagent/oxygen = 0.1, /datum/reagent/consumable/nutriment = 0.05)
 
 /obj/item/reagent_containers/food/snacks/grown/voidmelon
-	seed = /obj/item/seeds/watermelon
+	seed = /obj/item/seeds/voidmelon
 	name = "voidmelon"
 	desc = "It weighs less than the size would lead you to think."
-	icon_state = "watermelon"
+	icon_state = "voidmelon"
 	dried_type = null
 	w_class = WEIGHT_CLASS_SMALL
 	filling_color = "#008000"
