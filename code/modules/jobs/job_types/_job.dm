@@ -69,7 +69,7 @@
 
 	///Levels unlocked at roundstart in physiology
 	var/list/roundstart_experience
-	var/tmp/list/gear_leftovers = list()
+	var/tmp/list/gear_leftovers
 
 //Only override this proc, unless altering loadout code. Loadouts act on H but get info from M
 //H is usually a human unless an /equip override transformed it
@@ -89,6 +89,7 @@
 		return
 	var/mob/living/carbon/human/human = H
 	if(M.client && (M.client.prefs.equipped_gear && M.client.prefs.equipped_gear.len))
+		gear_leftovers = list()
 		for(var/gear in M.client.prefs.equipped_gear)
 			var/datum/gear/G = GLOB.gear_datums[gear]
 			if(G)
