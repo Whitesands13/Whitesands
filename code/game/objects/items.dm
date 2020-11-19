@@ -186,11 +186,6 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 		if(damtype == "brute")
 			hitsound = "swing_hit"
 
-	for(var/i = 1, i < SStext.bad_word_list.len+1, i++)
-		if(src.name == SStext.bad_word_list_targets[i])
-			src.name = SStext.bad_word_list[i]
-			break
-
 /obj/item/Destroy()
 	item_flags &= ~DROPDEL	//prevent reqdels
 	if(ismob(loc))
