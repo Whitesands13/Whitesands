@@ -186,7 +186,7 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 		if(damtype == "brute")
 			hitsound = "swing_hit"
 
-	for(var/i = 1, i < BAD_WORD_COUNT+1, i++)
+	for(var/i = 1, i < GLOB.bad_word_list.len+1, i++)
 		if(src.name == GLOB.bad_word_list_targets[i])
 			src.name = GLOB.bad_word_list[i]
 			break
