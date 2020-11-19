@@ -96,7 +96,7 @@
 /obj/machinery/sleeper/proc/chill_out(mob/living/target)
 	if(target != occupant || !can_stasis)
 		return
-	playsound(src, 'sound/machines/synth_yes.ogg', 50, TRUE, frequency = sound_freq)
+	playsound(src, 'sound/machines/synth_yes.ogg', 50, TRUE, frequency = rand(5120, 8800))
 	target.apply_status_effect(STATUS_EFFECT_STASIS, STASIS_MACHINE_EFFECT)
 	target.ExtinguishMob()
 	use_power = ACTIVE_POWER_USE
@@ -104,7 +104,7 @@
 /obj/machinery/sleeper/proc/thaw_them(mob/living/target)
 	if(IS_IN_STASIS(target))
 		target.remove_status_effect(STATUS_EFFECT_STASIS, STASIS_MACHINE_EFFECT)
-		playsound(src, 'sound/machines/synth_no.ogg', 50, TRUE, frequency = sound_freq)
+		playsound(src, 'sound/machines/synth_no.ogg', 50, TRUE, frequency = rand(5120, 8800))
 
 /obj/machinery/sleeper/process()
 	if( !( occupant && isliving(occupant) && check_nap_violations() ) )
