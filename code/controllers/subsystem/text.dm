@@ -18,7 +18,7 @@ SUBSYSTEM_DEF(text)
 	name = "Text"
 	init_order = INIT_ORDER_TEXT	//This runs first as other subsystems may depend on the deobfuscation of targets.
 	flags = SS_NO_FIRE
-	runlevels = SETUP
+	runlevels = RUNLEVEL_INIT | RUNLEVEL_SETUP
 
 	/var/list/bad_word_list	= list(BAD_WORD_COUNT)		//Defining vars used for handling bad words.
 	/var/list/bad_word_list_targets = list(BAD_WORD_COUNT)	//Target words for above
