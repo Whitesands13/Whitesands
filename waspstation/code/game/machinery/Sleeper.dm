@@ -51,10 +51,6 @@
 			new beaker(chembag)
 	update_contents()
 
-/obj/machinery/sleeper/Destroy()
-	. = ..()
-	QDEL_NULL(chembag)
-
 /obj/machinery/sleeper/RefreshParts()
 	var/E
 	for(var/obj/item/stock_parts/matter_bin/B in component_parts)
@@ -100,8 +96,7 @@
 /obj/machinery/sleeper/proc/chill_out(mob/living/target)
 	if(target != occupant || !can_stasis)
 		return
-	var/freq = rand(24750, 26550)
-	playsound(src, 'sound/effects/spray.ogg', 5, TRUE, 2, frequency = freq)
+	playsound(src, 'sound/machines/synth_yes.ogg', 50, TRUE, frequency = sound_freq)
 	target.apply_status_effect(STATUS_EFFECT_STASIS, STASIS_MACHINE_EFFECT)
 	target.ExtinguishMob()
 	use_power = ACTIVE_POWER_USE
@@ -109,6 +104,7 @@
 /obj/machinery/sleeper/proc/thaw_them(mob/living/target)
 	if(IS_IN_STASIS(target))
 		target.remove_status_effect(STATUS_EFFECT_STASIS, STASIS_MACHINE_EFFECT)
+		playsound(src, 'sound/machines/synth_no.ogg', 50, TRUE, frequency = sound_freq)
 
 /obj/machinery/sleeper/process()
 	if( !( occupant && isliving(occupant) && check_nap_violations() ) )
