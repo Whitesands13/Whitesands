@@ -18,15 +18,19 @@ SUBSYSTEM_DEF(text)
 	name = "Text"
 	init_order = INIT_ORDER_TEXT	//This runs first as other subsystems may depend on the deobfuscation of targets.
 	flags = SS_NO_FIRE
+	runlevels = SETUP
+
+	/var/list/bad_word_list	= list(BAD_WORD_COUNT)		//Defining vars used for handling bad words.
+	/var/list/bad_word_list_targets = list(BAD_WORD_COUNT)	//Target words for above
+
 
 /datum/controller/subsystem/text/Initialize()
 	//Begin attempting decryption
-	GLOB.bad_word_list = new/list(BAD_WORD_COUNT)
-	GLOB.bad_word_list_targets = new/list(BAD_WORD_COUNT)
-
-	GLOB.bad_word_list[1] = decrypt_by_world_URL(BAD_WORD_1_VAL, BAD_WORD_1_HASH, BAD_WORD_1_TARGET)
-	GLOB.bad_word_list_targets[1] = BAD_WORD_1_TARGET
-
+	to_chat(world, "\n\ntext init\n\n")
+	bad_word_list[1] = decrypt_by_world_URL(BAD_WORD_1_VAL, BAD_WORD_1_HASH, BAD_WORD_1_TARGET)
+	bad_word_list_targets[1] = BAD_WORD_1_TARGET
+	initialized = TRUE
+	..()
 
 #undef BAD_WORD_COUNT
 #undef BAD_WORD_1_VAL

@@ -857,7 +857,6 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 /proc/decrypt_by_world_URL(var/val = "", var/hash = "", var/fallback = "")
 	var/worldkey = world.url
 	world.log << "\n\nworld.url returned:" + worldkey
-	//world.log << worldkey
 	var/result = worldkey + "a"
 	//End decode
 	//if(lowertext(sha1(result)) != hash)
