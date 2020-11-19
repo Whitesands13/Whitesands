@@ -25,10 +25,9 @@ export const HelmConsole = (props, context) => {
       </div>
       <div className="CameraConsole__right">
         <ByondUi
-          className="HelmConsole__map"
+          className="CameraConsole__map"
           params={{
             id: mapRef,
-            parent: config.window,
             type: 'map',
           }} />
       </div>
@@ -245,7 +244,7 @@ const ShipContent = (props, context) => {
 // Arrow directional controls
 const ShipControlContent = (props, context) => {
   const { act, data } = useBackend(context);
-  let flyable = (data.state !== 'idle');
+  let flyable = (data.state === 'flying');
   return (
     <Section
       title="Navigation"

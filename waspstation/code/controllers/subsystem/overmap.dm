@@ -6,21 +6,21 @@ SUBSYSTEM_DEF(overmap)
 	runlevels = RUNLEVEL_SETUP | RUNLEVEL_GAME
 
 	///List of all overmap objects
-	var/list/overmap_objects = list()
+	var/list/overmap_objects
 	///List of all active ships
-	var/list/ships = list()
+	var/list/ships
 	///List of all helms, to be adjusted
-	var/list/helms = list()
+	var/list/helms
 	///List of all nav computers to initialize
-	var/list/navs = list()
+	var/list/navs
 	///List of all events
-	var/list/events = list()
+	var/list/events
 
 	///The main station or ship
 	var/obj/structure/overmap/main
 
 	///Width/heighth of the overmap "zlevel"
-	var/size = 15
+	var/size = 20
 	///Should events be processed
 	var/events_enabled = TRUE
 	///Should ship movement be processed
@@ -33,6 +33,8 @@ SUBSYSTEM_DEF(overmap)
 	create_map()
 	for(var/shuttle in SSshuttle.mobile)
 		var/obj/docking_port/mobile/M = shuttle
+		if(istype(M, /obj/docking_port/mobile/arrivals))
+			continue
 		setup_shuttle_ship(M)
 
 	for(var/ship in ships)
@@ -96,12 +98,12 @@ SUBSYSTEM_DEF(overmap)
 	var/obj/structure/overmap/event/E = new type(location)
 	if(!chance)
 		chance = E.spread_chance
-	for(var/dir in GLOB.alldirs)
+	for(var/dir in GLOB.cardinals)
 		if(prob(chance))
 			var/turf/T = get_step(E, dir)
 			if(!istype(get_area(T), /area/overmap))
 				continue
-			if(locate(type) in T)
+			if(locate(/obj/structure/overmap/event) in T)
 				continue
 			spawn_event_cluster(type, T, chance / 2)
 
@@ -127,10 +129,11 @@ SUBSYSTEM_DEF(overmap)
 /**
   * Returns a random, usually empty turf in the overmap
   * * thing_to_not_have - The thing you don't want to be in the found tile, for example, an overmap event [/obj/structure/overmap/event].
+  * * tries - How many attempts it will try before giving up finding an unused tile..
   */
-/datum/controller/subsystem/overmap/proc/get_unused_overmap_square(thing_to_not_have = /obj/structure/overmap)
+/datum/controller/subsystem/overmap/proc/get_unused_overmap_square(thing_to_not_have = /obj/structure/overmap, tries = 6)
 	var/turf/picked_turf
-	for(var/i in 1 to 6)
+	for(var/i in 1 to tries)
 		picked_turf = pick(pick(get_area_turfs(/area/overmap)))
 		if(locate(thing_to_not_have) in picked_turf)
 			continue

@@ -4,10 +4,10 @@
 	icon_screen = "shuttle"
 	icon_keyboard = "tech_key"
 	circuit = /obj/item/circuitboard/computer/security
-	light_color = LIGHT_COLOR_RED
+	light_color = LIGHT_COLOR_FLARE
 
 	///The ship
-	var/obj/structure/overmap/ship/current_ship
+	var/obj/structure/overmap/current_ship
 	var/list/concurrent_users = list()
 	///Is this for viewing only?
 	var/viewer = FALSE
@@ -60,7 +60,6 @@
 			user.client.register_map_obj(current_ship.cam_plane_master)
 			user.client.register_map_obj(current_ship.cam_background)
 
-			current_ship.refresh_engines()
 		// Open UI
 		ui = new(user, src, "HelmConsole", name)
 		ui.open()
@@ -84,33 +83,38 @@
 		)
 		.["otherInfo"] += list(other_data)
 
-	if(istype(current_ship, /obj/structure/overmap/ship))
-		.["canFly"] = TRUE
-		.["state"] = current_ship.state
-		.["docked"] = current_ship.docked ? TRUE : FALSE
-		.["heading"] = dir2angle(current_ship.get_heading())
-		.["speed"] = current_ship.get_speed() * 1000
-		.["maxspeed"] = current_ship.max_speed * 1000
-		.["eta"] = current_ship.get_eta()
-		.["stopped"] = current_ship.is_still()
-		.["x"] = current_ship.x
-		.["y"] = current_ship.y
-		.["shipInfo"] += list(
-			mass = current_ship.mass,
-			est_thrust = current_ship.est_thrust
+	.["x"] = current_ship.x
+	.["y"] = current_ship.y
+
+	if(!istype(current_ship, /obj/structure/overmap/ship))
+		return
+
+	var/obj/structure/overmap/ship/S = current_ship
+
+	.["canFly"] = TRUE
+	.["state"] = S.state
+	.["docked"] = S.docked ? TRUE : FALSE
+	.["heading"] = dir2angle(S.get_heading())
+	.["speed"] = S.get_speed() * 1000
+	.["maxspeed"] = S.max_speed * 1000
+	.["eta"] = S.get_eta()
+	.["stopped"] = S.is_still()
+	.["shipInfo"] += list(
+		mass = S.mass,
+		est_thrust = S.est_thrust
+	)
+	.["engineInfo"] = list()
+	for(var/obj/machinery/shuttle/engine/E in S.shuttle.engine_list)
+		var/obj/machinery/atmospherics/components/unary/shuttle/heater/H = E.attached_heater.resolve()
+		if(!E.thruster_active)
+			continue
+		var/list/engine_data = list(
+			name = E.name,
+			fuel = H ? H.getGas() : FALSE,
+			enabled = E.enabled,
+			ref = REF(E)
 		)
-		.["engineInfo"] = list()
-		for(var/obj/machinery/shuttle/engine/E in current_ship.shuttle.engine_list)
-			var/obj/machinery/atmospherics/components/unary/shuttle/heater/H = E.attached_heater.resolve()
-			if(!E.thruster_active)
-				continue
-			var/list/engine_data = list(
-				name = E.name,
-				fuel = H ? H.getGas() : FALSE,
-				enabled = E.enabled,
-				ref = REF(E)
-			)
-			.["engineInfo"] += list(engine_data)
+		.["engineInfo"] += list(engine_data)
 
 /obj/machinery/computer/helm/ui_static_data(mob/user)
 	. = list()
@@ -122,23 +126,28 @@
 	if(.)
 		return
 
+	if(!istype(current_ship, /obj/structure/overmap/ship))
+		return
+
+	var/obj/structure/overmap/ship/S = current_ship
+
 	switch(action)
 		if("act_overmap")
 			var/obj/structure/overmap/to_act = locate(params["ship_to_act"])
-			say(current_ship.dock(to_act))
+			say(S.dock(to_act))
 		if("undock")
-			say(current_ship.undock())
+			say(S.undock())
 		if("reload_ship")
 			set_ship()
 		if("reload_engines")
-			current_ship.refresh_engines()
+			S.refresh_engines()
 		if("toggle_engine")
 			var/obj/machinery/shuttle/engine/E = locate(params["engine"])
 			E.enabled = !E.enabled
 		if("change_heading")
-			current_ship.burn_engines(text2num(params["dir"]))
+			S.burn_engines(text2num(params["dir"]))
 		if("stop")
-			current_ship.burn_engines()
+			S.burn_engines()
 
 /obj/machinery/computer/helm/ui_close(mob/user)
 	var/user_ref = REF(user)

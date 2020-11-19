@@ -18,15 +18,24 @@
 	. = ..()
 	LAZYREMOVE(SSovermap.events, src)
 
+/**
+  * The main proc for calling other procs. Called by SSovermap.
+  */
 /obj/structure/overmap/event/proc/apply_effect()
 	if(affect_multiple_times)
 		for(var/obj/structure/overmap/ship/S in close_overmap_objects)
 			if(prob(chance_to_affect))
 				affect_ship(S)
 
+/**
+  * The proc called on all ships that are currently being affected.
+  */
 /obj/structure/overmap/event/proc/affect_ship(obj/structure/overmap/ship/S)
 	return
 
+/**
+  * The main proc for calling other procs. Called by SSovermap.
+  */
 /obj/structure/overmap/event/proc/ship_action(obj/structure/overmap/ship/S, mob/user)
 	return
 

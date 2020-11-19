@@ -97,7 +97,7 @@
   * Undocks the shuttle by launching the shuttle with no destination (this causes it to remain in transit)
   */
 /obj/structure/overmap/ship/proc/undock()
-	if(!is_still()) //how the hell would it even be moving
+	if(!is_still()) //how the hell is it even moving (is the question I've asked multiple times)
 		return "Ship must be stopped to undock!"
 	if(!docked)
 		return "Ship not docked!"
@@ -115,6 +115,9 @@
   * If no dir variable is provided, it decelerates the vessel.
   */
 /obj/structure/overmap/ship/proc/burn_engines(n_dir = null)
+	if(state != SHIP_FLYING)
+		return
+
 	var/thrust_used = 0 //The amount of thrust that the engines will provide with one burn
 	refresh_engines()
 	if(!mass)
@@ -162,12 +165,12 @@
 		return TRUE
 	if(!docked_object && !docked) //The shuttle is in transit, and the ship is not docked to anything, move along
 		return TRUE
-	if(docked && !docked_object) //The overmap object thinks it's docked to something, but it really isn't. Move to a random tile on the overmap
-		Move(SSovermap.get_unused_overmap_square())
+	if(docked && !docked_object && (state != SHIP_DOCKING)) //The overmap object thinks it's docked to something, but it really isn't. Move to a random tile on the overmap
+		forceMove(SSovermap.get_unused_overmap_square())
 		docked = null
 		return FALSE
-	if(!docked && docked_object) //The overmap object thinks it's NOT docked to something, but it actually is. Move to the correct place.
-		Move(docked_object)
+	if(!docked && docked_object && (state != SHIP_UNDOCKING)) //The overmap object thinks it's NOT docked to something, but it actually is. Move to the correct place.
+		forceMove(docked_object)
 		docked = docked_object
 		return FALSE
 
@@ -188,14 +191,14 @@
 	if((world.time >= dock_change_start_time)) //Handler for undocking and docking timer
 		switch(state)
 			if(SHIP_DOCKING) //so that the shuttle is truly docked first
-				if(shuttle.mode != SHUTTLE_DOCKED)
-					return
-				Move(docked)
-				state = SHIP_IDLE
+				if(shuttle.mode == SHUTTLE_DOCKED)
+					Move(docked)
+					state = SHIP_IDLE
 			if(SHIP_UNDOCKING)
-				Move(get_turf(docked))
-				docked = null
-				state = SHIP_FLYING
+				if(docked)
+					Move(get_turf(docked))
+					docked = null
+					state = SHIP_FLYING
 	if(!is_still() && !docked)
 		var/list/deltas = list(0,0)
 		for(var/i=1, i<=2, i++)
@@ -262,15 +265,15 @@
 	var/nx = x
 	var/ny = y
 	var/low_edge = 2
-	var/high_edge = SSovermap.size
+	var/high_edge = SSovermap.size - 1
 
 	if((dir & WEST) && x == low_edge)
 		nx = high_edge
-	else if((dir & EAST) && x == high_edge - 1)
+	else if((dir & EAST) && x == high_edge)
 		nx = low_edge
 	if((dir & SOUTH)  && y == low_edge)
 		ny = high_edge
-	else if((dir & NORTH) && y == high_edge - 1)
+	else if((dir & NORTH) && y == high_edge)
 		ny = low_edge
 	if((x == nx) && (y == ny))
 		return //we're not flying off anywhere
@@ -292,6 +295,7 @@
 	render_map = TRUE
 
 /obj/structure/overmap/ship/shuttle
+	name = "overmap shuttle"
 	icon_state = "shuttle"
 	moving_state = "shuttle_moving"
 

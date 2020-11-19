@@ -127,6 +127,9 @@
 			return
 	if(default_deconstruction_crowbar(I))
 		return
+	if(istype(I, /obj/item/tank/internals))
+		user.transferItemToLoc(I, src)
+		fuel_tank = I
 	return ..()
 
 /obj/machinery/atmospherics/components/unary/shuttle/heater/AltClick(mob/living/L)
@@ -152,5 +155,5 @@
 
 /obj/machinery/atmospherics/components/unary/shuttle/heater/tank/Initialize()
 	. = ..()
-	fuel_tank = new /obj/item/tank/internals/plasma(src)
+	fuel_tank = new /obj/item/tank/internals/plasma/full(src)
 	use_tank = TRUE

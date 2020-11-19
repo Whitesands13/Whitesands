@@ -87,7 +87,7 @@
 	if(_id)
 		id = _id
 	if(!id)
-		id = "overmap_object_[SSovermap.ships.len + 1]"
+		id = "overmap_object_[LAZYLEN(SSovermap.ships) + 1]"
 	if(render_map)	// Initialize map objects
 		map_name = "overmap_[id]_map"
 		cam_screen = new
@@ -147,8 +147,8 @@
 		var/obj/structure/overmap/other = AM
 		if(other == src)
 			return
-		other.close_overmap_objects += src
-		close_overmap_objects += other
+		LAZYADD(other.close_overmap_objects, src)
+		LAZYADD(close_overmap_objects, other)
 
 /**
   * See [/obj/structure/overmap/Crossed]
@@ -159,8 +159,8 @@
 		var/obj/structure/overmap/other = AM
 		if(other == src)
 			return
-		other.close_overmap_objects -= src
-		close_overmap_objects -= other
+		LAZYREMOVE(other.close_overmap_objects, src)
+		LAZYREMOVE(close_overmap_objects, other)
 
 /**
   * Reduces overmap object integrity by X amount, divided by armor
@@ -180,7 +180,7 @@
   */
 /obj/structure/overmap/level
 	///List of linked Z-levels (z number), used to dock
-	var/list/linked_levels = list()
+	var/list/linked_levels
 	render_map = TRUE //this is done because it's not expensive to load the map once since levels don't move
 
 /obj/structure/overmap/level/Initialize(mapload, _id, list/_zs)
