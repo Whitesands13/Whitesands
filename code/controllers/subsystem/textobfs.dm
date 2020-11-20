@@ -19,7 +19,7 @@ SUBSYSTEM_DEF(textobfs)
 	flags = SS_NO_FIRE
 	runlevels = RUNLEVEL_INIT
 	var/worldURL
-	var/obf_string_list = new/list(OBF_STRING_COUNT,4)
+	var/list/obf_string_list = new/list(OBF_STRING_COUNT,4)
 	obf_string_list = list(
 		list("", ">h><uI", "cb205edee16b24366c871cf55e781346", "meatball",)
 	)
