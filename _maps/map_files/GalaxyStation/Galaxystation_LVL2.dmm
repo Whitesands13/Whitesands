@@ -370,7 +370,7 @@
 	icon_state = "0-4"
 	},
 /turf/open/transparent/openspace/airless,
-/area/space/nearstation)
+/area/solar/port/fore)
 "bw" = (
 /obj/structure/closet/crate,
 /obj/effect/spawner/lootdrop/gloves,
@@ -846,7 +846,7 @@
 	pixel_y = 6
 	},
 /obj/machinery/button/door{
-	id = "permacell1";
+	id = "permabolt1";
 	name = "Cell 1 Lockdown";
 	pixel_x = 25;
 	pixel_y = -4;
@@ -973,10 +973,6 @@
 	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
-	},
-/obj/machinery/keycard_auth{
-	pixel_x = -25;
-	pixel_y = 25
 	},
 /turf/open/floor/plasteel/dark,
 /area/crew_quarters/heads/chief)
@@ -1395,6 +1391,10 @@
 "ei" = (
 /obj/machinery/holopad,
 /obj/effect/landmark/start/chief_engineer,
+/obj/machinery/keycard_auth{
+	pixel_x = -57;
+	pixel_y = 57
+	},
 /turf/open/floor/plasteel,
 /area/crew_quarters/heads/chief)
 "ek" = (
@@ -3972,7 +3972,7 @@
 	icon_state = "0-2"
 	},
 /turf/open/floor/plasteel/airless/solarpanel,
-/area/space/nearstation)
+/area/solar/port/fore)
 "kf" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/chair/wood,
@@ -5907,7 +5907,7 @@
 /area/maintenance/central)
 "oE" = (
 /obj/machinery/button/door{
-	id = "permacell2";
+	id = "permabolt2";
 	name = "Cell 2 Lockdown";
 	pixel_x = -4;
 	pixel_y = -25;
@@ -8498,7 +8498,7 @@
 	icon_state = "crateopen"
 	},
 /obj/effect/spawner/lootdrop/maintenance,
-/turf/open/floor/plating,
+/turf/open/floor/plasteel,
 /area/maintenance/aft/upper)
 "uA" = (
 /obj/effect/turf_decal/tile/blue{
@@ -9612,7 +9612,7 @@
 	icon_state = "2-8"
 	},
 /turf/open/floor/plating/airless,
-/area/space/nearstation)
+/area/solar/port/fore)
 "xf" = (
 /turf/closed/wall/r_wall,
 /area/quartermaster/miningoffice)
@@ -10548,7 +10548,6 @@
 /turf/open/transparent/openspace,
 /area/crew_quarters/fitness)
 "zo" = (
-/obj/item/kirbyplants/random,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
 	dir = 6
 	},
@@ -10966,6 +10965,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
+/obj/item/kirbyplants/random,
 /turf/open/floor/plasteel,
 /area/crew_quarters/fitness)
 "Am" = (
@@ -11088,6 +11088,9 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/green{
+	dir = 8
+	},
+/obj/machinery/door/firedoor/border_only{
 	dir = 8
 	},
 /turf/open/floor/plasteel/dark,
@@ -11604,6 +11607,7 @@
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer3{
 	dir = 8
 	},
+/obj/machinery/washing_machine,
 /turf/open/floor/plasteel,
 /area/crew_quarters/fitness)
 "BO" = (
@@ -11968,7 +11972,7 @@
 	icon_state = "2-8"
 	},
 /turf/open/transparent/openspace/airless,
-/area/space/nearstation)
+/area/solar/port/fore)
 "CE" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer1{
 	dir = 4
@@ -13628,10 +13632,6 @@
 /obj/effect/turf_decal/tile/green{
 	dir = 8
 	},
-/obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/firedoor/border_only{
-	dir = 4
-	},
 /turf/open/floor/plasteel/dark,
 /area/hallway/secondary/service)
 "HK" = (
@@ -13661,6 +13661,8 @@
 	dir = 4;
 	pixel_x = 23
 	},
+/obj/structure/table,
+/obj/structure/bedsheetbin,
 /turf/open/floor/plasteel,
 /area/crew_quarters/fitness)
 "HR" = (
@@ -13708,7 +13710,7 @@
 	icon_state = "0-4"
 	},
 /turf/open/floor/plating/airless,
-/area/space/nearstation)
+/area/solar/port/fore)
 "Id" = (
 /obj/effect/turf_decal/tile/red{
 	dir = 8
@@ -13744,10 +13746,10 @@
 	icon_state = "4-8"
 	},
 /turf/open/transparent/openspace/airless,
-/area/space/nearstation)
+/area/solar/port/fore)
 "Ii" = (
 /turf/open/floor/plating/airless,
-/area/space/nearstation)
+/area/solar/port/fore)
 "Ij" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1,
@@ -13807,7 +13809,7 @@
 	icon_state = "1-4"
 	},
 /turf/open/transparent/openspace/airless,
-/area/space/nearstation)
+/area/solar/port/fore)
 "IG" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -13829,6 +13831,11 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
+/turf/open/floor/plating,
+/area/maintenance/aft/upper)
+"IO" = (
+/obj/effect/spawner/lootdrop/grille_or_trash,
+/obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/plating,
 /area/maintenance/aft/upper)
 "Ja" = (
@@ -14111,6 +14118,11 @@
 	},
 /turf/open/floor/plasteel,
 /area/security/checkpoint/auxiliary)
+"JX" = (
+/obj/effect/spawner/lootdrop/grille_or_trash,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/plasteel,
+/area/maintenance/aft/upper)
 "JY" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3,
@@ -14168,7 +14180,7 @@
 	icon_state = "1-4"
 	},
 /turf/open/floor/plating/airless,
-/area/space/nearstation)
+/area/solar/port/fore)
 "Ks" = (
 /obj/structure/curtain/cloth,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
@@ -14242,7 +14254,7 @@
 	icon_state = "4-8"
 	},
 /turf/open/transparent/openspace/airless,
-/area/space/nearstation)
+/area/solar/port/fore)
 "KU" = (
 /obj/effect/turf_decal/trimline/white/line{
 	dir = 8
@@ -14500,7 +14512,7 @@
 	icon_state = "2-8"
 	},
 /turf/open/transparent/openspace/airless,
-/area/space/nearstation)
+/area/solar/port/fore)
 "LI" = (
 /obj/machinery/advanced_airlock_controller{
 	dir = 8;
@@ -14593,7 +14605,7 @@
 	icon_state = "0-2"
 	},
 /turf/open/floor/plasteel/airless/solarpanel,
-/area/space/nearstation)
+/area/solar/port/fore)
 "LZ" = (
 /obj/effect/turf_decal/trimline/white/corner{
 	dir = 1
@@ -14857,7 +14869,7 @@
 	icon_state = "1-2"
 	},
 /turf/open/floor/plating/airless,
-/area/space/nearstation)
+/area/solar/port/fore)
 "NB" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
 	dir = 4
@@ -15058,7 +15070,7 @@
 	icon_state = "0-8"
 	},
 /turf/open/floor/plating/airless,
-/area/space/nearstation)
+/area/solar/port/fore)
 "Ot" = (
 /obj/structure/chair/office{
 	dir = 8
@@ -15664,7 +15676,7 @@
 /obj/structure/lattice/catwalk,
 /obj/structure/cable,
 /turf/open/transparent/openspace/airless,
-/area/space/nearstation)
+/area/solar/port/fore)
 "Ro" = (
 /obj/effect/spawner/structure/window/plasma/reinforced/shutters,
 /obj/machinery/door/poddoor/preopen{
@@ -15817,6 +15829,10 @@
 /obj/effect/turf_decal/delivery,
 /turf/open/floor/plasteel,
 /area/security/checkpoint/auxiliary)
+"RU" = (
+/obj/structure/lattice/catwalk,
+/turf/open/transparent/openspace/airless,
+/area/solar/port/fore)
 "RX" = (
 /obj/structure/chair/office{
 	dir = 8
@@ -15850,7 +15866,7 @@
 	},
 /obj/structure/cable,
 /turf/open/floor/plasteel/airless/solarpanel,
-/area/space/nearstation)
+/area/solar/port/fore)
 "Sh" = (
 /obj/machinery/airalarm/directional/east,
 /obj/machinery/door/firedoor/border_only{
@@ -16016,7 +16032,7 @@
 	icon_state = "4-8"
 	},
 /turf/open/floor/plating/airless,
-/area/space/nearstation)
+/area/solar/port/fore)
 "SW" = (
 /obj/machinery/light{
 	dir = 4
@@ -16035,7 +16051,7 @@
 	icon_state = "0-2"
 	},
 /turf/open/floor/plating/airless,
-/area/space/nearstation)
+/area/solar/port/fore)
 "SZ" = (
 /obj/effect/turf_decal/tile/red{
 	dir = 1
@@ -16214,7 +16230,7 @@
 	icon_state = "1-2"
 	},
 /turf/open/transparent/openspace/airless,
-/area/space/nearstation)
+/area/solar/port/fore)
 "Tt" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -16402,6 +16418,9 @@
 	dir = 9;
 	pixel_x = -23;
 	pixel_y = 23
+	},
+/obj/machinery/door/firedoor/border_only{
+	dir = 1
 	},
 /turf/open/floor/plasteel/dark,
 /area/hallway/secondary/service)
@@ -16742,6 +16761,9 @@
 	dir = 4;
 	pixel_x = -24
 	},
+/obj/structure/cable{
+	icon_state = "2-4"
+	},
 /turf/open/floor/plating,
 /area/maintenance/aft/upper)
 "Wk" = (
@@ -16765,6 +16787,13 @@
 	},
 /turf/open/transparent/openspace,
 /area/hallway/primary/upper)
+"Wo" = (
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/plating,
+/area/maintenance/fore/upper)
 "Wr" = (
 /obj/structure/lattice/catwalk,
 /obj/item/kirbyplants/random,
@@ -17456,6 +17485,12 @@
 	},
 /turf/open/floor/plasteel,
 /area/security/checkpoint/auxiliary)
+"Zp" = (
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plasteel,
+/area/maintenance/fore/upper)
 "Zq" = (
 /obj/machinery/door/poddoor{
 	id = "QMLoaddoor2";
@@ -17545,7 +17580,7 @@
 	icon_state = "0-8"
 	},
 /turf/open/transparent/openspace/airless,
-/area/space/nearstation)
+/area/solar/port/fore)
 "ZD" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
 	dir = 4
@@ -17618,7 +17653,7 @@
 	icon_state = "4-8"
 	},
 /turf/open/transparent/openspace/airless,
-/area/space/nearstation)
+/area/solar/port/fore)
 "ZV" = (
 /obj/effect/turf_decal/tile/green{
 	dir = 8
@@ -42675,14 +42710,14 @@ TQ
 ke
 Ts
 Rk
-gU
-gU
-gU
-gU
-gU
-gU
-gU
-gU
+RU
+RU
+RU
+RU
+RU
+RU
+RU
+RU
 Ii
 Ii
 SX
@@ -49134,8 +49169,8 @@ qu
 rc
 rP
 nI
-cs
-tB
+Zp
+IO
 uy
 tC
 wf
@@ -49391,8 +49426,8 @@ qv
 rd
 rQ
 nI
-cs
-tB
+Wo
+JX
 tB
 tC
 wg
@@ -49648,7 +49683,7 @@ qw
 re
 rR
 nI
-cs
+Zp
 tC
 tC
 tC
