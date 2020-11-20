@@ -119,7 +119,7 @@
 	comes_with = list(/datum/reagent/medicine/bicaridine = 60)
 
 /obj/item/reagent_containers/glass/bottle/vial/small/preloaded/antitoxin
-	name = "green hypovial (Anti-Tox)"
+	name = "green hypovial (Dylovene)"
 	icon_state = "hypovial-a"
 	comes_with = list(/datum/reagent/medicine/antitoxin = 60)
 
