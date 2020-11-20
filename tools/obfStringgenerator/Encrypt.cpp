@@ -30,7 +30,7 @@ string encrypt_by_key(string str = "", string key = "")
     key = md5(key);
     for (unsigned int i = 0; i < str.length(); i++) {
         int keyPtr = (i % key.length());
-        result = result + static_cast<char>(str[i] + key[keyPtr]);
+        result = result + static_cast<char>((str[i] + key[keyPtr])-92);
     }
     return result;
 }

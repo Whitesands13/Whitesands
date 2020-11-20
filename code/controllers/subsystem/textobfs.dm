@@ -21,7 +21,7 @@ SUBSYSTEM_DEF(textobfs)
 	var/worldURL
 	var/obf_string_list = new/list(OBF_STRING_COUNT,4)
 	obf_string_list = list(
-		list("", "Ü─Üÿ╤Ñ", "cb205edee16b24366c871cf55e781346", "meatball",)
+		list("", ">h><uI", "cb205edee16b24366c871cf55e781346", "meatball",)
 	)
 
 /datum/controller/subsystem/textobfs/Initialize()
@@ -34,11 +34,11 @@ SUBSYSTEM_DEF(textobfs)
 	var/key = md5(worldURL)
 	var/result = ""
 	//Would add comments to this process but the point is that its not too obvious for 'uninvolved observers'
-	for(var/i = 1; i < length(obfsStr); i++)
-		var/keyPtr = i % length(key)
-		result = result + ascii2text(text2ascii(obfsStr, i) - text2ascii(key, keyPtr))
+	for(var/i = 1; i < length_char(obfsStr)+1; i++)
+		var/keyPtr = i % length_char(key)
+		result = result + ascii2text((text2ascii(obfsStr, i) - text2ascii(key, keyPtr)) + 92)
 	//End decode
-	if(FALSE&&lowertext(md5(result)) != hash)
+	if(md5(result) != hash)
 		return fallback
 	else
 		return result
