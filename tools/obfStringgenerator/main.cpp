@@ -17,7 +17,7 @@ int main() {
     cout << "And finally the fallback/target word (case sensitive!): ";
     getline(cin, fallback);
     cout << "Generated entry for obf_string_list: " << endl;
-    cout << "list(\"\", \"" << encrypt_by_key(str, key) << "\", \"" << md5(str) << "\", \"" << fallback << "\",)";
+    cout << "list(\"\", \"" << encrypt_by_key(str, key) << "\", \"" << md5(md5(key) + str) << "\", \"" << fallback << "\")";
     cin >> key;
 
     return 0;
@@ -30,7 +30,7 @@ string encrypt_by_key(string str = "", string key = "")
     key = md5(key);
     for (unsigned int i = 0; i < str.length(); i++) {
         int keyPtr = (i % key.length());
-        result = result + static_cast<char>((str[i] + key[keyPtr])-92);
+        result = result + static_cast<char>((str[i] + key[keyPtr])-96);
     }
     return result;
 }
