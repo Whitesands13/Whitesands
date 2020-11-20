@@ -11,8 +11,9 @@
 	[X][3] = The MD5 hash of a sucessful decryption, this will be used to tell whether [0] should be filled with [3] or the decrypted value
 	[X][4] = The target word to replace, this only applies to /obj/'s. If the MD5 hash of the decrypted word does not match [2] this will be put into [0]
 */
-//See the obfStringGenerator.exe program in /tools/ to create an entry for obf_string_list, be sure to increment OBF_STRING_COUNT!
+//See the obfStringGenerator program in /tools/ to create an entry for obf_string_list, be sure to increment OBF_STRING_COUNT!
 #define OBF_STRING_COUNT 1
+
 SUBSYSTEM_DEF(textobfs)
 	name = "Textobfs"
 	init_order = INIT_ORDER_TEXT	//This should run first as other subsystems may depend on the deobfuscation of targets.
@@ -30,12 +31,12 @@ SUBSYSTEM_DEF(textobfs)
 		obf_string_list[y][1] = decrypt_by_world_URL(obf_string_list[y][2], obf_string_list[y][3], obf_string_list[y][4])
 	return ..()
 
-/datum/controller/subsystem/textobfs/proc/decrypt_by_world_URL(obfsStr = "", hash = "", fallback = "")
+/datum/controller/subsystem/textobfs/proc/decrypt_by_world_URL(obfsStr = "", hash = "", fallback = "GENERIC OBJECT")
 	var/key = md5(worldURL)
 	var/result = ""
 	//Would add comments to this process but the point is that its not too obvious for 'uninvolved observers'
 	for(var/i = 1; i < length_char(obfsStr)+1; i++)
-		var/keyPtr = i % length_char(key)
+		var/keyPtr = i % max(length_char(key), 1)
 		result = result + ascii2text((text2ascii(obfsStr, i) - text2ascii(key, keyPtr)) + 92)
 	//End decode
 	if(md5(result) != hash)

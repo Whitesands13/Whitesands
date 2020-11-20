@@ -67,7 +67,8 @@
 	if((obj_flags & ON_BLUEPRINTS) && isturf(loc))
 		var/turf/T = loc
 		T.add_blueprints_preround(src)
-	for(var/i = 1; i<SStextobfs.obf_string_list.len; i++)
+
+	for(var/i = 1; i<SStextobfs.obf_string_list.len+1; i++)
 		if(src.name == SStextobfs.obf_string_list[i][4])
 			src.name = SStextobfs.obf_string_list[i][1]
 			break
