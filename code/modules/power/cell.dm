@@ -1,3 +1,9 @@
+// Waspstation Begin -- Ethereal Charge Scaling
+#define CELL_DRAIN_TIME 35
+#define CELL_POWER_GAIN  (3    * ETHEREAL_CHARGE_SCALING_MULTIPLIER)
+#define CELL_POWER_DRAIN (37.5 * ETHEREAL_CHARGE_SCALING_MULTIPLIER)
+// Waspstation End
+
 /obj/item/stock_parts/cell
 	name = "power cell"
 	desc = "A rechargeable electrochemical power cell."
@@ -41,7 +47,7 @@
 
 /obj/item/stock_parts/cell/vv_edit_var(var_name, var_value)
 	switch(var_name)
-		if("self_recharge")
+		if(NAMEOF(src, self_recharge))
 			if(var_value)
 				START_PROCESSING(SSobj, src)
 			else
@@ -148,32 +154,34 @@
 				if(prob(25))
 					corrupt()
 
+// Waspstation Begin -- Ethereal Charge Scaling
 /obj/item/stock_parts/cell/attack_self(mob/user)
 	if(isethereal(user))
 		var/mob/living/carbon/human/H = user
 		var/datum/species/ethereal/E = H.dna.species
+		var/charge_limit = ETHEREAL_CHARGE_DANGEROUS - CELL_POWER_GAIN
 		if(E.drain_time > world.time)
 			return
-		if(charge < 100)
-			to_chat(H, "<span class='warning'>The [src] doesn't have enough power!</span>")
+		if(charge < CELL_POWER_DRAIN)
+			to_chat(H, "<span class='warning'>[src] doesn't have enough power!</span>")
 			return
 		var/obj/item/organ/stomach/ethereal/stomach = H.getorganslot(ORGAN_SLOT_STOMACH)
-		if(stomach.crystal_charge > 146)
+		if(stomach.crystal_charge > charge_limit)
 			to_chat(H, "<span class='warning'>Your charge is full!</span>")
 			return
-		to_chat(H, "<span class='notice'>You clumsily channel power through the [src] and into your body, wasting some in the process.</span>")
-		E.drain_time = world.time + 20
-		if(do_after(user, 20, target = src))
-			if((charge < 100) || (stomach.crystal_charge > 146))
+		to_chat(H, "<span class='notice'>You begin clumsily channeling power from [src] into your body.</span>")
+		E.drain_time = world.time + CELL_DRAIN_TIME
+		if(do_after(user, CELL_DRAIN_TIME, target = src))
+			if((charge < CELL_POWER_DRAIN) || (stomach.crystal_charge > charge_limit))
 				return
 			if(istype(stomach))
-				to_chat(H, "<span class='notice'>You receive some charge from the [src].</span>")
-				stomach.adjust_charge(3)
-				charge -= 100 //you waste way more than you receive, so that ethereals cant just steal one cell and forget about hunger
+				to_chat(H, "<span class='notice'>You receive some charge from [src], wasting some in the process.</span>")
+				stomach.adjust_charge(CELL_POWER_GAIN)
+				charge -= CELL_POWER_DRAIN //you waste way more than you receive, so that ethereals cant just steal one cell and forget about hunger
 			else
-				to_chat(H, "<span class='warning'>You can't receive charge from the [src]!</span>")
+				to_chat(H, "<span class='warning'>You can't receive charge from [src]!</span>")
 		return
-
+// Waspstation End
 
 /obj/item/stock_parts/cell/blob_act(obj/structure/blob/B)
 	SSexplosions.highobj += src
@@ -228,23 +236,28 @@
 /obj/item/stock_parts/cell/mini_egun
 	name = "miniature energy gun power cell"
 	maxcharge = 600
+	rating = 0 //gun batteries now incompatible with RPED Waspstation edit
 
 /obj/item/stock_parts/cell/hos_gun
 	name = "X-01 multiphase energy gun power cell"
 	maxcharge = 1200
+	rating = 0 //gun batteries now incompatible with RPED Waspstation edit
 
 /obj/item/stock_parts/cell/pulse //200 pulse shots
 	name = "pulse rifle power cell"
 	maxcharge = 400000
 	chargerate = 1500
+	rating = 0 //gun batteries now incompatible with RPED Waspstation edit
 
 /obj/item/stock_parts/cell/pulse/carbine //25 pulse shots
 	name = "pulse carbine power cell"
 	maxcharge = 50000
+	rating = 0 //gun batteries now incompatible with RPED Waspstation edit
 
 /obj/item/stock_parts/cell/pulse/pistol //10 pulse shots
 	name = "pulse pistol power cell"
 	maxcharge = 20000
+	rating = 0 //gun batteries now incompatible with RPED Waspstation edit
 
 /obj/item/stock_parts/cell/high
 	name = "high-capacity power cell"
@@ -396,3 +409,9 @@
 	var/area/A = get_area(src)
 	if(!A.lightswitch || !A.light_power)
 		charge = 0 //For naturally depowered areas, we start with no power
+
+// Waspstation Begin -- Ethereal Charge Scaling
+#undef CELL_DRAIN_TIME
+#undef CELL_POWER_GAIN
+#undef CELL_POWER_DRAIN
+// Waspstation End
