@@ -44,7 +44,9 @@ const SharedContent = (props, context) => {
         title={shipInfo.name ? shipInfo.name : "Ship Info"}
         buttons={(
           <Button
-            content="Refresh"
+            tooltip="Refresh Ship Stats"
+            tooltipPosition="left"
+            icon="sync"
             disabled={isViewer}
             onClick={() => act('reload_ship')} />
         )}>
@@ -88,7 +90,7 @@ const SharedContent = (props, context) => {
             </Table.Cell>
             {!isViewer && (
               <Table.Cell>
-                Action
+                Act
               </Table.Cell>
             )}
           </Table.Row>
@@ -112,6 +114,8 @@ const SharedContent = (props, context) => {
               {!isViewer && (
                 <Table.Cell>
                   <Button
+                    tooltip="Interact"
+                    tooltipPosition="left"
                     icon="circle"
                     disabled={isViewer || (data.speed > 0)}
                     onClick={() => act('act_overmap', {
@@ -169,7 +173,9 @@ const ShipContent = (props, context) => {
         title="Engines"
         buttons={(
           <Button
-            content="Refresh"
+            tooltip="Refresh Engine"
+            tooltipPosition="left"
+            icon="sync"
             disabled={isViewer}
             onClick={() => act('reload_engines')} />
         )}>
@@ -196,16 +202,16 @@ const ShipContent = (props, context) => {
                 {!!engine.fuel && (
                   <ProgressBar
                     ranges={{
-                      good: [501, Infinity],
-                      average: [251, 500],
-                      bad: [-Infinity, 250],
+                      good: [engine.maxFuel / 2, Infinity],
+                      average: [engine.maxFuel / 4, engine.maxFuel / 2],
+                      bad: [-Infinity, engine.maxFuel / 4],
                     }}
-                    maxValue={1000}
+                    maxValue={engine.maxFuel}
                     value={engine.fuel}>
                     <AnimatedNumber
                       value={engine.fuel}
                       format={value => Math.round(value)} />
-                    mols
+                    mol(s)
                   </ProgressBar>
                 )}
               </Table.Cell>
@@ -213,7 +219,9 @@ const ShipContent = (props, context) => {
                 {!isViewer && (
                   <Button
                     icon="circle"
-                    color={engine.enabled ? "good" : "bad"}
+                    color={engine.enabled && "good"}
+                    tooltip="Toggle Engine"
+                    tooltipPosition="left"
                     onClick={() => act('toggle_engine', {
                       engine: engine.ref,
                     })} />
@@ -231,7 +239,8 @@ const ShipContent = (props, context) => {
             </Table.Cell>
             <Table.Cell>
               <AnimatedNumber
-                value={shipInfo.est_thrust / shipInfo.mass * 100} />
+                value={shipInfo.est_thrust / shipInfo.mass * 100}
+                format={value => Math.round(value)} />
               spM/burn
             </Table.Cell>
           </Table.Row>
@@ -245,97 +254,119 @@ const ShipContent = (props, context) => {
 const ShipControlContent = (props, context) => {
   const { act, data } = useBackend(context);
   let flyable = (data.state === 'flying');
+  //  DIRECTIONS const idea from Lyra as part of their Haven-Urist project
+  const DIRECTIONS = {
+    north: 1,
+    south: 2,
+    east: 4,
+    west: 8,
+    northeast: 1 + 4,
+    northwest: 1 + 8,
+    southeast: 2 + 4,
+    southwest: 2 + 8,
+  };
   return (
     <Section
       title="Navigation"
       buttons={(
         <Button
-          content="Undock"
+          tooltip="Undock"
+          icon="sign-out-alt"
           disabled={flyable}
           onClick={() => act('undock')} />
       )}>
-      <Grid width="1px">
-        <Grid.Column>
-          <Button
-            fluid
-            icon="arrow-left"
-            iconRotation={45}
-            mb={1}
-            disabled={!flyable}
-            onClick={() => act('change_heading', {
-              dir: 9,
-            })} />
-          <Button
-            fluid
-            icon="arrow-left"
-            mb={1}
-            disabled={!flyable}
-            onClick={() => act('change_heading', {
-              dir: 8,
-            })} />
-          <Button
-            fluid
-            icon="arrow-down"
-            iconRotation={45}
-            mb={1}
-            disabled={!flyable}
-            onClick={() => act('change_heading', {
-              dir: 10,
-            })} />
-        </Grid.Column>
-        <Grid.Column>
-          <Button
-            fluid
-            icon="arrow-up"
-            mb={1}
-            disabled={!flyable}
-            onClick={() => act('change_heading', {
-              dir: 1,
-            })} />
-          <Button
-            fluid
-            icon="circle"
-            mb={1}
-            disabled={data.stopped || !flyable}
-            onClick={() => act('stop')} />
-          <Button
-            fluid
-            icon="arrow-down"
-            mb={1}
-            disabled={!flyable}
-            onClick={() => act('change_heading', {
-              dir: 2,
-            })} />
-        </Grid.Column>
-        <Grid.Column>
-          <Button
-            fluid
-            icon="arrow-up"
-            iconRotation={45}
-            mb={1}
-            disabled={!flyable}
-            onClick={() => act('change_heading', {
-              dir: 5,
-            })} />
-          <Button
-            fluid
-            icon="arrow-right"
-            mb={1}
-            disabled={!flyable}
-            onClick={() => act('change_heading', {
-              dir: 4,
-            })} />
-          <Button
-            fluid
-            icon="arrow-right"
-            iconRotation={45}
-            mb={1}
-            disabled={!flyable}
-            onClick={() => act('change_heading', {
-              dir: 6,
-            })} />
-        </Grid.Column>
-      </Grid>
+      <Table collapsing>
+        <Table.Row height={1}>
+          <Table.Cell width={1}>
+            <Button
+              icon="arrow-left"
+              iconRotation={45}
+              mb={1}
+              disabled={!flyable}
+              onClick={() => act('change_heading', {
+                dir: DIRECTIONS.northwest,
+              })} />
+          </Table.Cell>
+          <Table.Cell width={1}>
+            <Button
+              icon="arrow-up"
+              mb={1}
+              disabled={!flyable}
+              onClick={() => act('change_heading', {
+                dir: DIRECTIONS.north,
+              })} />
+          </Table.Cell>
+          <Table.Cell width={1}>
+            <Button
+              icon="arrow-right"
+              iconRotation={-45}
+              mb={1}
+              disabled={!flyable}
+              onClick={() => act('change_heading', {
+                dir: DIRECTIONS.northeast,
+              })} />
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row height={1}>
+          <Table.Cell width={1}>
+            <Button
+              icon="arrow-left"
+              mb={1}
+              disabled={!flyable}
+              onClick={() => act('change_heading', {
+                dir: DIRECTIONS.west,
+              })} />
+          </Table.Cell>
+          <Table.Cell width={1}>
+            <Button
+              tooltip="Stop"
+              icon="circle"
+              mb={1}
+              disabled={data.stopped || !flyable}
+              onClick={() => act('stop')} />
+          </Table.Cell>
+          <Table.Cell width={1}>
+            <Button
+              icon="arrow-right"
+              mb={1}
+              disabled={!flyable}
+              onClick={() => act('change_heading', {
+                dir: DIRECTIONS.east,
+              })} />
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row height={1}>
+          <Table.Cell width={1}>
+            <Button
+              icon="arrow-left"
+              iconRotation={-45}
+              mb={1}
+              disabled={!flyable}
+              onClick={() => act('change_heading', {
+                dir: DIRECTIONS.southwest,
+              })} />
+          </Table.Cell>
+          <Table.Cell width={1}>
+            <Button
+              icon="arrow-down"
+              mb={1}
+              disabled={!flyable}
+              onClick={() => act('change_heading', {
+                dir: DIRECTIONS.south,
+              })} />
+          </Table.Cell>
+          <Table.Cell width={1}>
+            <Button
+              icon="arrow-right"
+              iconRotation={45}
+              mb={1}
+              disabled={!flyable}
+              onClick={() => act('change_heading', {
+                dir: DIRECTIONS.southeast,
+              })} />
+          </Table.Cell>
+        </Table.Row>
+      </Table>
     </Section>
   );
 };

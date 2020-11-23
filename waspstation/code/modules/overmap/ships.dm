@@ -13,6 +13,12 @@
 #define SHIP_DOCKING	"docking"
 #define SHIP_UNDOCKING	"undocking"
 
+/**
+  * ## Overmap ships
+  * Basically, any overmap object that is movable.
+  * Can be docked to any other overmap object with a corresponding docking port and/or zlevel.
+  * SUPPOSED to be linked to the corresponding shuttle's mobile docking port, but you never know do you
+  */
 /obj/structure/overmap/ship
 	name = "overmap vessel"
 	desc = "A spacefaring vessel."
@@ -60,6 +66,19 @@
 		calculate_mass()
 		refresh_engines()
 
+/obj/structure/overmap/ship/recieve_damage(amount)
+	. = ..()
+	if(integrity >= 0)
+		return
+	if(docked) //what even
+		return
+	for(var/MN in GLOB.player_list)
+		var/mob/M = MN
+		if(S.shuttle.is_in_shuttle_bounds(M))
+			return //MEANT TO BE A RETURN, DO NOT REPLACE WITH CONTINUE, THIS KEEPS IT FROM DELETING THE SHUTTLE WHEN THERE'S PEOPLE ON
+	shuttle.jumpToNullSpace()
+	qdel(src)
+
 /obj/structure/overmap/ship/Destroy()
 	. = ..()
 	LAZYREMOVE(SSovermap.ships, src)
@@ -73,6 +92,7 @@
 
 /**
   * Docks the shuttle by requesting a port at the requested spot.
+  * * to_dock - The [/obj/structure/overmap] to dock to.
   */
 /obj/structure/overmap/ship/proc/dock(obj/structure/overmap/to_dock)
 	if(!is_still())
@@ -113,6 +133,7 @@
 /**
   * Burns the engines in one direction, accelerating in that direction.
   * If no dir variable is provided, it decelerates the vessel.
+  * * n_dir - The direction to move in
   */
 /obj/structure/overmap/ship/proc/burn_engines(n_dir = null)
 	if(state != SHIP_FLYING)
@@ -127,13 +148,11 @@
 			continue
 		if(E.attached_heater)
 			var/obj/machinery/atmospherics/components/unary/shuttle/heater/resolved_heater = E.attached_heater.resolve()
-			if(!resolved_heater.hasFuel(E.fuel_use * E.thrust)) //if there's not enough fuel, don't burn
-				continue
-			resolved_heater.consumeFuel(E.fuel_use * E.thrust)
+			resolved_heater.consumeFuel(E.fuel_use * E.thrust) //This proc returns how much was actually burned, so let's use that.
 		E.fireEngine()
 		thrust_used = thrust_used + E.thrust
 	est_thrust = thrust_used //cheeky way of rechecking the thrust, check it every time it's used
-	thrust_used = (thrust_used / 20) / max(mass, 1)
+	thrust_used = (thrust_used / 20) / max(mass, 1) //do not know why this check is here, but I clearly ran into an issue here before
 	if(n_dir)
 		accelerate(n_dir, thrust_used)
 	else
@@ -159,6 +178,9 @@
 		. += length(get_area_turfs(shuttleArea))
 	mass = .
 
+/**
+  * Proc called after a shuttle is moved, used for checking a ship's location when it's moved manually (E.G. calling the mining shuttle via a console)
+  */
 /obj/structure/overmap/ship/proc/check_loc()
 	var/docked_object = SSovermap.get_overmap_object_by_z(shuttle.z)
 	if(docked_object == loc) //The docked object is correct, move along

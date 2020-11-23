@@ -168,7 +168,6 @@
   */
 /obj/structure/overmap/proc/recieve_damage(amount)
 	integrity = max(integrity - (amount / overmap_armor), 0)
-	//TODO: add check for if there's no mobs in a ship with no integrity to delete (or make into a ruin?)
 
 /**
   * ## Z-level linked overmap object

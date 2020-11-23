@@ -95,6 +95,12 @@
 		return
 	return air_contents.get_moles(gas_type)
 
+/obj/machinery/atmospherics/components/unary/shuttle/heater/proc/getGasCapacity()
+	var/datum/gas_mixture/air_contents = use_tank ? fuel_tank?.air_contents : airs[1]
+	if(!air_contents)
+		return
+	return air_contents.return_volume()
+
 /obj/machinery/atmospherics/components/unary/shuttle/heater/proc/updateGasStats()
 	var/datum/gas_mixture/air_contents = use_tank ? fuel_tank?.air_contents : airs[1]
 	if(!air_contents)
@@ -113,8 +119,8 @@
 	var/datum/gas_mixture/air_contents = use_tank ? fuel_tank?.air_contents : airs[1]
 	if(!air_contents)
 		return
-	air_contents.remove(amount)
-	return
+
+	return air_contents.remove(amount)
 
 /obj/machinery/atmospherics/components/unary/shuttle/heater/attackby(obj/item/I, mob/living/user, params)
 	update_adjacent_engines()

@@ -19,7 +19,6 @@
 	var/enabled = TRUE
 	var/fuel_use = 0
 	var/bluespace_capable = TRUE
-	var/cooldown = 0
 	var/thruster_active = FALSE
 	var/datum/weakref/attached_heater
 
@@ -34,7 +33,6 @@
 	thrust = 25
 	fuel_use = 0.24
 	bluespace_capable = FALSE
-	cooldown = 45
 
 /obj/machinery/shuttle/engine/void
 	name = "void thruster"
@@ -48,7 +46,6 @@
 	thrust = 400
 	fuel_use = 0
 	bluespace_capable = TRUE
-	cooldown = 90
 
 /obj/machinery/shuttle/engine/Initialize()
 	. = ..()

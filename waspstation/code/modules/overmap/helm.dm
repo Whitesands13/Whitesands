@@ -68,7 +68,7 @@
 	. = list()
 	.["shipInfo"] = list(
 		name = current_ship.name,
-		class = istype(current_ship, /obj/structure/overmap/ship) ? "ship" : istype(current_ship, /obj/structure/overmap/level/planet) ? "planet" : "station",
+		class = istype(current_ship, /obj/structure/overmap/ship) ? "Ship" : istype(current_ship, /obj/structure/overmap/level/planet) ? "Planetoid" : "Station",
 		integrity = current_ship.integrity,
 		sensor_range = current_ship.sensor_range,
 		ref = REF(current_ship)
@@ -111,6 +111,7 @@
 		var/list/engine_data = list(
 			name = E.name,
 			fuel = H ? H.getGas() : FALSE,
+			maxFuel = H ? H.getGasCapacity() : FALSE,
 			enabled = E.enabled,
 			ref = REF(E)
 		)
