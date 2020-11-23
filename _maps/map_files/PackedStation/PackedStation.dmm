@@ -252,6 +252,12 @@
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
 /area/quartermaster/storage)
+"abT" = (
+/obj/structure/cable{
+	icon_state = "1-4"
+	},
+/turf/open/floor/plating,
+/area/maintenance/solars/starboard/aft)
 "abU" = (
 /turf/closed/wall,
 /area/science/lab)
@@ -4165,12 +4171,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/crew_quarters/fitness)
-"aCf" = (
-/obj/machinery/modular_computer/console/preset/command{
-	dir = 4
-	},
-/turf/open/floor/wood,
-/area/crew_quarters/heads/head_of_personnel)
 "aCm" = (
 /turf/closed/wall,
 /area/crew_quarters/bar)
@@ -8573,6 +8573,25 @@
 "bPk" = (
 /turf/closed/wall/r_wall,
 /area/engine/atmos)
+"bPu" = (
+/obj/structure/table/reinforced,
+/obj/item/storage/box/teargas{
+	pixel_x = -3;
+	pixel_y = 3
+	},
+/obj/item/storage/box/handcuffs,
+/obj/item/storage/box/flashbangs{
+	pixel_x = 3;
+	pixel_y = -3
+	},
+/obj/machinery/power/apc/highcap/five_k{
+	areastring = "/area/ai_monitored/security/armory";
+	name = "Armory APC";
+	pixel_y = -24
+	},
+/obj/structure/cable,
+/turf/open/floor/plasteel/dark,
+/area/ai_monitored/security/armory)
 "bPQ" = (
 /obj/structure/lattice/catwalk,
 /obj/machinery/atmospherics/pipe/heat_exchanging/simple{
@@ -11660,6 +11679,12 @@
 	},
 /turf/open/floor/plasteel,
 /area/engine/engineering)
+"erB" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/open/floor/plasteel/dark,
+/area/ai_monitored/security/armory)
 "erF" = (
 /obj/structure/table,
 /obj/item/reagent_containers/food/drinks/shaker,
@@ -11752,6 +11777,19 @@
 /obj/structure/closet/crate/coffin,
 /obj/effect/decal/remains/human,
 /obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plating,
+/area/maintenance/aft/secondary)
+"exg" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3,
+/obj/machinery/atmospherics/pipe/manifold/supply/hidden/layer1{
+	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	icon_state = "1-4"
+	},
 /turf/open/floor/plating,
 /area/maintenance/aft/secondary)
 "exB" = (
@@ -18958,17 +18996,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/aft)
-"kmu" = (
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3,
-/obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1,
-/obj/structure/cable{
-	icon_state = "1-2"
-	},
-/obj/structure/cable{
-	icon_state = "1-4"
-	},
-/turf/open/floor/plating,
-/area/maintenance/aft/secondary)
 "knb" = (
 /obj/structure/cable/yellow{
 	icon_state = "1-8"
@@ -19207,6 +19234,12 @@
 /obj/effect/landmark/start/brig_phys,
 /turf/open/floor/plasteel,
 /area/security/brig)
+"kwv" = (
+/obj/machinery/computer/card{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/crew_quarters/heads/head_of_personnel)
 "kwx" = (
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
@@ -22078,24 +22111,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/engine/atmos)
-"mKB" = (
-/obj/structure/table/reinforced,
-/obj/item/storage/box/teargas{
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/storage/box/handcuffs,
-/obj/item/storage/box/flashbangs{
-	pixel_x = 3;
-	pixel_y = -3
-	},
-/obj/machinery/power/apc/highcap/five_k{
-	areastring = "/area/ai_monitored/security/armory";
-	name = "Armory APC";
-	pixel_y = -24
-	},
-/turf/open/floor/plasteel/dark,
-/area/ai_monitored/security/armory)
 "mKE" = (
 /obj/machinery/disposal/bin,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
@@ -24260,19 +24275,6 @@
 	},
 /turf/open/floor/carpet/purple,
 /area/library)
-"omN" = (
-/obj/effect/turf_decal/loading_area{
-	dir = 1
-	},
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/manifold/supply/hidden/layer1,
-/obj/structure/cable{
-	icon_state = "4-8"
-	},
-/turf/open/floor/plasteel/dark,
-/area/ai_monitored/security/armory)
 "onT" = (
 /obj/structure/sign/warning/electricshock{
 	pixel_y = 32
@@ -26516,13 +26518,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
 /area/maintenance/aft/secondary)
-"qiZ" = (
-/obj/structure/cable{
-	icon_state = "1-4"
-	},
-/obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1,
-/turf/open/floor/plating,
-/area/maintenance/solars/starboard/aft)
 "qjs" = (
 /obj/machinery/door/airlock/maintenance{
 	req_access_txt = "12"
@@ -26712,6 +26707,18 @@
 /obj/effect/turf_decal/delivery,
 /turf/open/floor/plasteel,
 /area/engine/atmospherics_engine)
+"qsK" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/maintenance/solars/starboard/aft)
 "qsM" = (
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
@@ -27630,6 +27637,22 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/aft)
+"qZs" = (
+/obj/effect/turf_decal/loading_area{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/supply/hidden/layer1,
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj/structure/cable{
+	icon_state = "2-4"
+	},
+/turf/open/floor/plasteel/dark,
+/area/ai_monitored/security/armory)
 "ram" = (
 /obj/machinery/door/airlock/highsecurity{
 	name = "Secure Tech Storage";
@@ -31399,16 +31422,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/central)
-"ump" = (
-/obj/structure/cable{
-	icon_state = "4-8"
-	},
-/obj/machinery/door/airlock/engineering{
-	name = "Aft Starboard Solar Access";
-	req_access_txt = "10"
-	},
-/turf/open/floor/plating,
-/area/maintenance/solars/starboard/aft)
 "unl" = (
 /obj/structure/cable{
 	icon_state = "2-4"
@@ -32812,18 +32825,6 @@
 	},
 /turf/open/floor/plating,
 /area/storage/tech)
-"voi" = (
-/obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
-	dir = 6
-	},
-/obj/structure/cable{
-	icon_state = "1-2"
-	},
-/obj/structure/cable{
-	icon_state = "2-8"
-	},
-/turf/open/floor/plating,
-/area/maintenance/solars/starboard/aft)
 "voo" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/cable{
@@ -34079,6 +34080,19 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/port/fore)
+"wFw" = (
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj/machinery/door/airlock/engineering{
+	name = "Aft Starboard Solar Access";
+	req_access_txt = "10"
+	},
+/obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/maintenance/solars/starboard/aft)
 "wFz" = (
 /obj/machinery/camera{
 	c_tag = "MiniSat External SouthWest";
@@ -34335,6 +34349,15 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/fore/secondary)
+"wRn" = (
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/maintenance/aft/secondary)
 "wSo" = (
 /obj/machinery/power/apc/auto_name/east{
 	pixel_x = 24
@@ -65564,7 +65587,7 @@ yeM
 gOG
 xAP
 hMQ
-aCf
+kwv
 fPj
 egw
 auW
@@ -71961,9 +71984,9 @@ aan
 azE
 vgQ
 dLq
-omN
-ayv
-mKB
+qZs
+erB
+bPu
 aXF
 aXF
 acj
@@ -83820,7 +83843,7 @@ eDf
 clC
 eDf
 eDf
-kmu
+exg
 hpP
 wnK
 tPZ
@@ -84077,7 +84100,7 @@ hFA
 okC
 ikw
 hFA
-flX
+wRn
 rTO
 pYh
 tKQ
@@ -84334,7 +84357,7 @@ wQY
 eze
 bQL
 bQL
-ump
+wFw
 bQL
 bQL
 vlK
@@ -84591,8 +84614,8 @@ hFA
 ikw
 bQL
 nGw
-voi
-qiZ
+qsK
+abT
 bQL
 iat
 bTx
