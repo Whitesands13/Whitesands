@@ -73,6 +73,8 @@ GLOBAL_LIST_INIT(gaslist_cache, init_gaslist_cache())
 /datum/gas_mixture/proc/mark_immutable()
 /datum/gas_mixture/proc/get_gases()
 /datum/gas_mixture/proc/multiply(factor)
+/datum/gas_mixture/proc/create_temperature_gradient(a, b, c)
+/datum/gas_mixture/proc/tick_temperature_gradient(step)
 /datum/gas_mixture/proc/get_last_share()
 /datum/gas_mixture/proc/clear()
 
