@@ -400,3 +400,8 @@
 	assets = list(
 		"view_variables.css" = 'html/admin/view_variables.css'
 	)
+
+/datum/asset/simple/safe
+	assets = list(
+		"safe_dial.png" = 'html/safe_dial.png'
+	)
