@@ -14,7 +14,7 @@
 		#include "map_files\BoxStation\BoxStation.dmm"
 		#include "map_files\PackedStation\PackedStation.dmm"
     #include "map_files\MidwayStation\MidwayStation.dmm"
-		#ifdef TRAVISBUILDING
+		#ifdef CIBUILDING
 			#include "templates.dm"
 		#endif
 	#endif
