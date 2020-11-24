@@ -21,8 +21,6 @@
 
 	/// The holopad that contains it currently. NOT ALWAYS THE SPAWN HOLOPAD
 	var/obj/machinery/holopad/holopad
-	///The placeholder hologram that allows the holorays to function
-	var/obj/effect/overlay/holo_pad_hologram/hologram_holder
 
 	/// The job the icon for it is generated with
 	var/datum/job/job_type
@@ -44,10 +42,7 @@
 	/// Flavor text announced to holograms on [/mob/proc/Login]
 	var/flavortext = "You have no laws other than SERVE THE CREW AT LARGE AT ANY COST."
 
-/mob/living/simple_animal/hologram/New(loc, _holopad)
-	. = ..()
-
-/mob/living/simple_animal/hologram/Initialize(mapload, _holopad)
+/mob/living/simple_animal/hologram/Initialize(mapload, prefs, _holopad)
 	. = ..()
 
 	var/datum/outfit/O
@@ -56,7 +51,7 @@
 		O.r_hand = null
 		O.l_hand = null //It would be confusing if, say, the medical hologram had a fake medkit
 
-	var/icon/initial_icon = get_flat_human_icon("hologram_[job_type?.title]", job_type, client?.prefs, "static", outfit_override = O)
+	var/icon/initial_icon = get_flat_human_icon("hologram_[job_type?.title]", job_type, prefs, "static", outfit_override = O)
 	var/icon/alpha_mask = new('icons/effects/effects.dmi', "scanline")//Scanline effect.
 	initial_icon.AddAlphaMask(alpha_mask)
 	icon = initial_icon
@@ -67,7 +62,6 @@
 	ADD_TRAIT(access_card, TRAIT_NODROP, ABSTRACT_ITEM_TRAIT)
 
 	holopad = _holopad
-	hologram_holder = new(src)
 	holopad.set_holo(src, src)
 
 	toggle_density_action.Grant(src)
@@ -182,7 +176,7 @@
 		drop_all_held_items() //can't hold things when you don't actually exist
 		dextrous = FALSE//see above comment
 	to_chat(src, "You toggle your density [density ? "on" : "off"].")
-	update_icons()
+	update_gravity()
 
 /mob/living/simple_animal/hologram/update_icons()
 	. = ..()

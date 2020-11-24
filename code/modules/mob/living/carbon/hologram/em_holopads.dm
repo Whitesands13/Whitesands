@@ -19,6 +19,11 @@
 	. = ..()
 	QDEL_NULL(em)
 
+/obj/machinery/holopad/emergency/clear_holo(mob/living/user)
+	. = ..()
+	if(user == em)
+		qdel(em)
+
 /obj/machinery/holopad/emergency/update_icon_state()
 	var/total_users = LAZYLEN(masters) + LAZYLEN(holo_calls)
 	if(ringing)
@@ -28,7 +33,7 @@
 	else
 		icon_state = "holopad3"
 
-/obj/machinery/holopad/emergency/attack_ghost(mob/user)
+/obj/machinery/holopad/emergency/attack_ghost(mob/dead/observer/user)
 	if(!SSticker.HasRoundStarted() || !loc || !em_starting || em)
 		return ..()
 	if(is_banned_from(user.key, ROLE_POSIBRAIN))
@@ -37,12 +42,11 @@
 	if(QDELETED(src) || QDELETED(user))
 		return
 	var/ghost_role = alert("Become a hologram? (Warning, You can no longer be revived!)", "Become Hologram", "Yes", "No")
-	if(ghost_role == "No" || !loc)
+	if(ghost_role == "No" || !loc || !istype(user))
 		return
 	if(!em)
-		em = new em_spawn_type(src, _holopad=src)
+		em = new em_spawn_type(get_turf(src), src, user.started_as_observer && user.client.prefs) //A bit snowflakey, allows people who started the round as observers to have their loaded character be the hologram's icon
 	em.ckey = user.ckey
-	em.forceMove(get_turf(src))
 	em.say("Please state the nature of the [em_name] emergency.")
 	calling = FALSE
 	em_starting = FALSE
