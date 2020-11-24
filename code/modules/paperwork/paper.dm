@@ -153,7 +153,7 @@
 		// Are we on fire?  Hard ot read if so
 	if(resistance_flags & ON_FIRE)
 		return UI_CLOSE
-	if(!in_range(user,src) && IsAdminGhost(user))
+	if(!in_range(user,src) && !IsAdminGhost(user))
 		return UI_CLOSE
 	if(user.incapacitated(TRUE, TRUE) || (isobserver(user) && !check_rights_for(user.client, R_ADMIN)))
 		return UI_UPDATE
