@@ -3,10 +3,11 @@
 /turf/open/transparent/openspace/airless,
 /area/space)
 "af" = (
-/obj/machinery/door/poddoor{
-	id = "miningdockext";
-	name = "mining docking door door"
+/obj/structure/fans/tiny,
+/obj/machinery/door/poddoor/shuttledock{
+	turftype = /turf/open/floor/engine/hull
 	},
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/engine/hull{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
 	name = "interior hull plating";
@@ -8056,7 +8057,10 @@
 /turf/closed/wall,
 /area/quartermaster/office)
 "tr" = (
-/obj/machinery/mineral/ore_redemption,
+/obj/machinery/mineral/ore_redemption{
+	input_dir = 2;
+	output_dir = 1
+	},
 /turf/open/floor/plating,
 /area/quartermaster/office)
 "ts" = (
@@ -12001,6 +12005,7 @@
 /turf/open/floor/wood,
 /area/crew_quarters/dorms)
 "CI" = (
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/engine/hull{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
 	name = "interior hull plating";
@@ -12017,6 +12022,7 @@
 	roundstart_template = /datum/map_template/shuttle/mining/box;
 	width = 7
 	},
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/engine/hull{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
 	name = "interior hull plating";
@@ -12221,6 +12227,7 @@
 /area/crew_quarters/theatre)
 "Dl" = (
 /obj/effect/decal/cleanable/oil,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/engine/hull{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
 	name = "interior hull plating";
@@ -12228,6 +12235,7 @@
 	},
 /area/quartermaster/miningdock)
 "Dm" = (
+/obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/engine/hull{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
@@ -12649,6 +12657,7 @@
 /area/maintenance/aft/upper)
 "EB" = (
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/engine/hull{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
 	name = "interior hull plating";
@@ -12933,10 +12942,6 @@
 	},
 /obj/machinery/light/small,
 /obj/structure/table,
-/obj/machinery/button/door{
-	id = "minedockext";
-	name = "Docking Door"
-	},
 /turf/open/floor/plasteel,
 /area/quartermaster/miningdock)
 "Fp" = (
@@ -13562,10 +13567,10 @@
 /turf/open/floor/engine/hull,
 /area/space/nearstation)
 "HC" = (
-/obj/structure/fans/tiny,
 /obj/effect/turf_decal/trimline/white/line{
 	dir = 8
 	},
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/engine/hull{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
 	name = "interior hull plating";
