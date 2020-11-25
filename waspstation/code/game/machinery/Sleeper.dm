@@ -80,7 +80,7 @@
 /obj/machinery/sleeper/container_resist(mob/living/user)
 	visible_message("<span class='notice'>[occupant] emerges from [src]!</span>",
 		"<span class='notice'>You climb out of [src]!</span>")
-	open_machine(FALSE)
+	open_machine()
 
 /obj/machinery/sleeper/Exited(atom/movable/user)
 	if (!state_open && user == occupant)
@@ -144,7 +144,7 @@
 	if (. & EMP_PROTECT_SELF)
 		return
 	if(is_operational() && occupant)
-		open_machine(FALSE)
+		open_machine()
 
 /obj/machinery/sleeper/MouseDrop_T(mob/target, mob/user)
 	if(user.stat || !Adjacent(user) || !user.Adjacent(target) || !iscarbon(target) || !user.IsAdvancedToolUser())
@@ -213,7 +213,7 @@
 	if(.)
 		I.play_tool_sound(src, 50)
 		visible_message("<span class='notice'>[usr] pries open [src].</span>", "<span class='notice'>You pry open [src].</span>")
-		open_machine(FALSE)
+		open_machine()
 
 /obj/machinery/sleeper/ui_state(mob/user)
 	if(controls_inside)
@@ -232,7 +232,7 @@
 	if(state_open)
 		close_machine()
 	else
-		open_machine(FALSE)
+		open_machine()
 
 /obj/machinery/sleeper/examine(mob/user)
 	. = ..()
@@ -244,7 +244,7 @@
 	check_nap_violations()
 
 /obj/machinery/sleeper/nap_violation(mob/violator)
-	open_machine(FALSE)
+	open_machine()
 
 /obj/machinery/sleeper/ui_data(mob/user)
 	var/list/data = list()
