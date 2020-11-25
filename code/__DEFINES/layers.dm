@@ -132,6 +132,7 @@
 
 //HUD layer defines
 
+#define FULLSCREEN_PLANE 20
 #define FLASH_LAYER 20
 #define FULLSCREEN_LAYER 20.1
 #define UI_DAMAGE_LAYER 20.2
