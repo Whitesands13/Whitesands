@@ -1366,6 +1366,35 @@
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/abandoned/cargo)
+"Bu" = (
+/obj/machinery/door/airlock/external{
+	name = "External Freight Airlock"
+	},
+/obj/machinery/door/firedoor/border_only{
+	dir = 1
+	},
+/obj/machinery/door/firedoor/border_only,
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/docking_port/mobile{
+	callTime = 250;
+	can_move_docking_ports = 1;
+	dir = 2;
+	dwidth = 11;
+	height = 13;
+	icon_state = "pinonclose";
+	id = "whiteship";
+	launch_status = 0;
+	movement_force = list("KNOCKDOWN" = 0, "THROW" = 0);
+	name = "Salvage Ship";
+	port_direction = 8;
+	preferred_direction = 4;
+	width = 23
+	},
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/abandoned/cargo)
 "BS" = (
 /obj/effect/turf_decal/delivery,
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden,
@@ -1916,35 +1945,6 @@
 	},
 /turf/open/floor/mineral/titanium/blue,
 /area/shuttle/abandoned/bridge)
-"Xr" = (
-/obj/machinery/door/airlock/external{
-	name = "External Freight Airlock"
-	},
-/obj/machinery/door/firedoor/border_only{
-	dir = 1
-	},
-/obj/machinery/door/firedoor/border_only,
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
-/obj/docking_port/mobile{
-	callTime = 250;
-	can_move_docking_ports = 1;
-	dir = 2;
-	dwidth = 11;
-	height = 13;
-	icon_state = "pinonclose";
-	id = "whiteship";
-	launch_status = 0;
-	movement_force = list("KNOCKDOWN" = 0, "THROW" = 0);
-	name = "Salvage Ship";
-	port_direction = 8;
-	preferred_direction = 4;
-	width = 23
-	},
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/abandoned/cargo)
 "XQ" = (
 /obj/effect/turf_decal/stripes/corner{
 	dir = 8
@@ -2204,7 +2204,7 @@ aa
 aa
 "}
 (11,1,1) = {"
-Xr
+Bu
 BZ
 zH
 Zv
