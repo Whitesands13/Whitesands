@@ -13,17 +13,3 @@
 	CallAsync(human, /mob/living/verb/resist)
 
 	TEST_ASSERT(human.fire_stacks < 5, "Human did not lower fire stacks after resisting")
-
-/// Test that you can resist out of a container
-/datum/unit_test/container_resist/Run()
-	var/mob/living/carbon/human/human = allocate(/mob/living/carbon/human)
-	var/obj/structure/closet/closet = allocate(/obj/structure/closet, get_turf(human))
-
-	closet.open(human)
-	TEST_ASSERT(!(human in closet.contents), "Human was in the contents of an open closet")
-
-	closet.close(human)
-	TEST_ASSERT(human in closet.contents, "Human was not in the contents of the closed closet")
-
-	human.resist()
-	TEST_ASSERT(!(human in closet.contents), "Human resisted out of a standard closet, but was still in it")
