@@ -76,11 +76,11 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 */
 
 //mob traits
-// Forces the user to stay unconscious.
+/// Forces the user to stay unconscious.
 #define TRAIT_KNOCKEDOUT		"knockedout"
-// Prevents voluntary movement.
+/// Prevents voluntary movement.
 #define TRAIT_IMMOBILIZED		"immobilized"
-// Prevents voluntary standing or staying up on its own.
+/// Prevents voluntary standing or staying up on its own.
 #define TRAIT_FLOORED			"floored"
 /// Prevents usage of manipulation appendages (picking, holding or using items, manipulating storage).
 #define TRAIT_HANDS_BLOCKED		"handsblocked"
@@ -91,11 +91,14 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Abstract condition that prevents movement if being pulled and might be resisted against. Handcuffs and straight jackets, basically.
 #define TRAIT_RESTRAINED		"restrained"
 #define TRAIT_INCAPACITATED		"incapacitated"
-#define TRAIT_CRITICAL_CONDITION	"critical-condition" //In some kind of critical condition. Is able to succumb.
+///In some kind of critical condition. Is able to succumb.
+#define TRAIT_CRITICAL_CONDITION	"critical-condition"
+/// Doesn't miss attacks
+#define TRAIT_PERFECT_ATTACKER "perfect_attacker"
 #define TRAIT_BLIND 			"blind"
+#define TRAIT_DEAF				"deaf"
 #define TRAIT_MUTE				"mute"
 #define TRAIT_EMOTEMUTE			"emotemute"
-#define TRAIT_DEAF				"deaf"
 #define TRAIT_NEARSIGHT			"nearsighted"
 #define TRAIT_FAT				"fat"
 #define TRAIT_HUSK				"husk"
