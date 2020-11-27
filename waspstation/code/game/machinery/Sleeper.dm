@@ -122,7 +122,6 @@
 		occupant.forceMove(get_turf(src))
 		if(isliving(occupant))
 			var/mob/living/L = occupant
-			L.update_mobility()
 			if(stasis_running())
 				thaw_them(L)
 				stasis_enabled = FALSE
