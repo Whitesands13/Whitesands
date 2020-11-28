@@ -113,7 +113,7 @@
 	required_reagents = list(/datum/reagent/medicine/soulus = 20, /datum/reagent/medicine/system_cleaner = 1, /datum/reagent/water/holywater = 10)
 
 /datum/chemical_reaction/chartreuse
-	results = list(/datum/reagent/medicine/puce_essence/chartreuse = 10)
+	results = list(/datum/reagent/medicine/chartreuse = 10)
 	required_reagents = list(/datum/reagent/medicine/puce_essence = 5, /datum/reagent/consumable/tinlux = 5, /datum/reagent/consumable/entpoly = 1)
 
 /datum/chemical_reaction/molten_bubbles

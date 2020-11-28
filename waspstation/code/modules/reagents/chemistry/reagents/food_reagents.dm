@@ -3,7 +3,7 @@
 	description = "This is what makes Fireblossoms even hotter."
 	color = "#d30639"
 	taste_description = "burning heat"
-	taste_mult = 2.0
+	taste_mult = 8.0
 	var/hunger_drain = -1
 	var/injested = FALSE
 
@@ -23,6 +23,7 @@
 		M.adjust_nutrition(hunger_drain)
 	if(!injested)							// Unless you didn't eat it
 		M.adjustFireLoss(0.25*REM, 0)
+	..()
 
 /datum/reagent/consumable/pyre_elementum/on_mob_end_metabolize(mob/living/M)
 	SEND_SIGNAL(M, COMSIG_CLEAR_MOOD_EVENT, "pyre_elementum")
@@ -40,3 +41,5 @@
 		M.adjust_nutrition(hunger_drain)
 		M.adjustBruteLoss(-1.6*REM, 0)
 		M.adjustFireLoss(-1.6*REM, 0)
+		M.adjustStaminaLoss(-5*REM, 0)
+	..()

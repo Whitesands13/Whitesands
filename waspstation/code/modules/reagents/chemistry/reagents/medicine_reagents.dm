@@ -135,6 +135,7 @@
 	color = "#302f20"
 	metabolization_rate = REAGENTS_METABOLISM
 	overdose_threshold = 100
+	var/clone_dam = 0.25
 
 /datum/reagent/medicine/soulus/expose_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1)
 	if(iscarbon(M) && M.stat != DEAD)
@@ -152,7 +153,7 @@
 /datum/reagent/medicine/soulus/on_mob_life(mob/living/carbon/M)
 	M.adjustFireLoss(-1*REM, 0)
 	M.adjustBruteLoss(-1*REM, 0)
-	M.adjustCloneLoss(0.25*REM, 0)
+	M.adjustCloneLoss(clone_dam *REM, 0)
 	..()
 
 /datum/reagent/medicine/soulus/overdose_process(mob/living/M)
@@ -170,11 +171,7 @@
 	color = "#302f20"
 	metabolization_rate = REAGENTS_METABOLISM
 	overdose_threshold = 100
-
-/datum/reagent/medicine/soulus/on_mob_life(mob/living/carbon/M)
-	M.adjustFireLoss(-1*REM, 0)
-	M.adjustBruteLoss(-1*REM, 0)
-	..()
+	clone_dam = 0
 
 /datum/reagent/medicine/puce_essence		// P U C E
 	name = "Pucetylline Essence"
@@ -188,14 +185,15 @@
 	M.adjustToxLoss(-0.8*REM, 0)
 	M.adjustCloneLoss(-0.2*REM, 0)
 	for(var/datum/reagent/toxin/R in M.reagents.reagent_list)
-		M.reagents.remove_reagent(R.type,0.25)
-	if(holder.has_reagent(/datum/reagent/medicine/soulus))			// No, you can't chemstack with soulus dust
+		M.reagents.remove_reagent(R.type, 0.25)
+	if(holder.has_reagent(/datum/reagent/medicine/soulus))				// No, you can't chemstack with soulus dust
 		holder.remove_reagent(/datum/reagent/medicine/soulus, 5)		
 	M.add_atom_colour(color, TEMPORARY_COLOUR_PRIORITY)		// Changes color to puce
 	..()
 
 datum/reagent/medicine/puce_essence/expose_atom(atom/A, volume)
-	A.add_atom_colour(color, WASHABLE_COLOUR_PRIORITY)
+	if(!ishuman(A))
+		A.add_atom_colour(color, WASHABLE_COLOUR_PRIORITY)
 	..()
 
 /datum/reagent/medicine/puce_essence/on_mob_end_metabolize(mob/living/M)
@@ -204,25 +202,33 @@ datum/reagent/medicine/puce_essence/expose_atom(atom/A, volume)
 /datum/reagent/medicine/puce_essence/overdose_process(mob/living/M)
 	M.add_atom_colour(color, FIXED_COLOUR_PRIORITY)		// Eternal puce
 
-/datum/reagent/medicine/puce_essence/chartreuse		// C H A R T R E U S E
+/datum/reagent/medicine/chartreuse		// C H A R T R E U S E
 	name = "Chartreuse Solution"
-	description = "Ground essence of puce crystals"
+	description = "Refined essence of puce crystals"
 	reagent_state = SOLID
 	color = "#DFFF00"
 	metabolization_rate = 2.5 * REAGENTS_METABOLISM
 	overdose_threshold = 30
 
-/datum/reagent/medicine/puce_essence/chartreuse/on_mob_life(mob/living/carbon/M)		// Yes, you can chemstack with soulus dust
+/datum/reagent/medicine/chartreuse/on_mob_life(mob/living/carbon/M)		// Yes, you can chemstack with soulus dust
 	M.adjustToxLoss(-1.6*REM, 0)
 	M.adjustCloneLoss(-0.8*REM, 0)
 	for(var/datum/reagent/toxin/R in M.reagents.reagent_list)
-		M.reagents.remove_reagent(R.type,1)
-	M.add_atom_colour(color, TEMPORARY_COLOUR_PRIORITY)		// Changes color to chartreuse
+		M.reagents.remove_reagent(R.type, 1)		
+	M.add_atom_colour(color, TEMPORARY_COLOUR_PRIORITY)		// Changes color to puce
 	..()
 
-/datum/reagent/medicine/puce_essence/overdose_process(mob/living/M)
+datum/reagent/medicine/chartreuse/expose_atom(atom/A, volume)
+	A.add_atom_colour(color, WASHABLE_COLOUR_PRIORITY)
+	..()
+
+/datum/reagent/medicine/chartreuse/on_mob_end_metabolize(mob/living/M)
+	M.remove_atom_colour(TEMPORARY_COLOUR_PRIORITY, color)		// Removes temporary (not permanent) puce
+
+/datum/reagent/medicine/chartreuse/overdose_process(mob/living/M)
 	M.add_atom_colour(color, FIXED_COLOUR_PRIORITY)		// Eternal chartreuse
 	M.set_drugginess(15)		// Also druggy
+	..()
 
 /datum/reagent/medicine/lavaland_extract
 	name = "Lavaland Extract"
@@ -293,9 +299,12 @@ datum/reagent/medicine/puce_essence/expose_atom(atom/A, volume)
 		H.physiology.armor.bullet -= added_armor		// No, you can't change species to get a permanant brute resist
 	..()
 
-/datum/reagent/medicine/lavaland_extract/overdose_process(mob/living/M)
+/datum/reagent/medicine/skeletons_boon/overdose_process(mob/living/M)
+	message_admins("Skele boon overdose start")
 	ADD_TRAIT(M, TRAIT_ALLBREAK, TRAIT_GENERIC)
-	return . = ..()
+	REMOVE_TRAIT(M, TRAIT_NOBREAK, TRAIT_GENERIC)
+	message_admins("Skele boon overdose end")
+	..()
 
 /datum/reagent/medicine/molten_bubbles
 	name = "Molten Bubbles"
@@ -310,7 +319,7 @@ datum/reagent/medicine/puce_essence/expose_atom(atom/A, volume)
 		M.adjust_bodytemperature(-10 * TEMPERATURE_DAMAGE_COEFFICIENT, M.get_body_temp_normal(apply_change=FALSE))
 	else if(M.bodytemperature < (M.get_body_temp_normal(apply_change=FALSE) + 1))
 		M.adjust_bodytemperature(10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0, M.get_body_temp_normal(apply_change=FALSE))
-	return TRUE
+	..()
 
 /datum/reagent/medicine/molten_bubbles/plasma
 	name = "Plasma Bubbles"
