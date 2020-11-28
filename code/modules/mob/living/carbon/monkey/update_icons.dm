@@ -55,23 +55,27 @@
 //update whether our head item appears on our hud.
 /mob/living/carbon/monkey/update_hud_head(obj/item/I)
 	if(client && hud_used && hud_used.hud_shown)
-		I.screen_loc = ui_monkey_head
+		var/list/ui_layout = hud_used.ui_layout
+		I.screen_loc = ui_layout["ui_monkey_head"]
 		client.screen += I
 
 //update whether our mask item appears on our hud.
 /mob/living/carbon/monkey/update_hud_wear_mask(obj/item/I)
 	if(client && hud_used && hud_used.hud_shown)
-		I.screen_loc = ui_monkey_mask
+		var/list/ui_layout = hud_used.ui_layout
+		I.screen_loc = ui_layout["ui_monkey_mask"]
 		client.screen += I
 
 //update whether our neck item appears on our hud.
 /mob/living/carbon/monkey/update_hud_neck(obj/item/I)
 	if(client && hud_used && hud_used.hud_shown)
-		I.screen_loc = ui_monkey_neck
+		var/list/ui_layout = hud_used.ui_layout
+		I.screen_loc = ui_layout["ui_monkey_neck"]
 		client.screen += I
 
 //update whether our back item appears on our hud.
 /mob/living/carbon/monkey/update_hud_back(obj/item/I)
 	if(client && hud_used && hud_used.hud_shown)
-		I.screen_loc = ui_monkey_back
+		var/list/ui_layout = hud_used.ui_layout
+		I.screen_loc = ui_layout["ui_monkey_back"]
 		client.screen += I

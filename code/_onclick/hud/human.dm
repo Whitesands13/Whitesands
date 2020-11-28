@@ -40,7 +40,10 @@
 /obj/screen/devil/soul_counter
 	name = "souls owned"
 	icon_state = "Devil-6"
-	screen_loc = ui_devilsouldisplay
+
+/obj/screen/devil/soul_counter/Initialize()
+	. = ..()
+	screen_loc = hud.ui_layout["ui_devilsouldisplay"]
 
 /obj/screen/devil/soul_counter/proc/update_counter(souls = 0)
 	invisibility = 0
@@ -68,7 +71,10 @@
 
 /obj/screen/ling/sting
 	name = "current sting"
-	screen_loc = ui_lingstingdisplay
+
+/obj/screen/ling/sting/Initialize()
+	. = ..()
+	screen_loc = hud.ui_layout["ui_lingstingdisplay"]
 
 /obj/screen/ling/sting/Click()
 	if(isobserver(usr))
@@ -79,7 +85,10 @@
 /obj/screen/ling/chems
 	name = "chemical storage"
 	icon_state = "power_display"
-	screen_loc = ui_lingchemdisplay
+
+/obj/screen/ling/chems/Initialize()
+	. = ..()
+	screen_loc = hud.ui_layout["ui_lingchemdisplay"]
 
 /datum/hud/human/New(mob/living/carbon/human/owner)
 	..()
@@ -119,13 +128,13 @@
 	using = new /obj/screen/mov_intent
 	using.icon = ui_style
 	using.icon_state = (mymob.m_intent == MOVE_INTENT_RUN ? "running" : "walking")
-	using.screen_loc = ui_movi
+	using.screen_loc = ui_layout["ui_movi"]
 	using.hud = src
 	static_inventory += using
 
 	using = new /obj/screen/drop()
 	using.icon = ui_style
-	using.screen_loc = ui_drop_throw
+	using.screen_loc = ui_layout["ui_drop_throw"]
 	using.hud = src
 	static_inventory += using
 
@@ -134,7 +143,7 @@
 	inv_box.icon = ui_style
 	inv_box.slot_id = ITEM_SLOT_ICLOTHING
 	inv_box.icon_state = "uniform"
-	inv_box.screen_loc = ui_iclothing
+	inv_box.screen_loc = ui_layout["ui_iclothing"]
 	inv_box.hud = src
 	toggleable_inventory += inv_box
 
@@ -143,7 +152,7 @@
 	inv_box.icon = ui_style
 	inv_box.slot_id = ITEM_SLOT_OCLOTHING
 	inv_box.icon_state = "suit"
-	inv_box.screen_loc = ui_oclothing
+	inv_box.screen_loc = ui_layout["ui_oclothing"]
 	inv_box.hud = src
 	toggleable_inventory += inv_box
 
@@ -167,7 +176,7 @@
 	inv_box.name = "id"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "id"
-	inv_box.screen_loc = ui_id
+	inv_box.screen_loc = ui_layout["ui_id"]
 	inv_box.slot_id = ITEM_SLOT_ID
 	inv_box.hud = src
 	static_inventory += inv_box
@@ -176,7 +185,7 @@
 	inv_box.name = "mask"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "mask"
-	inv_box.screen_loc = ui_mask
+	inv_box.screen_loc = ui_layout["ui_mask"]
 	inv_box.slot_id = ITEM_SLOT_MASK
 	inv_box.hud = src
 	toggleable_inventory += inv_box
@@ -185,7 +194,7 @@
 	inv_box.name = "neck"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "neck"
-	inv_box.screen_loc = ui_neck
+	inv_box.screen_loc = ui_layout["ui_neck"]
 	inv_box.slot_id = ITEM_SLOT_NECK
 	inv_box.hud = src
 	toggleable_inventory += inv_box
@@ -194,7 +203,7 @@
 	inv_box.name = "back"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "back"
-	inv_box.screen_loc = ui_back
+	inv_box.screen_loc = ui_layout["ui_back"]
 	inv_box.slot_id = ITEM_SLOT_BACK
 	inv_box.hud = src
 	static_inventory += inv_box
@@ -203,7 +212,7 @@
 	inv_box.name = "storage1"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "pocket"
-	inv_box.screen_loc = ui_storage1
+	inv_box.screen_loc = ui_layout["ui_storage1"]
 	inv_box.slot_id = ITEM_SLOT_LPOCKET
 	inv_box.hud = src
 	static_inventory += inv_box
@@ -212,7 +221,7 @@
 	inv_box.name = "storage2"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "pocket"
-	inv_box.screen_loc = ui_storage2
+	inv_box.screen_loc = ui_layout["ui_storage2"]
 	inv_box.slot_id = ITEM_SLOT_RPOCKET
 	inv_box.hud = src
 	static_inventory += inv_box
@@ -221,20 +230,20 @@
 	inv_box.name = "suit storage"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "suit_storage"
-	inv_box.screen_loc = ui_sstore1
+	inv_box.screen_loc = ui_layout["ui_sstore1"]
 	inv_box.slot_id = ITEM_SLOT_SUITSTORE
 	inv_box.hud = src
 	static_inventory += inv_box
 
 	using = new /obj/screen/resist()
 	using.icon = ui_style
-	using.screen_loc = ui_above_intent
+	using.screen_loc = ui_layout["ui_above_intent"]
 	using.hud = src
 	hotkeybuttons += using
 
 	using = new /obj/screen/human/toggle()
 	using.icon = ui_style
-	using.screen_loc = ui_inventory
+	using.screen_loc = ui_layout["ui_inventory"]
 	using.hud = src
 	static_inventory += using
 
@@ -248,7 +257,7 @@
 	inv_box.name = "gloves"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "gloves"
-	inv_box.screen_loc = ui_gloves
+	inv_box.screen_loc = ui_layout["ui_gloves"]
 	inv_box.slot_id = ITEM_SLOT_GLOVES
 	inv_box.hud = src
 	toggleable_inventory += inv_box
@@ -257,7 +266,7 @@
 	inv_box.name = "eyes"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "glasses"
-	inv_box.screen_loc = ui_glasses
+	inv_box.screen_loc = ui_layout["ui_glasses"]
 	inv_box.slot_id = ITEM_SLOT_EYES
 	inv_box.hud = src
 	toggleable_inventory += inv_box
@@ -266,7 +275,7 @@
 	inv_box.name = "ears"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "ears"
-	inv_box.screen_loc = ui_ears
+	inv_box.screen_loc = ui_layout["ui_ears"]
 	inv_box.slot_id = ITEM_SLOT_EARS
 	inv_box.hud = src
 	toggleable_inventory += inv_box
@@ -275,7 +284,7 @@
 	inv_box.name = "head"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "head"
-	inv_box.screen_loc = ui_head
+	inv_box.screen_loc = ui_layout["ui_head"]
 	inv_box.slot_id = ITEM_SLOT_HEAD
 	inv_box.hud = src
 	toggleable_inventory += inv_box
@@ -284,7 +293,7 @@
 	inv_box.name = "shoes"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "shoes"
-	inv_box.screen_loc = ui_shoes
+	inv_box.screen_loc = ui_layout["ui_shoes"]
 	inv_box.slot_id = ITEM_SLOT_FEET
 	inv_box.hud = src
 	toggleable_inventory += inv_box
@@ -294,20 +303,20 @@
 	inv_box.icon = ui_style
 	inv_box.icon_state = "belt"
 //	inv_box.icon_full = "template_small"
-	inv_box.screen_loc = ui_belt
+	inv_box.screen_loc = ui_layout["ui_belt"]
 	inv_box.slot_id = ITEM_SLOT_BELT
 	inv_box.hud = src
 	static_inventory += inv_box
 
 	throw_icon = new /obj/screen/throw_catch()
 	throw_icon.icon = ui_style
-	throw_icon.screen_loc = ui_drop_throw
+	throw_icon.screen_loc = ui_layout["ui_drop_throw"]
 	throw_icon.hud = src
 	hotkeybuttons += throw_icon
 
 	rest_icon = new /obj/screen/rest()
 	rest_icon.icon = ui_style
-	rest_icon.screen_loc = ui_above_movement
+	rest_icon.screen_loc = ui_layout["ui_above_movement"]
 	rest_icon.hud = src
 	static_inventory += rest_icon
 
@@ -326,7 +335,7 @@
 	pull_icon = new /obj/screen/pull()
 	pull_icon.icon = ui_style
 	pull_icon.update_icon()
-	pull_icon.screen_loc = ui_above_intent
+	pull_icon.screen_loc = ui_layout["ui_above_intent"]
 	pull_icon.hud = src
 	static_inventory += pull_icon
 
@@ -379,31 +388,31 @@
 
 	if(screenmob.hud_used.inventory_shown && screenmob.hud_used.hud_shown)
 		if(H.shoes)
-			H.shoes.screen_loc = ui_shoes
+			H.shoes.screen_loc = ui_layout["ui_shoes"]
 			screenmob.client.screen += H.shoes
 		if(H.gloves)
-			H.gloves.screen_loc = ui_gloves
+			H.gloves.screen_loc = ui_layout["ui_gloves"]
 			screenmob.client.screen += H.gloves
 		if(H.ears)
-			H.ears.screen_loc = ui_ears
+			H.ears.screen_loc = ui_layout["ui_ears"]
 			screenmob.client.screen += H.ears
 		if(H.glasses)
-			H.glasses.screen_loc = ui_glasses
+			H.glasses.screen_loc = ui_layout["ui_glasses"]
 			screenmob.client.screen += H.glasses
 		if(H.w_uniform)
-			H.w_uniform.screen_loc = ui_iclothing
+			H.w_uniform.screen_loc = ui_layout["ui_iclothing"]
 			screenmob.client.screen += H.w_uniform
 		if(H.wear_suit)
-			H.wear_suit.screen_loc = ui_oclothing
+			H.wear_suit.screen_loc = ui_layout["ui_oclothing"]
 			screenmob.client.screen += H.wear_suit
 		if(H.wear_mask)
-			H.wear_mask.screen_loc = ui_mask
+			H.wear_mask.screen_loc = ui_layout["ui_mask"]
 			screenmob.client.screen += H.wear_mask
 		if(H.wear_neck)
-			H.wear_neck.screen_loc = ui_neck
+			H.wear_neck.screen_loc = ui_layout["ui_neck"]
 			screenmob.client.screen += H.wear_neck
 		if(H.head)
-			H.head.screen_loc = ui_head
+			H.head.screen_loc = ui_layout["ui_head"]
 			screenmob.client.screen += H.head
 	else
 		if(H.shoes)		screenmob.client.screen -= H.shoes
@@ -429,22 +438,22 @@
 	if(screenmob.hud_used)
 		if(screenmob.hud_used.hud_shown)
 			if(H.s_store)
-				H.s_store.screen_loc = ui_sstore1
+				H.s_store.screen_loc = ui_layout["ui_sstore1"]
 				screenmob.client.screen += H.s_store
 			if(H.wear_id)
-				H.wear_id.screen_loc = ui_id
+				H.wear_id.screen_loc = ui_layout["ui_id"]
 				screenmob.client.screen += H.wear_id
 			if(H.belt)
-				H.belt.screen_loc = ui_belt
+				H.belt.screen_loc = ui_layout["ui_belt"]
 				screenmob.client.screen += H.belt
 			if(H.back)
-				H.back.screen_loc = ui_back
+				H.back.screen_loc = ui_layout["ui_back"]
 				screenmob.client.screen += H.back
 			if(H.l_store)
-				H.l_store.screen_loc = ui_storage1
+				H.l_store.screen_loc = ui_layout["ui_storage1"]
 				screenmob.client.screen += H.l_store
 			if(H.r_store)
-				H.r_store.screen_loc = ui_storage2
+				H.r_store.screen_loc = ui_layout["ui_storage2"]
 				screenmob.client.screen += H.r_store
 		else
 			if(H.s_store)

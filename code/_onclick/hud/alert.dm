@@ -672,15 +672,15 @@ so as to remain in compliance with the most up-to-date laws."
 			alert.icon = ui_style
 		switch(i)
 			if(1)
-				. = ui_alert1
+				. = ui_layout["ui_alert1"]
 			if(2)
-				. = ui_alert2
+				. = ui_layout["ui_alert2"]
 			if(3)
-				. = ui_alert3
+				. = ui_layout["ui_alert3"]
 			if(4)
-				. = ui_alert4
+				. = ui_layout["ui_alert4"]
 			if(5)
-				. = ui_alert5 // Right now there's 5 slots
+				. = ui_layout["ui_alert5"] // Right now there's 5 slots
 			else
 				. = ""
 		alert.screen_loc = .

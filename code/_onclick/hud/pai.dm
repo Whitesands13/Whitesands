@@ -171,77 +171,77 @@
 
 // Software menu
 	using = new /obj/screen/pai/software
-	using.screen_loc = ui_pai_software
+	using.screen_loc = ui_layout["ui_pai_software"]
 	static_inventory += using
 
 // Holoform
 	using = new /obj/screen/pai/shell
-	using.screen_loc = ui_pai_shell
+	using.screen_loc = ui_layout["ui_pai_shell"]
 	static_inventory += using
 
 // Chassis Select Menu
 	using = new /obj/screen/pai/chassis
-	using.screen_loc = ui_pai_chassis
+	using.screen_loc = ui_layout["ui_pai_chassis"]
 	static_inventory += using
 
 // Rest
 	using = new /obj/screen/pai/rest
-	using.screen_loc = ui_pai_rest
+	using.screen_loc = ui_layout["ui_pai_rest"]
 	static_inventory += using
 
 // Integrated Light
 	using = new /obj/screen/pai/light
-	using.screen_loc = ui_pai_light
+	using.screen_loc = ui_layout["ui_pai_light"]
 	static_inventory += using
 
 // Newscaster
 	using = new /obj/screen/pai/newscaster
-	using.screen_loc = ui_pai_newscaster
+	using.screen_loc = ui_layout["ui_pai_newscaster"]
 	static_inventory += using
 
 // Language menu
 	using = new /obj/screen/language_menu
-	using.screen_loc = ui_borg_language_menu
+	using.screen_loc = ui_layout["ui_borg_language_menu"]
 	static_inventory += using
 
 // Host Monitor
 	using = new /obj/screen/pai/host_monitor()
-	using.screen_loc = ui_pai_host_monitor
+	using.screen_loc = ui_layout["ui_pai_host_monitor"]
 	static_inventory += using
 
 // Crew Manifest
 	using = new /obj/screen/pai/crew_manifest()
-	using.screen_loc = ui_pai_crew_manifest
+	using.screen_loc = ui_layout["ui_pai_crew_manifest"]
 	static_inventory += using
 
 // Laws
 	using = new /obj/screen/pai/state_laws()
-	using.screen_loc = ui_pai_state_laws
+	using.screen_loc = ui_layout["ui_pai_state_laws"]
 	static_inventory += using
 
 // PDA message
 	using = new /obj/screen/pai/pda_msg_send()
-	using.screen_loc = ui_pai_pda_send
+	using.screen_loc = ui_layout["ui_pai_pda_send"]
 	static_inventory += using
 
 // PDA log
 	using = new /obj/screen/pai/pda_msg_show()
-	using.screen_loc = ui_pai_pda_log
+	using.screen_loc = ui_layout["ui_pai_pda_log"]
 	static_inventory += using
 
 // Take image
 	using = new /obj/screen/pai/image_take()
-	using.screen_loc = ui_pai_take_picture
+	using.screen_loc = ui_layout["ui_pai_take_picture"]
 	static_inventory += using
 
 // View images
 	using = new /obj/screen/pai/image_view()
-	using.screen_loc = ui_pai_view_images
+	using.screen_loc = ui_layout["ui_pai_view_images"]
 	static_inventory += using
 
 // Radio
 	using = new /obj/screen/pai/radio()
-	using.screen_loc = ui_borg_radio
+	using.screen_loc = ui_layout["ui_borg_radio"]
 	static_inventory += using
 
 	update_software_buttons()

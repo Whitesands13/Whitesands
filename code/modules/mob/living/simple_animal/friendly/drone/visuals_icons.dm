@@ -37,7 +37,7 @@
 		if(client && hud_used && hud_used.hud_version != HUD_STYLE_NOHUD)
 			r_hand.layer = ABOVE_HUD_LAYER
 			r_hand.plane = ABOVE_HUD_PLANE
-			r_hand.screen_loc = ui_hand_position(get_held_index_of_item(r_hand))
+			r_hand.screen_loc = hud_used.ui_hand_position(get_held_index_of_item(r_hand))
 			client.screen |= r_hand
 
 	if(l_hand)
@@ -50,7 +50,7 @@
 		if(client && hud_used && hud_used.hud_version != HUD_STYLE_NOHUD)
 			l_hand.layer = ABOVE_HUD_LAYER
 			l_hand.plane = ABOVE_HUD_PLANE
-			l_hand.screen_loc = ui_hand_position(get_held_index_of_item(l_hand))
+			l_hand.screen_loc = hud_used.ui_hand_position(get_held_index_of_item(l_hand))
 			client.screen |= l_hand
 
 
@@ -61,7 +61,7 @@
 
 /mob/living/simple_animal/drone/proc/update_inv_internal_storage()
 	if(internal_storage && client && hud_used && hud_used.hud_shown)
-		internal_storage.screen_loc = ui_drone_storage
+		internal_storage.screen_loc = hud_used.ui_layout["ui_drone_storage"]
 		client.screen += internal_storage
 
 
@@ -70,7 +70,7 @@
 
 	if(head)
 		if(client && hud_used && hud_used.hud_shown)
-			head.screen_loc = ui_drone_head
+			head.screen_loc = hud_used.ui_layout["ui_drone_head"]
 			client.screen += head
 		var/used_head_icon = 'icons/mob/clothing/head.dmi'
 		if(istype(head, /obj/item/clothing/mask))

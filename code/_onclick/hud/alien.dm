@@ -13,13 +13,11 @@
 /obj/screen/alien/plasma_display
 	name = "plasma stored"
 	icon_state = "power_display"
-	screen_loc = ui_alienplasmadisplay
 
 /obj/screen/alien/alien_queen_finder
 	name = "queen sense"
 	desc = "Allows you to sense the general direction of your Queen."
 	icon_state = "queen_finder"
-	screen_loc = ui_alien_queen_finder
 
 /datum/hud/alien
 	ui_style = 'icons/mob/screen_alien.dmi'
@@ -59,36 +57,36 @@
 	if(isalienhunter(mymob))
 		var/mob/living/carbon/alien/humanoid/hunter/H = mymob
 		H.leap_icon = new /obj/screen/alien/leap()
-		H.leap_icon.screen_loc = ui_alien_storage_r
+		H.leap_icon.screen_loc = ui_layout["ui_alien_storage_r"]
 		static_inventory += H.leap_icon
 
 	using = new/obj/screen/language_menu
-	using.screen_loc = ui_alien_language_menu
+	using.screen_loc = ui_layout["ui_alien_language_menu"]
 	using.hud = src
 	static_inventory += using
 
 	using = new /obj/screen/drop()
 	using.icon = ui_style
-	using.screen_loc = ui_drop_throw
+	using.screen_loc = ui_layout["ui_drop_throw"]
 	using.hud = src
 	static_inventory += using
 
 	using = new /obj/screen/resist()
 	using.icon = ui_style
-	using.screen_loc = ui_above_movement
+	using.screen_loc = ui_layout["ui_above_movement"]
 	using.hud = src
 	hotkeybuttons += using
 
 	throw_icon = new /obj/screen/throw_catch()
 	throw_icon.icon = ui_style
-	throw_icon.screen_loc = ui_drop_throw
+	throw_icon.screen_loc = ui_layout["ui_drop_throw"]
 	throw_icon.hud = src
 	hotkeybuttons += throw_icon
 
 	pull_icon = new /obj/screen/pull()
 	pull_icon.icon = ui_style
 	pull_icon.update_icon()
-	pull_icon.screen_loc = ui_above_movement
+	pull_icon.screen_loc = ui_layout["ui_above_movement"]
 	pull_icon.hud = src
 	static_inventory += pull_icon
 
@@ -99,12 +97,14 @@
 	infodisplay += healths
 
 	alien_plasma_display = new /obj/screen/alien/plasma_display()
+	alien_plasma_display.screen_loc = ui_layout["ui_alienplasmadisplay"]
 	alien_plasma_display.hud = src
 	infodisplay += alien_plasma_display
 
 	if(!isalienqueen(mymob))
 		alien_queen_finder = new /obj/screen/alien/alien_queen_finder
 		alien_queen_finder.hud = src
+		alien_queen_finder.screen_loc = ui_layout["ui_alien_queen_finder"]
 		infodisplay += alien_queen_finder
 
 	zone_select = new /obj/screen/zone_sel/alien()

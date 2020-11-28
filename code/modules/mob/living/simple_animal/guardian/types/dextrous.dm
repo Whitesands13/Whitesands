@@ -77,7 +77,8 @@
 
 /mob/living/simple_animal/hostile/guardian/dextrous/proc/update_inv_internal_storage()
 	if(internal_storage && client && hud_used && hud_used.hud_shown)
-		internal_storage.screen_loc = ui_id
+		var/list/ui_layout = hud_used.ui_layout
+		internal_storage.screen_loc = ui_layout["ui_id"]
 		client.screen += internal_storage
 
 /mob/living/simple_animal/hostile/guardian/dextrous/regenerate_icons()

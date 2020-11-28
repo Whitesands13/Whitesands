@@ -55,7 +55,7 @@
 	var/list/hands = list()
 	for(var/obj/item/I in held_items)
 		if(client && hud_used && hud_used.hud_version != HUD_STYLE_NOHUD)
-			I.screen_loc = ui_hand_position(get_held_index_of_item(I))
+			I.screen_loc = hud_used.ui_hand_position(get_held_index_of_item(I))
 			client.screen += I
 			if(observers && observers.len)
 				for(var/M in observers)

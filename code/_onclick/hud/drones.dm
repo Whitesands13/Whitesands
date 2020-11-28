@@ -7,7 +7,7 @@
 	inv_box.icon = ui_style
 	inv_box.icon_state = "suit_storage"
 //	inv_box.icon_full = "template"
-	inv_box.screen_loc = ui_drone_storage
+	inv_box.screen_loc = ui_layout["ui_drone_storage"]
 	inv_box.slot_id = ITEM_SLOT_DEX_STORAGE
 	inv_box.hud = src
 	static_inventory += inv_box
@@ -17,7 +17,7 @@
 	inv_box.icon = ui_style
 	inv_box.icon_state = "mask"
 //	inv_box.icon_full = "template"
-	inv_box.screen_loc = ui_drone_head
+	inv_box.screen_loc = ui_layout["ui_drone_head"]
 	inv_box.slot_id = ITEM_SLOT_HEAD
 	inv_box.hud = src
 	static_inventory += inv_box
@@ -36,10 +36,10 @@
 
 	if(hud_shown)
 		if(D.internal_storage)
-			D.internal_storage.screen_loc = ui_drone_storage
+			D.internal_storage.screen_loc = ui_layout["ui_drone_storage"]
 			D.client.screen += D.internal_storage
 		if(D.head)
-			D.head.screen_loc = ui_drone_head
+			D.head.screen_loc = ui_layout["ui_drone_head"]
 			D.client.screen += D.head
 	else
 		if(D.internal_storage)

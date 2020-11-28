@@ -15,8 +15,16 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	"Glass" = 'icons/mob/screen_glass.dmi'
 ))
 
+GLOBAL_LIST_INIT(available_ui_layouts, list(
+	"Default" = GLOB.ui_layout_default,
+	"Alternate" = GLOB.ui_layout_alternate
+))
+
 /proc/ui_style2icon(ui_style)
 	return GLOB.available_ui_styles[ui_style] || GLOB.available_ui_styles[GLOB.available_ui_styles[1]]
+
+/proc/ui_name2layout(ui_layout)
+	return GLOB.available_ui_layouts[ui_layout] || GLOB.available_ui_layouts[GLOB.available_ui_layouts[1]]
 
 /datum/hud
 	var/mob/mymob
@@ -64,6 +72,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	Wasp End - Fuckin' spacesuits. */
 	// subtypes can override this to force a specific UI style
 	var/ui_style
+	var/list/ui_layout
 
 /datum/hud/New(mob/owner)
 	mymob = owner
@@ -71,6 +80,10 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	if (!ui_style)
 		// will fall back to the default if any of these are null
 		ui_style = ui_style2icon(owner.client && owner.client.prefs && owner.client.prefs.UI_style)
+
+	if (!ui_layout)
+		// will fall back to the default if any of these are null
+		ui_layout = ui_name2layout(owner.client && owner.client.prefs && owner.client.prefs.UI_style)
 
 	hide_actions_toggle = new
 	hide_actions_toggle.InitialiseIcon(src)
@@ -180,7 +193,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 					screenmob.client.screen += hand
 			if(action_intent)
 				screenmob.client.screen += action_intent		//we want the intent switcher visible
-				action_intent.screen_loc = ui_acti_alt	//move this to the alternative position, where zone_select usually is.
+				action_intent.screen_loc = ui_layout["ui_acti_alt"]	//move this to the alternative position, where zone_select usually is.
 
 		if(HUD_STYLE_NOHUD)	//No HUD
 			hud_shown = FALSE	//Governs behavior of other procs

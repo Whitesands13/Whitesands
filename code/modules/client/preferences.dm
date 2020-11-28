@@ -26,6 +26,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 										//autocorrected this round, not that you'd need to check that.
 
 	var/UI_style = null
+	var/UI_layout = null
 	var/buttons_locked = FALSE
 	var/hotkeys = TRUE
 
@@ -146,6 +147,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		custom_names[custom_name_id] = get_default_name(custom_name_id)
 
 	UI_style = GLOB.available_ui_styles[1]
+	UI_layout = GLOB.available_ui_layouts[1]
 	if(istype(C))
 		if(!IsGuestKey(C.key))
 			load_path(C.ckey)
@@ -763,6 +765,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			dat += "<table><tr><td width='340px' height='300px' valign='top'>"
 			dat += "<h2>General Settings</h2>"
 			dat += "<b>UI Style:</b> <a href='?_src_=prefs;task=input;preference=ui'>[UI_style]</a><br>"
+			dat += "<b>UI Layout:</b> <a href='?_src_=prefs;task=input;preference=ui_layout'>[UI_layout]</a><br>"
 			dat += "<b>tgui Window Mode:</b> <a href='?_src_=prefs;preference=tgui_fancy'>[(tgui_fancy) ? "Fancy (default)" : "Compatible (slower)"]</a><br>"
 			dat += "<b>tgui Window Placement:</b> <a href='?_src_=prefs;preference=tgui_lock'>[(tgui_lock) ? "Primary monitor" : "Free (default)"]</a><br>"
 			dat += "<b>Show Runechat Chat Bubbles:</b> <a href='?_src_=prefs;preference=chat_on_map'>[chat_on_map ? "Enabled" : "Disabled"]</a><br>"
@@ -1921,6 +1924,12 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						UI_style = pickedui
 						if (parent && parent.mob && parent.mob.hud_used)
 							parent.mob.hud_used.update_ui_style(ui_style2icon(UI_style))
+				if("ui_layout")
+					var/pickedui = input(user, "Choose your UI layout.", "Character Preference", UI_style)  as null|anything in sortList(GLOB.available_ui_layouts)
+					if(pickedui)
+						UI_layout = pickedui
+						if (parent && parent.mob && parent.mob.hud_used)
+							parent.mob.hud_used.ui_layout = UI_layout
 				if("pda_style")
 					var/pickedPDAStyle = input(user, "Choose your PDA style.", "Character Preference", pda_style)  as null|anything in GLOB.pda_styles
 					if(pickedPDAStyle)
