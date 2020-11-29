@@ -57,8 +57,8 @@
 	var/screen_max_rows = INFINITY
 	var/screen_pixel_x = 16								//These two are pixel values for screen loc of boxes and closer
 	var/screen_pixel_y = 16
-	var/screen_start_x = 6								//These two are where the storage starts being rendered, screen_loc wise.
-	var/screen_start_y = 3
+	var/screen_start_x = 4								//These two are where the storage starts being rendered, screen_loc wise.
+	var/screen_start_y = 2
 	//End
 
 /datum/component/storage/Initialize(datum/component/storage/concrete/master)
@@ -396,6 +396,8 @@
 				return FALSE
 	if(M.active_storage)
 		M.active_storage.hide_from(M)
+	screen_start_x = initial(screen_start_x) + text2num(M.hud_used?.ui_layout["storage_offset_x"])
+	screen_start_y = initial(screen_start_x) + text2num(M.hud_used?.ui_layout["storage_offset_y"])
 	orient2hud()
 	M.client.screen |= boxes
 	M.client.screen |= closer

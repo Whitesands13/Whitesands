@@ -3,6 +3,10 @@ GLOBAL_LIST_INIT(ui_layout_default, list(
 	ui_hand_x_offset = "0",
 	ui_hand_y_offset = "0",
 
+	//Storage overlay offset
+	storage_offset_x = "0",
+	storage_offset_y = "0",
+
 	//Lower left, persistent menu
 	ui_inventory = "WEST:6,SOUTH:5",
 
@@ -22,7 +26,7 @@ GLOBAL_LIST_INIT(ui_layout_default, list(
 	//Lower right, persistent menu
 	ui_drop_throw = "EAST-1:28,SOUTH+1:7",
 	ui_above_movement = "EAST-2:26,SOUTH+1:7",
-	ui_above_intent = "EAST-3:24,SOUTH+1:7",
+	ui_pull_resist = "EAST-3:24,SOUTH+1:7",
 	ui_movi = "EAST-2:26,SOUTH:5",
 	ui_acti = "EAST-3:24,SOUTH:5",
 	ui_zonesel = "EAST-1:28,SOUTH:5",
@@ -147,6 +151,10 @@ GLOBAL_LIST_INIT(ui_layout_alternate, list(
 	ui_hand_x_offset = "2",
 	ui_hand_y_offset = "0",
 
+	//Storage overlay offset
+	storage_offset_x = "2",
+	storage_offset_y = "1",
+
 	//Lower left, persistent menu
 	ui_inventory = "CENTER-5:18,SOUTH:5",
 
@@ -166,7 +174,7 @@ GLOBAL_LIST_INIT(ui_layout_alternate, list(
 	//Lower right, persistent menu
 	ui_drop_throw = "CENTER+3:18,SOUTH:5",
 	ui_above_movement = "CENTER+7:18,SOUTH:5",
-	ui_above_intent = "CENTER+6:18,SOUTH:5",
+	ui_pull_resist = "CENTER+6:18,SOUTH:5",
 	ui_movi = "CENTER+6:18,SOUTH:5",
 	ui_acti = "CENTER+5:18,SOUTH:5",
 	ui_zonesel = "CENTER+4:18,SOUTH:5",

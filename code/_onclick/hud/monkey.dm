@@ -123,7 +123,7 @@
 
 	using = new /obj/screen/resist()
 	using.icon = ui_style
-	using.screen_loc_name = "ui_above_intent"
+	using.screen_loc_name = "ui_pull_resist"
 	using.hud = src
 	hotkeybuttons += using
 
