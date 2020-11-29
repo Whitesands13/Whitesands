@@ -79,11 +79,11 @@ GLOBAL_LIST_INIT(available_ui_layouts, list(
 
 	if (!ui_style)
 		// will fall back to the default if any of these are null
-		ui_style = ui_style2icon(owner.client && owner.client.prefs && owner.client.prefs.UI_style)
+		ui_style = ui_style2icon(owner?.client?.prefs?.UI_style)
 
 	if (!ui_layout)
 		// will fall back to the default if any of these are null
-		ui_layout = ui_name2layout(owner.client && owner.client.prefs && owner.client.prefs.UI_style)
+		ui_layout = ui_name2layout(owner?.client?.prefs?.UI_layout)
 
 	hide_actions_toggle = new
 	hide_actions_toggle.InitialiseIcon(src)
@@ -262,6 +262,18 @@ GLOBAL_LIST_INIT(available_ui_layouts, list(
 	ui_style = new_ui_style
 	build_hand_slots()
 	hide_actions_toggle.InitialiseIcon(src)
+
+/datum/hud/proc/update_ui_layout(new_ui_layout)
+	// do nothing if overridden by a subtype or already on that style
+	if (initial(ui_layout) || ui_layout == new_ui_layout)
+		return
+
+	for(var/atom/item in static_inventory + toggleable_inventory + hotkeybuttons + infodisplay + screenoverlays + inv_slots)
+		item.update_overlays()
+
+	ui_layout = new_ui_layout
+	persistent_inventory_update()
+	hidden_inventory_update()
 
 //Triggered when F12 is pressed (Unless someone changed something in the DMF)
 /mob/verb/button_pressed_F12()

@@ -43,7 +43,7 @@
 
 /obj/screen/devil/soul_counter/Initialize()
 	. = ..()
-	screen_loc = hud.ui_layout["ui_devilsouldisplay"]
+	screen_loc = hud?.ui_layout["ui_devilsouldisplay"]
 
 /obj/screen/devil/soul_counter/proc/update_counter(souls = 0)
 	invisibility = 0
@@ -74,7 +74,7 @@
 
 /obj/screen/ling/sting/Initialize()
 	. = ..()
-	screen_loc = hud.ui_layout["ui_lingstingdisplay"]
+	screen_loc = hud?.ui_layout["ui_lingstingdisplay"]
 
 /obj/screen/ling/sting/Click()
 	if(isobserver(usr))
@@ -88,7 +88,7 @@
 
 /obj/screen/ling/chems/Initialize()
 	. = ..()
-	screen_loc = hud.ui_layout["ui_lingchemdisplay"]
+	screen_loc = hud?.ui_layout["ui_lingchemdisplay"]
 
 /datum/hud/human/New(mob/living/carbon/human/owner)
 	..()
@@ -122,6 +122,7 @@
 
 	action_intent = new /obj/screen/act_intent/segmented
 	action_intent.icon_state = mymob.a_intent
+	using.screen_loc = ui_layout["ui_acti"]
 	action_intent.hud = src
 	static_inventory += action_intent
 

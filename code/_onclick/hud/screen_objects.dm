@@ -65,9 +65,9 @@
 	icon = 'icons/mob/screen_midnight.dmi'
 	icon_state = "skills"
 
-/obj/screen/skills/Initialize()
+/obj/screen/skills/update_overlays()
 	. = ..()
-	screen_loc = hud.ui_layout["ui_skill_menu"]
+	screen_loc = hud?.ui_layout["ui_skill_menu"]
 
 /obj/screen/skills/Click()
 	if(ishuman(usr))
@@ -79,18 +79,18 @@
 	icon = 'icons/mob/screen_midnight.dmi'
 	icon_state = "craft"
 
-/obj/screen/craft/Initialize()
+/obj/screen/craft/update_overlays()
 	. = ..()
-	screen_loc = hud.ui_layout["ui_crafting"]
+	screen_loc = hud?.ui_layout["ui_crafting"]
 
 /obj/screen/area_creator
 	name = "create new area"
 	icon = 'icons/mob/screen_midnight.dmi'
 	icon_state = "area_edit"
 
-/obj/screen/area_creator/Initialize()
+/obj/screen/area_creator/update_overlays()
 	. = ..()
-	screen_loc = hud.ui_layout["ui_building"]
+	screen_loc = hud?.ui_layout["ui_building"]
 
 /obj/screen/area_creator/Click()
 	if(usr.incapacitated() || (isobserver(usr) && !IsAdminGhost(usr)))
@@ -106,9 +106,9 @@
 	icon = 'icons/mob/screen_midnight.dmi'
 	icon_state = "talk_wheel"
 
-/obj/screen/language_menu/Initialize()
+/obj/screen/language_menu/update_overlays()
 	. = ..()
-	screen_loc = hud.ui_layout["ui_language_menu"]
+	screen_loc = hud?.ui_layout["ui_language_menu"]
 
 /obj/screen/language_menu/Click()
 	var/mob/M = usr
@@ -263,9 +263,9 @@
 	name = "intent"
 	icon_state = "help"
 
-/obj/screen/act_intent/Initialize()
+/obj/screen/act_intent/update_overlays()
 	. = ..()
-	screen_loc = hud.ui_layout["ui_acti"]
+	screen_loc = hud?.ui_layout["ui_acti"]
 
 /obj/screen/act_intent/Click(location, control, params)
 	usr.a_intent_change(INTENT_HOTKEY_RIGHT)
@@ -292,24 +292,24 @@
 /obj/screen/act_intent/alien
 	icon = 'icons/mob/screen_alien.dmi'
 
-/obj/screen/act_intent/alien/Initialize()
+/obj/screen/act_intent/alien/update_overlays()
 	. = ..()
-	screen_loc = hud.ui_layout["ui_movi"]
+	screen_loc = hud?.ui_layout["ui_movi"]
 
 /obj/screen/act_intent/robot
 	icon = 'icons/mob/screen_cyborg.dmi'
 
-/obj/screen/act_intent/robot/Initialize()
+/obj/screen/act_intent/robot/update_overlays()
 	. = ..()
-	screen_loc = hud.ui_layout["ui_borg_intents"]
+	screen_loc = hud?.ui_layout["ui_borg_intents"]
 
 /obj/screen/internals
 	name = "toggle internals"
 	icon_state = "internal0"
 
-/obj/screen/internals/Initialize()
+/obj/screen/internals/update_overlays()
 	. = ..()
-	screen_loc = hud.ui_layout["ui_internal"]
+	screen_loc = hud?.ui_layout["ui_internal"]
 
 /obj/screen/internals/Click()
 	if(!iscarbon(usr))
@@ -482,9 +482,9 @@
 	var/static/list/hover_overlays_cache = list()
 	var/hovering
 
-/obj/screen/zone_sel/Initialize()
+/obj/screen/zone_sel/update_overlays()
 	. = ..()
-	screen_loc = hud.ui_layout["ui_zonesel"]
+	screen_loc = hud?.ui_layout["ui_zonesel"]
 
 /obj/screen/zone_sel/Click(location, control,params)
 	if(isobserver(usr))
@@ -619,32 +619,32 @@
 	name = "health"
 	icon_state = "health0"
 
-/obj/screen/healths/Initialize()
+/obj/screen/healths/update_overlays()
 	. = ..()
-	screen_loc = hud.ui_layout["ui_health"]
+	screen_loc = hud?.ui_layout["ui_health"]
 
 /obj/screen/healths/alien
 	icon = 'icons/mob/screen_alien.dmi'
 
-/obj/screen/healths/alien/Initialize()
+/obj/screen/healths/alien/update_overlays()
 	. = ..()
-	screen_loc = hud.ui_layout["ui_alien_health"]
+	screen_loc = hud?.ui_layout["ui_alien_health"]
 
 /obj/screen/healths/robot
 	icon = 'icons/mob/screen_cyborg.dmi'
 
-/obj/screen/healths/robot/Initialize()
+/obj/screen/healths/robot/update_overlays()
 	. = ..()
-	screen_loc = hud.ui_layout["ui_borg_health"]
+	screen_loc = hud?.ui_layout["ui_borg_health"]
 
 /obj/screen/healths/blob
 	name = "blob health"
 	icon_state = "block"
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
-/obj/screen/healths/blob/Initialize()
+/obj/screen/healths/blob/update_overlays()
 	. = ..()
-	screen_loc = hud.ui_layout["ui_internal"]
+	screen_loc = hud?.ui_layout["ui_internal"]
 
 /obj/screen/healths/blob/naut
 	name = "health"
@@ -655,9 +655,9 @@
 	name = "overmind health"
 	icon_state = "corehealth"
 
-/obj/screen/healths/blob/naut/core/Initialize()
+/obj/screen/healths/blob/naut/core/update_overlays()
 	. = ..()
-	screen_loc = hud.ui_layout["ui_health"]
+	screen_loc = hud?.ui_layout["ui_health"]
 
 /obj/screen/healths/guardian
 	name = "summoner health"
@@ -676,16 +676,16 @@
 	icon_state = "artificer_health0"
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
-/obj/screen/healths/construct/Initialize()
+/obj/screen/healths/construct/update_overlays()
 	. = ..()
-	screen_loc = hud.ui_layout["ui_construct_health"]
+	screen_loc = hud?.ui_layout["ui_construct_health"]
 
 /obj/screen/healthdoll
 	name = "health doll"
 
-/obj/screen/healthdoll/Initialize()
+/obj/screen/healthdoll/update_overlays()
 	. = ..()
-	screen_loc = hud.ui_layout["ui_healthdoll"]
+	screen_loc = hud?.ui_layout["ui_healthdoll"]
 
 /obj/screen/healthdoll/Click()
 	if (iscarbon(usr))
@@ -696,17 +696,17 @@
 	icon_state = "fullhealth0"
 	var/filtered = FALSE //so we don't repeatedly create the mask of the mob every update
 
-/obj/screen/healthdoll/living/Initialize()
+/obj/screen/healthdoll/living/update_overlays()
 	. = ..()
-	screen_loc = hud.ui_layout["ui_living_healthdoll"]
+	screen_loc = hud?.ui_layout["ui_living_healthdoll"]
 
 /obj/screen/mood
 	name = "mood"
 	icon_state = "mood5"
 
-/obj/screen/mood/Initialize()
+/obj/screen/mood/update_overlays()
 	. = ..()
-	screen_loc = hud.ui_layout["ui_mood"]
+	screen_loc = hud?.ui_layout["ui_mood"]
 
 /obj/screen/splash
 	icon = 'icons/blank_title.png'

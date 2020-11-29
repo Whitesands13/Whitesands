@@ -1928,8 +1928,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					var/pickedui = input(user, "Choose your UI layout.", "Character Preference", UI_style)  as null|anything in sortList(GLOB.available_ui_layouts)
 					if(pickedui)
 						UI_layout = pickedui
-						if (parent && parent.mob && parent.mob.hud_used)
-							parent.mob.hud_used.ui_layout = UI_layout
+						if (parent?.mob?.hud_used)
+							parent.mob.hud_used.update_ui_layout(ui_name2layout(UI_layout))
 				if("pda_style")
 					var/pickedPDAStyle = input(user, "Choose your PDA style.", "Character Preference", pda_style)  as null|anything in GLOB.pda_styles
 					if(pickedPDAStyle)
