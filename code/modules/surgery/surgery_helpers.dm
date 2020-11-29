@@ -62,7 +62,7 @@
 					return
 			else if(C && S.requires_bodypart)
 				return
-			if(S.lying_required && (M.mobility_flags & MOBILITY_STAND))
+			if(S.lying_required && (M.body_position != LYING_DOWN))
 				return
 			if(!S.can_start(user, M))
 				return
