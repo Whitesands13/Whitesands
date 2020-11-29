@@ -11,7 +11,7 @@
 /datum/hud/ghost/New(mob/owner)
 	..()
 	var/obj/screen/using
-	
+
 	using = new /obj/screen/ghost/spawner_menu()
-	using.screen_loc = ui_ghost_spawner_menu
+	using.screen_loc_name = "ui_ghost_spawner_menu"
 	static_inventory += using

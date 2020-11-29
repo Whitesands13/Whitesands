@@ -97,30 +97,30 @@
 	var/obj/screen/using
 
 	using = new/obj/screen/language_menu
-	using.screen_loc = ui_layout["ui_borg_language_menu"]
+	using.screen_loc_name = "ui_borg_language_menu"
 	static_inventory += using
 
 //Radio
 	using = new /obj/screen/robot/radio()
-	using.screen_loc = ui_layout["ui_borg_radio"]
+	using.screen_loc_name = "ui_borg_radio"
 	using.hud = src
 	static_inventory += using
 
 //Module select
 	using = new /obj/screen/robot/module1()
-	using.screen_loc = ui_layout["ui_inv1"]
+	using.screen_loc_name = "ui_inv1"
 	using.hud = src
 	static_inventory += using
 	mymobR.inv1 = using
 
 	using = new /obj/screen/robot/module2()
-	using.screen_loc = ui_layout["ui_inv2"]
+	using.screen_loc_name = "ui_inv2"
 	using.hud = src
 	static_inventory += using
 	mymobR.inv2 = using
 
 	using = new /obj/screen/robot/module3()
-	using.screen_loc = ui_layout["ui_inv3"]
+	using.screen_loc_name = "ui_inv3"
 	using.hud = src
 	static_inventory += using
 	mymobR.inv3 = using
@@ -129,31 +129,31 @@
 
 //Photography stuff
 	using = new /obj/screen/ai/image_take()
-	using.screen_loc = ui_layout["ui_borg_camera"]
+	using.screen_loc_name = "ui_borg_camera"
 	using.hud = src
 	static_inventory += using
 
 	using = new /obj/screen/ai/image_view()
-	using.screen_loc = ui_layout["ui_borg_album"]
+	using.screen_loc_name = "ui_borg_album"
 	using.hud = src
 	static_inventory += using
 
 //Sec/Med HUDs
 	using = new /obj/screen/ai/sensors()
-	using.screen_loc = ui_layout["ui_borg_sensor"]
+	using.screen_loc_name = "ui_borg_sensor"
 	using.hud = src
 	static_inventory += using
 
 //Headlamp control
 	using = new /obj/screen/robot/lamp()
-	using.screen_loc = ui_layout["ui_borg_lamp"]
+	using.screen_loc_name = "ui_borg_lamp"
 	using.hud = src
 	static_inventory += using
 	mymobR.lamp_button = using
 
 //Thrusters
 	using = new /obj/screen/robot/thrusters()
-	using.screen_loc = ui_layout["ui_borg_thrusters"]
+	using.screen_loc_name = "ui_borg_thrusters"
 	using.hud = src
 	static_inventory += using
 	mymobR.thruster_button = using
@@ -171,18 +171,18 @@
 
 //Installed Module
 	mymobR.hands = new /obj/screen/robot/module()
-	mymobR.hands.screen_loc = ui_layout["ui_borg_module"]
+	mymobR.hands.screen_loc_name = "ui_borg_module"
 	mymobR.hands.hud = src
 	static_inventory += mymobR.hands
 
 //Store
 	module_store_icon = new /obj/screen/robot/store()
-	module_store_icon.screen_loc = ui_layout["ui_borg_store"]
+	module_store_icon.screen_loc_name = "ui_borg_store"
 	module_store_icon.hud = src
 
 	pull_icon = new /obj/screen/pull()
 	pull_icon.icon = 'icons/mob/screen_cyborg.dmi'
-	pull_icon.screen_loc = ui_layout["ui_borg_pull"]
+	pull_icon.screen_loc_name = "ui_borg_pull"
 	pull_icon.hud = src
 	pull_icon.update_icon()
 	hotkeybuttons += pull_icon

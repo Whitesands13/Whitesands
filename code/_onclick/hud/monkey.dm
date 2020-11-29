@@ -6,14 +6,14 @@
 	action_intent = new /obj/screen/act_intent()
 	action_intent.icon = ui_style
 	action_intent.icon_state = mymob.a_intent
-	action_intent.screen_loc = ui_layout["ui_acti"]
+	action_intent.screen_loc_name = "ui_acti"
 	action_intent.hud = src
 	static_inventory += action_intent
 
 	using = new /obj/screen/mov_intent()
 	using.icon = ui_style
 	using.icon_state = (mymob.m_intent == MOVE_INTENT_RUN ? "running" : "walking")
-	using.screen_loc = ui_layout["ui_movi"]
+	using.screen_loc_name = "ui_movi"
 	using.hud = src
 	static_inventory += using
 
@@ -24,7 +24,7 @@
 
 	using = new /obj/screen/drop()
 	using.icon = ui_style
-	using.screen_loc = ui_layout["ui_drop_throw"]
+	using.screen_loc_name = "ui_drop_throw"
 	using.hud = src
 	static_inventory += using
 
@@ -49,7 +49,7 @@
 	inv_box.icon = ui_style
 	inv_box.icon_state = "mask"
 //	inv_box.icon_full = "template"
-	inv_box.screen_loc = ui_layout["ui_monkey_mask"]
+	inv_box.screen_loc_name = "ui_monkey_mask"
 	inv_box.slot_id = ITEM_SLOT_MASK
 	inv_box.hud = src
 	static_inventory += inv_box
@@ -59,7 +59,7 @@
 	inv_box.icon = ui_style
 	inv_box.icon_state = "neck"
 //	inv_box.icon_full = "template"
-	inv_box.screen_loc = ui_layout["ui_monkey_neck"]
+	inv_box.screen_loc_name = "ui_monkey_neck"
 	inv_box.slot_id = ITEM_SLOT_NECK
 	inv_box.hud = src
 	static_inventory += inv_box
@@ -69,7 +69,7 @@
 	inv_box.icon = ui_style
 	inv_box.icon_state = "head"
 //	inv_box.icon_full = "template"
-	inv_box.screen_loc = ui_layout["ui_monkey_head"]
+	inv_box.screen_loc_name = "ui_monkey_head"
 	inv_box.slot_id = ITEM_SLOT_HEAD
 	inv_box.hud = src
 	static_inventory += inv_box
@@ -78,14 +78,14 @@
 	inv_box.name = "back"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "back"
-	inv_box.screen_loc = ui_layout["ui_monkey_back"]
+	inv_box.screen_loc_name = "ui_monkey_back"
 	inv_box.slot_id = ITEM_SLOT_BACK
 	inv_box.hud = src
 	static_inventory += inv_box
 
 	throw_icon = new /obj/screen/throw_catch()
 	throw_icon.icon = ui_style
-	throw_icon.screen_loc = ui_layout["ui_drop_throw"]
+	throw_icon.screen_loc_name = "ui_drop_throw"
 	throw_icon.hud = src
 	hotkeybuttons += throw_icon
 
@@ -100,7 +100,7 @@
 	pull_icon = new /obj/screen/pull()
 	pull_icon.icon = ui_style
 	pull_icon.update_icon()
-	pull_icon.screen_loc = ui_layout["ui_above_movement"]
+	pull_icon.screen_loc_name = "ui_above_movement"
 	pull_icon.hud = src
 	static_inventory += pull_icon
 
@@ -123,7 +123,7 @@
 
 	using = new /obj/screen/resist()
 	using.icon = ui_style
-	using.screen_loc = ui_layout["ui_above_intent"]
+	using.screen_loc_name = "ui_above_intent"
 	using.hud = src
 	hotkeybuttons += using
 

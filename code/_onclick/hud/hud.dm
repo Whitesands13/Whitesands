@@ -81,10 +81,6 @@ GLOBAL_LIST_INIT(available_ui_layouts, list(
 		// will fall back to the default if any of these are null
 		ui_style = ui_style2icon(owner?.client?.prefs?.UI_style)
 
-	if (!ui_layout)
-		// will fall back to the default if any of these are null
-		ui_layout = ui_name2layout(owner?.client?.prefs?.UI_layout)
-
 	hide_actions_toggle = new
 	hide_actions_toggle.InitialiseIcon(src)
 	if(mymob.client)
@@ -141,6 +137,18 @@ GLOBAL_LIST_INIT(available_ui_layouts, list(
 	update_sight()
 	SEND_SIGNAL(src, COMSIG_MOB_HUD_CREATED)
 
+/client/verb/change_ui_layout()
+	set name = "Change UI Layout"
+	set desc = "Change the layout of the HUD."
+	set category = "Preferences"
+
+	var/new_layout = input(usr, "Choose your UI layout.", "Character Preference", prefs?.UI_layout)  as null|anything in sortList(GLOB.available_ui_layouts)
+	if(!new_layout)
+		return
+	prefs?.UI_layout = new_layout
+	if (mob?.hud_used)
+		mob.hud_used.update_ui_layout(ui_name2layout(prefs.UI_layout))
+
 //Version denotes which style should be displayed. blank or 0 means "next version"
 /datum/hud/proc/show_hud(version = 0, mob/viewmob)
 	if(!ismob(mymob))
@@ -173,7 +181,7 @@ GLOBAL_LIST_INIT(available_ui_layouts, list(
 			screenmob.client.screen += hide_actions_toggle
 
 			if(action_intent)
-				action_intent.screen_loc = initial(action_intent.screen_loc) //Restore intent selection to the original position
+				action_intent.screen_loc = ui_layout[action_intent.screen_loc_name] //Restore intent selection to the original position
 
 		if(HUD_STYLE_REDUCED)	//Reduced HUD
 			hud_shown = FALSE	//Governs behavior of other procs
@@ -264,14 +272,14 @@ GLOBAL_LIST_INIT(available_ui_layouts, list(
 	hide_actions_toggle.InitialiseIcon(src)
 
 /datum/hud/proc/update_ui_layout(new_ui_layout)
-	// do nothing if overridden by a subtype or already on that style
-	if (initial(ui_layout) || ui_layout == new_ui_layout)
+	if (ui_layout == new_ui_layout)
 		return
 
-	for(var/atom/item in static_inventory + toggleable_inventory + hotkeybuttons + infodisplay + screenoverlays + inv_slots)
-		item.update_overlays()
-
 	ui_layout = new_ui_layout
+	for(var/obj/screen/S in static_inventory + toggleable_inventory + hotkeybuttons + infodisplay + screenoverlays + inv_slots)
+		S.update_screen_loc()
+
+	build_hand_slots()
 	persistent_inventory_update()
 	hidden_inventory_update()
 

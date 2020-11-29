@@ -1925,7 +1925,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						if (parent && parent.mob && parent.mob.hud_used)
 							parent.mob.hud_used.update_ui_style(ui_style2icon(UI_style))
 				if("ui_layout")
-					var/pickedui = input(user, "Choose your UI layout.", "Character Preference", UI_style)  as null|anything in sortList(GLOB.available_ui_layouts)
+					var/pickedui = input(user, "Choose your UI layout.", "Character Preference", UI_layout)  as null|anything in sortList(GLOB.available_ui_layouts)
 					if(pickedui)
 						UI_layout = pickedui
 						if (parent?.mob?.hud_used)

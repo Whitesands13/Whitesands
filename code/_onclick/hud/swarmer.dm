@@ -78,21 +78,21 @@
 	static_inventory += using
 
 	using = new /obj/screen/swarmer/Replicate()
-	using.screen_loc = ui_layout["ui_zonesel"]
+	using.screen_loc_name = "ui_zonesel"
 	using.hud = src
 	static_inventory += using
 
 	using = new /obj/screen/swarmer/RepairSelf()
-	using.screen_loc = ui_layout["ui_storage1"]
+	using.screen_loc_name = "ui_storage1"
 	using.hud = src
 	static_inventory += using
 
 	using = new /obj/screen/swarmer/ToggleLight()
-	using.screen_loc = ui_layout["ui_back"]
+	using.screen_loc_name = "ui_back"
 	using.hud = src
 	static_inventory += using
 
 	using = new /obj/screen/swarmer/ContactSwarmers()
-	using.screen_loc = ui_layout["ui_inventory"]
+	using.screen_loc_name = "ui_inventory"
 	using.hud = src
 	static_inventory += using

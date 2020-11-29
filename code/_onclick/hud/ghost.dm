@@ -49,27 +49,27 @@
 	var/obj/screen/using
 
 	using = new /obj/screen/ghost/jumptomob()
-	using.screen_loc = ui_ghost_jumptomob
+	using.screen_loc_name = "ui_ghost_jumptomob"
 	using.hud = src
 	static_inventory += using
 
 	using = new /obj/screen/ghost/orbit()
-	using.screen_loc = ui_ghost_orbit
+	using.screen_loc_name = "ui_ghost_orbit"
 	using.hud = src
 	static_inventory += using
 
 	using = new /obj/screen/ghost/reenter_corpse()
-	using.screen_loc = ui_ghost_reenter_corpse
+	using.screen_loc_name = "ui_ghost_reenter_corpse"
 	using.hud = src
 	static_inventory += using
 
 	using = new /obj/screen/ghost/teleport()
-	using.screen_loc = ui_ghost_teleport
+	using.screen_loc_name = "ui_ghost_teleport"
 	using.hud = src
 	static_inventory += using
 
 	using = new /obj/screen/ghost/pai()
-	using.screen_loc = ui_ghost_pai
+	using.screen_loc_name = "ui_ghost_pai"
 	using.hud = src
 	static_inventory += using
 

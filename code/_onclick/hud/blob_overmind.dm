@@ -129,7 +129,7 @@
 	blobpwrdisplay = new /obj/screen()
 	blobpwrdisplay.name = "blob power"
 	blobpwrdisplay.icon_state = "block"
-	blobpwrdisplay.screen_loc = ui_layout["ui_health"]
+	blobpwrdisplay.screen_loc_name = "ui_health"
 	blobpwrdisplay.mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	blobpwrdisplay.layer = ABOVE_HUD_LAYER
 	blobpwrdisplay.plane = ABOVE_HUD_PLANE
@@ -146,22 +146,22 @@
 	static_inventory += using
 
 	using = new /obj/screen/blob/JumpToNode()
-	using.screen_loc = ui_layout["ui_inventory"]
+	using.screen_loc_name = "ui_inventory"
 	using.hud = src
 	static_inventory += using
 
 	using = new /obj/screen/blob/JumpToCore()
-	using.screen_loc = ui_layout["ui_zonesel"]
+	using.screen_loc_name = "ui_zonesel"
 	using.hud = src
 	static_inventory += using
 
 	using = new /obj/screen/blob/Blobbernaut()
-	using.screen_loc = ui_layout["ui_belt"]
+	using.screen_loc_name = "ui_belt"
 	using.hud = src
 	static_inventory += using
 
 	using = new /obj/screen/blob/ResourceBlob()
-	using.screen_loc = ui_layout["ui_back"]
+	using.screen_loc_name = "ui_back"
 	using.hud = src
 	static_inventory += using
 
@@ -176,11 +176,11 @@
 	static_inventory += using
 
 	using = new /obj/screen/blob/ReadaptStrain()
-	using.screen_loc = ui_layout["ui_storage1"]
+	using.screen_loc_name = "ui_storage1"
 	using.hud = src
 	static_inventory += using
 
 	using = new /obj/screen/blob/RelocateCore()
-	using.screen_loc = ui_layout["ui_storage2"]
+	using.screen_loc_name = "ui_storage2"
 	using.hud = src
 	static_inventory += using

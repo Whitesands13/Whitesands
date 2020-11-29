@@ -40,10 +40,7 @@
 /obj/screen/devil/soul_counter
 	name = "souls owned"
 	icon_state = "Devil-6"
-
-/obj/screen/devil/soul_counter/Initialize()
-	. = ..()
-	screen_loc = hud?.ui_layout["ui_devilsouldisplay"]
+	screen_loc_name = "ui_devilsouldisplay"
 
 /obj/screen/devil/soul_counter/proc/update_counter(souls = 0)
 	invisibility = 0
@@ -71,10 +68,7 @@
 
 /obj/screen/ling/sting
 	name = "current sting"
-
-/obj/screen/ling/sting/Initialize()
-	. = ..()
-	screen_loc = hud?.ui_layout["ui_lingstingdisplay"]
+	screen_loc_name = "ui_lingstingdisplay"
 
 /obj/screen/ling/sting/Click()
 	if(isobserver(usr))
@@ -85,10 +79,7 @@
 /obj/screen/ling/chems
 	name = "chemical storage"
 	icon_state = "power_display"
-
-/obj/screen/ling/chems/Initialize()
-	. = ..()
-	screen_loc = hud?.ui_layout["ui_lingchemdisplay"]
+	screen_loc_name = "ui_lingchemdisplay"
 
 /datum/hud/human/New(mob/living/carbon/human/owner)
 	..()
@@ -111,6 +102,7 @@
 	using.icon = ui_style
 	if(!widescreen_layout)
 		using.screen_loc = UI_BOXLANG
+	using.hud = src
 	static_inventory += using
 
 	using = new /obj/screen/area_creator
@@ -122,20 +114,19 @@
 
 	action_intent = new /obj/screen/act_intent/segmented
 	action_intent.icon_state = mymob.a_intent
-	using.screen_loc = ui_layout["ui_acti"]
 	action_intent.hud = src
 	static_inventory += action_intent
 
 	using = new /obj/screen/mov_intent
 	using.icon = ui_style
 	using.icon_state = (mymob.m_intent == MOVE_INTENT_RUN ? "running" : "walking")
-	using.screen_loc = ui_layout["ui_movi"]
+	using.screen_loc_name = "ui_movi"
 	using.hud = src
 	static_inventory += using
 
 	using = new /obj/screen/drop()
 	using.icon = ui_style
-	using.screen_loc = ui_layout["ui_drop_throw"]
+	using.screen_loc_name = "ui_drop_throw"
 	using.hud = src
 	static_inventory += using
 
@@ -144,7 +135,7 @@
 	inv_box.icon = ui_style
 	inv_box.slot_id = ITEM_SLOT_ICLOTHING
 	inv_box.icon_state = "uniform"
-	inv_box.screen_loc = ui_layout["ui_iclothing"]
+	inv_box.screen_loc_name = "ui_iclothing"
 	inv_box.hud = src
 	toggleable_inventory += inv_box
 
@@ -153,7 +144,7 @@
 	inv_box.icon = ui_style
 	inv_box.slot_id = ITEM_SLOT_OCLOTHING
 	inv_box.icon_state = "suit"
-	inv_box.screen_loc = ui_layout["ui_oclothing"]
+	inv_box.screen_loc_name = "ui_oclothing"
 	inv_box.hud = src
 	toggleable_inventory += inv_box
 
@@ -177,7 +168,7 @@
 	inv_box.name = "id"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "id"
-	inv_box.screen_loc = ui_layout["ui_id"]
+	inv_box.screen_loc_name = "ui_id"
 	inv_box.slot_id = ITEM_SLOT_ID
 	inv_box.hud = src
 	static_inventory += inv_box
@@ -186,7 +177,7 @@
 	inv_box.name = "mask"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "mask"
-	inv_box.screen_loc = ui_layout["ui_mask"]
+	inv_box.screen_loc_name = "ui_mask"
 	inv_box.slot_id = ITEM_SLOT_MASK
 	inv_box.hud = src
 	toggleable_inventory += inv_box
@@ -195,7 +186,7 @@
 	inv_box.name = "neck"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "neck"
-	inv_box.screen_loc = ui_layout["ui_neck"]
+	inv_box.screen_loc_name = "ui_neck"
 	inv_box.slot_id = ITEM_SLOT_NECK
 	inv_box.hud = src
 	toggleable_inventory += inv_box
@@ -204,7 +195,7 @@
 	inv_box.name = "back"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "back"
-	inv_box.screen_loc = ui_layout["ui_back"]
+	inv_box.screen_loc_name = "ui_back"
 	inv_box.slot_id = ITEM_SLOT_BACK
 	inv_box.hud = src
 	static_inventory += inv_box
@@ -213,7 +204,7 @@
 	inv_box.name = "storage1"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "pocket"
-	inv_box.screen_loc = ui_layout["ui_storage1"]
+	inv_box.screen_loc_name = "ui_storage1"
 	inv_box.slot_id = ITEM_SLOT_LPOCKET
 	inv_box.hud = src
 	static_inventory += inv_box
@@ -222,7 +213,7 @@
 	inv_box.name = "storage2"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "pocket"
-	inv_box.screen_loc = ui_layout["ui_storage2"]
+	inv_box.screen_loc_name = "ui_storage2"
 	inv_box.slot_id = ITEM_SLOT_RPOCKET
 	inv_box.hud = src
 	static_inventory += inv_box
@@ -231,20 +222,20 @@
 	inv_box.name = "suit storage"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "suit_storage"
-	inv_box.screen_loc = ui_layout["ui_sstore1"]
+	inv_box.screen_loc_name = "ui_sstore1"
 	inv_box.slot_id = ITEM_SLOT_SUITSTORE
 	inv_box.hud = src
 	static_inventory += inv_box
 
 	using = new /obj/screen/resist()
 	using.icon = ui_style
-	using.screen_loc = ui_layout["ui_above_intent"]
+	using.screen_loc_name = "ui_above_intent"
 	using.hud = src
 	hotkeybuttons += using
 
 	using = new /obj/screen/human/toggle()
 	using.icon = ui_style
-	using.screen_loc = ui_layout["ui_inventory"]
+	using.screen_loc_name = "ui_inventory"
 	using.hud = src
 	static_inventory += using
 
@@ -258,7 +249,7 @@
 	inv_box.name = "gloves"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "gloves"
-	inv_box.screen_loc = ui_layout["ui_gloves"]
+	inv_box.screen_loc_name = "ui_gloves"
 	inv_box.slot_id = ITEM_SLOT_GLOVES
 	inv_box.hud = src
 	toggleable_inventory += inv_box
@@ -267,7 +258,7 @@
 	inv_box.name = "eyes"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "glasses"
-	inv_box.screen_loc = ui_layout["ui_glasses"]
+	inv_box.screen_loc_name = "ui_glasses"
 	inv_box.slot_id = ITEM_SLOT_EYES
 	inv_box.hud = src
 	toggleable_inventory += inv_box
@@ -276,7 +267,7 @@
 	inv_box.name = "ears"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "ears"
-	inv_box.screen_loc = ui_layout["ui_ears"]
+	inv_box.screen_loc_name = "ui_ears"
 	inv_box.slot_id = ITEM_SLOT_EARS
 	inv_box.hud = src
 	toggleable_inventory += inv_box
@@ -285,7 +276,7 @@
 	inv_box.name = "head"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "head"
-	inv_box.screen_loc = ui_layout["ui_head"]
+	inv_box.screen_loc_name = "ui_head"
 	inv_box.slot_id = ITEM_SLOT_HEAD
 	inv_box.hud = src
 	toggleable_inventory += inv_box
@@ -294,7 +285,7 @@
 	inv_box.name = "shoes"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "shoes"
-	inv_box.screen_loc = ui_layout["ui_shoes"]
+	inv_box.screen_loc_name = "ui_shoes"
 	inv_box.slot_id = ITEM_SLOT_FEET
 	inv_box.hud = src
 	toggleable_inventory += inv_box
@@ -304,20 +295,20 @@
 	inv_box.icon = ui_style
 	inv_box.icon_state = "belt"
 //	inv_box.icon_full = "template_small"
-	inv_box.screen_loc = ui_layout["ui_belt"]
+	inv_box.screen_loc_name = "ui_belt"
 	inv_box.slot_id = ITEM_SLOT_BELT
 	inv_box.hud = src
 	static_inventory += inv_box
 
 	throw_icon = new /obj/screen/throw_catch()
 	throw_icon.icon = ui_style
-	throw_icon.screen_loc = ui_layout["ui_drop_throw"]
+	throw_icon.screen_loc_name = "ui_drop_throw"
 	throw_icon.hud = src
 	hotkeybuttons += throw_icon
 
 	rest_icon = new /obj/screen/rest()
 	rest_icon.icon = ui_style
-	rest_icon.screen_loc = ui_layout["ui_above_movement"]
+	rest_icon.screen_loc_name = "ui_above_movement"
 	rest_icon.hud = src
 	static_inventory += rest_icon
 
@@ -336,7 +327,7 @@
 	pull_icon = new /obj/screen/pull()
 	pull_icon.icon = ui_style
 	pull_icon.update_icon()
-	pull_icon.screen_loc = ui_layout["ui_above_intent"]
+	pull_icon.screen_loc_name = "ui_above_intent"
 	pull_icon.hud = src
 	static_inventory += pull_icon
 

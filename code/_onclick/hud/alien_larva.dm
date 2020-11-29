@@ -22,12 +22,12 @@
 	pull_icon = new /obj/screen/pull()
 	pull_icon.icon = 'icons/mob/screen_alien.dmi'
 	pull_icon.update_icon()
-	pull_icon.screen_loc = ui_layout["ui_above_movement"]
+	pull_icon.screen_loc_name = "ui_above_movement"
 	pull_icon.hud = src
 	hotkeybuttons += pull_icon
 
 	using = new/obj/screen/language_menu
-	using.screen_loc = ui_layout["ui_alien_language_menu"]
+	using.screen_loc_name = "ui_alien_language_menu"
 	using.hud = src
 	static_inventory += using
 
