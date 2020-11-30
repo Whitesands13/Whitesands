@@ -5988,6 +5988,16 @@
 	},
 /turf/open/floor/plating,
 /area/security/prison)
+"oG" = (
+/obj/machinery/conveyor{
+	dir = 8;
+	id = "QMLoad2"
+	},
+/obj/machinery/status_display/supply{
+	pixel_y = -32
+	},
+/turf/open/floor/plating,
+/area/quartermaster/storage)
 "oH" = (
 /obj/effect/turf_decal/delivery,
 /obj/machinery/atmospherics/components/unary/portables_connector/visible,
@@ -8516,16 +8526,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/maintenance/central)
-"ut" = (
-/obj/structure/filingcabinet/chestdrawer,
-/obj/effect/turf_decal/tile/brown{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/brown{
-	dir = 4
-	},
-/turf/open/floor/plasteel,
-/area/quartermaster/qm)
 "uu" = (
 /obj/structure/table,
 /obj/effect/turf_decal/tile/brown{
@@ -10806,13 +10806,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/crew_quarters/dorms)
-"zz" = (
-/obj/effect/turf_decal/tile/brown{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/brown,
-/turf/open/floor/plasteel,
-/area/quartermaster/miningoffice)
 "zB" = (
 /obj/machinery/computer/security/mining{
 	dir = 1
@@ -13554,6 +13547,20 @@
 	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/upper)
+"Hc" = (
+/obj/machinery/power/apc/highcap/five_k{
+	dir = 4;
+	pixel_x = 24
+	},
+/obj/machinery/computer/telecomms/monitor{
+	dir = 8
+	},
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
+	name = "interior reinforced hull plating";
+	temperature = 293.15
+	},
+/area/tcommsat/server/upper)
 "Hd" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -13588,6 +13595,16 @@
 /obj/item/kirbyplants/random,
 /turf/open/floor/plasteel/grimy,
 /area/security/detectives_office)
+"Hu" = (
+/obj/machinery/conveyor{
+	dir = 8;
+	id = "QMLoad"
+	},
+/obj/machinery/status_display/supply{
+	pixel_y = -32
+	},
+/turf/open/floor/plating,
+/area/quartermaster/storage)
 "Hv" = (
 /obj/structure/closet/emcloset,
 /turf/open/floor/plasteel,
@@ -14122,6 +14139,19 @@
 	},
 /turf/open/floor/wood,
 /area/lawoffice)
+"JK" = (
+/obj/structure/cable{
+	icon_state = "0-8"
+	},
+/obj/structure/table/reinforced,
+/obj/item/folder/yellow,
+/obj/item/pen,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
+	name = "interior reinforced hull plating";
+	temperature = 293.15
+	},
+/area/tcommsat/server/upper)
 "JL" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
@@ -14157,22 +14187,6 @@
 	},
 /turf/open/transparent/openspace,
 /area/engine/engineering)
-"JR" = (
-/obj/structure/cable{
-	icon_state = "0-8"
-	},
-/obj/machinery/power/apc/highcap/five_k{
-	pixel_y = -24
-	},
-/obj/structure/table/reinforced,
-/obj/item/folder/yellow,
-/obj/item/pen,
-/turf/open/floor/engine/hull/reinforced{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
-	name = "interior reinforced hull plating";
-	temperature = 293.15
-	},
-/area/tcommsat/server/upper)
 "JS" = (
 /obj/machinery/door/airlock/maintenance_hatch{
 	name = "Security Maintenance";
@@ -14329,17 +14343,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/engine/engineering)
-"KA" = (
-/obj/machinery/computer/telecomms/server{
-	dir = 8;
-	network = "tcommsat"
-	},
-/turf/open/floor/engine/hull/reinforced{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
-	name = "interior reinforced hull plating";
-	temperature = 293.15
-	},
-/area/tcommsat/server/upper)
 "KE" = (
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
@@ -14411,6 +14414,15 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/medical/virology)
+"KX" = (
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/machinery/status_display/evac{
+	pixel_y = 32
+	},
+/turf/open/floor/plasteel,
+/area/hallway/primary/upper)
 "KY" = (
 /obj/machinery/computer/security/qm{
 	dir = 4
@@ -15115,6 +15127,17 @@
 /obj/structure/grille/broken,
 /turf/open/transparent/openspace/airless,
 /area/space/nearstation)
+"NX" = (
+/obj/effect/turf_decal/tile/brown{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/brown,
+/obj/machinery/status_display/shuttle{
+	pixel_y = -32;
+	shuttle_id = "mining"
+	},
+/turf/open/floor/plasteel,
+/area/quartermaster/miningoffice)
 "Oa" = (
 /obj/machinery/door/airlock/highsecurity{
 	name = "Gravity Generator Room";
@@ -16901,6 +16924,18 @@
 	},
 /turf/open/floor/engine/hull,
 /area/space/nearstation)
+"Wm" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/status_display/shuttle{
+	pixel_y = -32;
+	shuttle_id = "mining"
+	},
+/turf/open/floor/engine/hull{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
+	name = "interior hull plating";
+	temperature = 293.15
+	},
+/area/quartermaster/miningdock)
 "Wn" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -17473,6 +17508,13 @@
 	},
 /turf/open/floor/carpet,
 /area/crew_quarters/dorms)
+"YK" = (
+/obj/machinery/atmospherics/pipe/heat_exchanging/manifold{
+	dir = 1
+	},
+/obj/machinery/telecomms/relay/preset/station,
+/turf/open/floor/circuit/green/telecomms,
+/area/tcommsat/server/upper)
 "YM" = (
 /obj/machinery/atmospherics/components/binary/dp_vent_pump/layer1{
 	dir = 8
@@ -17783,6 +17825,19 @@
 	},
 /turf/open/transparent/openspace/airless,
 /area/solar/port/fore)
+"ZU" = (
+/obj/structure/filingcabinet/chestdrawer,
+/obj/effect/turf_decal/tile/brown{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/brown{
+	dir = 4
+	},
+/obj/machinery/status_display/supply{
+	pixel_y = 32
+	},
+/turf/open/floor/plasteel,
+/area/quartermaster/qm)
 "ZV" = (
 /obj/effect/turf_decal/tile/green{
 	dir = 8
@@ -17827,13 +17882,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/maintenance/aft/upper)
-"ZY" = (
-/obj/machinery/telecomms/relay/preset/auto,
-/obj/machinery/atmospherics/pipe/heat_exchanging/manifold{
-	dir = 1
-	},
-/turf/open/floor/circuit/green/telecomms,
-/area/tcommsat/server/upper)
 
 (1,1,1) = {"
 ab
@@ -40855,7 +40903,7 @@ CI
 Dm
 CI
 CI
-Ba
+FI
 ab
 ab
 ab
@@ -41112,7 +41160,7 @@ Dl
 CI
 CI
 CI
-FI
+Ba
 ab
 ab
 ab
@@ -41360,7 +41408,7 @@ ts
 Rw
 xO
 yD
-zz
+NX
 xg
 ph
 BW
@@ -41368,7 +41416,7 @@ CJ
 CI
 CI
 CI
-CI
+Wm
 Ba
 ab
 ab
@@ -43662,7 +43710,7 @@ jB
 pq
 qg
 bS
-rz
+KX
 sm
 sM
 tv
@@ -43930,7 +43978,7 @@ vS
 xp
 xX
 yJ
-Gk
+oG
 tv
 Bk
 Bk
@@ -45472,7 +45520,7 @@ vS
 xr
 xV
 yH
-zL
+Hu
 tv
 Bk
 Bk
@@ -47494,7 +47542,7 @@ ab
 ab
 VH
 dd
-ZY
+YK
 uG
 ZW
 Bv
@@ -47753,8 +47801,8 @@ ab
 dd
 Oz
 Gu
-JR
-KA
+JK
+Hc
 dd
 ca
 dn
@@ -47778,7 +47826,7 @@ SJ
 su
 sX
 lQ
-ut
+ZU
 vs
 wa
 Ot
