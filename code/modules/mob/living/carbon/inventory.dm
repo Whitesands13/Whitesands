@@ -161,13 +161,29 @@
   *
   * This handles creating an alert and adding an overlay to it
   */
-/mob/living/carbon/proc/give()
+/mob/living/carbon/verb/give(mob/living/carbon/target in oview(1))
+	set category = "IC"
+	set name = "Give"
+
 	var/obj/item/receiving = get_active_held_item()
 	if(!receiving)
 		to_chat(src, "<span class='warning'>You're not holding anything to give!</span>")
 		return
+
+	if(target)
+		if(!CanReach(target))
+			return
+		to_chat(src, "<span class='notice'>You offer [receiving].</span>")
+		to_chat(target, "<span class='notice'>[src] is offering [receiving]</span>")
+		var/obj/screen/alert/give/G = target.throw_alert("[src]", /obj/screen/alert/give)
+		if(!G)
+			return
+		G.setup(target, src, receiving)
+		return
+
 	visible_message("<span class='notice'>[src] is offering [receiving]</span>", \
 					"<span class='notice'>You offer [receiving]</span>", null, 2)
+
 	for(var/mob/living/carbon/C in orange(1, src))
 		if(!CanReach(C))
 			return
