@@ -71,7 +71,7 @@
 	for(var/obj/item/stock_parts/matter_bin/B in component_parts)
 		max_seeds = max_seeds * B.rating
 	for(var/obj/item/stock_parts/manipulator/M in component_parts)
-		seed_multiplier = seed_multiplier * M.rating
+		seed_multiplier = seed_multiplier + M.rating
 
 /obj/machinery/seed_extractor/examine(mob/user)
 	. = ..()
