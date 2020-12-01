@@ -72,10 +72,15 @@
 	maxy = crop_y2
 	overlay_icon = new(map_icon)
 	overlay_icon.Scale(16, 16)
+	//we're done baking, now we ship it.
+	if (!SSassets.cache["minimap-[id].png"])
+		SSassets.transport.register_asset("minimap-[id].png", map_icon)
+	if (!SSassets.cache["minimap-[id]-meta.png"])
+		SSassets.transport.register_asset("minimap-[id]-meta.png", meta_icon)
 
 /datum/minimap/proc/send(mob/user)
-	SSassets.transport.register_asset("minimap-[id].png", map_icon)
-	SSassets.transport.register_asset("minimap-[id]-meta.png", meta_icon)
+	if(!id)
+		CRASH("ERROR: send called, but the minimap id is null/missing. ID: [id]")
 	SSassets.transport.send_assets(user, list("minimap-[id].png" = map_icon, "minimap-[id]-meta.png" = meta_icon))
 
 /datum/minimap_group
@@ -100,12 +105,14 @@
 
 	for(var/i in 1 to length(minimaps))// OLD: for(var/i in 1 to length(minimaps))
 		var/datum/minimap/M = minimaps[i]
+		var/map_name = "minimap-[M.id].png"
+		var/meta_name = "minimap-[M.id]-meta.png"
 		M.send(user)
 		info += {"
 			<div class="block">
 				<div> <!-- The div is in here to fit it both in the block div -->
-					<img id='map-[i]' src='minimap-[M.id].png' />
-					<img id='map-[i]-meta' src='minimap-[M.id]-meta.png' style='display: none' />
+					<img id='map-[i]' src='[SSassets.transport.get_asset_url(map_name)]' />
+					<img id='map-[i]-meta' src='[SSassets.transport.get_asset_url(meta_name)]' style='display: none' />
 				</div>
 				<div class="statusDisplay" id='label-[i]'></div>
 			</div>
@@ -127,12 +134,13 @@
 			return num;
 		}
 		window.onload = function() {
-			var datas = \[[jointext(datas, ",")]]
-			if(!window.HTMLCanvasElement){
-				//something has gone horribly wrong!
+			if(!window.HTMLCanvasElement) {
+				var label = document.getElementById("label-1");
+				label.textContent = "<h1>WARNING! HTMLCanvasElement not found!</h1>"
 				return false
 			}
-			for(var i = 0; i < [length(minimaps)]; i++){
+			var datas = \[[jointext(datas, ",")]]
+			for(var i = 0; i < [length(minimaps)]; i++) {
 				//the fuck is this wrapped?
 				var data = datas\[i];
 				var img = document.getElementById("map-" + (i + 1));
@@ -142,6 +150,7 @@
 				var canvas = document.createElement("canvas");
 				canvas.width = img.width * 2;
 				canvas.height = img.height * 2;
+
 				var ctx = canvas.getContext('2d');
 				ctx.msImageSmoothingEnabled = false;
 				ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
@@ -150,14 +159,18 @@
 				ctx.canvas.width = img.width;
 				ctx.canvas.height = img.height;
 				ctx.drawImage(document.getElementById("map-" + (i+1) + "-meta"), 0, 0);
+
 				var imagedata = ctx.getImageData(0, 0, img.width, img.height);
-				var label = document.getElementById("label-" + (i+1));
+
 				canvas.onmousemove = function(e){
 					var rect = canvas.getBoundingClientRect();
 					var x = Math.floor(e.offsetX * img.width / rect.width);
 					var y = Math.floor(e.offsetY * img.height / rect.height);
+
 					var color_idx = x * 4 + (y * 4 * imagedata.width);
 					var color = "#" + hexify(imagedata.data\[color_idx]) + hexify(imagedata.data\[color_idx+1]) + hexify(imagedata.data\[color_idx+2]);
+					var label = document.getElementById("label-" + (i+1)); //label-String(n)
+
 					label.textContent = data\[color];
 					canvas.title = data\[color];
 				}
