@@ -94,12 +94,34 @@
 
 /mob/living/simple_animal/hologram/Move(atom/newloc, direct)
 	. = ..()
+	if(!holopad.anchored || holopad.machine_stat)
+		for(var/obj/machinery/holopad/another as() in holopad.holopads)
+			if(another == holopad || another.machine_stat || !another.anchored)
+				continue
+			if(another.validate_location(get_turf(newloc), FALSE, FALSE))
+				holopad.unset_holo(src)
+				if(another.masters && another.masters[src])
+					another.clear_holo(src)
+				another.set_holo(src, src)
+				holopad = another
+				return
+			else if(istype(another, /obj/machinery/holopad/emergency))
+				var/obj/machinery/holopad/emergency/emh = another
+				if(emh.em == src)
+					if(another == holopad)
+						continue
+					holopad.unset_holo(src)
+					if(emh.masters && another.masters[src])
+						emh.clear_holo(src)
+					emh.set_holo(src, src)
+					holopad = emh
+					forceMove(get_turf(emh.loc))
+					to_chat(src, "<span class='danger'>Your current holoprojector stops working, and you reset to your primary one!</span>")
 	if(holopad)
 		holopad.update_holoray(src, get_turf(newloc))
 		if(!holopad.validate_location(get_turf(newloc), FALSE, FALSE))
-			for(var/pad in holopad.holopads) //It's a static list so maybe it will work?
-				var/obj/machinery/holopad/another = pad
-				if(another == holopad || another.machine_stat)
+			for(var/obj/machinery/holopad/another as() in holopad.holopads)
+				if(another == holopad || another.machine_stat || !another.anchored)
 					continue
 				if(another.validate_location(get_turf(newloc), FALSE, FALSE))
 					holopad.unset_holo(src)
@@ -176,9 +198,10 @@
 		drop_all_held_items() //can't hold things when you don't actually exist
 		dextrous = FALSE//see above comment
 	to_chat(src, "You toggle your density [density ? "on" : "off"].")
+	update_icon()
 	update_gravity()
 
-/mob/living/simple_animal/hologram/update_icons()
+/mob/living/simple_animal/hologram/update_icon()
 	. = ..()
 	alpha = density ? initial(alpha) : 100 //applies opacity effect if non-dense
 	color = density ? initial(color) : "#77abff" //makes the hologram slightly blue
