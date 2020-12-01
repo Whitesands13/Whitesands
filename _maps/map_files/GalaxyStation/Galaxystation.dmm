@@ -9760,19 +9760,6 @@
 /obj/structure/closet/emcloset,
 /turf/open/floor/plasteel/dark,
 /area/hallway/secondary/exit/departure_lounge)
-"hkG" = (
-/obj/vehicle/ridden/janicart,
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/airalarm/directional/east{
-	pixel_x = 24
-	},
-/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer3,
-/obj/structure/extinguisher_cabinet{
-	dir = 1;
-	pixel_y = 30
-	},
-/turf/open/floor/plating,
-/area/janitor)
 "hkY" = (
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
@@ -13054,6 +13041,24 @@
 /obj/structure/lattice/catwalk,
 /turf/open/space/basic,
 /area/space/nearstation)
+"mEr" = (
+/obj/machinery/power/apc/auto_name/east{
+	pixel_x = 24
+	},
+/obj/structure/cable{
+	icon_state = "0-8"
+	},
+/obj/machinery/camera/motion{
+	c_tag = "Vault - Lower";
+	dir = 8;
+	network = list("vault")
+	},
+/obj/structure/ladder/unbreakable{
+	height = 1;
+	id = "Vault"
+	},
+/turf/open/floor/vault,
+/area/ai_monitored/nuke_storage)
 "mFn" = (
 /obj/structure/closet/secure_closet/medical3,
 /obj/machinery/light/small,
@@ -18427,6 +18432,20 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/hallway/secondary/command)
+"uZi" = (
+/obj/vehicle/ridden/janicart,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/airalarm/directional/east{
+	pixel_x = 24
+	},
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer3,
+/obj/structure/extinguisher_cabinet{
+	dir = 1;
+	pixel_y = 30
+	},
+/obj/item/key/janitor,
+/turf/open/floor/plating,
+/area/janitor)
 "uZn" = (
 /obj/effect/turf_decal/tile/yellow,
 /obj/effect/turf_decal/tile/yellow{
@@ -20033,24 +20052,6 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/science/research)
-"xty" = (
-/obj/machinery/power/apc/auto_name/east{
-	pixel_x = 24
-	},
-/obj/structure/cable{
-	icon_state = "0-8"
-	},
-/obj/machinery/camera/motion{
-	c_tag = "Vault - Lower";
-	dir = 8;
-	network = list("vault")
-	},
-/obj/structure/ladder/unbreakable{
-	height = 1;
-	id = "Vault"
-	},
-/turf/open/floor/vault,
-/area/ai_monitored/nuke_storage)
 "xtA" = (
 /obj/item/radio/intercom{
 	pixel_y = -26
@@ -56781,7 +56782,7 @@ eTD
 aFQ
 dxr
 arg
-hkG
+uZi
 aQu
 rDI
 nzi
@@ -62930,7 +62931,7 @@ piH
 aSY
 bix
 ydc
-xty
+mEr
 llf
 bix
 nvB
