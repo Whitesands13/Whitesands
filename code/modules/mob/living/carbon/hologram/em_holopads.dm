@@ -45,7 +45,7 @@
 	if(ghost_role == "No" || !loc || !istype(user))
 		return
 	if(!em)
-		em = new em_spawn_type(get_turf(src), src, user.started_as_observer && user.client.prefs) //A bit snowflakey, allows people who started the round as observers to have their loaded character be the hologram's icon
+		em = new em_spawn_type(get_turf(src), user.started_as_observer ? user.client.prefs : null, src) //A bit snowflakey, allows people who started the round as observers to have their loaded character be the hologram's icon
 	em.ckey = user.ckey
 	em.say("Please state the nature of the [em_name] emergency.")
 	calling = FALSE

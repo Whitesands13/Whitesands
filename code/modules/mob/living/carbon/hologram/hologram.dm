@@ -42,7 +42,7 @@
 	/// Flavor text announced to holograms on [/mob/proc/Login]
 	var/flavortext = "You have no laws other than SERVE THE CREW AT LARGE AT ANY COST."
 
-/mob/living/simple_animal/hologram/Initialize(mapload, prefs, _holopad)
+/mob/living/simple_animal/hologram/Initialize(mapload, _prefs, _holopad)
 	. = ..()
 
 	var/datum/outfit/O
@@ -51,7 +51,7 @@
 		O.r_hand = null
 		O.l_hand = null //It would be confusing if, say, the medical hologram had a fake medkit
 
-	var/icon/initial_icon = get_flat_human_icon("hologram_[job_type?.title]", job_type, prefs, "static", outfit_override = O)
+	var/icon/initial_icon = get_flat_human_icon("hologram_[job_type?.title]", job_type, _prefs, "static", outfit_override = O)
 	var/icon/alpha_mask = new('icons/effects/effects.dmi', "scanline")//Scanline effect.
 	initial_icon.AddAlphaMask(alpha_mask)
 	icon = initial_icon
