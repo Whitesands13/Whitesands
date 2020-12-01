@@ -182,8 +182,10 @@
 	overdose_threshold = 30
 
 /datum/reagent/medicine/puce_essence/on_mob_life(mob/living/carbon/M)
-	M.adjustToxLoss(-0.8*REM, 0)
-	M.adjustCloneLoss(-0.2*REM, 0)
+	if(prob(80))
+		M.adjustToxLoss(-1*REM, 0)
+	else
+		M.adjustCloneLoss(-1*REM, 0)
 	for(var/datum/reagent/toxin/R in M.reagents.reagent_list)
 		M.reagents.remove_reagent(R.type, 0.25)
 	if(holder.has_reagent(/datum/reagent/medicine/soulus))				// No, you can't chemstack with soulus dust
@@ -192,7 +194,7 @@
 	..()
 
 datum/reagent/medicine/puce_essence/expose_atom(atom/A, volume)
-	if(!ishuman(A))
+	if(!iscarbon(A))
 		A.add_atom_colour(color, WASHABLE_COLOUR_PRIORITY)
 	..()
 
@@ -211,15 +213,17 @@ datum/reagent/medicine/puce_essence/expose_atom(atom/A, volume)
 	overdose_threshold = 30
 
 /datum/reagent/medicine/chartreuse/on_mob_life(mob/living/carbon/M)		// Yes, you can chemstack with soulus dust
-	M.adjustToxLoss(-1.6*REM, 0)
-	M.adjustCloneLoss(-0.8*REM, 0)
+	if(prob(80))
+		M.adjustToxLoss(-2*REM, 0)
+		M.adjustCloneLoss(-1*REM, 0)
 	for(var/datum/reagent/toxin/R in M.reagents.reagent_list)
 		M.reagents.remove_reagent(R.type, 1)		
 	M.add_atom_colour(color, TEMPORARY_COLOUR_PRIORITY)		// Changes color to puce
 	..()
 
 datum/reagent/medicine/chartreuse/expose_atom(atom/A, volume)
-	A.add_atom_colour(color, WASHABLE_COLOUR_PRIORITY)
+	if(!iscarbon(A))
+		A.add_atom_colour(color, WASHABLE_COLOUR_PRIORITY)
 	..()
 
 /datum/reagent/medicine/chartreuse/on_mob_end_metabolize(mob/living/M)
@@ -300,10 +304,8 @@ datum/reagent/medicine/chartreuse/expose_atom(atom/A, volume)
 	..()
 
 /datum/reagent/medicine/skeletons_boon/overdose_process(mob/living/M)
-	message_admins("Skele boon overdose start")
 	ADD_TRAIT(M, TRAIT_ALLBREAK, TRAIT_GENERIC)
 	REMOVE_TRAIT(M, TRAIT_NOBREAK, TRAIT_GENERIC)
-	message_admins("Skele boon overdose end")
 	..()
 
 /datum/reagent/medicine/molten_bubbles
