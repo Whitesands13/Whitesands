@@ -315,8 +315,7 @@ datum/reagent/medicine/chartreuse/expose_atom(atom/A, volume)
 	metabolization_rate = REAGENTS_METABOLISM
 
 /datum/reagent/medicine/molten_bubbles/on_mob_life(mob/living/carbon/M)
-	M.adjustFireLoss(-1*REM, 0)
-	M.adjustBruteLoss(-1*REM, 0)
+	M.heal_bodypart_damage(1,1,0)
 	if(M.bodytemperature > M.get_body_temp_normal(apply_change=FALSE))
 		M.adjust_bodytemperature(-10 * TEMPERATURE_DAMAGE_COEFFICIENT, M.get_body_temp_normal(apply_change=FALSE))
 	else if(M.bodytemperature < (M.get_body_temp_normal(apply_change=FALSE) + 1))

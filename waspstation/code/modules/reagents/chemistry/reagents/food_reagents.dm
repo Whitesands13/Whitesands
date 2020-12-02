@@ -12,7 +12,7 @@
 	color = "#d30639"
 	taste_description = "burning heat"
 	taste_mult = 8.0
-	var/hunger_drain = -1
+	nutriment_factor = -1 * REAGENTS_METABOLISM
 	var/injested = FALSE
 
 /datum/reagent/consumable/pyre_elementum/expose_mob(mob/living/M, method=TOUCH, reac_volume)
@@ -27,8 +27,6 @@
 
 /datum/reagent/consumable/pyre_elementum/on_mob_life(mob/living/carbon/M)
 	M.adjust_bodytemperature(20 * TEMPERATURE_DAMAGE_COEFFICIENT, 0, M.get_body_temp_normal())		// Doesn't kill you like capsaicin
-	if(M.nutrition && (M.nutrition + hunger_drain > 0))
-		M.adjust_nutrition(hunger_drain)
 	if(!injested)							// Unless you didn't eat it
 		M.adjustFireLoss(0.25*REM, 0)
 	..()
@@ -42,11 +40,9 @@
 	description = "Healing chem made from mushrooms."
 	color = "#b6a076"
 	taste_description = "mushrooms"
-	var/hunger_drain = -1
+	nutriment_factor = -1 * REAGENTS_METABOLISM
 
 /datum/reagent/consumable/fervor/on_mob_life(mob/living/carbon/M)
-	if(M.nutrition && (M.nutrition + hunger_drain > 0))
-		M.adjust_nutrition(hunger_drain)
 	if(prob(80))
 		M.adjustBruteLoss(-2*REM, 0)
 		M.adjustFireLoss(-2*REM, 0)
