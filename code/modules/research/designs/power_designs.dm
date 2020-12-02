@@ -23,17 +23,6 @@
 	category = list("Misc","Power Designs")
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
-/datum/design/gun_cell
-	name = "Weapon Power Cell"
-	desc = "A power cell for weapons holds 10 MJ of energy."
-	id = "gun_cell"
-	build_type = PROTOLATHE | AUTOLATHE
-	materials = list(/datum/material/iron = 700, /datum/material/glass = 70)
-	construction_time=100
-	build_path = /obj/item/stock_parts/cell/gun/empty
-	category = list("Misc","Power Designs")
-	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_SECURITY
-
 /datum/design/super_cell
 	name = "Super-Capacity Power Cell"
 	desc = "A power cell that holds 20 MJ of energy."
@@ -44,17 +33,6 @@
 	build_path = /obj/item/stock_parts/cell/super/empty
 	category = list("Misc","Power Designs")
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
-
-/datum/design/gun_cell/upgraded
-	name = "Upgraded Weapon Power Cell"
-	desc = "A upgraded power cell for weapons holds 20 MJ of energy."
-	id = "gun_cell_upgraded"
-	build_type = PROTOLATHE
-	materials = list(/datum/material/iron = 700, /datum/material/gold = 150, /datum/material/silver = 150, /datum/material/glass = 80)
-	construction_time=100
-	build_path = /obj/item/stock_parts/cell/gun/upgraded/empty
-	category = list("Misc","Power Designs")
-	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_SECURITY
 
 /datum/design/hyper_cell
 	name = "Hyper-Capacity Power Cell"

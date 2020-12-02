@@ -42,6 +42,9 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 	melee_damage_upper = 15
 	butcher_results = list(/obj/item/ectoplasm = 1)
 	AIStatus = AI_OFF
+	light_system = MOVABLE_LIGHT
+	light_range = 3
+	light_on = FALSE
 	hud_type = /datum/hud/guardian
 	dextrous_hud_type = /datum/hud/dextrous/guardian //if we're set to dextrous, account for it.
 	var/mutable_appearance/cooloverlay
@@ -190,18 +193,17 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 		qdel(src)
 	snapback()
 
-/mob/living/simple_animal/hostile/guardian/Stat()
-	..()
-	if(statpanel("Status"))
-		if(summoner)
-			var/resulthealth
-			if(iscarbon(summoner))
-				resulthealth = round((abs(HEALTH_THRESHOLD_DEAD - summoner.health) / abs(HEALTH_THRESHOLD_DEAD - summoner.maxHealth)) * 100)
-			else
-				resulthealth = round((summoner.health / summoner.maxHealth) * 100, 0.5)
-			stat(null, "Summoner Health: [resulthealth]%")
-		if(cooldown >= world.time)
-			stat(null, "Manifest/Recall Cooldown Remaining: [DisplayTimeText(cooldown - world.time)]")
+/mob/living/simple_animal/hostile/guardian/get_status_tab_items()
+	. += ..()
+	if(summoner)
+		var/resulthealth
+		if(iscarbon(summoner))
+			resulthealth = round((abs(HEALTH_THRESHOLD_DEAD - summoner.health) / abs(HEALTH_THRESHOLD_DEAD - summoner.maxHealth)) * 100)
+		else
+			resulthealth = round((summoner.health / summoner.maxHealth) * 100, 0.5)
+		. += "Summoner Health: [resulthealth]%"
+	if(cooldown >= world.time)
+		. += "Manifest/Recall Cooldown Remaining: [DisplayTimeText(cooldown - world.time)]"
 
 /mob/living/simple_animal/hostile/guardian/Move() //Returns to summoner if they move out of range
 	. = ..()
@@ -370,13 +372,15 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 /mob/living/simple_animal/hostile/guardian/proc/ToggleMode()
 	to_chat(src, "<span class='danger'><B>You don't have another mode!</span></B>")
 
+
 /mob/living/simple_animal/hostile/guardian/proc/ToggleLight()
-	if(light_range<3)
+	if(!light_on)
 		to_chat(src, "<span class='notice'>You activate your light.</span>")
-		set_light(3)
+		set_light_on(TRUE)
 	else
 		to_chat(src, "<span class='notice'>You deactivate your light.</span>")
-		set_light(0)
+		set_light_on(FALSE)
+
 
 /mob/living/simple_animal/hostile/guardian/verb/ShowType()
 	set name = "Check Guardian Type"
@@ -475,13 +479,13 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 						to_chat(src, "<span class='holoparasite'><font color=\"[G.guardiancolor]\"><b>[G.real_name]</b></font> has appeared!</span>")
 				guardians -= G
 				if(!guardians.len)
-					verbs -= /mob/living/proc/guardian_reset
+					remove_verb(src, /mob/living/proc/guardian_reset)
 			else
 				to_chat(src, "<span class='holoparasite'>There were no ghosts willing to take control of <font color=\"[G.guardiancolor]\"><b>[G.real_name]</b></font>. Looks like you're stuck with it for now.</span>")
 		else
 			to_chat(src, "<span class='holoparasite'>You decide not to reset [guardians.len > 1 ? "any of your guardians":"your guardian"].</span>")
 	else
-		verbs -= /mob/living/proc/guardian_reset
+		remove_verb(src, /mob/living/proc/guardian_reset)
 
 ////////parasite tracking/finding procs
 
@@ -612,9 +616,10 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 		if("miner")
 			to_chat(user, "[G.miner_fluff_string]")
 			to_chat(user, "<span class='holoparasite'><b>[G.real_name]</b> has appeared!</span>")
-	user.verbs += /mob/living/proc/guardian_comm
-	user.verbs += /mob/living/proc/guardian_recall
-	user.verbs += /mob/living/proc/guardian_reset
+	add_verb(user, list(/mob/living/proc/guardian_comm, \
+						/mob/living/proc/guardian_recall, \
+						/mob/living/proc/guardian_reset))
+	G?.client.init_verbs()
 
 /obj/item/guardiancreator/choose
 	random = FALSE

@@ -404,7 +404,7 @@
 
 	switch(rand(1,100)+modifier) //91-100=Nothing special happens
 		if(-INFINITY to 0) //attack yourself
-			I.attack(src,src)
+			INVOKE_ASYNC(I, /obj/item.proc/attack, src, src)
 		if(1 to 30) //throw it at yourself
 			I.throw_impact(src)
 		if(31 to 60) //Throw object in facing direction
@@ -420,19 +420,20 @@
 			var/turf/target = get_turf(loc)
 			I.safe_throw_at(target,I.throw_range,I.throw_speed,src, force = move_force)
 
-/mob/living/carbon/Stat()
-	..()
-	if(statpanel("Status"))
-		var/obj/item/organ/alien/plasmavessel/vessel = getorgan(/obj/item/organ/alien/plasmavessel)
-		if(vessel)
-			stat(null, "Plasma Stored: [vessel.storedPlasma]/[vessel.max_plasma]")
-		var/obj/item/organ/dwarfgland/dwarfgland = getorgan(/obj/item/organ/dwarfgland)		// Begin Wasp Edit - Dwarf Alcohol Gland
-		if(dwarfgland)
-			stat(null, "Alcohol Stored: [dwarfgland.stored_alcohol]/[dwarfgland.max_alcohol]")		// End Wasp Edit
-		if(locate(/obj/item/assembly/health) in src)
-			stat(null, "Health: [health]")
+/mob/living/carbon/get_status_tab_items()
+	. = ..()
+	var/obj/item/organ/alien/plasmavessel/vessel = getorgan(/obj/item/organ/alien/plasmavessel)
+	if(vessel)
+		. += "Plasma Stored: [vessel.storedPlasma]/[vessel.max_plasma]"
+	var/obj/item/organ/dwarfgland/dwarfgland = getorgan(/obj/item/organ/dwarfgland)		// Begin Wasp Edit - Dwarf Alcohol Gland
+	if(dwarfgland)
+		. += "Alcohol Stored: [dwarfgland.stored_alcohol]/[dwarfgland.max_alcohol]"		// End Wasp Edit
+	if(locate(/obj/item/assembly/health) in src)
+		. += "Health: [health]"
 
-	add_abilities_to_panel()
+/mob/living/carbon/get_proc_holders()
+	. = ..()
+	. += add_abilities_to_panel()
 
 /mob/living/carbon/attack_ui(slot)
 	if(!has_hand_for_held_index(active_hand_index))
@@ -526,7 +527,7 @@
 		total_brute	+= (BP.brute_dam * BP.body_damage_coeff)
 		total_burn	+= (BP.burn_dam * BP.body_damage_coeff)
 		total_stamina += (BP.stamina_dam * BP.stam_damage_coeff)
-	health = round(maxHealth - getOxyLoss() - getToxLoss() - getCloneLoss() - total_burn - total_brute, DAMAGE_PRECISION)
+	set_health(round(maxHealth - getOxyLoss() - getToxLoss() - getCloneLoss() - total_burn - total_brute, DAMAGE_PRECISION))
 	staminaloss = round(total_stamina, DAMAGE_PRECISION)
 	update_stat()
 	update_mobility()
@@ -764,28 +765,40 @@
 	if(hud_used && hud_used.internals)
 		hud_used.internals.icon_state = "internal[internal_state]"
 
+/* Wasp revert
+/mob/living/carbon/proc/update_spacesuit_hud_icon(cell_state = "empty")
+	if(hud_used && hud_used.spacesuit)
+		hud_used.spacesuit.icon_state = "spacesuit_[cell_state]"
+*/
+
+/mob/living/carbon/set_health(new_value)
+	. = ..()
+	if(. > hardcrit_threshold)
+		if(health <= hardcrit_threshold && !HAS_TRAIT(src, TRAIT_NOHARDCRIT))
+			ADD_TRAIT(src, TRAIT_KNOCKEDOUT, CRIT_HEALTH_TRAIT)
+	else if(health > hardcrit_threshold)
+		REMOVE_TRAIT(src, TRAIT_KNOCKEDOUT, CRIT_HEALTH_TRAIT)
+	if(CONFIG_GET(flag/near_death_experience))
+		if(. > HEALTH_THRESHOLD_NEARDEATH)
+			if(health <= HEALTH_THRESHOLD_NEARDEATH && !HAS_TRAIT(src, TRAIT_NODEATH))
+				ADD_TRAIT(src, TRAIT_SIXTHSENSE, "near-death")
+		else if(health > HEALTH_THRESHOLD_NEARDEATH)
+			REMOVE_TRAIT(src, TRAIT_SIXTHSENSE, "near-death")
+
 /mob/living/carbon/update_stat()
 	if(status_flags & GODMODE)
 		return
 	if(stat != DEAD)
 		if(health <= HEALTH_THRESHOLD_DEAD && !HAS_TRAIT(src, TRAIT_NODEATH))
 			death()
-			cure_blind(UNCONSCIOUS_BLIND)
 			return
-		if(IsUnconscious() || IsSleeping() || getOxyLoss() > 50 || (HAS_TRAIT(src, TRAIT_DEATHCOMA)) || (health <= HEALTH_THRESHOLD_FULLCRIT && !HAS_TRAIT(src, TRAIT_NOHARDCRIT)))
+		if(HAS_TRAIT(src, TRAIT_KNOCKEDOUT))
 			set_stat(UNCONSCIOUS)
-			become_blind(UNCONSCIOUS_BLIND)
-			if(CONFIG_GET(flag/near_death_experience) && health <= HEALTH_THRESHOLD_NEARDEATH && !HAS_TRAIT(src, TRAIT_NODEATH))
-				ADD_TRAIT(src, TRAIT_SIXTHSENSE, "near-death")
-			else
-				REMOVE_TRAIT(src, TRAIT_SIXTHSENSE, "near-death")
 		else
 			if(health <= crit_threshold && !HAS_TRAIT(src, TRAIT_NOSOFTCRIT))
 				set_stat(SOFT_CRIT)
 			else
 				set_stat(CONSCIOUS)
-			cure_blind(UNCONSCIOUS_BLIND)
-			REMOVE_TRAIT(src, TRAIT_SIXTHSENSE, "near-death")
 		update_mobility()
 	update_damage_hud()
 	update_health_hud()
@@ -1059,35 +1072,50 @@
 		if(mood.sanity < SANITY_UNSTABLE)
 			return TRUE
 
-/mob/living/carbon/washed(var/atom/washer)
+/mob/living/carbon/wash(clean_types)
 	. = ..()
-	SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "shower", /datum/mood_event/nice_shower)
 
-	for(var/obj/item/I in held_items)
-		I.washed(washer)
+	// Wash equipped stuff that cannot be covered
+	for(var/i in held_items)
+		var/obj/item/held_thing = i
+		if(held_thing?.wash(clean_types))
+			. = TRUE
 
-	if(back)
+	if(back?.wash(clean_types))
 		update_inv_back(0)
+		. = TRUE
 
+	if(head?.wash(clean_types))
+		update_inv_head()
+		. = TRUE
+
+	// Check and wash stuff that can be covered
 	var/list/obscured = check_obscured_slots()
 
-	if(head && head.washed(washer))
-		update_inv_head()
-
-	if(glasses && !(ITEM_SLOT_EYES in obscured) && glasses.washed(washer))
+	// If the eyes are covered by anything but glasses, that thing will be covering any potential glasses as well.
+	if(glasses && is_eyes_covered(FALSE, TRUE, TRUE) && glasses.wash(clean_types))
 		update_inv_glasses()
+		. = TRUE
 
-	if(wear_mask && !(ITEM_SLOT_MASK in obscured && wear_mask.washed(washer)))
+	if(wear_mask && !(ITEM_SLOT_MASK in obscured) && wear_mask.wash(clean_types))
 		update_inv_wear_mask()
+		. = TRUE
 
-	if(ears && !(HIDEEARS in obscured) && ears.washed(washer))
+	if(ears && !(ITEM_SLOT_EARS in obscured) && ears.wash(clean_types))
 		update_inv_ears()
+		. = TRUE
 
-	if(wear_neck && !(ITEM_SLOT_NECK in obscured) && wear_neck.washed(washer))
+	if(wear_neck && !(ITEM_SLOT_NECK in obscured) && wear_neck.wash(clean_types))
 		update_inv_neck()
+		. = TRUE
 
-	if(shoes && !(HIDESHOES in obscured) && shoes.washed(washer))
+	if(shoes && !(ITEM_SLOT_FEET in obscured) && shoes.wash(clean_types))
 		update_inv_shoes()
+		. = TRUE
+
+	if(gloves && !(ITEM_SLOT_GLOVES in obscured) && gloves.wash(clean_types))
+		update_inv_gloves()
+		. = TRUE
 
 /mob/living/carbon/proc/update_flavor_text_feature(new_text)
 	if(!dna)
@@ -1113,3 +1141,6 @@
 /// Returns if the carbon is wearing shock proof gloves
 /mob/living/carbon/proc/wearing_shock_proof_gloves()
 	return gloves?.siemens_coefficient == 0
+
+/mob/living/carbon/is_face_visible()
+	return !(wear_mask?.flags_inv & HIDEFACE) && !(head?.flags_inv & HIDEFACE)

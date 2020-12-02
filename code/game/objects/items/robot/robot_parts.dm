@@ -268,12 +268,12 @@
 			O.custom_name = created_name
 			O.locked = panel_locked
 			if(!aisync)
-				lawsync = 0
+				lawsync = FALSE
 				O.connected_ai = null
 			else
 				O.notify_ai(NEW_BORG)
 				if(forced_ai)
-					O.connected_ai = forced_ai
+					O.set_connected_ai(forced_ai)
 			if(!lawsync)
 				O.lawupdate = 0
 				if(M.laws.id == DEFAULT_AI_LAWID)
@@ -306,8 +306,7 @@
 			log_game("[key_name(user)] has put the MMI/posibrain of [key_name(M.brainmob)] into a cyborg shell at [AREACOORD(src)]")
 
 			if(!locomotion)
-				O.lockcharge = TRUE
-				O.update_mobility()
+				O.set_lockcharge(TRUE)
 				to_chat(O, "<span class='warning'>Error: Servo motors unresponsive.</span>")
 
 		else
@@ -327,10 +326,10 @@
 
 			if(!aisync)
 				lawsync = FALSE
-				O.connected_ai = null
+				O.set_connected_ai(null)
 			else
 				if(forced_ai)
-					O.connected_ai = forced_ai
+					O.set_connected_ai(forced_ai)
 				O.notify_ai(AI_SHELL)
 			if(!lawsync)
 				O.lawupdate = FALSE
@@ -344,8 +343,7 @@
 			forceMove(O)
 			O.robot_suit = src
 			if(!locomotion)
-				O.lockcharge = TRUE
-				O.update_mobility()
+				O.set_lockcharge(TRUE)
 
 	else if(istype(W, /obj/item/pen))
 		to_chat(user, "<span class='warning'>You need to use a multitool to name [src]!</span>")
@@ -365,7 +363,8 @@
 			popup.open()
 
 /obj/item/robot_suit/Topic(href, href_list)
-	if(usr.incapacitated() || !Adjacent(usr))
+	. = ..()
+	if(. || usr.incapacitated() || !Adjacent(usr)) // atom/topic only returns true if clicked
 		return
 
 	var/mob/living/living_user = usr

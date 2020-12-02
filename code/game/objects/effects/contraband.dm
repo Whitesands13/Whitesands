@@ -128,7 +128,7 @@
 		return
 
 	// Deny placing posters on currently-diagonal walls, although the wall may change in the future.
-	if (smooth & SMOOTH_DIAGONAL)
+	if (smoothing_flags & SMOOTH_DIAGONAL)
 		for (var/O in overlays)
 			var/image/I = O
 			if(copytext(I.icon_state, 1, 3) == "d-") //3 == length("d-") + 1
@@ -422,6 +422,11 @@
 	name = "Bounty Hunters"
 	desc = "A poster advertising bounty hunting services. \"I hear you got a problem.\""
 	icon_state = "poster47"
+
+/obj/structure/sign/poster/contraband/steppyflag
+	name = "Steppy Flag"
+	desc = "A poster making a simple statement: \"Fuck around, Find out.\" There's a tiny Cargonia logo in the bottom right."
+	icon_state = "poster48"
 
 /obj/structure/sign/poster/official
 	poster_item_name = "motivational poster"

@@ -9,6 +9,7 @@
 
 	maxHealth = 25
 	health = 25
+	hardcrit_threshold = HEALTH_THRESHOLD_CRIT
 
 	var/amount_grown = 0
 	var/max_grown = 100
@@ -30,10 +31,9 @@
 	..()
 
 //This needs to be fixed
-/mob/living/carbon/alien/larva/Stat()
-	..()
-	if(statpanel("Status"))
-		stat(null, "Progress: [amount_grown]/[max_grown]")
+/mob/living/carbon/alien/larva/get_status_tab_items()
+	. = ..()
+	. += "Progress: [amount_grown]/[max_grown]"
 
 /mob/living/carbon/alien/larva/adjustPlasma(amount)
 	if(stat != DEAD && amount > 0)
