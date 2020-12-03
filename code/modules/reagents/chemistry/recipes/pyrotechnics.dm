@@ -91,10 +91,7 @@
 	required_temp = 450
 	strengthdiv = 3
 
-/datum/chemical_reaction/reagent_explosion/tatp/New()
-	SSticker.OnRoundstart(CALLBACK(src,.proc/UpdateInfo)) //method used by secret sauce.
-
-/datum/chemical_reaction/reagent_explosion/tatp/proc/UpdateInfo()
+/datum/chemical_reaction/reagent_explosion/tatp/update_info()
 	required_temp = 450 + rand(-49,49)  //this gets loaded only on round start
 
 
@@ -109,11 +106,13 @@
 	required_temp = 550 // this makes making tatp before pyro nades, and extreme pain in the ass to make
 	strengthdiv = 3
 
-/datum/chemical_reaction/reagent_explosion/tatp_explosion/New()
-	SSticker.OnRoundstart(CALLBACK(src,.proc/UpdateInfo))
+/datum/chemical_reaction/reagent_explosion/tatp_explosion/on_reaction(datum/reagents/holder, created_volume)
+	var/strengthdiv_adjust = created_volume / ( 2100 / initial(strengthdiv))
+	strengthdiv = max(initial(strengthdiv) - strengthdiv_adjust + 1.5 ,1.5) //Slightly better than nitroglycerin
+	. = ..()
+	return
 
-
-/datum/chemical_reaction/reagent_explosion/tatp_explosion/proc/UpdateInfo()
+/datum/chemical_reaction/reagent_explosion/tatp_explosion/update_info()
 	required_temp = 550 + rand(-49,49)
 
 
