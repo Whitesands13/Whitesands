@@ -5,6 +5,7 @@
 	has_gravity = STANDARD_GRAVITY
 	lighting_colour_tube = "#ffe8d2"
 	lighting_colour_bulb = "#ffdcb7"
+	flora_allowed = TRUE
 
 /area/mine/explored
 	name = "Mine"
@@ -18,6 +19,7 @@
 	outdoors = TRUE
 	flags_1 = NONE
 	ambientsounds = MINING
+	flora_allowed = FALSE
 
 /area/mine/unexplored
 	name = "Mine"
@@ -31,12 +33,15 @@
 	outdoors = TRUE
 	flags_1 = NONE
 	ambientsounds = MINING
+	tunnel_allowed = TRUE
 
 /area/mine/lobby
 	name = "Mining Station"
+	icon_state = "mining_lobby"
 
 /area/mine/storage
 	name = "Mining Station Storage"
+	icon_state = "mining_storage"
 
 /area/mine/production
 	name = "Mining Station Starboard Wing"
@@ -60,15 +65,18 @@
 
 /area/mine/cafeteria
 	name = "Mining Station Cafeteria"
+	icon_state = "mining_labor_cafe"
 
 /area/mine/hydroponics
 	name = "Mining Station Hydroponics"
+	icon_state = "mining_labor_hydro"
 
 /area/mine/sleeper
 	name = "Mining Station Emergency Sleeper"
 
 /area/mine/laborcamp
 	name = "Labor Camp"
+	icon_state = "mining_labor"
 
 /area/mine/laborcamp/security
 	name = "Labor Camp Security"
@@ -84,6 +92,7 @@
 	icon_state = "mining"
 	has_gravity = STANDARD_GRAVITY
 	flags_1 = NONE
+	flora_allowed = TRUE
 	blob_allowed = FALSE
 
 /area/lavaland/surface
@@ -115,9 +124,55 @@
 
 /area/lavaland/surface/outdoors/unexplored //monsters and ruins spawn here
 	icon_state = "unexplored"
+	tunnel_allowed = TRUE
+	mob_spawn_allowed = TRUE
 
 /area/lavaland/surface/outdoors/unexplored/danger //megafauna will also spawn here
 	icon_state = "danger"
+	megafauna_spawn_allowed = TRUE
 
 /area/lavaland/surface/outdoors/explored
 	name = "Lavaland Labor Camp"
+	flora_allowed = FALSE
+
+
+
+/**********************Whitesands Areas**************************/
+
+/area/whitesands
+	icon_state = "mining"
+	has_gravity = STANDARD_GRAVITY
+	flags_1 = NONE
+	blob_allowed = FALSE
+
+/area/whitesands/colony
+	name = "Whitesands Colony"
+
+/area/whitesands/colony/maintenance
+	name = "Whitesands Colony Communications"
+
+/area/whitesands/surface
+	name = "Whitesands"
+	icon_state = "explored"
+	always_unpowered = TRUE
+	poweralm = FALSE
+	power_environ = FALSE
+	power_equip = FALSE
+	power_light = FALSE
+	requires_power = TRUE
+	ambientsounds = MINING
+	flora_allowed = TRUE
+	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
+
+/area/whitesands/surface/outdoors // weather happens here
+	name = "Whitesands Dunes"
+	outdoors = TRUE
+
+/area/whitesands/surface/outdoors/unexplored //monsters and ruins spawn here
+	icon_state = "unexplored"
+	tunnel_allowed = TRUE
+	mob_spawn_allowed = TRUE
+
+/area/whitesands/surface/outdoors/unexplored/danger //megafauna will also spawn here
+	icon_state = "danger"
+	megafauna_spawn_allowed = TRUE

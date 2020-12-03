@@ -14,8 +14,8 @@
 	initial_temperature = T20C
 
 /datum/gas_mixture/immutable/whitesands_planet/New()
-	if (GLOB.whitesands_planet && GLOB.whitesands_planet != src)
-		return GLOB.whitesands_planet
+	if (GLOB.ws_planet_atmos && GLOB.ws_planet_atmos != src)
+		return GLOB.ws_planet_atmos
 	..()
 	set_temperature(initial_temperature)
 	populate()
