@@ -148,6 +148,27 @@
 /area/whitesands/colony
 	name = "Whitesands Colony"
 
+/area/whitesands/colony/guard
+	name = "Whitesands Colony Guard Post"
+	icon_state = "security"
+
+/area/whitesands/colony/dormitory
+	name = "Whitesands Colony Dormitory"
+	icon_state = "mining_living"
+/area/whitesands/colony/dormitory/one
+	name = "Whitesands Colony Dormitory One"
+
+/area/whitesands/colony/dormitory/two
+	name = "Whitesands Colony Dormitory Two"
+
+/area/whitesands/colony/greenhouse
+	name = "Whitesands Colony Greenhouse"
+	icon_state = "mining_labor_hydro"
+
+/area/whitesands/colony/production
+	name = "Whitesands Colony Ore Refinement Plant"
+	icon_state = "mining_production"
+
 /area/whitesands/colony/maintenance
 	name = "Whitesands Colony Communications"
 
