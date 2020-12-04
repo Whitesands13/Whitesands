@@ -16,12 +16,12 @@
 	toxic_food = MEAT | RAW
 	mutanteyes = /obj/item/organ/eyes/apid
 	mutantlungs = /obj/item/organ/lungs/apid
-	mutantwings = /obj/item/organ/wings/bee
 	heatmod = 1.5
 	coldmod = 1.5
 	burnmod = 1.5
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 	species_language_holder = /datum/language_holder/apid
+	has_innate_wings = TRUE
 
 /datum/species/apid/random_name(gender,unique,lastname)
 	if(unique)

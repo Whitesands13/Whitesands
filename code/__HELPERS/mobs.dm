@@ -122,6 +122,13 @@
 		if(!findname(.))
 			break
 
+/proc/random_unique_apid_name(gender, attempts_to_find_unique_name=10)
+	for(var/i in 1 to attempts_to_find_unique_name)
+		. = capitalize(apid_name(gender))
+
+		if(!findname(.))
+			break
+
 /proc/random_unique_lizard_name(gender, attempts_to_find_unique_name=10)
 	for(var/i in 1 to attempts_to_find_unique_name)
 		. = capitalize(lizard_name(gender))
