@@ -493,3 +493,9 @@
 		severe_cooldown = world.time + 30 SECONDS
 	if(prob(emp_vulnerability/severity))	//Chance of permanent effects
 		organ_flags = ORGAN_SYNTHETIC_EMP //Starts organ faliure - gonna need replacing soon.
+
+obj/item/organ/lungs/apid
+	name = "apid lungs"
+	desc = "Lungs from an apid, or beeperson. Thanks to the many spiracles an apid has, these lungs are capable of gathering more oxygen from low-pressure enviroments."
+	icon_state = "lungs"
+	safe_oxygen_min = 8
