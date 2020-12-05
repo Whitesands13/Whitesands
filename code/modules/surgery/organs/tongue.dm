@@ -10,6 +10,7 @@
 	var/taste_sensitivity = 15 // lower is more sensitive.
 	var/modifies_speech = FALSE
 	var/static/list/languages_possible_base = typecacheof(list(
+		/datum/language/apidite,
 		/datum/language/common,
 		/datum/language/draconic,
 		/datum/language/codespeak,
@@ -196,6 +197,13 @@
 
 /obj/item/organ/tongue/alien/handle_speech(datum/source, list/speech_args)
 	playsound(owner, "hiss", 25, TRUE, TRUE)
+
+/obj/item/organ/tongue/bee
+	name = "proboscis"
+	desc = "A freakish looking meat tube that apparently can take in liquids, this one smells slighlty like flowers."
+	icon_state = "tonguefly"
+	say_mod = "buzzes"
+	taste_sensitivity = 5
 
 /obj/item/organ/tongue/bone
 	name = "bone \"tongue\""
