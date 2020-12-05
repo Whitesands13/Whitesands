@@ -127,3 +127,15 @@
 	M.adjust_disgust(3)
 	..()
 	. = 1
+
+/datum/reagent/medicine/folate
+	name = "Folate"
+	description = "A B-vitamin that promotes DNA production, cell division, and is sometimes used as a treatment for anemia."
+	reagent_state = LIQUID
+	color = "#bf0000"
+	overdose_threshold = 35 //At 95-100 potency, you can eat two pomegranates without ODing
+
+/datum/reagent/medicine/folate/on_mob_life(mob/living/carbon/M)
+	M.adjustCloneLoss(-0.5*REM, 0) //Folate is needed for a human body to produce DNA and RNA, and for mitosis (cell division) to occur. Thought it'd be neat if it therefore healed some clone damage.
+	if(M.blood_volume < BLOOD_VOLUME_NORMAL)
+		M.blood_volume += 2.5
