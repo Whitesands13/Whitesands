@@ -10,7 +10,6 @@
 	var/taste_sensitivity = 15 // lower is more sensitive.
 	var/modifies_speech = FALSE
 	var/static/list/languages_possible_base = typecacheof(list(
-		/datum/language/apidite,
 		/datum/language/common,
 		/datum/language/draconic,
 		/datum/language/codespeak,
