@@ -578,7 +578,5 @@
 	required_reagents = list(/datum/reagent/consumable/capsaicin = 2, /datum/reagent/consumable/ethanol/kahlua = 1, /datum/reagent/consumable/ethanol/bahama_mama = 2)
 
 /datum/chemical_reaction/beesknees
-	name = "Bee's Knees"
-	id = /datum/reagent/consumable/ethanol/beesknees
 	results = list(/datum/reagent/consumable/ethanol/beesknees = 4)
 	required_reagents = list(/datum/reagent/consumable/ethanol/mead = 1, /datum/reagent/consumable/honey = 1, /datum/reagent/consumable/ethanol/whiskey = 1, /datum/reagent/consumable/lemonjuice = 1)
