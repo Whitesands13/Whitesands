@@ -9,7 +9,7 @@
 	fitted = NO_FEMALE_UNIFORM
 
 /obj/item/clothing/under/suit/qm/skirt
-	name = "engineering coordinator skirtsuit"
+	name = supply chief skirtsuit"
 	icon_state = "supply_chief_skirt"
 
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -25,7 +25,7 @@
 
 /obj/item/clothing/under/suit/cargo_tech/skirt
 	name = "deliveries officer skirtsuit"
-	desc = "A suit with cargo colors."
+	desc = "A suit with cargo colors, with a skirt..."
 	icon_state = "mailroom_technician_skirt"
 
 	body_parts_covered = CHEST|GROIN|ARMS
