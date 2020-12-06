@@ -390,18 +390,14 @@
 		set_light_flags(light_flags)
 
 
-/obj/item/organ/eyes/moth
-	name = "moth eyes"
-	desc = "These eyes seem to have increased sensitivity to bright light, with no improvement to low light vision."
-	flash_protect = FLASH_PROTECTION_SENSITIVE
-
 /obj/item/organ/eyes/snail
 	name = "snail eyes"
 	desc = "These eyes seem to have a large range, but might be cumbersome with glasses."
 	eye_icon_state = "snail_eyes"
 	icon_state = "snail_eyeballs"
 
-/obj/item/organ/eyes/apid
-	name = "apid eyes"
-	desc = "Designed for navigating dark hives, these eyes have improvement to low light vision."
+/obj/item/organ/eyes/compound
+	name = "compound eyes"
+	desc = "These eyes seem to have increased sensitivity to bright light, with some improvement to low light vision. It's like these eyes are looking everywhere at once!"
 	see_in_dark = 8
+	flash_protect = FLASH_PROTECTION_SENSITIVE
