@@ -11,9 +11,9 @@
 	attack_sound = 'sound/weapons/slash.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
 	meat = /obj/item/reagent_containers/food/snacks/meat/slab/human/mutant/apid
-	liked_food = VEGETABLES | FRUIT
-	disliked_food = GROSS | DAIRY
-	toxic_food = MEAT | RAW
+	liked_food = VEGETABLES | FRUIT | SUGAR
+	disliked_food = GROSS | GRAIN
+	toxic_food = MEAT | RAW | DAIRY
 	mutanteyes = /obj/item/organ/eyes/apid
 	mutantlungs = /obj/item/organ/lungs/apid
 	heatmod = 1.5
