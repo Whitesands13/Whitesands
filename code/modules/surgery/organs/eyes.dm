@@ -394,10 +394,3 @@
 	desc = "These eyes seem to have a large range, but might be cumbersome with glasses."
 	eye_icon_state = "snail_eyes"
 	icon_state = "snail_eyeballs"
-
-/obj/item/organ/eyes/night_vision/compound	//Waspstation edit - Compound eyes
-	name = "compound eyes"
-	desc = "These eyes seem to have increased sensitivity to bright light, with some improvement to low light vision. It's like these eyes are looking everywhere at once!"
-	icon_state = "compound_eyes"
-	see_in_dark = 4
-	flash_protect = FLASH_PROTECTION_SENSITIVE	//whoa, buggy
