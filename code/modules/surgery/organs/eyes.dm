@@ -399,5 +399,6 @@
 /obj/item/organ/eyes/compound
 	name = "compound eyes"
 	desc = "These eyes seem to have increased sensitivity to bright light, with some improvement to low light vision. It's like these eyes are looking everywhere at once!"
-	see_in_dark = 8
+	see_in_dark = 6
 	flash_protect = FLASH_PROTECTION_SENSITIVE
+	lighting_alpha = LIGHTING_PLANE_ALPHA_NV_TRAIT - 5	//whoa, buggy

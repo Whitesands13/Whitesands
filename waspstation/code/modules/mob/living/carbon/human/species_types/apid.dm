@@ -6,6 +6,8 @@
 	default_color = "FFE800"
 	species_traits = list(LIPS, NOEYESPRITES, TRAIT_BEEFRIEND)
 	inherent_biotypes = list(MOB_ORGANIC, MOB_HUMANOID, MOB_BUG)
+	mutant_bodyparts = list("wings_open")
+	default_features = list("wings_open" = "Bee")
 	mutanttongue = /obj/item/organ/tongue/bee
 	attack_verb = "slash"
 	attack_sound = 'sound/weapons/slash.ogg'
@@ -23,6 +25,7 @@
 	species_language_holder = /datum/language_holder/apid
 	/*loreblurb = "TODO: BEE LORE\
 					BEES"*/
+	wings_icon = "Bee"
 	has_innate_wings = TRUE
 
 /datum/species/apid/random_name(gender,unique,lastname)
@@ -46,3 +49,14 @@
 	if(chem.type == /datum/reagent/toxin/pestkiller)
 		H.adjustToxLoss(3)
 		H.reagents.remove_reagent(chem.type, REAGENTS_METABOLISM)
+
+/datum/species/space_move(mob/living/carbon/human/H)
+	. = ..()
+	if(H.loc && !isspaceturf(H.loc) && !flying_species) //"flying_species" is exclusive to the potion of flight, which has its flying mechanics. If they want to fly they can use that instead
+		var/datum/gas_mixture/current = H.loc.return_air()
+		if(current && (current.return_pressure() >= ONE_ATMOSPHERE*0.85)) //as long as there's reasonable pressure and no gravity, flight is possible
+			return TRUE
+
+/datum/species/apid/on_species_gain()
+	. = ..()
+	SSvis_overlays._create_new_vis_overlay()
