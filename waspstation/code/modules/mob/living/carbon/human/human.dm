@@ -72,6 +72,9 @@
 
 			src.is_busy = FALSE
 
+/mob/living/carbon/human/species/apid
+	race = /datum/species/apid
+
 /mob/living/carbon/human/species/ipc
 	race = /datum/species/ipc
 
@@ -80,4 +83,3 @@
 
 /mob/living/carbon/human/species/lizard/ashwalker/kobold
 	race = /datum/species/lizard/ashwalker/kobold
-	

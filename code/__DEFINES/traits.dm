@@ -169,7 +169,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_UNINTELLIGIBLE_SPEECH "unintelligible-speech"
 #define TRAIT_UNSTABLE			"unstable"
 #define TRAIT_OIL_FRIED			"oil_fried"
-#define TRAIT_BEEFRIEND 		"beefriend"
+#define TRAIT_BEEFRIEND 		"beefriend"		//Waspstation edit - Central friendly bees trait
 #define TRAIT_MEDICAL_HUD		"med_hud"
 #define TRAIT_SECURITY_HUD		"sec_hud"
 #define TRAIT_DIAGNOSTIC_HUD	"diag_hud" //for something granting you a diagnostic hud

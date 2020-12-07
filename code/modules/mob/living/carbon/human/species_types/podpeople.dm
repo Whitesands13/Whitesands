@@ -3,7 +3,7 @@
 	name = "Podperson"
 	id = "pod"
 	default_color = "59CE00"
-	species_traits = list(MUTCOLORS, EYECOLOR, TRAIT_BEEFRIEND)
+	species_traits = list(MUTCOLORS, EYECOLOR, TRAIT_BEEFRIEND)	//Waspstation edit - Centralized friendly bee trait
 	inherent_traits = list(TRAIT_ALWAYS_CLEAN)
 	inherent_factions = list("plants", "vines")
 	attack_verb = "slash"

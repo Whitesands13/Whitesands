@@ -16,13 +16,13 @@
 
 
 /mob/living/carbon/human/bee_friendly()
+	if(HAS_TRAIT(src, TRAIT_BEEFRIEND))	//Waspstation edit, centralized friendly bees trait.
+		return 1
 	if (wear_suit && head && istype(wear_suit, /obj/item/clothing) && istype(head, /obj/item/clothing))
 		var/obj/item/clothing/CS = wear_suit
 		var/obj/item/clothing/CH = head
 		if (CS.clothing_flags & CH.clothing_flags & THICKMATERIAL)
 			return 1
-	if(HAS_TRAIT(src, TRAIT_BEEFRIEND))
-		return 1
 	return 0
 
 
