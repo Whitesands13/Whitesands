@@ -6,8 +6,6 @@
 	default_color = "FFE800"
 	species_traits = list(LIPS, NOEYESPRITES, TRAIT_BEEFRIEND)
 	inherent_biotypes = list(MOB_ORGANIC, MOB_HUMANOID, MOB_BUG)
-	mutant_bodyparts = list("wings_open")
-	default_features = list("wings_open" = "Bee")
 	attack_verb = "slash"
 	attack_sound = 'sound/weapons/slash.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
@@ -17,6 +15,7 @@
 	toxic_food = MEAT | RAW | DAIRY
 	mutanteyes = /obj/item/organ/eyes/compound
 	mutanttongue = /obj/item/organ/tongue/bee
+	mutantlungs = /obj/item/organ/lungs/apid
 	heatmod = 1.5
 	coldmod = 1.5
 	burnmod = 1.5
