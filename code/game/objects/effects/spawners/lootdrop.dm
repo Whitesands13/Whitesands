@@ -233,7 +233,7 @@
 	loot = list(
 		/obj/item/organ/ears/penguin,
 		/obj/item/organ/ears/cat,
-		/obj/item/organ/eyes/compound,	//Waspstation Edit - Moth eyes to Compound eyes
+		/obj/item/organ/eyes/nightvision/compound,	//Waspstation Edit - Moth eyes to Compound eyes
 		/obj/item/organ/eyes/snail,
 		/obj/item/organ/tongue/bone,
 		/obj/item/organ/tongue/fly,
