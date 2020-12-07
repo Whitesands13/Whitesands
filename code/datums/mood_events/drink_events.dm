@@ -2,6 +2,7 @@
 	mood_change = 3
 	description = "<span class='nicegreen'>Everything just feels better after a drink or two.</span>\n"
 
+//Waspstation edit - Bad drink quality
 /datum/mood_event/quality_bad
 	description = "<span class='warning'>That drink wasn't good at all.</span>\n"
 	mood_change = -2

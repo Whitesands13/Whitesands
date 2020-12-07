@@ -8,7 +8,6 @@
 	inherent_biotypes = list(MOB_ORGANIC, MOB_HUMANOID, MOB_BUG)
 	mutant_bodyparts = list("wings_open")
 	default_features = list("wings_open" = "Bee")
-	mutanttongue = /obj/item/organ/tongue/bee
 	attack_verb = "slash"
 	attack_sound = 'sound/weapons/slash.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
@@ -17,7 +16,7 @@
 	disliked_food = GROSS | GRAIN
 	toxic_food = MEAT | RAW | DAIRY
 	mutanteyes = /obj/item/organ/eyes/compound
-	mutantlungs = /obj/item/organ/lungs/apid
+	mutanttongue = /obj/item/organ/tongue/bee
 	heatmod = 1.5
 	coldmod = 1.5
 	burnmod = 1.5
@@ -26,7 +25,7 @@
 	/*loreblurb = "TODO: BEE LORE\
 					BEES"*/
 	wings_icon = "Bee"
-	has_innate_wings = TRUE
+	has_innate_wings = FALSE	//Beestation decided that apids dont actually have ANY wings usually. But flight potion grants them some sweet bee wings.
 
 /datum/species/apid/random_name(gender,unique,lastname)
 	if(unique)
@@ -56,7 +55,3 @@
 		var/datum/gas_mixture/current = H.loc.return_air()
 		if(current && (current.return_pressure() >= ONE_ATMOSPHERE*0.85)) //as long as there's reasonable pressure and no gravity, flight is possible
 			return TRUE
-
-/datum/species/apid/on_species_gain()
-	. = ..()
-	SSvis_overlays._create_new_vis_overlay()

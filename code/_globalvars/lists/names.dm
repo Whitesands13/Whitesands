@@ -1,7 +1,4 @@
 GLOBAL_LIST_INIT(ai_names, world.file2list("strings/names/ai.txt"))
-GLOBAL_LIST_INIT(apid_names_male, world.file2list("strings/names/apid_first_male.txt"))
-GLOBAL_LIST_INIT(apid_names_female, world.file2list("strings/names/apid_first_female.txt"))
-GLOBAL_LIST_INIT(apid_names_last, world.file2list("strings/names/apid_last.txt"))
 GLOBAL_LIST_INIT(wizard_first, world.file2list("strings/names/wizardfirst.txt"))
 GLOBAL_LIST_INIT(wizard_second, world.file2list("strings/names/wizardsecond.txt"))
 GLOBAL_LIST_INIT(ninja_titles, world.file2list("strings/names/ninjatitle.txt"))
@@ -21,11 +18,17 @@ GLOBAL_LIST_INIT(moth_first, world.file2list("strings/names/moth_first.txt"))
 GLOBAL_LIST_INIT(moth_last, world.file2list("strings/names/moth_last.txt"))
 GLOBAL_LIST_INIT(plasmaman_names, world.file2list("strings/names/plasmaman.txt"))
 GLOBAL_LIST_INIT(ethereal_names, world.file2list("strings/names/ethereal.txt"))
-GLOBAL_LIST_INIT(squid_names, world.file2list("strings/names/squid.txt"))
 GLOBAL_LIST_INIT(posibrain_names, world.file2list("strings/names/posibrain.txt"))
 GLOBAL_LIST_INIT(nightmare_names, world.file2list("strings/names/nightmare.txt"))
 GLOBAL_LIST_INIT(megacarp_first_names, world.file2list("strings/names/megacarp1.txt"))
 GLOBAL_LIST_INIT(megacarp_last_names, world.file2list("strings/names/megacarp2.txt"))
+
+//Waspstation Begin - Custom Species Names
+GLOBAL_LIST_INIT(apid_names_male, world.file2list("strings/names/apid_first_male.txt"))
+GLOBAL_LIST_INIT(apid_names_female, world.file2list("strings/names/apid_first_female.txt"))
+GLOBAL_LIST_INIT(apid_names_last, world.file2list("strings/names/apid_last.txt"))
+GLOBAL_LIST_INIT(squid_names, world.file2list("strings/names/squid.txt"))
+//Waspstation End
 
 GLOBAL_LIST_INIT(verbs, world.file2list("strings/names/verbs.txt"))
 GLOBAL_LIST_INIT(ing_verbs, world.file2list("strings/names/ing_verbs.txt"))

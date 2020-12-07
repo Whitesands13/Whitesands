@@ -2232,7 +2232,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	M.adjust_disgust(5)
 	..()
 
-/datum/reagent/consumable/ethanol/beesknees
+/datum/reagent/consumable/ethanol/beesknees		//Waspstation Edit - Add Apids
 	name = "Bee's Knees"
 	description = "This has way too much honey."
 	boozepwr = 35

@@ -149,7 +149,7 @@
 	tastes = list("pure electricity" = 2, "meat" = 1)
 	foodtype = RAW | MEAT | TOXIC
 
-/obj/item/reagent_containers/food/snacks/meat/slab/human/mutant/apid
+/obj/item/reagent_containers/food/snacks/meat/slab/human/mutant/apid	//Waspstation Edit - Apid port
 	icon_state = "apidmeat"
 	desc = "Smells like flowers, hopefully doesn't taste like them."
 	filling_color = "#BEAD07"
