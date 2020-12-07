@@ -26,8 +26,10 @@
 
 //Captain
 /obj/item/clothing/head/caphat
-	name = "captain's hat"
+	name = "captain's peaked cap"
 	desc = "It's good being the king."
+	icon = 'waspstation/icons/obj/clothing/hats.dmi'
+	mob_overlay_icon = 'waspstation/icons/mob/clothing/head.dmi'
 	icon_state = "captain"
 	item_state = "that"
 	flags_inv = 0

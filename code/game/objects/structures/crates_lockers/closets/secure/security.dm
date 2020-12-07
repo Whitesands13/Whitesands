@@ -61,7 +61,7 @@
 	new /obj/item/storage/box/ids(src)
 	new /obj/item/storage/box/ids(src)
 	new /obj/item/megaphone/command(src)
-	new /obj/item/clothing/suit/armor/vest/alt(src)
+	new /obj/item/clothing/suit/armor/vest/hop(src) //Waspstation edit - Command Resprite 3
 	new /obj/item/assembly/flash/handheld(src)
 	new /obj/item/clothing/glasses/sunglasses(src)
 	new /obj/item/gun/energy/e_gun/mini(src) //WaspStation Edit - Gives HoP a mini egun

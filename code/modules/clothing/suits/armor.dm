@@ -107,6 +107,8 @@
 /obj/item/clothing/suit/armor/vest/capcarapace/alt
 	name = "captain's parade jacket"
 	desc = "For when an armoured vest isn't fashionable enough."
+	icon = 'waspstation/icons/obj/clothing/suits.dmi'
+	mob_overlay_icon = 'waspstation/icons/mob/clothing/suits.dmi'
 	icon_state = "capformal"
 	item_state = "capspacesuit"
 
