@@ -197,7 +197,7 @@
 /obj/item/organ/tongue/alien/handle_speech(datum/source, list/speech_args)
 	playsound(owner, "hiss", 25, TRUE, TRUE)
 
-/obj/item/organ/tongue/bee
+/obj/item/organ/tongue/bee		//Waspstation Edit - Apid port
 	name = "proboscis"
 	desc = "A freakish looking meat tube that apparently can take in liquids, this one smells slighlty like flowers."
 	icon_state = "tonguefly"
