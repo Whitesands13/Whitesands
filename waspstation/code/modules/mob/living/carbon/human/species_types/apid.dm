@@ -13,7 +13,7 @@
 	liked_food = VEGETABLES | FRUIT | SUGAR
 	disliked_food = GROSS | GRAIN
 	toxic_food = MEAT | RAW | DAIRY
-	mutanteyes = /obj/item/organ/eyes/nightvision/compound
+	mutanteyes = /obj/item/organ/eyes/night_vision/compound
 	mutanttongue = /obj/item/organ/tongue/bee
 	mutantlungs = /obj/item/organ/lungs/apid
 	heatmod = 1.5
