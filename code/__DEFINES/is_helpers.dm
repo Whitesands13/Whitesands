@@ -76,6 +76,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define issquidperson(A) (is_species(A, /datum/species/squid))
 #define isipc(A) (is_species(A, /datum/species/ipc))
 #define isspiderperson(A) (is_species(A, /datum/species/spider))
+#define isapid(A) (is_species(A, /datum/species/apid))
 //WaspStation End
 
 //more carbon mobs
