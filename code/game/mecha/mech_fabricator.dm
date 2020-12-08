@@ -37,6 +37,7 @@
 								"IPC components",
 								"Misc"
 								)
+	var/datum/bank_account/linked_account
 
 /obj/machinery/mecha_part_fabricator/Initialize(mapload)
 	stored_research = new
@@ -69,6 +70,8 @@
 	. = ..()
 	if(in_range(user, src) || isobserver(user))
 		. += "<span class='notice'>The status display reads: Storing up to <b>[rmat.local_size]</b> material units.<br>Material consumption at <b>[component_coeff*100]%</b>.<br>Build time reduced by <b>[100-time_coeff*100]%</b>.</span>"
+		if(linked_account)
+			. += "<span class='notice'><br><b>Linked account:</b> [linked_account.account_holder]'s bank account<span>"
 
 /obj/machinery/mecha_part_fabricator/emag_act()
 	if(obj_flags & EMAGGED)
@@ -190,9 +193,17 @@
 	if(!check_resources(D))
 		say("Not enough resources. Queue processing stopped.")
 		return FALSE
+	//Wasp start - Material Costs
+	if(!linked_account)
+		say("No bank account linked. Please swipe an ID to link one.")
+		return FALSE
+	if(!linked_account.has_money(materials.get_material_list_cost(res_coef)))
+		say("Not enough credits in bank account. Queue processing stopped.")
+		return FALSE
 	being_built = D
 	desc = "It's building \a [initial(D.name)]."
-	materials.use_materials(res_coef)
+	materials.use_materials(res_coef, using_account = linked_account)
+	//Wasp end
 	rmat.silo_log(src, "built", -1, "[D.name]", res_coef)
 
 	add_overlay("fab-active")
@@ -470,6 +481,19 @@
 
 	if(default_deconstruction_crowbar(W))
 		return TRUE
+
+	if(istype(W, /obj/item/card/id))
+		var/obj/item/card/id/I = W
+		if(I.registered_account)
+			if(I.registered_account == linked_account)
+				linked_account = null
+				to_chat(user, "<span class='notice'>You unlink [I]'s bank account on [src].</span>")
+				return TRUE
+			linked_account = I.registered_account
+			to_chat(user, "<span class='notice'>You slide [I] through the payment slot on [src].</span>")
+			return TRUE
+		else
+			to_chat(user, "<span class='warning'>[I] does not have a valid bank account!</span>.")
 
 	return ..()
 
