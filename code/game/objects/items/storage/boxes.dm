@@ -260,7 +260,7 @@
 
 /obj/item/storage/box/hypospray
 	name = "hypospray mk. II kit"
-	icon = 'waspstation/icons/obj/storage.dmi'
+	icon = 'waspstation/icons/obj/storage.dmi'		// Wasp Edit - Suitcases
 	icon_state = "medbriefcase"
 	illustration = null
 

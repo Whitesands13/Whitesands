@@ -37,7 +37,7 @@ GLOBAL_LIST_INIT(supply_positions, list(
 
 GLOBAL_LIST_INIT(service_positions, list(
 	"Head of Personnel",
-	"SolGov Representative",
+	"SolGov Representative",		// Wasp Edit - SolGov Rep
 	"Bartender",
 	"Botanist",
 	"Cook",
