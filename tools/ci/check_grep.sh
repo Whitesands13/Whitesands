@@ -58,7 +58,7 @@ if grep 'Solgov' code/**/*.dm; then
     st=1
 fi;
 if grep 'Solgov' _maps/**/*.dmm; then
-    echo "ERROR: Misspelling(s) of SolGov detected in maps, please remove the extra M(s)."
+    echo "ERROR: Misspelling(s) of SolGov detected in maps, please check capitalization."
     st=1
 fi;
 #Wasp end
