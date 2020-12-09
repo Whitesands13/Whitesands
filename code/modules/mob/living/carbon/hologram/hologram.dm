@@ -95,7 +95,8 @@
 /mob/living/simple_animal/hologram/Move(atom/newloc, direct)
 	. = ..()
 	if(!holopad.anchored || holopad.machine_stat)
-		for(var/obj/machinery/holopad/another as() in holopad.holopads)
+		for(var/I in holopad.holopads)
+			var/obj/machinery/holopad/another = I
 			if(another == holopad || another.machine_stat || !another.anchored)
 				continue
 			if(another.validate_location(get_turf(newloc), FALSE, FALSE))
@@ -120,7 +121,8 @@
 	if(holopad)
 		holopad.update_holoray(src, get_turf(newloc))
 		if(!holopad.validate_location(get_turf(newloc), FALSE, FALSE))
-			for(var/obj/machinery/holopad/another as() in holopad.holopads)
+			for(var/I in holopad.holopads)
+				var/obj/machinery/holopad/another = I
 				if(another == holopad || another.machine_stat || !another.anchored)
 					continue
 				if(another.validate_location(get_turf(newloc), FALSE, FALSE))
