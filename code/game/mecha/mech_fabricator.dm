@@ -121,6 +121,10 @@
 	else
 		output += "<font color='red'>No material storage connected, please contact the quartermaster.</font>"
 	output += "<br><a href='?src=[REF(src)];sync=1'>Sync with R&D servers</a><br>"
+	if(linked_account)
+		output += "<br><a href='?src=[REF(src)];link_id=1'>Unlink Linked Account: ([linked_acount.account_holder])</a><br>"
+	else
+		output += "<br><a href='?src=[REF(src)];link_id=1'>Link Material Payment Account</a><br>"
 	output += "<a href='?src=[REF(src)];screen=main'>Main Screen</a>"
 	output += "</div>"
 	output += "<form name='search' action='?src=[REF(src)]'>\
@@ -445,6 +449,9 @@
 		var/datum/material/Mat = locate(href_list["material"])
 		eject_sheets(Mat, text2num(href_list["remove_mat"]))
 
+	if(href_list["link_id"])
+		link_user_id(usr)
+
 	updateUsrDialog()
 	return
 
@@ -483,20 +490,25 @@
 		return TRUE
 
 	if(istype(W, /obj/item/card/id))
-		var/obj/item/card/id/I = W
-		if(I.registered_account)
-			if(I.registered_account == linked_account)
-				linked_account = null
-				to_chat(user, "<span class='notice'>You unlink [I]'s bank account on [src].</span>")
-				return TRUE
-			linked_account = I.registered_account
-			to_chat(user, "<span class='notice'>You slide [I] through the payment slot on [src].</span>")
-			return TRUE
-		else
-			to_chat(user, "<span class='warning'>[I] does not have a valid bank account!</span>.")
+		link_user_id(user)
 
 	return ..()
 
+/obj/machinery/mecha_part_fabricator/AltClick(mob/user)
+	. = ..()
+	link_user_id(user)
+
+/obj/machinery/mecha_part_fabricator/proc/link_user_id(mob/user)
+	if(linked_account)
+		linked_account = null
+		to_chat(user, "<span class='notice'>You unlink [src]'s linked account.</span>")
+	else
+		var/obj/item/card/id/user_id = user.get_idcard(TRUE)
+		if(user_id?.registered_account)
+			linked_account = user_id.registered_account
+			to_chat(user, "<span class='notice'>You link [user_id.registered_account.account_holder]'s bank account on [src].</span>")
+		else
+			to_chat(user, "<span class='warning'>No bank account found!</span>")
 
 /obj/machinery/mecha_part_fabricator/proc/is_insertion_ready(mob/user)
 	if(panel_open)
