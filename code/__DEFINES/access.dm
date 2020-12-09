@@ -82,12 +82,11 @@
 #define ACCESS_PSYCHOLOGY 70
 
 //WaspStation Begin
-
 /// Cloning room and clone pod ejection
 #define ACCESS_CLONING 68
 /// SGR Office
 #define ACCESS_SOLGOV 90 //Let's give em plenty of room, now
-
+//WaspStation End
 
 
 	//BEGIN CENTCOM ACCESS
