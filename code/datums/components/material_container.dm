@@ -167,7 +167,7 @@
 	var/amount = materials[mat]
 	if(mat)
 		if(amount >= amt)
-			if(charge && !linked_account.transfer_money(using_account, get_material_cost(mat, amt), 1))
+			if(charge && linked_account && !linked_account.transfer_money(using_account, get_material_cost(mat, amt), 1))
 				return FALSE
 			materials[mat] -= amt
 			total_amount -= amt
@@ -184,9 +184,9 @@
 		return T.transer_amt_to(src, -amt, mat)
 	var/tr = min(amt, materials[mat],T.can_insert_amount_mat(amt, mat))
 	if(tr)
-		use_amount_mat(tr, mat)
-		T.insert_amount_mat(tr, mat)
-		return tr
+		if(use_amount_mat(tr, mat))
+			T.insert_amount_mat(tr, mat)
+			return tr
 	return FALSE
 
 /// Proc for checking if there is room in the component, returning the amount or else the amount lacking.
@@ -216,6 +216,8 @@
 		var/amount_required = mats[x] * multiplier
 		if(!(materials[req_mat] >= amount_required)) // do we have enough of the resource?
 			return FALSE //Can't afford it
+		if(linked_account && !using_account.has_money(get_material_list_cost(mats, multiplier)))
+			return FALSE //Can't afford the credit cost
 		mats_to_remove[req_mat] += amount_required //Add it to the assoc list of things to remove
 		continue
 
@@ -229,9 +231,9 @@
 /// For spawning mineral sheets at a specific location. Used by machines to output sheets.
 /datum/component/material_container/proc/retrieve_sheets(sheet_amt, var/datum/material/M, target = null, datum/bank_account/using_account)
 	if(!M.sheet_type)
-		return 0 //Add greyscale sheet handling here later
+		return FALSE //Add greyscale sheet handling here later
 	if(sheet_amt <= 0)
-		return 0
+		return FALSE
 
 	if(!target)
 		target = get_turf(parent)
@@ -239,14 +241,16 @@
 		sheet_amt = round(materials[M] / MINERAL_MATERIAL_AMOUNT)
 	var/count = 0
 	while(sheet_amt > MAX_STACK_SIZE)
+		if(!use_amount_mat(sheet_amt * MINERAL_MATERIAL_AMOUNT, M, using_account, TRUE))
+			break
 		new M.sheet_type(target, MAX_STACK_SIZE)
 		count += MAX_STACK_SIZE
-		use_amount_mat(sheet_amt * MINERAL_MATERIAL_AMOUNT, M, using_account, TRUE)
 		sheet_amt -= MAX_STACK_SIZE
 	if(sheet_amt >= 1)
+		if(!use_amount_mat(sheet_amt * MINERAL_MATERIAL_AMOUNT, M, using_account, TRUE))
+			return FALSE
 		new M.sheet_type(target, sheet_amt)
 		count += sheet_amt
-		use_amount_mat(sheet_amt * MINERAL_MATERIAL_AMOUNT, M, using_account, TRUE)
 	return count
 
 
