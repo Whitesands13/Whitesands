@@ -122,7 +122,7 @@
 		output += "<font color='red'>No material storage connected, please contact the quartermaster.</font>"
 	output += "<br><a href='?src=[REF(src)];sync=1'>Sync with R&D servers</a><br>"
 	if(linked_account)
-		output += "<br><a href='?src=[REF(src)];link_id=1'>Unlink Linked Account: ([linked_acount.account_holder])</a><br>"
+		output += "<br><a href='?src=[REF(src)];link_id=1'>Unlink Linked Account: ([linked_account.account_holder])</a><br>"
 	else
 		output += "<br><a href='?src=[REF(src)];link_id=1'>Link Material Payment Account</a><br>"
 	output += "<a href='?src=[REF(src)];screen=main'>Main Screen</a>"
