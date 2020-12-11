@@ -175,7 +175,7 @@
 
 /datum/reagent/medicine/puce_essence		// P U C E
 	name = "Pucetylline Essence"
-	description = "Ground essence of puce crystals"
+	description = "Ground essence of puce crystals."
 	reagent_state = SOLID
 	color = "#CC8899"
 	metabolization_rate = 2.5 * REAGENTS_METABOLISM
@@ -206,7 +206,7 @@ datum/reagent/medicine/puce_essence/expose_atom(atom/A, volume)
 
 /datum/reagent/medicine/chartreuse		// C H A R T R E U S E
 	name = "Chartreuse Solution"
-	description = "Refined essence of puce crystals"
+	description = "Refined essence of puce crystals."
 	reagent_state = SOLID
 	color = "#DFFF00"
 	metabolization_rate = 2.5 * REAGENTS_METABOLISM
@@ -218,7 +218,7 @@ datum/reagent/medicine/puce_essence/expose_atom(atom/A, volume)
 		M.adjustCloneLoss(-1*REM, 0)
 	for(var/datum/reagent/toxin/R in M.reagents.reagent_list)
 		M.reagents.remove_reagent(R.type, 1)		
-	M.add_atom_colour(color, TEMPORARY_COLOUR_PRIORITY)		// Changes color to puce
+	M.add_atom_colour(color, TEMPORARY_COLOUR_PRIORITY)		// Changes color to chartreuse
 	..()
 
 datum/reagent/medicine/chartreuse/expose_atom(atom/A, volume)
@@ -227,7 +227,7 @@ datum/reagent/medicine/chartreuse/expose_atom(atom/A, volume)
 	..()
 
 /datum/reagent/medicine/chartreuse/on_mob_end_metabolize(mob/living/M)
-	M.remove_atom_colour(TEMPORARY_COLOUR_PRIORITY, color)		// Removes temporary (not permanent) puce
+	M.remove_atom_colour(TEMPORARY_COLOUR_PRIORITY, color)		// Removes temporary (not permanent) chartreuse
 
 /datum/reagent/medicine/chartreuse/overdose_process(mob/living/M)
 	M.add_atom_colour(color, FIXED_COLOUR_PRIORITY)		// Eternal chartreuse
@@ -272,7 +272,7 @@ datum/reagent/medicine/chartreuse/expose_atom(atom/A, volume)
 
 /datum/reagent/medicine/skeletons_boon
 	name = "Skeleton’s Boon"
-	description = "A strong chem that strengthens the bones."
+	description = "A robust solution of minerals that greatly strengthens the bones."
 	color = "#dbdfa2"
 	metabolization_rate = REAGENTS_METABOLISM * 0.125
 	overdose_threshold = 50

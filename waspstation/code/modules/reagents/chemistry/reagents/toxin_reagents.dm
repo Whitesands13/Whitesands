@@ -3,7 +3,7 @@
 
 /datum/reagent/toxin/lava_microbe
 	name = "Lavaland Microbes"
-	description = "Microbes isolated from the dirt"
+	description = "Microbes isolated from the dirt."
 	taste_description = "grit"
 	taste_mult = 0.5
 	color = "#f7cd90"

@@ -26,3 +26,12 @@
 	var/location = get_turf(holder.my_atom)
 	for(var/i in 1 to created_volume)
 		new /obj/item/stack/medical/ointment/herb(location)
+
+/datum/chemical_reaction/goldsolidification
+	required_reagents = list(/datum/reagent/consumable/frostoil = 5, /datum/reagent/titanium = 20, /datum/reagent/iron = 1)
+	mob_react = FALSE
+
+/datum/chemical_reaction/goldsolidification/on_reaction(datum/reagents/holder, created_volume)
+	var/location = get_turf(holder.my_atom)
+	for(var/i = 1, i <= created_volume, i++)
+		new /obj/item/stack/sheet/mineral/titanium(location)

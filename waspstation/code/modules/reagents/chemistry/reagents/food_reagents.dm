@@ -13,11 +13,11 @@
 	taste_description = "burning heat"
 	taste_mult = 8.0
 	nutriment_factor = -1 * REAGENTS_METABOLISM
-	var/injested = FALSE
+	var/ingested = FALSE
 
 /datum/reagent/consumable/pyre_elementum/expose_mob(mob/living/M, method=TOUCH, reac_volume)
 	if(method == INGEST)
-		injested = TRUE
+		ingested = TRUE
 		return
 	SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "pyre_elementum", /datum/mood_event/irritate, name)		// Applied if not eaten
 	if(method == TOUCH || method == VAPOR)
@@ -27,7 +27,7 @@
 
 /datum/reagent/consumable/pyre_elementum/on_mob_life(mob/living/carbon/M)
 	M.adjust_bodytemperature(20 * TEMPERATURE_DAMAGE_COEFFICIENT, 0, M.get_body_temp_normal())		// Doesn't kill you like capsaicin
-	if(!injested)							// Unless you didn't eat it
+	if(!ingested)							// Unless you didn't eat it
 		M.adjustFireLoss(0.25*REM, 0)
 	..()
 

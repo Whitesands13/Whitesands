@@ -129,5 +129,4 @@
 	required_reagents = list(/datum/reagent/medicine/molten_bubbles = 3, /datum/reagent/silicon = 2)
 
 /datum/chemical_reaction/sand_bubbles/plasma			// Subbing plasma bubbles for reg
-	results = list(/datum/reagent/medicine/molten_bubbles/sand = 3)
 	required_reagents = list(/datum/reagent/medicine/molten_bubbles/plasma = 3, /datum/reagent/silicon = 2)

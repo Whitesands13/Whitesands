@@ -7,13 +7,13 @@
 
 /datum/reagent/ash_fibers
 	name = "Ashen Fibers"
-	description = "Ground plant fibers from a cave fern. Useful for medicines"
+	description = "Ground plant fibers from a cave fern. Useful for medicines."
 	reagent_state = SOLID
 	color = "#5a4f42"
 	taste_mult = 0
 
 /datum/reagent/titanium
 	name = "Titanium"
-	description = "A light, reflective grey metal used in ship construction"
+	description = "A light, reflective grey metal used in ship construction."
 	reagent_state = SOLID
 	color = "#c2c2c2"

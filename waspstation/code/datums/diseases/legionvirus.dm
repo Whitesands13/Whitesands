@@ -20,3 +20,16 @@
 	stage4 = list("<span class='warning'>You feel like your head is splitting in two!</span>")
 	stage5 = list("<span class='warning'>You feel something growing inside your chest!</span>")
 	new_form = /mob/living/simple_animal/hostile/asteroid/hivelord/legion
+
+/datum/disease/transformation/legionvirus/do_disease_transformation(mob/living/H)		// Is it literally that easy?
+	H.visible_message("<span class='warning'>[H] transforms into a legion!</span>")
+	var/mob/living/simple_animal/hostile/asteroid/hivelord/legion/L
+	if(HAS_TRAIT(H, TRAIT_DWARF)) //dwarf legions aren't just fluff!
+		L = new /mob/living/simple_animal/hostile/asteroid/hivelord/legion/dwarf(H.loc)
+	else
+		L = new(H.loc)
+	H.death()
+	H.adjustBruteLoss(1000)
+	L.stored_mob = H
+	H.forceMove(L)
+	qdel(src)
