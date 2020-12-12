@@ -27,18 +27,18 @@
 	)
 
 /datum/gas_mixture/immutable/whitesands_planet/proc/populate_default()
-	set_moles(/datum/gas/nitrogen, ws_atmos_moles * N2STANDARD)
-	set_moles(/datum/gas/oxygen, ws_atmos_moles * (O2STANDARD / 2))
-	set_moles(/datum/gas/carbon_dioxide, ws_atmos_moles *  (O2STANDARD / 2))
+	set_moles(/datum/gas/nitrogen, ws_moles_amount * N2STANDARD)
+	set_moles(/datum/gas/oxygen, ws_moles_amount * (O2STANDARD / 2))
+	set_moles(/datum/gas/carbon_dioxide, ws_moles_amount *  (O2STANDARD / 2))
 
 /datum/gas_mixture/immutable/whitesands_planet/populate()
 	var/list/ws_atmos_conf = CONFIG_GET(keyed_list/whitesands_atmos_mix)
-	if (len(ws_atmos_conf) < 1)
+	if (length(ws_atmos_conf) < 1)
 		populate_default()
 		return
 
 	var/list/gas_types_by_id = list()
-	for (var/gas_type in gas_types())
+	for (var/datum/gas/gas_type in gas_types())
 		gas_types_by_id[gas_type.id] = gas_type
 
 	var/list/final_mix = list()
@@ -50,7 +50,7 @@
 			populate_default()
 			return
 		else
-			final_mix.push(list(gas_types_by_id[gas_key], ws_atmos_conf[gas_key]))
+			final_mix += list(gas_types_by_id[gas_key], ws_atmos_conf[gas_key])
 	for(var/mix_param in final_mix)
 		set_moles(mix_param[0], ws_moles_amount * mix_param[1])
 
