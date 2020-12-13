@@ -198,12 +198,13 @@
 		say("Not enough resources. Queue processing stopped.")
 		return FALSE
 	//Wasp start - Material Costs
-	if(!linked_account)
-		say("No bank account linked. Please swipe an ID to link one.")
-		return FALSE
-	if(!linked_account.has_money(materials.get_material_list_cost(res_coef)))
-		say("Not enough credits in bank account. Queue processing stopped.")
-		return FALSE
+	if(materials.linked_account)
+		if(!linked_account)
+			say("No bank account linked. Please swipe an ID to link one.")
+			return FALSE
+		if(!linked_account.has_money(materials.get_material_list_cost(res_coef)))
+			say("Not enough credits in bank account. Queue processing stopped.")
+			return FALSE
 	being_built = D
 	desc = "It's building \a [initial(D.name)]."
 	materials.use_materials(res_coef, using_account = linked_account)
