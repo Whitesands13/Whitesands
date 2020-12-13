@@ -1,7 +1,7 @@
 import { toFixed } from 'common/math';
 import { Fragment } from 'inferno';
 import { useBackend } from '../backend';
-import { Box, Button, Flex, Icon, Knob, LabeledControls, LabeledList, RoundGauge, Section, Tooltip } from '../components';
+import { AnimatedNumber, Box, Button, Flex, Icon, Knob, LabeledControls, LabeledList, RoundGauge, Section, Tooltip } from '../components';
 import { formatSiUnit } from '../format';
 import { Window } from '../layouts';
 
@@ -21,7 +21,6 @@ export const Canister = (props, context) => {
     defaultReleasePressure,
     minReleasePressure,
     maxReleasePressure,
-    pressureLimit,
     valveOpen,
     isPrototype,
     hasHoldingTank,
@@ -61,18 +60,14 @@ export const Canister = (props, context) => {
                 <LabeledControls.Item
                   minWidth="66px"
                   label="Pressure">
-                  <RoundGauge
-                    size={1.75}
+                  <AnimatedNumber
                     value={tankPressure}
-                    minValue={0}
-                    maxValue={pressureLimit}
-                    alertAfter={pressureLimit * 0.70}
-                    ranges={{
-                      "good": [0, pressureLimit * 0.70],
-                      "average": [pressureLimit * 0.70, pressureLimit * 0.85],
-                      "bad": [pressureLimit * 0.85, pressureLimit],
-                    }}
-                    format={formatPressure} />
+                    format={value => {
+                      if (value < 10000) {
+                        return toFixed(value) + ' kPa';
+                      }
+                      return formatSiUnit(value * 1000, 1, 'Pa');
+                    }} />
                 </LabeledControls.Item>
                 <LabeledControls.Item label="Regulator">
                   <Box
