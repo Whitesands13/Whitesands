@@ -25,3 +25,27 @@
 	item_state = "sec_helm"//looks kinda similar, I guess
 	allowed = list(/obj/item/analyzer, /obj/item/stack/medical, /obj/item/dnainjector, /obj/item/reagent_containers/dropper, /obj/item/reagent_containers/syringe, /obj/item/reagent_containers/hypospray, /obj/item/healthanalyzer, /obj/item/flashlight, /obj/item/reagent_containers/glass/bottle, /obj/item/reagent_containers/glass/beaker, /obj/item/reagent_containers/pill, /obj/item/storage/pill_bottle, /obj/item/paper, /obj/item/melee/classic_baton/telescopic, /obj/item/soap, /obj/item/tank/internals/emergency_oxygen)
 	armor = list(melee = 10, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 10, rad = 0, fire = 50, acid = 50)
+
+//AdMech
+
+/obj/item/clothing/suit/hooded/enginseer
+	name = "enginseer regalia"
+	desc = "You hold the secrets of the Machine."
+	icon = 'waspstation/icons/obj/clothing/suits.dmi'
+	mob_overlay_icon = 'waspstation/icons/mob/clothing/suits.dmi'
+	icon_state = "enginseer"
+	item_state = "enginseer"
+	hoodtype = /obj/item/clothing/head/hooded/enginseer
+	body_parts_covered = CHEST|GROIN|LEGS|ARMS|HANDS
+	flags_inv = HIDESHOES|HIDEJUMPSUIT|HIDEGLOVES
+	allowed = list(/obj/item/flashlight, /obj/item/tank/internals, /obj/item/gun, /obj/item/melee, /obj/item/nullrod, /obj/item/radio, /obj/item/storage/book)
+
+/obj/item/clothing/head/hooded/enginseer
+	name = "enginseer's hood"
+	desc = "You are honored that they require your skills."
+	icon = 'waspstation/icons/obj/clothing/hats.dmi'
+	mob_overlay_icon = 'waspstation/icons/mob/clothing/head.dmi'
+	icon_state = "enginseerhood"
+	item_state = "enginseerhood"
+	body_parts_covered = HEAD
+	flags_inv = HIDEHAIR|HIDEEARS|HIDEFACE|HIDEFACIALHAIR
