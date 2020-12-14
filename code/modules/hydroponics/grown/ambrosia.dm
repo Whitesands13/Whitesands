@@ -52,7 +52,7 @@
 	icon_state = "ambrosiadeus"
 	filling_color = "#008B8B"
 	wine_power = 50
-	wine_flavor = "divinity"
+	wine_flavor = "the hand of god"
 
 //Ambrosia Gaia
 /obj/item/seeds/ambrosia/gaia
