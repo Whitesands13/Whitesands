@@ -31,6 +31,8 @@ Space Station 13 is a paranoia-laden round-based roleplaying game set against th
 
 [Policy configuration system](.github/POLICYCONFIG.md)
 
+[Following the Code of Conduct](.github/CODE_OF_CONDUCT.md)
+
 ## CODEBASE CREDITS
 
 * /tg/, for the codebase
