@@ -122,7 +122,7 @@
 		if(!findname(.))
 			break
 
-/proc/random_unique_apid_name(gender, attempts_to_find_unique_name=10)
+/proc/random_unique_apid_name(gender, attempts_to_find_unique_name=10)	//Wasp Edit - Port Apids
 	for(var/i in 1 to attempts_to_find_unique_name)
 		. = capitalize(apid_name(gender))
 
