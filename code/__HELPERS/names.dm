@@ -1,4 +1,4 @@
-/proc/apid_name(gender)
+/proc/apid_name(gender) //Wasp Edit - Port Apids
 	if(gender == MALE)
 		return "[pick(GLOB.apid_names_male)] [pick(GLOB.apid_names_last)]"
 	else
