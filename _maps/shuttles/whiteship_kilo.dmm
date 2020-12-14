@@ -88,7 +88,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/greenglow,
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 24
+	pixel_y = -30
 	},
 /turf/open/floor/mineral/titanium/yellow,
 /area/shuttle/abandoned/cargo)
@@ -201,7 +201,7 @@
 	},
 /obj/machinery/firealarm{
 	dir = 4;
-	pixel_x = 24
+	pixel_x = 26
 	},
 /obj/machinery/light/small{
 	dir = 1
@@ -501,7 +501,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/firealarm{
 	dir = 4;
-	pixel_x = 24
+	pixel_x = 26
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/abandoned/cargo)
@@ -536,7 +536,7 @@
 /obj/effect/decal/cleanable/blood/old,
 /obj/effect/turf_decal/stripes/line,
 /obj/machinery/light_switch{
-	pixel_y = -24
+	pixel_y = -23
 	},
 /obj/machinery/light/small/built,
 /turf/open/floor/plating,
@@ -577,21 +577,6 @@
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/abandoned/bridge)
-"cA" = (
-/obj/effect/turf_decal/bot,
-/obj/structure/rack,
-/obj/item/storage/box/lights/mixed,
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/firealarm{
-	dir = 1;
-	pixel_y = -24
-	},
-/obj/effect/spawner/lootdrop/maintenance/two,
-/obj/structure/sign/poster/contraband/random{
-	pixel_x = -32
-	},
-/turf/open/floor/plating,
-/area/shuttle/abandoned/cargo)
 "cB" = (
 /obj/effect/turf_decal/stripes/corner,
 /obj/effect/decal/cleanable/oil,
@@ -900,10 +885,10 @@
 /obj/item/trash/syndi_cakes,
 /obj/item/organ/stomach,
 /obj/machinery/firealarm{
-	pixel_y = 26
+	pixel_y = -26
 	},
 /obj/machinery/light_switch{
-	pixel_x = 24
+	pixel_y = -23
 	},
 /turf/open/floor/plasteel/white,
 /area/shuttle/abandoned/bar)
@@ -1048,6 +1033,30 @@
 	},
 /turf/open/floor/plating,
 /area/shuttle/abandoned/crew)
+"ng" = (
+/obj/structure/table,
+/obj/effect/decal/cleanable/cobweb,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/folder/yellow{
+	pixel_x = -4;
+	pixel_y = 6
+	},
+/obj/item/paper/crumpled/bloody{
+	info = "We struck gold, literally. We found some good rocks out near Centurai-II rich with the stuff. Kae said he and Milos found something out while prospecting, some sort of glowing cube. It's jammed in there good, so we're anchoring until we sort this out...";
+	pixel_x = 4;
+	pixel_y = 4
+	},
+/obj/item/gps{
+	gpstag = "NTMS-037";
+	pixel_x = -9;
+	pixel_y = 4
+	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_y = 26
+	},
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/abandoned/bridge)
 "oj" = (
 /obj/machinery/computer/camera_advanced/shuttle_docker/whiteship{
 	dir = 4;
@@ -1109,8 +1118,7 @@
 	req_access = null
 	},
 /obj/machinery/light_switch{
-	pixel_x = 24;
-	pixel_y = -6
+	pixel_y = -23
 	},
 /turf/open/floor/mineral/titanium/blue,
 /area/shuttle/abandoned/bridge)
@@ -1191,7 +1199,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light_switch{
-	pixel_y = -24
+	pixel_y = -23
 	},
 /obj/effect/decal/cleanable/greenglow,
 /obj/structure/closet/crate/internals,
@@ -1301,6 +1309,35 @@
 	icon_state = "1-2"
 	},
 /turf/open/floor/plating,
+/area/shuttle/abandoned/cargo)
+"yu" = (
+/obj/machinery/door/airlock/external{
+	name = "External Freight Airlock"
+	},
+/obj/machinery/door/firedoor/border_only{
+	dir = 1
+	},
+/obj/machinery/door/firedoor/border_only,
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/docking_port/mobile{
+	callTime = 250;
+	can_move_docking_ports = 1;
+	dir = 2;
+	dwidth = 12;
+	height = 13;
+	icon_state = "pinonclose";
+	id = "whiteship";
+	launch_status = 0;
+	movement_force = list("KNOCKDOWN" = 0, "THROW" = 0);
+	name = "Salvage Ship";
+	port_direction = 8;
+	preferred_direction = 4;
+	width = 22
+	},
+/turf/open/floor/mineral/plastitanium,
 /area/shuttle/abandoned/cargo)
 "zH" = (
 /obj/effect/turf_decal/stripes/line{
@@ -1421,6 +1458,21 @@
 	dir = 1;
 	id = "NTMSLoad";
 	name = "off ramp"
+	},
+/turf/open/floor/plating,
+/area/shuttle/abandoned/cargo)
+"Ci" = (
+/obj/effect/turf_decal/bot,
+/obj/structure/rack,
+/obj/item/storage/box/lights/mixed,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/lootdrop/maintenance/two,
+/obj/structure/sign/poster/contraband/random{
+	pixel_x = -32
+	},
+/obj/machinery/firealarm{
+	dir = 2;
+	pixel_y = -26
 	},
 /turf/open/floor/plating,
 /area/shuttle/abandoned/cargo)
@@ -1755,29 +1807,6 @@
 /obj/effect/decal/cleanable/greenglow,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/abandoned/crew)
-"NO" = (
-/obj/structure/table,
-/obj/machinery/firealarm{
-	pixel_y = 26
-	},
-/obj/effect/decal/cleanable/cobweb,
-/obj/effect/decal/cleanable/dirt,
-/obj/item/folder/yellow{
-	pixel_x = -4;
-	pixel_y = 6
-	},
-/obj/item/paper/crumpled/bloody{
-	info = "We struck gold, literally. We found some good rocks out near Centurai-II rich with the stuff. Kae said he and Milos found something out while prospecting, some sort of glowing cube. It's jammed in there good, so we're anchoring until we sort this out...";
-	pixel_x = 4;
-	pixel_y = 4
-	},
-/obj/item/gps{
-	gpstag = "NTMS-037";
-	pixel_x = -9;
-	pixel_y = 4
-	},
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/abandoned/bridge)
 "Oi" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
@@ -1864,7 +1893,7 @@
 	dir = 4
 	},
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 24
+	pixel_y = -30
 	},
 /turf/open/floor/plating,
 /area/shuttle/abandoned/cargo)
@@ -1978,35 +2007,6 @@
 /obj/structure/cable,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/abandoned/bar)
-"Zv" = (
-/obj/machinery/door/airlock/external{
-	name = "External Freight Airlock"
-	},
-/obj/machinery/door/firedoor/border_only{
-	dir = 1
-	},
-/obj/machinery/door/firedoor/border_only,
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
-/obj/docking_port/mobile{
-	callTime = 250;
-	can_move_docking_ports = 1;
-	dir = 2;
-	dwidth = 11;
-	height = 13;
-	icon_state = "pinonclose";
-	id = "whiteship";
-	launch_status = 0;
-	movement_force = list("KNOCKDOWN" = 0, "THROW" = 0);
-	name = "Salvage Ship";
-	port_direction = 8;
-	preferred_direction = 4;
-	width = 23
-	},
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/abandoned/cargo)
 "ZA" = (
 /obj/machinery/power/apc{
 	dir = 1;
@@ -2061,7 +2061,7 @@ av
 bQ
 cf
 ac
-NO
+ng
 gC
 oj
 BS
@@ -2150,7 +2150,7 @@ ac
 ac
 bU
 ck
-cA
+Ci
 Vx
 db
 xF
@@ -2174,7 +2174,7 @@ YB
 Vx
 "}
 (11,1,1) = {"
-Zv
+yu
 ox
 jU
 KM
