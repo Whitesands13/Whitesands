@@ -618,7 +618,7 @@
 		var/mob/living/carbon/C = M
 		var/holycheck = ishumanbasic(C)
 		//>implying xenohumans are holy
-		if(reac_volume < 5 || !(holycheck || isapid(C) /*Waspstation edit - Port Apids*/ || islizard(C) || (ismoth(C) && C.dna.features["moth_wings"] != "Burnt Off")))
+		if(reac_volume < 5 || !(holycheck || isapid(C) || islizard(C) || (ismoth(C) && C.dna.features["moth_wings"] != "Burnt Off"))) //Wasp Edit - Port Apids
 			if(method == INGEST && show_message)
 				to_chat(C, "<span class='notice'><i>You feel nothing but a terrible aftertaste.</i></span>")
 			return ..()
