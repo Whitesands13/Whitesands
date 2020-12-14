@@ -19,8 +19,10 @@
 	var/obj/item/card/id/user_id = user.get_idcard(TRUE)
 	if(!user_id)
 		return
+	if(ACCESS_CAPTAIN in user_id.access)
+		. += budget ? ACCOUNT_CIV : "Captain"
 	if(ACCESS_HOP in user_id.access)
-		. += budget ? list(ACCOUNT_SRV, ACCOUNT_CAR) : "Head of Personnel"
+		. += budget ? list(ACCOUNT_SRV, ACCOUNT_CAR) : "Head of Personnel" //FU QM
 	if(ACCESS_HOS in user_id.access)
 		. += budget ? ACCOUNT_SEC : "Head of Security"
 	if(ACCESS_CMO in user_id.access)
@@ -32,31 +34,22 @@
 
 /datum/computer_file/program/department_management/ui_data(mob/user)
 	var/list/data = get_header_data()
-	var/list/department_accesses = get_accesses(user, FALSE)
 
+	var/list/department_accesses = get_accesses(user, FALSE)
 	var/list/accounts = list()
 	for(var/a in SSeconomy.bank_accounts)
 		var/datum/bank_account/account = a
-		if(account.account_job.department_head in department_accesses)
+		var/list/check_access = department_accesses & account.account_job?.department_head
+		if(check_access.len) //Checks if any of the departmental heads are in the user's access
 			accounts += list(list(
 				"holder" = account.account_holder,
 				"balance" = account.account_balance,
-				"job" = account.account_job?.title,
-				"paycheck" = account.account_job?.paycheck,
-				"paycheck_department" = account.account_job?.paycheck_department,
+				"job" = account.account_job.title,
+				"paycheck" = account.account_job.paycheck,
+				"paycheck_department" = account.account_job.paycheck_department,
 				"ref" = REF(account)
 			))
 	data["accounts"] = accounts
-	return data
-
-/datum/computer_file/program/department_management/ui_static_data(mob/user)
-	var/list/data = list()
-
-	var/list/jobs = list()
-	for(var/j in SSjob.occupations)
-		var/datum/job/job = j
-		jobs += job.title
-	data["jobs"] = jobs
 
 	var/list/department_budgets = get_accesses(user, TRUE)
 	var/list/budgets = list()
@@ -69,12 +62,13 @@
 			"frozen" = budget.frozen,
 			"ref" = REF(budget)
 		))
+	data["budgets"] = budgets
+
 	return data
 
 /datum/computer_file/program/department_management/ui_act(action, list/params, datum/tgui/ui)
 	if(..())
 		return
-	var/mob/user = usr
 	var/datum/bank_account/account_to_change = locate(params["selected_account"])
 	switch(action)
 		if("PRG_change_holder")

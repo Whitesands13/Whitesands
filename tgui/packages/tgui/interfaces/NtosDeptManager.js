@@ -64,8 +64,9 @@ export const NtosDeptManagerContent = (props, context) => {
               </Table.Cell>
               <Table.Cell collapsing>
                 <NumberInput
-                  minValue={0}
+                  minValue={25}
                   maxValue={500}
+                  value={account.paycheck}
                   onChange={(e, value) => act('PRG_change_paycheck', {
                     selected_account: account.ref,
                     new_paycheck: value,
@@ -92,9 +93,6 @@ export const NtosDeptManagerContent = (props, context) => {
         <Table>
           <Table.Row header>
             <Table.Cell>
-              ID
-            </Table.Cell>
-            <Table.Cell>
               Budget
             </Table.Cell>
             <Table.Cell>
@@ -109,9 +107,6 @@ export const NtosDeptManagerContent = (props, context) => {
               key={budget.name}
               className="candystripe">
               <Table.Cell>
-                {budget.id}
-              </Table.Cell>
-              <Table.Cell>
                 {budget.name}
               </Table.Cell>
               <Table.Cell>
@@ -121,7 +116,7 @@ export const NtosDeptManagerContent = (props, context) => {
               </Table.Cell>
               <Table.Cell>
                 <Button
-                  content={"FREEZE"}
+                  content={budget.frozen ? "FREEZE" : "UNFREEZE"}
                   icon={"exclamation-triangle"}
                   color={budget.frozen && "bad"}
                   onClick={() => act('PRG_freeze_acct', {

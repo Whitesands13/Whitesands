@@ -43,7 +43,10 @@
 	var/obj/item/card/id/user_id = user.get_idcard(TRUE)
 	switch(action)
 		if("PRG_new_account")
-			new /datum/bank_account(params["account_name"], new /datum/job/assistant())
+			var/datum/job/selected_job = SSjob.name_occupations[params["acct_job"]]
+			var/datum/bank_account/new_acct = new /datum/bank_account(params["acct_holder"], new selected_job.type)
+			if(text2num(params["acct_id"]))
+				new_acct.account_id = clamp(text2num(params["acct_id"]), 111111, 999999)
 			return TRUE
 	if(ACCESS_CHANGE_IDS in user_id?.GetAccess())
 		var/datum/bank_account/account_to_change = locate(params["selected_account"])
