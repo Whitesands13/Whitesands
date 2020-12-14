@@ -12,7 +12,7 @@
 
 //Service
 /datum/job/assistant
-	alt_titles = list("Civilian", "Visitor", "Businessman", "Entertainer")
+	alt_titles = list("Civilian", "Visitor", "Businessman", "Entertainer", "Asshat")
 	senior_title = "Greytider"
 
 /datum/job/cook
