@@ -94,6 +94,6 @@ SUBSYSTEM_DEF(weather)
 	if (!istype(mix))
 		CRASH("fire temperature update called on invalid mix: [temperature_gradients[z]]")
 	else
-		var/adjusted_time = (8640000 / SSticker.station_time_rate_multiplier) * rate
+		var/adjusted_time = (8640000 / SSticker.station_time_rate_multiplier) * temperature_gradients[z][1]
 		var/step = world.time % adjusted_time == 0 ? 0 : (world.time % adjusted_time) / adjusted_time
 		mix.tick_temperature_gradient(step)
