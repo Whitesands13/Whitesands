@@ -66,6 +66,6 @@ Assistant
 	name = "Assistant (Entertainer)"
 	r_hand = /obj/item/bikehorn //comedy
 
-/datum/outfit/job/assistant/asshat
+/datum/outfit/job/assistant/asshat //asshat alt title -waspstation
 	name = "Assistant (Asshat)"
-	backpack_contents = list(/obj/item/toy/gun=1) //terg said it was a good idea at the time, now asshats can shoot up the station with a cap gun
+	backpack_contents = list(/obj/item/toy/gun=1)
