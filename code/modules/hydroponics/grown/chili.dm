@@ -27,6 +27,7 @@
 	bitesize_mod = 2
 	foodtype = FRUIT
 	wine_power = 20
+	wine_flavor = "a lake of fire"
 
 // Ice Chili
 /obj/item/seeds/chili/ice
@@ -52,6 +53,7 @@
 	bitesize_mod = 2
 	foodtype = FRUIT
 	wine_power = 30
+	wine_flavor = "the 8th circle of hell"
 
 // Ghost Chili
 /obj/item/seeds/chili/ghost
@@ -79,6 +81,7 @@
 	bitesize_mod = 4
 	foodtype = FRUIT
 	wine_power = 50
+	wine_flavor = "burning regret and the veil growing thinner"
 
 /obj/item/reagent_containers/food/snacks/grown/ghost_chili/attack_hand(mob/user)
 	. = ..()
