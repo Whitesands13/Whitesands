@@ -65,3 +65,6 @@ Assistant
 /datum/outfit/job/assistant/entertainer
 	name = "Assistant (Entertainer)"
 	r_hand = /obj/item/bikehorn //comedy
+
+/datum/outfit/job/assistant/asshat
+	name = "Assistant (Asshat)"
