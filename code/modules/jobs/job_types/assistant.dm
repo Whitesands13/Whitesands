@@ -65,3 +65,7 @@ Assistant
 /datum/outfit/job/assistant/entertainer
 	name = "Assistant (Entertainer)"
 	r_hand = /obj/item/bikehorn //comedy
+
+/datum/outfit/job/assistant/asshat
+	name = "Assistant (Asshat)"
+	backpack_contents = list(/obj/item/toy/gun=1) //terg said it was a good idea at the time, now asshats can shoot up the station with a cap gun
