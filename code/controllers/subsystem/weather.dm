@@ -11,6 +11,7 @@ SUBSYSTEM_DEF(weather)
 	runlevels = RUNLEVEL_GAME
 	var/list/processing = list()
 	var/list/eligible_zlevels = list()
+	var/list/temperature_gradients = list()
 	var/list/next_hit_by_zlevel = list() //Used by barometers to know when the next storm is coming
 
 /datum/controller/subsystem/weather/fire()
@@ -32,6 +33,9 @@ SUBSYSTEM_DEF(weather)
 		eligible_zlevels -= z
 		var/randTime = rand(3000, 6000)
 		next_hit_by_zlevel["[z]"] = addtimer(CALLBACK(src, .proc/make_eligible, z, possible_weather), randTime + initial(W.weather_duration_upper), TIMER_UNIQUE|TIMER_STOPPABLE) //Around 5-10 minutes between weathers
+
+	for(var/z in temperature_gradients)
+		fire_temperature_update(z)
 
 /datum/controller/subsystem/weather/Initialize(start_timeofday)
 	for(var/V in subtypesof(/datum/weather))
@@ -78,3 +82,18 @@ SUBSYSTEM_DEF(weather)
             A = W
             break
     return A
+
+/datum/controller/subsystem/weather/proc/set_temperature_gradient(z, immutable_mix, rate = 1)
+	if (!(z in temperature_gradients))
+		temperature_gradients[z] = list(immutable_mix, rate)
+	else
+		temperature_gradients[z][1] = rate
+
+/datum/controller/subsystem/weather/proc/fire_temperature_update(z)
+	var/datum/gas_mixture/immutable/mix = temperature_gradients[z][0]
+	if (!istype(mix))
+		CRASH("fire temperature update called on invalid mix: [temperature_gradients[z]]")
+	else
+		var/adjusted_time = (8640000 / SSticker.station_time_rate_multiplier) * rate
+		var/step = world.time % adjusted_time == 0 ? 0 : (world.time % adjusted_time) / adjusted_time
+		mix.tick_temperature_gradient(step)

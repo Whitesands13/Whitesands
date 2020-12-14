@@ -8,9 +8,6 @@
 // Adjusted period for station time
 #define WS_TEMP_GRAD_COEFF_B 864000 / SSticker.station_time_rate_multiplier
 #define WS_TEMP_GRAD_COEFF_C 250
-/datum/gas_mixture/immutable/whitesands_planet
-	initial_temperature = T20C
-	var/ws_moles_amount
 
 /datum/gas_mixture/immutable/whitesands_planet/New()
 	if (GLOB.ws_planet_atmos && GLOB.ws_planet_atmos != src)
@@ -53,5 +50,3 @@
 			final_mix += list(gas_types_by_id[gas_key], ws_atmos_conf[gas_key])
 	for(var/mix_param in final_mix)
 		set_moles(mix_param[0], ws_moles_amount * mix_param[1])
-
-GLOBAL_DATUM_INIT(ws_planet_atmos, /datum/gas_mixture/immutable/whitesands_planet, new)
