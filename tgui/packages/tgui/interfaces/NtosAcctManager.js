@@ -20,18 +20,17 @@ export const NtosAcctManager = (props, context) => {
 export const NtosBankAcctManagerContent = (props, context) => {
   const { act, data } = useBackend(context);
 
-  const [tab, setTab] = useLocalState(context, 'tab', 1);
-  const [searchText, setSearchText] = useLocalState(context, 'searchText', '');
-  const [acctName, setAcctName] = useLocalState(context, 'acctName', '');
-  const [acctID, setAcctID] = useLocalState(context, 'acctID', '000000');
-  const [acctJob, setAcctJob] = useLocalState(context, 'acctJob', 'Assistant');
-
   const {
     authed,
     jobs = [],
     accounts = [],
   } = data;
 
+  const [tab, setTab] = useLocalState(context, 'tab', 1);
+  const [searchText, setSearchText] = useLocalState(context, 'searchText', '');
+  const [acctName, setAcctName] = useLocalState(context, 'acctName', '');
+  const [acctID, setAcctID] = useLocalState(context, 'acctID', '111111');
+  const [acctJob, setAcctJob] = useLocalState(context, 'acctJob', jobs[0]);
 
   const holderSearch = createSearch(searchText, item => {
     return item.holder;
@@ -44,7 +43,6 @@ export const NtosBankAcctManagerContent = (props, context) => {
   const items = searchText.length > 0
    && accounts
      .filter(holderSearch)
-     .concat(accounts.filter(idSearch))
     || accounts;
 
   return (
@@ -127,7 +125,7 @@ export const NtosBankAcctManagerContent = (props, context) => {
                   <Dropdown
                     options={jobs}
                     disabled={!authed}
-                    width={17}
+                    width={15}
                     selected={account.job}
                     onSelected={value => act('PRG_change_job', {
                       selected_account: account.ref,
@@ -137,7 +135,7 @@ export const NtosBankAcctManagerContent = (props, context) => {
                 <Table.Cell collapsing>
                   <AnimatedNumber
                     value={account.balance}
-                    format={value => value + 'cr'} />
+                    format={value => Math.round(value) + 'cr'} />
                 </Table.Cell>
               </Table.Row>
             ))}
@@ -153,7 +151,7 @@ export const NtosBankAcctManagerContent = (props, context) => {
               icon={"check"}
               confirmMessage={"Create?"}
               confirmColor={"good"}
-              onClick={() => act('PRG_new_acct', {
+              onClick={() => act('PRG_new_account', {
                 acct_holder: acctName,
                 acct_id: acctID,
                 acct_job: acctJob,
@@ -177,8 +175,8 @@ export const NtosBankAcctManagerContent = (props, context) => {
                 options={jobs}
                 disabled={!authed}
                 selected={acctJob}
-                width={15}
-                onSelected={(e, value) => setAcctJob(value)} />
+                width={17}
+                onSelected={value => setAcctJob(value)} />
             </LabeledList.Item>
           </LabeledList>
         </Section>

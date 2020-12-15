@@ -43,7 +43,7 @@
 	var/obj/item/card/id/user_id = user.get_idcard(TRUE)
 	switch(action)
 		if("PRG_new_account")
-			var/datum/job/selected_job = SSjob.name_occupations[params["acct_job"]]
+			var/datum/job/selected_job = SSjob.name_occupations[params["acct_job"]] || /datum/job/assistant
 			var/datum/bank_account/new_acct = new /datum/bank_account(params["acct_holder"], new selected_job.type)
 			if(text2num(params["acct_id"]))
 				new_acct.account_id = clamp(text2num(params["acct_id"]), 111111, 999999)

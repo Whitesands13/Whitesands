@@ -112,11 +112,11 @@ export const NtosDeptManagerContent = (props, context) => {
               <Table.Cell>
                 <AnimatedNumber
                   value={budget.balance}
-                  format={value => value + 'cr'} />
+                  format={value => Math.round(value) + 'cr'} />
               </Table.Cell>
               <Table.Cell>
                 <Button
-                  content={budget.frozen ? "FREEZE" : "UNFREEZE"}
+                  content={budget.frozen ? "UNFREEZE" : "FREEZE"}
                   icon={"exclamation-triangle"}
                   color={budget.frozen && "bad"}
                   onClick={() => act('PRG_freeze_acct', {
