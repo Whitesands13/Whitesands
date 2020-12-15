@@ -397,7 +397,7 @@
 	if(M.active_storage)
 		M.active_storage.hide_from(M)
 	screen_start_x = initial(screen_start_x) + text2num(M.hud_used?.ui_layout["storage_offset_x"])
-	screen_start_y = initial(screen_start_x) + text2num(M.hud_used?.ui_layout["storage_offset_y"])
+	screen_start_y = initial(screen_start_y) + text2num(M.hud_used?.ui_layout["storage_offset_y"])
 	orient2hud()
 	M.client.screen |= boxes
 	M.client.screen |= closer

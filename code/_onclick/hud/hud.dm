@@ -181,7 +181,8 @@ GLOBAL_LIST_INIT(available_ui_layouts, list(
 			screenmob.client.screen += hide_actions_toggle
 
 			if(action_intent)
-				action_intent.screen_loc = ui_layout[action_intent.screen_loc_name] //Restore intent selection to the original position
+				if(ui_layout)
+					action_intent.screen_loc = ui_layout[action_intent.screen_loc_name] //Restore intent selection to the original position
 
 		if(HUD_STYLE_REDUCED)	//Reduced HUD
 			hud_shown = FALSE	//Governs behavior of other procs
@@ -201,7 +202,8 @@ GLOBAL_LIST_INIT(available_ui_layouts, list(
 					screenmob.client.screen += hand
 			if(action_intent)
 				screenmob.client.screen += action_intent		//we want the intent switcher visible
-				action_intent.screen_loc = ui_layout["ui_acti_alt"]	//move this to the alternative position, where zone_select usually is.
+				if(ui_layout)
+					action_intent.screen_loc = ui_layout["ui_acti_alt"]	//move this to the alternative position, where zone_select usually is.
 
 		if(HUD_STYLE_NOHUD)	//No HUD
 			hud_shown = FALSE	//Governs behavior of other procs
