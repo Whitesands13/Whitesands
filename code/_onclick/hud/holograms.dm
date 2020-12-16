@@ -6,7 +6,7 @@
 	inv_box.name = "internal storage"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "suit_storage"
-	inv_box.screen_loc = ui_drone_storage
+	inv_box.screen_loc_name = "ui_drone_storage"
 	inv_box.slot_id = ITEM_SLOT_DEX_STORAGE
 	inv_box.hud = src
 	static_inventory += inv_box
@@ -15,7 +15,7 @@
 	inv_box.name = "storage1"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "pocket"
-	inv_box.screen_loc = ui_storage1
+	inv_box.screen_loc_name = "ui_storage1"
 	inv_box.slot_id = ITEM_SLOT_LPOCKET
 	inv_box.hud = src
 	static_inventory += inv_box
@@ -24,7 +24,7 @@
 	inv_box.name = "storage2"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "pocket"
-	inv_box.screen_loc = ui_storage2
+	inv_box.screen_loc_name = "ui_storage2"
 	inv_box.slot_id = ITEM_SLOT_RPOCKET
 	inv_box.hud = src
 	static_inventory += inv_box
@@ -32,7 +32,7 @@
 	pull_icon = new /obj/screen/pull()
 	pull_icon.icon = ui_style
 	pull_icon.update_icon()
-	pull_icon.screen_loc = ui_above_intent
+	pull_icon.screen_loc_name = "ui_above_intent"
 	pull_icon.hud = src
 	static_inventory += pull_icon
 
@@ -50,13 +50,13 @@
 
 	if(hud_shown)
 		if(H.internal_storage)
-			H.internal_storage.screen_loc = ui_drone_storage
+			H.internal_storage.screen_loc = ui_lauout["ui_drone_storage"]
 			H.client.screen += H.internal_storage
 		if(H.l_store)
-			H.l_store.screen_loc = ui_storage1
+			H.l_store.screen_loc_name = ui_lauout["ui_storage1"]
 			H.client.screen += H.l_store
 		if(H.r_store)
-			H.r_store.screen_loc = ui_storage2
+			H.r_store.screen_loc_name = ui_lauout["ui_storage2"]
 			H.client.screen += H.r_store
 	else
 		if(H.internal_storage)
