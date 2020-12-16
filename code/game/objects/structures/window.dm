@@ -715,8 +715,8 @@
 	heat_resistance = 1600
 	armor = list("melee" = 95, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 50, "bio" = 100, "rad" = 100, "fire" = 80, "acid" = 100)
 	smoothing_flags = SMOOTH_BITMASK
-	smoothing_groups = list(SMOOTH_GROUP_WINDOW_FULLTILE)
-	canSmoothWith = null
+	smoothing_groups = list(SMOOTH_GROUP_SHUTTLE_PARTS)
+	canSmoothWith = list(SMOOTH_GROUP_SHUTTLE_PARTS)
 	explosion_block = 3
 	damage_deflection = 5		// Wasp Edit - Weakens R-Windows
 	glass_type = /obj/item/stack/sheet/plastitaniumglass
