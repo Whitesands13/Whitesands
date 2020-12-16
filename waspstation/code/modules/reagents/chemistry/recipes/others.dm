@@ -35,3 +35,7 @@
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
 		new /obj/item/stack/sheet/mineral/titanium(location)
+
+/datum/chemical_reaction/mutationtoxin/kobold
+	results = list(/datum/reagent/mutationtoxin/ash = 1)
+	required_reagents  = list(/datum/reagent/aslimetoxin = 1, /datum/reagent/mutationtoxin/lizard = 1, /datum/reagent/ash = 10, /datum/reagent/consumable/tinlux = 5)
