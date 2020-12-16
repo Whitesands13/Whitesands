@@ -483,7 +483,13 @@
 		if(feedback)
 			to_chat(src, "<span class='warning'>You couldn't move there!</span>")
 		return FALSE
+	var/atom/movable/AM
+	if(pulling)
+		AM = pulling
+		AM.forceMove(target)
 	forceMove(target)
+	if(AM)
+		start_pulling(AM)
 	return TRUE
 
 /// Can this mob move between z levels
