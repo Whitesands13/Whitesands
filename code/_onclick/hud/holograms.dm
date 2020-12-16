@@ -50,13 +50,13 @@
 
 	if(hud_shown)
 		if(H.internal_storage)
-			H.internal_storage.screen_loc = ui_lauout["ui_drone_storage"]
+			H.internal_storage.screen_loc = ui_layout["ui_drone_storage"]
 			H.client.screen += H.internal_storage
 		if(H.l_store)
-			H.l_store.screen_loc_name = ui_lauout["ui_storage1"]
+			H.l_store.screen_loc_name = ui_layout["ui_storage1"]
 			H.client.screen += H.l_store
 		if(H.r_store)
-			H.r_store.screen_loc_name = ui_lauout["ui_storage2"]
+			H.r_store.screen_loc_name = ui_layout["ui_storage2"]
 			H.client.screen += H.r_store
 	else
 		if(H.internal_storage)
