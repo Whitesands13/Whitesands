@@ -93,7 +93,7 @@
 
 /mob/living/simple_animal/hologram/proc/update_inv_internal_storage()
 	if(internal_storage && client && hud_used && hud_used.hud_shown)
-		internal_storage.screen_loc = ui_drone_storage
+		internal_storage.screen_loc = ui_layout["ui_drone_storage"]
 		client.screen += internal_storage
 
 /mob/living/simple_animal/hologram/update_inv_pockets()
@@ -107,11 +107,11 @@
 		inv.update_icon()
 
 		if(l_store)
-			l_store.screen_loc = ui_storage1
+			l_store.screen_loc = ui_layout["ui_storage1"]
 			if(hud_used.hud_shown)
 				client.screen += l_store
 
 		if(r_store)
-			r_store.screen_loc = ui_storage2
+			r_store.screen_loc = ui_layout["ui_storage2"]
 			if(hud_used.hud_shown)
 				client.screen += r_store
