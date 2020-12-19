@@ -74,7 +74,7 @@
 		return
 	for(var/MN in GLOB.player_list)
 		var/mob/M = MN
-		if(S.shuttle.is_in_shuttle_bounds(M))
+		if(shuttle.is_in_shuttle_bounds(M))
 			return //MEANT TO BE A RETURN, DO NOT REPLACE WITH CONTINUE, THIS KEEPS IT FROM DELETING THE SHUTTLE WHEN THERE'S PEOPLE ON
 	shuttle.jumpToNullSpace()
 	qdel(src)
