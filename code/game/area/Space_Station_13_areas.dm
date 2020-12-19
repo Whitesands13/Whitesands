@@ -313,10 +313,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	lighting_colour_bulb = "#ffdbb4"
 	lighting_brightness_tube = 6
 
-/area/lieutenant
-	name = "Lieutenant's Office"
-	icon_state = "blueold"
-
 /area/bridge/meeting_room
 	name = "Heads of Staff Meeting Room"
 	icon_state = "meeting"
