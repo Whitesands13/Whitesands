@@ -201,7 +201,7 @@
 
 
 /// For consuming a dictionary of materials. mats is the map of materials to use and the corresponding amounts, example: list(M/datum/material/glass =100, datum/material/iron=200)
-/datum/component/material_container/proc/use_materials(list/mats, multiplier=1, datum/bank_account/using_account)
+/datum/component/material_container/proc/use_materials(list/mats, multiplier=1, datum/bank_account/using_account, charge = TRUE)
 	if(!mats || !length(mats))
 		return FALSE
 
@@ -224,12 +224,12 @@
 	var/total_amount_save = total_amount
 
 	for(var/i in mats_to_remove)
-		total_amount_save -= use_amount_mat(mats_to_remove[i], i, using_account, TRUE)
+		total_amount_save -= use_amount_mat(mats_to_remove[i], i, using_account, charge)
 
 	return total_amount_save - total_amount
 
 /// For spawning mineral sheets at a specific location. Used by machines to output sheets.
-/datum/component/material_container/proc/retrieve_sheets(sheet_amt, var/datum/material/M, target = null, datum/bank_account/using_account)
+/datum/component/material_container/proc/retrieve_sheets(sheet_amt, var/datum/material/M, target = null, datum/bank_account/using_account, charge = TRUE)
 	if(!M.sheet_type)
 		return FALSE //Add greyscale sheet handling here later
 	if(sheet_amt <= 0)
@@ -241,13 +241,13 @@
 		sheet_amt = round(materials[M] / MINERAL_MATERIAL_AMOUNT)
 	var/count = 0
 	while(sheet_amt > MAX_STACK_SIZE)
-		if(!use_amount_mat(sheet_amt * MINERAL_MATERIAL_AMOUNT, M, using_account, TRUE))
+		if(!use_amount_mat(sheet_amt * MINERAL_MATERIAL_AMOUNT, M, using_account, charge))
 			break
 		new M.sheet_type(target, MAX_STACK_SIZE)
 		count += MAX_STACK_SIZE
 		sheet_amt -= MAX_STACK_SIZE
 	if(sheet_amt >= 1)
-		if(!use_amount_mat(sheet_amt * MINERAL_MATERIAL_AMOUNT, M, using_account, TRUE))
+		if(!use_amount_mat(sheet_amt * MINERAL_MATERIAL_AMOUNT, M, using_account, charge))
 			return FALSE
 		new M.sheet_type(target, sheet_amt)
 		count += sheet_amt

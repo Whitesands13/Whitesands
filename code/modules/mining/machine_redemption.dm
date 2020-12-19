@@ -213,7 +213,9 @@
 
 /obj/machinery/mineral/ore_redemption/ui_data(mob/user)
 	var/list/data = list()
+	var/obj/item/card/id/I = user.get_idcard(TRUE)
 	data["unclaimedPoints"] = points
+	data["userCash"] = I.registered_account.account_balance
 
 	data["materials"] = list()
 	var/datum/component/material_container/mat_container = materials.mat_container
@@ -333,7 +335,7 @@
 			var/datum/bank_account/user_account = I?.registered_account
 			if((check_access(I) || allowed(usr)) && alloy)
 				var/smelt_amount = can_smelt_alloy(alloy)
-				if(mat_container.linked_account)
+				if(mat_container.linked_account && !(obj_flags & EMAGGED))
 					var/cost = mat_container.get_material_list_cost(alloy.materials)
 					if(cost)
 						smelt_amount = min(smelt_amount, FLOOR(user_account?.account_balance / cost, 1))
@@ -343,7 +345,7 @@
 				else
 					desired = input("How many sheets?", "How many sheets would you like to smelt?", 1) as null|num
 				var/amount = round(min(desired,50,smelt_amount))
-				mat_container.use_materials(alloy.materials, amount, user_account)
+				mat_container.use_materials(alloy.materials, amount, user_account, !(obj_flags & EMAGGED))
 				materials.silo_log(src, "released", -amount, "sheets", alloy.materials)
 				var/output
 				if(ispath(alloy.build_path, /obj/item/stack/sheet))

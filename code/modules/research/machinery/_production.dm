@@ -154,13 +154,13 @@
 			return FALSE
 	var/obj/item/card/id/user_id = usr.get_idcard(TRUE)
 	var/datum/bank_account/user_account = user_id?.registered_account
-	if(materials.mat_container.linked_account)
+	if(materials.mat_container.linked_account && !(obj_flags & EMAGGED))
 		var/cost = materials.mat_container.get_material_list_cost(efficient_mats)
 		if(!user_account.has_money(cost))
 			say("Insufficient funds to complete prototype[amount > 1? "s" : ""].")
 			return FALSE
 	materials.mat_container.use_materials(efficient_mats, amount, user_account)
-	materials.silo_log(src, "built", -amount, "[D.name]", efficient_mats)
+	materials.silo_log(src, "built", -amount, "[D.name]", efficient_mats, !(obj_flags & EMAGGED))
 	for(var/R in D.reagents_list)
 		reagents.remove_reagent(R, D.reagents_list[R]*amount/coeff)
 	busy = TRUE
@@ -287,7 +287,11 @@
 		c = min(c,t)
 
 	if(materials?.mat_container?.linked_account)
-		var/cost = materials.mat_container.get_material_list_cost(D.materials)
+		var/cost
+		if(obj_flags & EMAGGED)
+			cost = 0
+		else
+			cost = materials.mat_container.get_material_list_cost(D.materials)
 		if(cost)
 			var/obj/item/card/id/user_id = usr.get_idcard(TRUE)
 			var/datum/bank_account/user_account = user_id?.registered_account
