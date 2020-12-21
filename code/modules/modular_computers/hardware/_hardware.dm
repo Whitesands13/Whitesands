@@ -10,11 +10,9 @@
 	// Computer that holds this hardware, if any.
 
 	var/power_usage = 0 			// If the hardware uses extra power, change this.
-	var/enabled = TRUE				// If the hardware is turned off set this to 0.
-	var/critical = FALSE			// Prevent disabling for important component, like the CPU.
-	var/can_install = TRUE			// Prevents direct installation of removable media.
-	var/expansion_hw = FALSE		// Hardware that fits into expansion bays.
-	var/removable = TRUE			// Whether the hardware is removable or not.
+	var/enabled = 1					// If the hardware is turned off set this to 0.
+	var/critical = 0				// Prevent disabling for important component, like the CPU.
+	var/can_install = 1				// Prevents direct installation of removable media.
 	var/damage = 0					// Current damage level
 	var/max_damage = 100			// Maximal damage level.
 	var/damage_malfunction = 20		// "Malfunction" threshold. When damage exceeds this value the hardware piece will semi-randomly fail and do !!FUN!! things

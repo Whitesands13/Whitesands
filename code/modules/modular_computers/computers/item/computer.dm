@@ -35,12 +35,11 @@
 	var/max_hardware_size = 0								// Maximal hardware w_class. Tablets/PDAs have 1, laptops 2, consoles 4.
 	var/steel_sheet_cost = 5								// Amount of steel sheets refunded when disassembling an empty frame of this computer.
 
-	/// List of "connection ports" in this computer and the components with which they are plugged
-	var/list/all_components = list()
-	/// Lazy List of extra hardware slots that can be used modularly.
-	var/list/expansion_bays
-	/// Number of total expansion bays this computer has available.
-	var/max_bays = 0
+	// Important hardware (must be installed for computer to work)
+
+	// Optional hardware (improves functionality, but is not critical for computer to work)
+
+	var/list/all_components = list()						// List of "connection ports" in this computer and the components with which they are plugged
 
 	var/list/idle_threads							// Idle programs on background. They still receive process calls but can't be interacted with.
 	var/obj/physical = null									// Object that represents our computer. It's used for Adjacent() and UI visibility checks.
@@ -77,9 +76,9 @@
 		return
 
 	if(user.canUseTopic(src, BE_CLOSE))
-		var/obj/item/computer_hardware/card_slot/card_slot2 = all_components[MC_CARD2]
 		var/obj/item/computer_hardware/card_slot/card_slot = all_components[MC_CARD]
-		return (card_slot2?.try_eject(user) || card_slot?.try_eject(user)) //Try the secondary one first.
+		if(card_slot)
+			card_slot.try_eject(null, user)
 
 // Gets IDs/access levels from card slot. Would be useful when/if PDAs would become modular PCs.
 /obj/item/modular_computer/GetAccess()
@@ -95,25 +94,19 @@
 	return ..()
 
 /obj/item/modular_computer/RemoveID()
-	var/obj/item/computer_hardware/card_slot/card_slot2 = all_components[MC_CARD2]
 	var/obj/item/computer_hardware/card_slot/card_slot = all_components[MC_CARD]
-	return (card_slot2?.try_eject() || card_slot?.try_eject()) //Try the secondary one first.
+	if(!card_slot)
+		return
+	return card_slot.RemoveID()
 
 /obj/item/modular_computer/InsertID(obj/item/inserting_item)
 	var/obj/item/computer_hardware/card_slot/card_slot = all_components[MC_CARD]
-	var/obj/item/computer_hardware/card_slot/card_slot2 = all_components[MC_CARD2]
-	if(!(card_slot || card_slot2))
-		//to_chat(user, "<span class='warning'>There isn't anywhere you can fit a card into on this computer.</span>")
+	if(!card_slot)
 		return FALSE
-
 	var/obj/item/card/inserting_id = inserting_item.RemoveID()
 	if(!inserting_id)
 		return FALSE
-
-	if((card_slot?.try_insert(inserting_id)) || (card_slot2?.try_insert(inserting_id)))
-		return TRUE
-	//to_chat(user, "<span class='warning'>This computer doesn't have an open card slot.</span>")
-	return FALSE
+	return card_slot.try_insert(inserting_id)
 
 /obj/item/modular_computer/MouseDrop(obj/over_object, src_location, over_location)
 	var/mob/M = usr

@@ -127,7 +127,7 @@ const Program = (props, context) => {
       {!(program.access) && (
         <Box mt={1} italic fontSize="12px" position="relative">
           <Icon mx={1} color="red" name="times" />
-          Invalid credentials loaded!
+          Insufficient credentials!
         </Box>
       )}
       {program.size > disk_free && (

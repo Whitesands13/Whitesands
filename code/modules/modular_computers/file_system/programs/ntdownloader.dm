@@ -127,8 +127,6 @@
 
 	if(!istype(my_computer))
 		return
-	var/obj/item/computer_hardware/card_slot/card_slot = computer.all_components[MC_CARD]
-	var/list/access = card_slot?.GetAccess()
 
 	var/list/data = get_header_data()
 
@@ -158,7 +156,7 @@
 			"fileinfo" = P.extended_desc,
 			"compatibility" = check_compatibility(P),
 			"size" = P.size,
-			"access" = P.can_run(user,transfer = 1, access = access)
+			"access" = P.can_run(user,transfer = 1)
 		)))
 	data["hackedavailable"] = FALSE
 	if(emagged) // If we are running on emagged computer we have access to some "bonus" software
