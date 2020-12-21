@@ -56,6 +56,9 @@
 	if(!current_target)
 		to_chat(user, "<span class='warning'>Not near any celestial object or station!</span>")
 		return
+	if(!current_target.custom_docking || !current_target.linked_levels)
+		to_chat(user, "<span class='warning'>There's too much interference to dock anywhere but the designated docking port!</span>")
+		return
 	jumpto_ports = list("[shuttleId]_[current_target.id]", "whiteship_[current_target.id]")
 	shuttlePortId = "[shuttleId]_[current_target.id]"
 	shuttlePortName = "[current_ship] [current_target.id] dock"

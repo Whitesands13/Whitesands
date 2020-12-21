@@ -71,7 +71,7 @@
 	///Armor value, reduces integrity damage taken
 	var/overmap_armor = 1
 	///List of other overmap objects in the same tile
-	var/list/close_overmap_objects = list()
+	var/list/close_overmap_objects
 
 	// Stuff needed to render the map
 	var/map_name
@@ -180,6 +180,8 @@
 /obj/structure/overmap/level
 	///List of linked Z-levels (z number), used to dock
 	var/list/linked_levels
+	///If the shuttle navigation/docking computer can be used to change the docking location
+	var/custom_docking = TRUE
 	render_map = TRUE //this is done because it's not expensive to load the map once since levels don't move
 
 /obj/structure/overmap/level/Initialize(mapload, _id, list/_zs)
@@ -220,5 +222,44 @@
 /obj/structure/overmap/level/planet/lavaland
 	name = "Lavaland"
 	desc = "A lava-covered planet known for its plentiful natural resources among dangerous fauna."
-	id = AWAY_OVERMAP_OBJECT_ID_LAVALAND
+	id = AWAY_OVERMAP_OBJECT_ID_MINING
 	color = COLOR_ORANGE
+
+/obj/structure/overmap/dynamic
+	name = "weak energy signature"
+	desc = "A very weak energy signal. It may not still be here if you leave it."
+	icon_state = "strange_event"
+	///The active turf reservation, if there is one
+	var/datum/turf_reservation/reserve
+	///If the level should be preserved. Useful for if you want to build an autismfort or something.
+	var/preserve_level = FALSE
+	///If the level is a planet.
+	var/planet = FALSE
+
+/obj/structure/overmap/dynamic/Initialize(mapload, _id, preload_level)
+	. = ..()
+	if(prob(50))
+		desc = "A small planetoid with a small energy reading emenating out of it. It may not still be here if you leave it."
+		icon_state = "globe"
+		planet = TRUE
+	if(preload_level)
+		load_level()
+
+/obj/structure/overmap/dynamic/Del()
+	. = ..()
+	QDEL_NULL(reserve)
+
+/obj/structure/overmap/dynamic/proc/load_level(obj/docking_port/mobile/visiting_shuttle)
+	if(reserve)
+		return
+	if(!COOLDOWN_FINISHED(SSovermap, encounter_cooldown))
+		return "WARNING! Stellar interference is restricting flight in this area. Interference should pass in [COOLDOWN_TIMELEFT(SSovermap, encounter_cooldown) SECONDS] seconds."
+	var/datum/turf_reservation/new_reserve = SSovermap.spawn_dynamic_encounter(planet, planet ? pick(subtypesof(/datum/map_template/ruin/lavaland)) : pick(subtypesof(/datum/map_template/ruin/space)), "[DEFAULT_OVERMAP_DOCK_PREFIX]_[id]", visiting_shuttle = visiting_shuttle)
+	reserve = new_reserve
+
+/obj/structure/overmap/dynamic/proc/unload_level()
+	if(preserve_level)
+		return
+	if(reserve)
+		forceMove(SSovermap.get_unused_overmap_square())
+		QDEL_NULL(reserve)

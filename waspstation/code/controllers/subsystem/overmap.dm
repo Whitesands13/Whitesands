@@ -15,6 +15,8 @@ SUBSYSTEM_DEF(overmap)
 	var/list/navs
 	///List of all events
 	var/list/events
+	///List of all encounter turf reservations
+	var/list/encounters
 
 	///The main station or ship
 	var/obj/structure/overmap/main
@@ -26,11 +28,15 @@ SUBSYSTEM_DEF(overmap)
 	///Should ship movement be processed
 	var/ship_movement_enabled = TRUE
 
+	///Cooldown on dynamically loading encounters
+	var/encounter_cooldown = 0
+
 /**
   * Creates an overmap object for shuttles, triggers initialization procs for ships and helms
   */
 /datum/controller/subsystem/overmap/Initialize(start_timeofday)
 	create_map()
+
 	for(var/shuttle in SSshuttle.mobile)
 		var/obj/docking_port/mobile/M = shuttle
 		if(istype(M, /obj/docking_port/mobile/arrivals))
@@ -60,7 +66,7 @@ SUBSYSTEM_DEF(overmap)
 	if(events_enabled)
 		for(var/event in events)
 			var/obj/structure/overmap/event/E = event
-			if(E.affect_multiple_times && E.close_overmap_objects)
+			if(E?.affect_multiple_times && E?.close_overmap_objects)
 				E.apply_effect()
 
 /**
@@ -109,12 +115,24 @@ SUBSYSTEM_DEF(overmap)
 
 /**
   * Creates a station and lavaland overmap object randomly on the overmap.
+  * * attempt - Used for the failsafe respawning of the station. Don't set unless you want it to only try to spawn it once.
   */
-/datum/controller/subsystem/overmap/proc/spawn_station()
+/datum/controller/subsystem/overmap/proc/spawn_station(attempt = 1)
+	if(main)
+		qdel(main)
 	var/obj/structure/overmap/level/main/station = new(get_unused_overmap_square(), null, SSmapping.levels_by_trait(ZTRAIT_STATION))
-	var/obj/structure/overmap/level/planet/lavaland/lavaland = new(get_step(station, pick(GLOB.alldirs)), null, SSmapping.levels_by_trait(ZTRAIT_MINING)) //no promise lavaland is safe from events
-	if(!istype(get_area(lavaland), /area/overmap))
-		lavaland.Move(get_unused_overmap_square()) //you're fucked now, it could be ANYWHERE
+	for(var/dir in shuffle(GLOB.alldirs))
+		var/turf/possible_tile = get_step(station, dir)
+		if(!istype(get_area(possible_tile), /area/overmap))
+			continue
+		if(locate(/obj/structure/overmap/event) in possible_tile)
+			continue
+		new /obj/structure/overmap/level/planet/lavaland(possible_tile, null, SSmapping.levels_by_trait(ZTRAIT_MINING))
+		return
+	if(attempt <= MAX_OVERMAP_PLACEMENT_ATTEMPTS)
+		spawn_station(++attempt) //Try to spawn the whole thing again
+	else
+		new /obj/structure/overmap/level/planet/lavaland(get_unused_overmap_square(), null, SSmapping.levels_by_trait(ZTRAIT_MINING))
 
 /**
   * Creates an overmap object for each ruin level, making them accessible.
@@ -125,13 +143,72 @@ SUBSYSTEM_DEF(overmap)
 		if(ZTRAIT_SPACE_RUINS in L.traits)
 			var/obj/structure/overmap/level/ruin/new_level = new(get_unused_overmap_square(), null, L.z_value)
 			new_level.id = "z[L.z_value]"
+	for(var/i in 1 to 4) //TODO: make configurable
+		new /obj/structure/overmap/dynamic(get_unused_overmap_square())
+
+/**
+  * Reserves a square dynamic encounter area, and spawns a ruin in it if one is supplied.
+  * * on_planet - If the encounter should be on a generated planet. Required, as it will be otherwise inaccessible.
+  * * target - The ruin to spawn, if any
+  * * dock_id - The id of the stationary docking port that will be spawned in the encounter
+  * * size - Size of the encounter, defaults to 1/3 total world size
+  * * visiting_shuttle - The shuttle that is going to go to the encounter. Allows ruins to scale.
+  */
+/datum/controller/subsystem/overmap/proc/spawn_dynamic_encounter(on_planet, datum/map_template/target, dock_id, size = world.maxx / 3, obj/docking_port/mobile/visiting_shuttle, ignore_cooldown = FALSE)
+	if(!ignore_cooldown && !COOLDOWN_FINISHED(SSovermap, encounter_cooldown))
+		return FALSE
+
+	COOLDOWN_START(src, encounter_cooldown, 90 SECONDS) //Cooldown starts even if ignore_cooldown is set.
+
+	if(!dock_id)
+		CRASH("Encounter spawner tried spawning an encounter without a docking port ID!")
+
+	var/total_size = size
+	var/ruin_size = CEILING(size / 2, 1)
+	var/dock_size = FLOOR(size / 2, 1)
+	if(visiting_shuttle)
+		dock_size = max(visiting_shuttle.width, visiting_shuttle.height) + 3 //a little bit of wiggle room
+
+	if(target) //Done BEFORE the turfs are reserved so that it allocates the right size box
+		target = new target
+		ruin_size = max(target.width, target.height) + 3
+
+	total_size = min(dock_size + ruin_size, total_size)
+
+	var/datum/turf_reservation/encounter_reservation = SSmapping.RequestBlockReservation(total_size, total_size, border_turf_override = /turf/closed/indestructible/blank, area_override = on_planet ? /area/ruin/unpowered/planetoid : null)
+	if(on_planet)
+		var/datum/map_generator/mapgen = pick(subtypesof(/datum/map_generator))
+		mapgen = new mapgen
+		mapgen.generate_terrain(encounter_reservation.non_border_turfs)
+
+	if(target) //Does AFTER the turfs are reserved so it can find where the allocation is
+		//gets a turf vaguely in the middle of the reserve
+		var/turf/ruin_turf = locate(encounter_reservation.bottom_left_coords[1] + dock_size + 1, encounter_reservation.bottom_left_coords[2] + dock_size + 1, encounter_reservation.bottom_left_coords[3])
+		target.load(ruin_turf)
+
+	//gets the turf with an X in the middle of the reservation, and a Y that's 1/4ths up in the reservation.
+	var/turf/docking_turf = locate(encounter_reservation.bottom_left_coords[1] + dock_size, encounter_reservation.bottom_left_coords[2] + CEILING(dock_size / 2, 1), encounter_reservation.bottom_left_coords[3])
+	var/obj/docking_port/stationary/dock = new(docking_turf)
+	dock.dir = WEST
+	dock.id = dock_id
+	dock.height = dock_size
+	dock.width = dock_size
+	if(visiting_shuttle)
+		dock.dheight = min(visiting_shuttle.dheight, dock_size)
+		dock.dwidth = min(visiting_shuttle.dwidth, dock_size)
+	else
+		dock.dheight = dock_size / 2
+		dock.dwidth = dock_size / 2
+
+	LAZYADD(encounters, encounter_reservation)
+	return encounter_reservation
 
 /**
   * Returns a random, usually empty turf in the overmap
   * * thing_to_not_have - The thing you don't want to be in the found tile, for example, an overmap event [/obj/structure/overmap/event].
   * * tries - How many attempts it will try before giving up finding an unused tile..
   */
-/datum/controller/subsystem/overmap/proc/get_unused_overmap_square(thing_to_not_have = /obj/structure/overmap, tries = 6)
+/datum/controller/subsystem/overmap/proc/get_unused_overmap_square(thing_to_not_have = /obj/structure/overmap, tries = MAX_OVERMAP_PLACEMENT_ATTEMPTS)
 	var/turf/picked_turf
 	for(var/i in 1 to tries)
 		picked_turf = pick(pick(get_area_turfs(/area/overmap)))

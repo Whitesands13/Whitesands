@@ -92,7 +92,7 @@
 
 //Shuttle equipment
 
-/obj/machinery/shuttle_scrambler
+/obj/machinery/power/shuttle_scrambler
 	name = "Data Siphon"
 	desc = "This heap of machinery steals credits and data from unprotected systems and locks down cargo shuttles."
 	icon = 'icons/obj/machines/dominator.dmi'
@@ -102,11 +102,11 @@
 	var/credits_stored = 0
 	var/siphon_per_tick = 5
 
-/obj/machinery/shuttle_scrambler/Initialize(mapload)
+/obj/machinery/power/shuttle_scrambler/Initialize(mapload)
 	. = ..()
 	update_icon()
 
-/obj/machinery/shuttle_scrambler/process()
+/obj/machinery/power/shuttle_scrambler/process()
 	if(active)
 		if(is_station_level(z))
 			var/datum/bank_account/D = SSeconomy.get_dep_account(ACCOUNT_CAR)
@@ -120,7 +120,7 @@
 	else
 		STOP_PROCESSING(SSobj,src)
 
-/obj/machinery/shuttle_scrambler/proc/toggle_on(mob/user)
+/obj/machinery/power/shuttle_scrambler/proc/toggle_on(mob/user)
 	SSshuttle.registerTradeBlockade(src)
 	AddComponent(/datum/component/gps, "Nautical Signal")
 	active = TRUE
@@ -128,7 +128,7 @@
 	to_chat(user,"<span class='warning'>The scrambling signal can be now tracked by GPS.</span>")
 	START_PROCESSING(SSobj,src)
 
-/obj/machinery/shuttle_scrambler/interact(mob/user)
+/obj/machinery/power/shuttle_scrambler/interact(mob/user)
 	if(!active)
 		if(alert(user, "Turning the scrambler on will make the shuttle trackable by GPS. Are you sure you want to do it?", "Scrambler", "Yes", "Cancel") == "Cancel")
 			return
@@ -141,14 +141,14 @@
 		dump_loot(user)
 
 //interrupt_research
-/obj/machinery/shuttle_scrambler/proc/interrupt_research()
+/obj/machinery/power/shuttle_scrambler/proc/interrupt_research()
 	for(var/obj/machinery/rnd/server/S in GLOB.machines)
 		if(S.machine_stat & (NOPOWER|BROKEN))
 			continue
 		S.emp_act(1)
 		new /obj/effect/temp_visual/emp(get_turf(S))
 
-/obj/machinery/shuttle_scrambler/proc/dump_loot(mob/user)
+/obj/machinery/power/shuttle_scrambler/proc/dump_loot(mob/user)
 	if(credits_stored)	// Prevents spamming empty holochips
 		new /obj/item/holochip(drop_location(), credits_stored)
 		to_chat(user,"<span class='notice'>You retrieve the siphoned credits!</span>")
@@ -156,21 +156,21 @@
 	else
 		to_chat(user,"<span class='notice'>There's nothing to withdraw.</span>")
 
-/obj/machinery/shuttle_scrambler/proc/send_notification()
+/obj/machinery/power/shuttle_scrambler/proc/send_notification()
 	priority_announce("Data theft signal detected, source registered on local gps units.")
 
-/obj/machinery/shuttle_scrambler/proc/toggle_off(mob/user)
+/obj/machinery/power/shuttle_scrambler/proc/toggle_off(mob/user)
 	SSshuttle.clearTradeBlockade(src)
 	active = FALSE
 	STOP_PROCESSING(SSobj,src)
 
-/obj/machinery/shuttle_scrambler/update_icon_state()
+/obj/machinery/power/shuttle_scrambler/update_icon_state()
 	if(active)
 		icon_state = "dominator-blue"
 	else
 		icon_state = "dominator"
 
-/obj/machinery/shuttle_scrambler/Destroy()
+/obj/machinery/power/shuttle_scrambler/Destroy()
 	toggle_off()
 	return ..()
 

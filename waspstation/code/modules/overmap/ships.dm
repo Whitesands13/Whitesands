@@ -46,6 +46,12 @@
 	var/last_movement = list(0,0)
 	///icon_state that's shown when the vessel is moving
 	var/moving_state = "ship_moving"
+	///Suffix of the icon_state that's shown when the vessel is damaged. Omit to disable damaged states.
+	var/damaged_state
+	///List of weapons/utility modules (currently unused)
+	var/list/modules
+	///Direction the thrusters will repeatedly thrust in
+	var/locked_dir
 
 /obj/structure/overmap/ship/Initialize(mapload, _id, _shuttle = null)
 	. = ..()
@@ -68,14 +74,17 @@
 
 /obj/structure/overmap/ship/recieve_damage(amount)
 	. = ..()
-	if(integrity >= 0)
+	update_icon_state()
+	if(integrity > 0)
 		return
 	if(docked) //what even
 		return
-	for(var/MN in GLOB.player_list)
+	for(var/MN in GLOB.mob_living_list)
 		var/mob/M = MN
 		if(shuttle.is_in_shuttle_bounds(M))
-			return //MEANT TO BE A RETURN, DO NOT REPLACE WITH CONTINUE, THIS KEEPS IT FROM DELETING THE SHUTTLE WHEN THERE'S PEOPLE ON
+			if(M.stat <= HARD_CRIT) //Is not in hard crit, or is dead.
+				return //MEANT TO BE A RETURN, DO NOT REPLACE WITH CONTINUE, THIS KEEPS IT FROM DELETING THE SHUTTLE WHEN THERE'S CONCIOUS PEOPLE ON
+			throw_atom_into_space(M)
 	shuttle.jumpToNullSpace()
 	qdel(src)
 
@@ -83,12 +92,22 @@
 	. = ..()
 	LAZYREMOVE(SSovermap.ships, src)
 
-/*
-/obj/structure/overmap/ship/proc/overmap_act(mob/user, obj/structure/overmap/to_act)
-	var/dockable = istype(to_act, /obj/structure/overmap/level)
-	var/interactable =
-	if(istype(to_act))
-*/
+/**
+  * Acts on the specified option. Used for docking.
+  * * user - Mob that started the action
+  * * object - Overmap object to act on
+  */
+/obj/structure/overmap/ship/proc/overmap_object_act(mob/user, obj/structure/overmap/object)
+	if(istype(object, /obj/structure/overmap/dynamic))
+		var/obj/structure/overmap/dynamic/D = object
+		to_chat(user, "<span class='notice'>The \"PREPARING TO DOCK\" indicator begins flashing.")
+		var/return_value = D.load_level(shuttle)
+		return return_value || dock(D) //If a value is returned from load_level(), say that, otherwise, commence docking
+	else if(istype(object, /obj/structure/overmap/level))
+		return dock(object)
+	else if(istype(object, /obj/structure/overmap/event))
+		var/obj/structure/overmap/event/E = object
+		return E.ship_act(user, src)
 
 /**
   * Docks the shuttle by requesting a port at the requested spot.
@@ -100,12 +119,12 @@
 	var/dock_to_use
 	if(SSshuttle.getDock("[id]_[to_dock.id]"))
 		dock_to_use = SSshuttle.getDock("[id]_[to_dock.id]")
-	else if(SSshuttle.getDock("whiteship_[to_dock.id]")) //TODO: needs to be changed to `default_id`
-		dock_to_use = SSshuttle.getDock("whiteship_[to_dock.id]")
+	else if(SSshuttle.getDock("[DEFAULT_OVERMAP_DOCK_PREFIX]_[to_dock.id]"))
+		dock_to_use = SSshuttle.getDock("[DEFAULT_OVERMAP_DOCK_PREFIX]_[to_dock.id]")
 	else
 		return "Error finding valid docking port!"
 	if(!shuttle.check_dock(dock_to_use, TRUE))
-		return "Error with docking port. Try using a docking computer if one is available."
+		return "Error with docking port. Try using a docking computer if possible."
 	shuttle.request(dock_to_use)
 	docked = to_dock
 
@@ -135,7 +154,7 @@
   * If no dir variable is provided, it decelerates the vessel.
   * * n_dir - The direction to move in
   */
-/obj/structure/overmap/ship/proc/burn_engines(n_dir = null)
+/obj/structure/overmap/ship/proc/burn_engines(n_dir = null, percentage = 100)
 	if(state != SHIP_FLYING)
 		return
 
@@ -143,16 +162,12 @@
 	refresh_engines()
 	if(!mass)
 		calculate_mass()
-	for(var/obj/machinery/shuttle/engine/E in shuttle.engine_list)
+	for(var/obj/machinery/power/shuttle/engine/E in shuttle.engine_list)
 		if(!E.enabled)
 			continue
-		if(E.attached_heater)
-			var/obj/machinery/atmospherics/components/unary/shuttle/heater/resolved_heater = E.attached_heater.resolve()
-			resolved_heater.consumeFuel(E.fuel_use * E.thrust) //This proc returns how much was actually burned, so let's use that.
-		E.fireEngine()
-		thrust_used = thrust_used + E.thrust
+		thrust_used = E.burn_engine(percentage)
 	est_thrust = thrust_used //cheeky way of rechecking the thrust, check it every time it's used
-	thrust_used = (thrust_used / 20) / max(mass, 1) //do not know why this check is here, but I clearly ran into an issue here before
+	thrust_used = thrust_used / max(mass * 100, 100) //do not know why this minimum check is here, but I clearly ran into an issue here before
 	if(n_dir)
 		accelerate(n_dir, thrust_used)
 	else
@@ -163,8 +178,8 @@
   */
 /obj/structure/overmap/ship/proc/refresh_engines()
 	var/calculated_thrust
-	for(var/obj/machinery/shuttle/engine/E in shuttle.engine_list)
-		E.check_setup()
+	for(var/obj/machinery/power/shuttle/engine/E in shuttle.engine_list)
+		E.update_engine()
 		calculated_thrust += E.thrust
 	est_thrust = calculated_thrust
 
@@ -187,11 +202,16 @@
 		return TRUE
 	if(!docked_object && !docked) //The shuttle is in transit, and the ship is not docked to anything, move along
 		return TRUE
-	if(docked && !docked_object && (state != SHIP_DOCKING)) //The overmap object thinks it's docked to something, but it really isn't. Move to a random tile on the overmap
+	if(state == SHIP_DOCKING || state == SHIP_UNDOCKING)
+		return
+	if(docked && !docked_object) //The overmap object thinks it's docked to something, but it really isn't. Move to a random tile on the overmap
+		if(istype(docked, /obj/structure/overmap/dynamic))
+			var/obj/structure/overmap/dynamic/D = docked
+			D.unload_level()
 		forceMove(SSovermap.get_unused_overmap_square())
 		docked = null
 		return FALSE
-	if(!docked && docked_object && (state != SHIP_UNDOCKING)) //The overmap object thinks it's NOT docked to something, but it actually is. Move to the correct place.
+	if(!docked && docked_object) //The overmap object thinks it's NOT docked to something, but it actually is. Move to the correct place.
 		forceMove(docked_object)
 		docked = docked_object
 		return FALSE
@@ -200,7 +220,9 @@
 /* BEWARE ALL YE WHO PASS THIS LINE */
 // This code needs to be reworked before it gets merged. I'm serious.
 
-
+/**
+  * Returns whether or not the ship is moving in any direction.
+  */
 /obj/structure/overmap/ship/proc/is_still()
 	return !MOVING(speed[1]) && !MOVING(speed[2])
 
@@ -210,17 +232,22 @@
 /obj/structure/overmap/ship/proc/process_movement()
 	if(docked && integrity < initial(integrity))
 		integrity++
-	if((world.time >= dock_change_start_time)) //Handler for undocking and docking timer
+	if((state == SHIP_DOCKING || state == SHIP_UNDOCKING) && (world.time >= dock_change_start_time)) //Handler for undocking and docking timer
 		switch(state)
 			if(SHIP_DOCKING) //so that the shuttle is truly docked first
-				if(shuttle.mode == SHUTTLE_DOCKED)
+				if(shuttle.mode == SHUTTLE_DOCKED || shuttle.mode == SHUTTLE_IDLE)
 					Move(docked)
 					state = SHIP_IDLE
 			if(SHIP_UNDOCKING)
 				if(docked)
 					Move(get_turf(docked))
+					if(istype(docked, /obj/structure/overmap/dynamic))
+						var/obj/structure/overmap/dynamic/D = docked
+						D.unload_level()
 					docked = null
 					state = SHIP_FLYING
+	if(locked_dir)
+		burn_engines(locked_dir)
 	if(!is_still() && !docked)
 		var/list/deltas = list(0,0)
 		for(var/i=1, i<=2, i++)
@@ -232,9 +259,15 @@
 			Move(newloc)
 		update_icon()
 
+/**
+  * Returns the total speed in all directions.
+  */
 /obj/structure/overmap/ship/proc/get_speed()
 	return round(sqrt(speed[1] ** 2 + speed[2] ** 2), SHIP_MOVE_RESOLUTION) / 2
 
+/**
+  * Returns the direction the ship is moving in terms of dirs
+  */
 /obj/structure/overmap/ship/proc/get_heading()
 	var/direction = 0
 	if(MOVING(speed[1]))
@@ -249,6 +282,9 @@
 			direction |= SOUTH
 	return direction
 
+/**
+  * Returns the estimated time in seconds to the next tile at current speed
+  */
 /obj/structure/overmap/ship/proc/get_eta()
 	var/eta = INFINITY
 	for(var/i=1, i<=2, i++)
@@ -256,11 +292,21 @@
 			eta = min(last_movement[i] - world.time + 1/abs(speed[i]), eta)
 	return max(eta, 0)
 
+/**
+  * Change the speed in any direction.
+  * * n_x - Speed in the X direction to change
+  * * n_y - Speed in the Y direction to change
+  */
 /obj/structure/overmap/ship/proc/adjust_speed(n_x, n_y)
 	CHANGE_SPEED_BY(speed[1], n_x)
 	CHANGE_SPEED_BY(speed[2], n_y)
 	update_icon()
 
+/**
+  * Change the speed in a specified dir.
+  * * direction - dir to accelerate in (NORTH, SOUTH, SOUTHEAST, etc.)
+  * * acceleration - How much to accelerate by
+  */
 /obj/structure/overmap/ship/proc/accelerate(direction, acceleration)
 	if(direction & EAST)
 		adjust_speed(acceleration, 0)
@@ -271,6 +317,10 @@
 	if(direction & SOUTH)
 		adjust_speed(0, -acceleration)
 
+/**
+  * Reduce the speed or stop in all directions.
+  * * acceleration - How much to decelerate by
+  */
 /obj/structure/overmap/ship/proc/decelerate(acceleration)
 	if(((speed[1]) || (speed[2])))
 		if (speed[1])
@@ -283,6 +333,9 @@
 		handle_wraparound()
 	..()
 
+/**
+  * Check if the ship is flying into the border of the overmap.
+  */
 /obj/structure/overmap/ship/proc/handle_wraparound()
 	var/nx = x
 	var/ny = y
@@ -304,12 +357,14 @@
 	if(T)
 		forceMove(T)
 
-/obj/structure/overmap/ship/update_icon()
+/obj/structure/overmap/ship/update_icon_state()
 	if(!is_still())
 		icon_state = moving_state
 		dir = get_heading()
 	else
 		icon_state = initial(icon_state)
+	if(damaged_state && integrity < initial(integrity) / 4)
+		icon_state = "[icon_state]_[damaged_state]"
 
 /* YE OLDE LINE OF WARNING ENDS HERE */
 
@@ -320,6 +375,7 @@
 	name = "overmap shuttle"
 	icon_state = "shuttle"
 	moving_state = "shuttle_moving"
+	damaged_state = "damaged"
 
 /obj/structure/overmap/ship/shuttle/rendered
 	render_map = TRUE

@@ -846,7 +846,7 @@
 			if(!QDELETED(E))
 				engine_list += E
 				. += E.engine_power
-		for(var/obj/machinery/shuttle/engine/E in areaInstance.contents)
+		for(var/obj/machinery/power/shuttle/engine/E in areaInstance.contents)
 			if(!QDELETED(E))
 				engine_list += E
 				. += E.thruster_active ? 1 : 0

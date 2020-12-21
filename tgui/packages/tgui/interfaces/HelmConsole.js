@@ -1,6 +1,6 @@
 import { Fragment } from 'inferno';
 import { useBackend, useLocalState } from '../backend';
-import { Button, ByondUi, LabeledList, Knob, Input, Section, Grid, Box, ProgressBar, Slider, AnimatedNumber } from '../components';
+import { Button, ByondUi, LabeledList, Knob, Input, Section, Grid, Box, ProgressBar, Slider, AnimatedNumber, Tooltip } from '../components';
 import { refocusLayout, Window } from '../layouts';
 import { Table } from '../components/Table';
 
@@ -72,11 +72,9 @@ const SharedContent = (props, context) => {
               <AnimatedNumber value={shipInfo.sensor_range} />
             </ProgressBar>
           </LabeledList.Item>
-          {shipInfo.mass && (
-            <LabeledList.Item label="Mass">
-              <AnimatedNumber value={shipInfo.mass} />
-            </LabeledList.Item>
-          )}
+          <LabeledList.Item label="Mass">
+            {shipInfo.mass + 'tonnes'}
+          </LabeledList.Item>
         </LabeledList>
       </Section>
       <Section title="Radar">
@@ -181,41 +179,51 @@ const ShipContent = (props, context) => {
         )}>
         <Table>
           <Table.Row bold>
-            <Table.Cell>
+            <Table.Cell collapsing>
               Name
             </Table.Cell>
             <Table.Cell>
               Fuel
             </Table.Cell>
             {!isViewer && (
-              <Table.Cell>
+              <Table.Cell collapsing>
                 Toggle
               </Table.Cell>
             )}
           </Table.Row>
           {engineInfo.map(engine => (
-            <Table.Row key={engine.name}>
-              <Table.Cell>
-                {engine.name}
+            <Table.Row
+              key={engine.name}
+              className="candystripe">
+              <Table.Cell
+                collapsing>
+                <Box position="Relative">
+                  {engine.name.slice(0, 5) + '...'}
+                  <Tooltip
+                    position={"bottom"}
+                    content={engine.name} />
+                </Box>
               </Table.Cell>
               <Table.Cell>
-                {!!engine.fuel && (
+                {!!engine.maxFuel && (
                   <ProgressBar
+                    fluid
                     ranges={{
                       good: [engine.maxFuel / 2, Infinity],
                       average: [engine.maxFuel / 4, engine.maxFuel / 2],
                       bad: [-Infinity, engine.maxFuel / 4],
                     }}
                     maxValue={engine.maxFuel}
+                    minValue={0}
                     value={engine.fuel}>
                     <AnimatedNumber
-                      value={engine.fuel}
+                      value={engine.fuel / engine.maxFuel * 100}
                       format={value => Math.round(value)} />
-                    mol(s)
+                    %
                   </ProgressBar>
                 )}
               </Table.Cell>
-              <Table.Cell>
+              <Table.Cell collapsing>
                 {!isViewer && (
                   <Button
                     icon="circle"

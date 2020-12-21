@@ -8,7 +8,7 @@
 	name = "shuttle atmospherics device"
 	desc = "This does something to do with shuttle atmospherics"
 	icon_state = "heater"
-	icon = 'icons/turf/shuttle.dmi'
+	icon = 'waspstation/icons/obj/shuttle.dmi'
 
 /obj/machinery/atmospherics/components/unary/shuttle/heater
 	name = "engine heater"
@@ -16,7 +16,6 @@
 	icon_state = "heater_pipe"
 	var/icon_state_closed = "heater_pipe"
 	var/icon_state_open = "heater_pipe_open"
-	var/icon_state_off = "heater_pipe"
 	idle_power_usage = 50
 	circuit = /obj/item/circuitboard/machine/shuttle/heater
 
@@ -28,7 +27,6 @@
 
 	pipe_flags = PIPING_ONE_PER_TURF | PIPING_DEFAULT_LAYER_ONLY
 
-	var/gas_type = /datum/gas/plasma
 	var/efficiency_multiplier = 1
 	var/gas_capacity = 0
 	///Whether or not to draw from the attached internals tank
@@ -41,7 +39,7 @@
 	GLOB.custom_shuttle_machines += src
 	SetInitDirections()
 	update_adjacent_engines()
-	updateGasStats()
+	update_gas_stats()
 
 /obj/machinery/atmospherics/components/unary/shuttle/heater/Destroy()
 	. = ..()
@@ -82,45 +80,56 @@
 		eff += L.rating
 	gas_capacity = 5000 * ((cap - 1) ** 2) + 1000
 	efficiency_multiplier = round(((eff / 2) / 2.8) ** 2, 0.1)
-	updateGasStats()
+	update_gas_stats()
 
 /obj/machinery/atmospherics/components/unary/shuttle/heater/examine(mob/user)
 	. = ..()
 	. += "It looks like the fuel source can be toggled with an alt-click."
-	. += "The engine heater's gas dial reads [getGas()] moles of gas.<br>"
+	. += "The engine heater's gas dial reads [return_gas()] moles of gas.<br>"
 
-/obj/machinery/atmospherics/components/unary/shuttle/heater/proc/getGas()
+/obj/machinery/atmospherics/components/unary/shuttle/heater/proc/return_gas(datum/gas/gas_type)
 	var/datum/gas_mixture/air_contents = use_tank ? fuel_tank?.air_contents : airs[1]
 	if(!air_contents)
 		return
-	return air_contents.get_moles(gas_type)
+	if(gas_type)
+		return air_contents.get_moles(gas_type)
+	else
+		return air_contents.total_moles()
 
-/obj/machinery/atmospherics/components/unary/shuttle/heater/proc/getGasCapacity()
+/obj/machinery/atmospherics/components/unary/shuttle/heater/proc/return_gas_capacity()
 	var/datum/gas_mixture/air_contents = use_tank ? fuel_tank?.air_contents : airs[1]
 	if(!air_contents)
 		return
 	return air_contents.return_volume()
 
-/obj/machinery/atmospherics/components/unary/shuttle/heater/proc/updateGasStats()
+/obj/machinery/atmospherics/components/unary/shuttle/heater/proc/update_gas_stats()
 	var/datum/gas_mixture/air_contents = use_tank ? fuel_tank?.air_contents : airs[1]
 	if(!air_contents)
 		return
 	air_contents.set_volume(gas_capacity)
 	air_contents.set_temperature(T20C)
 
-/obj/machinery/atmospherics/components/unary/shuttle/heater/proc/hasFuel(required)
+/obj/machinery/atmospherics/components/unary/shuttle/heater/proc/has_fuel(required, datum/gas/gas_type)
 	var/datum/gas_mixture/air_contents = use_tank ? fuel_tank?.air_contents : airs[1]
 	if(!air_contents)
 		return
-	var/moles = air_contents?.total_moles()
-	return moles >= required
+	return air_contents.get_moles(gas_type) >= required
 
-/obj/machinery/atmospherics/components/unary/shuttle/heater/proc/consumeFuel(amount)
+/**
+  * Burns a specific amount of one type of gas. Returns how much was actually used.
+  * * amount - The amount of mols of fuel to burn.
+  * * gas_type - The gas type to burn.
+  */
+/obj/machinery/atmospherics/components/unary/shuttle/heater/proc/consume_fuel(amount, datum/gas/gas_type)
 	var/datum/gas_mixture/air_contents = use_tank ? fuel_tank?.air_contents : airs[1]
 	if(!air_contents)
 		return
-
-	return air_contents.remove(amount)
+	if(!gas_type)
+		return air_contents.remove(amount)
+	else
+		var/starting_amt = air_contents.get_moles(gas_type)
+		air_contents.adjust_moles(gas_type, -amount)
+		return min(starting_amt, amount)
 
 /obj/machinery/atmospherics/components/unary/shuttle/heater/attackby(obj/item/I, mob/living/user, params)
 	update_adjacent_engines()
@@ -140,8 +149,12 @@
 
 /obj/machinery/atmospherics/components/unary/shuttle/heater/AltClick(mob/living/L)
 	. = ..()
+	if(panel_open)
+		return
 	use_tank = !use_tank
 	to_chat(L, "<span class='notice'>You switch [src] to draw fuel from [use_tank ? "the attached tank" : "the atmospherics system"].")
+	icon_state_closed = use_tank ? "heater" : initial(icon_state)
+	icon_state_open = use_tank ? "heater_open" : "[initial(icon_state)]_open"
 
 /obj/machinery/atmospherics/components/unary/shuttle/heater/proc/update_adjacent_engines()
 	var/engine_turf
@@ -156,8 +169,8 @@
 			engine_turf = get_offset_target_turf(src, 1, 0)
 	if(!engine_turf)
 		return
-	for(var/obj/machinery/shuttle/engine/E in engine_turf)
-		E.check_setup()
+	for(var/obj/machinery/power/shuttle/engine/E in engine_turf)
+		E.update_icon_state()
 
 /obj/machinery/atmospherics/components/unary/shuttle/heater/tank/Initialize()
 	. = ..()

@@ -19,6 +19,13 @@
 	LAZYREMOVE(SSovermap.events, src)
 
 /**
+  * The action performed by a ship on this when the helm button is pressed.
+  * * acting - The ship acting on the event
+  */
+/obj/structure/overmap/event/proc/ship_act(mob/user, obj/structure/overmap/ship/acting)
+	return
+
+/**
   * The main proc for calling other procs. Called by SSovermap.
   */
 /obj/structure/overmap/event/proc/apply_effect()
@@ -31,12 +38,6 @@
   * The proc called on all ships that are currently being affected.
   */
 /obj/structure/overmap/event/proc/affect_ship(obj/structure/overmap/ship/S)
-	return
-
-/**
-  * The main proc for calling other procs. Called by SSovermap.
-  */
-/obj/structure/overmap/event/proc/ship_action(obj/structure/overmap/ship/S, mob/user)
 	return
 
 /obj/structure/overmap/event/Crossed(atom/movable/AM, oldloc)
@@ -65,11 +66,11 @@
 /obj/structure/overmap/event/meteor/affect_ship(obj/structure/overmap/ship/S)
 	var/area/source_area = pick(S.shuttle.shuttle_areas)
 	source_area.set_fire_alarm_effect()
+	S.recieve_damage(rand(min_damage, max_damage))
 	if(S.integrity <= 0)
 		var/source_object = pick(source_area.contents)
 		dyn_explosion(source_object, rand(min_damage, max_damage) / 2)
 	else
-		S.recieve_damage(rand(min_damage, max_damage))
 		for(var/MN in GLOB.player_list)
 			var/mob/M = MN
 			if(S.shuttle.is_in_shuttle_bounds(M))
@@ -133,11 +134,11 @@
 /obj/structure/overmap/event/electric/affect_ship(obj/structure/overmap/ship/S)
 	var/area/source_area = pick(S.shuttle.shuttle_areas)
 	source_area.set_fire_alarm_effect()
+	S.recieve_damage(rand(min_damage, max_damage))
 	if(S.integrity <= 0)
 		var/source_object = pick(source_area.contents)
 		tesla_zap(source_object, rand(min_damage, max_damage) / 2)
 	else
-		S.recieve_damage(rand(min_damage, max_damage))
 		for(var/MN in GLOB.player_list)
 			var/mob/M = MN
 			if(S.shuttle.is_in_shuttle_bounds(M))
@@ -174,6 +175,7 @@
 
 /obj/structure/overmap/event/wormhole/Initialize(mapload, _id, _other_wormhole)
 	. = ..()
+	stability = rand(2, 5)
 	if(_other_wormhole)
 		other_wormhole = _other_wormhole
 	if(!other_wormhole)
@@ -186,4 +188,4 @@
 		QDEL_NULL(other_wormhole)
 		return qdel(src)
 	other_wormhole.stability = stability
-	S.Move(get_step(other_wormhole, S.dir))
+	S.forceMove(get_step(other_wormhole, S.dir))

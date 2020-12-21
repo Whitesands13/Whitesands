@@ -104,14 +104,13 @@
 		est_thrust = S.est_thrust
 	)
 	.["engineInfo"] = list()
-	for(var/obj/machinery/shuttle/engine/E in S.shuttle.engine_list)
-		var/obj/machinery/atmospherics/components/unary/shuttle/heater/H = E.attached_heater.resolve()
+	for(var/obj/machinery/power/shuttle/engine/E in S.shuttle.engine_list)
 		if(!E.thruster_active)
 			continue
 		var/list/engine_data = list(
 			name = E.name,
-			fuel = H ? H.getGas() : FALSE,
-			maxFuel = H ? H.getGasCapacity() : FALSE,
+			fuel = E.return_fuel(),
+			maxFuel = E.return_fuel_cap(),
 			enabled = E.enabled,
 			ref = REF(E)
 		)
@@ -135,7 +134,7 @@
 	switch(action)
 		if("act_overmap")
 			var/obj/structure/overmap/to_act = locate(params["ship_to_act"])
-			say(S.dock(to_act))
+			say(S.overmap_object_act(usr, to_act))
 		if("undock")
 			say(S.undock())
 		if("reload_ship")
@@ -143,7 +142,7 @@
 		if("reload_engines")
 			S.refresh_engines()
 		if("toggle_engine")
-			var/obj/machinery/shuttle/engine/E = locate(params["engine"])
+			var/obj/machinery/power/shuttle/engine/E = locate(params["engine"])
 			E.enabled = !E.enabled
 		if("change_heading")
 			S.burn_engines(text2num(params["dir"]))

@@ -1,3 +1,12 @@
+//DYNAMIC OVERMAP
+/area/space
+
+/area/ruin/unpowered/planetoid
+	name = "Unknown Planetoid"
+	icon_state = "away"
+	unique = FALSE
+	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
+
 //MACSPACE
 /area/ruin/space/has_grav/powered/macspace
 	name = "Mac Space Restaurant"
