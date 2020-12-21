@@ -19,10 +19,7 @@
 	replaced_by = null
 	steps = list(
 		/datum/surgery_step/mechanic_open,
-		/datum/surgery_step/prepare_electronics,
-		/datum/surgery_step/mechanic_unwrench,
 		/datum/surgery_step/heal/mechanic,
-		/datum/surgery_step/mechanic_wrench,
 		/datum/surgery_step/mechanic_close
 	)
 	lying_required = FALSE
@@ -30,17 +27,19 @@
 
 /datum/surgery_step/heal/mechanic
 	name = "repair components"
-	implements = list(TOOL_WELDER = 100, TOOL_CAUTERY = 60, TOOL_WIRECUTTER = 100, TOOL_HEMOSTAT = 60)
+	implements = list(TOOL_WELDER = 100, TOOL_CAUTERY = 60, /obj/item/melee/transforming/energy = 40, /obj/item/gun/energy/laser = 20, TOOL_WIRECUTTER = 100, TOOL_HEMOSTAT = 60, TOOL_RETRACTOR = 60)
 	time = 20
 	missinghpbonus = 10
 
 /datum/surgery_step/heal/mechanic/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/repairtype
-	if(tool.tool_behaviour == TOOL_WELDER || tool.tool_behaviour == TOOL_CAUTERY)
+	if(tool.tool_behaviour == TOOL_WELDER || tool.tool_behaviour == TOOL_CAUTERY || istype(tool, /obj/item/melee/transforming/energy) || istype(tool, /obj/item/gun/energy/laser))
 		brutehealing = 5
+		burnhealing = 0
 		repairtype = "dents"
-	if(tool.tool_behaviour == TOOL_WIRECUTTER || tool.tool_behaviour == TOOL_HEMOSTAT)
+	if(tool.tool_behaviour == TOOL_WIRECUTTER || tool.tool_behaviour == TOOL_HEMOSTAT || tool.tool_behaviour == TOOL_RETRACTOR)
 		burnhealing = 5
+		brutehealing = 0
 		repairtype = "wiring"
 	if(istype(surgery,/datum/surgery/healing))
 		var/datum/surgery/healing/the_surgery = surgery
@@ -54,9 +53,6 @@
 	var/tmsg = "[user] fixes some of [target]'s damages" //see above
 	var/urhealedamt_brute = brutehealing
 	var/urhealedamt_burn = burnhealing
-	//Reset heal checks
-	burnhealing = 0
-	brutehealing = 0
 	if(missinghpbonus)
 		urhealedamt_brute += round((target.getBruteLoss()/ missinghpbonus),0.1)
 		urhealedamt_burn += round((target.getFireLoss()/ missinghpbonus),0.1)
@@ -73,9 +69,9 @@
 	if(istype(surgery, /datum/surgery/healing))
 		var/datum/surgery/healing/the_surgery = surgery
 		the_surgery.antispam = TRUE
-	return ..()
+	return TRUE
 
-/datum/surgery_step/heal/mechanic/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+/datum/surgery_step/heal/mechanic/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, fail_prob)
 	display_results(user, target, "<span class='warning'>You screwed up!</span>",
 		"<span class='warning'>[user] screws up!</span>",
 		"<span class='notice'>[user] fixes some of [target]'s damages.</span>", TRUE)
@@ -87,6 +83,10 @@
 	if(missinghpbonus)
 		urdamageamt_brute += round((target.getBruteLoss()/ (missinghpbonus*2)),0.1)
 		urdamageamt_burn += round((target.getFireLoss()/ (missinghpbonus*2)),0.1)
-
+	if((fail_prob > 50) && (tool.tool_behaviour == TOOL_WIRECUTTER || tool.tool_behaviour == TOOL_HEMOSTAT || tool.tool_behaviour == TOOL_RETRACTOR))
+		do_sparks(3, TRUE, target)
+		if(isliving(user))
+			var/mob/living/L = user
+			L.electrocute_act(urdamageamt_burn, target)
 	target.take_bodypart_damage(urdamageamt_brute, urdamageamt_burn)
 	return FALSE
