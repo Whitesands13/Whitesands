@@ -97,6 +97,10 @@
 /area/shuttle/labor)
 "p" = (
 /obj/structure/closet/crate,
+/obj/machinery/power/terminal,
+/obj/structure/cable{
+	icon_state = "0-4"
+	},
 /turf/open/floor/mineral/titanium,
 /area/shuttle/labor)
 "q" = (
@@ -113,19 +117,69 @@
 	port_direction = 4;
 	width = 9
 	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plating,
 /area/shuttle/labor)
 "r" = (
-/obj/structure/shuttle/engine/heater,
-/obj/structure/window/reinforced{
+/obj/machinery/power/smes/shuttle/precharged{
+	dir = 1
+	},
+/obj/structure/window/reinforced,
+/obj/machinery/door/window/brigdoor{
 	dir = 1;
-	layer = 2.9
+	name = "Engine Access";
+	req_access_txt = "2"
+	},
+/obj/structure/cable{
+	icon_state = "0-2"
 	},
 /turf/open/floor/plating/airless,
 /area/shuttle/labor)
 "s" = (
-/obj/structure/shuttle/engine/propulsion,
+/obj/machinery/power/shuttle/engine/electric{
+	dir = 1
+	},
+/obj/structure/cable,
 /turf/open/floor/plating/airless,
+/area/shuttle/labor)
+"C" = (
+/turf/template_noop,
+/area/template_noop)
+"M" = (
+/obj/machinery/power/smes/shuttle/precharged{
+	dir = 1
+	},
+/obj/structure/window/reinforced,
+/obj/machinery/door/window/brigdoor/northright{
+	name = "Engine Access";
+	req_access_txt = "2"
+	},
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/turf/open/floor/plating/airless,
+/area/shuttle/labor)
+"O" = (
+/obj/effect/spawner/structure/window/shuttle,
+/turf/open/floor/plating/airless,
+/area/shuttle/labor)
+"U" = (
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/labor)
+"X" = (
+/obj/machinery/power/terminal,
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj/structure/cable{
+	icon_state = "0-4"
+	},
+/turf/open/floor/mineral/titanium,
 /area/shuttle/labor)
 
 (1,1,1) = {"
@@ -157,9 +211,9 @@ g
 a
 m
 l
-l
-r
-s
+U
+O
+C
 "}
 (4,1,1) = {"
 b
@@ -168,8 +222,8 @@ h
 k
 n
 o
-l
-r
+X
+M
 s
 "}
 (5,1,1) = {"

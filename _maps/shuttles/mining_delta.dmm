@@ -101,12 +101,18 @@
 /obj/machinery/door/firedoor/border_only{
 	dir = 8
 	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plasteel/white,
 /area/shuttle/mining)
 "j" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
 	},
 /turf/open/floor/plasteel,
 /area/shuttle/mining)
@@ -120,6 +126,9 @@
 	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "2-8"
 	},
 /turf/open/floor/plasteel,
 /area/shuttle/mining)
@@ -165,12 +174,12 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/turf_decal/stripes/line{
-	dir = 2
-	},
+/obj/effect/turf_decal/stripes/line,
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
+/obj/machinery/power/terminal,
+/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/shuttle/mining)
 "p" = (
@@ -270,17 +279,22 @@
 /turf/open/floor/plasteel,
 /area/shuttle/mining)
 "r" = (
-/obj/structure/shuttle/engine/heater,
 /obj/structure/window/reinforced{
 	dir = 4
-	},
-/obj/structure/window/reinforced{
-	dir = 1
 	},
 /obj/structure/window/reinforced{
 	dir = 8
 	},
 /obj/effect/turf_decal/stripes/line,
+/obj/machinery/power/smes/shuttle/precharged{
+	dir = 1
+	},
+/obj/machinery/door/window/northleft{
+	name = "Engine Access"
+	},
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
 /turf/open/floor/plating/airless,
 /area/shuttle/mining)
 "s" = (
@@ -293,12 +307,15 @@
 /turf/open/floor/plasteel,
 /area/shuttle/mining)
 "t" = (
-/obj/structure/shuttle/engine/propulsion/burst,
 /obj/structure/window/reinforced{
 	dir = 1;
 	layer = 2.9
 	},
 /obj/effect/turf_decal/stripes/line,
+/obj/machinery/power/shuttle/engine/electric{
+	dir = 1
+	},
+/obj/structure/cable,
 /turf/open/floor/plating/airless,
 /area/shuttle/mining)
 "E" = (

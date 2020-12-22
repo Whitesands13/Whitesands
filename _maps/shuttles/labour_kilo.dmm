@@ -196,6 +196,10 @@
 /obj/structure/closet/crate,
 /obj/effect/turf_decal/delivery,
 /obj/effect/turf_decal/stripes/line,
+/obj/machinery/power/terminal,
+/obj/structure/cable{
+	icon_state = "0-4"
+	},
 /turf/open/floor/mineral/titanium/yellow,
 /area/shuttle/labor)
 "s" = (
@@ -207,6 +211,9 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/stripes/line,
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
 /turf/open/floor/mineral/titanium/yellow,
 /area/shuttle/labor)
 "t" = (
@@ -215,6 +222,13 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/stripes/line,
+/obj/machinery/power/terminal,
+/obj/structure/cable{
+	icon_state = "0-4"
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
 /turf/open/floor/mineral/titanium/yellow,
 /area/shuttle/labor)
 "u" = (
@@ -237,22 +251,55 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/labor)
 "v" = (
 /turf/closed/wall/mineral/titanium/nodiagonal,
 /area/shuttle/labor)
 "w" = (
-/obj/effect/spawner/structure/window/shuttle,
-/obj/structure/shuttle/engine/heater,
+/obj/machinery/power/smes/shuttle/precharged{
+	dir = 1
+	},
+/obj/structure/window/reinforced,
+/obj/machinery/door/window/brigdoor{
+	dir = 1;
+	name = "Engine Access";
+	req_access_txt = "2"
+	},
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
 /turf/open/floor/plating,
 /area/shuttle/labor)
 "x" = (
 /turf/closed/wall/mineral/plastitanium,
 /area/shuttle/labor)
 "y" = (
-/obj/structure/shuttle/engine/propulsion,
+/obj/machinery/power/shuttle/engine/electric{
+	dir = 1
+	},
+/obj/structure/cable,
 /turf/open/floor/plating/airless,
+/area/shuttle/labor)
+"V" = (
+/turf/template_noop,
+/area/template_noop)
+"Z" = (
+/obj/machinery/power/smes/shuttle/precharged{
+	dir = 1
+	},
+/obj/structure/window/reinforced,
+/obj/machinery/door/window/brigdoor/northright{
+	name = "Engine Access";
+	req_access_txt = "2"
+	},
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/turf/open/floor/plating,
 /area/shuttle/labor)
 
 (1,1,1) = {"
@@ -285,8 +332,8 @@ a
 m
 p
 s
-w
-y
+b
+V
 "}
 (4,1,1) = {"
 b
@@ -296,7 +343,7 @@ k
 n
 q
 t
-w
+Z
 y
 "}
 (5,1,1) = {"

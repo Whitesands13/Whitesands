@@ -109,13 +109,16 @@
 	icon_state_off = "burst_off"
 	icon_state_closed = "burst"
 	icon_state_open = "burst_open"
-	thrust = 5
+	thrust = 15
 	///Amount, in kilojoules, needed for a full burn.
-	var/power_per_burn = 20000
+	var/power_per_burn = 200000
 
 /obj/machinery/power/smes/shuttle
 	name = "electric engine precharger"
 	icon = 'waspstation/icons/obj/shuttle.dmi'
+	input_level = 0
+	input_level_max = 50000
+	output_level = 200000
 
 /obj/machinery/power/smes/shuttle/precharged
 	charge = 1e6
@@ -134,12 +137,12 @@
 
 /obj/machinery/power/shuttle/engine/electric/burn_engine(percentage = 100)
 	. = ..()
-	var/true_percentage = min(surplus() / power_per_burn, percentage / 100)
-	add_load(power_per_burn * true_percentage)
+	var/true_percentage = min(newavail() / power_per_burn, percentage / 100)
+	add_delayedload(power_per_burn * true_percentage)
 	return thrust * true_percentage
 
 /obj/machinery/power/shuttle/engine/electric/return_fuel()
-	return surplus()
+	return newavail()
 
 /obj/machinery/power/shuttle/engine/electric/return_fuel_cap()
 	return power_per_burn
