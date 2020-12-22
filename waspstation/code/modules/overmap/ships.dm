@@ -1,12 +1,5 @@
 #define SHIP_MOVE_RESOLUTION 0.00001
 #define MOVING(speed) abs(speed) >= min_speed
-#define SANITIZE_SPEED(speed) SIGN(speed) * clamp(abs(speed), 0, max_speed)
-#define CHANGE_SPEED_BY(speed_var, v_diff) \
-	v_diff = SANITIZE_SPEED(v_diff);\
-	if(!MOVING(speed_var + v_diff)) \
-		{speed_var = 0};\
-	else \
-		{speed_var = SANITIZE_SPEED((speed_var + v_diff)/(1 + speed_var*v_diff/(max_speed ** 2)))}
 
 #define SHIP_IDLE		"idle"
 #define SHIP_FLYING		"flying"
@@ -24,34 +17,36 @@
 	desc = "A spacefaring vessel."
 	icon = 'waspstation/icons/effects/overmap.dmi'
 	icon_state = "ship"
+	///Suffix of the icon_state that's shown when the vessel is damaged. Omit to disable damaged states.
+	var/damaged_state
+	///icon_state that's shown when the vessel is moving
+	var/moving_state = "ship_moving"
+
 	///The overmap object the ship is docked to, if any
 	var/obj/structure/overmap/docked
 	///The docking port of the linked shuttle
 	var/obj/docking_port/mobile/shuttle
-	///State of the shuttle: idle, flying, docking, or undocking
-	var/state = SHIP_IDLE
+
 	///The time the shuttle started launching
 	var/dock_change_start_time
-	///Vessel approximate mass
-	var/mass
+	///State of the shuttle: idle, flying, docking, or undocking
+	var/state = SHIP_IDLE
+
 	///Vessel estimated thrust
 	var/est_thrust
-	///The current speed in x/y direction (in grid squares per... second?)
-	var/speed = list(0,0)
+	///Vessel approximate mass
+	var/mass
+	///Timer ID of the looping movement timer
+	var/movement_callback_id
 	///Max possible speed (PLACEHOLDER)
 	var/max_speed = 1/(1 SECONDS)
 	///Minimum speed. Any lower is rounded down.
 	var/min_speed = 1/(2 MINUTES)
-	///The last time the vessel moved
-	var/last_movement = list(0,0)
-	///icon_state that's shown when the vessel is moving
-	var/moving_state = "ship_moving"
-	///Suffix of the icon_state that's shown when the vessel is damaged. Omit to disable damaged states.
-	var/damaged_state
+	///The current speed in x/y direction in grid squares per minute
+	var/speed = list(0,0)
+
 	///List of weapons/utility modules (currently unused)
 	var/list/modules
-	///Direction the thrusters will repeatedly thrust in
-	var/locked_dir
 
 /obj/structure/overmap/ship/Initialize(mapload, _id, _shuttle = null)
 	. = ..()
@@ -91,6 +86,8 @@
 /obj/structure/overmap/ship/Destroy()
 	. = ..()
 	LAZYREMOVE(SSovermap.ships, src)
+	if(movement_callback_id)
+		deltimer(movement_callback_id)
 
 /**
   * Acts on the specified option. Used for docking.
@@ -100,7 +97,7 @@
 /obj/structure/overmap/ship/proc/overmap_object_act(mob/user, obj/structure/overmap/object)
 	if(istype(object, /obj/structure/overmap/dynamic))
 		var/obj/structure/overmap/dynamic/D = object
-		to_chat(user, "<span class='notice'>The \"PREPARING TO DOCK\" indicator begins flashing.")
+		to_chat(user, "<span class='notice'>\"PREPARING TO DOCK, PLEASE WAIT\" flashes on the screen.")
 		var/return_value = D.load_level(shuttle)
 		return return_value || dock(D) //If a value is returned from load_level(), say that, otherwise, commence docking
 	else if(istype(object, /obj/structure/overmap/level))
@@ -128,7 +125,7 @@
 	shuttle.request(dock_to_use)
 	docked = to_dock
 
-	dock_change_start_time = world.time + shuttle.ignitionTime
+	addtimer(CALLBACK(src, .proc/complete_dock), shuttle.ignitionTime)
 	state = SHIP_DOCKING
 	return "Commencing docking..."
 
@@ -145,7 +142,7 @@
 	shuttle.destination = null
 	shuttle.mode = SHUTTLE_IGNITING
 	shuttle.setTimer(shuttle.ignitionTime)
-	dock_change_start_time = world.time + shuttle.ignitionTime
+	addtimer(CALLBACK(src, .proc/complete_dock), shuttle.ignitionTime)
 	state = SHIP_UNDOCKING
 	return "Beginning undocking procedures..."
 
@@ -216,9 +213,41 @@
 		docked = docked_object
 		return FALSE
 
+/**
+  * Change the speed in any direction.
+  * * n_x - Speed in the X direction to change
+  * * n_y - Speed in the Y direction to change
+  */
+/obj/structure/overmap/ship/proc/adjust_speed(n_x, n_y)
+	var/offset = 1
+	if(movement_callback_id)
+		var/previous_time = round(1 / MAGNITUDE(speed[1], speed[2]), SHIP_MOVE_RESOLUTION)
+		offset = timeleft(movement_callback_id) / previous_time
+		deltimer(movement_callback_id)
+		movement_callback_id = null //just in case
 
-/* BEWARE ALL YE WHO PASS THIS LINE */
-// This code needs to be reworked before it gets merged. I'm serious.
+	speed[1] += n_x
+	speed[2] += n_y
+
+	if(is_still())
+		return
+
+	var/timer = round(1 / MAGNITUDE(speed[1], speed[2]) * offset, SHIP_MOVE_RESOLUTION)
+	movement_callback_id = addtimer(CALLBACK(src, .proc/tick_move), timer, TIMER_STOPPABLE)
+	update_icon_state()
+
+/obj/structure/overmap/ship/proc/tick_move()
+	if(docked || is_still())
+		deltimer(movement_callback_id)
+		movement_callback_id = null
+		return
+	var/turf/newloc = locate(x + SIGN(speed[1]), y + SIGN(speed[2]), z)
+	Move(newloc)
+
+	//Queue another movement
+	var/timer = 1 / round(MAGNITUDE(speed[1], speed[2]), SHIP_MOVE_RESOLUTION)
+	movement_callback_id = addtimer(CALLBACK(src, .proc/tick_move), timer, TIMER_STOPPABLE)
+	update_screen()
 
 /**
   * Returns whether or not the ship is moving in any direction.
@@ -226,44 +255,35 @@
 /obj/structure/overmap/ship/proc/is_still()
 	return !MOVING(speed[1]) && !MOVING(speed[2])
 
+/obj/structure/overmap/ship/proc/complete_dock()
+	switch(state)
+		if(SHIP_DOCKING) //so that the shuttle is truly docked first
+			if(shuttle.mode == SHUTTLE_DOCKED || shuttle.mode == SHUTTLE_IDLE)
+				Move(docked)
+				state = SHIP_IDLE
+		if(SHIP_UNDOCKING)
+			if(docked)
+				Move(get_turf(docked))
+				if(istype(docked, /obj/structure/overmap/dynamic))
+					var/obj/structure/overmap/dynamic/D = docked
+					D.unload_level()
+				docked = null
+				state = SHIP_FLYING
+
 /**
-  * Handles all movement, called by the SSovermap subsystem
+  * Handles all movement, called by the SSovermap subsystem, TODO: refactor pls
   */
-/obj/structure/overmap/ship/proc/process_movement()
+/obj/structure/overmap/ship/proc/process_misc()
 	if(docked && integrity < initial(integrity))
 		integrity++
-	if((state == SHIP_DOCKING || state == SHIP_UNDOCKING) && (world.time >= dock_change_start_time)) //Handler for undocking and docking timer
-		switch(state)
-			if(SHIP_DOCKING) //so that the shuttle is truly docked first
-				if(shuttle.mode == SHUTTLE_DOCKED || shuttle.mode == SHUTTLE_IDLE)
-					Move(docked)
-					state = SHIP_IDLE
-			if(SHIP_UNDOCKING)
-				if(docked)
-					Move(get_turf(docked))
-					if(istype(docked, /obj/structure/overmap/dynamic))
-						var/obj/structure/overmap/dynamic/D = docked
-						D.unload_level()
-					docked = null
-					state = SHIP_FLYING
-	if(locked_dir)
-		burn_engines(locked_dir)
-	if(!is_still() && !docked)
-		var/list/deltas = list(0,0)
-		for(var/i=1, i<=2, i++)
-			if(MOVING(speed[i]) && world.time > last_movement[i] + 1/abs(speed[i]))
-				deltas[i] = SIGN(speed[i])
-				last_movement[i] = world.time
-		var/turf/newloc = locate(x + deltas[1], y + deltas[2], z)
-		if(newloc)
-			Move(newloc)
-		update_icon()
 
 /**
   * Returns the total speed in all directions.
   */
 /obj/structure/overmap/ship/proc/get_speed()
-	return round(sqrt(speed[1] ** 2 + speed[2] ** 2), SHIP_MOVE_RESOLUTION) / 2
+	if(is_still())
+		return 0
+	return 60 SECONDS / round(1 / MAGNITUDE(speed[1], speed[2]), SHIP_MOVE_RESOLUTION) //It's per minute, which is 60 seconds
 
 /**
   * Returns the direction the ship is moving in terms of dirs
@@ -283,24 +303,10 @@
 	return direction
 
 /**
-  * Returns the estimated time in seconds to the next tile at current speed
+  * Returns the estimated time in deciseconds to the next tile at current speed
   */
 /obj/structure/overmap/ship/proc/get_eta()
-	var/eta = INFINITY
-	for(var/i=1, i<=2, i++)
-		if(MOVING(speed[i]))
-			eta = min(last_movement[i] - world.time + 1/abs(speed[i]), eta)
-	return max(eta, 0)
-
-/**
-  * Change the speed in any direction.
-  * * n_x - Speed in the X direction to change
-  * * n_y - Speed in the Y direction to change
-  */
-/obj/structure/overmap/ship/proc/adjust_speed(n_x, n_y)
-	CHANGE_SPEED_BY(speed[1], n_x)
-	CHANGE_SPEED_BY(speed[2], n_y)
-	update_icon()
+	return timeleft(movement_callback_id)
 
 /**
   * Change the speed in a specified dir.
@@ -366,8 +372,6 @@
 	if(damaged_state && integrity < initial(integrity) / 4)
 		icon_state = "[icon_state]_[damaged_state]"
 
-/* YE OLDE LINE OF WARNING ENDS HERE */
-
 /obj/structure/overmap/ship/rendered
 	render_map = TRUE
 
@@ -386,5 +390,3 @@
 #undef SHIP_UNDOCKING
 
 #undef MOVING
-#undef SANITIZE_SPEED
-#undef CHANGE_SPEED_BY

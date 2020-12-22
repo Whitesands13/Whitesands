@@ -11,7 +11,7 @@
 	var/wipe_reservation_on_release = TRUE
 	var/turf_type = /turf/open/space
 	var/border_turf_type
-	var/area_type
+	var/area/area_type
 
 /datum/turf_reservation/transit
 	turf_type = /turf/open/space/transit

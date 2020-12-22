@@ -95,8 +95,8 @@
 	.["state"] = S.state
 	.["docked"] = S.docked ? TRUE : FALSE
 	.["heading"] = dir2angle(S.get_heading())
-	.["speed"] = S.get_speed() * 1000
-	.["maxspeed"] = S.max_speed * 1000
+	.["speed"] = S.get_speed() / 10
+	.["maxSpeed"] = S.max_speed
 	.["eta"] = S.get_eta()
 	.["stopped"] = S.is_still()
 	.["shipInfo"] += list(

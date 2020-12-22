@@ -132,7 +132,7 @@ const SharedContent = (props, context) => {
 // Content included on helms when they're controlling ships
 const ShipContent = (props, context) => {
   const { act, data } = useBackend(context);
-  const { isViewer, engineInfo, shipInfo, speed, heading, eta, x, y } = data;
+  const { isViewer, engineInfo, shipInfo, speed, maxSpeed, heading, eta, x, y } = data;
   return (
     <Fragment>
       <Section title="Velocity">
@@ -161,7 +161,7 @@ const ShipContent = (props, context) => {
           </LabeledList.Item>
           <LabeledList.Item label="Next">
             <AnimatedNumber
-              value={eta > 1000 ? "N/A" : eta / 10}
+              value={eta > 1000 ? "N/A" : eta / 10} //it's in deciseconds
               format={value => Math.round(value)} />
             s
           </LabeledList.Item>

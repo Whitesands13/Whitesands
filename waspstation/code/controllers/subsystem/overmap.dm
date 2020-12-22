@@ -61,7 +61,7 @@ SUBSYSTEM_DEF(overmap)
 	if(ship_movement_enabled)
 		for(var/ship in ships)
 			var/obj/structure/overmap/ship/S = ship
-			S.process_movement()
+			S.process_misc()
 
 	if(events_enabled)
 		for(var/event in events)
