@@ -175,7 +175,7 @@
 
 /obj/structure/overmap/event/wormhole/Initialize(mapload, _id, _other_wormhole)
 	. = ..()
-	stability = rand(2, 5)
+	stability = rand(1, 5)
 	if(_other_wormhole)
 		other_wormhole = _other_wormhole
 	if(!other_wormhole)
@@ -186,6 +186,13 @@
 		S.recieve_damage(rand(20, 30))
 		S.Move(SSovermap.get_unused_overmap_square())
 		QDEL_NULL(other_wormhole)
+		for(var/MN in GLOB.player_list)
+			var/mob/M = MN
+			if(S.shuttle.is_in_shuttle_bounds(M))
+				var/strength = abs(S.integrity - initial(S.integrity))
+				M.playsound_local(S.shuttle, 'sound/effects/explosionfar.ogg', strength)
+				shake_camera(M, 10, strength / 10)
+
 		return qdel(src)
 	other_wormhole.stability = stability
 	S.forceMove(get_step(other_wormhole, S.dir))

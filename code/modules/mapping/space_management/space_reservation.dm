@@ -70,10 +70,10 @@
 			T.ChangeTurf(turf_type, turf_type)
 		else
 			T.ChangeTurf(turf_type, turf_type)
-			if(area_type)
-				var/area/old_area = get_area(T)
-				area_type.contents += T
-				T.change_area(old_area, area_type)
+		if(area_type)
+			var/area/old_area = get_area(T)
+			area_type.contents += T
+			T.change_area(old_area, area_type)
 	src.width = width
 	src.height = height
 	return TRUE

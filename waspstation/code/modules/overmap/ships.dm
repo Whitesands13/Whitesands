@@ -38,10 +38,10 @@
 	var/mass
 	///Timer ID of the looping movement timer
 	var/movement_callback_id
-	///Max possible speed (PLACEHOLDER)
-	var/max_speed = 1/(1 SECONDS)
-	///Minimum speed. Any lower is rounded down.
-	var/min_speed = 1/(2 MINUTES)
+	///Max possible speed (1 tile per second)
+	var/static/max_speed = 1/(1 SECONDS)
+	///Minimum speed. Any lower is rounded down. (0.5 tiles per minute)
+	var/static/min_speed = 1/(2 MINUTES)
 	///The current speed in x/y direction in grid squares per minute
 	var/speed = list(0,0)
 
@@ -97,9 +97,9 @@
 /obj/structure/overmap/ship/proc/overmap_object_act(mob/user, obj/structure/overmap/object)
 	if(istype(object, /obj/structure/overmap/dynamic))
 		var/obj/structure/overmap/dynamic/D = object
-		to_chat(user, "<span class='notice'>\"PREPARING TO DOCK, PLEASE WAIT\" flashes on the screen.")
-		var/return_value = D.load_level(shuttle)
-		return return_value || dock(D) //If a value is returned from load_level(), say that, otherwise, commence docking
+		state = SHIP_DOCKING
+		. = D.load_level(shuttle)
+		return . || dock(D) //If a value is returned from load_level(), say that, otherwise, commence docking
 	else if(istype(object, /obj/structure/overmap/level))
 		return dock(object)
 	else if(istype(object, /obj/structure/overmap/event))
@@ -125,7 +125,7 @@
 	shuttle.request(dock_to_use)
 	docked = to_dock
 
-	addtimer(CALLBACK(src, .proc/complete_dock), shuttle.ignitionTime)
+	addtimer(CALLBACK(src, .proc/complete_dock), shuttle.ignitionTime + 1 SECONDS) //A little bit of time to account for lag
 	state = SHIP_DOCKING
 	return "Commencing docking..."
 
@@ -142,7 +142,7 @@
 	shuttle.destination = null
 	shuttle.mode = SHUTTLE_IGNITING
 	shuttle.setTimer(shuttle.ignitionTime)
-	addtimer(CALLBACK(src, .proc/complete_dock), shuttle.ignitionTime)
+	addtimer(CALLBACK(src, .proc/complete_dock), shuttle.ignitionTime + 1 SECONDS) //See above
 	state = SHIP_UNDOCKING
 	return "Beginning undocking procedures..."
 
@@ -164,7 +164,7 @@
 			continue
 		thrust_used = E.burn_engine(percentage)
 	est_thrust = thrust_used //cheeky way of rechecking the thrust, check it every time it's used
-	thrust_used = thrust_used / max(mass * 100, 100) //do not know why this minimum check is here, but I clearly ran into an issue here before
+	thrust_used = thrust_used / max(mass * 100, 1) //do not know why this minimum check is here, but I clearly ran into an issue here before
 	if(n_dir)
 		accelerate(n_dir, thrust_used)
 	else
@@ -204,13 +204,17 @@
 	if(docked && !docked_object) //The overmap object thinks it's docked to something, but it really isn't. Move to a random tile on the overmap
 		if(istype(docked, /obj/structure/overmap/dynamic))
 			var/obj/structure/overmap/dynamic/D = docked
+			if(shuttle.is_in_shuttle_bounds(D.reserve_dock))
+				return TRUE
 			D.unload_level()
 		forceMove(SSovermap.get_unused_overmap_square())
 		docked = null
+		update_screen()
 		return FALSE
 	if(!docked && docked_object) //The overmap object thinks it's NOT docked to something, but it actually is. Move to the correct place.
 		forceMove(docked_object)
 		docked = docked_object
+		update_screen()
 		return FALSE
 
 /**
@@ -236,6 +240,9 @@
 	movement_callback_id = addtimer(CALLBACK(src, .proc/tick_move), timer, TIMER_STOPPABLE)
 	update_icon_state()
 
+/**
+  * Called by /proc/adjust_speed(), this continually moves the ship according to it's speed
+  */
 /obj/structure/overmap/ship/proc/tick_move()
 	if(docked || is_still())
 		deltimer(movement_callback_id)
@@ -255,20 +262,24 @@
 /obj/structure/overmap/ship/proc/is_still()
 	return !MOVING(speed[1]) && !MOVING(speed[2])
 
+/**
+  * Called after the shuttle docks, and finishes the transfer to the new location.
+  */
 /obj/structure/overmap/ship/proc/complete_dock()
 	switch(state)
 		if(SHIP_DOCKING) //so that the shuttle is truly docked first
-			if(shuttle.mode == SHUTTLE_DOCKED || shuttle.mode == SHUTTLE_IDLE)
-				Move(docked)
+			if(shuttle.mode == SHUTTLE_CALL)
+				forceMove(docked)
 				state = SHIP_IDLE
 		if(SHIP_UNDOCKING)
 			if(docked)
-				Move(get_turf(docked))
+				forceMove(get_turf(docked))
 				if(istype(docked, /obj/structure/overmap/dynamic))
 					var/obj/structure/overmap/dynamic/D = docked
 					D.unload_level()
 				docked = null
 				state = SHIP_FLYING
+	update_screen()
 
 /**
   * Handles all movement, called by the SSovermap subsystem, TODO: refactor pls

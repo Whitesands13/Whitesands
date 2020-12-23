@@ -190,6 +190,7 @@ SUBSYSTEM_DEF(overmap)
 	var/turf/docking_turf = locate(encounter_reservation.bottom_left_coords[1] + dock_size, encounter_reservation.bottom_left_coords[2] + CEILING(dock_size / 2, 1), encounter_reservation.bottom_left_coords[3])
 	var/obj/docking_port/stationary/dock = new(docking_turf)
 	dock.dir = WEST
+	dock.name = "\improper Uncharted Space"
 	dock.id = dock_id
 	dock.height = dock_size
 	dock.width = dock_size

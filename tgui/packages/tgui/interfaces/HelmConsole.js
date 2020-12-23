@@ -72,9 +72,11 @@ const SharedContent = (props, context) => {
               <AnimatedNumber value={shipInfo.sensor_range} />
             </ProgressBar>
           </LabeledList.Item>
-          <LabeledList.Item label="Mass">
-            {shipInfo.mass + 'tonnes'}
-          </LabeledList.Item>
+          {shipInfo.mass && (
+            <LabeledList.Item label="Mass">
+              {shipInfo.mass + 'tonnes'}
+            </LabeledList.Item>
+          )}
         </LabeledList>
       </Section>
       <Section title="Radar">
@@ -115,7 +117,7 @@ const SharedContent = (props, context) => {
                     tooltip="Interact"
                     tooltipPosition="left"
                     icon="circle"
-                    disabled={isViewer || (data.speed > 0)}
+                    disabled={isViewer || (data.speed > 0) || data.state !== 'flying'}
                     onClick={() => act('act_overmap', {
                       ship_to_act: ship.ref,
                     })} />
@@ -132,7 +134,17 @@ const SharedContent = (props, context) => {
 // Content included on helms when they're controlling ships
 const ShipContent = (props, context) => {
   const { act, data } = useBackend(context);
-  const { isViewer, engineInfo, shipInfo, speed, maxSpeed, heading, eta, x, y } = data;
+  const {
+    isViewer,
+    engineInfo,
+    shipInfo,
+    speed,
+    maxSpeed,
+    heading,
+    eta,
+    x,
+    y,
+  } = data;
   return (
     <Fragment>
       <Section title="Velocity">
@@ -146,7 +158,9 @@ const ShipContent = (props, context) => {
               }}
               maxValue={10}
               value={speed}>
-              <AnimatedNumber value={speed} />
+              <AnimatedNumber
+                value={speed}
+                format={value => Math.round(value * 100) / 100} />
               spM
             </ProgressBar>
           </LabeledList.Item>
@@ -161,7 +175,7 @@ const ShipContent = (props, context) => {
           </LabeledList.Item>
           <LabeledList.Item label="Next">
             <AnimatedNumber
-              value={eta > 1000 ? "N/A" : eta / 10} //it's in deciseconds
+              value={eta > 1000 ? "N/A" : eta / 10} // it's in deciseconds
               format={value => Math.round(value)} />
             s
           </LabeledList.Item>
@@ -182,29 +196,27 @@ const ShipContent = (props, context) => {
             <Table.Cell collapsing>
               Name
             </Table.Cell>
-            <Table.Cell>
+            <Table.Cell fluid>
               Fuel
             </Table.Cell>
-            {!isViewer && (
-              <Table.Cell collapsing>
-                Toggle
-              </Table.Cell>
-            )}
           </Table.Row>
           {engineInfo.map(engine => (
             <Table.Row
               key={engine.name}
               className="candystripe">
-              <Table.Cell
-                collapsing>
-                <Box position="Relative">
-                  {engine.name.slice(0, 5) + '...'}
-                  <Tooltip
-                    position={"bottom"}
-                    content={engine.name} />
-                </Box>
+              <Table.Cell collapsing>
+                <Button
+                  content={engine.name}
+                  color={engine.enabled && "good"}
+                  icon={engine.enabled ? "toggle-on" : "toggle-off"}
+                  disabled={isViewer}
+                  tooltip="Toggle Engine"
+                  tooltipPosition="right"
+                  onClick={() => act('toggle_engine', {
+                    engine: engine.ref,
+                  })} />
               </Table.Cell>
-              <Table.Cell>
+              <Table.Cell fluid>
                 {!!engine.maxFuel && (
                   <ProgressBar
                     fluid
@@ -223,18 +235,6 @@ const ShipContent = (props, context) => {
                   </ProgressBar>
                 )}
               </Table.Cell>
-              <Table.Cell collapsing>
-                {!isViewer && (
-                  <Button
-                    icon="circle"
-                    color={engine.enabled && "good"}
-                    tooltip="Toggle Engine"
-                    tooltipPosition="left"
-                    onClick={() => act('toggle_engine', {
-                      engine: engine.ref,
-                    })} />
-                )}
-              </Table.Cell>
             </Table.Row>
           ))}
           <Table.Row>
@@ -247,8 +247,8 @@ const ShipContent = (props, context) => {
             </Table.Cell>
             <Table.Cell>
               <AnimatedNumber
-                value={shipInfo.est_thrust / shipInfo.mass * 100}
-                format={value => Math.round(value)} />
+                value={shipInfo.est_thrust / (shipInfo.mass * 100)}
+                format={value => Math.round(value * 10) / 10} />
               spM/burn
             </Table.Cell>
           </Table.Row>
@@ -279,8 +279,9 @@ const ShipControlContent = (props, context) => {
       buttons={(
         <Button
           tooltip="Undock"
+          tooltipPosition="left"
           icon="sign-out-alt"
-          disabled={flyable}
+          disabled={data.state === 'idle'}
           onClick={() => act('undock')} />
       )}>
       <Table collapsing>

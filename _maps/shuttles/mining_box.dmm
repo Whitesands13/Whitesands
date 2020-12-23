@@ -58,21 +58,22 @@
 /turf/open/floor/mineral/titanium/blue,
 /area/shuttle/mining)
 "j" = (
-/obj/structure/window/reinforced{
-	dir = 1;
-	layer = 2.9
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 4
-	},
 /obj/machinery/power/smes/shuttle/precharged{
 	dir = 1
 	},
 /obj/structure/cable{
 	icon_state = "0-2"
+	},
+/obj/machinery/door/window/northleft{
+	name = "Engine Access"
+	},
+/obj/structure/window/reinforced{
+	dir = 8;
+	pixel_x = -4
+	},
+/obj/structure/window/reinforced{
+	dir = 4;
+	pixel_x = 4
 	},
 /turf/open/floor/plating,
 /area/shuttle/mining)
@@ -85,6 +86,10 @@
 	dir = 1
 	},
 /obj/structure/cable,
+/obj/structure/window/reinforced{
+	dir = 1;
+	pixel_y = 3
+	},
 /turf/open/floor/plating/airless,
 /area/shuttle/mining)
 "A" = (

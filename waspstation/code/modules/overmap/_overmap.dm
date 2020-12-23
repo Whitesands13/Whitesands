@@ -79,7 +79,7 @@
 	var/obj/screen/plane_master/lighting/cam_plane_master
 	var/obj/screen/background/cam_background
 
-/obj/structure/overmap/Initialize(mapload, _id = null)
+/obj/structure/overmap/Initialize(mapload, _id)
 	. = ..()
 	LAZYADD(SSovermap.overmap_objects, src)
 	if(id == MAIN_OVERMAP_OBJECT_ID)
@@ -87,7 +87,7 @@
 	if(_id)
 		id = _id
 	if(!id)
-		id = "overmap_object_[LAZYLEN(SSovermap.ships) + 1]"
+		id = "overmap_object_[length(SSovermap.overmap_objects) + 1]"
 	if(render_map)	// Initialize map objects
 		map_name = "overmap_[id]_map"
 		cam_screen = new
@@ -202,6 +202,7 @@
 	desc = "Nanotrasen's top-secret plasma research and extraction facility. Most likely the reason you're here."
 	icon_state = "station"
 	id = MAIN_OVERMAP_OBJECT_ID
+	sensor_range = 6
 
 /**
   * Ensures there is only ONE main station object
@@ -231,6 +232,8 @@
 	icon_state = "strange_event"
 	///The active turf reservation, if there is one
 	var/datum/turf_reservation/reserve
+	///The docking port in the reserve
+	var/obj/docking_port/stationary/reserve_dock
 	///If the level should be preserved. Useful for if you want to build an autismfort or something.
 	var/preserve_level = FALSE
 	///If the level is a planet.
@@ -253,13 +256,25 @@
 	if(reserve)
 		return
 	if(!COOLDOWN_FINISHED(SSovermap, encounter_cooldown))
-		return "WARNING! Stellar interference is restricting flight in this area. Interference should pass in [COOLDOWN_TIMELEFT(SSovermap, encounter_cooldown) SECONDS] seconds."
+		return "WARNING! Stellar interference is restricting flight in this area. Interference should pass in [COOLDOWN_TIMELEFT(SSovermap, encounter_cooldown) / 10] seconds."
 	var/datum/turf_reservation/new_reserve = SSovermap.spawn_dynamic_encounter(planet, planet ? pick(subtypesof(/datum/map_template/ruin/lavaland)) : pick(subtypesof(/datum/map_template/ruin/space)), "[DEFAULT_OVERMAP_DOCK_PREFIX]_[id]", visiting_shuttle = visiting_shuttle)
+	if(!new_reserve)
+		return "FATAL NAVIGATION ERROR, PLEASE TRY AGAIN LATER!"
 	reserve = new_reserve
+	reserve_dock = SSshuttle.getDock("[DEFAULT_OVERMAP_DOCK_PREFIX]_[id]")
 
+/**
+  * Unloads the reserve, deletes the linked docking port, and moves to a random location if there's no client-having, alive mobs.
+  */
 /obj/structure/overmap/dynamic/proc/unload_level()
 	if(preserve_level)
 		return
+	for(var/turf/T in reserve.non_border_turfs)
+		var/mob/living/L = locate() in T
+		if(L.mind)
+			return //Don't fuck over stranded people plox
 	if(reserve)
+		QDEL_NULL(reserve_dock)
 		forceMove(SSovermap.get_unused_overmap_square())
+		LAZYREMOVE(SSovermap.encounters, reserve)
 		QDEL_NULL(reserve)

@@ -3,7 +3,7 @@
 	desc = "Used to view or control the ship."
 	icon_screen = "shuttle"
 	icon_keyboard = "tech_key"
-	circuit = /obj/item/circuitboard/computer/security
+	circuit = /obj/item/circuitboard/computer/shuttle/helm
 	light_color = LIGHT_COLOR_FLARE
 
 	///The ship
@@ -59,6 +59,7 @@
 			user.client.register_map_obj(current_ship.cam_screen)
 			user.client.register_map_obj(current_ship.cam_plane_master)
 			user.client.register_map_obj(current_ship.cam_background)
+			current_ship.update_screen()
 
 		// Open UI
 		ui = new(user, src, "HelmConsole", name)
@@ -83,8 +84,12 @@
 		)
 		.["otherInfo"] += list(other_data)
 
-	.["x"] = current_ship.x
-	.["y"] = current_ship.y
+	if(istype(current_ship.loc, /obj/structure/overmap))
+		.["x"] = current_ship.loc.x
+		.["y"] = current_ship.loc.y
+	else
+		.["x"] = current_ship.x
+		.["y"] = current_ship.y
 
 	if(!istype(current_ship, /obj/structure/overmap/ship))
 		return
@@ -125,12 +130,12 @@
 	. = ..()
 	if(.)
 		return
-
+	if(viewer)
+		return
 	if(!istype(current_ship, /obj/structure/overmap/ship))
 		return
 
 	var/obj/structure/overmap/ship/S = current_ship
-
 	switch(action)
 		if("act_overmap")
 			var/obj/structure/overmap/to_act = locate(params["ship_to_act"])

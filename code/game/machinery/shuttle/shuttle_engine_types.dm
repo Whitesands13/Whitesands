@@ -89,13 +89,14 @@
 	circuit = /obj/item/circuitboard/machine/shuttle/engine/plasma
 	fuel_type = /datum/gas/plasma
 	fuel_use = 20
-	thrust = 25
+	thrust = 30
 
 /obj/machinery/power/shuttle/engine/fueled/expulsion
 	name = "expulsion thruster"
 	desc = "A thruster that expels gas inefficiently to create thrust."
+	circuit = /obj/item/circuitboard/machine/shuttle/engine/expulsion
 	fuel_use = 80
-	thrust = 15
+	thrust = 20
 	//All fuel code already handled
 
 /**
@@ -105,20 +106,23 @@
 /obj/machinery/power/shuttle/engine/electric
 	name = "ion thruster"
 	desc = "A thruster that expels charged particles to generate thrust."
+	circuit = /obj/item/circuitboard/machine/shuttle/engine/electric
 	icon_state = "burst"
 	icon_state_off = "burst_off"
 	icon_state_closed = "burst"
 	icon_state_open = "burst_open"
-	thrust = 15
+	thrust = 20
 	///Amount, in kilojoules, needed for a full burn.
-	var/power_per_burn = 200000
+	var/power_per_burn = 50000
 
 /obj/machinery/power/smes/shuttle
 	name = "electric engine precharger"
+	desc = "A medium-capacity, high transfer superconducting magnetic energy storage unit specially made for use with shuttle engines."
 	icon = 'waspstation/icons/obj/shuttle.dmi'
 	input_level = 0
 	input_level_max = 50000
-	output_level = 200000
+	output_level = 50000
+	circuit = /obj/item/circuitboard/machine/shuttle/smes
 
 /obj/machinery/power/smes/shuttle/precharged
 	charge = 1e6
