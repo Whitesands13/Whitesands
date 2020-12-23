@@ -281,7 +281,7 @@ const ShipControlContent = (props, context) => {
           tooltip="Undock"
           tooltipPosition="left"
           icon="sign-out-alt"
-          disabled={data.state === 'idle'}
+          disabled={data.state !== 'idle'}
           onClick={() => act('undock')} />
       )}>
       <Table collapsing>
