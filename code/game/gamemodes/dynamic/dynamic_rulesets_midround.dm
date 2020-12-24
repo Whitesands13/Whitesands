@@ -568,3 +568,27 @@
 	else // Our second guy is the agent, team is already created, don't need to make another one.
 		var/datum/antagonist/abductor/agent/new_role = new
 		new_character.mind.add_antag_datum(new_role, new_team)
+
+//////////////////////////////////////////////
+//                                          //
+//            SPIDERS     (GHOST)           //
+//                                          //
+//////////////////////////////////////////////
+
+/datum/dynamic_ruleset/midround/spiders
+	name = "Spiders"
+	antag_flag = "Spider"
+	antag_flag_override = ROLE_ALIEN
+	required_type = /mob/dead/observer
+	enemy_roles = list("Security Officer", "Detective", "Head of Security", "Captain")
+	required_enemies = list(2,2,1,1,1,1,1,0,0,0)
+	required_candidates = 0
+	weight = 3
+	cost = 10
+	requirements = list(101,101,101,80,60,50,30,20,10,10)
+	repeatable = TRUE
+	var/spawncount = 2
+
+/datum/dynamic_ruleset/midround/spiders/execute()
+	create_midwife_eggs(spawncount)
+	return ..()
