@@ -22,6 +22,7 @@
 		WS_TEMP_GRAD_COEFF_B,
 		WS_TEMP_GRAD_COEFF_C
 	)
+	SSweather.set_temperature_gradient(src)
 
 /datum/gas_mixture/immutable/whitesands_planet/proc/populate_default()
 	set_moles(/datum/gas/nitrogen, ws_moles_amount * N2STANDARD)

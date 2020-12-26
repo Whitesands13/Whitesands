@@ -217,6 +217,14 @@
 /obj/structure/fans/tiny,
 /turf/open/floor/plasteel,
 /area/whitesands/colony/dormitory/one)
+"fn" = (
+/obj/machinery/camera{
+	c_tag = "Administration - Telecomms Relay";
+	dir = 10;
+	network = list("mine")
+	},
+/turf/open/floor/circuit/telecomms,
+/area/whitesands/colony/maintenance)
 "fw" = (
 /obj/effect/turf_decal/tile/purple{
 	dir = 8
@@ -258,6 +266,11 @@
 	},
 /obj/effect/turf_decal/tile/green{
 	dir = 1
+	},
+/obj/machinery/camera{
+	c_tag = "North Barrack - Sleeping Quarters";
+	dir = 4;
+	network = list("mine")
 	},
 /turf/open/floor/plasteel,
 /area/whitesands/colony/dormitory/one)
@@ -352,7 +365,7 @@
 	dwidth = 3;
 	height = 10;
 	id = "mining_away";
-	name = "lavaland mine";
+	name = "whitesands landing zone";
 	width = 7
 	},
 /turf/open/floor/plating/asteroid/whitesands/dried,
@@ -617,6 +630,11 @@
 /obj/effect/turf_decal/loading_area{
 	dir = 8
 	},
+/obj/machinery/camera{
+	c_tag = "Processing Facility - Processing";
+	dir = 6;
+	network = list("mine")
+	},
 /turf/open/floor/plasteel,
 /area/whitesands/colony/production)
 "pv" = (
@@ -711,6 +729,11 @@
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden/layer1{
 	dir = 1
 	},
+/obj/machinery/camera{
+	c_tag = "Administration - Lobby";
+	dir = 6;
+	network = list("mine")
+	},
 /turf/open/floor/carpet/blue,
 /area/whitesands/colony)
 "rd" = (
@@ -750,6 +773,17 @@
 /obj/effect/mob_spawn/human/corpse/assistant,
 /turf/open/floor/plasteel,
 /area/whitesands/colony/guard)
+"rK" = (
+/obj/machinery/atmospherics/pipe/simple/general/visible{
+	dir = 4
+	},
+/obj/machinery/camera{
+	c_tag = "Administration - Engineering";
+	dir = 6;
+	network = list("mine")
+	},
+/turf/open/floor/plasteel/dark,
+/area/whitesands/colony/maintenance)
 "rL" = (
 /obj/effect/turf_decal/tile/purple{
 	dir = 8
@@ -790,6 +824,11 @@
 	},
 /obj/machinery/light/small/broken{
 	dir = 8
+	},
+/obj/machinery/camera{
+	c_tag = "North Barrack - Entrance";
+	dir = 10;
+	network = list("mine")
 	},
 /turf/open/floor/plasteel,
 /area/whitesands/colony/dormitory/one)
@@ -1158,6 +1197,14 @@
 /obj/machinery/space_heater,
 /turf/open/floor/plasteel/dark,
 /area/whitesands/colony/maintenance)
+"By" = (
+/obj/machinery/camera{
+	c_tag = "Guard Post";
+	dir = 8;
+	network = list("mine")
+	},
+/turf/open/floor/plasteel,
+/area/whitesands/colony/guard)
 "BS" = (
 /obj/structure/fence/door,
 /turf/open/floor/plating/asteroid/whitesands,
@@ -1320,6 +1367,11 @@
 /area/whitesands/colony/production)
 "FB" = (
 /obj/machinery/vending/hydroseeds,
+/obj/machinery/camera{
+	c_tag = "Greenhouse";
+	dir = 1;
+	network = list("mine")
+	},
 /turf/open/floor/plasteel,
 /area/whitesands/colony/greenhouse)
 "FG" = (
@@ -1535,6 +1587,11 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/purple,
+/obj/machinery/camera{
+	c_tag = "Processing Facility - Entrance";
+	dir = 8;
+	network = list("mine")
+	},
 /turf/open/floor/plasteel,
 /area/whitesands/colony/production)
 "Kj" = (
@@ -1593,8 +1650,25 @@
 /obj/item/reagent_containers/blood/random,
 /obj/item/reagent_containers/blood/random,
 /obj/item/reagent_containers/blood/random,
+/obj/machinery/camera{
+	c_tag = "Administration - Infirmary";
+	network = list("mine")
+	},
 /turf/open/floor/plasteel,
 /area/whitesands/colony)
+"Mh" = (
+/obj/structure/table/reinforced,
+/obj/effect/turf_decal/tile/purple{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/red,
+/obj/machinery/camera{
+	c_tag = "Administration - Security Office";
+	dir = 8;
+	network = list("mine")
+	},
+/turf/open/floor/plasteel,
+/area/whitesands/colony/guard)
 "Mi" = (
 /obj/structure/bed,
 /obj/effect/turf_decal/tile/green,
@@ -1790,6 +1864,21 @@
 /obj/effect/turf_decal/tile/red,
 /turf/open/floor/plasteel,
 /area/whitesands/colony/guard)
+"Qr" = (
+/obj/structure/bed,
+/obj/effect/turf_decal/tile/green{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/green{
+	dir = 1
+	},
+/obj/machinery/camera{
+	c_tag = "South Barrack - Sleeping Quarters";
+	dir = 4;
+	network = list("mine")
+	},
+/turf/open/floor/plasteel,
+/area/whitesands/colony/dormitory/two)
 "Qu" = (
 /obj/structure/chair/office{
 	dir = 1
@@ -1817,6 +1906,10 @@
 /obj/effect/turf_decal/tile/purple,
 /turf/open/floor/plasteel,
 /area/whitesands/colony/production)
+"RI" = (
+/obj/structure/sign/warning/enginesafety,
+/turf/closed/wall/r_wall,
+/area/whitesands/colony/maintenance)
 "RJ" = (
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -1920,6 +2013,10 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/bot,
+/obj/machinery/camera{
+	c_tag = "South Barrack - Entrance";
+	network = list("mine")
+	},
 /turf/open/floor/plasteel,
 /area/whitesands/colony/dormitory/two)
 "TQ" = (
@@ -1950,6 +2047,13 @@
 /obj/machinery/atmospherics/components/unary/tank/air,
 /turf/open/floor/plasteel/dark,
 /area/whitesands/colony/maintenance)
+"VG" = (
+/obj/structure/fence{
+	dir = 4
+	},
+/obj/structure/sign/warning/securearea,
+/turf/open/floor/plating/asteroid/whitesands,
+/area/whitesands/surface/outdoors)
 "VJ" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer1{
 	dir = 1
@@ -20319,7 +20423,7 @@ Am
 Am
 Am
 Am
-Dk
+VG
 Am
 Am
 Am
@@ -20811,7 +20915,7 @@ Am
 Am
 TG
 aX
-rd
+By
 TQ
 Xf
 Am
@@ -20833,7 +20937,7 @@ Am
 Am
 Am
 Am
-Dk
+VG
 Am
 Am
 Am
@@ -21350,7 +21454,7 @@ Am
 Dd
 FI
 Kc
-FI
+fn
 Dd
 Am
 Am
@@ -22889,8 +22993,8 @@ Am
 Am
 Dd
 Dd
-Dd
-fQ
+RI
+rK
 vh
 fa
 Sn
@@ -24431,7 +24535,7 @@ PO
 LS
 Qu
 gg
-rz
+Mh
 rz
 HE
 Qn
@@ -28799,7 +28903,7 @@ Am
 Sb
 Jb
 cM
-DY
+Qr
 Gw
 DY
 Sb
@@ -30342,7 +30446,7 @@ Am
 Am
 Am
 Am
-Dk
+VG
 Am
 Am
 Am
@@ -30856,7 +30960,7 @@ Am
 Am
 Am
 Am
-Dk
+VG
 Am
 Am
 Am
