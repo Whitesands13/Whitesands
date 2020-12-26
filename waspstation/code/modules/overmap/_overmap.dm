@@ -8,7 +8,7 @@
 	opacity = 1
 	density = 1
 
-//this is completely unnecessary but it looks interesting
+//this is completely unnecessary but it looks nice
 /turf/open/overmap/Initialize()
 	. = ..()
 	name = "[x]-[y]"
@@ -36,7 +36,10 @@
 		if(x == SSovermap.size)
 			I.pixel_x = 5*i + 2
 		overlays += I
-/* OVERMAP AREA */
+
+/** # Overmap area
+  * Area that all overmap objects will spawn in at roundstart.
+  */
 /area/overmap
 	name = "Overmap"
 	icon_state = "yellow"
@@ -248,7 +251,7 @@
 	if(preload_level)
 		load_level()
 
-/obj/structure/overmap/dynamic/Del()
+/obj/structure/overmap/dynamic/Destroy()
 	. = ..()
 	QDEL_NULL(reserve)
 
@@ -276,5 +279,4 @@
 	if(reserve)
 		QDEL_NULL(reserve_dock)
 		forceMove(SSovermap.get_unused_overmap_square())
-		LAZYREMOVE(SSovermap.encounters, reserve)
 		QDEL_NULL(reserve)

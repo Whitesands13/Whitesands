@@ -15,8 +15,6 @@ SUBSYSTEM_DEF(overmap)
 	var/list/navs
 	///List of all events
 	var/list/events
-	///List of all encounter turf reservations
-	var/list/encounters
 
 	///The main station or ship
 	var/obj/structure/overmap/main
@@ -25,8 +23,6 @@ SUBSYSTEM_DEF(overmap)
 	var/size = 20
 	///Should events be processed
 	var/events_enabled = TRUE
-	///Should ship movement be processed
-	var/ship_movement_enabled = TRUE
 
 	///Cooldown on dynamically loading encounters
 	var/encounter_cooldown = 0
@@ -58,10 +54,9 @@ SUBSYSTEM_DEF(overmap)
 	return ..()
 
 /datum/controller/subsystem/overmap/fire()
-	if(ship_movement_enabled)
-		for(var/ship in ships)
-			var/obj/structure/overmap/ship/S = ship
-			S.process_misc()
+	for(var/ship in ships)
+		var/obj/structure/overmap/ship/S = ship
+		S.process_misc()
 
 	if(events_enabled)
 		for(var/event in events)
@@ -143,7 +138,7 @@ SUBSYSTEM_DEF(overmap)
 		if(ZTRAIT_SPACE_RUINS in L.traits)
 			var/obj/structure/overmap/level/ruin/new_level = new(get_unused_overmap_square(), null, L.z_value)
 			new_level.id = "z[L.z_value]"
-	for(var/i in 1 to 4) //TODO: make configurable
+	for(var/i in 1 to CONFIG_GET(number/max_overmap_dynamic_events))
 		new /obj/structure/overmap/dynamic(get_unused_overmap_square())
 
 /**
@@ -201,7 +196,6 @@ SUBSYSTEM_DEF(overmap)
 		dock.dheight = dock_size / 2
 		dock.dwidth = dock_size / 2
 
-	LAZYADD(encounters, encounter_reservation)
 	return encounter_reservation
 
 /**

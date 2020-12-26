@@ -233,12 +233,13 @@
 	speed[1] += n_x
 	speed[2] += n_y
 
+	update_icon_state()
+
 	if(is_still())
 		return
 
 	var/timer = round(1 / MAGNITUDE(speed[1], speed[2]) * offset, SHIP_MOVE_RESOLUTION)
 	movement_callback_id = addtimer(CALLBACK(src, .proc/tick_move), timer, TIMER_STOPPABLE)
-	update_icon_state()
 
 /**
   * Called by /proc/adjust_speed(), this continually moves the ship according to it's speed
@@ -282,7 +283,7 @@
 	update_screen()
 
 /**
-  * Handles all movement, called by the SSovermap subsystem, TODO: refactor pls
+  * Handles a few miscellaneous features, namely repairs. called by the SSovermap subsystem, TODO: refactor pls
   */
 /obj/structure/overmap/ship/proc/process_misc()
 	if(docked && integrity < initial(integrity))
@@ -290,6 +291,9 @@
 
 /**
   * Returns the total speed in all directions.
+  *
+  * The equation for speed is as follows:
+  * 60 SECONDS / (1 / ([ship's speed] / ([ship's mass] * 100)))
   */
 /obj/structure/overmap/ship/proc/get_speed()
 	if(is_still())
@@ -325,6 +329,8 @@
   * * acceleration - How much to accelerate by
   */
 /obj/structure/overmap/ship/proc/accelerate(direction, acceleration)
+	if(!(direction in GLOB.cardinals))
+		acceleration *= 0.5 //Makes it so going diagonally isn't twice as efficient
 	if(direction & EAST)
 		adjust_speed(acceleration, 0)
 	if(direction & WEST)
@@ -339,11 +345,12 @@
   * * acceleration - How much to decelerate by
   */
 /obj/structure/overmap/ship/proc/decelerate(acceleration)
-	if(((speed[1]) || (speed[2])))
-		if (speed[1])
-			adjust_speed(-SIGN(speed[1]) * min(acceleration, abs(speed[1])), 0)
-		if (speed[2])
-			adjust_speed(0, -SIGN(speed[2]) * min(acceleration, abs(speed[2])))
+	if(speed[1] && speed[2]) //another check to make sure that deceleration isn't twice as fasts when moving diagonally
+		adjust_speed(-SIGN(speed[1]) * min(acceleration / 2, abs(speed[1])), -SIGN(speed[2]) * min(acceleration / 2, abs(speed[2])))
+	else if(speed[1])
+		adjust_speed(-SIGN(speed[1]) * min(acceleration, abs(speed[1])), 0)
+	else if(speed[2])
+		adjust_speed(0, -SIGN(speed[2]) * min(acceleration, abs(speed[2])))
 
 /obj/structure/overmap/ship/Bump(atom/A)
 	if(istype(A, /turf/open/overmap/edge))

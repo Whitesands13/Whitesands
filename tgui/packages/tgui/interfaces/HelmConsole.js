@@ -165,7 +165,7 @@ const ShipContent = (props, context) => {
             </ProgressBar>
           </LabeledList.Item>
           <LabeledList.Item label="Heading">
-            <AnimatedNumber value={heading ? heading : "None"} />
+            <AnimatedNumber value={heading} />
           </LabeledList.Item>
           <LabeledList.Item label="Position">
             X
@@ -239,16 +239,12 @@ const ShipContent = (props, context) => {
           ))}
           <Table.Row>
             <Table.Cell>
-              Total Thrust:
-            </Table.Cell>
-            <Table.Cell>
-              <AnimatedNumber value={shipInfo.est_thrust} />
-              kN
+              Est burn:
             </Table.Cell>
             <Table.Cell>
               <AnimatedNumber
-                value={shipInfo.est_thrust / (shipInfo.mass * 100)}
-                format={value => Math.round(value * 10) / 10} />
+                value={60 / (1 / (shipInfo.est_thrust / (shipInfo.mass * 100)))}
+                format={value => Math.round(value * 100) / 100} />
               spM/burn
             </Table.Cell>
           </Table.Row>

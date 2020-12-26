@@ -14,7 +14,7 @@
 	. = ..()
 	LAZYADD(SSovermap.events, src)
 
-/obj/structure/overmap/event/Del()
+/obj/structure/overmap/event/Destroy()
 	. = ..()
 	LAZYREMOVE(SSovermap.events, src)
 
@@ -182,9 +182,11 @@
 		other_wormhole = new(SSovermap.get_unused_overmap_square(), "[id]_exit", src)
 
 /obj/structure/overmap/event/wormhole/affect_ship(obj/structure/overmap/ship/S)
+	if(!other_wormhole)
+		qdel(src)
 	if(--stability <= 0)
 		S.recieve_damage(rand(20, 30))
-		S.Move(SSovermap.get_unused_overmap_square())
+		S.forceMove(SSovermap.get_unused_overmap_square())
 		QDEL_NULL(other_wormhole)
 		for(var/MN in GLOB.player_list)
 			var/mob/M = MN
@@ -195,4 +197,7 @@
 
 		return qdel(src)
 	other_wormhole.stability = stability
-	S.forceMove(get_step(other_wormhole, S.dir))
+	var/turf/potential_turf = get_step(other_wormhole, S.dir)
+	if(potential_turf.density) //So people don't abuse it to escape the overmap
+		potential_turf = get_turf(other_wormhole)
+	S.forceMove(potential_turf)

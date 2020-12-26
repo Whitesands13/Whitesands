@@ -24,9 +24,12 @@
 	if(_id)
 		id = _id
 	if(!id)
-		var/obj/docking_port/port = SSshuttle.get_containing_shuttle(src)
+		var/obj/docking_port/mobile/port = SSshuttle.get_containing_shuttle(src)
 		var/area/A = get_area(src)
 		if(port)
+			if(port.current_ship)
+				current_ship = port.current_ship
+				return
 			id = port.id
 		else if(is_station_level(z) && !A?.outdoors)
 			id = MAIN_OVERMAP_OBJECT_ID
@@ -99,7 +102,7 @@
 	.["canFly"] = TRUE
 	.["state"] = S.state
 	.["docked"] = S.docked ? TRUE : FALSE
-	.["heading"] = dir2angle(S.get_heading())
+	.["heading"] = dir2angle(S.get_heading()) || 0
 	.["speed"] = S.get_speed() / 10
 	.["maxSpeed"] = S.max_speed
 	.["eta"] = S.get_eta()

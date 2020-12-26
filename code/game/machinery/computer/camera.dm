@@ -236,6 +236,7 @@
 	network = list("thunder")
 	density = FALSE
 	circuit = null
+	light_power = 0
 
 /obj/machinery/computer/security/telescreen/update_icon_state()
 	icon_state = initial(icon_state)
