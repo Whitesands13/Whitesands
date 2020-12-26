@@ -94,16 +94,16 @@
 		.["x"] = current_ship.x
 		.["y"] = current_ship.y
 
-	if(!istype(current_ship, /obj/structure/overmap/ship))
+	if(!istype(current_ship, /obj/structure/overmap/ship/simulated))
 		return
 
-	var/obj/structure/overmap/ship/S = current_ship
+	var/obj/structure/overmap/ship/simulated/S = current_ship
 
 	.["canFly"] = TRUE
 	.["state"] = S.state
 	.["docked"] = S.docked ? TRUE : FALSE
 	.["heading"] = dir2angle(S.get_heading()) || 0
-	.["speed"] = S.get_speed() / 10
+	.["speed"] = S.get_speed()
 	.["maxSpeed"] = S.max_speed
 	.["eta"] = S.get_eta()
 	.["stopped"] = S.is_still()
@@ -135,10 +135,10 @@
 		return
 	if(viewer)
 		return
-	if(!istype(current_ship, /obj/structure/overmap/ship))
+	if(!istype(current_ship, /obj/structure/overmap/ship/simulated))
 		return
 
-	var/obj/structure/overmap/ship/S = current_ship
+	var/obj/structure/overmap/ship/simulated/S = current_ship
 	switch(action)
 		if("act_overmap")
 			var/obj/structure/overmap/to_act = locate(params["ship_to_act"])
@@ -152,6 +152,7 @@
 		if("toggle_engine")
 			var/obj/machinery/power/shuttle/engine/E = locate(params["engine"])
 			E.enabled = !E.enabled
+			S.refresh_engines()
 		if("change_heading")
 			S.burn_engines(text2num(params["dir"]))
 		if("stop")

@@ -160,7 +160,7 @@ const ShipContent = (props, context) => {
               value={speed}>
               <AnimatedNumber
                 value={speed}
-                format={value => Math.round(value * 100) / 100} />
+                format={value => Math.round(value * 10) / 10} />
               spM
             </ProgressBar>
           </LabeledList.Item>
@@ -221,9 +221,9 @@ const ShipContent = (props, context) => {
                   <ProgressBar
                     fluid
                     ranges={{
-                      good: [engine.maxFuel / 2, Infinity],
-                      average: [engine.maxFuel / 4, engine.maxFuel / 2],
-                      bad: [-Infinity, engine.maxFuel / 4],
+                      good: [50, Infinity],
+                      average: [25, 50],
+                      bad: [-Infinity, 25],
                     }}
                     maxValue={engine.maxFuel}
                     minValue={0}
@@ -243,8 +243,8 @@ const ShipContent = (props, context) => {
             </Table.Cell>
             <Table.Cell>
               <AnimatedNumber
-                value={60 / (1 / (shipInfo.est_thrust / (shipInfo.mass * 100)))}
-                format={value => Math.round(value * 100) / 100} />
+                value={600 / (1/(shipInfo.est_thrust / (shipInfo.mass * 100)))}
+                format={value => Math.round(value * 10) / 10} />
               spM/burn
             </Table.Cell>
           </Table.Row>

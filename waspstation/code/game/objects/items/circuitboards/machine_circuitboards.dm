@@ -76,6 +76,12 @@
 	req_components = list(/obj/item/stock_parts/manipulator = 2,
 		/obj/item/stock_parts/matter_bin = 2)
 
+/obj/item/circuitboard/machine/shuttle/engine/oil
+	name = "Oil Thruster (Machine Board)"
+	build_path = /obj/machinery/power/shuttle/engine/liquid/oil
+	req_components = list(/obj/item/reagent_containers/glass/beaker = 4,
+		/obj/item/stock_parts/micro_laser = 2)
+
 /obj/item/circuitboard/machine/shuttle/engine/void
 	name = "Void Thruster (Machine Board)"
 	build_path = /obj/machinery/power/shuttle/engine/void

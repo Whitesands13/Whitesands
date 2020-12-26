@@ -7,7 +7,7 @@
 	jumpto_ports = list("whiteship_home" = 1)
 	designate_time = 100
 	circuit = /obj/item/circuitboard/computer/shuttle/docker
-	var/obj/structure/overmap/ship/current_ship
+	var/obj/structure/overmap/ship/simulated/current_ship
 	var/obj/structure/overmap/level/current_target
 
 /obj/machinery/computer/camera_advanced/shuttle_docker/nav/Initialize(mapload)

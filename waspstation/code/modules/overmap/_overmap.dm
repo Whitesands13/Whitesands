@@ -274,7 +274,7 @@
 		return
 	for(var/turf/T in reserve.non_border_turfs)
 		var/mob/living/L = locate() in T
-		if(L.mind)
+		if(L?.mind)
 			return //Don't fuck over stranded people plox
 	if(reserve)
 		QDEL_NULL(reserve_dock)

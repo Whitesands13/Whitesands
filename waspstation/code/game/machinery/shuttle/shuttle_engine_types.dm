@@ -89,14 +89,14 @@
 	circuit = /obj/item/circuitboard/machine/shuttle/engine/plasma
 	fuel_type = /datum/gas/plasma
 	fuel_use = 20
-	thrust = 30
+	thrust = 25
 
 /obj/machinery/power/shuttle/engine/fueled/expulsion
 	name = "expulsion thruster"
 	desc = "A thruster that expels gas inefficiently to create thrust."
 	circuit = /obj/item/circuitboard/machine/shuttle/engine/expulsion
 	fuel_use = 80
-	thrust = 20
+	thrust = 15
 	//All fuel code already handled
 
 /**
@@ -111,7 +111,7 @@
 	icon_state_off = "burst_off"
 	icon_state_closed = "burst"
 	icon_state_open = "burst_open"
-	thrust = 20
+	thrust = 15
 	///Amount, in kilojoules, needed for a full burn.
 	var/power_per_burn = 50000
 
@@ -146,9 +146,15 @@
 	return thrust * true_percentage
 
 /obj/machinery/power/shuttle/engine/electric/return_fuel()
+	if(length(powernet.nodes) == 2)
+		for(var/obj/machinery/power/smes/S in powernet.nodes)
+			return S.charge
 	return newavail()
 
 /obj/machinery/power/shuttle/engine/electric/return_fuel_cap()
+	if(length(powernet.nodes) == 2)
+		for(var/obj/machinery/power/smes/S in powernet.nodes)
+			return S.capacity
 	return power_per_burn
 
 /**
@@ -187,6 +193,14 @@
 
 /obj/machinery/power/shuttle/engine/liquid/return_fuel_cap()
 	return reagents.maximum_volume
+
+/obj/machinery/power/shuttle/engine/liquid/oil
+	name = "oil thruster"
+	desc = "A highly inefficient thruster that burns oil as a propellant."
+	max_reagents = 2000
+	thrust = 20
+	fuel_reagents = list(/datum/reagent/fuel/oil = 200)
+	circuit = /obj/item/circuitboard/machine/shuttle/engine/oil
 
 /**
   * ### Void Engines

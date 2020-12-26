@@ -295,7 +295,7 @@
 	var/list/hidden_turfs = list()
 
 	///The linked overmap object, if there is one
-	var/obj/structure/overmap/ship/current_ship
+	var/obj/structure/overmap/ship/simulated/current_ship
 
 /obj/docking_port/mobile/proc/register()
 	SSshuttle.mobile += src

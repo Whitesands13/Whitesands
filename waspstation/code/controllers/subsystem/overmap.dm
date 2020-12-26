@@ -7,8 +7,8 @@ SUBSYSTEM_DEF(overmap)
 
 	///List of all overmap objects
 	var/list/overmap_objects
-	///List of all active ships
-	var/list/ships
+	///List of all active, simulated ships
+	var/list/simulated_ships
 	///List of all helms, to be adjusted
 	var/list/helms
 	///List of all nav computers to initialize
@@ -39,8 +39,8 @@ SUBSYSTEM_DEF(overmap)
 			continue
 		setup_shuttle_ship(M)
 
-	for(var/ship in ships)
-		var/obj/structure/overmap/ship/S = ship
+	for(var/ship in simulated_ships)
+		var/obj/structure/overmap/ship/simulated/S = ship
 		S.initial_load()
 
 	for(var/helm in helms)
@@ -54,8 +54,8 @@ SUBSYSTEM_DEF(overmap)
 	return ..()
 
 /datum/controller/subsystem/overmap/fire()
-	for(var/ship in ships)
-		var/obj/structure/overmap/ship/S = ship
+	for(var/ship in simulated_ships)
+		var/obj/structure/overmap/ship/simulated/S = ship
 		S.process_misc()
 
 	if(events_enabled)
@@ -71,9 +71,9 @@ SUBSYSTEM_DEF(overmap)
 /datum/controller/subsystem/overmap/proc/setup_shuttle_ship(obj/docking_port/mobile/shuttle)
 	var/docked_object = get_overmap_object_by_z(shuttle.z)
 	if(docked_object)
-		shuttle.current_ship = new /obj/structure/overmap/ship/shuttle/rendered(docked_object, shuttle.id, shuttle)
+		shuttle.current_ship = new /obj/structure/overmap/ship/simulated(docked_object, shuttle.id, shuttle)
 	else if(!is_centcom_level(shuttle.z) && !istype(shuttle, /obj/docking_port/mobile/arrivals))
-		shuttle.current_ship = new /obj/structure/overmap/ship/shuttle/rendered(get_unused_overmap_square(), shuttle.id, shuttle)
+		shuttle.current_ship = new /obj/structure/overmap/ship/simulated(get_unused_overmap_square(), shuttle.id, shuttle)
 
 /**
   * The proc that creates all the objects on the overmap, split into seperate procs for redundancy.
@@ -231,8 +231,8 @@ SUBSYSTEM_DEF(overmap)
 			return object
 
 /datum/controller/subsystem/overmap/Recover()
-	if(istype(SSovermap.ships))
-		ships = SSovermap.ships
+	if(istype(SSovermap.simulated_ships))
+		simulated_ships = SSovermap.simulated_ships
 	if(istype(SSovermap.helms))
 		helms = SSovermap.helms
 	if(istype(SSovermap.events))

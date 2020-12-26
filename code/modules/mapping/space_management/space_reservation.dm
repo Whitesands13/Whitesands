@@ -71,6 +71,8 @@
 		else
 			T.ChangeTurf(turf_type, turf_type)
 		if(area_type)
+			if(ispath(area_type))
+				area_type = new area_type
 			var/area/old_area = get_area(T)
 			area_type.contents += T
 			T.change_area(old_area, area_type)
