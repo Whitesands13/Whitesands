@@ -295,8 +295,9 @@
 	switch(H.jumpsuit_style)
 		if(PREF_SKIRT)
 			holder = "[uniform]/skirt"
-		if(PREF_ALTSUIT && alt_uniform)
-			holder = "[alt_uniform]"
+		if(PREF_ALTSUIT)
+			if(alt_uniform)
+				holder = "[alt_uniform]"
 		if(PREF_GREYSUIT)
 			holder = "/obj/item/clothing/under/color/grey"
 		// WaspStation Edit - Fix Loadout Uniforms not spawning ID/PDA
