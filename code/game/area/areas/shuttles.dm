@@ -102,7 +102,7 @@
 
 /area/shuttle/custom
 	name = "Custom player shuttle"
-	blob_allowed = TRUE
+	area_flags = BLOBS_ALLOWED
 	flags_1 = CAN_BE_DIRTY_1 | CULT_PERMITTED_1
 
 /area/shuttle/custom/powered

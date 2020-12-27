@@ -44,8 +44,7 @@
 	name = "Overmap"
 	icon_state = "yellow"
 	requires_power = FALSE
-	noteleport = TRUE
-	blob_allowed = FALSE
+	area_flags = NOTELEPORT
 	flags_1 = NONE
 
 /**
@@ -260,7 +259,7 @@
 		return
 	if(!COOLDOWN_FINISHED(SSovermap, encounter_cooldown))
 		return "WARNING! Stellar interference is restricting flight in this area. Interference should pass in [COOLDOWN_TIMELEFT(SSovermap, encounter_cooldown) / 10] seconds."
-	var/datum/turf_reservation/new_reserve = SSovermap.spawn_dynamic_encounter(planet, planet ? pick(subtypesof(/datum/map_template/ruin/lavaland)) : pick(subtypesof(/datum/map_template/ruin/space)), "[DEFAULT_OVERMAP_DOCK_PREFIX]_[id]", visiting_shuttle = visiting_shuttle)
+	var/datum/turf_reservation/new_reserve = SSovermap.spawn_dynamic_encounter(planet, TRUE, "[DEFAULT_OVERMAP_DOCK_PREFIX]_[id]", visiting_shuttle = visiting_shuttle)
 	if(!new_reserve)
 		return "FATAL NAVIGATION ERROR, PLEASE TRY AGAIN LATER!"
 	reserve = new_reserve

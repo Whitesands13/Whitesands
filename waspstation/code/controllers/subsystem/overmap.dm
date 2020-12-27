@@ -149,7 +149,7 @@ SUBSYSTEM_DEF(overmap)
   * * size - Size of the encounter, defaults to 1/3 total world size
   * * visiting_shuttle - The shuttle that is going to go to the encounter. Allows ruins to scale.
   */
-/datum/controller/subsystem/overmap/proc/spawn_dynamic_encounter(on_planet, datum/map_template/target, dock_id, size = world.maxx / 3, obj/docking_port/mobile/visiting_shuttle, ignore_cooldown = FALSE)
+/datum/controller/subsystem/overmap/proc/spawn_dynamic_encounter(on_planet, ruin = TRUE, dock_id, size = world.maxx / 3, obj/docking_port/mobile/visiting_shuttle, ignore_cooldown = FALSE)
 	if(!ignore_cooldown && !COOLDOWN_FINISHED(SSovermap, encounter_cooldown))
 		return FALSE
 
@@ -164,22 +164,33 @@ SUBSYSTEM_DEF(overmap)
 	if(visiting_shuttle)
 		dock_size = max(visiting_shuttle.width, visiting_shuttle.height) + 3 //a little bit of wiggle room
 
-	if(target) //Done BEFORE the turfs are reserved so that it allocates the right size box
-		target = new target
-		ruin_size = max(target.width, target.height) + 3
+	var/datum/map_template/ruin/ruin_type = /datum/map_template/ruin/space
+	var/planet_type
+	var/datum/map_generator/mapgen
+	if(on_planet)
+		planet_type = pick("lava", "ice", "jungle")
+		switch(planet_type)
+			if("lava")
+				ruin_type = /datum/map_template/ruin/lavaland
+				mapgen = /datum/map_generator/cave_generator/lavaland
+			if("ice")
+				mapgen = /datum/map_generator/cave_generator/icemoon/surface
+
+	if(ruin) //Done BEFORE the turfs are reserved so that it allocates the right size box
+		ruin_type = new pick(subtypesof(ruin_type))
+		ruin_size = max(ruin_type.width, ruin_type.height) + 3
 
 	total_size = min(dock_size + ruin_size, total_size)
 
 	var/datum/turf_reservation/encounter_reservation = SSmapping.RequestBlockReservation(total_size, total_size, border_turf_override = /turf/closed/indestructible/blank, area_override = on_planet ? /area/ruin/unpowered/planetoid : null)
 	if(on_planet)
-		var/datum/map_generator/mapgen = pick(subtypesof(/datum/map_generator))
 		mapgen = new mapgen
 		mapgen.generate_terrain(encounter_reservation.non_border_turfs)
 
-	if(target) //Does AFTER the turfs are reserved so it can find where the allocation is
+	if(ruin_type) //Does AFTER the turfs are reserved so it can find where the allocation is
 		//gets a turf vaguely in the middle of the reserve
 		var/turf/ruin_turf = locate(encounter_reservation.bottom_left_coords[1] + dock_size + 1, encounter_reservation.bottom_left_coords[2] + dock_size + 1, encounter_reservation.bottom_left_coords[3])
-		target.load(ruin_turf)
+		ruin_type.load(ruin_turf)
 
 	//gets the turf with an X in the middle of the reservation, and a Y that's 1/4ths up in the reservation.
 	var/turf/docking_turf = locate(encounter_reservation.bottom_left_coords[1] + dock_size, encounter_reservation.bottom_left_coords[2] + CEILING(dock_size / 2, 1), encounter_reservation.bottom_left_coords[3])
