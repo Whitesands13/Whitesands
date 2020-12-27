@@ -3,7 +3,7 @@
 //defaults to box
 //  -Cyberboss
 
-GLOBAL_LIST_INIT(mining_maps, list("lavaland" = 0, "icemoon" = 0, "whitesands" = 0, "random" = 1))
+GLOBAL_LIST_INIT(mining_maps, list("lavaland" = 1, "icemoon" = 1, "whitesands" = 1, "random" = 0))
 GLOBAL_VAR_INIT(current_mining_map, "random")
 GLOBAL_VAR_INIT(next_mining_map, "random")
 
@@ -26,7 +26,7 @@ GLOBAL_VAR_INIT(next_mining_map, "random")
 	var/space_ruin_levels = 7
 	var/space_empty_levels = 1
 
-	var/minetype = "icemoon"
+	var/minetype = "random"
 
 	var/allow_custom_shuttles = TRUE
 	var/shuttles = list(

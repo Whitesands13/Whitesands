@@ -115,7 +115,7 @@ SUBSYSTEM_DEF(overmap)
 /datum/controller/subsystem/overmap/proc/spawn_station(attempt = 1)
 	if(main)
 		qdel(main)
-	var/obj/structure/overmap/level/mining/mining_level
+	var/obj/structure/overmap/level/mining/mining_level = /obj/structure/overmap/level/mining/lavaland
 	switch(GLOB.current_mining_map)
 		if("lavaland")
 			mining_level = /obj/structure/overmap/level/mining/lavaland

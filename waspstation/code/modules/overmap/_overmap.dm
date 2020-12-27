@@ -219,6 +219,7 @@
 
 /obj/structure/overmap/level/mining
 	id = AWAY_OVERMAP_OBJECT_ID_MINING
+	icon_state = "globe"
 
 /obj/structure/overmap/level/mining/lavaland
 	name = "Lavaland"

@@ -124,11 +124,11 @@
 /area/lavaland/surface/outdoors/unexplored //monsters and ruins spawn here
 	icon_state = "unexplored"
 	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED
+	map_generator = /datum/map_generator/cave_generator/lavaland
 
 /area/lavaland/surface/outdoors/unexplored/danger //megafauna will also spawn here
 	icon_state = "danger"
 	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED | MEGAFAUNA_SPAWN_ALLOWED
-	map_generator = /datum/map_generator/cave_generator/lavaland
 
 /area/lavaland/surface/outdoors/explored
 	name = "Lavaland Labor Camp"
@@ -169,6 +169,7 @@
 	icon_state = "unexplored"
 	poweralm = FALSE
 	area_flags = UNIQUE_AREA | FLORA_ALLOWED | MOB_SPAWN_ALLOWED | CAVES_ALLOWED
+	map_generator = /datum/map_generator/cave_generator/icemoon/surface
 
 /area/icemoon/surface/outdoors/unexplored/danger
 	icon_state = "unexplored"
@@ -177,7 +178,6 @@
 
 /area/icemoon/surface/outdoors/unexplored/rivers // rivers spawn here
 	icon_state = "danger"
-	map_generator = /datum/map_generator/cave_generator/icemoon/surface
 
 /area/icemoon/surface/outdoors/unexplored/rivers/no_monsters
 	poweralm = FALSE
@@ -194,15 +194,13 @@
 	ambientsounds = MINING
 	poweralm = FALSE
 	area_flags = UNIQUE_AREA | FLORA_ALLOWED
+	map_generator = /datum/map_generator/cave_generator/icemoon
 
 /area/icemoon/underground/unexplored // mobs and megafauna and ruins spawn here
 	name = "Icemoon Caves"
-	icon_state = "unexplored"
+	icon_state = "danger"
 	poweralm = FALSE
 	area_flags = CAVES_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED | MEGAFAUNA_SPAWN_ALLOWED
-/area/icemoon/underground/unexplored/rivers // rivers spawn here
-	icon_state = "danger"
-	map_generator = /datum/map_generator/cave_generator/icemoon
 
 /area/icemoon/underground/explored // ruins can't spawn here
 	name = "Icemoon Underground"
@@ -257,12 +255,12 @@
 	requires_power = TRUE
 	ambientsounds = MINING
 	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
-	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | FLORA_ALLOWED
+	map_generator = /datum/map_generator/cave_generator/whitesands
 
 /area/whitesands/surface/outdoors // weather happens here
 	name = "Whitesands Dunes"
 	outdoors = TRUE
-	map_generator = /datum/map_generator/cave_generator/whitesands
 
 /area/whitesands/surface/outdoors/unexplored //monsters and ruins spawn here
 	icon_state = "unexplored"
