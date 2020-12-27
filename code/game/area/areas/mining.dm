@@ -5,7 +5,7 @@
 	has_gravity = STANDARD_GRAVITY
 	lighting_colour_tube = "#ffe8d2"
 	lighting_colour_bulb = "#ffdcb7"
-	flora_allowed = TRUE
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | FLORA_ALLOWED
 
 /area/mine/explored
 	name = "Mine"
@@ -19,7 +19,7 @@
 	outdoors = TRUE
 	flags_1 = NONE
 	ambientsounds = MINING
-	flora_allowed = FALSE
+	area_flags = VALID_TERRITORY | UNIQUE_AREA
 
 /area/mine/unexplored
 	name = "Mine"
@@ -33,7 +33,7 @@
 	outdoors = TRUE
 	flags_1 = NONE
 	ambientsounds = MINING
-	tunnel_allowed = TRUE
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | FLORA_ALLOWED | CAVES_ALLOWED
 
 /area/mine/lobby
 	name = "Mining Station"
@@ -92,8 +92,7 @@
 	icon_state = "mining"
 	has_gravity = STANDARD_GRAVITY
 	flags_1 = NONE
-	flora_allowed = TRUE
-	blob_allowed = FALSE
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | FLORA_ALLOWED
 
 /area/lavaland/surface
 	name = "Lavaland"
@@ -124,16 +123,16 @@
 
 /area/lavaland/surface/outdoors/unexplored //monsters and ruins spawn here
 	icon_state = "unexplored"
-	tunnel_allowed = TRUE
-	mob_spawn_allowed = TRUE
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED
 
 /area/lavaland/surface/outdoors/unexplored/danger //megafauna will also spawn here
 	icon_state = "danger"
-	megafauna_spawn_allowed = TRUE
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED | MEGAFAUNA_SPAWN_ALLOWED
+	map_generator = /datum/map_generator/cave_generator/lavaland
 
 /area/lavaland/surface/outdoors/explored
 	name = "Lavaland Labor Camp"
-	flora_allowed = FALSE
+	area_flags = VALID_TERRITORY | UNIQUE_AREA
 
 
 
@@ -143,7 +142,7 @@
 	icon_state = "mining"
 	has_gravity = STANDARD_GRAVITY
 	flags_1 = NONE
-	blob_allowed = FALSE
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | FLORA_ALLOWED
 
 /area/whitesands/colony
 	name = "Whitesands Colony"
@@ -182,8 +181,8 @@
 	power_light = FALSE
 	requires_power = TRUE
 	ambientsounds = MINING
-	flora_allowed = TRUE
 	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED
 
 /area/whitesands/surface/outdoors // weather happens here
 	name = "Whitesands Dunes"
@@ -191,9 +190,8 @@
 
 /area/whitesands/surface/outdoors/unexplored //monsters and ruins spawn here
 	icon_state = "unexplored"
-	tunnel_allowed = TRUE
-	mob_spawn_allowed = TRUE
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED
 
 /area/whitesands/surface/outdoors/unexplored/danger //megafauna will also spawn here
 	icon_state = "danger"
-	megafauna_spawn_allowed = TRUE
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED | MEGAFAUNA_SPAWN_ALLOWED
