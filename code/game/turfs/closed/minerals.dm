@@ -22,13 +22,15 @@
 	var/last_act = 0
 	var/scan_state = "" //Holder for the image we display when we're pinged by a mining scanner
 	var/defer_change = 0
+	var/has_borders = TRUE
 
 /turf/closed/mineral/Initialize()
 	. = ..()
-	var/matrix/M = new
-	M.Translate(-4, -4)
-	transform = M
-	icon = smooth_icon
+	if(has_borders)
+		var/matrix/M = new
+		M.Translate(-4, -4)
+		transform = M
+		icon = smooth_icon
 
 
 /turf/closed/mineral/proc/Spread_Vein()

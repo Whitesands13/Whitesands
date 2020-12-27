@@ -37,9 +37,11 @@
 
 /area/mine/lobby
 	name = "Mining Station"
+	icon_state = "mining_lobby"
 
 /area/mine/storage
 	name = "Mining Station Storage"
+	icon_state = "mining_storage"
 
 /area/mine/production
 	name = "Mining Station Starboard Wing"
@@ -63,15 +65,18 @@
 
 /area/mine/cafeteria
 	name = "Mining Station Cafeteria"
+	icon_state = "mining_labor_cafe"
 
 /area/mine/hydroponics
 	name = "Mining Station Hydroponics"
+	icon_state = "mining_labor_hydro"
 
 /area/mine/sleeper
 	name = "Mining Station Emergency Sleeper"
 
 /area/mine/laborcamp
 	name = "Labor Camp"
+	icon_state = "mining_labor"
 
 /area/mine/laborcamp/security
 	name = "Labor Camp Security"
@@ -128,3 +133,65 @@
 /area/lavaland/surface/outdoors/explored
 	name = "Lavaland Labor Camp"
 	area_flags = VALID_TERRITORY | UNIQUE_AREA
+
+
+
+/**********************Whitesands Areas**************************/
+
+/area/whitesands
+	icon_state = "mining"
+	has_gravity = STANDARD_GRAVITY
+	flags_1 = NONE
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | FLORA_ALLOWED
+
+/area/whitesands/colony
+	name = "Whitesands Colony"
+
+/area/whitesands/colony/guard
+	name = "Whitesands Colony Guard Post"
+	icon_state = "security"
+
+/area/whitesands/colony/dormitory
+	name = "Whitesands Colony Dormitory"
+	icon_state = "mining_living"
+/area/whitesands/colony/dormitory/one
+	name = "Whitesands Colony Dormitory One"
+
+/area/whitesands/colony/dormitory/two
+	name = "Whitesands Colony Dormitory Two"
+
+/area/whitesands/colony/greenhouse
+	name = "Whitesands Colony Greenhouse"
+	icon_state = "mining_labor_hydro"
+
+/area/whitesands/colony/production
+	name = "Whitesands Colony Ore Refinement Plant"
+	icon_state = "mining_production"
+
+/area/whitesands/colony/maintenance
+	name = "Whitesands Colony Communications"
+
+/area/whitesands/surface
+	name = "Whitesands"
+	icon_state = "explored"
+	always_unpowered = TRUE
+	poweralm = FALSE
+	power_environ = FALSE
+	power_equip = FALSE
+	power_light = FALSE
+	requires_power = TRUE
+	ambientsounds = MINING
+	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED
+
+/area/whitesands/surface/outdoors // weather happens here
+	name = "Whitesands Dunes"
+	outdoors = TRUE
+
+/area/whitesands/surface/outdoors/unexplored //monsters and ruins spawn here
+	icon_state = "unexplored"
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED
+
+/area/whitesands/surface/outdoors/unexplored/danger //megafauna will also spawn here
+	icon_state = "danger"
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED | MEGAFAUNA_SPAWN_ALLOWED

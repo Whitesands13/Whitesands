@@ -16,6 +16,7 @@ SUBSYSTEM_DEF(mapping)
 	var/list/ruins_templates = list()
 	var/list/space_ruins_templates = list()
 	var/list/lava_ruins_templates = list()
+	var/list/sand_ruins_templates = list()
 	var/datum/space_level/isolated_ruins_z //Created on demand during ruin loading.
 
 	var/list/shuttle_templates = list()
@@ -96,6 +97,10 @@ SUBSYSTEM_DEF(mapping)
 		for (var/lava_z in lava_ruins)
 			spawn_rivers(lava_z)
 
+	var/list/sand_ruins = levels_by_trait(ZTRAIT_SAND_RUINS)
+	if (sand_ruins.len)
+		seedRuins(sand_ruins, CONFIG_GET(number/whitesands_budget), /area/whitesands/surface/outdoors/unexplored, sand_ruins_templates)
+
 	// Generate deep space ruins
 	var/list/space_ruins = levels_by_trait(ZTRAIT_SPACE_RUINS)
 	if (space_ruins.len)
@@ -169,6 +174,7 @@ SUBSYSTEM_DEF(mapping)
 	ruins_templates = SSmapping.ruins_templates
 	space_ruins_templates = SSmapping.space_ruins_templates
 	lava_ruins_templates = SSmapping.lava_ruins_templates
+	sand_ruins_templates = SSmapping.sand_ruins_templates
 	shuttle_templates = SSmapping.shuttle_templates
 	shelter_templates = SSmapping.shelter_templates
 	unused_turfs = SSmapping.unused_turfs
@@ -254,11 +260,18 @@ SUBSYSTEM_DEF(mapping)
 		++space_levels_so_far
 		add_new_zlevel("Empty Area [space_levels_so_far]", ZTRAITS_SPACE)
 
-	// load mining
-	if(config.minetype == "lavaland")
-		LoadGroup(FailedZs, "Lavaland", "map_files/Mining", "Lavaland.dmm", default_traits = ZTRAITS_LAVALAND)
-	else if (!isnull(config.minetype))
-		INIT_ANNOUNCE("WARNING: An unknown minetype '[config.minetype]' was set! This is being ignored! Update the maploader code!")
+	for(var/minetype in config.minetypes)
+		if(minetype == "random")
+			minetype = list(pickweightAllowZero(GLOB.mining_maps))
+		if(minetype == "lavaland")
+			LoadGroup(FailedZs, "Lavaland", "map_files/Mining", "Lavaland.dmm", default_traits = ZTRAITS_LAVALAND)
+		else if (minetype == "whitesands")
+			LoadGroup(FailedZs, "Whitesands", "map_files/Mining", "Whitesands.dmm", default_traits = ZTRAITS_WHITESANDS)
+		else if (!isnull(minetype) && minetype != "none")
+			INIT_ANNOUNCE("WARNING: An unknown minetype '[minetype]' was set! This is being ignored! Update the maploader code!")
+
+	GLOB.current_mining_map = pick(config.minetypes)
+
 #endif
 
 	if(LAZYLEN(FailedZs))	//but seriously, unless the server's filesystem is messed up this will never happen
@@ -399,6 +412,8 @@ GLOBAL_LIST_EMPTY(the_station_areas)
 
 		if(istype(R, /datum/map_template/ruin/lavaland))
 			lava_ruins_templates[R.name] = R
+//		else if(istype(R, /datum/map_template/ruin/whitesands)) - TBA
+			sand_ruins_templates[R.name] = R
 		else if(istype(R, /datum/map_template/ruin/space))
 			space_ruins_templates[R.name] = R
 		else if(istype(R, /datum/map_template/ruin/station)) //Wasp - Random Engine Framework
