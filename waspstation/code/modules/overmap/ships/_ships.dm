@@ -11,7 +11,7 @@
 	icon = 'waspstation/icons/effects/overmap.dmi'
 	icon_state = "ship"
 	///Prefix of all the icons used by the ship. ([base_icon_state]_moving and [base_icon_state]_damaged)
-	var/base_icon_state = "ship"
+	base_icon_state = "ship"
 
 	///Timer ID of the looping movement timer
 	var/movement_callback_id

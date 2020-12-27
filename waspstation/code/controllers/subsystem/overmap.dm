@@ -173,11 +173,12 @@ SUBSYSTEM_DEF(overmap)
 			if("lava")
 				ruin_type = /datum/map_template/ruin/lavaland
 				mapgen = /datum/map_generator/cave_generator/lavaland
-			if("ice")
-				mapgen = /datum/map_generator/cave_generator/icemoon/surface
+//			if("ice")
+//				mapgen = /datum/map_generator/cave_generator/icemoon/surface
 
 	if(ruin) //Done BEFORE the turfs are reserved so that it allocates the right size box
-		ruin_type = new pick(subtypesof(ruin_type))
+		ruin_type = pick(subtypesof(ruin_type))
+		ruin_type = new ruin_type
 		ruin_size = max(ruin_type.width, ruin_type.height) + 3
 
 	total_size = min(dock_size + ruin_size, total_size)
