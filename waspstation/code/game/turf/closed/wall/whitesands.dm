@@ -7,6 +7,7 @@
 	baseturfs = /turf/open/floor/plating/asteroid/whitesands/dried
 	initial_gas_mix = WHITESANDS_ATMOS
 	defer_change = TRUE
+	has_borders = FALSE
 
 /turf/closed/mineral/uranium/whitesands
 	icon = 'waspstation/icons/turf/walls/whitesands/ws_walls.dmi'
@@ -16,6 +17,7 @@
 	baseturfs = /turf/open/floor/plating/asteroid/whitesands/dried
 	initial_gas_mix = WHITESANDS_ATMOS
 	defer_change = TRUE
+	has_borders = FALSE
 
 /turf/closed/mineral/diamond/whitesands
 	icon = 'waspstation/icons/turf/walls/whitesands/ws_walls.dmi'
@@ -25,6 +27,7 @@
 	baseturfs = /turf/open/floor/plating/asteroid/whitesands/dried
 	initial_gas_mix = WHITESANDS_ATMOS
 	defer_change = TRUE
+	has_borders = FALSE
 
 /turf/closed/mineral/plasma/whitesands
 	icon = 'waspstation/icons/turf/walls/whitesands/ws_walls.dmi'
@@ -34,6 +37,7 @@
 	baseturfs = /turf/open/floor/plating/asteroid/whitesands/dried
 	initial_gas_mix = WHITESANDS_ATMOS
 	defer_change = TRUE
+	has_borders = FALSE
 
 /turf/closed/mineral/bscrystal/whitesands
 	icon = 'waspstation/icons/turf/walls/whitesands/ws_walls.dmi'
@@ -43,6 +47,7 @@
 	baseturfs = /turf/open/floor/plating/asteroid/whitesands/dried
 	initial_gas_mix = WHITESANDS_ATMOS
 	defer_change = TRUE
+	has_borders = FALSE
 
 /turf/closed/mineral/gibtonite/whitesands
 	icon = 'waspstation/icons/turf/walls/whitesands/ws_walls.dmi'
@@ -52,6 +57,7 @@
 	baseturfs = /turf/open/floor/plating/asteroid/whitesands/dried
 	initial_gas_mix = WHITESANDS_ATMOS
 	defer_change = TRUE
+	has_borders = FALSE
 
 /turf/closed/mineral/random/whitesands
 	icon = 'waspstation/icons/turf/walls/whitesands/ws_walls.dmi'
@@ -64,6 +70,7 @@
 		/turf/closed/mineral/gibtonite/whitesands = 4, /turf/open/floor/plating/asteroid/whitesands = 2, /obj/item/stack/ore/bluespace_crystal = 1)
 	initial_gas_mix = WHITESANDS_ATMOS
 	defer_change = TRUE
+	has_borders = FALSE
 
 /turf/closed/mineral/random/whitesands/high_chance
 	icon = 'waspstation/icons/turf/walls/whitesands/ws_walls.dmi'
@@ -73,6 +80,8 @@
 	baseturfs = /turf/open/floor/plating/asteroid/whitesands/dried
 	initial_gas_mix = WHITESANDS_ATMOS
 	defer_change = TRUE
+	has_borders = FALSE
+
 /turf/closed/mineral/random/labormineral/whitesands
 	icon = 'waspstation/icons/turf/walls/whitesands/ws_walls.dmi'
 	smooth_icon = 'waspstation/icons/turf/walls/whitesands/ws_walls.dmi'
@@ -81,6 +90,7 @@
 	baseturfs = /turf/open/floor/plating/asteroid/whitesands/dried
 	initial_gas_mix = WHITESANDS_ATMOS
 	defer_change = TRUE
+	has_borders = FALSE
 
 /turf/closed/mineral/random/low_chance
 	icon = 'waspstation/icons/turf/walls/whitesands/ws_walls.dmi'
@@ -90,3 +100,4 @@
 	baseturfs = /turf/open/floor/plating/asteroid/whitesands/dried
 	initial_gas_mix = WHITESANDS_ATMOS
 	defer_change = TRUE
+	has_borders = FALSE
