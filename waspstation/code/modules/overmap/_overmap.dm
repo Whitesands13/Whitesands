@@ -217,16 +217,23 @@
 		SSovermap.main = src
 	..()
 
-/obj/structure/overmap/level/planet
-	name = "planet"
-	desc = "An unknown planet."
-	icon_state = "globe"
+/obj/structure/overmap/level/mining
+	id = AWAY_OVERMAP_OBJECT_ID_MINING
 
-/obj/structure/overmap/level/planet/lavaland
+/obj/structure/overmap/level/mining/lavaland
 	name = "Lavaland"
 	desc = "A lava-covered planet known for its plentiful natural resources among dangerous fauna."
-	id = AWAY_OVERMAP_OBJECT_ID_MINING
 	color = COLOR_ORANGE
+
+/obj/structure/overmap/level/mining/icemoon
+	name = "Icemoon"
+	desc = "A frozen planet, known for it's lakes and rivers of plasma."
+	color = COLOR_BLUE_LIGHT
+
+/obj/structure/overmap/level/mining/whitesands
+	name = "Whitesands"
+	desc = "Once a mining colony abandoned in unknown circumstances, recent events have lead to it's reactivation."
+	color = COLOR_SILVER
 
 /obj/structure/overmap/dynamic
 	name = "weak energy signature"
@@ -243,10 +250,6 @@
 
 /obj/structure/overmap/dynamic/Initialize(mapload, _id, preload_level)
 	. = ..()
-	if(prob(50))
-		desc = "A small planetoid with a small energy reading emenating out of it. It may not still be here if you leave it."
-		icon_state = "globe"
-		planet = TRUE
 	if(preload_level)
 		load_level()
 
@@ -254,6 +257,43 @@
 	. = ..()
 	QDEL_NULL(reserve)
 
+/**
+  * Chooses a type of level for the dynamic level to use.
+  */
+/obj/structure/overmap/dynamic/proc/choose_level_type()
+	var/chosen = rand(0, 4)
+	switch(chosen)
+		if(0)
+			name = "weak energy signal"
+			planet = FALSE
+			icon_state = "strange_event"
+			color = null
+		if(1)
+			name = "strange lava planet"
+			planet = DYNAMIC_WORLD_LAVA
+			icon_state = "globe"
+			color = COLOR_ORANGE
+		if(2)
+			name = "strange ice planet"
+			planet = DYNAMIC_WORLD_ICE
+			icon_state = "globe"
+			color = COLOR_BLUE_LIGHT
+		if(3)
+			name = "strange jungle planet"
+			planet = DYNAMIC_WORLD_JUNGLE
+			icon_state = "globe"
+			color = COLOR_LIME
+		if(4)
+			name = "strange sand planet"
+			planet = DYNAMIC_WORLD_SAND
+			icon_state = "globe"
+			color = COLOR_SILVER
+	desc += "It may not still be here if you leave it."
+
+/**
+  * Load a level for a ship that's visiting the level.
+  * * visiting shuttle - The docking port of the shuttle visiting the level.
+  */
 /obj/structure/overmap/dynamic/proc/load_level(obj/docking_port/mobile/visiting_shuttle)
 	if(reserve)
 		return

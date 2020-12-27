@@ -115,6 +115,15 @@ SUBSYSTEM_DEF(overmap)
 /datum/controller/subsystem/overmap/proc/spawn_station(attempt = 1)
 	if(main)
 		qdel(main)
+	var/obj/structure/overmap/level/mining/mining_level
+	switch(GLOB.current_mining_map)
+		if("lavaland")
+			mining_level = /obj/structure/overmap/level/mining/lavaland
+		if("icemoon")
+			mining_level = /obj/structure/overmap/level/mining/icemoon
+		if("whitesands")
+			mining_level = /obj/structure/overmap/level/mining/whitesands
+
 	var/obj/structure/overmap/level/main/station = new(get_unused_overmap_square(), null, SSmapping.levels_by_trait(ZTRAIT_STATION))
 	for(var/dir in shuffle(GLOB.alldirs))
 		var/turf/possible_tile = get_step(station, dir)
@@ -122,12 +131,12 @@ SUBSYSTEM_DEF(overmap)
 			continue
 		if(locate(/obj/structure/overmap/event) in possible_tile)
 			continue
-		new /obj/structure/overmap/level/planet/lavaland(possible_tile, null, SSmapping.levels_by_trait(ZTRAIT_MINING))
+		new mining_level(possible_tile, null, SSmapping.levels_by_trait(ZTRAIT_MINING))
 		return
 	if(attempt <= MAX_OVERMAP_PLACEMENT_ATTEMPTS)
 		spawn_station(++attempt) //Try to spawn the whole thing again
 	else
-		new /obj/structure/overmap/level/planet/lavaland(get_unused_overmap_square(), null, SSmapping.levels_by_trait(ZTRAIT_MINING))
+		new mining_level(get_unused_overmap_square(), null, SSmapping.levels_by_trait(ZTRAIT_MINING))
 
 /**
   * Creates an overmap object for each ruin level, making them accessible.
@@ -149,7 +158,7 @@ SUBSYSTEM_DEF(overmap)
   * * size - Size of the encounter, defaults to 1/3 total world size
   * * visiting_shuttle - The shuttle that is going to go to the encounter. Allows ruins to scale.
   */
-/datum/controller/subsystem/overmap/proc/spawn_dynamic_encounter(on_planet, ruin = TRUE, dock_id, size = world.maxx / 3, obj/docking_port/mobile/visiting_shuttle, ignore_cooldown = FALSE)
+/datum/controller/subsystem/overmap/proc/spawn_dynamic_encounter(planet_type, ruin = TRUE, dock_id, size = world.maxx / 4, obj/docking_port/mobile/visiting_shuttle, ignore_cooldown = FALSE)
 	if(!ignore_cooldown && !COOLDOWN_FINISHED(SSovermap, encounter_cooldown))
 		return FALSE
 
@@ -164,28 +173,34 @@ SUBSYSTEM_DEF(overmap)
 	if(visiting_shuttle)
 		dock_size = max(visiting_shuttle.width, visiting_shuttle.height) + 3 //a little bit of wiggle room
 
-	var/datum/map_template/ruin/ruin_type = /datum/map_template/ruin/space
-	var/planet_type
+	var/list/ruin_list = SSmapping.space_ruins_templates
+	var/datum/map_template/ruin/ruin_type
 	var/datum/map_generator/mapgen
-	if(on_planet)
-		planet_type = pick("lava", "ice", "jungle")
+	if(planet_type)
 		switch(planet_type)
-			if("lava")
-				ruin_type = /datum/map_template/ruin/lavaland
-				mapgen = /datum/map_generator/cave_generator/lavaland
-//			if("ice")
-//				mapgen = /datum/map_generator/cave_generator/icemoon/surface
+			if(DYNAMIC_WORLD_LAVA)
+				ruin_list = SSmapping.lava_ruins_templates
+				mapgen = new /datum/map_generator/cave_generator/lavaland
+			if(DYNAMIC_WORLD_ICE)
+				ruin_list = SSmapping.ice_ruins_templates
+				mapgen = new /datum/map_generator/cave_generator/icemoon/surface
+			if(DYNAMIC_WORLD_SAND)
+				ruin_list = SSmapping.sand_ruins_templates
+				mapgen = new /datum/map_generator/cave_generator/whitesands
+			if(DYNAMIC_WORLD_JUNGLE)
+				ruin_list = null
+//				ruin_list = SSmapping.jungle_ruins_templates
+				mapgen = new /datum/map_generator/jungle_generator
 
-	if(ruin) //Done BEFORE the turfs are reserved so that it allocates the right size box
-		ruin_type = pick(subtypesof(ruin_type))
+	if(ruin && ruin_list) //Done BEFORE the turfs are reserved so that it allocates the right size box
+		ruin_type = pick(ruin_list)
 		ruin_type = new ruin_type
 		ruin_size = max(ruin_type.width, ruin_type.height) + 3
 
 	total_size = min(dock_size + ruin_size, total_size)
 
-	var/datum/turf_reservation/encounter_reservation = SSmapping.RequestBlockReservation(total_size, total_size, border_turf_override = /turf/closed/indestructible/blank, area_override = on_planet ? /area/ruin/unpowered/planetoid : null)
-	if(on_planet)
-		mapgen = new mapgen
+	var/datum/turf_reservation/encounter_reservation = SSmapping.RequestBlockReservation(total_size, total_size, border_turf_override = /turf/closed/indestructible/blank, area_override = planet_type ? /area/ruin/unpowered/planetoid : null)
+	if(mapgen)
 		mapgen.generate_terrain(encounter_reservation.non_border_turfs)
 
 	if(ruin_type) //Does AFTER the turfs are reserved so it can find where the allocation is

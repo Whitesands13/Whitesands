@@ -72,7 +72,7 @@
 	. = list()
 	.["shipInfo"] = list(
 		name = current_ship.name,
-		class = istype(current_ship, /obj/structure/overmap/ship) ? "Ship" : istype(current_ship, /obj/structure/overmap/level/planet) ? "Planetoid" : "Station",
+		class = istype(current_ship, /obj/structure/overmap/ship) ? "Ship" : istype(current_ship, /obj/structure/overmap/level) ? "Planetoid" : "Station",
 		integrity = current_ship.integrity,
 		sensor_range = current_ship.sensor_range,
 		ref = REF(current_ship)

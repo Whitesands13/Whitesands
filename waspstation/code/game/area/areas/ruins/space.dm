@@ -4,7 +4,7 @@
 /area/ruin/unpowered/planetoid
 	name = "Unknown Planetoid"
 	icon_state = "away"
-	area_flags = UNIQUE_AREA
+	area_flags = UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED
 	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
 
 //MACSPACE

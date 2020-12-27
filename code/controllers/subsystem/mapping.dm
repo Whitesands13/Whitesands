@@ -16,6 +16,8 @@ SUBSYSTEM_DEF(mapping)
 	var/list/ruins_templates = list()
 	var/list/space_ruins_templates = list()
 	var/list/lava_ruins_templates = list()
+	var/list/ice_ruins_templates = list()
+	var/list/ice_ruins_underground_templates = list()
 	var/list/sand_ruins_templates = list()
 	var/datum/space_level/isolated_ruins_z //Created on demand during ruin loading.
 
@@ -99,18 +101,31 @@ SUBSYSTEM_DEF(mapping)
 	loading_ruins = TRUE
 	var/list/lava_ruins = levels_by_trait(ZTRAIT_LAVA_RUINS)
 	if (lava_ruins.len)
-		seedRuins(lava_ruins, CONFIG_GET(number/lavaland_budget), /area/lavaland/surface/outdoors/unexplored, lava_ruins_templates)
+		seedRuins(lava_ruins, CONFIG_GET(number/lavaland_budget), list(/area/lavaland/surface/outdoors/unexplored), lava_ruins_templates)
 		for (var/lava_z in lava_ruins)
 			spawn_rivers(lava_z)
 
+	var/list/ice_ruins = levels_by_trait(ZTRAIT_ICE_RUINS)
+	if (ice_ruins.len)
+		// needs to be whitelisted for underground too so place_below ruins work
+		seedRuins(ice_ruins, CONFIG_GET(number/icemoon_budget), list(/area/icemoon/surface/outdoors/unexplored, /area/icemoon/underground/unexplored), ice_ruins_templates)
+		for (var/ice_z in ice_ruins)
+			spawn_rivers(ice_z, 4, /turf/open/transparent/openspace/icemoon, /area/icemoon/surface/outdoors/unexplored)
+
+	var/list/ice_ruins_underground = levels_by_trait(ZTRAIT_ICE_RUINS_UNDERGROUND)
+	if (ice_ruins_underground.len)
+		seedRuins(ice_ruins_underground, CONFIG_GET(number/icemoon_budget), list(/area/icemoon/underground/unexplored), ice_ruins_underground_templates)
+		for (var/ice_z in ice_ruins_underground)
+			spawn_rivers(ice_z, 4, /turf/open/lava/plasma/ice_moon, /area/icemoon/underground/unexplored)
+
 	var/list/sand_ruins = levels_by_trait(ZTRAIT_SAND_RUINS)
 	if (sand_ruins.len)
-		seedRuins(sand_ruins, CONFIG_GET(number/whitesands_budget), /area/whitesands/surface/outdoors/unexplored, sand_ruins_templates)
+		seedRuins(sand_ruins, CONFIG_GET(number/whitesands_budget), list(/area/whitesands/surface/outdoors/unexplored), sand_ruins_templates)
 
 	// Generate deep space ruins
 	var/list/space_ruins = levels_by_trait(ZTRAIT_SPACE_RUINS)
 	if (space_ruins.len)
-		seedRuins(space_ruins, CONFIG_GET(number/space_budget), /area/space, space_ruins_templates)
+		seedRuins(space_ruins, CONFIG_GET(number/space_budget), list(/area/space), space_ruins_templates)
 	SSmapping.seedStation() //Wasp - Random Engine Framework
 	loading_ruins = FALSE
 #endif
@@ -269,18 +284,26 @@ SUBSYSTEM_DEF(mapping)
 		var/obj/docking_port/stationary/z_port = new(T)
 		z_port.id = "whiteship_z[z_list.len]"
 
-	for(var/minetype in config.minetypes)
-		if(minetype == "random")
-			minetype = list(pickweightAllowZero(GLOB.mining_maps))
-		if(minetype == "lavaland")
-			LoadGroup(FailedZs, "Lavaland", "map_files/Mining", "Lavaland.dmm", default_traits = ZTRAITS_LAVALAND)
-		else if (minetype == "whitesands")
-			LoadGroup(FailedZs, "Whitesands", "map_files/Mining", "Whitesands.dmm", default_traits = ZTRAITS_WHITESANDS)
-		else if (!isnull(minetype) && minetype != "none")
-			INIT_ANNOUNCE("WARNING: An unknown minetype '[minetype]' was set! This is being ignored! Update the maploader code!")
+	// pick a random mining map
+	if (config.minetype == "random")
+		config.minetype = pickweightAllowZero(GLOB.mining_maps)
 
-	GLOB.current_mining_map = pick(config.minetypes)
+	GLOB.current_mining_map = config.minetype
 
+	if(config.minetype == "lavaland")
+		LoadGroup(FailedZs, "Lavaland", "map_files/Mining", "Lavaland.dmm", default_traits = ZTRAITS_LAVALAND)
+	else if (config.minetype == "icemoon")
+		LoadGroup(FailedZs, "Ice moon Underground", "map_files/Mining", "IcemoonUnderground.dmm", default_traits = ZTRAITS_ICEMOON_UNDERGROUND)
+		LoadGroup(FailedZs, "Ice moon", "map_files/Mining", "Icemoon.dmm", default_traits = ZTRAITS_ICEMOON)
+	else if (config.minetype == "whitesands")
+		LoadGroup(FailedZs, "Whitesands", "map_files/Mining", "Whitesands.dmm", default_traits = ZTRAITS_WHITESANDS)
+	else if (!isnull(config.minetype))
+		INIT_ANNOUNCE("WARNING: An unknown minetype '[config.minetype]' was set! This is being ignored! Update the maploader code!")
+
+	// reset the mining map to random so if an admin sets the mining map it isn't stuck to that forever
+	GLOB.next_mining_map = "random"
+	var/datum/map_config/VM = load_map_config()
+	SSmapping.changemap(VM)
 #endif
 
 	if(LAZYLEN(FailedZs))	//but seriously, unless the server's filesystem is messed up this will never happen
@@ -405,6 +428,8 @@ GLOBAL_LIST_EMPTY(the_station_areas)
 	// Still supporting bans by filename
 	var/list/banned = generateMapList("[global.config.directory]/lavaruinblacklist.txt")
 	banned += generateMapList("[global.config.directory]/spaceruinblacklist.txt")
+	banned += generateMapList("[global.config.directory]/iceruinblacklist.txt")
+	banned += generateMapList("[global.config.directory]/sandruinblacklist.txt")
 
 	for(var/item in sortList(subtypesof(/datum/map_template/ruin), /proc/cmp_ruincost_priority))
 		var/datum/map_template/ruin/ruin_type = item
@@ -423,6 +448,10 @@ GLOBAL_LIST_EMPTY(the_station_areas)
 			lava_ruins_templates[R.name] = R
 //		else if(istype(R, /datum/map_template/ruin/whitesands)) - TBA
 			sand_ruins_templates[R.name] = R
+		else if(istype(R, /datum/map_template/ruin/icemoon/underground))
+			ice_ruins_underground_templates[R.name] = R
+		else if(istype(R, /datum/map_template/ruin/icemoon))
+			ice_ruins_templates[R.name] = R
 		else if(istype(R, /datum/map_template/ruin/space))
 			space_ruins_templates[R.name] = R
 		else if(istype(R, /datum/map_template/ruin/station)) //Wasp - Random Engine Framework
