@@ -16,8 +16,7 @@
 	var/hair_color = "000"
 	var/hairstyle = "Bald"
 
-	//Facial hair colour and style
-	var/facial_hair_color = "000"
+	//Facial hair style | //Wasp edit, merged hair color
 	var/facial_hairstyle = "Shaved"
 
 	//Eye colour

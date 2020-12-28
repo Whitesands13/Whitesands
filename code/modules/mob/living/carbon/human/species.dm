@@ -531,7 +531,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 					else
 						facial_overlay.color = "#" + hair_color
 				else
-					facial_overlay.color = "#" + H.facial_hair_color
+					facial_overlay.color = "#" + H.hair_color
 			else
 				facial_overlay.color = forced_colour
 
@@ -904,7 +904,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 							else
 								accessory_overlay.color = "#[H.hair_color]"
 						if(FACEHAIR)
-							accessory_overlay.color = "#[H.facial_hair_color]"
+							accessory_overlay.color = "#[H.hair_color]"
 						if(EYECOLOR)
 							accessory_overlay.color = "#[H.eye_color]"
 				else
