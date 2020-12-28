@@ -339,21 +339,18 @@
 	name = "Security Clothing Crate"
 	desc = "Contains appropriate outfits for the station's private security force. Contains outfits for the Warden, Head of Security, and two Security Officers. Each outfit comes with a rank-appropriate jumpsuit, suit, and beret. Requires extended Security access to open."
 	cost = 3000
-	contains = list(/obj/item/clothing/under/rank/security/officer/formal,
-					/obj/item/clothing/under/rank/security/officer/formal,
+	contains = list(/obj/item/clothing/suit/security/officer,
 					/obj/item/clothing/suit/security/officer,
 					/obj/item/clothing/suit/security/officer,
-					/obj/item/clothing/head/beret/sec/navyofficer,
-					/obj/item/clothing/head/beret/sec/navyofficer,
-					/obj/item/clothing/head/beret/sec/navyofficer/black,
-					/obj/item/clothing/under/rank/security/warden/formal,
+					/obj/item/clothing/head/beret/sec/officer/navy,
+					/obj/item/clothing/head/beret/sec/officer/navy,
+					/obj/item/clothing/head/beret/sec/officer,
 					/obj/item/clothing/suit/security/warden,
-					/obj/item/clothing/head/beret/sec/navywarden,
-					/obj/item/clothing/head/beret/sec/navywarden/black,
-					/obj/item/clothing/under/rank/security/head_of_security/formal,
+					/obj/item/clothing/head/beret/sec/warden/navy,
+					/obj/item/clothing/head/beret/sec/warden,
 					/obj/item/clothing/suit/security/hos,
-					/obj/item/clothing/head/beret/sec/navyhos,
-					/obj/item/clothing/head/beret/sec/navyhos/black)
+					/obj/item/clothing/head/beret/sec/hos/navy,
+					/obj/item/clothing/head/beret/sec/hos)
 	crate_name = "security clothing crate"
 
 /datum/supply_pack/security/stingpack

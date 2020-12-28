@@ -86,34 +86,34 @@
 	strip_delay = 60
 	dog_fashion = null
 
-/obj/item/clothing/head/beret/sec/navyhos
+/obj/item/clothing/head/beret/sec/hos/navy
 	name = "head of security's navy beret"
 	desc = "A navy-colored beret with the Head of Security's insignia emblazoned on it. A symbol of excellence, a badge of courage, a mark of distinction."
 	icon_state = "hosberet"
 	armor = list("melee" = 40, "bullet" = 30, "laser" = 25, "energy" = 35, "bomb" = 25, "bio" = 10, "rad" = 0, "fire" = 50, "acid" = 60)
 
-/obj/item/clothing/head/beret/sec/navyhos/black
+/obj/item/clothing/head/beret/sec/hos
 	name = "head of security's black beret"
 	desc = "A black beret with the Head of Security's insignia emblazoned on it. A symbol of excellence, a badge of courage, a mark of distinction."
 	icon_state = "hosberetblack"
 
-/obj/item/clothing/head/beret/sec/navywarden
+/obj/item/clothing/head/beret/sec/warden/navy
 	name = "warden's beret"
 	desc = "A navy-colored beret with the Warden's insignia emblazoned on it. For wardens with class."
 	icon_state = "wardenberet"
 	armor = list("melee" = 40, "bullet" = 30, "laser" = 30, "energy" = 40, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 30, "acid" = 60)
 	strip_delay = 60
 
-/obj/item/clothing/head/beret/sec/navywarden/black
+/obj/item/clothing/head/beret/sec/warden
 	name = "warden's beret"
 	desc = "A beret made with black reinforced fabric with the Warden's insignia emblazoned on it. For wardens with class."
 	icon_state = "wardenberetblack"
 
-/obj/item/clothing/head/beret/sec/navyofficer
+/obj/item/clothing/head/beret/sec/officer/navy
 	desc = "A navy-colored beret with the security insignia emblazoned on it. For officers with class."
 	icon_state = "officerberet"
 
-/obj/item/clothing/head/beret/sec/navyofficer/black
+/obj/item/clothing/head/beret/sec/officer
 	desc = "A beret made out of black reinforced fabric with the security insignia emblazoned on it. For officers with class."
 	icon_state = "officerberetblack"
 
