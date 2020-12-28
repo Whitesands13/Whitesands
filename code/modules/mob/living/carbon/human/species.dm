@@ -533,8 +533,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 						facial_overlay.color = "#[fixed_mut_color]"
 					else
 						facial_overlay.color = "#" + hair_color
-				else
-					facial_overlay.color = "#" + H.facial_hair_color
+	//Waspstation Edit - Facial Hair and Head hair same color
 			else
 				facial_overlay.color = forced_colour
 
@@ -906,8 +905,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 								accessory_overlay.color = "#[fixed_mut_color]"
 							else
 								accessory_overlay.color = "#[H.hair_color]"
-						if(FACEHAIR)
-							accessory_overlay.color = "#[H.facial_hair_color]"
+	//Waspstation Edit - Facial Hair and Head hair same color
 						if(EYECOLOR)
 							accessory_overlay.color = "#[H.eye_color]"
 				else
