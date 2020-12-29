@@ -19,6 +19,7 @@ SUBSYSTEM_DEF(mapping)
 	var/list/ice_ruins_templates = list()
 	var/list/ice_ruins_underground_templates = list()
 	var/list/sand_ruins_templates = list()
+	var/list/jungle_ruins_templates = list()
 	var/datum/space_level/isolated_ruins_z //Created on demand during ruin loading.
 
 	var/list/shuttle_templates = list()
@@ -446,8 +447,10 @@ GLOBAL_LIST_EMPTY(the_station_areas)
 
 		if(istype(R, /datum/map_template/ruin/lavaland))
 			lava_ruins_templates[R.name] = R
-//		else if(istype(R, /datum/map_template/ruin/whitesands)) - TBA
+		else if(istype(R, /datum/map_template/ruin/whitesands))
 			sand_ruins_templates[R.name] = R
+		else if(istype(R, /datum/map_template/ruin/jungle))
+			jungle_ruins_templates[R.name] = R
 		else if(istype(R, /datum/map_template/ruin/icemoon/underground))
 			ice_ruins_underground_templates[R.name] = R
 		else if(istype(R, /datum/map_template/ruin/icemoon))

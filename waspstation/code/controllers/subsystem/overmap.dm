@@ -189,7 +189,7 @@ SUBSYSTEM_DEF(overmap)
 				mapgen = new /datum/map_generator/cave_generator/whitesands
 			if(DYNAMIC_WORLD_JUNGLE)
 				ruin_list = null
-//				ruin_list = SSmapping.jungle_ruins_templates
+				ruin_list = SSmapping.jungle_ruins_templates
 				mapgen = new /datum/map_generator/jungle_generator
 
 	if(ruin && ruin_list) //Done BEFORE the turfs are reserved so that it allocates the right size box
