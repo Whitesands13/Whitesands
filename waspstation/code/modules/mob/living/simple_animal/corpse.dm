@@ -13,6 +13,7 @@
 	shoes = /obj/item/clothing/shoes/jackboots
 	gloves = /obj/item/clothing/gloves/color/grey
 	ears = /obj/item/radio/headset
+	suit_store = null
 	mask = /obj/item/clothing/mask/gas/sechailer/swat
 	head = /obj/item/clothing/head/helmet/solgov
 	back = /obj/item/storage/backpack
@@ -33,6 +34,7 @@
 	shoes = /obj/item/clothing/shoes/combat
 	gloves = /obj/item/clothing/gloves/combat
 	ears = /obj/item/radio/headset/solgov/alt
+	suit_store = null
 	mask = /obj/item/clothing/mask/gas/sechailer/swat
 	head = /obj/item/clothing/head/helmet/solgov
 	back = /obj/item/storage/backpack
