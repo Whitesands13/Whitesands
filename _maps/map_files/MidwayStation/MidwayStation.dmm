@@ -4837,8 +4837,8 @@
 /area/science/test_area)
 "ayn" = (
 /turf/closed/indestructible/riveted{
-	name = "hyper-reinforced wall";
-	desc = "A wall impregnated with Fixium, able to withstand massive explosions with ease"
+	desc = "A wall impregnated with Fixium, able to withstand massive explosions with ease";
+	name = "hyper-reinforced wall"
 	},
 /area/science/test_area)
 "ayo" = (
@@ -11473,6 +11473,15 @@
 	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/fore)
+"cmd" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/machinery/airalarm/directional/east{
+	pixel_x = 24
+	},
+/turf/open/floor/plasteel,
+/area/security/courtroom)
 "cmB" = (
 /obj/machinery/computer/communications,
 /turf/open/floor/wood,
@@ -15367,23 +15376,6 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/medical/virology)
-"fbh" = (
-/obj/structure/table,
-/obj/item/stack/packageWrap,
-/obj/item/hand_labeler,
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/brown{
-	dir = 4
-	},
-/obj/machinery/firealarm{
-	dir = 1;
-	pixel_y = 26
-	},
-/turf/open/floor/plasteel,
-/area/vacant_room/commissary)
 "fbW" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
@@ -21333,16 +21325,6 @@
 	},
 /turf/open/floor/plasteel/showroomfloor,
 /area/crew_quarters/kitchen/coldroom)
-"jnx" = (
-/obj/structure/table/wood,
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
-	dir = 6
-	},
-/obj/machinery/atmospherics/pipe/simple/supply/hidden{
-	dir = 5
-	},
-/turf/open/floor/carpet/green,
-/area/crew_quarters/solgov)
 "joi" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 5
@@ -22037,6 +22019,17 @@
 /obj/effect/turf_decal/tile/yellow,
 /turf/open/floor/plasteel,
 /area/hallway/primary/starboard)
+"jRt" = (
+/obj/structure/table/wood,
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 5
+	},
+/obj/item/desk_flag/solgov,
+/turf/open/floor/carpet/green,
+/area/crew_quarters/solgov)
 "jRY" = (
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
@@ -22649,6 +22642,13 @@
 	},
 /turf/open/floor/plasteel,
 /area/crew_quarters/bar)
+"kkg" = (
+/obj/structure/chair,
+/obj/machinery/airalarm/directional/east{
+	pixel_x = 24
+	},
+/turf/open/floor/plasteel,
+/area/security/courtroom)
 "klv" = (
 /obj/item/radio/intercom{
 	pixel_x = -28
@@ -24213,12 +24213,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/starboard)
-"ltb" = (
-/obj/machinery/light{
-	dir = 4
-	},
-/turf/open/floor/plasteel,
-/area/security/courtroom)
 "ltz" = (
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
@@ -27549,6 +27543,24 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/medical/virology)
+"nCU" = (
+/obj/structure/table,
+/obj/item/stack/packageWrap,
+/obj/item/hand_labeler,
+/obj/effect/turf_decal/tile/brown,
+/obj/effect/turf_decal/tile/brown{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/brown{
+	dir = 4
+	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_y = 26
+	},
+/obj/item/desk_flag,
+/turf/open/floor/plasteel,
+/area/vacant_room/commissary)
 "nDp" = (
 /obj/structure/disposalpipe/segment{
 	dir = 9
@@ -29377,8 +29389,7 @@
 	},
 /obj/machinery/firealarm{
 	dir = 8;
-	pixel_x = -35;
-	pixel_y = 5
+	pixel_x = -26
 	},
 /turf/open/floor/plasteel,
 /area/security/checkpoint/engineering)
@@ -61381,11 +61392,11 @@ aaa
 aaa
 hGZ
 sUt
-jnx
+jRt
 vgk
 ksO
 sUt
-jnx
+jRt
 vgk
 ksO
 ljD
@@ -62466,7 +62477,7 @@ aZz
 aZz
 aZz
 jfn
-fbh
+nCU
 iCq
 srz
 idP
@@ -64814,13 +64825,13 @@ aaa
 aaa
 aaa
 yge
-hGv
+kkg
 fdS
 oFU
 cXo
 aRc
 fgG
-ltb
+cmd
 aRc
 aRc
 aRc
