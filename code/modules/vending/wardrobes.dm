@@ -33,9 +33,9 @@
 					/obj/item/clothing/under/rank/security/officer/mallcop = 3,
 					/obj/item/clothing/neck/tie/blue = 6,
 					/obj/item/clothing/neck/tie/black = 6)
-	premium = list(/obj/item/clothing/suit/security/officer = 3,
-					/obj/item/clothing/head/beret/sec/officer/navy = 2,
-					/obj/item/clothing/head/beret/sec/officer/navy = 2)
+	premium = list(/obj/item/clothing/suit/armor/vest/security/officer = 3,
+					/obj/item/clothing/head/beret/sec/officer = 2,
+					/obj/item/clothing/head/beret/sec/officer = 2)
 	refill_canister = /obj/item/vending_refill/wardrobe/sec_wardrobe
 	payment_department = ACCOUNT_SEC
 	light_color = COLOR_MOSTLY_PURE_RED

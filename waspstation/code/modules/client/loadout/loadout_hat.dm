@@ -42,7 +42,7 @@
 		"Warden" = /obj/item/clothing/head/beret/sec/warden,
 		"Security Officer" = /obj/item/clothing/head/beret/sec/officer,
 		"Detective" = /obj/item/clothing/head/beret/sec,
-		"Brig Physician" = /obj/item/clothing/head/beret/sec/officer,
+		"Brig Physician" = /obj/item/clothing/head/beret/sec/brig_phys,
 
 		"Chief Engineer" = /obj/item/clothing/head/beret/ce,
 		"Station Engineer" = /obj/item/clothing/head/beret/eng,

@@ -42,7 +42,7 @@
 	uniform = /obj/item/clothing/under/rank/security/head_of_security
 	shoes = /obj/item/clothing/shoes/jackboots
 	suit = /obj/item/clothing/suit/armor/hos/trenchcoat
-	alt_suit = /obj/item/clothing/suit/armor/hos
+	alt_suit = /obj/item/clothing/suit/armor/vest/security/hos
 	dcoat = /obj/item/clothing/suit/hooded/wintercoat/security //Wasp Edit - Alt Uniforms
 	gloves = /obj/item/clothing/gloves/color/black
 	head = /obj/item/clothing/head/beret/sec/hos //Wasp edit - Better Berets
