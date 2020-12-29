@@ -41,6 +41,9 @@
 /obj/machinery/computer/camera_advanced/shuttle_docker/nav/placeLandingSpot()
 	if(!shuttleId)
 		return	//Only way this would happen is if someone else delinks the console while in use somehow
+	if(!current_ship.is_still())
+		to_chat(current_user, "<span class='warning'>You can't try to land while moving!</span>")
+		return
 	if(!(current_target in current_ship.close_overmap_objects))
 		return
 	..()
@@ -58,6 +61,9 @@
 		return
 	if(!current_target.custom_docking || !current_target.linked_levels)
 		to_chat(user, "<span class='warning'>There's too much interference to dock anywhere but the designated docking port!</span>")
+		return
+	if(!current_ship.is_still())
+		to_chat(user, "<span class='warning'>You can't try to land while moving!</span>")
 		return
 	jumpto_ports = list("[shuttleId]_[current_target.id]", "whiteship_[current_target.id]")
 	shuttlePortId = "[shuttleId]_[current_target.id]"
