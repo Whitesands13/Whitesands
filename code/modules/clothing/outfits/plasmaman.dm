@@ -217,7 +217,7 @@
 	head = /obj/item/clothing/head/helmet/space/plasmaman/security/lieutenant
 	uniform = /obj/item/clothing/under/plasmaman/lieutenant
 	gloves = /obj/item/clothing/gloves/combat
-	
+
 /datum/outfit/plasmaman/solgov //WS edit sgr
 	name = "P-Man"
 	head = /obj/item/clothing/head/helmet/space/plasmaman/solgov
