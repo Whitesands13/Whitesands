@@ -7,11 +7,12 @@
 	environment_type = WHITESANDS_SAND_ENV
 	initial_gas_mix = OPENTURF_LOW_PRESSURE //Fallback, and used to tell the AACs that this is the exterior
 	digResult = /obj/item/stack/ore/glass
-	var/static/datum/gas_mixture/immutable/whitesands_planet/whitesands_gas = new
 
 /turf/open/floor/plating/asteroid/whitesands/Initialize()
 	..()
-	air = whitesands_gas
+	if (GLOB.ws_planet_atmos.ws_moles_amount == null)
+		GLOB.ws_planet_atmos.New()
+	air = GLOB.ws_planet_atmos
 	update_air_ref()
 
 /turf/open/floor/plating/asteroid/whitesands/dried
@@ -21,3 +22,6 @@
 	icon_plating = "dried_up"
 	environment_type = WHITESANDS_DRIED_ENV
 	digResult = /obj/item/stack/ore/glass
+
+/turf/open/floor/plating/asteroid/whitesands/remove_air(amount)
+	return return_air()
