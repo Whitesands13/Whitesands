@@ -116,7 +116,8 @@
 	return data
 
 /obj/machinery/clonepod/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
 	switch(action)
 		if("ejectbeaker")
@@ -516,9 +517,9 @@
 		QDEL_IN(mob_occupant, 40)
 
 /obj/machinery/clonepod/relaymove(mob/user)
-	container_resist(user)
+	container_resist_act(user)
 
-/obj/machinery/clonepod/container_resist(mob/living/user)
+/obj/machinery/clonepod/container_resist_act(mob/living/user)
 	if(user.stat == CONSCIOUS)
 		go_out()
 

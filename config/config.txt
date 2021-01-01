@@ -6,6 +6,7 @@ $include comms.txt
 $include antag_rep.txt
 $include resources.txt
 $include interviews.txt
+$include atmos_mix.txt
 
 # You can use the @ character at the beginning of a config option to lock it from being edited in-game
 # Example usage:
@@ -527,6 +528,10 @@ DEFAULT_VIEW 21x15
 ## The alternative square viewport size if you're using a widescreen view size
 ## You probably shouldn't ever be changing this, but it's here if you want to.
 DEFAULT_VIEW_SQUARE 15x15
+
+## Custom shuttle spam prevention. Changine these numbers allows you to change the maxsize and amount of custom shuttles.
+MAX_SHUTTLE_COUNT 6
+MAX_SHUTTLE_SIZE 300
 
 
 ## Enable automatic profiling - Byond 513.1506 and newer only.

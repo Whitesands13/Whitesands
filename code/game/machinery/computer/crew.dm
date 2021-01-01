@@ -32,7 +32,7 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 	var/list/jobs = new/list()
 	jobs["Captain"] = 00
 	jobs["Head of Personnel"] = 02
-	jobs["Lieutenant"] = 05
+	jobs["SolGov Representative"] = 05		// Wasp Edit - SolGov Rep
 	jobs["Head of Security"] = 10
 	jobs["Warden"] = 11
 	jobs["Security Officer"] = 12
@@ -97,12 +97,12 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 	if(!z)
 		var/turf/T = get_turf(user)
 		z = T.z
-	var/list/zdata = update_data(z)
+	var/list/zdata = update_data(z, SSmapping.level_trait(z, ZTRAIT_STATION))
 	. = list()
 	.["sensors"] = zdata
 	.["link_allowed"] = isAI(user)
 
-/datum/crewmonitor/proc/update_data(z)
+/datum/crewmonitor/proc/update_data(z, station)
 	if(data_by_z["[z]"] && last_update["[z]"] && world.time <= last_update["[z]"] + SENSORS_UPDATE_PERIOD)
 		return data_by_z["[z]"]
 
@@ -129,7 +129,8 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 			nanite_sensors = TRUE
 		// Check if their z-level is correct and if they are wearing a uniform.
 		// Accept H.z==0 as well in case the mob is inside an object.
-		if ((H.z == 0 || H.z == z) && (istype(H.w_uniform, /obj/item/clothing/under) || nanite_sensors))
+		// Accept any station zlevel if the console user is on a station zlevel
+		if ((H.z == 0 || H.z == z || (station && SSmapping.level_trait(H.z, ZTRAIT_STATION))) && (istype(H.w_uniform, /obj/item/clothing/under) || nanite_sensors))
 			U = H.w_uniform
 
 			// Are the suit sensors on?
@@ -189,6 +190,9 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 	return a["ijob"] - b["ijob"]
 
 /datum/crewmonitor/ui_act(action,params)
+	. = ..()
+	if(.)
+		return
 	var/mob/living/silicon/ai/AI = usr
 	if(!istype(AI))
 		return
@@ -197,4 +201,3 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 			AI.ai_camera_track(params["name"])
 
 #undef SENSORS_UPDATE_PERIOD
-

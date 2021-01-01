@@ -143,11 +143,11 @@
 			target.LAssailant = user
 		update_icon()
 
-/obj/machinery/disposal/relaymove(mob/user)
+/obj/machinery/disposal/relaymove(mob/living/user, direction)
 	attempt_escape(user)
 
 // resist to escape the bin
-/obj/machinery/disposal/container_resist(mob/living/user)
+/obj/machinery/disposal/container_resist_act(mob/living/user)
 	attempt_escape(user)
 
 /obj/machinery/disposal/proc/attempt_escape(mob/user)
@@ -299,7 +299,8 @@
 	return data
 
 /obj/machinery/disposal/bin/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
 
 	switch(action)

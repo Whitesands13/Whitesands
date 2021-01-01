@@ -29,6 +29,7 @@
 	for(var/direction in GLOB.cardinals)
 		power_station = locate(/obj/machinery/teleport/station, get_step(src, direction))
 		if(power_station)
+			power_station.link_console_and_hub()
 			break
 	return power_station
 
@@ -54,7 +55,8 @@
 	return data
 
 /obj/machinery/computer/teleporter/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
 
 	if(!check_hub_connection())
@@ -174,6 +176,6 @@
 	if(is_centcom_level(T.z) || is_away_level(T.z))
 		return FALSE
 	var/area/A = get_area(T)
-	if(!A || A.noteleport)
+	if(!A ||(A.area_flags & NOTELEPORT))
 		return FALSE
 	return TRUE

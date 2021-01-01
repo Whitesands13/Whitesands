@@ -55,7 +55,7 @@
 			if(I.use_tool(src, user, ENGINE_WELDTIME, volume=50))
 				state = ENGINE_WELDED
 				to_chat(user, "<span class='notice'>You weld \the [src] to the floor.</span>")
-				alter_engine_power(engine_power)
+				alter_engine_power(engine_power, src)
 
 		if(ENGINE_WELDED)
 			if(!I.tool_start_check(user, amount=0))
@@ -68,12 +68,12 @@
 			if(I.use_tool(src, user, ENGINE_WELDTIME, volume=50))
 				state = ENGINE_WRENCHED
 				to_chat(user, "<span class='notice'>You cut \the [src] free from the floor.</span>")
-				alter_engine_power(-engine_power)
+				alter_engine_power(-engine_power, src)
 	return TRUE
 
 /obj/structure/shuttle/engine/Destroy()
 	if(state == ENGINE_WELDED)
-		alter_engine_power(-engine_power)
+		alter_engine_power(-engine_power, src)
 	. = ..()
 
 //Propagates the change to the shuttle.
