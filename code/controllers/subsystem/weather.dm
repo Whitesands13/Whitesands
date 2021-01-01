@@ -84,7 +84,7 @@ SUBSYSTEM_DEF(weather)
     return A
 
 /datum/controller/subsystem/weather/proc/set_temperature_gradient(datum/gas_mixture/immutable/immutable_mix)
-	LAZYSET(temperature_gradients, immutable_mix, rate)
+	LAZYSET(temperature_gradients, immutable_mix)
 
 /datum/controller/subsystem/weather/proc/fire_temperature_update(datum/gas_mixture/immutable/mix)
 	if (!istype(mix))
