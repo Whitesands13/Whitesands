@@ -82,6 +82,7 @@
 				if(can_spawn)
 					spawned_flora = pickweight(flora_spawn_list)
 					spawned_flora = new spawned_flora(new_open_turf)
+					new_open_turf.flags_1 |= NO_LAVA_GEN_1
 
 			//FEATURE SPAWNING HERE
 			var/atom/spawned_feature
@@ -99,6 +100,7 @@
 
 				if(can_spawn)
 					spawned_feature = new picked_feature(new_open_turf)
+					new_open_turf.flags_1 |= NO_LAVA_GEN_1
 
 			//MOB SPAWNING HERE
 
@@ -134,6 +136,7 @@
 						megafauna_spawn_list.Remove(picked_mob)
 
 					new picked_mob(new_open_turf)
+					new_open_turf.flags_1 |= NO_LAVA_GEN_1
 		CHECK_TICK
 
 	var/message = "[name] finished in [(REALTIMEOFDAY - start_time)/10]s!"
