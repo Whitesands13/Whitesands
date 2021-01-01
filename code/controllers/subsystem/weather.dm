@@ -35,7 +35,7 @@ SUBSYSTEM_DEF(weather)
 		next_hit_by_zlevel["[z]"] = addtimer(CALLBACK(src, .proc/make_eligible, z, possible_weather), randTime + initial(W.weather_duration_upper), TIMER_UNIQUE|TIMER_STOPPABLE) //Around 5-10 minutes between weathers
 
 	for(var/mix in temperature_gradients)
-		fire_temperature_update(mix, temperature_gradients[mix])
+		fire_temperature_update(mix)
 
 /datum/controller/subsystem/weather/Initialize(start_timeofday)
 	for(var/V in subtypesof(/datum/weather))
@@ -84,7 +84,7 @@ SUBSYSTEM_DEF(weather)
     return A
 
 /datum/controller/subsystem/weather/proc/set_temperature_gradient(datum/gas_mixture/immutable/immutable_mix)
-	LAZYSET(temperature_gradients, immutable_mix)
+	temperature_gradients += immutable_mix
 
 /datum/controller/subsystem/weather/proc/fire_temperature_update(datum/gas_mixture/immutable/mix)
 	if (!istype(mix))
