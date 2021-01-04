@@ -203,7 +203,7 @@ GLOBAL_LIST_INIT(spider_last, world.file2list("strings/names/spider_last.txt"))
 		if(!isliving(A) && A.anchored)
 			to_chat(H, "<span class='warning'>[A] is bolted to the floor!</span>")
 			return
-		if(istype(A, /obj/structure/arachnid))
+		if(istype(A, /obj/structure/spider_player))
 			to_chat(H, "<span class='warning'>No double wrapping.</span>")
 			return
 		if(istype(A, /obj/effect))
