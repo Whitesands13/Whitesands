@@ -219,7 +219,7 @@
 	gloves = /obj/item/clothing/gloves/combat
 
 /datum/outfit/plasmaman/solgov //WS edit sgr
-	name = "P-Man"
+	name = "Plasmasolgov"
 	head = /obj/item/clothing/head/helmet/space/plasmaman/solgov
 	uniform = /obj/item/clothing/under/plasmaman/solgov
 	gloves = /obj/item/clothing/gloves/color/plasmaman/white
