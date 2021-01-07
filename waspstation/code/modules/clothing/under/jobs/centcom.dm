@@ -26,16 +26,16 @@
 	name = "CentCom commander plasma envirosuit"
 	desc = "It's an envirosuit worn by CentCom's highest-tier Commanders."
 	icon_state = "commander_envirosuit"
-	inhand_icon_state = "commander_envirosuit"
+	item_state = "commander_envirosuit"
 
 /obj/item/clothing/under/plasmaman/centcom_official
 	name = "CentCom official plasma envirosuit"
 	desc = "It's an envirosuit worn by CentCom Officers."
 	icon_state = "official_envirosuit"
-	inhand_icon_state = "official_envirosuit"
+	item_state = "official_envirosuit"
 
 /obj/item/clothing/under/plasmaman/centcom_intern
 	name = "CentCom intern plasma envirosuit"
 	desc = "It's an envirosuit worn by those working for CentCom."
 	icon_state = "intern_envirosuit"
-	inhand_icon_state = "intern_envirosuit"
+	item_state = "intern_envirosuit"
