@@ -1,5 +1,5 @@
 /datum/map_generator/cave_generator/whitesands
-	open_turf_types = list(/turf/open/floor/plating/asteroid/whitesands = 5, /turf/open/floor/plating/asteroid/whitesands/dried, 1)
+	open_turf_types = list(/turf/open/floor/plating/asteroid/whitesands = 5, /turf/open/floor/plating/asteroid/whitesands/dried = 1)
 	closed_turf_types =  list(/turf/closed/mineral/random/whitesands = 1)
 
 
