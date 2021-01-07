@@ -35,7 +35,7 @@ SUBSYSTEM_DEF(weather)
 		next_hit_by_zlevel["[z]"] = addtimer(CALLBACK(src, .proc/make_eligible, z, possible_weather), randTime + initial(W.weather_duration_upper), TIMER_UNIQUE|TIMER_STOPPABLE) //Around 5-10 minutes between weathers
 
 	for(var/mix in temperature_gradients)
-		fire_temperature_update(mix, temperature_gradients[mix])
+		fire_temperature_update(mix)
 
 /datum/controller/subsystem/weather/Initialize(start_timeofday)
 	for(var/V in subtypesof(/datum/weather))
@@ -83,13 +83,13 @@ SUBSYSTEM_DEF(weather)
             break
     return A
 
-/datum/controller/subsystem/weather/proc/set_temperature_gradient(datum/gas_mixture/immutable/immutable_mix, rate = 1)
-	LAZYSET(temperature_gradients, immutable_mix, rate)
+/datum/controller/subsystem/weather/proc/set_temperature_gradient(datum/gas_mixture/immutable/immutable_mix)
+	temperature_gradients += immutable_mix
 
-/datum/controller/subsystem/weather/proc/fire_temperature_update(datum/gas_mixture/immutable/mix, rate = 1)
+/datum/controller/subsystem/weather/proc/fire_temperature_update(datum/gas_mixture/immutable/mix)
 	if (!istype(mix))
 		CRASH("fire temperature update called on invalid mix: [mix]")
 	else
-		var/adjusted_time = (8640000 / SSticker.station_time_rate_multiplier) * rate
-		var/step = world.time % adjusted_time == 0 ? 0 : (world.time % adjusted_time) / adjusted_time
+		var/adjusted_time = (86400 / SSticker.station_time_rate_multiplier)
+		var/step = world.time % adjusted_time == 0 ? 1 : (world.time % adjusted_time)
 		mix.tick_temperature_gradient(step)

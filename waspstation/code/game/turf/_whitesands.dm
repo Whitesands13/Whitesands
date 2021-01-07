@@ -6,14 +6,18 @@
 
 #define WS_TEMP_GRAD_COEFF_A 35
 // Adjusted period for station time
-#define WS_TEMP_GRAD_COEFF_B 864000 / SSticker.station_time_rate_multiplier
+#define WS_TEMP_GRAD_COEFF_B 1 / ((86400 / SSticker.station_time_rate_multiplier))
 #define WS_TEMP_GRAD_COEFF_C 250
+
+/datum/gas_mixture/immutable/whitesands_planet
+	initial_temperature = T20C
+	var/ws_moles_amount
 
 /datum/gas_mixture/immutable/whitesands_planet/New()
 	if (GLOB.ws_planet_atmos && GLOB.ws_planet_atmos != src)
 		return GLOB.ws_planet_atmos
-	..()
 	ws_moles_amount = CONFIG_GET(number/whitesands_atmos_moles)
+	__gasmixture_register()
 	set_temperature(initial_temperature)
 	populate()
 	mark_immutable()
@@ -36,8 +40,9 @@
 		return
 
 	var/list/gas_types_by_id = list()
-	for (var/datum/gas/gas_type in gas_types())
-		gas_types_by_id[gas_type.id] = gas_type
+	for (var/gas_type in gas_types())
+		var/datum/gas/GT = gas_type
+		gas_types_by_id[initial(GT.id)] = gas_type
 
 	var/list/final_mix = list()
 	for(var/gas_key in ws_atmos_conf)
@@ -48,6 +53,9 @@
 			populate_default()
 			return
 		else
-			final_mix += list(gas_types_by_id[gas_key], ws_atmos_conf[gas_key])
+			final_mix += gas_types_by_id[gas_key]
 	for(var/mix_param in final_mix)
-		set_moles(mix_param[0], ws_moles_amount * mix_param[1])
+		var/datum/gas/MP = mix_param
+		set_moles(MP, ws_moles_amount * ws_atmos_conf[initial(MP.id)])
+
+GLOBAL_DATUM_INIT(ws_planet_atmos, /datum/gas_mixture/immutable/whitesands_planet, new)
