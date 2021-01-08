@@ -504,10 +504,10 @@
 		linked_account = null
 		to_chat(user, "<span class='notice'>You unlink [src]'s linked account.</span>")
 	else
-		var/obj/item/card/id/user_id = user.get_idcard(TRUE)
-		if(user_id?.registered_account)
-			linked_account = user_id.registered_account
-			to_chat(user, "<span class='notice'>You link [user_id.registered_account.account_holder]'s bank account on [src].</span>")
+		var/datum/bank_account/user_account = user.get_bank_account()
+		if(user_account)
+			linked_account = user_account
+			to_chat(user, "<span class='notice'>You link [user_account.account_holder]'s bank account on [src].</span>")
 		else
 			to_chat(user, "<span class='warning'>No bank account found!</span>")
 

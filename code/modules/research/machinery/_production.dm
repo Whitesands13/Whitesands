@@ -152,8 +152,7 @@
 		if(!reagents.has_reagent(R, D.reagents_list[R]*amount/coeff))
 			say("Not enough reagents to complete prototype[amount > 1? "s" : ""].")
 			return FALSE
-	var/obj/item/card/id/user_id = usr.get_idcard(TRUE)
-	var/datum/bank_account/user_account = user_id?.registered_account
+	var/datum/bank_account/user_account = usr.get_bank_account()
 	if(materials.mat_container.linked_account && !(obj_flags & EMAGGED))
 		var/cost = materials.mat_container.get_material_list_cost(efficient_mats)
 		if(!user_account.has_money(cost))
@@ -205,8 +204,8 @@
 	l += "<div class='statusDisplay'><b>[host_research.organization] [department_tag] Department Lathe</b>"
 	l += "Security protocols: [(obj_flags & EMAGGED)? "<font color='red'>Disabled</font>" : "<font color='green'>Enabled</font>"]"
 	if (materials.mat_container.linked_account)
-		var/obj/item/card/id/user_id = usr.get_idcard(TRUE)
-		l += "<B>User credit balance:</B> [user_id ? user_id.registered_account?.account_balance : 0] cr, <B>Remote balance:</B> [materials.mat_container.linked_account.account_balance] cr"
+		var/datum/bank_account/user_account = usr.get_bank_account()
+		l += "<B>User credit balance:</B> [user_account ? user_account.account_balance : "N/A"] cr, <B>Remote balance:</B> [materials.mat_container.linked_account.account_balance] cr"
 	if (materials.mat_container)
 		l += "<A href='?src=[REF(src)];switch_screen=[RESEARCH_FABRICATOR_SCREEN_MATERIALS]'><B>Material Amount:</B> [materials.format_amount()]</A>"
 	else
@@ -293,8 +292,7 @@
 		else
 			cost = materials.mat_container.get_material_list_cost(D.materials)
 		if(cost)
-			var/obj/item/card/id/user_id = usr.get_idcard(TRUE)
-			var/datum/bank_account/user_account = user_id?.registered_account
+			var/datum/bank_account/user_account = usr.get_bank_account()
 			var/d = FLOOR(user_account?.account_balance / cost, 1)
 			if(d < 1)
 				temp_material += " | <span class='bad'>[cost] cr/Item</span>"

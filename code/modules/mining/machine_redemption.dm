@@ -213,9 +213,9 @@
 
 /obj/machinery/mineral/ore_redemption/ui_data(mob/user)
 	var/list/data = list()
-	var/obj/item/card/id/I = user.get_idcard(TRUE)
+	var/datum/bank_account/user_account = user.get_bank_account()
 	data["unclaimedPoints"] = points
-	data["userCash"] = I.registered_account.account_balance
+	data["userCash"] = user_account.account_balance
 
 	data["materials"] = list()
 	var/datum/component/material_container/mat_container = materials.mat_container
