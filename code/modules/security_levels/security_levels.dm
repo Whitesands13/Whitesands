@@ -16,9 +16,11 @@ GLOBAL_VAR_INIT(security_level, SEC_LEVEL_GREEN)
 			level = SEC_LEVEL_RED
 		if("delta")
 			level = SEC_LEVEL_DELTA
+		if("omega")
+			level = SEC_LEVEL_OMEGA
 
 	//Will not be announced if you try to set to the same level as it already is
-	if(level >= SEC_LEVEL_GREEN && level <= SEC_LEVEL_DELTA && level != GLOB.security_level)
+	if(level >= SEC_LEVEL_GREEN && level <= SEC_LEVEL_OMEGA && level != GLOB.security_level)
 		switch(level)
 			if(SEC_LEVEL_GREEN)
 				minor_announce(CONFIG_GET(string/alert_green), "Attention! Security level lowered to green:")
@@ -74,6 +76,15 @@ GLOBAL_VAR_INIT(security_level, SEC_LEVEL_GREEN)
 						FA.update_icon()
 				for(var/obj/machinery/computer/shuttle/pod/pod in GLOB.machines)
 					pod.admin_controlled = FALSE
+			if(SEC_LEVEL_OMEGA) //When shit gets real
+				minor_announce("A immediate threat to Metaphysical Reality has been recorded. We thank you for spending the last moments of the Universe with Nanotrasen Incorporated.", "Attention! OMEGA security level reached!",1)
+				SSshuttle.emergencyNoEscape = TRUE
+				GLOB.security_level = SEC_LEVEL_OMEGA
+				for(var/obj/machinery/firealarm/FA in GLOB.machines)
+					if(is_station_level(FA.z))
+						FA.update_icon()
+				for(var/obj/machinery/computer/shuttle/pod/pod in GLOB.machines)
+					pod.admin_controlled = FALSE
 		if(level >= SEC_LEVEL_RED)
 			for(var/obj/machinery/door/D in GLOB.machines)
 				if(D.red_alert_access)
@@ -94,6 +105,8 @@ GLOBAL_VAR_INIT(security_level, SEC_LEVEL_GREEN)
 			return "red"
 		if(SEC_LEVEL_DELTA)
 			return "delta"
+		if(SEC_LEVEL_OMEGA)
+			return "delta"
 
 /proc/num2seclevel(num)
 	switch(num)
@@ -105,6 +118,8 @@ GLOBAL_VAR_INIT(security_level, SEC_LEVEL_GREEN)
 			return "red"
 		if(SEC_LEVEL_DELTA)
 			return "delta"
+		if(SEC_LEVEL_OMEGA)
+			return "omega"
 
 /proc/seclevel2num(seclevel)
 	switch( lowertext(seclevel) )
@@ -116,3 +131,5 @@ GLOBAL_VAR_INIT(security_level, SEC_LEVEL_GREEN)
 			return SEC_LEVEL_RED
 		if("delta")
 			return SEC_LEVEL_DELTA
+		if("omega")
+			return SEC_LEVEL_OMEGA

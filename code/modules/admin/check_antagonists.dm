@@ -145,6 +145,9 @@
 	if(istype(SSticker.mode, /datum/game_mode/dynamic))	// Currently only used by dynamic. If more start using this, find a better way.
 		dat += "<a href='?_src_=holder;[HrefToken()];gamemode_panel=1'>Gamemode Panel</a><br>"
 	dat += "Round Duration: <B>[DisplayTimeText(world.time - SSticker.round_start_time)]</B><BR>"
+	if(istype(SSticker.mode, /datum/game_mode/cataclysm)) // WS - The End Times Commeth
+		var/datum/game_mode/cataclysm/M = SSticker.mode
+		dat += "Countdown: <B>[DisplayTimeText(timeleft(M.armageddon_timer))]</B><BR>"
 	dat += "<B>Emergency shuttle</B><BR>"
 	if(EMERGENCY_IDLE_OR_RECALLED)
 		dat += "<a href='?_src_=holder;[HrefToken()];call_shuttle=1'>Call Shuttle</a><br>"
