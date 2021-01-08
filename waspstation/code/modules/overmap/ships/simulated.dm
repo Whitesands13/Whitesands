@@ -99,13 +99,14 @@
 	var/obj/docking_port/stationary/dock_to_use
 	for(var/port_id in list(id, TERTIARY_OVERMAP_DOCK_PREFIX, PRIMARY_OVERMAP_DOCK_PREFIX, SECONDARY_OVERMAP_DOCK_PREFIX)) //This is poor form, but it was better than what it used to be. Tertiary is before default and secondary because it's currently the public mining ports.
 		var/obj/docking_port/stationary/found_port = SSshuttle.getDock("[port_id]_[to_dock.id]")
-		if(!shuttle.check_dock(dock_to_use, TRUE))
-			if(!dock_to_use.width && !dock_to_use.height)
+		if(!found_port)
+			continue
+		if(!shuttle.check_dock(found_port, TRUE))
+			if(!found_port.width && !found_port.height)
 				. = "Please use a docking computer to specify dock location."
 			continue
-		if(found_port)
-			dock_to_use = found_port
-			break
+		dock_to_use = found_port
+		break
 
 	if(!dock_to_use)
 		return . + "Error finding available docking port!"
