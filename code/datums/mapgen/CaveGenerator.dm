@@ -94,7 +94,7 @@
 
 				var/atom/picked_feature = pickweight(feature_spawn_list)
 
-				for(var/obj/structure/F in range(7, new_open_turf))
+				for(var/obj/F in range(7, new_open_turf))
 					if(istype(F, picked_feature))
 						can_spawn = FALSE
 
