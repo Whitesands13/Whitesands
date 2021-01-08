@@ -22,10 +22,11 @@
 	var/base_icon
 	var/regrowth_time_low = 8 MINUTES
 	var/regrowth_time_high = 16 MINUTES
+	var/num_sprites = 4 // WS edit - WS
 
 /obj/structure/flora/ash/Initialize()
 	. = ..()
-	base_icon = "[icon_state][rand(1, 4)]"
+	base_icon = "[icon_state][rand(1, num_sprites)]"
 	icon_state = base_icon
 
 /obj/structure/flora/ash/proc/harvest(user)

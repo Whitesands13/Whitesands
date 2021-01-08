@@ -178,7 +178,7 @@
 //Pests & Weeds//////////////////////////////////////////////////////////
 
 			if(pestlevel >= 8)
-				if(!myseed.get_gene(/datum/plant_gene/trait/plant_type/carnivory))
+				if(!myseed.get_gene(/datum/plant_gene/trait/plant_type/carnivory) && !myseed.get_gene(/datum/plant_gene/trait/plant_type/crystal))		// WS edit - crystals
 					adjustHealth(-2 / rating)
 
 				else
@@ -186,7 +186,7 @@
 					adjustPests(-1 / rating)
 
 			else if(pestlevel >= 4)
-				if(!myseed.get_gene(/datum/plant_gene/trait/plant_type/carnivory))
+				if(!myseed.get_gene(/datum/plant_gene/trait/plant_type/carnivory) && !myseed.get_gene(/datum/plant_gene/trait/plant_type/crystal))		// WS edit - crystals
 					adjustHealth(-1 / rating)
 
 				else
@@ -194,13 +194,13 @@
 					if(prob(50))
 						adjustPests(-1 / rating)
 
-			else if(pestlevel < 4 && myseed.get_gene(/datum/plant_gene/trait/plant_type/carnivory))
+			else if(pestlevel < 4 && myseed.get_gene(/datum/plant_gene/trait/plant_type/carnivory) && myseed.get_gene(/datum/plant_gene/trait/plant_type/crystal))		// WS edit - crystals
 				adjustHealth(-2 / rating)
 				if(prob(5))
 					adjustPests(-1 / rating)
 
 			// If it's a weed, it doesn't stunt the growth
-			if(weedlevel >= 5 && !myseed.get_gene(/datum/plant_gene/trait/plant_type/weed_hardy))
+			if(weedlevel >= 5 && !myseed.get_gene(/datum/plant_gene/trait/plant_type/weed_hardy) && !myseed.get_gene(/datum/plant_gene/trait/plant_type/crystal))
 				adjustHealth(-1 / rating)
 
 //Health & Age///////////////////////////////////////////////////////////
@@ -230,7 +230,7 @@
 		// Weeeeeeeeeeeeeeedddssss
 		if(weedlevel >= 10 && prob(50) && !self_sustaining) // At this point the plant is kind of fucked. Weeds can overtake the plant spot.
 			if(myseed)
-				if(!myseed.get_gene(/datum/plant_gene/trait/plant_type/weed_hardy) && !myseed.get_gene(/datum/plant_gene/trait/plant_type/fungal_metabolism)) // If a normal plant
+				if(!myseed.get_gene(/datum/plant_gene/trait/plant_type/weed_hardy) && !myseed.get_gene(/datum/plant_gene/trait/plant_type/fungal_metabolism) && !myseed.get_gene(/datum/plant_gene/trait/plant_type/crystal)) // If a normal plant
 					weedinvasion()
 			else
 				weedinvasion() // Weed invasion into empty tray
