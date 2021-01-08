@@ -24,9 +24,6 @@
 /area/shuttle/mining)
 "l" = (
 /obj/structure/table,
-/obj/item/radio/intercom{
-	pixel_x = -28
-	},
 /obj/item/storage/firstaid/regular,
 /turf/open/floor/mineral/titanium/blue,
 /area/shuttle/mining)
@@ -48,6 +45,9 @@
 /obj/item/screwdriver{
 	pixel_y = 18
 	},
+/obj/item/radio/intercom/wideband{
+	pixel_y = 23
+	},
 /turf/open/floor/mineral/titanium/blue,
 /area/shuttle/mining)
 "t" = (
@@ -55,12 +55,8 @@
 /obj/machinery/power/smes/shuttle/precharged{
 	dir = 1
 	},
-/turf/open/floor/plating,
-/area/space)
-"u" = (
-/obj/effect/spawner/structure/window/shuttle,
-/obj/machinery/power/smes/shuttle/precharged{
-	dir = 1
+/obj/structure/cable{
+	icon_state = "0-2"
 	},
 /turf/open/floor/plating,
 /area/shuttle/mining)
@@ -96,7 +92,8 @@
 /obj/machinery/power/shuttle/engine/electric{
 	dir = 1
 	},
-/turf/open/space/basic,
+/obj/structure/cable,
+/turf/closed/wall/mineral/titanium/nodiagonal,
 /area/shuttle/mining)
 "O" = (
 /obj/docking_port/mobile{
@@ -212,6 +209,6 @@ P
 f
 P
 e
-u
+t
 N
 "}

@@ -74,9 +74,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/turf_decal/bot,
-/obj/machinery/atmospherics/components/unary/tank/toxins{
-	dir = 1
-	},
+/obj/machinery/atmospherics/components/unary/tank/toxins,
 /turf/open/floor/plating,
 /area/shuttle/abandoned/engine)
 "am" = (
@@ -246,14 +244,24 @@
 /obj/machinery/power/shuttle/engine/electric{
 	dir = 4
 	},
+/obj/structure/cable{
+	icon_state = "0-4"
+	},
 /turf/open/floor/plating/airless,
 /area/shuttle/abandoned/engine)
 "ay" = (
-/obj/structure/window/reinforced{
-	dir = 4
-	},
 /obj/machinery/power/smes/shuttle/precharged{
 	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "0-8"
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/machinery/door/window/northleft{
+	dir = 4;
+	name = "Engine Access"
 	},
 /turf/open/floor/plating/airless,
 /area/shuttle/abandoned/engine)
@@ -427,7 +435,7 @@
 /turf/open/floor/plasteel/dark,
 /area/shuttle/abandoned/crew)
 "aL" = (
-/obj/machinery/power/shuttle/engine/fueled/expulsion{
+/obj/machinery/power/shuttle/engine/fueled/plasma{
 	dir = 4
 	},
 /turf/open/floor/plating/airless,
@@ -3132,6 +3140,22 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/plasteel/dark,
 /area/shuttle/abandoned/cargo)
+"fb" = (
+/obj/machinery/power/smes/shuttle/precharged{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "0-8"
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/machinery/door/window/northright{
+	dir = 4;
+	name = "Engine Access"
+	},
+/turf/open/floor/plating/airless,
+/area/shuttle/abandoned/engine)
 "hv" = (
 /obj/effect/turf_decal/box/white/corners{
 	dir = 1
@@ -3158,11 +3182,15 @@
 /turf/open/floor/plasteel/dark,
 /area/shuttle/abandoned/cargo)
 "qt" = (
-/obj/structure/window/reinforced{
-	dir = 4
-	},
 /obj/machinery/atmospherics/components/unary/shuttle/heater{
 	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/machinery/door/window/northright{
+	dir = 4;
+	name = "Engine Access"
 	},
 /turf/open/floor/plating/airless,
 /area/shuttle/abandoned/engine)
@@ -3196,6 +3224,19 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/shuttle/abandoned/cargo)
+"tN" = (
+/obj/machinery/atmospherics/components/unary/shuttle/heater{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/machinery/door/window/northleft{
+	dir = 4;
+	name = "Engine Access"
+	},
+/turf/open/floor/plating/airless,
+/area/shuttle/abandoned/engine)
 "wM" = (
 /obj/effect/turf_decal/arrows/white{
 	dir = 4
@@ -3285,8 +3326,8 @@ aa
 aa
 ab
 ac
-qt
-ay
+tN
+fb
 ac
 ab
 "}

@@ -266,29 +266,34 @@
 	switch(chosen)
 		if(0)
 			name = "weak energy signal"
+			desc = "A very weak energy signal emenating from space."
 			planet = FALSE
 			icon_state = "strange_event"
 			color = null
 		if(1)
 			name = "strange lava planet"
+			desc = "A very weak energy signal originating from a planet with lots of seismic and volcanic activity."
 			planet = DYNAMIC_WORLD_LAVA
 			icon_state = "globe"
 			color = COLOR_ORANGE
 		if(2)
 			name = "strange ice planet"
+			desc = "A very weak energy signal originating from a planet with traces of water and extremely low temperatures."
 			planet = DYNAMIC_WORLD_ICE
 			icon_state = "globe"
 			color = COLOR_BLUE_LIGHT
 		if(3)
 			name = "strange jungle planet"
+			desc = "A very weak energy signal originating from a planet teeming with life."
 			planet = DYNAMIC_WORLD_JUNGLE
 			icon_state = "globe"
 			color = COLOR_LIME
 		if(4)
 			name = "strange sand planet"
+			desc = "A very weak energy signal originating from a planet with many traces of silica."
 			planet = DYNAMIC_WORLD_SAND
 			icon_state = "globe"
-			color = COLOR_SILVER
+			color = COLOR_GRAY
 	desc += "It may not still be here if you leave it."
 
 /**
@@ -300,11 +305,11 @@
 		return
 	if(!COOLDOWN_FINISHED(SSovermap, encounter_cooldown))
 		return "WARNING! Stellar interference is restricting flight in this area. Interference should pass in [COOLDOWN_TIMELEFT(SSovermap, encounter_cooldown) / 10] seconds."
-	var/datum/turf_reservation/new_reserve = SSovermap.spawn_dynamic_encounter(planet, TRUE, "[DEFAULT_OVERMAP_DOCK_PREFIX]_[id]", visiting_shuttle = visiting_shuttle)
+	var/datum/turf_reservation/new_reserve = SSovermap.spawn_dynamic_encounter(planet, TRUE, "[PRIMARY_OVERMAP_DOCK_PREFIX]_[id]", visiting_shuttle = visiting_shuttle)
 	if(!new_reserve)
 		return "FATAL NAVIGATION ERROR, PLEASE TRY AGAIN LATER!"
 	reserve = new_reserve
-	reserve_dock = SSshuttle.getDock("[DEFAULT_OVERMAP_DOCK_PREFIX]_[id]")
+	reserve_dock = SSshuttle.getDock("[PRIMARY_OVERMAP_DOCK_PREFIX]_[id]")
 
 /**
   * Unloads the reserve, deletes the linked docking port, and moves to a random location if there's no client-having, alive mobs.
