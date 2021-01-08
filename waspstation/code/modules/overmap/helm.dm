@@ -113,15 +113,23 @@
 	)
 	.["engineInfo"] = list()
 	for(var/obj/machinery/power/shuttle/engine/E in S.shuttle.engine_list)
+		var/list/engine_data
 		if(!E.thruster_active)
-			continue
-		var/list/engine_data = list(
-			name = E.name,
-			fuel = E.return_fuel(),
-			maxFuel = E.return_fuel_cap(),
-			enabled = E.enabled,
-			ref = REF(E)
-		)
+			engine_data = list(
+				name = E.name,
+				fuel = 0,
+				maxFuel = 100,
+				enabled = E.enabled,
+				ref = REF(E)
+			)
+		else
+			engine_data = list(
+				name = E.name,
+				fuel = E.return_fuel(),
+				maxFuel = E.return_fuel_cap(),
+				enabled = E.enabled,
+				ref = REF(E)
+			)
 		.["engineInfo"] += list(engine_data)
 
 /obj/machinery/computer/helm/ui_static_data(mob/user)

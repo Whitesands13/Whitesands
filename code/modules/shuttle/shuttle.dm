@@ -830,7 +830,7 @@
 	if(mod < 0)
 		LAZYREMOVE(engine_list, engine)
 	else
-		LAZYADD(engine_list, engine)
+		LAZYOR(engine_list, engine)
 	var/old_coeff = engine_coeff
 	engine_coeff = get_engine_coeff(current_engines,mod)
 	current_engines = max(0,current_engines + mod)
@@ -840,6 +840,7 @@
 
 /obj/docking_port/mobile/proc/count_engines()
 	. = 0
+	engine_list = list()
 	for(var/thing in shuttle_areas)
 		var/area/shuttle/areaInstance = thing
 		for(var/obj/structure/shuttle/engine/E in areaInstance.contents)

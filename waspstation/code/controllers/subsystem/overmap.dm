@@ -192,7 +192,9 @@ SUBSYSTEM_DEF(overmap)
 				mapgen = new /datum/map_generator/jungle_generator
 
 	if(ruin && ruin_list) //Done BEFORE the turfs are reserved so that it allocates the right size box
-		ruin_type = pick(ruin_list)
+		ruin_type = ruin_list[pick(ruin_list)]
+		if(ispath(ruin_type))
+			ruin_type = new ruin_type
 		ruin_size = max(ruin_type.width, ruin_type.height) + 3
 
 	total_size = min(dock_size + ruin_size, total_size)

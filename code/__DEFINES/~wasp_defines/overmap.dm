@@ -1,7 +1,9 @@
 //Object IDs
 #define MAIN_OVERMAP_OBJECT_ID				"home"
 #define AWAY_OVERMAP_OBJECT_ID_MINING		"away"
-#define DEFAULT_OVERMAP_DOCK_PREFIX			"whiteship"
+#define PRIMARY_OVERMAP_DOCK_PREFIX			"whiteship"
+#define SECONDARY_OVERMAP_DOCK_PREFIX		"ferry"
+#define TERTIARY_OVERMAP_DOCK_PREFIX		"commonmining"
 
 #define MAX_OVERMAP_PLACEMENT_ATTEMPTS		3
 
