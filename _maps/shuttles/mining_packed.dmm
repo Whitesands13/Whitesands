@@ -2,8 +2,24 @@
 "c" = (
 /turf/open/floor/mineral/titanium,
 /area/shuttle/mining)
+"e" = (
+/obj/effect/spawner/structure/window/shuttle,
+/obj/machinery/power/terminal,
+/obj/structure/cable{
+	icon_state = "0-8"
+	},
+/turf/open/floor/plating,
+/area/shuttle/mining)
 "f" = (
 /obj/effect/spawner/structure/window/shuttle,
+/turf/open/floor/plating,
+/area/shuttle/mining)
+"i" = (
+/obj/effect/spawner/structure/window/shuttle,
+/obj/machinery/power/terminal,
+/obj/structure/cable{
+	icon_state = "0-4"
+	},
 /turf/open/floor/plating,
 /area/shuttle/mining)
 "l" = (
@@ -36,7 +52,16 @@
 /area/shuttle/mining)
 "t" = (
 /obj/effect/spawner/structure/window/shuttle,
-/obj/structure/shuttle/engine/heater,
+/obj/machinery/power/smes/shuttle/precharged{
+	dir = 1
+	},
+/turf/open/floor/plating,
+/area/space)
+"u" = (
+/obj/effect/spawner/structure/window/shuttle,
+/obj/machinery/power/smes/shuttle/precharged{
+	dir = 1
+	},
 /turf/open/floor/plating,
 /area/shuttle/mining)
 "x" = (
@@ -44,6 +69,9 @@
 	dir = 1
 	},
 /obj/structure/window/reinforced,
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
 /turf/open/floor/mineral/titanium,
 /area/shuttle/mining)
 "D" = (
@@ -59,10 +87,15 @@
 /turf/open/floor/mineral/titanium,
 /area/shuttle/mining)
 "I" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
 /turf/open/floor/mineral/titanium/blue,
 /area/shuttle/mining)
 "N" = (
-/obj/structure/shuttle/engine/propulsion/burst,
+/obj/machinery/power/shuttle/engine/electric{
+	dir = 1
+	},
 /turf/open/space/basic,
 /area/shuttle/mining)
 "O" = (
@@ -76,6 +109,9 @@
 	},
 /obj/machinery/door/airlock/titanium{
 	name = "Mining Shuttle Airlock"
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
 	},
 /turf/open/floor/mineral/titanium,
 /area/shuttle/mining)
@@ -124,13 +160,22 @@
 	},
 /turf/open/floor/mineral/titanium,
 /area/shuttle/mining)
+"Z" = (
+/obj/structure/cable{
+	icon_state = "2-4"
+	},
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/mining)
 
 (1,1,1) = {"
 P
 P
 f
 P
-f
+i
 t
 N
 "}
@@ -148,7 +193,7 @@ f
 n
 G
 c
-c
+Z
 I
 O
 "}
@@ -166,7 +211,7 @@ P
 P
 f
 P
-f
-t
+e
+u
 N
 "}
