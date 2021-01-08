@@ -10,8 +10,8 @@
 
 /turf/open/floor/plating/asteroid/whitesands/Initialize()
 	..()
-	if (GLOB.ws_planet_atmos.ws_moles_amount == null)
-		GLOB.ws_planet_atmos.New()
+	if (GLOB.ws_planet_atmos == null)
+		GLOB.ws_planet_atmos = new
 	air = GLOB.ws_planet_atmos
 	update_air_ref()
 
