@@ -1,6 +1,3 @@
-/*
-	Waspstation Edit - Moved to modular folder
-
 //A slow but strong beast that tries to stun using its tentacles
 /mob/living/simple_animal/hostile/asteroid/goliath
 	name = "goliath"
@@ -20,12 +17,14 @@
 	friendly_verb_simple = "wail at"
 	speak_emote = list("bellows")
 	speed = 3
+	throw_deflection = 10
 	maxHealth = 300
 	health = 300
+	armor = list("melee" = 10, "bullet" = 15, "laser" = 10, "energy" = 10, "bomb" = 10, "bio" = 10, "rad" = 10, "fire" = 10, "acid" = 10)
 	harm_intent_damage = 0
 	obj_damage = 100
-	melee_damage_lower = 25
-	melee_damage_upper = 25
+	melee_damage_lower = 12
+	melee_damage_upper = 20
 	attack_verb_continuous = "pulverizes"
 	attack_verb_simple = "pulverize"
 	attack_sound = 'sound/weapons/punch1.ogg'
@@ -39,6 +38,11 @@
 	var/pre_attack = 0
 	var/pre_attack_icon = "Goliath_preattack"
 	loot = list(/obj/item/stack/sheet/animalhide/goliath_hide)
+	food_type = list(/obj/item/reagent_containers/food/snacks/meat)		// Omnivorous
+	tame_chance = 0
+	bonus_tame_chance = 10
+	search_objects = 1
+	wanted_objects = list(/obj/structure/flora/ash)
 
 	footstep_type = FOOTSTEP_MOB_HEAVY
 
@@ -77,6 +81,22 @@
 		icon_state = icon_aggro
 		pre_attack = 0
 
+/mob/living/simple_animal/hostile/asteroid/goliath/Found(atom/A)
+	if(istype(A, /obj/structure/flora/ash))
+		var/obj/structure/flora/ash/edible = A
+		if(!edible.harvested)
+			return TRUE
+	return FALSE
+
+/mob/living/simple_animal/hostile/asteroid/goliath/AttackingTarget()
+	if(istype(target, /obj/structure/flora/ash))
+		var/obj/structure/flora/ash/edible = target
+		visible_message("<span class='notice'>[src] eats the [edible].</span>")
+		edible.consume()
+		target = null		// Don't gnaw on the same plant forever
+	else
+		. = ..()
+
 /mob/living/simple_animal/hostile/asteroid/goliath/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	ranged_cooldown -= 10
 	handle_preattack()
@@ -87,6 +107,27 @@
 	handle_preattack()
 	if(icon_state != icon_aggro)
 		icon_state = icon_aggro
+
+/mob/living/simple_animal/hostile/asteroid/goliath/pup
+	name = "goliath pup"
+	desc = "A small goliath pup. It's tendrils have not yet fully grown."
+	icon = 'icons/mob/lavaland/lavaland_monsters.dmi'
+	icon_state = "goliath_baby"
+	icon_living = "goliath_baby"
+	icon_aggro = "goliath_baby"
+	icon_dead = "goliath_baby_dead"
+	throw_message = "does nothing to the tough hide of the"
+	pre_attack_icon = "goliath_baby"
+	maxHealth = 60
+	health = 60
+	armor = list("melee" = 0, "bullet" = 5, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	harm_intent_damage = 0
+	obj_damage = 100
+	melee_damage_lower = 2
+	melee_damage_upper = 5
+	tame_chance = 5
+	bonus_tame_chance = 15
+
 
 //Lavaland Goliath
 /mob/living/simple_animal/hostile/asteroid/goliath/beast
@@ -100,15 +141,68 @@
 	throw_message = "does nothing to the tough hide of the"
 	pre_attack_icon = "goliath2"
 	crusher_loot = /obj/item/crusher_trophy/goliath_tentacle
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab/goliath = 2, /obj/item/stack/sheet/bone = 2)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab/goliath = 2, /obj/item/stack/sheet/bone = 2, /obj/item/stack/sheet/sinew = 2, /obj/item/stack/ore/silver = 10)
 	guaranteed_butcher_results = list(/obj/item/stack/sheet/animalhide/goliath_hide = 1)
 	loot = list()
-	stat_attack = HARD_CRIT
+	stat_attack = UNCONSCIOUS
 	robust_searching = 1
-	food_type = list(/obj/item/reagent_containers/food/snacks/customizable/salad/ashsalad, /obj/item/reagent_containers/food/snacks/customizable/soup/ashsoup, /obj/item/reagent_containers/food/snacks/grown/ash_flora)//use lavaland plants to feed the lavaland monster
-	tame_chance = 10
-	bonus_tame_chance = 5
 	var/saddled = FALSE
+	var/charging = FALSE
+	var/revving_charge = FALSE
+	var/charge_range = 7
+	var/tent_range = 3
+
+/mob/living/simple_animal/hostile/asteroid/goliath/beast/proc/charge(atom/chargeat = target, delay = 10, chargepast = 2)
+	if(!chargeat)
+		return
+	var/chargeturf = get_turf(chargeat)
+	if(!chargeturf)
+		return
+	var/dir = get_dir(src, chargeturf)
+	var/turf/T = get_ranged_target_turf(chargeturf, dir, chargepast)
+	if(!T)
+		return
+	charging = TRUE
+	revving_charge = TRUE
+	walk(src, 0)
+	setDir(dir)
+	var/obj/effect/temp_visual/decoy/D = new /obj/effect/temp_visual/decoy(loc,src)
+	animate(D, alpha = 0, color = "#FF0000", transform = matrix()*2, time = 3)
+	SLEEP_CHECK_DEATH(delay)
+	revving_charge = FALSE
+	var/movespeed = 0.7
+	walk_towards(src, T, movespeed)
+	SLEEP_CHECK_DEATH(get_dist(src, T) * movespeed)
+	walk(src, 0) // cancel the movement
+	charging = FALSE
+
+/mob/living/simple_animal/hostile/asteroid/goliath/beast/Bump(atom/A)
+	. = ..()
+	if(charging && isclosedturf(A))				// We slammed into a wall while charging
+		wall_slam(A)
+
+/mob/living/simple_animal/hostile/asteroid/goliath/beast/proc/wall_slam(atom/A)
+	charging = FALSE
+	Stun(100, TRUE, TRUE)
+	walk(src, 0)		// Cancel the movement
+	if(ismineralturf(A))
+		var/turf/closed/mineral/M = A
+		if(M.mineralAmt < 7)
+			M.mineralAmt++
+
+/mob/living/simple_animal/hostile/asteroid/goliath/beast/OpenFire()
+	var/tturf = get_turf(target)
+	var/dist = get_dist(src, target)
+	if(!isturf(tturf) || !isliving(target))
+		return
+	if(dist <= tent_range)
+		visible_message("<span class='warning'>[src] digs its tentacles under [target]!</span>")
+		new /obj/effect/temp_visual/goliath_tentacle/original(tturf, src)
+		ranged_cooldown = world.time + ranged_cooldown_time
+		icon_state = icon_aggro
+		pre_attack = 0
+	else if(dist <= charge_range)		//Screen range check, so you can't get charged offscreen
+		charge()
 
 /mob/living/simple_animal/hostile/asteroid/goliath/beast/attackby(obj/item/O, mob/user, params)
 	if(istype(O, /obj/item/saddle) && !saddled)
@@ -150,11 +244,11 @@
 	speed = 4
 	pre_attack_icon = "Goliath_preattack"
 	throw_message = "does nothing to the rocky hide of the"
-	loot = list(/obj/item/stack/sheet/animalhide/goliath_hide) //A throwback to the asteroid days
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab/goliath = 2, /obj/item/stack/sheet/bone = 2)
 	guaranteed_butcher_results = list()
 	crusher_drop_mod = 30
 	wander = FALSE
+	tame_chance = 0
+	bonus_tame_chance = 5
 	var/list/cached_tentacle_turfs
 	var/turf/last_location
 	var/tentacle_recheck_cooldown = 100
@@ -222,7 +316,7 @@
 			continue
 		visible_message("<span class='danger'>[src] grabs hold of [L]!</span>")
 		L.Stun(100)
-		L.adjustBruteLoss(rand(10,15))
+		L.adjustBruteLoss(rand(1,3))
 		latched = TRUE
 	if(!latched)
 		retract()
@@ -239,4 +333,4 @@
 	name = "saddle"
 	desc = "This saddle will solve all your problems with being killed by lava beasts!"
 	icon = 'icons/obj/mining.dmi'
-	icon_state = "goliath_saddle"	*/
+	icon_state = "goliath_saddle"
