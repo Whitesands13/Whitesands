@@ -57,14 +57,17 @@
 /obj/item/clothing/suit/armor/hos/trenchcoat
 	name = "armored trenchcoat"
 	desc = "A trenchcoat enhanced with a special lightweight kevlar. The epitome of tactical plainclothes."
+	mob_overlay_icon = 'waspstation/icons/mob/clothing/under/security.dmi'
 	icon_state = "hostrench"
 	item_state = "hostrench"
 	flags_inv = 0
 	strip_delay = 80
 
-/obj/item/clothing/suit/armor/vest/warden
+/obj/item/clothing/suit/armor/vest/security/warden
 	name = "warden's jacket"
-	desc = "A navy-blue armored jacket with blue shoulder designations and '/Warden/' stitched into one of the chest pockets."
+	desc = "A black armored jacket with silver shoulder designations and '/Warden/' stitched into one of the chest pockets."
+	icon = 'waspstation/icons/obj/clothing/suits.dmi'
+	mob_overlay_icon = 'waspstation/icons/mob/clothing/suits.dmi'
 	icon_state = "warden_alt"
 	item_state = "armor"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -74,9 +77,9 @@
 	resistance_flags = FLAMMABLE
 	dog_fashion = null
 
-/obj/item/clothing/suit/armor/vest/warden/alt
+/obj/item/clothing/suit/armor/vest/security/warden/alt
 	name = "warden's armored jacket"
-	desc = "A red jacket with silver rank pips and body armor strapped on top."
+	desc = "A white jacket with silver rank pips and body armor strapped on top."
 	icon_state = "warden_jacket"
 
 /obj/item/clothing/suit/armor/vest/leather
@@ -92,6 +95,8 @@
 /obj/item/clothing/suit/armor/vest/capcarapace
 	name = "captain's carapace"
 	desc = "A fireproof armored chestpiece reinforced with ceramic plates and plasteel pauldrons to provide additional protection whilst still offering maximum mobility and flexibility. Issued only to the station's finest, although it does chafe your nipples."
+	icon = 'waspstation/icons/obj/clothing/suits.dmi'
+	mob_overlay_icon = 'waspstation/icons/mob/clothing/suits.dmi'
 	icon_state = "capcarapace"
 	item_state = "armor"
 	body_parts_covered = CHEST|GROIN
