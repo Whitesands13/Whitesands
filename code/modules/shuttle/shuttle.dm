@@ -150,7 +150,7 @@
 
 /obj/docking_port/proc/is_in_shuttle_bounds(atom/A)
 	var/turf/T = get_turf(A)
-	if(T.z != z)
+	if(T?.z != z)
 		return FALSE
 	var/list/bounds = return_coords()
 	var/x0 = bounds[1]
@@ -294,6 +294,9 @@
 	var/can_move_docking_ports = FALSE
 	var/list/hidden_turfs = list()
 
+	///The linked overmap object, if there is one
+	var/obj/structure/overmap/ship/simulated/current_ship
+
 /obj/docking_port/mobile/proc/register()
 	SSshuttle.mobile += src
 
@@ -325,6 +328,9 @@
 
 	initial_engines = count_engines()
 	current_engines = initial_engines
+
+	if(!mapload)
+		SSovermap.setup_shuttle_ship(src)
 
 	#ifdef DOCKING_PORT_HIGHLIGHT
 	highlight("#0f0")
@@ -818,9 +824,13 @@
 
 // Losing all initial engines should get you 2
 // Adding another set of engines at 0.5 time
-/obj/docking_port/mobile/proc/alter_engines(mod)
+/obj/docking_port/mobile/proc/alter_engines(mod, engine)
 	if(mod == 0)
 		return
+	if(mod < 0)
+		LAZYREMOVE(engine_list, engine)
+	else
+		LAZYADD(engine_list, engine)
 	var/old_coeff = engine_coeff
 	engine_coeff = get_engine_coeff(current_engines,mod)
 	current_engines = max(0,current_engines + mod)
@@ -836,6 +846,10 @@
 			if(!QDELETED(E))
 				engine_list += E
 				. += E.engine_power
+		for(var/obj/machinery/power/shuttle/engine/E in areaInstance.contents)
+			if(!QDELETED(E))
+				engine_list += E
+				. += E.thruster_active ? 1 : 0
 
 // Double initial engines to get to 0.5 minimum
 // Lose all initial engines to get to 2
