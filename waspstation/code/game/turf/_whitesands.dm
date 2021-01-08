@@ -8,20 +8,6 @@
 // Adjusted period for station time
 #define WS_TEMP_GRAD_COEFF_B 1 / ((86400 / SSticker.station_time_rate_multiplier))
 #define WS_TEMP_GRAD_COEFF_C 250
-
-/datum/atmosphere/whitesands
-	id = WHITESANDS_ATMOS
-
-/datum/atmosphere/whitesands/generate_gas_string()
-	if (GLOB.ws_planet_atmos == null)
-		GLOB.ws_planet_atmos = new
-
-	var/list/gas_string_builder = list()
-	for(var/i in GLOB.ws_planet_atmos.get_gases())
-		gas_string_builder += "[GLOB.meta_gas_info[i][META_GAS_ID]]=[gasmix.get_moles(i)]"
-	gas_string_builder += "TEMP=[gasmix.return_temperature()]"
-	gas_string = gas_string_builder.Join(";")
-
 /datum/gas_mixture/immutable/whitesands_planet
 	initial_temperature = T20C
 	var/ws_moles_amount
@@ -72,3 +58,16 @@
 		set_moles(MP, ws_moles_amount * ws_atmos_conf[initial(MP.id)])
 
 GLOBAL_DATUM(ws_planet_atmos, /datum/gas_mixture/immutable/whitesands_planet)
+
+/datum/atmosphere/whitesands
+	id = WHITESANDS_ATMOS
+
+/datum/atmosphere/whitesands/generate_gas_string()
+	if (GLOB.ws_planet_atmos == null)
+		GLOB.ws_planet_atmos = new
+	var/datum/gas_mixture/immutable/whitesands_planet/gasmix = GLOB.ws_planet_atmos
+	var/list/gas_string_builder = list()
+	for(var/i in GLOB.ws_planet_atmos.get_gases())
+		gas_string_builder += "[GLOB.meta_gas_info[i][META_GAS_ID]]=[gasmix.get_moles(i)]"
+	gas_string_builder += "TEMP=[gasmix.return_temperature()]"
+	gas_string = gas_string_builder.Join(";")
