@@ -206,11 +206,13 @@
 			INVOKE_ASYNC(D, /obj/structure/overmap/dynamic/.proc/unload_level)
 		forceMove(SSovermap.get_unused_overmap_square())
 		docked = null
+		state = SHIP_FLYING
 		update_screen()
 		return FALSE
 	if(!docked && docked_object) //The overmap object thinks it's NOT docked to something, but it actually is. Move to the correct place.
 		forceMove(docked_object)
 		docked = docked_object
+		state = SHIP_IDLE
 		update_screen()
 		return FALSE
 
