@@ -1,9 +1,13 @@
-#define SHIP_IDLE			"idle"
-#define SHIP_FLYING			"flying"
-#define SHIP_DOCKING		"docking"
-#define SHIP_UNDOCKING		"undocking"
+#define SHIP_IDLE				"idle"
+#define SHIP_FLYING				"flying"
+#define SHIP_DOCKING			"docking"
+#define SHIP_UNDOCKING			"undocking"
 
-#define SHIP_SIZE_THRESHOLD	300
+//Threshold above which it uses the ship sprites instead of the shuttle sprites
+#define SHIP_SIZE_THRESHOLD		300
+
+//How long it takes to regain 1% integrity while docked
+#define SHIP_DOCKED_REPAIR_TIME	2 SECONDS
 
 /**
   * ### Simulated overmap ship
@@ -16,6 +20,8 @@
 
 	///The time the shuttle started launching
 	var/dock_change_start_time
+	///The timer ID of the repair timer.
+	var/repair_timer
 	///State of the shuttle: idle, flying, docking, or undocking
 	var/state = SHIP_IDLE
 	///Vessel estimated thrust
@@ -223,6 +229,8 @@
 		if(SHIP_DOCKING) //so that the shuttle is truly docked first
 			if(shuttle.mode == SHUTTLE_CALL)
 				forceMove(docked)
+				if(istype(docked, /obj/structure/overmap/level/main)) //Hardcoded and bad
+					addtimer(CALLBACK(src, .proc/repair), SHIP_DOCKED_REPAIR_TIME, TIMER_STOPPABLE | TIMER_LOOP)
 				state = SHIP_IDLE
 		if(SHIP_UNDOCKING)
 			if(docked)
@@ -232,13 +240,18 @@
 					INVOKE_ASYNC(D, /obj/structure/overmap/dynamic/.proc/unload_level)
 				docked = null
 				state = SHIP_FLYING
+				if(repair_timer)
+					deltimer(repair_timer)
 	update_screen()
 
 /**
-  * Handles a few miscellaneous features, namely repairs. called by the SSovermap subsystem, TODO: refactor pls
+  * Handles repairs. Called by a repeating timer that is created when the ship docks.
   */
-/obj/structure/overmap/ship/simulated/proc/process_misc()
-	if(docked && integrity < initial(integrity))
+/obj/structure/overmap/ship/simulated/proc/repair()
+	if(!docked)
+		deltimer(repair_timer)
+		return
+	if(integrity < initial(integrity))
 		integrity++
 
 /obj/structure/overmap/ship/simulated/update_icon_state()
@@ -252,3 +265,5 @@
 #undef SHIP_UNDOCKING
 
 #undef SHIP_SIZE_THRESHOLD
+
+#undef SHIP_DOCKED_REPAIR_TIME

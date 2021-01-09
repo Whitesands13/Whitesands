@@ -57,7 +57,7 @@
 /obj/item/clothing/suit/armor/hos/trenchcoat
 	name = "armored trenchcoat"
 	desc = "A trenchcoat enhanced with a special lightweight kevlar. The epitome of tactical plainclothes."
-	mob_overlay_icon = 'waspstation/icons/mob/clothing/under/security.dmi'
+	mob_overlay_icon = 'waspstation/icons/mob/clothing/suits.dmi'
 	icon_state = "hostrench"
 	item_state = "hostrench"
 	flags_inv = 0

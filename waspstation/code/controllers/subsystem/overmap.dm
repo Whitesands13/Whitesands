@@ -54,10 +54,6 @@ SUBSYSTEM_DEF(overmap)
 	return ..()
 
 /datum/controller/subsystem/overmap/fire()
-	for(var/ship in simulated_ships)
-		var/obj/structure/overmap/ship/simulated/S = ship
-		S.process_misc()
-
 	if(events_enabled)
 		for(var/event in events)
 			var/obj/structure/overmap/event/E = event
