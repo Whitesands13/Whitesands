@@ -305,7 +305,7 @@
 		return
 	if(!COOLDOWN_FINISHED(SSovermap, encounter_cooldown))
 		return "WARNING! Stellar interference is restricting flight in this area. Interference should pass in [COOLDOWN_TIMELEFT(SSovermap, encounter_cooldown) / 10] seconds."
-	var/datum/turf_reservation/new_reserve = SSovermap.spawn_dynamic_encounter(planet, TRUE, "[PRIMARY_OVERMAP_DOCK_PREFIX]_[id]", visiting_shuttle = visiting_shuttle)
+	var/datum/turf_reservation/new_reserve = SSovermap.spawn_dynamic_encounter(planet, TRUE, id, visiting_shuttle = visiting_shuttle)
 	if(!new_reserve)
 		return "FATAL NAVIGATION ERROR, PLEASE TRY AGAIN LATER!"
 	reserve = new_reserve

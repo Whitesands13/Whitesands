@@ -65,11 +65,11 @@
 	if(!current_ship.is_still())
 		to_chat(user, "<span class='warning'>You can't try to land while moving!</span>")
 		return
-	jumpto_ports = list("[shuttleId]_[current_target.id]", "whiteship_[current_target.id]")
+	jumpto_ports = list("[shuttleId]_[current_target.id]", "[PRIMARY_OVERMAP_DOCK_PREFIX]_[current_target.id]")
 	shuttlePortId = "[shuttleId]_[current_target.id]"
 	shuttlePortName = "[current_ship] [current_target.id] dock"
 	z_lock = LAZYCOPY(current_target.linked_levels)
 	my_port = SSshuttle.getDock(shuttlePortId)
+	..()
 	if(eyeobj)
 		eyeobj.setLoc(my_port ? get_turf(my_port) : locate(eyeobj.x, eyeobj.y, pick(z_lock)))
-	return ..()

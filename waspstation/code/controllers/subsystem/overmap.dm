@@ -150,7 +150,7 @@ SUBSYSTEM_DEF(overmap)
   * Reserves a square dynamic encounter area, and spawns a ruin in it if one is supplied.
   * * on_planet - If the encounter should be on a generated planet. Required, as it will be otherwise inaccessible.
   * * target - The ruin to spawn, if any
-  * * dock_id - The id of the stationary docking port that will be spawned in the encounter
+  * * dock_id - The id of the stationary docking port that will be spawned in the encounter. The primary and secondary prefixes will be applied, so do not include them.
   * * size - Size of the encounter, defaults to 1/3 total world size
   * * visiting_shuttle - The shuttle that is going to go to the encounter. Allows ruins to scale.
   */
@@ -191,9 +191,9 @@ SUBSYSTEM_DEF(overmap)
 		ruin_type = ruin_list[pick(ruin_list)]
 		if(ispath(ruin_type))
 			ruin_type = new ruin_type
-		ruin_size = max(ruin_type.width, ruin_type.height) + 3
+		ruin_size = max(ruin_type.width, ruin_type.height) + 4
 
-	total_size = min(dock_size + ruin_size, total_size)
+	total_size = dock_size + ruin_size
 
 	var/datum/turf_reservation/encounter_reservation = SSmapping.RequestBlockReservation(total_size, total_size, border_turf_override = /turf/closed/indestructible/blank, area_override = planet_type ? /area/ruin/unpowered/planetoid : null)
 	if(mapgen)
@@ -201,23 +201,32 @@ SUBSYSTEM_DEF(overmap)
 
 	if(ruin_type) //Does AFTER the turfs are reserved so it can find where the allocation is
 		//gets a turf vaguely in the middle of the reserve
-		var/turf/ruin_turf = locate(encounter_reservation.bottom_left_coords[1] + dock_size + 1, encounter_reservation.bottom_left_coords[2] + dock_size + 1, encounter_reservation.bottom_left_coords[3])
+		var/turf/ruin_turf = locate(encounter_reservation.bottom_left_coords[1] + dock_size + 2, encounter_reservation.bottom_left_coords[2] + dock_size, encounter_reservation.bottom_left_coords[3])
 		ruin_type.load(ruin_turf)
 
 	//gets the turf with an X in the middle of the reservation, and a Y that's 1/4ths up in the reservation.
-	var/turf/docking_turf = locate(encounter_reservation.bottom_left_coords[1] + dock_size, encounter_reservation.bottom_left_coords[2] + CEILING(dock_size / 2, 1), encounter_reservation.bottom_left_coords[3])
+	var/turf/docking_turf = locate(encounter_reservation.bottom_left_coords[1] + dock_size, encounter_reservation.bottom_left_coords[2] + FLOOR(dock_size / 2, 1), encounter_reservation.bottom_left_coords[3])
 	var/obj/docking_port/stationary/dock = new(docking_turf)
 	dock.dir = WEST
 	dock.name = "\improper Uncharted Space"
-	dock.id = dock_id
+	dock.id = "[PRIMARY_OVERMAP_DOCK_PREFIX]_[dock_id]"
 	dock.height = dock_size
 	dock.width = dock_size
 	if(visiting_shuttle)
 		dock.dheight = min(visiting_shuttle.dheight, dock_size)
 		dock.dwidth = min(visiting_shuttle.dwidth, dock_size)
 	else
-		dock.dheight = dock_size / 2
-		dock.dwidth = dock_size / 2
+		dock.dwidth = FLOOR(dock_size / 2, 1)
+
+	//gets the turf with an X in the middle of the reservation, and a Y that's 3/4ths up in the reservation.
+	var/turf/secondary_docking_turf = locate(encounter_reservation.bottom_left_coords[1] + dock_size, encounter_reservation.bottom_left_coords[2] + CEILING(dock_size * 1.5, 1), encounter_reservation.bottom_left_coords[3])
+	var/obj/docking_port/stationary/secondary_dock = new(secondary_docking_turf)
+	secondary_dock.dir = WEST
+	secondary_dock.name = "\improper Uncharted Space"
+	secondary_dock.id = "[SECONDARY_OVERMAP_DOCK_PREFIX]_[dock_id]"
+	secondary_dock.height = dock_size
+	secondary_dock.width = dock_size
+	secondary_dock.dwidth = FLOOR(dock_size / 2, 1)
 
 	return encounter_reservation
 

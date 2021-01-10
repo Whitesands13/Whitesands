@@ -109,12 +109,13 @@
 			continue
 		if(!shuttle.check_dock(found_port, TRUE))
 			if(!found_port.width && !found_port.height)
-				. = "Please use a docking computer to specify dock location."
+				. = "Please use a docking computer to specify dock location. "
 			continue
 		dock_to_use = found_port
 		break
 
 	if(!dock_to_use)
+		state = SHIP_FLYING
 		return . + "Error finding available docking port!"
 
 	shuttle.request(dock_to_use)
