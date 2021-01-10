@@ -92,6 +92,8 @@
 /obj/item/seeds/lavaland/whitesands
 	icon = 'waspstation/icons/obj/lavaland/newlavalandplants.dmi'
 	growing_icon = 'waspstation/icons/obj/lavaland/newlavalandplants.dmi'
+	species = "fern" // begone test
+	growthstages = 2
 
 /obj/item/seeds/lavaland/whitesands/fern
 	name = "pack of cave fern seeds"
