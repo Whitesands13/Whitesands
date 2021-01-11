@@ -51,19 +51,19 @@
   *
   * See: [/obj/item/proc/melee_attack_chain]
   */
-/atom/proc/attackby(obj/item/W, mob/user, params, modifier)
+/atom/proc/attackby(obj/item/W, mob/user, params, modifier = 1)
 	if(SEND_SIGNAL(src, COMSIG_PARENT_ATTACKBY, W, user, params) & COMPONENT_NO_AFTERATTACK)
 		return TRUE
 	return FALSE
 
-/obj/attackby(obj/item/I, mob/living/user, params, modifier)
+/obj/attackby(obj/item/I, mob/living/user, params, modifier = 1)
 	return ..() || ((obj_flags & CAN_BE_HIT) && I.attack_obj(src, user))
 
-/mob/living/attackby(obj/item/I, mob/living/user, params, modifier)
+/mob/living/attackby(obj/item/I, mob/living/user, params, modifier = 1)
 	if(..())
 		return TRUE
 	user.changeNext_move(CLICK_CD_MELEE)
-	return I.attack(src, user)
+	return I.attack(src, user, modifier)
 
 /**
   * Called from [/mob/living/attackby]
@@ -72,7 +72,7 @@
   * * mob/living/M - The mob being hit by this item
   * * mob/living/user - The mob hitting with this item
   */
-/obj/item/proc/attack(mob/living/M, mob/living/user)
+/obj/item/proc/attack(mob/living/M, mob/living/user, modifier = 1)
 	if(SEND_SIGNAL(src, COMSIG_ITEM_ATTACK, M, user) & COMPONENT_ITEM_NO_ATTACK)
 		return
 	SEND_SIGNAL(user, COMSIG_MOB_ITEM_ATTACK, M, user)
@@ -100,7 +100,7 @@
 		user.client.give_award(/datum/award/achievement/misc/selfouch, user)
 
 	user.do_attack_animation(M)
-	M.attacked_by(src, user)
+	M.attacked_by(src, user, modifier)
 
 	log_combat(user, M, "attacked", src.name, "(INTENT: [uppertext(user.a_intent)]) (DAMTYPE: [uppertext(damtype)])")
 	add_fingerprint(user)

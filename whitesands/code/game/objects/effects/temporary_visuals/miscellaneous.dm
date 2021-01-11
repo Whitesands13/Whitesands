@@ -14,7 +14,5 @@
 	icon_state = "swing"
 	duration = 5
 
-/obj/effect/temp_visual/dir_setting/item_stab
-	icon = 'waspstation/icons/effects/effects.dmi'
+/obj/effect/temp_visual/dir_setting/item_swing/stab
 	icon_state = "stab"
-	duration = 5

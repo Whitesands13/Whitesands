@@ -55,7 +55,7 @@
 	else
 		mode() // Activate held item
 
-/mob/living/carbon/attackby(obj/item/I, mob/user, params)
+/mob/living/carbon/attackby(obj/item/I, mob/user, params, modifier = 1)
 	var/be_nice = FALSE
 	// if(body_position == LYING_DOWN) //WS - Fix IPC surgery
 	if((I.item_flags & SURGICAL_TOOL) && user.a_intent == INTENT_HELP)
