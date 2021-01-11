@@ -3,6 +3,9 @@
   * user - The mob swinging the object
   */
 /obj/item/proc/swing_attack(mob/living/user)
+	if(!COOLDOWN_FINISHED(user, swing_cooldown))
+		return
+
 	var/list/affected_turfs = list()
 	var/effect_type = /obj/effect/temp_visual/dir_setting/item_swing
 	var/swing_speed = 1.5
@@ -34,14 +37,11 @@
 				affected_turfs[front_turf] = 0.5
 				affected_turfs[get_step(front_turf, user.dir)] = 1
 
-	var/swings_left = swing_penetration
+	COOLDOWN_START(user, swing_cooldown, SWING_COOLDOWN_TIME)
 	var/swing_num = 0
 	for(var/turf in affected_turfs)
 		var/turf/T = turf
 		addtimer(CALLBACK(T, /turf/proc/swing_attack_act, user, src, effect_type, affected_turfs[turf]), swing_speed * swing_num++)
-
-	if(--swings_left <= 0)
-		return
 
 /turf/proc/swing_attack_act(mob/living/user, obj/item/I, effect_type, damage_modifier = 1)
 	if(!isopenturf(src))

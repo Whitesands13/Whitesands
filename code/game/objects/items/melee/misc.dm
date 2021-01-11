@@ -64,7 +64,6 @@
 	w_class = WEIGHT_CLASS_BULKY
 	block_chance = 50
 	armour_penetration = 75
-	swing_penetration = 2 //WS edit - swingable objects
 	sharpness = IS_SHARP
 	attack_verb = list("slashed", "cut")
 	hitsound = 'sound/weapons/rapierhit.ogg'
@@ -431,7 +430,6 @@
 	w_class = WEIGHT_CLASS_BULKY
 	force = 0.001
 	armour_penetration = 1000
-	swing_penetration = 3 //WS edit - swingable objects
 	var/obj/machinery/power/supermatter_crystal/shard
 	var/balanced = 1
 	force_string = "INFINITE"
