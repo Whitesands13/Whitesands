@@ -14,6 +14,7 @@
 	volume = 100
 	force = 15 //Smashing bottles over someone's head hurts.
 	throwforce = 15
+	swing_type = SWINGABLE_SWING //WS edit - swingable objects
 	item_state = "broken_beer" //Generic held-item sprite until unique ones are made.
 	lefthand_file = 'icons/mob/inhands/misc/food_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/food_righthand.dmi'
@@ -141,6 +142,7 @@
 	throwforce = 5
 	throw_speed = 3
 	throw_range = 5
+	swing_type = SWINGABLE_STAB //WS edit - swingable objects
 	w_class = WEIGHT_CLASS_TINY
 	item_state = "beer"
 	hitsound = 'sound/weapons/bladeslice.ogg'
