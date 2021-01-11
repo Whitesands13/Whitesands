@@ -153,10 +153,14 @@
 				changeNext_move(CLICK_CD_MELEE)
 			UnarmedAttack(A,1)
 	else
-		if(W)
+		//WS edit - Swingable objects
+		if(W?.swing_type && a_intent != INTENT_HELP)
+			W.swing_attack(src)
+		else if(W)
 			W.afterattack(A,src,0,params)
 		else
 			RangedAttack(A,params)
+		//WS end
 
 /// Is the atom obscured by a PREVENT_CLICK_UNDER_1 object above it
 /atom/proc/IsObscured()

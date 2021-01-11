@@ -7,12 +7,12 @@
   * * [/atom/proc/attackby] on the target. If it returns TRUE, the chain will be stopped.
   * * [/obj/item/proc/afterattack]. The return value does not matter.
   */
-/obj/item/proc/melee_attack_chain(mob/user, atom/target, params)
+/obj/item/proc/melee_attack_chain(mob/user, atom/target, params, modifier = 1)
 	if(tool_behaviour && target.tool_act(user, src, tool_behaviour))
 		return
 	if(pre_attack(target, user, params))
 		return
-	if(target.attackby(src,user, params))
+	if(target.attackby(src,user, params, modifier))
 		return
 	if(QDELETED(src) || QDELETED(target))
 		attack_qdeleted(target, user, TRUE, params)
@@ -47,18 +47,19 @@
   * * obj/item/W - The item hitting this atom
   * * mob/user - The wielder of this item
   * * params - click params such as alt/shift etc
+  * * modifier - multiply damage done by this amount
   *
   * See: [/obj/item/proc/melee_attack_chain]
   */
-/atom/proc/attackby(obj/item/W, mob/user, params)
+/atom/proc/attackby(obj/item/W, mob/user, params, modifier)
 	if(SEND_SIGNAL(src, COMSIG_PARENT_ATTACKBY, W, user, params) & COMPONENT_NO_AFTERATTACK)
 		return TRUE
 	return FALSE
 
-/obj/attackby(obj/item/I, mob/living/user, params)
+/obj/attackby(obj/item/I, mob/living/user, params, modifier)
 	return ..() || ((obj_flags & CAN_BE_HIT) && I.attack_obj(src, user))
 
-/mob/living/attackby(obj/item/I, mob/living/user, params)
+/mob/living/attackby(obj/item/I, mob/living/user, params, modifier)
 	if(..())
 		return TRUE
 	user.changeNext_move(CLICK_CD_MELEE)
@@ -127,11 +128,11 @@
 		log_combat(user, src, "attacked", I)
 	take_damage(I.force, I.damtype, "melee", 1)
 
-/mob/living/attacked_by(obj/item/I, mob/living/user)
+/mob/living/attacked_by(obj/item/I, mob/living/user, modifier = 1)
 	var/armor_value = run_armor_check(armour_penetration = I.armour_penetration)		//WS Edit - Simplemobs can have armor
 	send_item_attack_message(I, user)
 	if(I.force)
-		apply_damage(I.force, I.damtype, break_modifier = I.force, blocked = armor_value) //Bone break modifier = item force
+		apply_damage(I.force * modifier, I.damtype, break_modifier = I.force * modifier, blocked = armor_value) //Bone break modifier = item force
 		if(I.damtype == BRUTE)
 			if(prob(33))
 				I.add_mob_blood(src)

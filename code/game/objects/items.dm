@@ -166,6 +166,10 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 
 	var/canMouseDown = FALSE
 
+	///If the item can be swung to attack stuff
+	var/swing_type
+	///How many things the item can penetrate when swung
+	var/swing_penetration = 1
 
 /obj/item/Initialize()
 
