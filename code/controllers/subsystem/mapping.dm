@@ -18,7 +18,10 @@ SUBSYSTEM_DEF(mapping)
 	var/list/lava_ruins_templates = list()
 	var/list/ice_ruins_templates = list()
 	var/list/ice_ruins_underground_templates = list()
+	 // WS Edit Start - Whitesands
 	var/list/sand_ruins_templates = list()
+	var/list/sand_camps_templates = list()
+	// WS Edit End - Whitesands
 	var/list/jungle_ruins_templates = list()
 	var/datum/space_level/isolated_ruins_z //Created on demand during ruin loading.
 
@@ -118,11 +121,12 @@ SUBSYSTEM_DEF(mapping)
 		seedRuins(ice_ruins_underground, CONFIG_GET(number/icemoon_budget), list(/area/icemoon/underground/unexplored), ice_ruins_underground_templates)
 		for (var/ice_z in ice_ruins_underground)
 			spawn_rivers(ice_z, 4, /turf/open/lava/plasma/ice_moon, /area/icemoon/underground/unexplored)
-
+	// WS Edit Start - Whitesands
 	var/list/sand_ruins = levels_by_trait(ZTRAIT_SAND_RUINS)
 	if (sand_ruins.len)
 		seedRuins(sand_ruins, CONFIG_GET(number/whitesands_budget), list(/area/whitesands/surface/outdoors/unexplored), sand_ruins_templates)
-
+		seedRuins(sand_ruins, CONFIG_GET(number/whitesands_budget), list(/area/whitesands/surface/outdoors/explored), sand_camps_templates)
+	// WS Edit End - Whitesands
 	// Generate deep space ruins
 	var/list/space_ruins = levels_by_trait(ZTRAIT_SPACE_RUINS)
 	if (space_ruins.len)
@@ -196,7 +200,10 @@ SUBSYSTEM_DEF(mapping)
 	ruins_templates = SSmapping.ruins_templates
 	space_ruins_templates = SSmapping.space_ruins_templates
 	lava_ruins_templates = SSmapping.lava_ruins_templates
+	// WS Edit Start - Whitesands
 	sand_ruins_templates = SSmapping.sand_ruins_templates
+	sand_camps_templates = SSmapping.sand_camps_templates
+	// WS Edit End - Whitesands
 	shuttle_templates = SSmapping.shuttle_templates
 	shelter_templates = SSmapping.shelter_templates
 	unused_turfs = SSmapping.unused_turfs
@@ -447,6 +454,8 @@ GLOBAL_LIST_EMPTY(the_station_areas)
 
 		if(istype(R, /datum/map_template/ruin/lavaland))
 			lava_ruins_templates[R.name] = R
+		else if(istype(R, /datum/map_template/ruin/camp/whitesands))
+			sand_camps_templates[R.name] = R
 		else if(istype(R, /datum/map_template/ruin/whitesands))
 			sand_ruins_templates[R.name] = R
 		else if(istype(R, /datum/map_template/ruin/jungle))

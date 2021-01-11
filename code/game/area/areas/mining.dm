@@ -262,6 +262,10 @@
 	name = "Whitesands Dunes"
 	outdoors = TRUE
 
+/area/whitesands/surface/outdoors/explored
+	icon_state = "explored"
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | FLORA_ALLOWED | MOB_SPAWN_ALLOWED
+
 /area/whitesands/surface/outdoors/unexplored //monsters and ruins spawn here
 	icon_state = "unexplored"
 	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED

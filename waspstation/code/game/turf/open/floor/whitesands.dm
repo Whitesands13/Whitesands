@@ -4,8 +4,9 @@
 	icon = 'waspstation/icons/turf/floors/whitesands/ws_floors.dmi'
 	icon_state = "sand"
 	icon_plating = "sand"
+	planetary_atmos = TRUE
 	environment_type = WHITESANDS_SAND_ENV
-	initial_gas_mix = OPENTURF_LOW_PRESSURE //Fallback, and used to tell the AACs that this is the exterior
+	initial_gas_mix = WHITESANDS_ATMOS //Fallback, and used to tell the AACs that this is the exterior
 	digResult = /obj/item/stack/ore/glass
 
 /turf/open/floor/plating/asteroid/whitesands/Initialize()
@@ -25,3 +26,6 @@
 
 /turf/open/floor/plating/asteroid/whitesands/remove_air(amount)
 	return return_air()
+
+/turf/open/floor/plating/grass/whitesands
+	initial_gas_mix = WHITESANDS_ATMOS
