@@ -101,12 +101,8 @@
 	if(deployed_zone && isarea(deployed_zone))
 		if(istype(deployed_zone, /area/lavaland/surface/outdoors/ore_vein))
 			var/area/lavaland/surface/outdoors/ore_vein/vein = deployed_zone
-			if(!vein.active_drill)
-				vein.active_drill = src
-				active_vein = vein
-				return DCM_LOCATED_VEIN
-			else
-				return DCM_OCCUPIED_VEIN
+			active_vein = vein
+			return DCM_LOCATED_VEIN
 		else
 			return DCM_NO_VEIN
 
@@ -117,7 +113,6 @@
 	visible_message("<span class='notice'>[src] is now deployed and ready to operate!</span>")
 
 /obj/machinery/deepcore/drill/proc/Undeploy()
-	active_vein.active_drill = null
 	active_vein = null
 	deployed = FALSE
 	anchored = FALSE

@@ -25,7 +25,6 @@ GLOBAL_LIST_EMPTY(ore_vein_landmarks)
 	name = "Undefined Ore Vein"
 	var/obj/item/stack/ore/ore_type //What you're pulling out of the ground
 	var/material_rate = 0	//Affects overall value of the ore vein
-	var/obj/machinery/deepcore/drill/active_drill
 	///Currently linked ore vein landmark
 	var/obj/effect/landmark/ore_vein/landmark
 
