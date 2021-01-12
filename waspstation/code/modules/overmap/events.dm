@@ -105,10 +105,18 @@
 
 /obj/structure/overmap/event/emp/affect_ship(obj/structure/overmap/ship/simulated/S)
 	var/area/source_area = pick(S.shuttle.shuttle_areas)
-	var/source_object = pick(source_area.contents)
-	S.recieve_damage(strength * 2)
 	source_area.set_fire_alarm_effect()
-	empulse(get_turf(source_object), round(rand(strength / 2, strength)), rand(strength, strength * 2))
+	S.recieve_damage(rand(strength * 5, strength * 10))
+	if(S.integrity <= 0)
+		var/source_object = pick(source_area.contents)
+		empulse(get_turf(source_object), round(rand(strength / 2, strength)), rand(strength, strength * 2))
+	else
+		for(var/MN in GLOB.player_list)
+			var/mob/M = MN
+			if(S.shuttle.is_in_shuttle_bounds(M))
+				var/strength = abs(S.integrity - initial(S.integrity))
+				M.playsound_local(S.shuttle, 'sound/weapons/ionrifle.ogg', strength)
+				shake_camera(M, 10, strength / 10)
 
 /obj/structure/overmap/event/emp/minor
 	name = "ion storm (minor)"

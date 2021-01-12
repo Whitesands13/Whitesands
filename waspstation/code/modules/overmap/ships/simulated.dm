@@ -28,6 +28,8 @@
 	var/est_thrust
 	///Vessel approximate mass
 	var/mass
+	///Average fuel fullness percentage
+	var/avg_fuel_amnt = 100
 
 	///The overmap object the ship is docked to, if any
 	var/obj/structure/overmap/docked
@@ -155,6 +157,7 @@
 	refresh_engines()
 	if(!mass)
 		calculate_mass()
+	calculate_avg_fuel()
 	for(var/obj/machinery/power/shuttle/engine/E in shuttle.engine_list)
 		if(!E.enabled)
 			continue
@@ -187,6 +190,21 @@
 		. += length(get_area_turfs(shuttleArea))
 	mass = .
 	update_icon_state()
+
+/**
+  * Calculates the average fuel fullness of all engines.
+  */
+/obj/structure/overmap/ship/simulated/proc/calculate_avg_fuel()
+	var/fuel_avg = 0
+	var/engine_amnt = 0
+	for(var/obj/machinery/power/shuttle/engine/E in shuttle.engine_list)
+		if(!E.enabled)
+			continue
+		fuel_avg += E.return_fuel() / E.return_fuel_cap()
+	if(!engine_amnt || !fuel_avg)
+		avg_fuel_amnt = 0
+		return
+	avg_fuel_amnt = round(fuel_avg / engine_amnt)
 
 /**
   * Proc called after a shuttle is moved, used for checking a ship's location when it's moved manually (E.G. calling the mining shuttle via a console)

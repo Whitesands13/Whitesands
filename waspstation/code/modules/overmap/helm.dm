@@ -152,6 +152,9 @@
 			var/obj/structure/overmap/to_act = locate(params["ship_to_act"])
 			say(S.overmap_object_act(usr, to_act))
 		if("undock")
+			S.calculate_avg_fuel()
+			if(S.avg_fuel_amnt < 25 && tgui_alert(usr, "Ship only has ~[round(S.avg_fuel_amnt)]% fuel remaining! Are you sure you want to undock?", name, list("Yes", "No")) != "Yes")
+				return
 			say(S.undock())
 		if("reload_ship")
 			set_ship()
