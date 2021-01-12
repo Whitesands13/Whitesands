@@ -8,6 +8,9 @@
 	environment_type = WHITESANDS_SAND_ENV
 	initial_gas_mix = WHITESANDS_ATMOS //Fallback, and used to tell the AACs that this is the exterior
 	digResult = /obj/item/stack/ore/glass
+	light_range = 2
+	light_power = 0.6
+	light_color = COLOR_VERY_LIGHT_GRAY
 
 /turf/open/floor/plating/asteroid/whitesands/Initialize()
 	..()
