@@ -19,6 +19,15 @@
 	air = GLOB.ws_planet_atmos
 	update_air_ref()
 
+/// Drops itemstack when dug and changes icon
+/turf/open/floor/plating/asteroid/proc/getDug()
+	new digResult(src, 5)
+	if(postdig_icon_change)
+		if(!postdig_icon)
+			icon_plating = "[initial(src.icon_state)]_dug"
+			icon_state = "[initial(src.icon_state)]_dug"
+	dug = TRUE
+
 /turf/open/floor/plating/asteroid/whitesands/dried
 	name = "dried sand"
 	baseturfs = /turf/open/floor/plating/asteroid/whitesands/dried
