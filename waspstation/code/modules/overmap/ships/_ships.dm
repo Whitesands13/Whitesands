@@ -22,6 +22,12 @@
 	///The current speed in x/y direction in grid squares per minute
 	var/speed = list(0,0)
 
+/obj/structure/overmap/ship/Destroy()
+	. = ..()
+	LAZYREMOVE(SSovermap.simulated_ships, src)
+	if(movement_callback_id)
+		deltimer(movement_callback_id)
+
 /**
   * Change the speed in any direction.
   * * n_x - Speed in the X direction to change

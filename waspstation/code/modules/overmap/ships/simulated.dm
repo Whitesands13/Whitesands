@@ -42,12 +42,6 @@
 	if(_shuttle)
 		shuttle = _shuttle
 
-/obj/structure/overmap/ship/Destroy()
-	. = ..()
-	LAZYREMOVE(SSovermap.simulated_ships, src)
-	if(movement_callback_id)
-		deltimer(movement_callback_id)
-
 /obj/structure/overmap/ship/simulated/proc/initial_load()
 	if(istype(loc, /obj/structure/overmap))
 		docked = loc
@@ -131,8 +125,8 @@
   * Undocks the shuttle by launching the shuttle with no destination (this causes it to remain in transit)
   */
 /obj/structure/overmap/ship/simulated/proc/undock()
-	if(!is_still()) //how the hell is it even moving (is the question I've asked multiple times)
-		return "Ship must be stopped to undock!"
+	if(!is_still()) //how the hell is it even moving (is the question I've asked multiple times) //fuck you past me this didn't help at all
+		decelerate(max_speed)
 	if(!docked)
 		return "Ship not docked!"
 	if(!shuttle)
@@ -232,6 +226,7 @@
 		forceMove(docked_object)
 		docked = docked_object
 		state = SHIP_IDLE
+		decelerate(max_speed)
 		update_screen()
 		return FALSE
 
