@@ -15,5 +15,5 @@
 	icon = 'waspstation/icons/obj/ammo.dmi'
 	icon_state = "aks74u_mag"
 	ammo_type = /obj/item/ammo_casing/ballistic/a545_39
-	caliber = "5.45x39mm cartridge"
+	caliber = "5.45x39mm"
 	max_ammo = 30

@@ -20,7 +20,7 @@
 	update_air_ref()
 
 /// Drops itemstack when dug and changes icon
-/turf/open/floor/plating/asteroid/proc/getDug()
+/turf/open/floor/plating/asteroid/getDug()
 	new digResult(src, 5)
 	if(postdig_icon_change)
 		if(!postdig_icon)
