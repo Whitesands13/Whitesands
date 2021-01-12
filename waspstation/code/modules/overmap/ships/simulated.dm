@@ -59,6 +59,7 @@
 	if(integrity > 0)
 		return
 	if(docked) //what even
+		check_loc()
 		return
 	for(var/MN in GLOB.mob_living_list)
 		var/mob/M = MN
@@ -128,6 +129,7 @@
 	if(!is_still()) //how the hell is it even moving (is the question I've asked multiple times) //fuck you past me this didn't help at all
 		decelerate(max_speed)
 	if(!docked)
+		check_loc()
 		return "Ship not docked!"
 	if(!shuttle)
 		return "Shuttle not found!"
