@@ -161,7 +161,7 @@ SUBSYSTEM_DEF(discord)
 		not_unique = find_discord_link_by_token(one_time_token, timebound = TRUE)
 
 	// Insert into the table, null in the discord id, id and timestamp and valid fields so the db fills them out where needed
-	var/datum/db_query/query_insert_link_record = SSdbcore.NewQuery(
+	var/datum/DBQuery/query_insert_link_record = SSdbcore.NewQuery(
 		"INSERT INTO [format_table_name("discord_links")] (ckey, one_time_token) VALUES(:ckey, :token)",
 		list("ckey" = ckey_for, "token" = one_time_token)
 	)
@@ -192,7 +192,7 @@ SUBSYSTEM_DEF(discord)
 	if(timebound)
 		timeboundsql = "AND timestamp >= Now() - INTERVAL 4 HOUR"
 	var/query = "SELECT CAST(discord_id AS CHAR(25)), ckey, MAX(timestamp), one_time_token FROM [format_table_name("discord_links")] WHERE one_time_token = :one_time_token [timeboundsql] GROUP BY ckey, discord_id, one_time_token LIMIT 1"
-	var/datum/db_query/query_get_discord_link_record = SSdbcore.NewQuery(
+	var/datum/DBQuery/query_get_discord_link_record = SSdbcore.NewQuery(
 		query,
 		list("one_time_token" = one_time_token)
 	)
@@ -225,7 +225,7 @@ SUBSYSTEM_DEF(discord)
 		timeboundsql = "AND timestamp >= Now() - INTERVAL 4 HOUR"
 
 	var/query = "SELECT CAST(discord_id AS CHAR(25)), ckey, MAX(timestamp), one_time_token FROM [format_table_name("discord_links")] WHERE ckey = :ckey [timeboundsql] GROUP BY ckey, discord_id, one_time_token LIMIT 1"
-	var/datum/db_query/query_get_discord_link_record = SSdbcore.NewQuery(
+	var/datum/DBQuery/query_get_discord_link_record = SSdbcore.NewQuery(
 		query,
 		list("ckey" = ckey)
 	)
@@ -260,7 +260,7 @@ SUBSYSTEM_DEF(discord)
 		timeboundsql = "AND timestamp >= Now() - INTERVAL 4 HOUR"
 
 	var/query = "SELECT CAST(discord_id AS CHAR(25)), ckey, MAX(timestamp), one_time_token FROM [format_table_name("discord_links")] WHERE discord_id = :discord_id [timeboundsql] GROUP BY ckey, discord_id, one_time_token LIMIT 1"
-	var/datum/db_query/query_get_discord_link_record = SSdbcore.NewQuery(
+	var/datum/DBQuery/query_get_discord_link_record = SSdbcore.NewQuery(
 		query,
 		list("discord_id" = discord_id)
 	)
