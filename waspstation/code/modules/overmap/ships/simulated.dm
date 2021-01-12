@@ -234,6 +234,7 @@
 
 /obj/structure/overmap/ship/simulated/tick_move()
 	if(docked)
+		decelerate(max_speed)
 		deltimer(movement_callback_id)
 		movement_callback_id = null
 		return
