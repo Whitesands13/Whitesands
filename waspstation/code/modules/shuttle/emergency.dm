@@ -7,6 +7,7 @@
 	desc = "A wall mounted safe containing space suits. Will only open in emergencies."
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "safe"
+	anchored = TRUE
 	var/unlocked = FALSE
 	var/obj/structure/overmap/ship/simulated/linked_ship
 
