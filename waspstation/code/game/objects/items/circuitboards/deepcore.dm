@@ -24,4 +24,6 @@
 	build_path = /obj/machinery/deepcore/hub
 	req_components = list(
 		/obj/item/stock_parts/capacitor = 1,
-		/obj/item/stock_parts/scanning_module = 1)
+		/obj/item/stock_parts/micro_laser = 2,
+		/obj/item/stock_parts/matter_bin = 3,
+		/obj/item/stock_parts/manipulator = 2)

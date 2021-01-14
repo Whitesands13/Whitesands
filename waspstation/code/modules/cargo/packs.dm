@@ -422,7 +422,13 @@
 					/obj/item/multitool,
 					/obj/item/circuitboard/machine/deepcore/hub,
 					/obj/item/stock_parts/capacitor,
-					/obj/item/stock_parts/scanning_module)
+					/obj/item/stock_parts/micro_laser,
+					/obj/item/stock_parts/micro_laser,
+					/obj/item/stock_parts/matter_bin,
+					/obj/item/stock_parts/matter_bin,
+					/obj/item/stock_parts/matter_bin,
+					/obj/item/stock_parts/manipulator,
+					/obj/item/stock_parts/manipulator)
 	crate_name = "deep core logi crate"
 
 //////////////////////////////////////////////////////////////////////////////

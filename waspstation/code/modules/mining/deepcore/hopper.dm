@@ -6,9 +6,24 @@
 	idle_power_usage = 5
 	active_power_usage = 50
 	anchored = FALSE
+	circuit = /obj/item/circuitboard/machine/deepcore/hopper
 
 	var/active = FALSE
-	var/list/ore_contained = list()
+	var/eject_lim = 0 //Amount of ore stacks the hopper can eject each tick
+
+/obj/machinery/deepcore/hopper/RefreshParts()
+	// Material container size
+	var/MB_value = 0
+	for(var/obj/item/stock_parts/matter_bin/MB in component_parts)
+		MB_value += 4 * MB.rating ** 2 // T1 = 8, T2 = 32, T3 = 72, T4 = 128
+	container.max_amount = MB_value * MINERAL_MATERIAL_AMOUNT
+	// Ejection limit per-tick
+	var/MM_value = 0
+	for(var/obj/item/stock_parts/manipulator/MM in component_parts)
+		MM_value += MM.rating
+	eject_lim = MM_value ** 2
+	// Capacitor part function
+	// lol there is none
 
 /obj/machinery/deepcore/hopper/interact(mob/user, special_state)
 	. = ..()
@@ -17,7 +32,7 @@
 		use_power = 1 //Use idle power
 		to_chat(user, "<span class='notice'>You deactiveate [src]</span>")
 	else
-		if(!network && !length(ore_contained))
+		if(!network)
 			to_chat(user, "<span class='warning'>Unable to activate [src]! No ore located for processing.</span>")
 		else if(!powered(power_channel))
 			to_chat(user, "<span class='warning'>Unable to activate [src]! Insufficient power.</span>")
@@ -28,24 +43,21 @@
 	update_icon_state()
 
 /obj/machinery/deepcore/hopper/process()
-	if((!network && !length(ore_contained)) || !anchored)
+	if(!network || !anchored)
 		active = FALSE
 		update_icon_state()
 	if(active)
 		if(network)
-			network.Pull(ore_contained)
-		for(var/O in ore_contained)
-			dropOre(O, ore_contained[O])
+			network.Pull(container)
+			dropOre()
 
-/obj/machinery/deepcore/hopper/proc/dropOre(obj/item/stack/ore/O, amount)
-	if(ore_contained[O] > amount)
-		ore_contained[O] -= amount
-	else if(ore_contained[O] == amount)
-		ore_contained -= O
-	else
-		return 0
-	new O(get_step(src, dir), amount, TRUE)
-	return amount
+/obj/machinery/deepcore/hopper/proc/dropOre()
+	var/eject_count = eject_lim
+	for(var/I in container.materials)
+		if(eject_count <= 0)
+			return
+		var/datum/material/M = I
+		eject_count -= container.retrieve_sheets(eject_count, M, get_step(src, dir))
 
 /obj/machinery/deepcore/hopper/update_icon_state()
 	if(powered(power_channel) && anchored)
