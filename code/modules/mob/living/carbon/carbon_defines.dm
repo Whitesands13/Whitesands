@@ -85,3 +85,4 @@
 
 	/// Wasp edit - moth dust when hugging
 	var/mothdust
+	
