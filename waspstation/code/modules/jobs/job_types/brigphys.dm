@@ -46,4 +46,5 @@
 
 	uniform = /obj/item/clothing/under/rank/security/brig_phys/security_medic
 	suit = /obj/item/clothing/suit/toggle/labcoat/brig_phys
+	suit_store = /obj/item/flashlight/pen
 	alt_suit = null
