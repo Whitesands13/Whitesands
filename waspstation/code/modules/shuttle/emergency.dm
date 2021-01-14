@@ -37,12 +37,30 @@
 	..()
 	new /obj/item/storage/toolbox/emergency/shuttle/electric(src)
 
+/obj/item/storage/overmap_ship/attackby(obj/item/W, mob/user, params)
+	if (can_interact(user))
+		return ..()
+
+/obj/item/storage/overmap_ship/attack_hand(mob/user)
+	if (can_interact(user))
+		SEND_SIGNAL(src, COMSIG_TRY_STORAGE_SHOW, user)
+	return TRUE
+
+/obj/item/storage/overmap_ship/MouseDrop(over_object, src_location, over_location)
+	if(can_interact(usr))
+		return ..()
+
+/obj/item/storage/overmap_ship/AltClick(mob/user)
+	if(!can_interact(user))
+		return
+	..()
+
 /obj/item/storage/overmap_ship/can_interact(mob/user)
 	if(!..())
 		return FALSE
 	if((linked_ship?.integrity < initial(linked_ship?.integrity) / 4)|| (!linked_ship.is_still() && linked_ship.avg_fuel_amnt < 10) || unlocked)
 		return TRUE
-	to_chat(user, "The storage unit will only unlock when the vessel is at 25% integrity or out of fuel..")
+	to_chat(user, "The storage unit will only unlock when the vessel is at 25% integrity or out of fuel.")
 
 //Emergency toolbox with a few more things for repairing shuttles.
 /obj/item/storage/toolbox/emergency/shuttle

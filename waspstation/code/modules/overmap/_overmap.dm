@@ -228,13 +228,13 @@
 
 /obj/structure/overmap/level/mining/icemoon
 	name = "Icemoon"
-	desc = "A frozen planet, known for it's lakes and rivers of plasma."
+	desc = "A frozen planet, well known for it's deep chasms and rivers of plasma."
 	color = COLOR_BLUE_LIGHT
 
 /obj/structure/overmap/level/mining/whitesands
 	name = "Whitesands"
-	desc = "Once a mining colony abandoned in unknown circumstances, recent events have lead to it's reactivation."
-	color = COLOR_SILVER
+	desc = "Once a mining colony abandoned in unknown circumstances, recent events have lead to it's attempted reestablishment."
+	color = COLOR_GRAY
 
 /obj/structure/overmap/dynamic
 	name = "weak energy signature"
@@ -244,6 +244,8 @@
 	var/datum/turf_reservation/reserve
 	///The docking port in the reserve
 	var/obj/docking_port/stationary/reserve_dock
+	///The docking port in the reserve
+	var/obj/docking_port/stationary/reserve_dock_secondary
 	///If the level should be preserved. Useful for if you want to build an autismfort or something.
 	var/preserve_level = FALSE
 	///If the level is a planet.
@@ -251,6 +253,7 @@
 
 /obj/structure/overmap/dynamic/Initialize(mapload, _id, preload_level)
 	. = ..()
+	choose_level_type()
 	if(preload_level)
 		load_level()
 
@@ -309,7 +312,6 @@
 	if(!new_reserve)
 		return "FATAL NAVIGATION ERROR, PLEASE TRY AGAIN LATER!"
 	reserve = new_reserve
-	reserve_dock = SSshuttle.getDock("[PRIMARY_OVERMAP_DOCK_PREFIX]_[id]")
 
 /**
   * Unloads the reserve, deletes the linked docking port, and moves to a random location if there's no client-having, alive mobs.
@@ -322,6 +324,6 @@
 		if(L?.mind)
 			return //Don't fuck over stranded people plox
 	if(reserve)
-		QDEL_NULL(reserve_dock)
 		forceMove(SSovermap.get_unused_overmap_square())
+		choose_level_type()
 		QDEL_NULL(reserve)
