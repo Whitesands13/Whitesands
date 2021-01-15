@@ -60,6 +60,20 @@
 	suffix = "whitesands_surface_envy.dmm"
 	allow_duplicates = FALSE
 
+/datum/map_template/ruin/whitesands/water
+	name = "Abandoned Water Extraction Facility"
+	id = "waterplant"
+	description = "An abandoned building that seems to have once used prisoner labour to extract water for a colony."
+	suffix = "whitesands_surface_waterplant.dmm"
+
+/datum/map_template/ruin/whitesands/starfurycrash
+	name = "Starfury Crash"
+	id = "starfurycrash"
+	description = "The remains of an unidentified syndicate battleship has crashed here."
+	suffix = "whitesands_surface_starfurycrash.dmm"
+	allow_duplicates = FALSE
+
+//////////OUTSIDE SETTLEMENTS/RUINS//////////
 /datum/map_template/ruin/camp/whitesands/survivors
 	name = "Survivor Camp"
 	id = "ws-survivors"
