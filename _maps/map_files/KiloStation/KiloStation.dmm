@@ -357,6 +357,21 @@
 	},
 /turf/open/space,
 /area/space/nearstation)
+"acz" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 4
+	},
+/obj/machinery/door/airlock/security/glass{
+	id_tag = "innerbrig";
+	name = "Brig";
+	req_access_txt = "63"
+	},
+/obj/machinery/door/firedoor/border_only{
+	dir = 8
+	},
+/obj/machinery/scanner_gate,
+/turf/open/floor/plasteel/dark,
+/area/security/brig)
 "acE" = (
 /obj/structure/table,
 /obj/effect/decal/cleanable/cobweb,
@@ -2926,16 +2941,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/quartermaster/office)
-"atu" = (
-/obj/effect/turf_decal/loading_area{
-	dir = 1
-	},
-/obj/machinery/door/poddoor/shutters/preopen{
-	id = "foqueue";
-	name = "Queue Shutters"
-	},
-/turf/open/floor/plasteel,
-/area/crew_quarters/heads/head_of_personnel)
 "atv" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1{
@@ -17834,14 +17839,6 @@
 /obj/structure/girder,
 /turf/open/floor/plating,
 /area/maintenance/aft)
-"bZe" = (
-/obj/effect/turf_decal/loading_area,
-/obj/machinery/door/poddoor/shutters/preopen{
-	id = "foqueue";
-	name = "Queue Shutters"
-	},
-/turf/open/floor/plasteel,
-/area/crew_quarters/heads/head_of_personnel)
 "bZl" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/structure/cable,
@@ -34414,6 +34411,28 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"fzH" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 8
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/door/airlock/security/glass{
+	id_tag = "outerbrig";
+	name = "Brig";
+	req_access_txt = "63"
+	},
+/obj/machinery/navbeacon/wayfinding,
+/obj/machinery/door/firedoor/border_only{
+	dir = 8
+	},
+/obj/machinery/door/firedoor/border_only{
+	dir = 4
+	},
+/obj/machinery/scanner_gate,
+/turf/open/floor/plasteel/dark,
+/area/security/brig)
 "fzX" = (
 /obj/structure/table/wood,
 /obj/effect/turf_decal/tile/red{
@@ -39454,6 +39473,24 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/fore)
+"gWo" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/door/airlock/security/glass{
+	id_tag = "innerbrig";
+	name = "Brig";
+	req_access_txt = "63"
+	},
+/obj/machinery/door/firedoor/border_only{
+	dir = 8
+	},
+/obj/machinery/scanner_gate,
+/turf/open/floor/plasteel/dark,
+/area/security/brig)
 "gWp" = (
 /obj/machinery/igniter{
 	id = "Incinerator"
@@ -48718,23 +48755,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/hallway/secondary/exit/departure_lounge)
-"jJo" = (
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 4
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/machinery/door/airlock/security/glass{
-	id_tag = "innerbrig";
-	name = "Brig";
-	req_access_txt = "63"
-	},
-/obj/machinery/door/firedoor/border_only{
-	dir = 8
-	},
-/turf/open/floor/plasteel/dark,
-/area/security/brig)
 "jJC" = (
 /obj/machinery/conveyor{
 	id = "garbage"
@@ -51998,23 +52018,6 @@
 /obj/structure/disposalpipe/segment,
 /turf/open/floor/plasteel,
 /area/hallway/primary/fore)
-"kHT" = (
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 8
-	},
-/obj/machinery/door/airlock/security/glass{
-	id_tag = "outerbrig";
-	name = "Brig";
-	req_access_txt = "63"
-	},
-/obj/machinery/door/firedoor/border_only{
-	dir = 4
-	},
-/obj/machinery/door/firedoor/border_only{
-	dir = 8
-	},
-/turf/open/floor/plasteel/dark,
-/area/security/brig)
 "kIb" = (
 /obj/machinery/power/apc{
 	areastring = "/area/maintenance/solars/starboard/fore";
@@ -55377,20 +55380,6 @@
 /obj/machinery/atmospherics/pipe/layer_manifold,
 /turf/open/floor/plasteel/dark,
 /area/security/processing)
-"lAT" = (
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 4
-	},
-/obj/machinery/door/airlock/security/glass{
-	id_tag = "innerbrig";
-	name = "Brig";
-	req_access_txt = "63"
-	},
-/obj/machinery/door/firedoor/border_only{
-	dir = 8
-	},
-/turf/open/floor/plasteel/dark,
-/area/security/brig)
 "lAY" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 5
@@ -60205,27 +60194,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/maintenance/starboard)
-"mRA" = (
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 8
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/machinery/door/airlock/security/glass{
-	id_tag = "outerbrig";
-	name = "Brig";
-	req_access_txt = "63"
-	},
-/obj/machinery/navbeacon/wayfinding,
-/obj/machinery/door/firedoor/border_only{
-	dir = 8
-	},
-/obj/machinery/door/firedoor/border_only{
-	dir = 4
-	},
-/turf/open/floor/plasteel/dark,
-/area/security/brig)
 "mRD" = (
 /obj/effect/turf_decal/bot,
 /obj/effect/turf_decal/tile/neutral{
@@ -70854,6 +70822,15 @@
 /obj/item/camera,
 /turf/open/floor/plasteel/dark,
 /area/crew_quarters/heads/captain)
+"qgp" = (
+/obj/effect/turf_decal/loading_area,
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "foqueue";
+	name = "Queue Shutters"
+	},
+/obj/machinery/scanner_gate,
+/turf/open/floor/plasteel,
+/area/crew_quarters/heads/head_of_personnel)
 "qgs" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
@@ -86202,6 +86179,17 @@
 	icon_state = "panelscorched"
 	},
 /area/maintenance/port/aft)
+"uRR" = (
+/obj/effect/turf_decal/loading_area{
+	dir = 1
+	},
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "foqueue";
+	name = "Queue Shutters"
+	},
+/obj/machinery/scanner_gate,
+/turf/open/floor/plasteel,
+/area/crew_quarters/heads/head_of_personnel)
 "uSy" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
@@ -95227,6 +95215,24 @@
 	icon_state = "panelscorched"
 	},
 /area/maintenance/port)
+"xDQ" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 8
+	},
+/obj/machinery/door/airlock/security/glass{
+	id_tag = "outerbrig";
+	name = "Brig";
+	req_access_txt = "63"
+	},
+/obj/machinery/door/firedoor/border_only{
+	dir = 4
+	},
+/obj/machinery/door/firedoor/border_only{
+	dir = 8
+	},
+/obj/machinery/scanner_gate,
+/turf/open/floor/plasteel/dark,
+/area/security/brig)
 "xEf" = (
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
@@ -120503,9 +120509,9 @@ aef
 hpm
 wSu
 aef
-lAT
+acz
 gEZ
-jJo
+gWo
 aaj
 fsj
 jhY
@@ -121274,9 +121280,9 @@ aef
 ksV
 wsC
 agX
-kHT
+xDQ
 gEZ
-mRA
+fzH
 aaf
 aTH
 qRy
@@ -125117,7 +125123,7 @@ jQS
 tTJ
 atC
 jPl
-atu
+uRR
 bRG
 dhr
 hab
@@ -126145,7 +126151,7 @@ yfk
 bui
 loZ
 bzM
-bZe
+qgp
 bRG
 noY
 mxV
