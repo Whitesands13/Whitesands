@@ -10161,24 +10161,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/quartermaster/storage)
-"aPh" = (
-/obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
-/obj/machinery/door/airlock/security/glass{
-	id_tag = "innerbrig";
-	name = "Brig";
-	req_access_txt = "63"
-	},
-/obj/effect/turf_decal/tile/red,
-/obj/effect/turf_decal/tile/red{
-	dir = 8
-	},
-/obj/machinery/door/firedoor/border_only{
-	dir = 1
-	},
-/obj/machinery/door/firedoor/border_only,
-/turf/open/floor/plasteel,
-/area/security/brig)
 "aPi" = (
 /obj/item/reagent_containers/food/snacks/grown/wheat,
 /obj/item/reagent_containers/food/snacks/grown/watermelon,
@@ -14883,39 +14865,6 @@
 /obj/structure/table/reinforced,
 /turf/open/floor/plasteel,
 /area/security/checkpoint/customs)
-"bgB" = (
-/obj/structure/rack,
-/obj/effect/turf_decal/tile/blue,
-/obj/effect/turf_decal/tile/blue{
-	dir = 4
-	},
-/obj/item/clothing/under/rank/security/officer,
-/obj/item/clothing/under/rank/security/officer,
-/obj/item/clothing/under/rank/security/officer,
-/obj/item/clothing/under/rank/security/officer,
-/obj/item/clothing/under/rank/security/officer,
-/obj/item/clothing/under/rank/security/officer,
-/obj/item/clothing/suit/security/officer,
-/obj/item/clothing/suit/security/officer,
-/obj/item/clothing/suit/security/officer,
-/obj/item/clothing/suit/security/officer,
-/obj/item/clothing/suit/security/officer,
-/obj/item/clothing/suit/security/officer,
-/obj/item/clothing/under/rank/security/warden,
-/obj/item/clothing/suit/armor/vest/security/warden,
-/obj/item/clothing/under/rank/security/head_of_security,
-/obj/item/clothing/suit/armor/vest/security/hos,
-/obj/item/clothing/head/beret/sec/officer,
-/obj/item/clothing/head/beret/sec/officer,
-/obj/item/clothing/head/beret/sec/officer,
-/obj/item/clothing/head/beret/sec/officer,
-/obj/item/clothing/head/beret/sec/officer,
-/obj/item/clothing/head/beret/sec/officer,
-/obj/item/clothing/head/beret/sec/warden,
-/obj/item/clothing/head/beret/sec/hos,
-/obj/effect/turf_decal/bot,
-/turf/open/floor/plasteel,
-/area/security/warden)
 "bgD" = (
 /obj/machinery/space_heater,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
@@ -26645,10 +26594,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/security/checkpoint/science/research)
-"cfa" = (
-/obj/machinery/airalarm/directional/north,
-/turf/open/floor/wood,
-/area/vacant_room/office)
 "cfq" = (
 /obj/machinery/atmospherics/pipe/simple/general/visible{
 	dir = 4
@@ -31846,13 +31791,6 @@
 	},
 /turf/open/floor/circuit/green,
 /area/science/robotics/mechbay)
-"cxH" = (
-/obj/machinery/airalarm/directional/west,
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/turf/open/floor/plasteel/dark,
-/area/science/nanite)
 "cxJ" = (
 /obj/item/radio/intercom{
 	pixel_x = 29
@@ -41629,30 +41567,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/security/warden)
-"dMy" = (
-/obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 1
-	},
-/obj/machinery/door/airlock/security/glass{
-	id_tag = "outerbrig";
-	name = "Brig";
-	req_access_txt = "63"
-	},
-/obj/effect/turf_decal/tile/red{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/red{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/obj/machinery/navbeacon/wayfinding,
-/obj/machinery/door/firedoor/border_only{
-	dir = 1
-	},
-/obj/machinery/door/firedoor/border_only,
-/turf/open/floor/plasteel,
-/area/security/brig)
 "dMC" = (
 /obj/structure/table/wood,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
@@ -41753,6 +41667,13 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/port/fore)
+"dNQ" = (
+/obj/machinery/airalarm/directional/west,
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/turf/open/floor/plasteel/dark,
+/area/science/nanite)
 "dNU" = (
 /obj/machinery/door/airlock/engineering/glass/critical{
 	heat_proof = 1;
@@ -45767,6 +45688,31 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/medical/medbay/central)
+"fEy" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/machinery/door/airlock/security/glass{
+	id_tag = "innerbrig";
+	name = "Brig";
+	req_access_txt = "63"
+	},
+/obj/effect/turf_decal/tile/red,
+/obj/effect/turf_decal/tile/red{
+	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	icon_state = "1-8"
+	},
+/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor/border_only{
+	dir = 1
+	},
+/obj/machinery/scanner_gate,
+/turf/open/floor/plasteel,
+/area/security/brig)
 "fEB" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
@@ -46924,6 +46870,25 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/port/aft)
+"gjd" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/machinery/door/airlock/security/glass{
+	id_tag = "innerbrig";
+	name = "Brig";
+	req_access_txt = "63"
+	},
+/obj/effect/turf_decal/tile/red,
+/obj/effect/turf_decal/tile/red{
+	dir = 8
+	},
+/obj/machinery/door/firedoor/border_only{
+	dir = 1
+	},
+/obj/machinery/door/firedoor/border_only,
+/obj/machinery/scanner_gate,
+/turf/open/floor/plasteel,
+/area/security/brig)
 "gje" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -48496,19 +48461,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/science/robotics/lab)
-"gUy" = (
-/obj/machinery/door/poddoor/shutters/preopen{
-	id = "foqueue";
-	name = "Head of Personnel's Queue Shutters"
-	},
-/obj/effect/turf_decal/loading_area{
-	dir = 1
-	},
-/obj/structure/cable{
-	icon_state = "4-8"
-	},
-/turf/open/floor/plasteel,
-/area/hallway/secondary/command)
 "gUD" = (
 /obj/structure/disposalpipe/segment,
 /obj/effect/turf_decal/stripes/line{
@@ -50863,6 +50815,20 @@
 	},
 /turf/open/floor/plasteel,
 /area/security/prison)
+"hQt" = (
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "foqueue";
+	name = "Head of Personnel's Queue Shutters"
+	},
+/obj/effect/turf_decal/loading_area{
+	dir = 1
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj/machinery/scanner_gate,
+/turf/open/floor/plasteel,
+/area/hallway/secondary/command)
 "hRu" = (
 /obj/effect/spawner/structure/window/reinforced/shutters,
 /turf/open/floor/plating,
@@ -56538,6 +56504,31 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/science/research)
+"kuy" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 1
+	},
+/obj/machinery/door/airlock/security/glass{
+	id_tag = "outerbrig";
+	name = "Brig";
+	req_access_txt = "63"
+	},
+/obj/effect/turf_decal/tile/red{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/red{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/machinery/navbeacon/wayfinding,
+/obj/machinery/door/firedoor/border_only{
+	dir = 1
+	},
+/obj/machinery/door/firedoor/border_only,
+/obj/machinery/scanner_gate,
+/turf/open/floor/plasteel,
+/area/security/brig)
 "kvt" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/cable{
@@ -58715,6 +58706,10 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/aft/secondary)
+"lpi" = (
+/obj/machinery/airalarm/directional/north,
+/turf/open/floor/wood,
+/area/vacant_room/office)
 "lpp" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Detective Maintenance";
@@ -59126,6 +59121,21 @@
 	},
 /turf/open/floor/plasteel,
 /area/security/brig)
+"lve" = (
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "foqueue";
+	name = "Head of Personnel's Queue Shutters"
+	},
+/obj/effect/turf_decal/loading_area,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	icon_state = "1-8"
+	},
+/obj/machinery/scanner_gate,
+/turf/open/floor/plasteel,
+/area/hallway/secondary/command)
 "lvn" = (
 /obj/structure/sign/warning/vacuum{
 	pixel_x = 32
@@ -60648,6 +60658,39 @@
 	},
 /turf/closed/wall,
 /area/quartermaster/miningoffice)
+"mhL" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
+/obj/machinery/flasher{
+	id = "secentranceflasher";
+	pixel_x = 25
+	},
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 1
+	},
+/obj/machinery/door/airlock/security/glass{
+	id_tag = "outerbrig";
+	name = "Brig";
+	req_access_txt = "63"
+	},
+/obj/effect/turf_decal/tile/red{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/red{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	icon_state = "1-8"
+	},
+/obj/machinery/door/firedoor/border_only{
+	dir = 1
+	},
+/obj/machinery/door/firedoor/border_only,
+/obj/machinery/scanner_gate,
+/turf/open/floor/plasteel,
+/area/security/brig)
 "mhN" = (
 /obj/structure/disposalpipe/segment{
 	dir = 9
@@ -69753,30 +69796,6 @@
 	icon_state = "platingdmg3"
 	},
 /area/maintenance/central)
-"qct" = (
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
-/obj/machinery/door/airlock/security/glass{
-	id_tag = "innerbrig";
-	name = "Brig";
-	req_access_txt = "63"
-	},
-/obj/effect/turf_decal/tile/red,
-/obj/effect/turf_decal/tile/red{
-	dir = 8
-	},
-/obj/structure/cable{
-	icon_state = "1-2"
-	},
-/obj/structure/cable{
-	icon_state = "1-8"
-	},
-/obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/firedoor/border_only{
-	dir = 1
-	},
-/turf/open/floor/plasteel,
-/area/security/brig)
 "qcI" = (
 /obj/machinery/atmospherics/pipe/simple/orange/visible{
 	dir = 5
@@ -76476,20 +76495,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/security/warden)
-"sWM" = (
-/obj/machinery/door/poddoor/shutters/preopen{
-	id = "foqueue";
-	name = "Head of Personnel's Queue Shutters"
-	},
-/obj/effect/turf_decal/loading_area,
-/obj/structure/cable{
-	icon_state = "1-2"
-	},
-/obj/structure/cable{
-	icon_state = "1-8"
-	},
-/turf/open/floor/plasteel,
-/area/hallway/secondary/command)
 "sWQ" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /obj/machinery/door/airlock/maintenance{
@@ -83170,38 +83175,6 @@
 	},
 /turf/open/floor/plasteel/cafeteria,
 /area/crew_quarters/heads/cmo)
-"wca" = (
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
-/obj/machinery/flasher{
-	id = "secentranceflasher";
-	pixel_x = 25
-	},
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 1
-	},
-/obj/machinery/door/airlock/security/glass{
-	id_tag = "outerbrig";
-	name = "Brig";
-	req_access_txt = "63"
-	},
-/obj/effect/turf_decal/tile/red{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/red{
-	dir = 4
-	},
-/obj/structure/cable{
-	icon_state = "1-2"
-	},
-/obj/structure/cable{
-	icon_state = "1-8"
-	},
-/obj/machinery/door/firedoor/border_only{
-	dir = 1
-	},
-/obj/machinery/door/firedoor/border_only,
-/turf/open/floor/plasteel,
-/area/security/brig)
 "wde" = (
 /obj/structure/disposalpipe/segment{
 	dir = 9
@@ -84519,6 +84492,39 @@
 /obj/effect/spawner/structure/window/reinforced/shutters,
 /turf/open/floor/plating,
 /area/security/prison)
+"wIE" = (
+/obj/structure/rack,
+/obj/effect/turf_decal/tile/blue,
+/obj/effect/turf_decal/tile/blue{
+	dir = 4
+	},
+/obj/item/clothing/under/rank/security/officer,
+/obj/item/clothing/under/rank/security/officer,
+/obj/item/clothing/under/rank/security/officer,
+/obj/item/clothing/under/rank/security/officer,
+/obj/item/clothing/under/rank/security/officer,
+/obj/item/clothing/under/rank/security/officer,
+/obj/item/clothing/suit/security/officer,
+/obj/item/clothing/suit/security/officer,
+/obj/item/clothing/suit/security/officer,
+/obj/item/clothing/suit/security/officer,
+/obj/item/clothing/suit/security/officer,
+/obj/item/clothing/suit/security/officer,
+/obj/item/clothing/under/rank/security/warden,
+/obj/item/clothing/suit/armor/vest/security/warden,
+/obj/item/clothing/under/rank/security/head_of_security,
+/obj/item/clothing/suit/armor/vest/security/hos,
+/obj/item/clothing/head/beret/sec/officer,
+/obj/item/clothing/head/beret/sec/officer,
+/obj/item/clothing/head/beret/sec/officer,
+/obj/item/clothing/head/beret/sec/officer,
+/obj/item/clothing/head/beret/sec/officer,
+/obj/item/clothing/head/beret/sec/officer,
+/obj/item/clothing/head/beret/sec/warden,
+/obj/item/clothing/head/beret/sec/hos,
+/obj/effect/turf_decal/bot,
+/turf/open/floor/plasteel,
+/area/security/warden)
 "wJh" = (
 /obj/structure/window/reinforced,
 /obj/machinery/computer/atmos_control/tank/air_tank{
@@ -111574,7 +111580,7 @@ umS
 qez
 bol
 bzL
-gUy
+hQt
 bDb
 saq
 fEk
@@ -112859,7 +112865,7 @@ hyq
 cgY
 xad
 aiv
-sWM
+lve
 ygQ
 jRO
 bGC
@@ -114867,7 +114873,7 @@ aeq
 aeq
 aeq
 aeq
-bgB
+wIE
 tmD
 oum
 qvZ
@@ -115907,10 +115913,10 @@ adY
 lSV
 xwu
 oNe
-aPh
+gjd
 nxh
 mTh
-dMy
+kuy
 jMW
 kWl
 aGm
@@ -116421,10 +116427,10 @@ aiB
 avc
 lft
 hXU
-qct
+fEy
 bvE
 hgX
-wca
+mhL
 oaO
 msQ
 ooY
@@ -117521,7 +117527,7 @@ ctL
 cuF
 bpG
 cwK
-cxH
+dNQ
 cyt
 czl
 mqO
@@ -121034,7 +121040,7 @@ bzx
 bzx
 bzx
 bzx
-cfa
+lpi
 oyx
 fZa
 hll
