@@ -172,20 +172,25 @@ SUBSYSTEM_DEF(overmap)
 	var/list/ruin_list = SSmapping.space_ruins_templates
 	var/datum/map_template/ruin/ruin_type
 	var/datum/map_generator/mapgen
+	var/area/target_area
 	if(planet_type)
 		switch(planet_type)
 			if(DYNAMIC_WORLD_LAVA)
 				ruin_list = SSmapping.lava_ruins_templates
 				mapgen = new /datum/map_generator/cave_generator/lavaland
+				target_area = /area/ruin/unpowered/planetoid/lava
 			if(DYNAMIC_WORLD_ICE)
 				ruin_list = SSmapping.ice_ruins_templates
 				mapgen = new /datum/map_generator/cave_generator/icemoon/surface
+				target_area = /area/ruin/unpowered/planetoid/ice
 			if(DYNAMIC_WORLD_SAND)
 				ruin_list = SSmapping.sand_ruins_templates
 				mapgen = new /datum/map_generator/cave_generator/whitesands
+				target_area = /area/ruin/unpowered/planetoid/sand
 			if(DYNAMIC_WORLD_JUNGLE)
 				ruin_list = SSmapping.jungle_ruins_templates
 				mapgen = new /datum/map_generator/jungle_generator
+				target_area = /area/ruin/unpowered/planetoid/jungle
 
 	if(ruin && ruin_list) //Done BEFORE the turfs are reserved so that it allocates the right size box
 		ruin_type = ruin_list[pick(ruin_list)]
@@ -195,9 +200,16 @@ SUBSYSTEM_DEF(overmap)
 
 	total_size = dock_size + ruin_size
 
-	var/datum/turf_reservation/encounter_reservation = SSmapping.RequestBlockReservation(total_size, total_size, border_turf_override = /turf/closed/indestructible/blank, area_override = planet_type ? /area/ruin/unpowered/planetoid : null)
+	var/datum/turf_reservation/encounter_reservation = SSmapping.RequestBlockReservation(total_size, total_size, border_turf_override = /turf/closed/indestructible/blank, area_override = target_area)
 	if(mapgen)
-		mapgen.generate_terrain(encounter_reservation.non_border_turfs)
+		var/list/same_area_turfs = list()
+		for(var/turf in encounter_reservation.non_border_turfs)
+			var/turf/T = turf
+			var/area/A = T.loc
+			if(A?.type != target_area)
+				continue
+			same_area_turfs += T
+		mapgen.generate_terrain(same_area_turfs)
 
 	if(ruin_type) //Does AFTER the turfs are reserved so it can find where the allocation is
 		//gets a turf vaguely in the middle of the reserve
@@ -206,7 +218,11 @@ SUBSYSTEM_DEF(overmap)
 
 	//gets the turf with an X in the middle of the reservation, and a Y that's 1/4ths up in the reservation.
 	var/turf/docking_turf = locate(encounter_reservation.bottom_left_coords[1] + dock_size, encounter_reservation.bottom_left_coords[2] + FLOOR(dock_size / 2, 1), encounter_reservation.bottom_left_coords[3])
-	var/obj/docking_port/stationary/dock = new(docking_turf)
+	var/obj/docking_port/stationary/dock = SSshuttle.getDock("[PRIMARY_OVERMAP_DOCK_PREFIX]_[dock_id]")
+	if(!dock)
+		dock = new(docking_turf)
+	else
+		dock.forceMove(docking_turf)
 	dock.dir = WEST
 	dock.name = "\improper Uncharted Space"
 	dock.id = "[PRIMARY_OVERMAP_DOCK_PREFIX]_[dock_id]"
@@ -220,7 +236,11 @@ SUBSYSTEM_DEF(overmap)
 
 	//gets the turf with an X in the middle of the reservation, and a Y that's 3/4ths up in the reservation.
 	var/turf/secondary_docking_turf = locate(encounter_reservation.bottom_left_coords[1] + dock_size, encounter_reservation.bottom_left_coords[2] + CEILING(dock_size * 1.5, 1), encounter_reservation.bottom_left_coords[3])
-	var/obj/docking_port/stationary/secondary_dock = new(secondary_docking_turf)
+	var/obj/docking_port/stationary/secondary_dock = SSshuttle.getDock("[SECONDARY_OVERMAP_DOCK_PREFIX]_[dock_id]")
+	if(!secondary_dock)
+		secondary_dock = new(secondary_docking_turf)
+	else
+		secondary_dock.forceMove(secondary_docking_turf)
 	secondary_dock.dir = WEST
 	secondary_dock.name = "\improper Uncharted Space"
 	secondary_dock.id = "[SECONDARY_OVERMAP_DOCK_PREFIX]_[dock_id]"

@@ -9,13 +9,15 @@
 	pressure_resistance = 30
 	max_integrity = 200
 	integrity_failure = 0.3
+	circuit = /obj/item/circuitboard/machine/deepcore/drill
 
 	var/deployed = FALSE //If the drill is anchored and ready-to-mine
 	var/active = FALSE //If the drill is activly mining ore
-	var/ore_contained = list() //[Ore stack path] = Amount
-	var/total_amount = 0
-	var/max_amount = 10000
-	var/area/lavaland/surface/outdoors/ore_vein/active_vein //Ore vein currently set to be mined in
+	var/obj/effect/landmark/ore_vein/active_vein //Ore vein currently set to be mined in
+
+/obj/machinery/deepcore/drill/Initialize(mapload)
+	. = ..()
+	container.max_amount = 4000 //Give the drill some room to buffer mats, but not much
 
 /obj/machinery/deepcore/drill/interact(mob/user, special_state)
 	. = ..()
@@ -32,18 +34,16 @@
 		update_overlays()
 		return TRUE
 	else
-		switch(scanArea())
-			if(DCM_LOCATED_VEIN)
-				anchored = TRUE
-				playsound(src, 'sound/machines/windowdoor.ogg', 50)
-				flick("deep_core_drill-deploy", src)
-				addtimer(CALLBACK(src, .proc/Deploy), 14)
-				to_chat(user, "<span class='notice'>[src] detects an ore vein and begins to deploy...</span>")
-				return TRUE
-			if(DCM_OCCUPIED_VEIN)
-				to_chat(user, "<span class='warning'>[src] detects a drill active nearby!</span>")
-			if(DCM_NO_VEIN)
-				to_chat(user, "<span class='warning'>[src] fails to locate any ore in the area!</span>")
+		var/obj/effect/landmark/ore_vein/O = scanArea()
+		if(O)
+			anchored = TRUE
+			playsound(src, 'sound/machines/windowdoor.ogg', 50)
+			flick("deep_core_drill-deploy", src)
+			addtimer(CALLBACK(src, .proc/Deploy), 14)
+			to_chat(user, "<span class='notice'>[src] detects a [O.name] and begins to deploy...</span>")
+			return TRUE
+		else
+			to_chat(user, "<span class='warning'>[src] fails to locate any ore in the area!</span>")
 
 /obj/machinery/deepcore/drill/AltClick(mob/user)
 	. = ..()
@@ -58,53 +58,38 @@
 /obj/machinery/deepcore/drill/process()
 	if(machine_stat & BROKEN || (active && !active_vein))
 		active = FALSE
+		update_overlays()
 		update_icon_state()
 		return
 	if(deployed && active)
 		if(!mineOre())
 			active = FALSE
+			update_overlays()
 			update_icon_state()
 		if(network)
-			network.Push(ore_contained)
+			network.Push(container)
 		else //Dry deployment of ores
-			for(var/O in ore_contained)
-				dropOre(O, ore_contained[O])
+			dropOre()
 
 /obj/machinery/deepcore/drill/proc/mineOre()
-	if(total_amount >= max_amount || !active_vein)
-		return FALSE
-
 	var/list/extracted = active_vein.extract_ore()
 	for(var/O in extracted)
-		var/extract_amount = extracted[O]
-		if(total_amount + extract_amount >= max_amount)
-			ore_contained[O] += max_amount - total_amount
-			total_amount = max_amount
-			return FALSE
-		ore_contained[O] += extract_amount
-		total_amount += extract_amount
-	return total_amount
+		var/datum/material/M = O
+		container.insert_amount_mat(extracted[M], M)
+	return TRUE
 
-/obj/machinery/deepcore/drill/proc/dropOre(obj/item/stack/ore/O, amount)
-	if(ore_contained[O] > amount)
-		ore_contained[O] -= amount
-	else if(ore_contained[O] == amount)
-		ore_contained -= O
-	else
-		return 0
-	new O(get_step(src, SOUTH), amount, TRUE)
-	return amount
+/obj/machinery/deepcore/drill/proc/dropOre(datum/material/M, amount)
+	return container.retrieve_all(get_step(src, SOUTH))
 
 /obj/machinery/deepcore/drill/proc/scanArea()
 	//Checks for ores and latches to an active vein if one is located.
-	var/area/deployed_zone = get_area(src)
-	if(deployed_zone && isarea(deployed_zone))
-		if(istype(deployed_zone, /area/lavaland/surface/outdoors/ore_vein))
-			var/area/lavaland/surface/outdoors/ore_vein/vein = deployed_zone
-			active_vein = vein
-			return DCM_LOCATED_VEIN
-		else
-			return DCM_NO_VEIN
+	var/turf/deployed_zone = get_turf(src)
+	var/obj/effect/landmark/ore_vein/vein = locate() in deployed_zone
+	if(vein)
+		active_vein = vein
+		return vein
+	else
+		return FALSE
 
 /obj/machinery/deepcore/drill/proc/Deploy()
 	deployed = TRUE

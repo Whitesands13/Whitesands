@@ -197,10 +197,11 @@
 		if(!E.enabled)
 			continue
 		fuel_avg += E.return_fuel() / E.return_fuel_cap()
+		engine_amnt++
 	if(!engine_amnt || !fuel_avg)
 		avg_fuel_amnt = 0
 		return
-	avg_fuel_amnt = round(fuel_avg / engine_amnt)
+	avg_fuel_amnt = round(fuel_avg / engine_amnt * 100)
 
 /**
   * Proc called after a shuttle is moved, used for checking a ship's location when it's moved manually (E.G. calling the mining shuttle via a console)
@@ -216,7 +217,7 @@
 	if(docked && !docked_object) //The overmap object thinks it's docked to something, but it really isn't. Move to a random tile on the overmap
 		if(istype(docked, /obj/structure/overmap/dynamic))
 			var/obj/structure/overmap/dynamic/D = docked
-			if(shuttle.is_in_shuttle_bounds(D.reserve_dock))
+			if(D.reserve_dock.get_docked() == shuttle || D.reserve_dock_secondary.get_docked() == shuttle)
 				return TRUE
 			INVOKE_ASYNC(D, /obj/structure/overmap/dynamic/.proc/unload_level)
 		forceMove(SSovermap.get_unused_overmap_square())

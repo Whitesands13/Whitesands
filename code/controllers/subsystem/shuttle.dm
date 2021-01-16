@@ -169,7 +169,7 @@ SUBSYSTEM_DEF(shuttle)
 	for(var/obj/docking_port/stationary/S in stationary)
 		if(S.id == id)
 			return S
-	WARNING("couldn't find dock with id: [id]")
+	return
 
 /// Check if we can call the evac shuttle.
 /// Returns TRUE if we can. Otherwise, returns a string detailing the problem.

@@ -60,6 +60,20 @@
 	suffix = "whitesands_surface_envy.dmm"
 	allow_duplicates = FALSE
 
+/datum/map_template/ruin/whitesands/water
+	name = "Abandoned Water Extraction Facility"
+	id = "waterplant"
+	description = "An abandoned building that seems to have once used prisoner labour to extract water for a colony."
+	suffix = "whitesands_surface_waterplant.dmm"
+
+/datum/map_template/ruin/whitesands/starfurycrash
+	name = "Starfury Crash"
+	id = "starfurycrash"
+	description = "The remains of an unidentified syndicate battleship has crashed here."
+	suffix = "whitesands_surface_starfurycrash.dmm"
+	allow_duplicates = FALSE
+
+//////////OUTSIDE SETTLEMENTS/RUINS//////////
 /datum/map_template/ruin/camp/whitesands/survivors
 	name = "Survivor Camp"
 	id = "ws-survivors"
@@ -87,9 +101,18 @@
 
 /datum/map_template/ruin/camp/whitesands/survivors/adobe
 	name = "Native Adobe"
-	id = "ws-survivors-gunslingers"
+	id = "ws-survivors-adobe"
 	description = "A semi-permanent settlement of survivors of the First Colony, and their descendants. Places like this often stash gear and supplies for their bretheren."
 	suffix = "whitesands_surface_camp_adobe.dmm"
+	cost = 10
+	placement_weight = 0.5
+	allow_duplicates = FALSE
+
+/datum/map_template/ruin/camp/whitesands/survivors/cowboy
+	name = "Frontier Settlement"
+	id = "ws-survivors-cowboy"
+	description = "A frontier-style settlement founded by what can only be assumed as an offshoot of the original colony. Most inhabitants must have either moved on or died."
+	suffix = "whitesands_surface_camp_cowboy.dmm"
 	cost = 10
 	placement_weight = 0.5
 	allow_duplicates = FALSE

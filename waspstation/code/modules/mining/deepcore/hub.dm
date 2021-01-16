@@ -4,6 +4,7 @@ GLOBAL_DATUM(dcm_net_default, /datum/dcm_net)
 	desc = "Houses the server which processes all connected mining equipment."
 	icon_state = "hub"
 	density = TRUE
+	circuit = /obj/item/circuitboard/machine/deepcore/hub
 
 /obj/machinery/deepcore/hub/Initialize(mapload)
 	. = ..()
@@ -13,6 +14,7 @@ GLOBAL_DATUM(dcm_net_default, /datum/dcm_net)
 		network = GLOB.dcm_net_default
 	else if (!network)
 		network = new /datum/dcm_net(src)
+	RefreshParts()
 
 /obj/machinery/deepcore/hub/Destroy()
 	qdel(network)
@@ -20,8 +22,26 @@ GLOBAL_DATUM(dcm_net_default, /datum/dcm_net)
 
 /obj/machinery/deepcore/hub/examine(mob/user)
 	. = ..()
-	. += "<span class='info'>Linked to [network.connected.len] networks.</span>"
+	. += "<span class='info'>Linked to [network.connected.len] machines.</span>"
 	. += "<span class='notice'>Deep core mining equipment can be linked to [src] with a multitool.</span>"
+
+/obj/machinery/deepcore/hub/RefreshParts()
+	//Matter bins = size of container
+	var/MB_value = 0
+	for(var/obj/item/stock_parts/matter_bin/MB in component_parts)
+		MB_value += MINERAL_MATERIAL_AMOUNT * 10 ** MB.rating
+	container.max_amount = MB_value
+	if(network)
+		//Micro Laser = transfer limit
+		var/ML_value = 0
+		for(var/obj/item/stock_parts/micro_laser/ML in component_parts)
+			ML_value += MINERAL_MATERIAL_AMOUNT * 5 ** ML.rating
+		network.transfer_limit = ML_value
+		//Micro Manipulator = connected limit
+		var/MM_value = 0
+		for(var/obj/item/stock_parts/manipulator/MM in component_parts)
+			MM_value += 3 * MM.rating + 2
+		network.max_connected = MM_value
 
 /obj/machinery/deepcore/hub/multitool_act(mob/living/user, obj/item/multitool/I)
 	. = ..()
