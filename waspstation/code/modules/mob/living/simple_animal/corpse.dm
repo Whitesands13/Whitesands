@@ -18,6 +18,7 @@
 	head = /obj/item/clothing/head/helmet/solgov
 	back = /obj/item/storage/backpack
 	id = /obj/item/card/id/solgov
+	backpack_contents = null
 
 /obj/effect/mob_spawn/human/corpse/solgov/officer
 	name = "SolGov Officer"
@@ -39,3 +40,4 @@
 	head = /obj/item/clothing/head/helmet/solgov
 	back = /obj/item/storage/backpack
 	id = /obj/item/card/id/solgov/commander
+	backpack_contents = null
