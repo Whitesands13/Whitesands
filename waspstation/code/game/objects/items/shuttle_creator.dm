@@ -169,11 +169,10 @@ GLOBAL_LIST_EMPTY(custom_shuttle_machines)		//Machines that require updating (He
 
 	var/datum/map_template/shuttle/new_shuttle = new /datum/map_template/shuttle()
 
-	var/obj/docking_port/mobile/port = new /obj/docking_port/mobile(get_turf(target))
+	var/obj/docking_port/mobile/port = new /obj/docking_port/mobile(get_turf(target), "custom_[GLOB.custom_shuttle_count]")
 	var/obj/docking_port/stationary/stationary_port = new /obj/docking_port/stationary(get_turf(target))
 	port.callTime = 50
 	port.dir = 1	//Point away from space.
-	port.id = "custom_[GLOB.custom_shuttle_count]"
 	linkedShuttleId = port.id
 	port.ignitionTime = 25
 	port.name = "Custom Shuttle"
@@ -290,8 +289,8 @@ GLOBAL_LIST_EMPTY(custom_shuttle_machines)		//Machines that require updating (He
 		if(!place)
 			to_chat(user, "<span class='warning'>You can't seem to overpower the bluespace harmonics in this location, try somewhere else.</span>")
 			return
-		if(!istype(place, /area/space))
-			to_chat(user, "<span class='warning'>Caution, shuttle must not use any material connected to the station. Your shuttle is currenly overlapping with [place.name]</span>")
+		if(!place.outdoors)
+			to_chat(user, "<span class='warning'>Caution, shuttle must be built outdoors. Your shuttle is currenly overlapping with [place.name]</span>")
 			return
 
 	loggedOldArea = get_area(get_turf(user))

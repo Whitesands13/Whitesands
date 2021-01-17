@@ -61,15 +61,15 @@
 /obj/machinery/power/shuttle/engine/Initialize()
 	. = ..()
 	update_icon_state()
+	alter_engine_power(0.5)
+
+/obj/machinery/power/shuttle/engine/Destroy()
+	. = ..()
+	alter_engine_power(-0.5)
 
 /obj/machinery/power/shuttle/engine/on_construction()
 	. = ..()
 	update_icon_state()
-	alter_engine_power(0.5)
-
-/obj/machinery/power/shuttle/engine/on_deconstruction()
-	. = ..()
-	alter_engine_power(-0.5)
 
 /obj/machinery/power/shuttle/engine/multitool_act(mob/living/user, obj/item/I)
 	. = ..()
@@ -84,4 +84,4 @@
 	if(SSshuttle.is_in_shuttle_bounds(src))
 		var/obj/docking_port/mobile/M = SSshuttle.get_containing_shuttle(src)
 		if(M)
-			M.alter_engines(mod)
+			M.alter_engines(mod, src)

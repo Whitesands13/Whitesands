@@ -310,9 +310,11 @@
 		remove_ripples()
 	. = ..()
 
-/obj/docking_port/mobile/Initialize(mapload)
+/obj/docking_port/mobile/Initialize(mapload, _id)
 	. = ..()
 
+	if(_id)
+		id = _id
 	if(!id)
 		id = "[SSshuttle.mobile.len]"
 	if(name == "shuttle")

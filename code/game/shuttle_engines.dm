@@ -83,7 +83,7 @@
 	if(SSshuttle.is_in_shuttle_bounds(src))
 		var/obj/docking_port/mobile/M = SSshuttle.get_containing_shuttle(src)
 		if(M)
-			M.alter_engines(mod)
+			M.alter_engines(mod, src)
 
 /obj/structure/shuttle/engine/heater
 	name = "engine heater"

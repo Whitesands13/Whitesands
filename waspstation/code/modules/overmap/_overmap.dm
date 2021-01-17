@@ -1,7 +1,7 @@
 /* OVERMAP TURFS */
 /turf/open/overmap
 	icon = 'waspstation/icons/turf/overmap.dmi'
-	icon_state = "overmap0"
+	icon_state = "overmap"
 	initial_gas_mix = AIRLESS_ATMOS
 
 /turf/open/overmap/edge

@@ -67,9 +67,13 @@ SUBSYSTEM_DEF(overmap)
 /datum/controller/subsystem/overmap/proc/setup_shuttle_ship(obj/docking_port/mobile/shuttle)
 	var/docked_object = get_overmap_object_by_z(shuttle.z)
 	if(docked_object)
-		shuttle.current_ship = new /obj/structure/overmap/ship/simulated(docked_object, shuttle.id, shuttle)
-	else if(!is_centcom_level(shuttle.z) && !istype(shuttle, /obj/docking_port/mobile/arrivals))
+		var/obj/structure/overmap/ship/simulated/S = new (docked_object, shuttle.id, shuttle)
+		S.docked = docked_object
+		shuttle.current_ship = S
+	else if(SSmapping.level_trait(shuttle.z, ZTRAIT_RESERVED))
 		shuttle.current_ship = new /obj/structure/overmap/ship/simulated(get_unused_overmap_square(), shuttle.id, shuttle)
+	else
+		WARNING("Shuttle created in unknown location, unable to create overmap ship!")
 
 /**
   * The proc that creates all the objects on the overmap, split into seperate procs for redundancy.
