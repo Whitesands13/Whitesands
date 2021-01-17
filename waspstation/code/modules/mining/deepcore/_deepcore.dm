@@ -26,7 +26,6 @@
 	return count
 
 /datum/component/material_container/crude/OnExamine(datum/source, mob/user)
-	SIGNAL_HANDLER
 	//See? Totally ores now.
 	if(show_on_examine)
 		for(var/I in materials)
