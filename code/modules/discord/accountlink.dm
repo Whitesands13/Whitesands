@@ -21,7 +21,7 @@
 	if(!stored_id) // Account is not linked
 		var/know_how = alert("Do you know how to get a Discord user ID? This ID is NOT your Discord username and numbers! (Pressing NO will open a guide.)","Question","Yes","No","Cancel Linking")
 		if(know_how == "No") // Opens discord support on how to collect IDs
-			src << link("https://tgstation13.org/wiki/How_to_find_your_Discord_User_ID")
+			src << link("[CONFIG_GET(string/wikiurl)]/How_to_find_your_Discord_User_ID")
 		if(know_how == "Cancel Linking")
 			return
 		var/entered_id = input("Please enter your Discord ID (18-ish digits)", "Enter Discord ID", null, null) as text|null
@@ -33,7 +33,7 @@
 		if(choice == "Yes")
 			var/know_how = alert("Do you know how to get a Discord user ID? This ID is NOT your Discord username and numbers! (Pressing NO will open a guide.)","Question","Yes","No", "Cancel Linking")
 			if(know_how == "No")
-				src << link("https://tgstation13.org/wiki/How_to_find_your_Discord_User_ID")
+				src << link("[CONFIG_GET(string/wikiurl)]/How_to_find_your_Discord_User_ID")
 
 			if(know_how == "Cancel Linking")
 				return

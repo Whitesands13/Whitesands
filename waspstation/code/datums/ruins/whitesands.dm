@@ -65,6 +65,7 @@
 	id = "waterplant"
 	description = "An abandoned building that seems to have once used prisoner labour to extract water for a colony."
 	suffix = "whitesands_surface_waterplant.dmm"
+	allow_duplicates = FALSE
 
 /datum/map_template/ruin/whitesands/starfurycrash
 	name = "Starfury Crash"
