@@ -1,8 +1,3 @@
-#define SHIP_IDLE				"idle"
-#define SHIP_FLYING				"flying"
-#define SHIP_DOCKING			"docking"
-#define SHIP_UNDOCKING			"undocking"
-
 //Threshold above which it uses the ship sprites instead of the shuttle sprites
 #define SHIP_SIZE_THRESHOLD		300
 
@@ -23,7 +18,7 @@
 	///The timer ID of the repair timer.
 	var/repair_timer
 	///State of the shuttle: idle, flying, docking, or undocking
-	var/state = SHIP_IDLE
+	var/state = OVERMAP_SHIP_IDLE
 	///Vessel estimated thrust
 	var/est_thrust
 	///Vessel approximate mass
@@ -79,7 +74,7 @@
 	if(istype(object, /obj/structure/overmap/dynamic))
 		var/obj/structure/overmap/dynamic/D = object
 		var/prev_state = state
-		state = SHIP_DOCKING
+		state = OVERMAP_SHIP_DOCKING
 		. = D.load_level(shuttle)
 		if(.)
 			state = prev_state
@@ -112,14 +107,14 @@
 		break
 
 	if(!dock_to_use)
-		state = SHIP_FLYING
+		state = OVERMAP_SHIP_FLYING
 		return . + "Error finding available docking port!"
 
 	shuttle.request(dock_to_use)
 	docked = to_dock
 
 	addtimer(CALLBACK(src, .proc/complete_dock), shuttle.ignitionTime + 1 SECONDS) //A little bit of time to account for lag
-	state = SHIP_DOCKING
+	state = OVERMAP_SHIP_DOCKING
 	return "Commencing docking..."
 
 /**
@@ -137,7 +132,7 @@
 	shuttle.mode = SHUTTLE_IGNITING
 	shuttle.setTimer(shuttle.ignitionTime)
 	addtimer(CALLBACK(src, .proc/complete_dock), shuttle.ignitionTime + 1 SECONDS) //See above
-	state = SHIP_UNDOCKING
+	state = OVERMAP_SHIP_UNDOCKING
 	return "Beginning undocking procedures..."
 
 /**
@@ -146,7 +141,7 @@
   * * n_dir - The direction to move in
   */
 /obj/structure/overmap/ship/simulated/proc/burn_engines(n_dir = null, percentage = 100)
-	if(state != SHIP_FLYING)
+	if(state != OVERMAP_SHIP_FLYING)
 		return
 
 	var/thrust_used = 0 //The amount of thrust that the engines will provide with one burn
@@ -212,7 +207,7 @@
 		return TRUE
 	if(!docked_object && !docked) //The shuttle is in transit, and the ship is not docked to anything, move along
 		return TRUE
-	if(state == SHIP_DOCKING || state == SHIP_UNDOCKING)
+	if(state == OVERMAP_SHIP_DOCKING || state == OVERMAP_SHIP_UNDOCKING)
 		return
 	if(docked && !docked_object) //The overmap object thinks it's docked to something, but it really isn't. Move to a random tile on the overmap
 		if(istype(docked, /obj/structure/overmap/dynamic))
@@ -222,13 +217,13 @@
 			INVOKE_ASYNC(D, /obj/structure/overmap/dynamic/.proc/unload_level)
 		forceMove(SSovermap.get_unused_overmap_square())
 		docked = null
-		state = SHIP_FLYING
+		state = OVERMAP_SHIP_FLYING
 		update_screen()
 		return FALSE
 	if(!docked && docked_object) //The overmap object thinks it's NOT docked to something, but it actually is. Move to the correct place.
 		forceMove(docked_object)
 		docked = docked_object
-		state = SHIP_IDLE
+		state = OVERMAP_SHIP_IDLE
 		decelerate(max_speed)
 		update_screen()
 		return FALSE
@@ -239,6 +234,8 @@
 		deltimer(movement_callback_id)
 		movement_callback_id = null
 		return
+	if(avg_fuel_amnt < 1)
+		decelerate(max_speed / 100)
 	..()
 
 /**
@@ -246,20 +243,20 @@
   */
 /obj/structure/overmap/ship/simulated/proc/complete_dock()
 	switch(state)
-		if(SHIP_DOCKING) //so that the shuttle is truly docked first
+		if(OVERMAP_SHIP_DOCKING) //so that the shuttle is truly docked first
 			if(shuttle.mode == SHUTTLE_CALL)
 				forceMove(docked)
 				if(istype(docked, /obj/structure/overmap/level/main)) //Hardcoded and bad
 					addtimer(CALLBACK(src, .proc/repair), SHIP_DOCKED_REPAIR_TIME, TIMER_STOPPABLE | TIMER_LOOP)
-				state = SHIP_IDLE
-		if(SHIP_UNDOCKING)
+				state = OVERMAP_SHIP_IDLE
+		if(OVERMAP_SHIP_UNDOCKING)
 			if(docked)
 				forceMove(get_turf(docked))
 				if(istype(docked, /obj/structure/overmap/dynamic))
 					var/obj/structure/overmap/dynamic/D = docked
 					INVOKE_ASYNC(D, /obj/structure/overmap/dynamic/.proc/unload_level)
 				docked = null
-				state = SHIP_FLYING
+				state = OVERMAP_SHIP_FLYING
 				if(repair_timer)
 					deltimer(repair_timer)
 	update_screen()
@@ -278,11 +275,6 @@
 	if(mass < SHIP_SIZE_THRESHOLD)
 		base_icon_state = "shuttle"
 	return ..()
-
-#undef SHIP_IDLE
-#undef SHIP_FLYING
-#undef SHIP_DOCKING
-#undef SHIP_UNDOCKING
 
 #undef SHIP_SIZE_THRESHOLD
 

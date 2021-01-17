@@ -72,6 +72,9 @@ SUBSYSTEM_DEF(overmap)
 		shuttle.current_ship = S
 	else if(SSmapping.level_trait(shuttle.z, ZTRAIT_RESERVED))
 		shuttle.current_ship = new /obj/structure/overmap/ship/simulated(get_unused_overmap_square(), shuttle.id, shuttle)
+		shuttle.current_ship.state = OVERMAP_SHIP_FLYING
+	else if(is_centcom_level(shuttle.z))
+		shuttle.current_ship = new /obj/structure/overmap/ship/simulated(null, shuttle.id, shuttle)
 	else
 		WARNING("Shuttle created in unknown location, unable to create overmap ship!")
 

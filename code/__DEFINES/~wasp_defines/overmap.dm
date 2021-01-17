@@ -11,3 +11,8 @@
 #define DYNAMIC_WORLD_ICE				"ice"
 #define DYNAMIC_WORLD_SAND				"sand"
 #define DYNAMIC_WORLD_JUNGLE			"jungle"
+
+#define OVERMAP_SHIP_IDLE				"idle"
+#define OVERMAP_SHIP_FLYING				"flying"
+#define OVERMAP_SHIP_DOCKING			"docking"
+#define OVERMAP_SHIP_UNDOCKING			"undocking"

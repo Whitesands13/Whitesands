@@ -163,7 +163,7 @@ SUBSYSTEM_DEF(shuttle)
 	for(var/obj/docking_port/mobile/M in mobile)
 		if(M.id == id)
 			return M
-	WARNING("couldn't find shuttle with id: [id]")
+	return FALSE
 
 /datum/controller/subsystem/shuttle/proc/getDock(id)
 	for(var/obj/docking_port/stationary/S in stationary)
