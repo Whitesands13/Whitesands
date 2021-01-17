@@ -312,6 +312,8 @@
 	if(!new_reserve)
 		return "FATAL NAVIGATION ERROR, PLEASE TRY AGAIN LATER!"
 	reserve = new_reserve
+	reserve_dock = SSshuttle.getDock("[PRIMARY_OVERMAP_DOCK_PREFIX]_[id]")
+	reserve_dock_secondary = SSshuttle.getDock("[SECONDARY_OVERMAP_DOCK_PREFIX]_[id]")
 
 /**
   * Unloads the reserve, deletes the linked docking port, and moves to a random location if there's no client-having, alive mobs.

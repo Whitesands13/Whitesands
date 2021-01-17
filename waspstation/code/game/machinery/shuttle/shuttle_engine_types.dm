@@ -146,13 +146,13 @@
 	return thrust * true_percentage
 
 /obj/machinery/power/shuttle/engine/electric/return_fuel()
-	if(length(powernet.nodes) == 2)
+	if(length(powernet?.nodes) == 2)
 		for(var/obj/machinery/power/smes/S in powernet.nodes)
 			return S.charge
 	return newavail()
 
 /obj/machinery/power/shuttle/engine/electric/return_fuel_cap()
-	if(length(powernet.nodes) == 2)
+	if(length(powernet?.nodes) == 2)
 		for(var/obj/machinery/power/smes/S in powernet.nodes)
 			return S.capacity
 	return power_per_burn
