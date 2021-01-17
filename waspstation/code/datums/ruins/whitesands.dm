@@ -67,11 +67,25 @@
 	suffix = "whitesands_surface_waterplant.dmm"
 	allow_duplicates = FALSE
 
-/datum/map_template/ruin/whitesands/starfurycrash
+/datum/map_template/ruin/whitesands/starfury_crash
 	name = "Starfury Crash"
 	id = "starfurycrash"
 	description = "The remains of an unidentified syndicate battleship has crashed here."
 	suffix = "whitesands_surface_starfurycrash.dmm"
+	allow_duplicates = FALSE
+
+/datum/map_template/ruin/whitesands/golem_hijack
+	name = "Crashed Golem Ship"
+	id = "golemcrash"
+	description = "The remains of a mysterious ship, inhabited by strange lizardpeople and golems of some sort. Who knows what happened here."
+	suffix = "whitesands_surface_golemhijack.dmm"
+	allow_duplicates = FALSE
+
+/datum/map_template/ruin/whitesands/medipen_plant
+	name = "Abandoned Medipen Factory"
+	id = "medipenplant"
+	description = "A once prosperous autoinjector manufacturing plant."
+	suffix = "whitesands_surface_medipen_plant.dmm"
 	allow_duplicates = FALSE
 
 //////////OUTSIDE SETTLEMENTS/RUINS//////////
