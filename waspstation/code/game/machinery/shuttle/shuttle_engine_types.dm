@@ -216,6 +216,12 @@
 	circuit = /obj/item/circuitboard/machine/shuttle/engine/void
 	thrust = 400
 
+/obj/machinery/power/shuttle/engine/void/return_fuel()
+	return TRUE
+
+/obj/machinery/power/shuttle/engine/void/return_fuel_cap()
+	return TRUE
+
 /obj/machinery/power/shuttle/engine/void/burn_engine()
 	return thrust
 

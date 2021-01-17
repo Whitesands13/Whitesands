@@ -46,7 +46,7 @@
 
 	update_icon_state()
 
-	if(is_still())
+	if(is_still() || QDELETED(src))
 		return
 
 	var/timer = round(1 / MAGNITUDE(speed[1], speed[2]) * offset, SHIP_MOVE_RESOLUTION)
@@ -56,7 +56,7 @@
   * Called by /proc/adjust_speed(), this continually moves the ship according to it's speed
   */
 /obj/structure/overmap/ship/proc/tick_move()
-	if(is_still())
+	if(is_still() || QDELETED(src))
 		deltimer(movement_callback_id)
 		movement_callback_id = null
 		return

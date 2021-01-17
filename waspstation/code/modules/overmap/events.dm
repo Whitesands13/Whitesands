@@ -65,9 +65,9 @@
 
 /obj/structure/overmap/event/meteor/affect_ship(obj/structure/overmap/ship/simulated/S)
 	var/area/source_area = pick(S.shuttle.shuttle_areas)
-	source_area.set_fire_alarm_effect()
+	source_area?.set_fire_alarm_effect()
 	S.recieve_damage(rand(min_damage, max_damage))
-	if(S.integrity <= 0)
+	if(S.integrity <= 0 && source_area)
 		var/source_object = pick(source_area.contents)
 		dyn_explosion(source_object, rand(min_damage, max_damage) / 2)
 	else
