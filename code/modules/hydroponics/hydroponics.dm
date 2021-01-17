@@ -1,4 +1,6 @@
 #define TRAY_NAME_UPDATE name = myseed ? "[initial(name)] ([myseed.plantname])" : initial(name)
+#define CYCLE_DELAY_DEFAULT 200			//About 10 seconds / cycle
+#define CYCLE_DELAY_SLOW    500			//About 25 seconds / cycle
 
 /obj/machinery/hydroponics
 	name = "hydroponics tray"
@@ -22,7 +24,7 @@
 	var/plant_health		//Its health
 	var/lastproduce = 0		//Last time it was harvested
 	var/lastcycle = 0		//Used for timing of cycles.
-	var/cycledelay = 200	//About 10 seconds / cycle
+	var/cycledelay = CYCLE_DELAY_DEFAULT		// WS edit - Crystals
 	var/harvest = 0			//Ready to harvest?
 	var/obj/item/seeds/myseed = null	//The currently planted seed
 	var/rating = 1
@@ -104,11 +106,15 @@
 
 /obj/machinery/hydroponics/process()
 	var/needs_update = 0 // Checks if the icon needs updating so we don't redraw empty trays every time
+	var/temp_sustain = FALSE	// If we want self_sustaining effects temporarily		// WS edit begin - Crystals
 
-	if(myseed && (myseed.loc != src))
-		myseed.forceMove(src)
+	if(myseed)
+		if(myseed.loc != src)
+			myseed.forceMove(src)
+		if(myseed.get_gene(/datum/plant_gene/trait/plant_type/crystal))
+			temp_sustain = TRUE
 
-	if(self_sustaining)
+	if(self_sustaining || temp_sustain)		// Wasp edit end
 		adjustNutri(1)
 		adjustWater(rand(3,5))
 		adjustWeeds(-2)
@@ -178,7 +184,7 @@
 //Pests & Weeds//////////////////////////////////////////////////////////
 
 			if(pestlevel >= 8)
-				if(!myseed.get_gene(/datum/plant_gene/trait/plant_type/carnivory) && !myseed.get_gene(/datum/plant_gene/trait/plant_type/crystal))		// WS edit - crystals
+				if(!myseed.get_gene(/datum/plant_gene/trait/plant_type/carnivory))
 					adjustHealth(-2 / rating)
 
 				else
@@ -186,7 +192,7 @@
 					adjustPests(-1 / rating)
 
 			else if(pestlevel >= 4)
-				if(!myseed.get_gene(/datum/plant_gene/trait/plant_type/carnivory) && !myseed.get_gene(/datum/plant_gene/trait/plant_type/crystal))		// WS edit - crystals
+				if(!myseed.get_gene(/datum/plant_gene/trait/plant_type/carnivory))
 					adjustHealth(-1 / rating)
 
 				else
@@ -194,13 +200,13 @@
 					if(prob(50))
 						adjustPests(-1 / rating)
 
-			else if(pestlevel < 4 && myseed.get_gene(/datum/plant_gene/trait/plant_type/carnivory) && myseed.get_gene(/datum/plant_gene/trait/plant_type/crystal))		// WS edit - crystals
+			else if(pestlevel < 4 && myseed.get_gene(/datum/plant_gene/trait/plant_type/carnivory))
 				adjustHealth(-2 / rating)
 				if(prob(5))
 					adjustPests(-1 / rating)
 
 			// If it's a weed, it doesn't stunt the growth
-			if(weedlevel >= 5 && !myseed.get_gene(/datum/plant_gene/trait/plant_type/weed_hardy) && !myseed.get_gene(/datum/plant_gene/trait/plant_type/crystal))
+			if(weedlevel >= 5 && !myseed.get_gene(/datum/plant_gene/trait/plant_type/weed_hardy))
 				adjustHealth(-1 / rating)
 
 //Health & Age///////////////////////////////////////////////////////////
@@ -230,7 +236,7 @@
 		// Weeeeeeeeeeeeeeedddssss
 		if(weedlevel >= 10 && prob(50) && !self_sustaining) // At this point the plant is kind of fucked. Weeds can overtake the plant spot.
 			if(myseed)
-				if(!myseed.get_gene(/datum/plant_gene/trait/plant_type/weed_hardy) && !myseed.get_gene(/datum/plant_gene/trait/plant_type/fungal_metabolism) && !myseed.get_gene(/datum/plant_gene/trait/plant_type/crystal)) // If a normal plant
+				if(!myseed.get_gene(/datum/plant_gene/trait/plant_type/weed_hardy) && !myseed.get_gene(/datum/plant_gene/trait/plant_type/fungal_metabolism)) // If a normal plant
 					weedinvasion()
 			else
 				weedinvasion() // Weed invasion into empty tray
@@ -387,6 +393,7 @@
 	harvest = 0
 	weedlevel = 0 // Reset
 	pestlevel = 0 // Reset
+	cycledelay = CYCLE_DELAY_DEFAULT		// WS edit - crystals
 	update_icon()
 	visible_message("<span class='warning'>The [oldPlantName] is overtaken by some [myseed.plantname]!</span>")
 	TRAY_NAME_UPDATE
@@ -786,6 +793,11 @@
 				investigate_log("had Kudzu planted in it by [key_name(user)] at [AREACOORD(src)]","kudzu")
 			if(!user.transferItemToLoc(O, src))
 				return
+			var/obj/item/seeds/S = O
+			if(S.get_gene(/datum/plant_gene/trait/plant_type/crystal))
+				cycledelay = CYCLE_DELAY_SLOW
+			else
+				cycledelay = CYCLE_DELAY_DEFAULT
 			to_chat(user, "<span class='notice'>You plant [O].</span>")
 			dead = 0
 			myseed = O
