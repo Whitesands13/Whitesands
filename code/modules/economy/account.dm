@@ -56,6 +56,7 @@
 /datum/bank_account/proc/payday(amt_of_paychecks, free = FALSE)
 	if(frozen)
 		bank_card_talk("ERROR: Payday aborted, account frozen!")
+		return
 	var/money_to_transfer = account_job.paycheck * amt_of_paychecks
 	if(free)
 		adjust_money(money_to_transfer)
@@ -66,6 +67,7 @@
 		if(D)
 			if(D.frozen)
 				bank_card_talk("ERROR: Payday aborted, departmental funds frozen!")
+				return
 			if(!transfer_money(D, money_to_transfer))
 				bank_card_talk("ERROR: Payday aborted, departmental funds insufficient.")
 				return FALSE
