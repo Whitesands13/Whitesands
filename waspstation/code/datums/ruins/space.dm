@@ -22,3 +22,9 @@
 	suffix = "spacegym.dmm"
 	name = "Space Gym"
 	description = "A gym, lost in space, where many grunts and moaning could be heard."
+
+/datum/map_template/ruin/space/drunk_driving
+	id = "drunk_driving"
+	suffix = "drunkdriving.dmm"
+	name = "drink driving"
+	description = "A man drank strong alkohol while driving his shuttle. now he is dead and his shuttle crashed into an asteroid."

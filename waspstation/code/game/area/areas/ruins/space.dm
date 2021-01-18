@@ -63,3 +63,9 @@
 /area/ruin/space/has_grav/spacegym
 	name = "Space Gym"
 	icon_state = "firingrange"
+
+//Drunk driving
+
+/area/ruin/space/has_grav/drunk_driving
+	name = "crashed shuttle"
+	icon_state = "green"
