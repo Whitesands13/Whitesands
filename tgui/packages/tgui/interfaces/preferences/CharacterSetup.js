@@ -105,7 +105,7 @@ export const CharacterSetupPanel = (props, context) => {
         onChange={(evt, value) => {
           const san_val = parseInt(value);
           if (Number.isNaN(san_val)) {
-            actOnCharacter('update_age', {value: character.age })
+            actOnCharacter('update_age', { value: character.age })
           } else {
             actOnCharacter('update_age', { value: sand_val })
           }
@@ -123,7 +123,7 @@ export const CharacterSetupPanel = (props, context) => {
       >Always Random Antag Age</Button.Checkbox>
     </Flex.Item>}
     <Flex.Item>
-      Flavor Text:<br/>
+      Flavor Text:<br />
       <TextArea
         value={character.flavor_text}
         onChange={(evt, value) => actOnCharacter('update_flavor_text', { value })}
@@ -212,7 +212,7 @@ export const CharacterSetup = (props, context) => {
 
   return <React.Fragment>
     <Tabs>
-    {renderCharacterTabs()}
+      {renderCharacterTabs()}
     </Tabs>
     <Box>
       <CharacterSetupPanel index={active_character} character={characters[activeTabIndex]} />
