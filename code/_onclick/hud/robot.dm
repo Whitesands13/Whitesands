@@ -116,46 +116,6 @@
 	var/obj/screen/robot/lamp/lampscreen = using
 	lampscreen.robot = mymobR
 
-//Sec/Med HUDs
-	using = new /obj/screen/ai/sensors()
-	using.screen_loc_name = "ui_borg_sensor"
-	using.hud = src
-	static_inventory += using
-
-//Headlamp control
-	using = new /obj/screen/robot/lamp()
-	using.screen_loc_name = "ui_borg_lamp"
-	using.hud = src
-	static_inventory += using
-	mymobR.lamp_button = using
-
-//Thrusters
-	using = new /obj/screen/robot/thrusters()
-	using.screen_loc_name = "ui_borg_thrusters"
- 
-//Photography stuff
-	using = new /obj/screen/ai/image_take()
-	using.screen_loc_name = "ui_borg_camera"
-	using.hud = src
-	static_inventory += using
-
-//Borg Integrated Tablet
-	using = new /obj/screen/robot/modPC()
-	using.screen_loc_name = "ui_borg_tablet"
-	using.hud = src
-	static_inventory += using
-	mymobR.interfaceButton = using
-	if(mymobR.modularInterface)
-		using.vis_contents += mymobR.modularInterface
-	var/obj/screen/robot/modPC/tabletbutton = using
-	tabletbutton.robot = mymobR
-
-//Alerts
-	using = new /obj/screen/robot/alerts()
-	using.screen_loc_name = "ui_borg_alerts"
-	using.hud = src
-	static_inventory += using
-
 //Intent
 	action_intent = new /obj/screen/act_intent/robot()
 	action_intent.icon_state = mymob.a_intent
