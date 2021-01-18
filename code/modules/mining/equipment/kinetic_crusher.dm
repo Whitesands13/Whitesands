@@ -26,7 +26,7 @@
 	var/list/trophies = list()
 	var/charged = TRUE
 	var/charge_time = 15
-	var/detonation_damage = 50
+	var/detonation_damage = 25
 	var/backstab_bonus = 30
 	var/wielded = FALSE // track wielded status on item
 
@@ -433,7 +433,7 @@
 /obj/item/crusher_trophy/vortex_talisman/on_mark_detonation(mob/living/target, mob/living/user)
 	var/turf/current_location = get_turf(user)
 	var/area/current_area = current_location.loc
-	if(current_area.noteleport)
+	if(current_area.area_flags & NOTELEPORT)
 		to_chat(user, "[src] fizzles uselessly.")
 		return
 	var/turf/T = get_turf(user)

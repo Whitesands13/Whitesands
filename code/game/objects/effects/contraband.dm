@@ -114,6 +114,11 @@
 	R.add_fingerprint(user)
 	qdel(src)
 
+// WaspStation Start - Changing Posters Fix
+/obj/structure/sign/poster/wrench_act(mob/living/user, obj/item/wrench/I)
+	return
+// WaspStation End
+
 /obj/structure/sign/poster/proc/roll_and_drop(loc)
 	pixel_x = 0
 	pixel_y = 0
@@ -128,7 +133,7 @@
 		return
 
 	// Deny placing posters on currently-diagonal walls, although the wall may change in the future.
-	if (smoothing_flags & SMOOTH_DIAGONAL)
+	if (smoothing_flags & SMOOTH_DIAGONAL_CORNERS)
 		for (var/O in overlays)
 			var/image/I = O
 			if(copytext(I.icon_state, 1, 3) == "d-") //3 == length("d-") + 1
