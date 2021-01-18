@@ -11048,13 +11048,6 @@
 /obj/structure/closet/wardrobe/miner,
 /turf/open/floor/plasteel,
 /area/quartermaster/miningoffice)
-"cbq" = (
-/obj/structure/extinguisher_cabinet{
-	dir = 4;
-	pixel_x = 27
-	},
-/turf/open/floor/plasteel/dark,
-/area/ai_monitored/security/armory)
 "ccl" = (
 /obj/structure/table/reinforced,
 /obj/item/reagent_containers/glass/rag,
@@ -11660,6 +11653,28 @@
 /obj/effect/landmark/xeno_spawn,
 /turf/open/floor/plating,
 /area/maintenance/starboard/fore)
+"cvU" = (
+/obj/machinery/door/airlock/solgov{
+	name = "SolGov Ofice";
+	req_access_txt = "70"
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 8
+	},
+/obj/machinery/door/firedoor/border_only{
+	dir = 4
+	},
+/obj/machinery/door/firedoor/border_only{
+	dir = 8
+	},
+/turf/open/floor/plasteel,
+/area/crew_quarters/solgov)
 "cwg" = (
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -24169,28 +24184,6 @@
 	},
 /turf/open/floor/plasteel/airless/solarpanel,
 /area/maintenance/solars/port/aft)
-"lsE" = (
-/obj/machinery/door/airlock/solgov{
-	name = "Solgov Ofice";
-	req_access_txt = "70"
-	},
-/obj/structure/cable{
-	icon_state = "4-8"
-	},
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
-	dir = 8
-	},
-/obj/machinery/atmospherics/pipe/simple/supply/hidden{
-	dir = 8
-	},
-/obj/machinery/door/firedoor/border_only{
-	dir = 4
-	},
-/obj/machinery/door/firedoor/border_only{
-	dir = 8
-	},
-/turf/open/floor/plasteel,
-/area/crew_quarters/solgov)
 "lsI" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
@@ -27150,6 +27143,13 @@
 	},
 /turf/open/floor/circuit,
 /area/ai_monitored/turret_protected/ai)
+"ntP" = (
+/obj/structure/extinguisher_cabinet{
+	dir = 4;
+	pixel_x = 27
+	},
+/turf/open/floor/plasteel/dark,
+/area/ai_monitored/security/armory)
 "nug" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer3{
 	dir = 4;
@@ -30476,19 +30476,6 @@
 /obj/machinery/cell_charger,
 /turf/open/floor/plasteel/white,
 /area/medical/medbay/central)
-"pvH" = (
-/obj/machinery/door/airlock/solgov{
-	name = "Solgov Ofice";
-	req_access_txt = "70"
-	},
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
-	dir = 8
-	},
-/obj/machinery/atmospherics/pipe/simple/supply/hidden{
-	dir = 8
-	},
-/turf/open/floor/wood,
-/area/crew_quarters/solgov)
 "pvK" = (
 /obj/structure/closet/firecloset,
 /turf/open/floor/plating,
@@ -41126,20 +41113,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/crew_quarters/locker)
-"wLu" = (
-/obj/machinery/door/airlock/solgov,
-/obj/machinery/door/airlock/solgov{
-	name = "Solgov Ofice";
-	req_access_txt = "70"
-	},
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
-	dir = 8
-	},
-/obj/machinery/atmospherics/pipe/simple/supply/hidden{
-	dir = 8
-	},
-/turf/open/floor/wood,
-/area/crew_quarters/solgov)
 "wLN" = (
 /obj/machinery/door/airlock/security{
 	name = "Security Checkpoint";
@@ -43268,6 +43241,19 @@
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/grass,
 /area/hallway/primary/central)
+"yft" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 8
+	},
+/obj/machinery/door/airlock/solgov{
+	name = "SolGov Ofice";
+	req_access_txt = "70"
+	},
+/turf/open/floor/wood,
+/area/crew_quarters/solgov)
 "yfP" = (
 /obj/effect/turf_decal/tile/red{
 	dir = 4
@@ -61952,14 +61938,14 @@ aaa
 aaa
 ksO
 ksO
-pvH
+yft
 ksO
 ksO
 ksO
-pvH
+yft
 ksO
 ksO
-wLu
+yft
 uHY
 iex
 rxX
@@ -62760,7 +62746,7 @@ nXv
 tkg
 aTu
 ksO
-lsE
+cvU
 lEA
 lEA
 lEA
@@ -68225,7 +68211,7 @@ aaa
 aaa
 alo
 alo
-cbq
+ntP
 lBO
 ald
 alA
