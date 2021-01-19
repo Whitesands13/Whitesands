@@ -186,7 +186,7 @@
   * A backwards depth-limited breadth-first-search to see if the target is
   * logically "in" anything adjacent to us.
   */
-/atom/movable/proc/CanReach(atom/ultimate_target, obj/item/tool, view_only = FALSE)
+/atom/movable/proc/CanReach(atom/ultimate_target, obj/item/tool, view_only = FALSE, reach_multiplier = 1)
 	var/list/direct_access = DirectAccess()
 	var/depth = 1 + (view_only ? STORAGE_VIEW_DEPTH : INVENTORY_DEPTH)
 
@@ -201,7 +201,7 @@
 				continue
 			closed[target] = TRUE
 			if(isturf(target) || isturf(target.loc) || (target in direct_access)) //Directly accessible atoms
-				if(Adjacent(target) || (tool && CheckToolReach(src, target, tool.reach))) //Adjacent or reaching attacks
+				if(Adjacent(target) || (tool && CheckToolReach(src, target, tool.reach * 1))) //Adjacent or reaching attacks
 					return TRUE
 
 			if (!target.loc)

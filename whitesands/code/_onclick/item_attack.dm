@@ -41,10 +41,10 @@
 	var/swing_num = 0
 	for(var/turf in affected_turfs)
 		var/turf/T = turf
-		addtimer(CALLBACK(T, /turf/proc/swing_attack_act, user, src, effect_type, affected_turfs[turf]), swing_speed * swing_num++)
+		T.swing_attack_act(user, src, effect_type, affected_turfs[turf]), swing_speed * swing_num++)
 
 /turf/proc/swing_attack_act(mob/living/user, obj/item/I, effect_type, damage_modifier = 1)
-	if(!isopenturf(src))
+	if(user.CanReach(M, I, FALSE, 2))
 		return
 	for(var/mob/M in contents)
 		if(M == user)
