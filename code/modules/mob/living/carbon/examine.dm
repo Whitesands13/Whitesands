@@ -138,7 +138,7 @@
 		if(51 to 150)
 			. += "[t_He] [t_has] a layer of shimmering dust on them."
 		if(151 to INFINITY)
-			. += "[t_He] [t_is] covered in glistening dust!" //WS Wasp edit
+			. += "[t_He] [t_is] covered in glistening dust!" //End WS edit
 
 	. += "*---------*</span>"
 

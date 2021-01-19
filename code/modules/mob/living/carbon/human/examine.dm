@@ -324,7 +324,7 @@
 		if(51 to 150)
 			. += "[t_He] [t_has] a layer of shimmering dust on [t_him]."
 		if(151 to INFINITY)
-			. += "<b>[t_He] [t_is] covered in glistening dust!</b>" //WS Wasp edit
+			. += "<b>[t_He] [t_is] covered in glistening dust!</b>" //End WS edit
 
 	var/trait_exam = common_trait_examine()
 	if (!isnull(trait_exam))
