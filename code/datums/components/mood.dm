@@ -292,6 +292,7 @@
 	var/mob/living/owner = parent
 	var/datum/hud/hud = owner.hud_used
 	screen_obj = new
+	screen_obj.hud = owner.hud_used
 	screen_obj.color = "#4b96c4"
 	hud.infodisplay += screen_obj
 	RegisterSignal(hud, COMSIG_PARENT_QDELETING, .proc/unmodify_hud)
