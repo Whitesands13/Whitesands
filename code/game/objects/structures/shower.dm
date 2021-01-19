@@ -106,7 +106,7 @@
 	if(isliving(A))
 		check_heat(A)
 
-	if(iscarbon(A))
+	if(iscarbon(A)) //WS edit - moth dust from hugging
 		var/mob/living/carbon/C = A
 		C.mothdust -= 10;
 

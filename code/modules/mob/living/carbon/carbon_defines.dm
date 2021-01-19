@@ -83,5 +83,5 @@
 	/// Timer id of any transformation
 	var/transformation_timer
 
-	/// Wasp edit - moth dust when hugging
+	/// WS edit - moth dust when hugging
 	var/mothdust
