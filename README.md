@@ -1,4 +1,4 @@
-# WaspStation 13 Codebase
+# White Sands 13 Codebase
 
 ![Checks](https://github.com/WaspStation/WaspStation-1.0/workflows/Checks/badge.svg) [![Percentage of issues still open](http://isitmaintained.com/badge/open/waspstation/waspstation-1.0.svg)](https://isitmaintained.com/project/waspstation/waspstation-1.0 "Percentage of issues still open") [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/waspstation/waspstation-1.0.svg)](https://isitmaintained.com/project/waspstation/waspstation-1.0 "Average time to resolve an issue") [![GitHub issues](https://img.shields.io/github/issues/waspstation/waspstation-1.0)](https://github.com/waspstation/waspstation-1.0/issues) ![GitHub top language](https://img.shields.io/github/languages/top/waspstation/waspstation-1.0)
 
@@ -57,4 +57,4 @@ See the footer of [code/__DEFINES/tgs.dm](./code/__DEFINES/tgs.dm) and [code/mod
 
 All assets including icons and sound are under a [Creative Commons 3.0 BY-SA license](https://creativecommons.org/licenses/by-sa/3.0/) unless otherwise indicated.
 
-All assets located in the `goon` and `waspstation/goon` directory are under a [Creative Commons 3.0 BY-NC-SA license](https://creativecommons.org/licenses/by-nc-sa/3.0/). Assets created by Goonstation.
+All assets located in the `goon` and `whitesands/goon` directory are under a [Creative Commons 3.0 BY-NC-SA license](https://creativecommons.org/licenses/by-nc-sa/3.0/). Assets created by Goonstation.

@@ -50,14 +50,14 @@ GLOBAL_VAR(restart_counter)
 	config.Load(params[OVERRIDE_CONFIG_DIRECTORY_PARAMETER])
 
 	load_admins()
-	load_mentors() //Wasp edit - Mentors
+	load_mentors() //WS edit - Mentors
 
 	//SetupLogs depends on the RoundID, so lets check
 	//DB schema and set RoundID if we can
 	SSdbcore.CheckSchemaVersion()
 	SSdbcore.SetRoundID()
 	SetupLogs()
-	populate_gear_list() //Wasp edit - Loadouts
+	populate_gear_list() //WS edit - Loadouts
 	load_poll_data()
 
 #ifndef USE_CUSTOM_ERROR_HANDLER

@@ -116,7 +116,7 @@
 	integer = FALSE
 	min_val = 0
 
-//Waspstation Begin - Autotranfer vote
+//WS Begin - Autotranfer vote
 
 /datum/config_entry/number/vote_autotransfer_initial //length of time before the first autotransfer vote is called (deciseconds, default 2 hours)
 	config_entry_value = 72000
@@ -128,7 +128,7 @@
 	integer = FALSE
 	min_val = 0
 
-//Waspstation End
+//WS End
 
 /datum/config_entry/flag/default_no_vote	// vote does not default to nochange/norestart
 
@@ -526,9 +526,9 @@
 
 /datum/config_entry/flag/auto_profile
 
-//Begin Wasp Edit
+//BeginWS Edit
 /datum/config_entry/flag/minimaps_enabled
 	config_entry_value = TRUE
-//End Wasp Edit
+//EndWS Edit
 
 /datum/config_entry/string/centcom_source_whitelist
