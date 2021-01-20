@@ -332,7 +332,7 @@
 	icon_state = "tac"
 
 /obj/structure/closet/secure_closet/lethalshots/PopulateContents()
-	..()
+	..() // ws edit - selective locker stocking
 		new /obj/item/storage/box/lethalshot(src)
 		new /obj/item/storage/box/lethalshot(src)
 		new /obj/item/storage/box/lethalshot(src)
