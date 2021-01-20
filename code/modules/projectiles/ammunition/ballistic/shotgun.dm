@@ -151,3 +151,10 @@
 /obj/item/ammo_casing/shotgun/L666/penetrator
 	name = "L666 penetraotr bullet casing"
 	projectile_type = /obj/projectile/bullet/p50/penetrator
+
+/obj/item/ammo_casing/shotgun/breacher //ws edit breach
+	name = "breaching shot"
+	desc = "A 12 gauge shot of powdered steel, designed for knocking out airlock locking mechanisms."
+	icon_state = "breacher"
+	projectile_type = /obj/item/projectile/bullet/shotgun_breaching
+	materials = list(/datum/material/iron=4000)
