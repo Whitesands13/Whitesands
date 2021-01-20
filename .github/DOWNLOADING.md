@@ -1,9 +1,9 @@
 # DOWNLOADING
-There are a number of ways to download the source code. Some are described here, an alternative all-inclusive guide is also located at https://wiki.boomerstation.space/Downloading_the_source_code
+There are a number of ways to download the source code. Some are described here, an alternative all-inclusive guide is also located at https://wiki.white-sands.space/Downloading_the_source_code
 
 ## Option 1
 
-Follow this: https://wiki.boomerstation.space/Setting_up_git
+Follow this: https://wiki.white-sands.space/Setting_up_git
 
 ## Option 2
 

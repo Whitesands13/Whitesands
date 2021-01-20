@@ -2,11 +2,11 @@
 
 White Sands currently comes equipped with five maps.
 
-* [BoxStation (default)](https://wiki.boomerstation.space/Boxstation)
-* [MetaStation](https://wiki.boomerstation.space/MetaStation)
-* [DeltaStation](https://wiki.boomerstation.space/DeltaStation)
-* [PubbyStation](https://wiki.boomerstation.space/PubbyStation)
-* [Kilostation](https://wiki.boomerstation.space/KiloStation)
+* [BoxStation (default)](https://wiki.white-sands.space/Boxstation)
+* [MetaStation](https://wiki.white-sands.space/MetaStation)
+* [DeltaStation](https://wiki.white-sands.space/DeltaStation)
+* [PubbyStation](https://wiki.white-sands.space/PubbyStation)
+* [Kilostation](https://wiki.white-sands.space/KiloStation)
 
 All maps have their own code file that is in the base of the _maps directory. Maps are loaded dynamically when the game starts. Follow this guideline when adding your own map, to your fork, for easy compatibility.
 
