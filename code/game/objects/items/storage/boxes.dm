@@ -891,13 +891,13 @@
 /obj/item/storage/box/beanbag/PopulateContents()
 	for(var/i in 1 to 6)
 		new /obj/item/ammo_casing/shotgun/beanbag(src)
-		
+
 /obj/item/storage/box/meteor //wasp sands edit breaching
 	name = "box of breaching shells"
 	desc = "A box full of breaching shells, designed for rapid entry."
 	icon_state = "secbox"
-	illustration = syndiesuit
-	
+	illustration = "syndiesuit"
+
 /obj/item/storage/box/meteor/PopulateContents() //white station edit breaching
 	for(var/i in 1 to 7)
 		new /obj/item/ammo_casing/shotgun/meteorslug(src)
