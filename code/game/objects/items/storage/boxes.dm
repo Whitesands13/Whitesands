@@ -892,16 +892,6 @@
 	for(var/i in 1 to 6)
 		new /obj/item/ammo_casing/shotgun/beanbag(src)
 
-/obj/item/storage/box/meteor //ws edit breaching
-	name = "box of breaching shells"
-	desc = "A box full of breaching shells, designed for rapid entry."
-	icon_state = "secbox"
-	illustration = "syndiesuit"
-
-/obj/item/storage/box/meteor/PopulateContents() //ws edit breaching
-	for(var/i in 1 to 7)
-		new /obj/item/ammo_casing/shotgun/meteorslug(src)
-
 /obj/item/storage/box/actionfigure
 	name = "box of action figures"
 	desc = "The latest set of collectable action figures."
