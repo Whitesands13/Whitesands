@@ -342,8 +342,7 @@
 	new /obj/item/ammo_box/magazine/co9mm(src)
 	new /obj/item/ammo_box/magazine/co9mm(src)
 	new /obj/item/ammo_box/magazine/co9mm(src) // Waspstation edit - end
-	new /obj/item/storage/box/meteor(src)
-	new /obj/item/gun/grenadelauncher(src)
+	new /obj/item/gun/grenadelauncher(src) //ws edit sec grenade launcher
 
 /obj/structure/closet/secure_closet/labor_camp_security
 	name = "labor camp security locker"
