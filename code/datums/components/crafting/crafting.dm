@@ -9,6 +9,7 @@
 	var/obj/screen/craft/C = new()
 	C.icon = H.ui_style
 	C.hud = H
+	C.update_screen_loc()
 	H.static_inventory += C
 	CL.screen += C
 	RegisterSignal(C, COMSIG_CLICK, .proc/component_ui_interact)
