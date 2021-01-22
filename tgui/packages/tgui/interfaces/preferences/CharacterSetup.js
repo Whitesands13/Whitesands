@@ -1,12 +1,13 @@
-import { useBackend, useLocalState } from '../../backend';
+import { useBackend } from '../../backend';
 import { Flex, NoticeBox, Tabs, Divider, Button, Input, Dropdown } from '../../components';
 import OccupationPicker from './OccupationPicker';
 import QuirkPicker from './QuirkPicker';
+import { actOnCharacter as _actOnCharacter } from './helpers/characterSlotHelpers';
 
 const genderDisplayNames = ['male', 'female', 'other'];
 
 const characterName = (slot, index) => {
-  return slot[i] ? slot[i].name : 'Character Slot 1';
+  return slot[index] ? slot[index].name : `Character Slot ${index}`;
 };
 
 export const CharacterSetupPanel = (props, context) => {
@@ -18,8 +19,7 @@ export const CharacterSetupPanel = (props, context) => {
 
   const { index, character } = props;
 
-  const actOnCharacter = (action, payload = {}) => act(action, { slot: index, ...payload })
-
+  const actOnCharacter = _actOnCharacter(act, { current: index });
   const renderCustomNamePreferences = () => {
     let ret = [];
     for (let i = 0; i < pref_defines.custom_names.length; i++) {

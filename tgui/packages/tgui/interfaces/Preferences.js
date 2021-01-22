@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Button, Tabs } from '../components';
 import { useBackend, useLocalState } from "../backend";
-import { CharacterSetup } from './preferences';
+import { CharacterSetup, CharacterAppearance } from './preferences';
 
 export const Preferences = (props, context) => {
   const { act, data } = useBackend(context);
