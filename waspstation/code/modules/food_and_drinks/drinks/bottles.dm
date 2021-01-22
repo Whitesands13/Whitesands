@@ -1,5 +1,5 @@
 /obj/item/reagent_containers/food/drinks/bottle/sarsaparilla
-	name = "SandBlast Sarsaparilla"
+	name = "Sandblast Sarsaparilla"
 	desc = "Sealed for a guaranteed fresh taste in every bottle."
 	icon_state = "sandbottle"
 	volume = 50
@@ -7,20 +7,20 @@
 	reagent_flags = null //Cap's on
 
 /obj/item/reagent_containers/food/drinks/bottle/sarsaparilla/attack_self(mob/user)
-	if(reagents.flags == null) // Uses the reagents.flags cause reagent_flags is only the init value
+	if(!is_drainable()) // Uses the reagents.flags cause reagent_flags is only the init value
 		playsound(src, 'waspstation/sound/items/openbottle.ogg', 30, 1)
-		user.visible_message("<span class='notice'>[user] takes the cap off [src].</span>", "<span class='notice'>You take the cap off [src].</span>")
-		reagents.flags = OPENCONTAINER //Cap's off
+		user.visible_message("<span class='notice'>[user] takes the cap off \the [src].</span>", "<span class='notice'>You take the cap off [src].</span>")
+		reagents.flags |= OPENCONTAINER //Cap's off
 		if(prob(1)) //Lucky you
 			var/S = new /obj/item/sandstar(src)
 			user.put_in_hands(S)
-			to_chat(user, "<span class='notice'>You found a SandBlast Star!</span>")
+			to_chat(user, "<span class='notice'>You found a Sandblast Star!</span>")
 	else
 		. = ..()
 
 /obj/item/reagent_containers/food/drinks/bottle/sarsaparilla/examine(mob/user)
 	. = ..()
-	if(reagent.flags == null)
+	if(!is_drainable())
 		. += "<span class='info'>The cap is still sealed.</span>"
 
 /obj/item/sandstar
