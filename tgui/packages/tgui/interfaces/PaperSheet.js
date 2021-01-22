@@ -7,8 +7,6 @@
  */
 
 import { classes } from 'common/react';
-import { vecScale, vecSubtract } from 'common/vector';
-import DOMPurify from 'dompurify';
 import { Component } from 'inferno';
 import marked from 'marked';
 import { useBackend } from '../backend';
@@ -358,17 +356,14 @@ class PaperSheetStamper extends Component {
       rotate: this.state.rotate,
     };
     return (
-      <Box
-        onClick={this.handleMouseClick.bind(this)}
-        onMouseMove={this.handleMouseMove.bind(this)}
-        onwheel={this.handleWheel.bind(this)} {...rest}>
+      <>
         <PaperSheetView
           readOnly
           value={value}
           stamps={stamp_list} />
         <Stamp
           opacity={0.5} image={current_pos} />
-      </Box>
+      </>
     );
   }
 }
