@@ -33,3 +33,63 @@
 	w_class = WEIGHT_CLASS_TINY
 	custom_materials = list(/datum/material/gold = 200)
 
+/obj/item/storage/bottles
+	name = "bottle crate"
+	desc = "A small crate for storing bottles"
+	icon = 'waspstation/icons/obj/storage.dmi'
+	icon_state = "bottlecrate"
+	item_state = "deliverypackage"
+	lefthand_file = 'icons/mob/inhands/items_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/items_righthand.dmi'
+	custom_materials = list(/datum/material/wood = 800)
+	w_class = WEIGHT_CLASS_BULKY
+	var/sealed = FALSE
+
+/obj/item/storage/bottles/Initialize()
+	. = ..()
+	update_icon()
+
+/obj/item/storage/bottles/ComponentInitialize()
+	. = ..()
+	var/datum/component/storage/S = GetComponent(/datum/component/storage)
+	S.max_w_class = WEIGHT_CLASS_NORMAL
+	S.max_combined_w_class = 16
+	S.max_items = 6
+	S.set_holdable(list(
+		/obj/item/reagent_containers/food/drinks/beer,
+		/obj/item/reagent_containers/food/drinks/ale,
+		/obj/item/reagent_containers/food/drinks/bottle
+	))
+	S.locked = sealed
+
+/obj/item/storage/bottles/update_icon_state()
+	if(sealed)
+		icon_state = "[initial(icon_state)]_seal"
+	else
+		icon_state = "[initial(icon_state)]_[contents.len]"
+
+/obj/item/storage/bottles/examine(mob/user)
+	. = ..()
+	if(sealed)
+		. += "<span class='info'>It is sealed. You could pry it open with a <i>crowbar</i> to access its contents.</span>"
+
+/obj/item/storage/bottles/crowbar_act(mob/living/user, obj/item/I)
+	. = ..()
+	if(sealed)
+		var/datum/component/storage/S = GetComponent(/datum/component/storage)
+		user.visible_message("<span class='notice'>[user] prys open \the [src].</span>", "You pry open \the [src]")
+		playsound(src, 'sound/machines/wooden_closet_close.ogg', 20, 1)
+		sealed = FALSE
+		S.locked = FALSE
+		new /obj/item/stack/sheet/mineral/wood(get_turf(src), 1)
+		update_icon()
+		return TRUE
+
+/obj/item/storage/bottles/sandblast
+	name = "sarsaparilla bottle crate"
+	desc = "Holds six bottles of the finest sarsaparilla this side of the sector."
+	sealed = TRUE
+
+/obj/item/storage/bottles/sandblast/PopulateContents()
+	for(var/i in 1 to 6)
+		new /obj/item/reagent_containers/food/drinks/bottle/sarsaparilla(src)
