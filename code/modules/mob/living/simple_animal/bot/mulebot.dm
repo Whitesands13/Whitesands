@@ -117,10 +117,6 @@
 /mob/living/simple_animal/bot/mulebot/proc/has_power(bypass_open_check)
 	return (!open || bypass_open_check) && cell && cell.charge > 0 && (!wires.is_cut(WIRE_POWER1) && !wires.is_cut(WIRE_POWER2))
 
-/mob/living/simple_animal/bot/mulebot/update_mobility()
-	. = ..()
-	if(!on)
-		mobility_flags |= MOBILITY_STAND //base bots removes all mobility flags when turned off, resulting in the bot becoming passable. we don't want this since it's a large device that should block things.
 
 /mob/living/simple_animal/bot/mulebot/proc/set_id(new_id)
 	id = new_id
@@ -259,8 +255,11 @@
 	return data
 
 /mob/living/simple_animal/bot/mulebot/ui_act(action, params)
-	if(..() || (locked && !usr.has_unlimited_silicon_privilege))
+	. = ..()
+
+	if(. || (locked && !usr.has_unlimited_silicon_privilege))
 		return
+
 	switch(action)
 		if("lock")
 			if(usr.has_unlimited_silicon_privilege)
@@ -408,7 +407,7 @@
 	if (!istype(L))
 		return
 
-	if(user.incapacitated() || (istype(L) && !(L.mobility_flags & MOBILITY_STAND)))
+	if(user.incapacitated() || (istype(L) && L.body_position == LYING_DOWN))
 		return
 
 	if(!istype(AM) || isdead(AM) || iscameramob(AM) || istype(AM, /obj/effect/dummy/phased_mob))
@@ -726,7 +725,7 @@
 	bloodiness += 4
 
 // player on mulebot attempted to move
-/mob/living/simple_animal/bot/mulebot/relaymove(mob/user)
+/mob/living/simple_animal/bot/mulebot/relaymove(mob/living/user, direction)
 	if(user.incapacitated())
 		return
 	if(load == user)
@@ -806,7 +805,7 @@
 /mob/living/simple_animal/bot/mulebot/paranormal/MouseDrop_T(atom/movable/AM, mob/user)
 	var/mob/living/L = user
 
-	if(user.incapacitated() || (istype(L) && !(L.mobility_flags & MOBILITY_STAND)))
+	if(user.incapacitated() || (istype(L) && L.body_position == LYING_DOWN))
 		return
 
 	if(!istype(AM) || iscameramob(AM) || istype(AM, /obj/effect/dummy/phased_mob)) //allows ghosts!

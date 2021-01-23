@@ -14,7 +14,7 @@
 	growthstages = 4
 	rarity = 30
 	var/list/mutations = list()
-	reagents_add = list(/datum/reagent/medicine/C2/multiver = 0.04, /datum/reagent/consumable/nutriment = 0.02)
+	reagents_add = list(/datum/reagent/medicine/charcoal = 0.04, /datum/reagent/consumable/nutriment = 0.02)
 
 /obj/item/seeds/kudzu/Copy()
 	var/obj/item/seeds/kudzu/S = ..()
@@ -104,4 +104,5 @@
 	bitesize_mod = 2
 	foodtype = VEGETABLES | GROSS
 	tastes = list("kudzu" = 1)
-	wine_power = 20
+	wine_power = 45
+	wine_flavor = "choking vines" //wasp edit: new wine flavors

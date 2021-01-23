@@ -5,7 +5,7 @@
 	icon_state = "hypnochair"
 	circuit = /obj/item/circuitboard/machine/hypnochair
 	density = TRUE
-	opacity = 0
+	opacity = FALSE
 
 	var/mob/living/carbon/victim = null ///Keeps track of the victim to apply effects if it teleports away
 	var/interrogating = FALSE ///Is the device currently interrogating someone?
@@ -55,8 +55,10 @@
 	return data
 
 /obj/machinery/hypnochair/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
+
 	switch(action)
 		if("door")
 			if(state_open)
@@ -175,7 +177,7 @@
 		else
 			icon_state += "_occupied"
 
-/obj/machinery/hypnochair/container_resist(mob/living/user)
+/obj/machinery/hypnochair/container_resist_act(mob/living/user)
 	user.changeNext_move(CLICK_CD_BREAKOUT)
 	user.last_special = world.time + CLICK_CD_BREAKOUT
 	user.visible_message("<span class='notice'>You see [user] kicking against the door of [src]!</span>", \
@@ -188,17 +190,14 @@
 			"<span class='notice'>You successfully break out of [src]!</span>")
 		open_machine()
 
-/obj/machinery/hypnochair/relaymove(mob/user)
+/obj/machinery/hypnochair/relaymove(mob/living/user, direction)
 	if(message_cooldown <= world.time)
 		message_cooldown = world.time + 50
 		to_chat(user, "<span class='warning'>[src]'s door won't budge!</span>")
 
-/obj/machinery/hypnochair/MouseDrop_T(mob/target, mob/user)
-	if(user.stat || !Adjacent(user) || !user.Adjacent(target) || !isliving(target) || !user.IsAdvancedToolUser())
-		return
-	if(isliving(user))
-		var/mob/living/L = user
-		if(!(L.mobility_flags & MOBILITY_STAND))
-			return
-	close_machine(target)
 
+/obj/machinery/hypnochair/MouseDrop_T(mob/target, mob/user)
+	if(HAS_TRAIT(user, TRAIT_UI_BLOCKED) || !Adjacent(user) || !user.Adjacent(target) || !isliving(target) || !user.IsAdvancedToolUser())
+		return
+
+	close_machine(target)

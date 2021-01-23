@@ -88,7 +88,7 @@
 /datum/supply_pack/materials/plasma50
 	name = "50 Plasma Sheets"
 	desc = "You're supposed to be mining this, not buying it."
-	cost = 15000
+	cost = 25000
 	contains = list(/obj/item/stack/sheet/mineral/plasma/fifty)
 	crate_name = "bulk plasma sheets crate"
 
@@ -144,7 +144,7 @@
 /datum/supply_pack/materials/titanium50
 	name = "50 Titanium Sheets"
 	desc = "Used for making big boy tanks and tools."
-	cost = 1000
+	cost = 10000
 	contains = list(/obj/item/stack/sheet/mineral/titanium/fifty)
 	crate_name = "titanium sheets crate"
 
@@ -400,6 +400,36 @@
 					/obj/machinery/grill/cat,
 					/obj/item/reagent_containers/food/snacks/meat/slab/mouse)
 	crate_name = "catgrill crate"
+
+//////////////////////////////////////////////////////////////////////////////
+/////////////////////////////// Deepcore /////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+/datum/supply_pack/materials/deepcore_drill
+	name = "Deep Core Mining Drill Crate"
+	desc = "Contains three Deep Core Mining Drills to boost your productivity."
+	cost = 3000
+	contains = list(/obj/item/deepcorecapsule,
+					/obj/item/deepcorecapsule,
+					/obj/item/deepcorecapsule)
+	crate_name = "deep core drill crate"
+
+/datum/supply_pack/materials/deepcore_logi
+	name = "Deep Core Mining Logistics Crate"
+	desc = "Contains the logistics systems needed to run your Deep Core Mining Drills. Some assembly required."
+	cost = 5000
+	contains = list(/obj/machinery/deepcore/hopper,
+					/obj/item/multitool,
+					/obj/item/circuitboard/machine/deepcore/hub,
+					/obj/item/stock_parts/capacitor,
+					/obj/item/stock_parts/micro_laser,
+					/obj/item/stock_parts/micro_laser,
+					/obj/item/stock_parts/matter_bin,
+					/obj/item/stock_parts/matter_bin,
+					/obj/item/stock_parts/matter_bin,
+					/obj/item/stock_parts/manipulator,
+					/obj/item/stock_parts/manipulator)
+	crate_name = "deep core logi crate"
 
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////// Miscellaneous ///////////////////////////////////

@@ -28,7 +28,7 @@
 
 	light_power = 0
 	light_range = 7
-	light_color = "#ff3232"
+	light_color = COLOR_VIVID_RED
 
 	//Trick to get the glowing overlay visible from a distance
 	luminosity = 1
@@ -37,6 +37,14 @@
 	var/buildstage = 2 // 2 = complete, 1 = no wires, 0 = circuit gone
 	var/last_alarm = 0
 	var/area/myarea = null
+
+	FASTDMM_PROP(\
+		set_instance_vars(\
+			pixel_x = dir == EAST ? 26 : (dir == WEST ? -26 : INSTANCE_VAR_DEFAULT),\
+			pixel_y = dir == NORTH ? 26 : (dir == SOUTH ? -26 : INSTANCE_VAR_DEFAULT)\
+		),\
+		dir_amount = 4\
+    )
 
 /obj/machinery/firealarm/Initialize(mapload, dir, building)
 	. = ..()

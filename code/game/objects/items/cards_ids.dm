@@ -146,7 +146,7 @@
 	. = ..()
 	if(.)
 		switch(var_name)
-			if("assignment","registered_name","registered_age")
+			if(NAMEOF(src, assignment),NAMEOF(src, registered_name),NAMEOF(src, registered_age))
 				update_label()
 
 /obj/item/card/id/attackby(obj/item/W, mob/user, params)
@@ -330,6 +330,8 @@
 		. += mutable_appearance(icon, "id[job]")
 
 /obj/item/card/id/proc/update_in_wallet()
+	SIGNAL_HANDLER
+
 	if(istype(loc, /obj/item/storage/wallet))
 		var/obj/item/storage/wallet/powergaming = loc
 		if(powergaming.front_id == src)
@@ -366,6 +368,11 @@ update_label()
 	item_state = "silver_id"
 	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
+
+/obj/item/card/id/silver/hologram
+	assignment = "Head of Personnel"
+	registered_name = "Emergency Command Hologram"
+	access = list(ACCESS_CHANGE_IDS)
 
 /obj/item/card/id/silver/reaper
 	name = "Thirteen's ID Card (Reaper)"

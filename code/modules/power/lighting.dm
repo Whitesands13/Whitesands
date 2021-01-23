@@ -9,8 +9,11 @@
 #define LIGHT_BROKEN 2
 #define LIGHT_BURNED 3
 
-#define BROKEN_SPARKS_MIN (30 SECONDS)
-#define BROKEN_SPARKS_MAX (90 SECONDS)
+#define BROKEN_SPARKS_MIN (3 MINUTES)
+#define BROKEN_SPARKS_MAX (9 MINUTES)
+
+#define LIGHT_DRAIN_TIME 25                                             // Waspstation Edit -- Ethereal Charge Scaling
+#define LIGHT_POWER_GAIN (1.75 * ETHEREAL_CHARGE_SCALING_MULTIPLIER)    // Waspstation Edit -- Ethereal Charge Scaling
 
 /obj/item/wallframe/light_fixture
 	name = "light fixture frame"
@@ -117,6 +120,10 @@
 			cell = W
 			add_fingerprint(user)
 		return
+	else if (istype(W, /obj/item/light))
+		to_chat(user, "<span class='warning'>This [name] isn't finished being setup!</span>")
+		return
+
 	switch(stage)
 		if(1)
 			if(W.tool_behaviour == TOOL_WRENCH)
@@ -213,7 +220,7 @@
 	var/static_power_used = 0
 	var/brightness = 8			// luminosity when on, also used in power calculation
 	var/bulb_power = 0.75			// basically the alpha of the emitted light source, MODIFIED TO CIT LIGHTING
-	var/bulb_colour = "#FFEEDD"	// befault colour of the light, MODIFIED TO CIT LIGHTING
+	var/bulb_colour = "#FFF6ED"	// befault colour of the light, MODIFIED TO CIT LIGHTING
 	var/status = LIGHT_OK		// LIGHT_OK, _EMPTY, _BURNED or _BROKEN
 	var/flickering = FALSE
 	var/light_type = /obj/item/light/tube		// the type of light item
@@ -230,7 +237,7 @@
 	var/nightshift_allowed = TRUE	//Set to FALSE to never let this light get switched to night mode.
 	var/nightshift_brightness = 8
 	var/nightshift_light_power = 0.45
-	var/nightshift_light_color = "#FFDDCC"
+	var/nightshift_light_color = "#FFDBB5"
 
 	var/emergency_mode = FALSE	// if true, the light is in emergency mode
 	var/no_emergency = FALSE	// if true, this light cannot ever have an emergency mode
@@ -300,8 +307,21 @@
 
 	glowybit = SSvis_overlays.add_vis_overlay(src, overlayicon, base_state, layer, plane, dir, alpha = 0, unique = TRUE)
 
+	//Setup area colours -pb
+	var/area/A = get_area(src)
+	if(bulb_colour == initial(bulb_colour))
+		if(istype(src, /obj/machinery/light/small))
+			bulb_colour = A.lighting_colour_bulb
+			brightness = A.lighting_brightness_bulb
+		else
+			bulb_colour = A.lighting_colour_tube
+			brightness = A.lighting_brightness_bulb
+
+	if(nightshift_light_color == initial(nightshift_light_color))
+		nightshift_light_color = A.lighting_colour_night
+		nightshift_brightness = A.lighting_brightness_night
+
 	if(!mapload) //sync up nightshift lighting for player made lights
-		var/area/A = get_area(src)
 		var/obj/machinery/power/apc/temp_apc = A.get_apc()
 		nightshift_enabled = temp_apc?.nightshift_lights
 
@@ -664,13 +684,13 @@
 				if(E.drain_time > world.time)
 					return
 				to_chat(H, "<span class='notice'>You start channeling some power through the [fitting] into your body.</span>")
-				E.drain_time = world.time + 30
-				while(do_after(user, 30, target = src)) //Wasp edit
-					E.drain_time = world.time + 30 //Wasp edit
+				E.drain_time = world.time + LIGHT_DRAIN_TIME          // Waspstation Edit -- Ethereal Charge Scaling
+				while(do_after(user, LIGHT_DRAIN_TIME, target = src)) //Wasp edit
+					E.drain_time = world.time + LIGHT_DRAIN_TIME //Wasp edit
 					var/obj/item/organ/stomach/ethereal/stomach = H.getorganslot(ORGAN_SLOT_STOMACH)
 					if(istype(stomach))
 						to_chat(H, "<span class='notice'>You receive some charge from the [fitting].</span>")
-						stomach.adjust_charge(2)
+						stomach.adjust_charge(LIGHT_POWER_GAIN)       // Waspstation Edit -- Ethereal Charge Scaling
 					else
 						to_chat(H, "<span class='warning'>You can't receive charge from the [fitting]!</span>")
 				return
@@ -914,3 +934,6 @@
 	layer = 2.5
 	light_type = /obj/item/light/bulb
 	fitting = "bulb"
+
+#undef LIGHT_DRAIN_TIME  // Waspstation Edit -- Ethereal Charge Scaling
+#undef LIGHT_POWER_GAIN  // Waspstation Edit -- Ethereal Charge Scaling

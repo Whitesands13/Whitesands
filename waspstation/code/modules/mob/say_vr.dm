@@ -10,7 +10,7 @@
 		usr << "No."
 	var/msg = input(usr,"Set the flavor text in your 'examine' verb. Can also be used for OOC notes about your character.","Flavor Text",html_decode(flavor_text)) as message|null
 
-	if(msg != null)
+	if(msg) //Waspstation edit - "Cancel" does not clear flavor text
 		msg = copytext(msg, 1, MAX_MESSAGE_LEN)
 		msg = html_encode(msg)
 
@@ -24,10 +24,10 @@
 /mob/proc/print_flavor_text()
 	if(flavor_text && flavor_text != "")
 		var/msg = replacetext(flavor_text, "\n", " ")
-		if(length(msg) <= 40)
+		if(length(msg) <= 100)
 			return "<span class='notice'>[msg]</span>"
 		else
-			return "<span class='notice'>[copytext(msg, 1, 37)]... <a href=\"byond://?src=\ref[src];flavor_more=1\">More...</span></a>"
+			return "<span class='notice'>[copytext(msg, 1, 97)]... <a href=\"byond://?src=\ref[src];flavor_more=1\">More...</span></a>"
 
 
 /mob/proc/get_top_level_mob()
@@ -68,7 +68,7 @@ SUBTLER  //WaspStation - Subtle emotes
 		to_chat(user, "You cannot send IC messages (muted).")
 		return FALSE
 	else if(!params)
-		var/subtle_emote = stripped_multiline_input(user, "Choose an emote to display.", "Subtler" , null, MAX_MESSAGE_LEN)
+		var/subtle_emote = input(user, "Choose an emote to display.", "Subtler")
 		if(subtle_emote && !check_invalid(user, subtle_emote))
 			var/type = input("Is this a visible or hearable emote?") as null|anything in list("Visible", "Hearable")
 			switch(type)

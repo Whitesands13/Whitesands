@@ -63,10 +63,6 @@
 #define BODYPART_ORGANIC   1
 #define BODYPART_ROBOTIC   2
 
-#define BODYPART_NOT_DISABLED 0
-#define BODYPART_DISABLED_DAMAGE 1
-#define BODYPART_DISABLED_PARALYSIS 2
-
 #define DEFAULT_BODYPART_ICON_ORGANIC 'icons/mob/human_parts_greyscale.dmi'
 #define DEFAULT_BODYPART_ICON_ROBOTIC 'icons/mob/augmentation/augments.dmi'
 
@@ -194,13 +190,16 @@
 #define NUTRITION_LEVEL_ALMOST_FULL 535
 
 //Charge levels for Ethereals
-#define ETHEREAL_CHARGE_NONE 0
-#define ETHEREAL_CHARGE_LOWPOWER 20
-#define ETHEREAL_CHARGE_NORMAL 50
-#define ETHEREAL_CHARGE_ALMOSTFULL 75
-#define ETHEREAL_CHARGE_FULL 100
-#define ETHEREAL_CHARGE_OVERLOAD 125
-#define ETHEREAL_CHARGE_DANGEROUS 150
+// Waspstation Begin -- Ethereal Charge Scaling
+#define ETHEREAL_CHARGE_SCALING_MULTIPLIER 1
+#define ETHEREAL_CHARGE_NONE       (  0 * ETHEREAL_CHARGE_SCALING_MULTIPLIER)
+#define ETHEREAL_CHARGE_LOWPOWER   ( 20 * ETHEREAL_CHARGE_SCALING_MULTIPLIER)
+#define ETHEREAL_CHARGE_NORMAL     ( 50 * ETHEREAL_CHARGE_SCALING_MULTIPLIER)
+#define ETHEREAL_CHARGE_ALMOSTFULL ( 75 * ETHEREAL_CHARGE_SCALING_MULTIPLIER)
+#define ETHEREAL_CHARGE_FULL       (100 * ETHEREAL_CHARGE_SCALING_MULTIPLIER)
+#define ETHEREAL_CHARGE_OVERLOAD   (125 * ETHEREAL_CHARGE_SCALING_MULTIPLIER)
+#define ETHEREAL_CHARGE_DANGEROUS  (150 * ETHEREAL_CHARGE_SCALING_MULTIPLIER)
+// Waspstation End
 
 //Slime evolution threshold. Controls how fast slimes can split/grow
 #define SLIME_EVOLUTION_THRESHOLD 10
@@ -225,6 +224,10 @@
 #define SENTIENCE_BOSS 5
 
 //Mob AI Status
+#define POWER_RESTORATION_OFF 0
+#define POWER_RESTORATION_START 1
+#define POWER_RESTORATION_SEARCH_APC 2
+#define POWER_RESTORATION_APC_FOUND 3
 
 //Hostile simple animals
 //If you add a new status, be sure to add a list for it to the simple_animals global in _globalvars/lists/mobs.dm
@@ -305,7 +308,7 @@
 #define DOOR_CRUSH_DAMAGE	15	//the amount of damage that airlocks deal when they crush you
 
 #define	HUNGER_FACTOR		0.1	//factor at which mob nutrition decreases
-#define	ETHEREAL_CHARGE_FACTOR	0.12 //factor at which ethereal's charge decreases
+#define	ETHEREAL_CHARGE_FACTOR (0.05 * ETHEREAL_CHARGE_SCALING_MULTIPLIER) //factor at which ethereal's charge decreases   // Waspstation Edit -- Ethereal Charge Scaling
 #define	REAGENTS_METABOLISM 0.4	//How many units of reagent are consumed per tick, by default.
 #define REAGENTS_EFFECT_MULTIPLIER (REAGENTS_METABOLISM / 0.4)	// By defining the effect multiplier this way, it'll exactly adjust all effects according to how they originally were with the 0.4 metabolism
 
@@ -359,3 +362,25 @@
 
 /// If you examine the same atom twice in this timeframe, we call examine_more() instead of examine()
 #define EXAMINE_MORE_TIME	1 SECONDS
+/// How far away you can be to make eye contact with someone while examining
+#define EYE_CONTACT_RANGE	5
+
+#define SILENCE_RANGED_MESSAGE (1<<0)
+
+///Swarmer flags
+#define SWARMER_LIGHT_ON (1<<0)
+
+/// Returns whether or not the given mob can succumb
+#define CAN_SUCCUMB(target) (HAS_TRAIT(target, TRAIT_CRITICAL_CONDITION) && !HAS_TRAIT(target, TRAIT_NODEATH))
+
+// Body position defines.
+/// Mob is standing up, usually associated with lying_angle value of 0.
+#define STANDING_UP 0
+/// Mob is lying down, usually associated with lying_angle values of 90 or 270.
+#define LYING_DOWN 1
+
+///How much a mob's sprite should be moved when they're lying down
+#define PIXEL_Y_OFFSET_LYING -6
+
+///Define for spawning megafauna instead of a mob for cave gen
+#define SPAWN_MEGAFAUNA "bluh bluh huge boss"

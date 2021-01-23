@@ -147,7 +147,7 @@
 	. += "Held Item: [held_item]"
 	. += "Mode: [a_intent]"
 
-/mob/living/simple_animal/parrot/Hear(message, atom/movable/speaker, message_langs, raw_message, radio_freq, list/spans, message_mode)
+/mob/living/simple_animal/parrot/Hear(message, atom/movable/speaker, message_langs, raw_message, radio_freq, list/spans, list/message_mods = list())
 	. = ..()
 	if(speaker != src && prob(50)) //Dont imitate ourselves
 		if(!radio_freq || prob(10))
@@ -157,25 +157,22 @@
 	if(speaker == src && !client) //If a parrot squawks in the woods and no one is around to hear it, does it make a sound? This code says yes!
 		return message
 
-/mob/living/simple_animal/parrot/radio(message, message_mode, list/spans, language) //literally copied from human/radio(), but there's no other way to do this. at least it's better than it used to be.
+/mob/living/simple_animal/parrot/radio(message, list/message_mods = list(), list/spans, language) //literally copied from human/radio(), but there's no other way to do this. at least it's better than it used to be.
 	. = ..()
 	if(. != 0)
 		return .
 
-	switch(message_mode)
-		if(MODE_HEADSET)
-			if (ears)
-				ears.talk_into(src, message, , spans, language)
-			return ITALICS | REDUCE_RANGE
-
-		if(MODE_DEPARTMENT)
-			if (ears)
-				ears.talk_into(src, message, message_mode, spans, language)
-			return ITALICS | REDUCE_RANGE
-
-	if(message_mode in GLOB.radiochannels)
+	if(message_mods[MODE_HEADSET])
 		if(ears)
-			ears.talk_into(src, message, message_mode, spans, language)
+			ears.talk_into(src, message, , spans, language, message_mods)
+		return ITALICS | REDUCE_RANGE
+	else if(message_mods[RADIO_EXTENSION] == MODE_DEPARTMENT)
+		if(ears)
+			ears.talk_into(src, message, message_mods[RADIO_EXTENSION], spans, language, message_mods)
+		return ITALICS | REDUCE_RANGE
+	else if(message_mods[RADIO_EXTENSION] in GLOB.radiochannels)
+		if(ears)
+			ears.talk_into(src, message, message_mods[RADIO_EXTENSION], spans, language, message_mods)
 			return ITALICS | REDUCE_RANGE
 
 	return 0
@@ -185,12 +182,17 @@
  */
 /mob/living/simple_animal/parrot/show_inv(mob/user)
 	user.set_machine(src)
+	var/list/dat = list()
 
-	var/dat = 	"<div align='center'><b>Inventory of [name]</b></div><p>"
-	dat += "<br><B>Headset:</B> <A href='?src=[REF(src)];[ears ? "remove_inv=ears'>[ears]" : "add_inv=ears'>Nothing"]</A>"
+	dat += "<table>"
+	dat += "<tr><td><B>Headset:</B></td><td><A href='?src=[REF(src)];[ears ? "remove_inv=ears'>[ears]" : "add_inv=ears'><font color=grey>Empty</font>"]</A></td></tr>"
+	dat += {"</table>
+	<A href='?src=[REF(user)];mach_close=mob[REF(src)]'>Close</A>
+	"}
 
-	user << browse(dat, "window=mob[REF(src)];size=325x500")
-	onclose(user, "window=mob[REF(src)]")
+	var/datum/browser/popup = new(user, "mob[REF(src)]", "[src]", 440, 510)
+	popup.set_content(dat.Join())
+	popup.open()
 
 
 /mob/living/simple_animal/parrot/Topic(href, href_list)
@@ -214,6 +216,7 @@
 				for(var/possible_phrase in speak)
 					if(copytext_char(possible_phrase, 2, 3) in GLOB.department_radio_keys)
 						possible_phrase = copytext_char(possible_phrase, 3)
+		show_inv(usr)
 
 	//Adding things to inventory
 	else if(href_list["add_inv"])
@@ -262,6 +265,8 @@
 
 					if(headset_to_add.translate_binary)
 						available_channels.Add(MODE_TOKEN_BINARY)
+		show_inv(usr)
+
 	else
 		return ..()
 
@@ -438,7 +443,7 @@
 			//Search for item to steal
 			parrot_interest = search_for_item()
 			if(parrot_interest)
-				emote("me", 1, "looks in [parrot_interest]'s direction and takes flight.")
+				manual_emote("looks in [parrot_interest]'s direction and takes flight.")
 				parrot_state = PARROT_SWOOP | PARROT_STEAL
 				icon_state = icon_living
 			return
@@ -460,7 +465,7 @@
 			if(AM)
 				if(istype(AM, /obj/item) || isliving(AM))	//If stealable item
 					parrot_interest = AM
-					emote("me", 1, "turns and flies towards [parrot_interest].")
+					manual_emote("turns and flies towards [parrot_interest].")
 					parrot_state = PARROT_SWOOP | PARROT_STEAL
 					return
 				else	//Else it's a perch
@@ -762,7 +767,7 @@
 		held_item = null
 		if(health < maxHealth)
 			adjustBruteLoss(-10)
-		emote("me", 1, "[src] eagerly downs the cracker.")
+		manual_emote("[src] eagerly downs the cracker.")
 		return 1
 
 

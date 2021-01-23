@@ -129,13 +129,13 @@ Class Procs:
 	// For storing and overriding ui id
 	var/tgui_id // ID of TGUI interface
 
-/obj/machinery/Initialize()
+/obj/machinery/Initialize(mapload, apply_default_parts = TRUE)
 	if(!armor)
 		armor = list("melee" = 25, "bullet" = 10, "laser" = 10, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 70)
 	. = ..()
 	GLOB.machines += src
 
-	if(ispath(circuit, /obj/item/circuitboard))
+	if(ispath(circuit, /obj/item/circuitboard) && (mapload || apply_default_parts))
 		circuit = new circuit
 		circuit.apply_default_parts(src)
 
@@ -200,11 +200,27 @@ Class Procs:
 	for(var/atom/movable/A in contents)
 		if(subset && !(A in subset))
 			continue
+
 		A.forceMove(T)
-		if(isliving(A))
-			var/mob/living/L = A
-			L.update_mobility()
-	occupant = null
+
+		if(occupant == A)
+			occupant = null
+
+/**
+ * Puts passed object in to user's hand
+ *
+ * Puts the passed object in to the users hand if they are adjacent.
+ * If the user is not adjacent then place the object on top of the machine.
+ *
+ * Vars:
+ * * object (obj) The object to be moved in to the users hand.
+ * * user (mob/living) The user to recive the object
+ */
+/obj/machinery/proc/try_put_in_hand(obj/object, mob/living/user)
+	if(!issilicon(user) && in_range(src, user))
+		user.put_in_hands(object)
+	else
+		object.forceMove(drop_location())
 
 /obj/machinery/proc/can_be_occupant(atom/movable/am)
 	return occupant_typecache ? is_type_in_typecache(am, occupant_typecache) : isliving(am)
@@ -397,7 +413,7 @@ Class Procs:
 /obj/machinery/proc/spawn_frame(disassembled)
 	var/obj/structure/frame/machine/M = new /obj/structure/frame/machine(loc)
 	. = M
-	M.setAnchored(anchored)
+	M.set_anchored(anchored)
 	if(!disassembled)
 		M.obj_integrity = M.max_integrity * 0.5 //the frame is already half broken
 	transfer_fingerprints_to(M)
@@ -463,7 +479,7 @@ Class Procs:
 		//as long as we're the same anchored state and we're either on a floor or are anchored, toggle our anchored state
 		if(I.use_tool(src, user, time, extra_checks = CALLBACK(src, .proc/unfasten_wrench_check, prev_anchored, user)))
 			to_chat(user, "<span class='notice'>You [anchored ? "un" : ""]secure [src].</span>")
-			setAnchored(!anchored)
+			set_anchored(!anchored)
 			playsound(src, 'sound/items/deconstruct.ogg', 50, TRUE)
 			SEND_SIGNAL(src, COMSIG_OBJ_DEFAULT_UNFASTEN_WRENCH, anchored)
 			return SUCCESSFUL_UNFASTEN

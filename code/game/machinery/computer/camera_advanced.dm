@@ -3,6 +3,7 @@
 	desc = "Used to access the various cameras on the station."
 	icon_screen = "cameras"
 	icon_keyboard = "security_key"
+	light_color = COLOR_SOFT_RED
 	var/list/z_lock = list() // Lock use to these z levels
 	var/lock_override = NONE
 	var/mob/camera/aiEye/remote/eyeobj
@@ -11,8 +12,8 @@
 	var/datum/action/innate/camera_off/off_action = new
 	var/datum/action/innate/camera_jump/jump_action = new
 	var/list/actions = list()
-
-	light_color = LIGHT_COLOR_RED
+	///Should we supress any view changes?
+	var/should_supress_view_changes  = TRUE
 
 /obj/machinery/computer/camera_advanced/Initialize()
 	. = ..()
@@ -76,6 +77,7 @@
 
 	current_user = null
 	user.unset_machine()
+	user.client.view_size.unsupress()
 	playsound(src, 'sound/machines/terminal_off.ogg', 25, FALSE)
 
 /obj/machinery/computer/camera_advanced/check_eye(mob/user)
@@ -161,6 +163,8 @@
 	user.remote_control = eyeobj
 	user.reset_perspective(eyeobj)
 	eyeobj.setLoc(eyeobj.loc)
+	if(should_supress_view_changes )
+		user.client.view_size.supress()
 
 /mob/camera/aiEye/remote
 	name = "Inactive Camera Eye"
@@ -208,7 +212,7 @@
 				user_image = image(icon,loc,icon_state,FLY_LAYER)
 				eye_user.client.images += user_image
 
-/mob/camera/aiEye/remote/relaymove(mob/user,direct)
+/mob/camera/aiEye/remote/relaymove(mob/living/user, direction)
 	var/initial = initial(sprint)
 	var/max_sprint = 50
 
@@ -216,7 +220,7 @@
 		sprint = initial
 
 	for(var/i = 0; i < max(sprint, initial); i += 20)
-		var/turf/step = get_turf(get_step(src, direct))
+		var/turf/step = get_turf(get_step(src, direction))
 		if(step)
 			setLoc(step)
 

@@ -275,7 +275,14 @@
 		remove_display()
 		return PROCESS_KILL
 
-	return display_shuttle_status(SSshuttle.getShuttle(shuttle_id))
+	var/shuttle = SSshuttle.getShuttle(shuttle_id)
+
+	if(!shuttle)
+		// No shuttle, no processing.
+		remove_display()
+		return PROCESS_KILL
+
+	return display_shuttle_status(shuttle)
 
 /obj/machinery/status_display/shuttle/examine(mob/user)
 	. = ..()
@@ -289,7 +296,7 @@
 	if(!.)
 		return
 	switch(var_name)
-		if("shuttle_id")
+		if(NAMEOF(src, shuttle_id))
 			update()
 
 /obj/machinery/status_display/shuttle/connect_to_shuttle(obj/docking_port/mobile/port, obj/docking_port/stationary/dock, idnum, override)

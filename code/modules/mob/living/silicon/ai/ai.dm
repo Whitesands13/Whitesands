@@ -19,7 +19,6 @@
 	icon_state = "ai"
 	move_resist = MOVE_FORCE_OVERPOWERING
 	density = TRUE
-	mobility_flags = ALL
 	status_flags = CANSTUN|CANPUSH
 	a_intent = INTENT_HARM //so we always get pushed instead of trying to swap
 	sight = SEE_TURFS | SEE_MOBS | SEE_OBJS
@@ -34,7 +33,7 @@
 	var/list/network = list("ss13")
 	var/obj/machinery/camera/current
 	var/list/connected_robots = list()
-	var/aiRestorePowerRoutine = 0
+	var/aiRestorePowerRoutine = POWER_RESTORATION_OFF
 	var/requires_power = POWER_REQ_ALL
 	var/can_be_carded = TRUE
 	var/alarms = list("Motion"=list(), "Fire"=list(), "Atmosphere"=list(), "Power"=list(), "Camera"=list(), "Burglar"=list())
@@ -169,6 +168,10 @@
 	builtInCamera = new (src)
 	builtInCamera.network = list("ss13")
 
+	ADD_TRAIT(src, TRAIT_PULL_BLOCKED, ROUNDSTART_TRAIT)
+	ADD_TRAIT(src, TRAIT_HANDS_BLOCKED, ROUNDSTART_TRAIT)
+
+
 /mob/living/silicon/ai/key_down(_key, client/user)
 	if(findtext(_key, "numpad")) //if it's a numpad number, we can convert it to just the number
 		_key = _key[7] //strings, lists, same thing really
@@ -301,7 +304,9 @@
 		to_chat(usr, "<span class='warning'>Wireless control is disabled!</span>")
 		return
 
-	if(!SSshuttle.canEvac(src))
+	var/can_evac_or_fail_reason = SSshuttle.canEvac(src)
+	if(can_evac_or_fail_reason != TRUE)
+		to_chat(usr, "<span class='alert'>[can_evac_or_fail_reason]</span>")
 		return
 
 	var/reason = input(src, "What is the nature of your emergency? ([CALL_SHUTTLE_REASON_LENGTH] characters required.)", "Confirm Shuttle Call") as null|text
@@ -366,14 +371,6 @@
 	to_chat(src, "<b>You are now [is_anchored ? "" : "un"]anchored.</b>")
 	// the message in the [] will change depending whether or not the AI is anchored
 
-/mob/living/silicon/ai/update_mobility() //If the AI dies, mobs won't go through it anymore
-	if(stat != CONSCIOUS)
-		mobility_flags = NONE
-	else
-		mobility_flags = ALL
-
-/mob/living/silicon/ai/restrained(ignore_grab)
-	. = 0
 
 /mob/living/silicon/ai/Topic(href, href_list)
 	..()
@@ -791,10 +788,6 @@
 /mob/living/silicon/ai/can_buckle()
 	return 0
 
-/mob/living/silicon/ai/incapacitated(ignore_restraints = FALSE, ignore_grab = FALSE, ignore_stasis = FALSE)
-	if(aiRestorePowerRoutine)
-		return TRUE
-	return ..()
 
 /mob/living/silicon/ai/canUseTopic(atom/movable/M, be_close=FALSE, no_dexterity=FALSE, no_tk=FALSE)
 	if(control_disabled || incapacitated())
@@ -815,8 +808,8 @@
 	var/list/viewscale = getviewsize(client.view)
 	return get_dist(src, A) <= max(viewscale[1]*0.5,viewscale[2]*0.5)
 
-/mob/living/silicon/ai/proc/relay_speech(message, atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, message_mode)
-	var/treated_message = lang_treat(speaker, message_language, raw_message, spans, message_mode)
+/mob/living/silicon/ai/proc/relay_speech(message, atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, list/message_mods = list())
+	var/treated_message = lang_treat(speaker, message_language, raw_message, spans, message_mods)
 	var/start = "Relayed Speech: "
 	var/namepart = "[speaker.GetVoice()][speaker.get_alt_name()]"
 	var/hrefpart = "<a href='?src=[REF(src)];track=[html_encode(namepart)]'>"
@@ -830,7 +823,7 @@
 	var/rendered = "<i><span class='game say'>[start]<span class='name'>[hrefpart][namepart] ([jobpart])</a> </span><span class='message'>[treated_message]</span></span></i>"
 
 	if (client?.prefs.chat_on_map && (client.prefs.see_chat_non_mob || ismob(speaker)))
-		create_chat_message(speaker, message_language, raw_message, spans, message_mode)
+		create_chat_message(speaker, message_language, raw_message, spans)
 	show_message(rendered, 2)
 
 /mob/living/silicon/ai/fully_replace_character_name(oldname,newname)
@@ -1017,3 +1010,23 @@
 
 /mob/living/silicon/ai/zMove(dir, feedback = FALSE)
 	. = eyeobj.zMove(dir, feedback)
+
+
+/// Proc to hook behavior to the changes of the value of [aiRestorePowerRoutine].
+/mob/living/silicon/ai/proc/setAiRestorePowerRoutine(new_value)
+	if(new_value == aiRestorePowerRoutine)
+		return
+	. = aiRestorePowerRoutine
+	aiRestorePowerRoutine = new_value
+	if(aiRestorePowerRoutine)
+		if(!.)
+			ADD_TRAIT(src, TRAIT_INCAPACITATED, POWER_LACK_TRAIT)
+	else if(.)
+		REMOVE_TRAIT(src, TRAIT_INCAPACITATED, POWER_LACK_TRAIT)
+
+
+/mob/living/silicon/on_handsblocked_start()
+	return // AIs have no hands
+
+/mob/living/silicon/on_handsblocked_end()
+	return // AIs have no hands

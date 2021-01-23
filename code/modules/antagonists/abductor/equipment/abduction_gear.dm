@@ -584,13 +584,13 @@ Congratulations! You are now trained for invasive xenobiology research!"}
 		return
 	var/mob/living/carbon/C = L
 	if(!C.handcuffed)
-		if(C.get_num_arms(FALSE) >= 2 || C.get_arm_ignore())
+		if(C.canBeHandcuffed())
 			playsound(src, 'sound/weapons/cablecuff.ogg', 30, TRUE, -2)
 			C.visible_message("<span class='danger'>[user] begins restraining [C] with [src]!</span>", \
 									"<span class='userdanger'>[user] begins shaping an energy field around your hands!</span>")
-			if(do_mob(user, C, time_to_cuff) && (C.get_num_arms(FALSE) >= 2 || C.get_arm_ignore()))
+			if(do_mob(user, C, time_to_cuff) && C.canBeHandcuffed())
 				if(!C.handcuffed)
-					C.handcuffed = new /obj/item/restraints/handcuffs/energy/used(C)
+					C.set_handcuffed(new /obj/item/restraints/handcuffs/energy/used(C))
 					C.update_handcuffed()
 					to_chat(user, "<span class='notice'>You restrain [C].</span>")
 					log_combat(user, C, "handcuffed")
@@ -810,12 +810,14 @@ Congratulations! You are now trained for invasive xenobiology research!"}
 	name = "alien table"
 	desc = "Advanced flat surface technology at work!"
 	icon = 'icons/obj/smooth_structures/alien_table.dmi'
-	icon_state = "alien_table"
+	icon_state = "alien_table-0"
+	base_icon_state = "alien_table"
 	buildstack = /obj/item/stack/sheet/mineral/abductor
 	framestack = /obj/item/stack/sheet/mineral/abductor
 	buildstackamount = 1
 	framestackamount = 1
-	canSmoothWith = null
+	smoothing_groups = list(SMOOTH_GROUP_ABDUCTOR_TABLES)
+	canSmoothWith = list(SMOOTH_GROUP_ABDUCTOR_TABLES)
 	frame = /obj/structure/table_frame/abductor
 
 /obj/structure/table/optable/abductor

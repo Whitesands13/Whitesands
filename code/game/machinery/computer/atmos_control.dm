@@ -92,6 +92,7 @@ GLOBAL_LIST_EMPTY(atmos_air_controllers)
 	icon_screen = "tank"
 	icon_keyboard = "atmos_key"
 	circuit = /obj/item/circuitboard/computer/atmos_control
+	light_color = LIGHT_COLOR_CYAN
 
 	var/frequency = FREQ_ATMOS_STORAGE
 	var/list/sensors = list(
@@ -110,7 +111,6 @@ GLOBAL_LIST_EMPTY(atmos_air_controllers)
 	var/list/sensor_information = list()
 	var/datum/radio_frequency/radio_connection
 
-	light_color = LIGHT_COLOR_CYAN
 
 /obj/machinery/computer/atmos_control/Initialize()
 	. = ..()
@@ -275,7 +275,9 @@ GLOBAL_LIST_EMPTY(atmos_air_controllers)
 	return data
 
 /obj/machinery/computer/atmos_control/tank/ui_act(action, params)
-	if(..() || !radio_connection)
+	. = ..()
+
+	if(. || !radio_connection)
 		return
 	var/datum/signal/signal = new(list("sigtype" = "command", "user" = usr))
 	switch(action)

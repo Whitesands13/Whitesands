@@ -3,6 +3,7 @@
 	desc = "Used to order supplies, approve requests, and control the shuttle."
 	icon_screen = "supply"
 	circuit = /obj/item/circuitboard/computer/cargo
+	light_color = COLOR_BRIGHT_ORANGE
 
 	var/requestonly = FALSE
 	var/contraband = FALSE
@@ -16,7 +17,6 @@
 	/// var that tracks message cooldown
 	var/message_cooldown
 
-	light_color = "#E2853D"//orange
 
 /obj/machinery/computer/cargo/request
 	name = "supply request console"
@@ -131,7 +131,8 @@
 	return data
 
 /obj/machinery/computer/cargo/ui_act(action, params, datum/tgui/ui)
-	if(..())
+	. = ..()
+	if(.)
 		return
 	switch(action)
 		if("send")

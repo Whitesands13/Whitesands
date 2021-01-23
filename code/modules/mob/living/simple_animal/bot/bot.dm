@@ -4,9 +4,6 @@
 	layer = MOB_LAYER
 	gender = NEUTER
 	mob_biotypes = MOB_ROBOTIC
-	light_range = 3
-	light_power = 0.9
-	light_color = "#CDDDFF"
 	stop_automated_movement = 1
 	wander = 0
 	healable = 0
@@ -25,6 +22,10 @@
 	bubble_icon = "machine"
 	speech_span = SPAN_ROBOT
 	faction = list("neutral", "silicon" , "turret")
+	light_system = MOVABLE_LIGHT
+	light_range = 3
+	light_power = 0.9
+	light_color = "#CDDDFF"
 
 	var/obj/machinery/bot_core/bot_core = null
 	var/bot_core_type = /obj/machinery/bot_core
@@ -129,16 +130,20 @@
 	if(stat)
 		return FALSE
 	on = TRUE
-	update_mobility()
-	set_light(initial(light_range))
+	REMOVE_TRAIT(src, TRAIT_INCAPACITATED, POWER_LACK_TRAIT)
+	REMOVE_TRAIT(src, TRAIT_IMMOBILIZED, POWER_LACK_TRAIT)
+	REMOVE_TRAIT(src, TRAIT_HANDS_BLOCKED, POWER_LACK_TRAIT)
+	set_light_on(on)
 	update_icon()
 	diag_hud_set_botstat()
 	return TRUE
 
 /mob/living/simple_animal/bot/proc/turn_off()
 	on = FALSE
-	update_mobility()
-	set_light(0)
+	ADD_TRAIT(src, TRAIT_INCAPACITATED, POWER_LACK_TRAIT)
+	ADD_TRAIT(src, TRAIT_IMMOBILIZED, POWER_LACK_TRAIT)
+	ADD_TRAIT(src, TRAIT_HANDS_BLOCKED, POWER_LACK_TRAIT)
+	set_light_on(on)
 	bot_reset() //Resets an AI's call, should it exist.
 	update_icon()
 
@@ -174,10 +179,6 @@
 		path_hud.add_to_hud(src)
 		path_hud.add_hud_to(src)
 
-/mob/living/simple_animal/bot/update_mobility()
-	. = ..()
-	if(!on)
-		mobility_flags = NONE
 
 /mob/living/simple_animal/bot/Destroy()
 	if(path_hud)
@@ -400,22 +401,19 @@
 	else
 		say(message)
 
-/mob/living/simple_animal/bot/radio(message, message_mode, list/spans, language)
+/mob/living/simple_animal/bot/radio(message, list/message_mods = list(), list/spans, language)
 	. = ..()
 	if(. != 0)
 		return
 
-	switch(message_mode)
-		if(MODE_HEADSET)
-			Radio.talk_into(src, message, , spans, language)
-			return REDUCE_RANGE
-
-		if(MODE_DEPARTMENT)
-			Radio.talk_into(src, message, message_mode, spans, language)
-			return REDUCE_RANGE
-
-	if(message_mode in GLOB.radiochannels)
-		Radio.talk_into(src, message, message_mode, spans, language)
+	if(message_mods[MODE_HEADSET])
+		Radio.talk_into(src, message, , spans, language, message_mods)
+		return REDUCE_RANGE
+	else if(message_mods[RADIO_EXTENSION] == MODE_DEPARTMENT)
+		Radio.talk_into(src, message, message_mods[RADIO_EXTENSION], spans, language, message_mods)
+		return REDUCE_RANGE
+	else if(message_mods[RADIO_EXTENSION] in GLOB.radiochannels)
+		Radio.talk_into(src, message, message_mods[RADIO_EXTENSION], spans, language, message_mods)
 		return REDUCE_RANGE
 
 /mob/living/simple_animal/bot/proc/drop_part(obj/item/drop_item, dropzone)
@@ -1044,7 +1042,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 					var/turf/prevprevT = path[i - 2]
 					var/prevDir = get_dir(prevprevT, prevT)
 					var/mixDir = direction|prevDir
-					if(mixDir in GLOB.diagonals)
+					if(ISDIAGONALDIR(mixDir))
 						prevI.dir = mixDir
 						if(prevDir & (NORTH|SOUTH))
 							var/matrix/ntransform = matrix()

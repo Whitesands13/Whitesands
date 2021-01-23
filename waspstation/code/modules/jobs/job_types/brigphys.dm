@@ -26,16 +26,25 @@
 	name = "Brig Physician"
 	jobtype = /datum/job/brig_phys
 
-	belt = /obj/item/pda/security
+	belt = /obj/item/pda/brig_phys
 	ears = /obj/item/radio/headset/headset_medsec/alt
 	uniform = /obj/item/clothing/under/rank/security/brig_phys
-	alt_uniform = /obj/item/clothing/under/rank/medical/doctor/purple
+	alt_uniform = /obj/item/clothing/under/rank/medical/doctor/red
 	shoes = /obj/item/clothing/shoes/sneakers/white
 	glasses = /obj/item/clothing/glasses/hud/health/sunglasses
-	suit = /obj/item/clothing/suit/hazardvest/brig_phys
-	alt_suit = /obj/item/clothing/suit/toggle/labcoat/brig_phys
+	suit = /obj/item/clothing/suit/toggle/labcoat/brig_phys
+	alt_suit = /obj/item/clothing/suit/armor/vest/security/brig_phys
 	dcoat = /obj/item/clothing/suit/hooded/wintercoat/security
-	suit_store = /obj/item/flashlight/seclite
+	suit_store = /obj/item/flashlight/pen
 	l_hand = /obj/item/storage/firstaid/regular
 	head = /obj/item/clothing/head/soft/sec/brig_phys
 	implants = list(/obj/item/implant/mindshield)
+
+
+/datum/outfit/job/brig_phys/securitymedic
+	name = "Brig Physician (Security Medic)"
+
+	uniform = /obj/item/clothing/under/rank/security/brig_phys/security_medic
+	suit = /obj/item/clothing/suit/toggle/labcoat/brig_phys
+	suit_store = /obj/item/flashlight/pen
+	alt_suit = null

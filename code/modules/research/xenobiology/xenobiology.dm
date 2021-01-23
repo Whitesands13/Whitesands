@@ -1054,7 +1054,6 @@
 	throwforce = 10
 	throw_speed = 0.1
 	throw_range = 28
-	glide_size = 2
 	flags_1 = CONDUCT_1
 	max_amount = 60
 	turf_type = /turf/open/floor/sepia
@@ -1071,5 +1070,5 @@
 	for(var/turf/T in A)
 		T.remove_atom_colour(WASHABLE_COLOUR_PRIORITY)
 		T.add_atom_colour("#2956B2", FIXED_COLOUR_PRIORITY)
-	A.xenobiology_compatible = TRUE
+	A.area_flags |= XENOBIOLOGY_COMPATIBLE
 	qdel(src)

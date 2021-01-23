@@ -49,7 +49,7 @@
 	display_name = "Basic Tools"
 	description = "Basic mechanical, electronic, surgical and botanical tools."
 	design_ids = list("screwdriver", "wrench", "wirecutters", "crowbar", "multitool", "welding_tool", "tscanner", "analyzer", "cable_coil", "pipe_painter", "airlock_painter",
-					"cultivator", "plant_analyzer", "shovel", "spade", "hatchet", "mop", "floor_painter", "plunger", "spraycan") //WaspStation Edit - Floor Painters
+					"cultivator", "plant_analyzer", "shovel", "spade", "hatchet", "mop", "floor_painter", "decal_painter", "plunger", "spraycan") //WaspStation Edit - Floor Painters
 
 /datum/techweb_node/basic_medical
 	id = "basic_medical"
@@ -540,16 +540,16 @@
 	design_ids = list("drill_diamond", "jackhammer", "hypermod", "plasmacutter_adv")
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
 	export_price = 5000
-
-/datum/techweb_node/bluespace_mining
-	id = "bluespace_mining"
-	display_name = "Bluespace Mining Technology"
-	description = "Harness the power of bluespace to make materials out of nothing. Slowly."
-	prereq_ids = list("practical_bluespace", "adv_mining")
-	design_ids = list("bluespace_miner")
-	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
-	export_price = 5000
-
+// WS Edit Start - Yeet The BSM
+// /datum/techweb_node/bluespace_mining
+// 	id = "bluespace_mining"
+// 	display_name = "Bluespace Mining Technology"
+// 	description = "Harness the power of bluespace to make materials out of nothing. Slowly."
+// 	prereq_ids = list("practical_bluespace", "adv_mining")
+// 	design_ids = list("bluespace_miner")
+// 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
+// 	export_price = 5000
+//  WS Edit End - Yeet The BSM
 /datum/techweb_node/janitor
 	id = "janitor"
 	display_name = "Advanced Sanitation Technology"
@@ -619,7 +619,7 @@
 	display_name = "Advanced Weapon Development Technology"
 	description = "Our weapons are breaking the rules of reality by now."
 	prereq_ids = list("adv_engi", "weaponry")
-	design_ids = list("pin_loyalty","gun_cell_upgraded")
+	design_ids = list("pin_loyalty","gun_cell_upgraded", "gun_cell_large")
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 10000)
 	export_price = 5000
 

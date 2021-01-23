@@ -52,6 +52,7 @@
 	icon_state = "ambrosiadeus"
 	filling_color = "#008B8B"
 	wine_power = 50
+	wine_flavor = "the hand of god" //wasp edit: new wine flavors
 
 //Ambrosia Gaia
 /obj/item/seeds/ambrosia/gaia
@@ -73,6 +74,7 @@
 	desc = "Eating this <i>makes</i> you immortal."
 	icon_state = "ambrosia_gaia"
 	filling_color = rgb(255, 175, 0)
+	light_system = MOVABLE_LIGHT
 	light_range = 3
 	seed = /obj/item/seeds/ambrosia/gaia
 	wine_power = 70

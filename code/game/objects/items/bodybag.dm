@@ -8,6 +8,8 @@
 	var/unfoldedbag_path = /obj/structure/closet/body_bag
 
 /obj/item/bodybag/attack_self(mob/user)
+	if(user in contents)
+		return
 	deploy_bodybag(user, user.loc)
 
 /obj/item/bodybag/afterattack(atom/target, mob/user, proximity)
@@ -15,6 +17,12 @@
 	if(proximity)
 		if(isopenturf(target))
 			deploy_bodybag(user, target)
+
+/obj/item/bodybag/attack_hand(mob/user)
+	if(user in contents)
+		to_chat(user, "<span class='warning'>You cannot use [src] from the inside!</span>")
+		return
+	return ..()
 
 /obj/item/bodybag/proc/deploy_bodybag(mob/user, atom/location)
 	var/obj/structure/closet/body_bag/R = new unfoldedbag_path(location)
@@ -76,7 +84,7 @@
 	R.foldedbag_instance = src
 	moveToNullspace()
 
-/obj/item/bodybag/bluespace/container_resist(mob/living/user)
+/obj/item/bodybag/bluespace/container_resist_act(mob/living/user)
 	if(user.incapacitated())
 		to_chat(user, "<span class='warning'>You can't get out while you're restrained like this!</span>")
 		return

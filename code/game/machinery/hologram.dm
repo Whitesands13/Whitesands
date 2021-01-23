@@ -323,7 +323,6 @@ obj/machinery/holopad/secure/Initialize()
 		if("hang_up")
 			if(outgoing_call)
 				outgoing_call.Disconnect(src)
-				return TRUE
 
 /**
   * hangup_all_calls: Disconnects all current holocalls from the holopad
@@ -406,7 +405,7 @@ obj/machinery/holopad/secure/Initialize()
 
 		Hologram.mouse_opacity = MOUSE_OPACITY_TRANSPARENT//So you can't click on it.
 		Hologram.layer = FLY_LAYER//Above all the other objects/mobs. Or the vast majority of them.
-		Hologram.setAnchored(TRUE)//So space wind cannot drag it.
+		Hologram.set_anchored(TRUE)//So space wind cannot drag it.
 		Hologram.name = "[user.name] (Hologram)"//If someone decides to right click.
 		Hologram.set_light(2)	//hologram lighting
 		move_hologram()
@@ -420,17 +419,17 @@ obj/machinery/holopad/secure/Initialize()
 
 /*This is the proc for special two-way communication between AI and holopad/people talking near holopad.
 For the other part of the code, check silicon say.dm. Particularly robot talk.*/
-/obj/machinery/holopad/Hear(message, atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, message_mode)
+/obj/machinery/holopad/Hear(message, atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, list/message_mods = list())
 	. = ..()
 	if(speaker && LAZYLEN(masters) && !radio_freq)//Master is mostly a safety in case lag hits or something. Radio_freq so AIs dont hear holopad stuff through radios.
 		for(var/mob/living/silicon/ai/master in masters)
 			if(masters[master] && speaker != master)
-				master.relay_speech(message, speaker, message_language, raw_message, radio_freq, spans, message_mode)
+				master.relay_speech(message, speaker, message_language, raw_message, radio_freq, spans, message_mods)
 
 	for(var/I in holo_calls)
 		var/datum/holocall/HC = I
 		if(HC.connected_holopad == src && speaker != HC.hologram)
-			HC.user.Hear(message, speaker, message_language, raw_message, radio_freq, spans, message_mode)
+			HC.user.Hear(message, speaker, message_language, raw_message, radio_freq, spans, message_mods)
 
 	if(outgoing_call && speaker == outgoing_call.user)
 		outgoing_call.hologram.say(raw_message)
@@ -477,7 +476,8 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	if(istype(AI) && AI.current == src)
 		AI.current = null
 	LAZYREMOVE(masters, user) // Discard AI from the list of those who use holopad
-	qdel(holorays[user])
+	if(user in holorays)
+		QDEL_NULL(holorays[user])
 	LAZYREMOVE(holorays, user)
 	SetLightsAndPower()
 	return TRUE
@@ -504,10 +504,12 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		return FALSE
 	return TRUE
 
-//Can we display holos there
-//Area check instead of line of sight check because this is a called a lot if AI wants to move around.
-/obj/machinery/holopad/proc/validate_location(turf/T,check_los = FALSE)
-	if(T.z == z && get_dist(T, src) <= holo_range && T.loc == get_area(src))
+/**Can we display holos on the turf T
+  *Area check instead of line of sight check because this is a called a lot if AI wants to move around.
+  * *Areacheck for things that need to get into other areas, such as emergency holograms
+  */
+/obj/machinery/holopad/proc/validate_location(turf/T, check_los = FALSE, areacheck = TRUE)
+	if(T.z == z && get_dist(T, src) <= holo_range && (T.loc == get_area(src) || !areacheck) && anchored)
 		return TRUE
 	else
 		return FALSE
@@ -564,7 +566,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	holder.selected_language = record.language
 	Hologram.mouse_opacity = MOUSE_OPACITY_TRANSPARENT//So you can't click on it.
 	Hologram.layer = FLY_LAYER//Above all the other objects/mobs. Or the vast majority of them.
-	Hologram.setAnchored(TRUE)//So space wind cannot drag it.
+	Hologram.set_anchored(TRUE)//So space wind cannot drag it.
 	Hologram.name = "[record.caller_name] (Hologram)"//If someone decides to right click.
 	Hologram.set_light(2)	//hologram lighting
 	visible_message("<span class='notice'>A holographic image of [record.caller_name] flickers to life before your eyes!</span>")

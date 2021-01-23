@@ -153,7 +153,7 @@
 	interact(user)
 	return ..()
 
-/obj/item/toy/eightball/haunted/Hear(message, atom/movable/speaker, message_langs, raw_message, radio_freq, spans, message_mode)
+/obj/item/toy/eightball/haunted/Hear(message, atom/movable/speaker, message_langs, raw_message, radio_freq, spans, list/message_mods = list())
 	. = ..()
 	last_message = raw_message
 
@@ -217,8 +217,10 @@
 	return data
 
 /obj/item/toy/eightball/haunted/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
+
 	var/mob/user = usr
 
 	switch(action)

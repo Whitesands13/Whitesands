@@ -233,7 +233,7 @@ Turf and target are separate in case you want to teleport some distance from a t
 	return "[pick("!","@","#","$","%","^","&")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]"
 
 //Returns a list of all items of interest with their name
-/proc/getpois(mobs_only=0,skip_mindless=0)
+/proc/getpois(mobs_only = FALSE, skip_mindless = FALSE, specify_dead_role = TRUE)
 	var/list/mobs = sortmobs()
 	var/list/namecounts = list()
 	var/list/pois = list()
@@ -247,7 +247,7 @@ Turf and target are separate in case you want to teleport some distance from a t
 
 		if(M.real_name && M.real_name != M.name)
 			name += " \[[M.real_name]\]"
-		if(M.stat == DEAD)
+		if(M.stat == DEAD && specify_dead_role)
 			if(isobserver(M))
 				name += " \[ghost\]"
 			else
@@ -359,7 +359,7 @@ Turf and target are separate in case you want to teleport some distance from a t
 		x = world.maxx
 	else if(direction & WEST)
 		x = 1
-	if(direction in GLOB.diagonals) //let's make sure it's accurately-placed for diagonals
+	if(ISDIAGONALDIR(direction)) //let's make sure it's accurately-placed for diagonals
 		var/lowest_distance_to_map_edge = min(abs(x - A.x), abs(y - A.y))
 		return get_ranged_target_turf(A, direction, lowest_distance_to_map_edge)
 	return locate(x,y,A.z)
@@ -382,6 +382,30 @@ Turf and target are separate in case you want to teleport some distance from a t
 		x = max(1, x - range)
 
 	return locate(x,y,A.z)
+
+/**
+ * Get ranged target turf, but with direct targets as opposed to directions
+ *
+ * Starts at atom A and gets the exact angle between A and target
+ * Moves from A with that angle, Range amount of times, until it stops, bound to map size
+ * Arguments:
+ * * A - Initial Firer / Position
+ * * target - Target to aim towards
+ * * range - Distance of returned target turf from A
+ * * offset - Angle offset, 180 input would make the returned target turf be in the opposite direction
+ */
+/proc/get_ranged_target_turf_direct(atom/A, atom/target, range, offset)
+	var/angle = ATAN2(target.x - A.x, target.y - A.y)
+	if(offset)
+		angle += offset
+	var/turf/T = get_turf(A)
+	for(var/i in 1 to range)
+		var/turf/check = locate(A.x + cos(angle) * i, A.y + sin(angle) * i, A.z)
+		if(!check)
+			break
+		T = check
+
+	return T
 
 
 // returns turf relative to A offset in dx and dy tiles
@@ -437,17 +461,13 @@ Turf and target are separate in case you want to teleport some distance from a t
 		current = get_step_towards(current, target_turf)
 		while(current != target_turf)
 			if(steps > length)
-				return 0
-			if(current.opacity)
-				return 0
-			for(var/thing in current)
-				var/atom/A = thing
-				if(A.opacity)
-					return 0
+				return FALSE
+			if(IS_OPAQUE_TURF(current))
+				return FALSE
 			current = get_step_towards(current, target_turf)
 			steps++
+	return TRUE
 
-	return 1
 
 /proc/is_blocked_turf(turf/T, exclude_mobs)
 	if(T.density)
@@ -736,7 +756,7 @@ GLOBAL_LIST_INIT(WALLITEMS_INVERSE, typecacheof(list(
 	/*This can be used to add additional effects on interactions between mobs depending on how the mobs are facing each other, such as adding a crit damage to blows to the back of a guy's head.
 	Given how click code currently works (Nov '13), the initiating mob will be facing the target mob most of the time
 	That said, this proc should not be used if the change facing proc of the click code is overridden at the same time*/
-	if(!ismob(target) || !(target.mobility_flags & MOBILITY_STAND))
+	if(!isliving(target) || target.body_position == LYING_DOWN)
 	//Make sure we are not doing this for things that can't have a logical direction to the players given that the target would be on their side
 		return FALSE
 	if(initator.dir == target.dir) //mobs are facing the same direction
@@ -813,7 +833,7 @@ GLOBAL_LIST_INIT(WALLITEMS_INVERSE, typecacheof(list(
 		return FALSE
 	if(isliving(A))
 		var/mob/living/LA = A
-		if(!(LA.mobility_flags & MOBILITY_STAND))
+		if(LA.body_position == LYING_DOWN)
 			return FALSE
 	var/goal_dir = get_dir(A,B)
 	var/clockwise_A_dir = turn(A.dir, -45)
@@ -1039,7 +1059,7 @@ B --><-- A
 			var/I = rand(1, L.len)
 			var/turf/T = L[I]
 			var/area/X = get_area(T)
-			if(!T.density && X.valid_territory)
+			if(!T.density && (X.area_flags & VALID_TERRITORY))
 				var/clear = TRUE
 				for(var/obj/O in T)
 					if(O.density)

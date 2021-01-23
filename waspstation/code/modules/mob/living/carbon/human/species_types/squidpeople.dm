@@ -58,7 +58,7 @@
 	name = "Change Color"
 	check_flags = AB_CHECK_CONSCIOUS
 	icon_icon = 'icons/mob/actions.dmi'
-	button_icon_state = "squid"
+	button_icon_state = "squid_color"
 
 /datum/action/innate/change_color/Activate()
 	active = TRUE //Prevent promptspam
@@ -80,9 +80,9 @@
 
 /datum/action/cooldown/spit_ink
 	name = "Spit Ink"
-	check_flags = AB_CHECK_CONSCIOUS | AB_CHECK_STUN
+	check_flags = AB_CHECK_CONSCIOUS | AB_CHECK_IMMOBILE
 	icon_icon = 'icons/mob/actions.dmi'
-	button_icon_state = "squid"
+	button_icon_state = "squid_ink"
 	cooldown_time = 60
 	var/ink_cost = 60
 

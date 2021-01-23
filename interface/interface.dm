@@ -2,7 +2,7 @@
 /client/verb/wiki(query as text)
 	set name = "wiki"
 	set desc = "Type what you want to know about.  This will open the wiki in your web browser. Type nothing to go to the main page."
-	set hidden = 1
+	set hidden = TRUE
 	var/wikiurl = CONFIG_GET(string/wikiurl)
 	if(wikiurl)
 		if(query)
@@ -17,7 +17,7 @@
 /client/verb/forum()
 	set name = "forum"
 	set desc = "Visit the forum."
-	set hidden = 1
+	set hidden = TRUE
 	var/forumurl = CONFIG_GET(string/forumurl)
 	if(forumurl)
 		if(alert("This will open the forum in your browser. Are you sure?",,"Yes","No")!="Yes")
@@ -30,7 +30,7 @@
 /client/verb/rules()
 	set name = "rules"
 	set desc = "Show Server Rules."
-	set hidden = 1
+	set hidden = TRUE
 	var/rulesurl = CONFIG_GET(string/rulesurl)
 	if(rulesurl)
 		if(alert("This will open the rules in your browser. Are you sure?",,"Yes","No")!="Yes")
@@ -43,7 +43,7 @@
 /client/verb/github()
 	set name = "github"
 	set desc = "Visit Github"
-	set hidden = 1
+	set hidden = TRUE
 	var/githuburl = CONFIG_GET(string/githuburl)
 	if(githuburl)
 		if(alert("This will open the Github repository in your browser. Are you sure?",,"Yes","No")!="Yes")
@@ -56,13 +56,15 @@
 /client/verb/reportissue()
 	set name = "report-issue"
 	set desc = "Report an issue"
-	set hidden = 1
+	set hidden = TRUE
 	var/githuburl = CONFIG_GET(string/githuburl)
 	if(githuburl)
 		var/message = "This will open the Github issue reporter in your browser. Are you sure?"
 		if(GLOB.revdata.testmerge.len)
 			message += "<br>The following experimental changes are active and are probably the cause of any new or sudden issues you may experience. If possible, please try to find a specific thread for your issue instead of posting to the general issue tracker:<br>"
 			message += GLOB.revdata.GetTestMergeInfo(FALSE)
+		// We still use tgalert here because some people were concerned that if someone wanted to report that tgui wasn't working
+		// then the report issue button being tgui-based would be problematic.
 		if(tgalert(src, message, "Report Issue","Yes","No")!="Yes")
 			return
 		var/static/issue_template = file2text(".github/ISSUE_TEMPLATE.md")

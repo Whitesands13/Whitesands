@@ -25,10 +25,6 @@
 	///any alerts we have active
 	var/obj/screen/alert/our_alert
 
-/obj/item/clothing/shoes/ComponentInitialize()
-	. = ..()
-	RegisterSignal(src, COMSIG_COMPONENT_CLEAN_ACT, .proc/clean_blood)
-
 /obj/item/clothing/shoes/suicide_act(mob/living/carbon/user)
 	if(rand(2)>1)
 		user.visible_message("<span class='suicide'>[user] begins tying \the [src] up waaay too tightly! It looks like [user.p_theyre()] trying to commit suicide!</span>")
@@ -82,6 +78,14 @@
 		our_alert = user.throw_alert("shoealert", /obj/screen/alert/shoes/untied)
 		RegisterSignal(src, COMSIG_SHOES_STEP_ACTION, .proc/check_trip, override=TRUE)
 
+	if((DIGITIGRADE_SHOE & obj_flags) || (DIGITIGRADE_COMPATIBLE & obj_flags))	//WaspStation start - Digitigrade magboots
+		var/mob/living/carbon/human/H = user
+		if(H.get_item_by_slot(ITEM_SLOT_FEET) && H.get_item_by_slot(ITEM_SLOT_ICLOTHING))
+			var/obj/item/clothing/under/S = H.get_item_by_slot(ITEM_SLOT_ICLOTHING)
+			if(("legs" in H.dna.species.mutant_bodyparts) && H.dna.features["legs"] == "Digitigrade Legs")
+				if((HIDEJUMPSUIT in S.flags_inv) || (LEGS & S.body_parts_covered))
+					digi_alt(H, 1)												//WaspStation end - Digitigrade magboots
+
 /obj/item/clothing/shoes/proc/restore_offsets(mob/user)
 	equipped_before_drop = FALSE
 	user.pixel_y -= offset
@@ -92,6 +96,15 @@
 		user.clear_alert("shoealert")
 	if(offset && equipped_before_drop)
 		restore_offsets(user)
+
+	if((DIGITIGRADE_SHOE & obj_flags) || (DIGITIGRADE_COMPATIBLE & obj_flags))	//WaspStation start - Digitigrade magboots
+		var/mob/living/carbon/human/H = user
+		if(H.get_item_by_slot(ITEM_SLOT_FEET) && H.get_item_by_slot(ITEM_SLOT_ICLOTHING))
+			var/obj/item/clothing/under/S = H.get_item_by_slot(ITEM_SLOT_ICLOTHING)
+			if(("legs" in H.dna.species.mutant_bodyparts) && H.dna.features["legs"] == "Digitigrade Legs")
+				if((HIDEJUMPSUIT in S.flags_inv) || (LEGS & S.body_parts_covered))
+					digi_alt(H, 0)												//WaspStation end - Digitigrade magboots
+
 	. = ..()
 
 /obj/item/clothing/shoes/update_clothes_damaged_state(damaging = TRUE)
@@ -100,14 +113,16 @@
 		var/mob/M = loc
 		M.update_inv_shoes()
 
-/obj/item/clothing/shoes/proc/clean_blood(datum/source, strength)
-	if(strength < CLEAN_STRENGTH_BLOOD)
+/obj/item/clothing/shoes/wash(clean_types)
+	. = ..()
+	if(!(clean_types & CLEAN_TYPE_BLOOD) || blood_state == BLOOD_STATE_NOT_BLOODY)
 		return
 	bloody_shoes = list(BLOOD_STATE_HUMAN = 0,BLOOD_STATE_XENO = 0, BLOOD_STATE_OIL = 0, BLOOD_STATE_NOT_BLOODY = 0)
 	blood_state = BLOOD_STATE_NOT_BLOODY
 	if(ismob(loc))
 		var/mob/M = loc
 		M.update_inv_shoes()
+	return TRUE
 
 /obj/item/proc/negates_gravity()
 	return FALSE
@@ -174,7 +189,7 @@
 
 	else // if they're someone else's shoes, go knot-wards
 		var/mob/living/L = user
-		if(istype(L) && (L.mobility_flags & MOBILITY_STAND))
+		if(istype(L) && L.body_position == STANDING_UP)
 			to_chat(user, "<span class='warning'>You must be on the floor to interact with [src]!</span>")
 			return
 		if(tied == SHOES_KNOTTED)

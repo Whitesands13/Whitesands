@@ -151,7 +151,7 @@
 	var/hash = md5(hidden_message)
 	var/newcolor = copytext_char(hash, 1, 7)
 	add_atom_colour("#[newcolor]", FIXED_COLOUR_PRIORITY)
-	light_color = "#[newcolor]"
+	set_light_color("#[newcolor]")
 	set_light(1)
 
 /obj/structure/chisel_message/proc/pack()
@@ -232,6 +232,10 @@
 	return data
 
 /obj/structure/chisel_message/ui_act(action, params, datum/tgui/ui)
+	. = ..()
+	if(.)
+		return
+
 	var/mob/user = usr
 	var/is_admin = check_rights_for(user.client, R_ADMIN)
 	var/is_creator = user.ckey == creator_key

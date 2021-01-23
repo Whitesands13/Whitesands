@@ -4,6 +4,12 @@
 /obj/item/modular_computer
 	name = "modular microcomputer"
 	desc = "A small portable microcomputer."
+	icon = 'icons/obj/computer.dmi'
+	icon_state = "laptop-open"
+	light_on = FALSE
+	integrity_failure = 0.5
+	max_integrity = 100
+	armor = list("melee" = 0, "bullet" = 20, "laser" = 20, "energy" = 100, "bomb" = 0, "bio" = 100, "rad" = 100, "fire" = 0, "acid" = 0)
 
 	var/enabled = 0											// Whether the computer is turned on.
 	var/screen_on = 1										// Whether the computer is active/opened/it's screen is on.
@@ -22,18 +28,12 @@
 	// must have it's own DMI file. Icon states must be called exactly the same in all files, but may look differently
 	// If you create a program which is limited to Laptops and Consoles you don't have to add it's icon_state overlay for Tablets too, for example.
 
-	icon = 'icons/obj/computer.dmi'
-	icon_state = "laptop-open"
 	var/icon_state_unpowered = null							// Icon state when the computer is turned off.
 	var/icon_state_powered = null							// Icon state when the computer is turned on.
 	var/icon_state_menu = "menu"							// Icon state overlay when the computer is turned on, but no program is loaded that would override the screen.
 	var/display_overlays = TRUE								// If FALSE, don't draw overlays on this device at all
 	var/max_hardware_size = 0								// Maximal hardware w_class. Tablets/PDAs have 1, laptops 2, consoles 4.
 	var/steel_sheet_cost = 5								// Amount of steel sheets refunded when disassembling an empty frame of this computer.
-
-	integrity_failure = 0.5
-	max_integrity = 100
-	armor = list("melee" = 0, "bullet" = 20, "laser" = 20, "energy" = 100, "bomb" = 0, "bio" = 100, "rad" = 100, "fire" = 0, "acid" = 0)
 
 	// Important hardware (must be installed for computer to work)
 
@@ -44,7 +44,6 @@
 	var/list/idle_threads							// Idle programs on background. They still receive process calls but can't be interacted with.
 	var/obj/physical = null									// Object that represents our computer. It's used for Adjacent() and UI visibility checks.
 	var/has_light = FALSE						//If the computer has a flashlight/LED light/what-have-you installed
-	var/light_on = FALSE						//If that light is enabled
 	var/comp_light_luminosity = 3				//The brightness of that light
 	var/comp_light_color			//The color of that light
 
@@ -248,6 +247,28 @@
 	handle_power() // Handles all computer power interaction
 	//check_update_ui_need()
 
+/**
+  * Displays notification text alongside a soundbeep when requested to by a program.
+  *
+  * After checking tha the requesting program is allowed to send an alert, creates
+  * a visible message of the requested text alongside a soundbeep. This proc adds
+  * text to indicate that the message is coming from this device and the program
+  * on it, so the supplied text should be the exact message and ending punctuation.
+  *
+  * Arguments:
+  * The program calling this proc.
+  * The message that the program wishes to display.
+ */
+
+/obj/item/modular_computer/proc/alert_call(datum/computer_file/program/caller, alerttext, sound = 'sound/machines/twobeep_high.ogg')
+	if(!caller || !caller.alert_able || caller.alert_silenced || !alerttext) //Yeah, we're checking alert_able. No, you don't get to make alerts that the user can't silence.
+		return
+	playsound(src, sound, 50, TRUE)
+	visible_message("<span class='notice'>The [src] displays a [caller.filedesc] notification: [alerttext]</span>")
+	var/mob/living/holder = loc
+	if(istype(holder))
+		to_chat(holder, "[icon2html(src)] <span class='notice'>The [src] displays a [caller.filedesc] notification: [alerttext]</span>")
+
 // Function used by NanoUI's to obtain data for header. All relevant entries begin with "PC_"
 /obj/item/modular_computer/proc/get_header_data()
 	var/list/data = list()
@@ -342,6 +363,31 @@
 	enabled = 0
 	update_icon()
 
+/obj/item/modular_computer/screwdriver_act(mob/user, obj/item/tool)
+	if(!all_components.len)
+		to_chat(user, "<span class='warning'>This device doesn't have any components installed.</span>")
+		return
+	var/list/component_names = list()
+	for(var/h in all_components)
+		var/obj/item/computer_hardware/H = all_components[h]
+		component_names.Add(H.name)
+
+	var/choice = input(user, "Which component do you want to uninstall?", "Computer maintenance", null) as null|anything in sortList(component_names)
+
+	if(!choice)
+		return
+
+	if(!Adjacent(user))
+		return
+
+	var/obj/item/computer_hardware/H = find_hardware_by_name(choice)
+
+	if(!H)
+		return
+
+	uninstall_component(H, user)
+	return
+
 
 /obj/item/modular_computer/attackby(obj/item/W as obj, mob/user as mob)
 	// Insert items into the components
@@ -377,31 +423,6 @@
 		if(W.use_tool(src, user, 20, volume=50, amount=1))
 			obj_integrity = max_integrity
 			to_chat(user, "<span class='notice'>You repair \the [src].</span>")
-		return
-
-	if(W.tool_behaviour == TOOL_SCREWDRIVER)
-		if(!all_components.len)
-			to_chat(user, "<span class='warning'>This device doesn't have any components installed.</span>")
-			return
-		var/list/component_names = list()
-		for(var/h in all_components)
-			var/obj/item/computer_hardware/H = all_components[h]
-			component_names.Add(H.name)
-
-		var/choice = input(user, "Which component do you want to uninstall?", "Computer maintenance", null) as null|anything in sortList(component_names)
-
-		if(!choice)
-			return
-
-		if(!Adjacent(user))
-			return
-
-		var/obj/item/computer_hardware/H = find_hardware_by_name(choice)
-
-		if(!H)
-			return
-
-		uninstall_component(H, user)
 		return
 
 	..()

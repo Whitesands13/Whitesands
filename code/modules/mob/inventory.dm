@@ -148,14 +148,6 @@
 		return FALSE
 	return !held_items[hand_index]
 
-// Can put in any hand?
-/mob/proc/can_put_in_hands(obj/item/I)
-	if(can_put_in_hand(I, active_hand_index))
-		return TRUE
-	if(can_put_in_hand(I, get_inactive_hand_index()))
-		return TRUE
-	return FALSE
-
 /mob/proc/put_in_hand(obj/item/I, hand_index, forced = FALSE, ignore_anim = TRUE)
 	if(forced || can_put_in_hand(I, hand_index))
 		if(isturf(I.loc) && !ignore_anim)
@@ -437,7 +429,7 @@
 
 /mob/verb/quick_equip()
 	set name = "quick-equip"
-	set hidden = 1
+	set hidden = TRUE
 
 	var/obj/item/I = get_active_held_item()
 	if (I)
@@ -445,7 +437,7 @@
 
 /mob/verb/equipment_swap()
 	set name = "equipment-swap"
-	set hidden = 1
+	set hidden = TRUE
 
 	var/obj/item/I = get_active_held_item()
 	if (I)
@@ -498,6 +490,6 @@
 			var/obj/item/bodypart/BP = new path ()
 			BP.owner = src
 			BP.held_index = i
-			bodyparts += BP
+			add_bodypart(BP)
 			hand_bodyparts[i] = BP
 	..() //Don't redraw hands until we have organs for them

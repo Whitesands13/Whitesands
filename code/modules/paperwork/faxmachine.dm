@@ -99,7 +99,8 @@ GLOBAL_LIST_EMPTY(alldepartments)
 	return data
 
 /obj/machinery/photocopier/faxmachine/ui_act(action, params)
-	if (..())
+	. = ..()
+	if (.)
 		return
 
 	var/is_authenticated = is_authenticated(usr)
@@ -247,6 +248,8 @@ GLOBAL_LIST_EMPTY(alldepartments)
 		to_send = make_photo_copy()
 	else if(document_copy)
 		to_send = make_document_copy()
+
+	to_send.moveToNullspace()
 
 	var/datum/fax/admin/A = new /datum/fax/admin()
 	A.name = to_send.name

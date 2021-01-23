@@ -37,7 +37,7 @@
 	var/list/disabled = list()
 	for(var/X in bodyparts)
 		var/obj/item/bodypart/BP = X
-		if(BP.disabled)
+		if(BP.bodypart_disabled)
 			disabled += BP
 		missing -= BP.body_zone
 		for(var/obj/item/I in BP.embedded_objects)
@@ -106,10 +106,11 @@
 	. += msg.Join("")
 
 	if(!appears_dead)
-		if(stat == UNCONSCIOUS)
-			. += "[t_He] [t_is]n't responding to anything around [t_him] and seems to be asleep."
-		else if(InCritical())
-			. += "[t_His] breathing is shallow and labored."
+		switch(stat)
+			if(SOFT_CRIT)
+				. += "[t_His] breathing is shallow and labored."
+			if(UNCONSCIOUS, HARD_CRIT)
+				. += "[t_He] [t_is]n't responding to anything around [t_him] and seems to be asleep."
 
 	var/trait_exam = common_trait_examine()
 	if (!isnull(trait_exam))
@@ -130,6 +131,15 @@
 				. += "[t_He] look[p_s()] very happy."
 			if(MOOD_LEVEL_HAPPY4 to INFINITY)
 				. += "[t_He] look[p_s()] ecstatic."
+
+	switch(mothdust) //WS edit - moth dust from hugging
+		if(1 to 50)
+			. += "[t_He] [t_is] a little dusty."
+		if(51 to 150)
+			. += "[t_He] [t_has] a layer of shimmering dust on them."
+		if(151 to INFINITY)
+			. += "[t_He] [t_is] covered in glistening dust!" //End WS edit
+
 	. += "*---------*</span>"
 
 	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .)

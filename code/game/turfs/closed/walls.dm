@@ -4,7 +4,8 @@
 	name = "wall"
 	desc = "A huge chunk of metal used to separate rooms."
 	icon = 'icons/turf/walls/wall.dmi'
-	icon_state = "wall"
+	icon_state = "wall-0"
+	base_icon_state = "wall"
 	explosion_block = 1
 
 	thermal_conductivity = WALL_HEAT_TRANSFER_COEFFICIENT
@@ -14,33 +15,42 @@
 
 	flags_ricochet = RICOCHET_HARD
 
-	///lower numbers are harder. Used to determine the probability of a hulk smashing through. Also, (hardness - 40) is used as a modifier for objects trying to embed in this (hardness of 30 results in a -10% chance)
+	smoothing_flags = SMOOTH_BITMASK
+	smoothing_groups = list(SMOOTH_GROUP_CLOSED_TURFS, SMOOTH_GROUP_WALLS)
+	canSmoothWith = list(SMOOTH_GROUP_WALLS)
+
+	///lower numbers are harder. Used to determine the probability of a hulk smashing through.
 	var/hardness = 40
 	var/slicing_duration = 100  //default time taken to slice the wall
 	var/sheet_type = /obj/item/stack/sheet/metal
 	var/sheet_amount = 2
 	var/girder_type = /obj/structure/girder
 
-	canSmoothWith = list(
-	/turf/closed/wall,
-	/turf/closed/wall/r_wall,
-	/obj/structure/falsewall,
-	/obj/structure/falsewall/reinforced,
-	/turf/closed/wall/rust,
-	/turf/closed/wall/r_wall/rust)
-	smooth = SMOOTH_TRUE
-
 	var/list/dent_decals
+
 
 /turf/closed/wall/Initialize(mapload)
 	. = ..()
 	if(is_station_level(z))
 		GLOB.station_turfs += src
+	if(smoothing_flags & SMOOTH_DIAGONAL_CORNERS && fixed_underlay) //Set underlays for the diagonal walls.
+		var/mutable_appearance/underlay_appearance = mutable_appearance(layer = TURF_LAYER, plane = FLOOR_PLANE)
+		if(fixed_underlay["space"])
+			underlay_appearance.icon = 'icons/turf/space.dmi'
+			underlay_appearance.icon_state = SPACE_ICON_STATE
+			underlay_appearance.plane = PLANE_SPACE
+		else
+			underlay_appearance.icon = fixed_underlay["icon"]
+			underlay_appearance.icon_state = fixed_underlay["icon_state"]
+		fixed_underlay = string_assoc_list(fixed_underlay)
+		underlays += underlay_appearance
+
 
 /turf/closed/wall/Destroy()
 	if(is_station_level(z))
 		GLOB.station_turfs -= src
 	..()
+
 
 /turf/closed/wall/examine(mob/user)
 	. += ..()
@@ -136,8 +146,13 @@
 		dismantle_wall(1)
 		return
 
-/turf/closed/wall/attack_hulk(mob/user)
+/turf/closed/wall/attack_hulk(mob/living/carbon/user)
 	..()
+	var/obj/item/bodypart/arm = user.hand_bodyparts[user.active_hand_index]
+	if(!arm)
+		return
+	if(arm.bodypart_disabled)
+		return
 	if(prob(hardness))
 		playsound(src, 'sound/effects/meteorimpact.ogg', 100, TRUE)
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ), forced = "hulk")

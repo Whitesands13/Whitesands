@@ -310,7 +310,8 @@
 	return data
 
 /obj/machinery/nuclearbomb/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
 	playsound(src, "terminal_type", 20, FALSE)
 	switch(action)
@@ -393,7 +394,7 @@
 	if(isinspace() && !anchored)
 		to_chat(usr, "<span class='warning'>There is nothing to anchor to!</span>")
 	else
-		anchored = !anchored
+		set_anchored(!anchored)
 
 /obj/machinery/nuclearbomb/proc/set_safety()
 	safety = !safety

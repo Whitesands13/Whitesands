@@ -37,8 +37,8 @@
 	if (!ui)
 		ui = new(user, src, "NtosMain")
 		ui.set_autoupdate(TRUE)
-		ui.open()
-		ui.send_asset(get_asset_datum(/datum/asset/simple/headers))
+		if(ui.open())
+			ui.send_asset(get_asset_datum(/datum/asset/simple/headers))
 
 
 /obj/item/modular_computer/ui_data(mob/user)
@@ -47,7 +47,9 @@
 
 	data["login"] = list()
 	var/obj/item/computer_hardware/card_slot/cardholder = all_components[MC_CARD]
+	data["cardholder"] = FALSE
 	if(cardholder)
+		data["cardholder"] = TRUE
 		var/obj/item/card/id/stored_card = cardholder.GetID()
 		if(stored_card)
 			var/stored_name = stored_card.registered_name
@@ -75,7 +77,7 @@
 		if(P in idle_threads)
 			running = 1
 
-		data["programs"] += list(list("name" = P.filename, "desc" = P.filedesc, "running" = running))
+		data["programs"] += list(list("name" = P.filename, "desc" = P.filedesc, "running" = running, "icon" = P.program_icon, "alert" = P.alert_pending))
 
 	data["has_light"] = has_light
 	data["light_on"] = light_on
@@ -85,8 +87,10 @@
 
 // Handles user's GUI input
 /obj/item/modular_computer/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
+
 	var/obj/item/computer_hardware/hard_drive/hard_drive = all_components[MC_HDD]
 	switch(action)
 		if("PC_exit")
@@ -141,6 +145,7 @@
 			if(P in idle_threads)
 				P.program_state = PROGRAM_STATE_ACTIVE
 				active_program = P
+				P.alert_pending = FALSE
 				idle_threads.Remove(P)
 				update_icon()
 				return
@@ -156,11 +161,12 @@
 				return
 			if(P.run_program(user))
 				active_program = P
+				P.alert_pending = FALSE
 				update_icon()
 			return 1
 
 		if("PC_toggle_light")
-			light_on = !light_on
+			set_light_on(!light_on)
 			if(light_on)
 				set_light(comp_light_luminosity, 1, comp_light_color)
 			else
@@ -178,7 +184,7 @@
 					to_chat(user, "<span class='warning'>That color is too dark! Choose a lighter one.</span>")
 					new_color = null
 			comp_light_color = new_color
-			light_color = new_color
+			set_light_color(new_color)
 			update_light()
 			return TRUE
 

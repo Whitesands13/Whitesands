@@ -3,7 +3,6 @@
 	desc = "Exosuit"
 	icon = 'icons/mecha/mecha.dmi'
 	density = TRUE //Dense. To raise the heat.
-	opacity = 1 ///opaque. Menacing.
 	move_force = MOVE_FORCE_VERY_STRONG
 	move_resist = MOVE_FORCE_EXTREMELY_STRONG
 	resistance_flags = FIRE_PROOF | ACID_PROOF
@@ -11,6 +10,10 @@
 	infra_luminosity = 15 //byond implementation is bugged.
 	force = 5
 	flags_1 = HEAR_1
+	light_system = MOVABLE_LIGHT
+	light_power = 0.8
+	light_range = 6
+	light_on = FALSE
 	var/ruin_mecha = FALSE //if the mecha starts on a ruin, don't automatically give it a tracking beacon to prevent metagaming.
 	var/can_move = 0 //time of next allowed movement
 	var/mob/living/carbon/occupant = null
@@ -36,7 +39,6 @@
 	var/list/proc_res = list() //stores proc owners, like proc_res["functionname"] = owner reference
 	var/datum/effect_system/spark_spread/spark_system = new
 	var/lights = FALSE
-	var/lights_power = 6
 	var/last_user_hud = 1 // used to show/hide the mecha hud while preserving previous preference
 	var/completely_disabled = FALSE //stops the mech from doing anything
 
@@ -450,11 +452,11 @@
 /obj/mecha/proc/drop_item()//Derpfix, but may be useful in future for engineering exosuits.
 	return
 
-/obj/mecha/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, message_mode)
+/obj/mecha/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, list/message_mods = list())
 	. = ..()
 	if(speaker == occupant)
 		if(radio?.broadcasting)
-			radio.talk_into(speaker, text, , spans, message_language)
+			radio.talk_into(speaker, text, , spans, message_language, message_mods)
 		//flick speech bubble
 		var/list/speech_bubble_recipients = list()
 		for(var/mob/M in get_hearers_in_view(7,src))
@@ -564,7 +566,7 @@
 
 	return FALSE
 
-/obj/mecha/relaymove(mob/user,direction)
+/obj/mecha/relaymove(mob/living/user, direction)
 	if(completely_disabled)
 		return
 	if(!direction)
@@ -611,10 +613,12 @@
 	var/move_result = 0
 	var/oldloc = loc
 	if(internal_damage & MECHA_INT_CONTROL_LOST)
+		set_glide_size(DELAY_TO_GLIDE_SIZE(step_in))
 		move_result = mechsteprand()
 	else if(dir != direction && (!strafe || occupant.client.keys_held["Alt"]))
 		move_result = mechturn(direction)
 	else
+		set_glide_size(DELAY_TO_GLIDE_SIZE(step_in))
 		move_result = mechstep(direction)
 	if(move_result || loc != oldloc)// halfway done diagonal move still returns false
 		use_power(step_energy_drain)
@@ -817,7 +821,6 @@
 	AI.cancel_camera()
 	AI.controlled_mech = src
 	AI.remote_control = src
-	AI.mobility_flags = ALL //Much easier than adding AI checks! Be sure to set this back to 0 if you decide to allow an AI to leave a mech somehow.
 	AI.can_shunt = 0 //ONE AI ENTERS. NO AI LEAVES.
 	to_chat(AI, AI.can_dominate_mechs ? "<span class='announce'>Takeover of [name] complete! You are now loaded onto the onboard computer. Do not attempt to leave the station sector!</span>" :\
 		"<span class='notice'>You have been uploaded to a mech's onboard computer.</span>")
@@ -979,13 +982,12 @@
 		to_chat(user, "<span class='warning'>\the [M] is stuck to your hand, you cannot put it in \the [src]!</span>")
 		return FALSE
 
-	M.mecha = src
+	M.set_mecha(src)
 	occupant = B
 	silicon_pilot = TRUE
 	B.forceMove(src) //should allow relaymove
 	B.reset_perspective(src)
 	B.remote_control = src
-	B.update_mobility()
 	B.update_mouse_pointer()
 	icon_state = initial(icon_state)
 	update_icon()
@@ -997,7 +999,7 @@
 	log_game("[key_name(user)] has put the MMI/posibrain of [key_name(B)] into [src] at [AREACOORD(src)]")
 	return TRUE
 
-/obj/mecha/container_resist(mob/living/user)
+/obj/mecha/container_resist_act(mob/living/user)
 	is_currently_ejecting = TRUE
 	to_chat(occupant, "<span class='notice'>You begin the ejection procedure. Equipment is disabled during this process. Hold still to finish ejecting.</span>")
 	if(do_after(occupant, has_gravity() ? exit_delay : 0 , target = src))
@@ -1070,15 +1072,14 @@
 			if(mmi.brainmob)
 				L.forceMove(mmi)
 				L.reset_perspective()
-			mmi.mecha = null
+			mmi.set_mecha(null)
 			mmi.update_icon()
-			L.mobility_flags = NONE
 		icon_state = initial(icon_state)+"-open"
 		setDir(dir_in)
 
 	if(L && L.client)
 		L.update_mouse_pointer()
-		L.client.change_view(CONFIG_GET(string/default_view))
+		L.client.view_size.resetToDefault()
 		zoom_mode = 0
 
 /////////////////////////

@@ -64,7 +64,10 @@
 		/obj/item/construction/rcd,
 		/obj/item/pipe_dispenser,
 		/obj/item/inducer,
-		/obj/item/plunger
+		/obj/item/plunger,
+		/obj/item/clothing/glasses/welding, //wasp edit: ok mald sure I'll add the welding stuff to the. ok. 
+		/obj/item/clothing/mask/gas/welding,
+		/obj/item/clothing/head/welding //wasp end
 		))
 
 /obj/item/storage/belt/utility/chief
@@ -147,6 +150,7 @@
 		/obj/item/flashlight/pen,
 		/obj/item/extinguisher/mini,
 		/obj/item/reagent_containers/hypospray,
+		/obj/item/hypospray,
 		/obj/item/sensor_device,
 		/obj/item/radio,
 		/obj/item/clothing/gloves/,
@@ -192,6 +196,16 @@
 	new /obj/item/reagent_containers/glass/bottle/formaldehyde(src)
 	update_icon()
 
+/obj/item/storage/belt/medical/surgery/PopulateContents()
+	new /obj/item/scalpel(src)
+	new /obj/item/circular_saw(src)
+	new /obj/item/surgicaldrill(src)
+	new /obj/item/retractor(src)
+	new /obj/item/cautery(src)
+	new /obj/item/hemostat(src)
+	new /obj/item/hypospray/mkii(src)
+	update_icon()
+
 /obj/item/storage/belt/security
 	name = "security belt"
 	desc = "Can hold security gear like handcuffs and flashes."
@@ -221,7 +235,8 @@
 		/obj/item/radio,
 		/obj/item/clothing/gloves,
 		/obj/item/restraints/legcuffs/bola,
-		/obj/item/holosign_creator/security
+		/obj/item/holosign_creator/security,
+		/obj/item/stock_parts/cell/gun   //waspstation edit Gun cells fit where they should and not where they dont
 		))
 
 /obj/item/storage/belt/security/full/PopulateContents()

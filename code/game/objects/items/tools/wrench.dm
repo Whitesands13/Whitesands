@@ -1,10 +1,10 @@
 /obj/item/wrench
 	name = "wrench"
-	desc = "A wrench with common uses. Can be found in your hand."
+	desc = "A wrench with common uses. Can be found in your hand. This one is a pipe wrench."
 	icon = 'waspstation/icons/obj/tools.dmi'
-	icon_state = "wrench"
-	lefthand_file = 'icons/mob/inhands/equipment/tools_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/equipment/tools_righthand.dmi'
+	icon_state = "wrench_pipe" //now where could my pipe wrench be?
+	lefthand_file = 'waspstation/icons/mob/inhands/equipment/tools_lefthand.dmi'
+	righthand_file = 'waspstation/icons/mob/inhands/equipment/tools_righthand.dmi'
 	flags_1 = CONDUCT_1
 	slot_flags = ITEM_SLOT_BELT
 	force = 5
@@ -38,9 +38,10 @@
 	name = "medical wrench"
 	desc = "A medical wrench with common(medical?) uses. Can be found in your hand."
 	icon_state = "wrench_medical"
+	item_state = "wrench"
 	force = 2 //MEDICAL
 	throwforce = 4
-	attack_verb = list("healed", "medicaled", "tapped", "poked", "analyzed") //"cobbyed"
+	attack_verb = list("healed", "medicaled", "tapped", "poked", "analyzed", "cobbyed") //"cobbyed" //i dont know who added this comment but now it's a thing - zeta
 	///var to hold the name of the person who suicided
 	var/suicider
 
@@ -52,7 +53,7 @@
 /obj/item/wrench/medical/suicide_act(mob/living/user)
 	user.visible_message("<span class='suicide'>[user] is praying to the medical wrench to take [user.p_their()] soul. It looks like [user.p_theyre()] trying to commit suicide!</span>")
 	user.Stun(100, ignore_canstun = TRUE)// Stun stops them from wandering off
-	user.light_color = "#FAE48E"
+	user.set_light_color(COLOR_VERY_SOFT_YELLOW)
 	user.set_light(2)
 	user.add_overlay(mutable_appearance('icons/effects/genetics.dmi', "servitude", -MUTATIONS_LAYER))
 	playsound(loc, 'sound/effects/pray.ogg', 50, TRUE, -1)

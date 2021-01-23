@@ -69,9 +69,9 @@ SUBSYSTEM_DEF(blackbox)
 
 /datum/controller/subsystem/blackbox/vv_edit_var(var_name, var_value)
 	switch(var_name)
-		if("feedback")
+		if(NAMEOF(src, feedback))
 			return FALSE
-		if("sealed")
+		if(NAMEOF(src, sealed))
 			if(var_value)
 				return Seal()
 			return FALSE
@@ -148,6 +148,8 @@ SUBSYSTEM_DEF(blackbox)
 			record_feedback("tally", "radio_usage", 1, "supply")
 		if(FREQ_CENTCOM)
 			record_feedback("tally", "radio_usage", 1, "centcom")
+		if(FREQ_SOLGOV)		// Wasp Edit - SolGov Rep
+			record_feedback("tally", "radio_usage", 1, "solgov")		// Wasp Edit - SolGov Rep
 		if(FREQ_AI_PRIVATE)
 			record_feedback("tally", "radio_usage", 1, "ai private")
 		if(FREQ_CTF_RED)

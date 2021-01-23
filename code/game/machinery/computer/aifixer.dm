@@ -46,8 +46,10 @@
 	return data
 
 /obj/machinery/computer/aifixer/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
+
 	if(!occupier)
 		restoring = FALSE
 
@@ -93,7 +95,7 @@
 		switch (occupier.stat)
 			if (CONSCIOUS)
 				. += "ai-fixer-full"
-			if (UNCONSCIOUS)
+			if (UNCONSCIOUS, HARD_CRIT)
 				. += "ai-fixer-404"
 	else
 		. += "ai-fixer-empty"

@@ -12,7 +12,7 @@ RLD
 /obj/item/construction
 	name = "not for ingame use"
 	desc = "A device used to rapidly build and deconstruct. Reload with metal, plasteel, glass or compressed matter cartridges."
-	opacity = 0
+	opacity = FALSE
 	density = FALSE
 	anchored = FALSE
 	flags_1 = CONDUCT_1
@@ -207,9 +207,30 @@ RLD
 	/// Integrated airlock electronics for setting access to a newly built airlocks
 	var/obj/item/electronics/airlock/airlock_electronics
 
-/obj/item/construction/rcd/suicide_act(mob/user)
-	user.visible_message("<span class='suicide'>[user] sets the RCD to 'Wall' and points it down [user.p_their()] throat! It looks like [user.p_theyre()] trying to commit suicide..</span>")
-	return (BRUTELOSS)
+/obj/item/construction/rcd/suicide_act(mob/living/user)
+	var/turf/T = get_turf(user)
+
+	if(!isopenturf(T)) // Oh fuck
+		user.visible_message("<span class='suicide'>[user] is beating [user.p_them()]self to death with [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
+		return BRUTELOSS
+
+	mode = RCD_FLOORWALL
+	user.visible_message("<span class='suicide'>[user] sets the RCD to 'Wall' and points it down [user.p_their()] throat! It looks like [user.p_theyre()] trying to commit suicide!</span>")
+	if(checkResource(16, user)) // It takes 16 resources to construct a wall
+		var/success = T.rcd_act(user, src, RCD_FLOORWALL)
+		T = get_turf(user)
+		// If the RCD placed a floor instead of a wall, having a wall without plating under it is cursed
+		// There isn't an easy programmatical way to check if rcd_act will place a floor or a wall, so just repeat using it for free
+		if(success && isopenturf(T))
+			T.rcd_act(user, src, RCD_FLOORWALL)
+		useResource(16, user)
+		activate()
+		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
+		user.gib()
+		return MANUAL_SUICIDE
+
+	user.visible_message("<span class='suicide'>[user] pulls the trigger... But there is not enough ammo!</span>")
+	return SHAME
 
 /obj/item/construction/rcd/verb/toggle_window_type_verb()
 	set name = "RCD : Toggle Window Type"
@@ -747,7 +768,7 @@ RLD
 						var/obj/machinery/light/L = new /obj/machinery/light(light)
 						L.setDir(align)
 						L.color = color_choice
-						L.light_color = L.color
+						L.set_light_color(L.color)
 						return TRUE
 				return FALSE
 
@@ -767,7 +788,7 @@ RLD
 						var/destination = get_turf(A)
 						var/obj/machinery/light/floor/FL = new /obj/machinery/light/floor(destination)
 						FL.color = color_choice
-						FL.light_color = FL.color
+						FL.set_light_color(FL.color)
 						return TRUE
 				return FALSE
 
@@ -777,7 +798,7 @@ RLD
 				to_chat(user, "<span class='notice'>You fire a glowstick!</span>")
 				var/obj/item/flashlight/glowstick/G  = new /obj/item/flashlight/glowstick(start)
 				G.color = color_choice
-				G.light_color = G.color
+				G.set_light_color(G.color)
 				G.throw_at(A, 9, 3, user)
 				G.on = TRUE
 				G.update_brightness()

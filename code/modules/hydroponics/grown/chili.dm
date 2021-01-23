@@ -27,6 +27,7 @@
 	bitesize_mod = 2
 	foodtype = FRUIT
 	wine_power = 20
+	wine_flavor = "a lake of fire" //wasp edit: new wine flavors
 
 // Ice Chili
 /obj/item/seeds/chili/ice
@@ -52,6 +53,7 @@
 	bitesize_mod = 2
 	foodtype = FRUIT
 	wine_power = 30
+	wine_flavor = "the 8th circle of hell" //wasp edit: new wine flavors
 
 // Ghost Chili
 /obj/item/seeds/chili/ghost
@@ -67,7 +69,7 @@
 	yield = 3
 	rarity = 20
 	mutatelist = list()
-	reagents_add = list(/datum/reagent/consumable/condensedcapsaicin = 0.3, /datum/reagent/consumable/capsaicin = 0.55, /datum/reagent/consumable/nutriment = 0.04)
+	reagents_add = list(/datum/reagent/consumable/condensedcapsaicin = 0.3, /datum/reagent/consumable/capsaicin = 0.55, /datum/reagent/consumable/nutriment = 0.04, /datum/reagent/sodium = 0.10)
 
 /obj/item/reagent_containers/food/snacks/grown/ghost_chili
 	seed = /obj/item/seeds/chili/ghost
@@ -79,6 +81,7 @@
 	bitesize_mod = 4
 	foodtype = FRUIT
 	wine_power = 50
+	wine_flavor = "burning regret and the veil growing thinner" //wasp edit: new wine flavors
 
 /obj/item/reagent_containers/food/snacks/grown/ghost_chili/attack_hand(mob/user)
 	. = ..()

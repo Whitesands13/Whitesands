@@ -50,7 +50,8 @@
 	return data
 
 /obj/machinery/computer/emergency_shuttle/ui_act(action, params, datum/tgui/ui)
-	if(..())
+	. = ..()
+	if(.)
 		return
 	if(ENGINES_STARTED) // past the point of no return
 		return
@@ -247,6 +248,8 @@
 		SSshuttle.emergencyLastCallLoc = null
 	priority_announce("The emergency shuttle has been recalled.[SSshuttle.emergencyLastCallLoc ? " Recall signal traced. Results can be viewed on any communications console." : "" ]", null, 'sound/ai/shuttlerecalled.ogg', "Priority")
 
+	SSticker.emergency_reason = null
+
 /obj/docking_port/mobile/emergency/proc/is_hijacked()
 	var/has_people = FALSE
 	var/hijacker_present = FALSE
@@ -319,7 +322,8 @@
 				mode = SHUTTLE_DOCKED
 				setTimer(SSshuttle.emergencyDockTime)
 				send2tgs("Server", "The Emergency Shuttle has docked with the station.")
-				SSredbot.send_discord_message("admin","The escape shuttle has docked with the station.","round ending event")
+				SSredbot.send_discord_message("admin", "The escape shuttle has docked with the station.","round ending event")
+				SSredbot.send_discord_message("newround", "The escape shuttle has docked with the station. New round imminent!")
 				priority_announce("[SSshuttle.emergency] has docked with the station. You have [timeLeft(600)] minutes to board the Emergency Shuttle.", null, 'sound/ai/shuttledock.ogg', "Priority")
 				ShuttleDBStuff()
 
@@ -480,7 +484,7 @@
 	dwidth = 1
 	width = 3
 	height = 4
-	var/target_area = /area/lavaland/surface/outdoors
+	var/target_area
 	var/edge_distance = 16
 	// Minimal distance from the map edge, setting this too low can result in shuttle landing on the edge and getting "sliced"
 
@@ -488,6 +492,15 @@
 	. = ..()
 	if(!mapload)
 		return
+
+	if(!target_area)
+		switch(GLOB.current_mining_map)
+			if("lavaland")
+				target_area = /area/lavaland/surface/outdoors
+			if("icemoon")
+				target_area = /area/icemoon/surface/outdoors
+			if("whitesands")
+				target_area = /area/whitesands/surface/outdoors
 
 	var/list/turfs = get_area_turfs(target_area)
 	var/original_len = turfs.len

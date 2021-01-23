@@ -6,6 +6,14 @@
 
 GLOBAL_LIST_INIT(spacepods_list, list())
 
+GLOBAL_LIST_INIT(spacepod_verb_list,  list(
+	/obj/spacepod/verb/exit_pod,
+	/obj/spacepod/verb/lock_pod,
+	/obj/spacepod/verb/toggle_brakes,
+	/obj/spacepod/verb/toggleLights,
+	/obj/spacepod/verb/toggleDoors
+))
+
 /obj/spacepod
 	name = "space pod"
 	desc = "A frame for a spacepod."
@@ -67,12 +75,12 @@ GLOBAL_LIST_INIT(spacepods_list, list())
 
 	var/lights = 0
 	var/lights_power = 6
-	var/static/list/icon_light_color = list("pod_civ" = LIGHT_COLOR_WHITE, \
-									 "pod_mil" = "#BBF093", \
-									 "pod_synd" = LIGHT_COLOR_RED, \
-									 "pod_gold" = LIGHT_COLOR_WHITE, \
-									 "pod_black" = "#3B8FE5", \
-									 "pod_industrial" = "#CCCC00")
+	var/static/list/icon_light_color = list("pod_civ" = LIGHT_COLOR_HALOGEN, \
+									 "pod_mil" = LIGHT_COLOR_GREEN, \
+									 "pod_synd" = LIGHT_COLOR_FLARE, \
+									 "pod_gold" = LIGHT_COLOR_HALOGEN, \
+									 "pod_black" = LIGHT_COLOR_DARK_BLUE, \
+									 "pod_industrial" = LIGHT_COLOR_TUNGSTEN)
 
 	var/bump_impulse = 0.6
 	var/bounce_factor = 0.2 // how much of our velocity to keep on collision
@@ -424,7 +432,7 @@ GLOBAL_LIST_INIT(spacepods_list, list())
 	if(weapon && weapon.overlay_icon_state)
 		add_overlay(image(icon=weapon.overlay_icon,icon_state=weapon.overlay_icon_state))
 
-	light_color = icon_light_color[icon_state] || LIGHT_COLOR_WHITE
+	light_color = icon_light_color[icon_state] || LIGHT_COLOR_HALOGEN
 
 	// Thrust!
 	var/list/left_thrusts = list()
@@ -545,7 +553,7 @@ GLOBAL_LIST_INIT(spacepods_list, list())
 	if(!isliving(usr) || usr.stat > CONSCIOUS)
 		return
 
-	if(usr.restrained())
+	if(HAS_TRAIT(usr, TRAIT_HANDS_BLOCKED))
 		to_chat(usr, "<span class='notice'>You attempt to stumble out of [src]. This will take two minutes.</span>")
 		if(pilot)
 			to_chat(pilot, "<span class='warning'>[usr] is trying to escape [src].</span>")
@@ -638,6 +646,8 @@ GLOBAL_LIST_INIT(spacepods_list, list())
 		return FALSE
 	M.stop_pulling()
 	M.forceMove(src)
+	if(allow_pilot)
+		add_verb(M, GLOB.spacepod_verb_list)
 	playsound(src, 'sound/machines/windowdoor.ogg', 50, 1)
 	return TRUE
 
@@ -649,6 +659,7 @@ GLOBAL_LIST_INIT(spacepods_list, list())
 		LAZYREMOVE(M.mousemove_intercept_objects, src)
 		if(M.click_intercept == src)
 			M.click_intercept = null
+		remove_verb(M, GLOB.spacepod_verb_list)
 		desired_angle = null // since there's no pilot there's no one aiming it.
 	else if(M in passengers)
 		passengers -= M

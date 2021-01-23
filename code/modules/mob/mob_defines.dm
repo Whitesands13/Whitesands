@@ -18,6 +18,9 @@
 	throwforce = 10
 	blocks_emissive = EMISSIVE_BLOCK_GENERIC
 
+ 	///when this be added to vis_contents of something it inherit something.plane, important for visualisation of mob in openspace.
+	vis_flags = VIS_INHERIT_PLANE
+
 	var/lighting_alpha = LIGHTING_PLANE_ALPHA_VISIBLE
 	var/datum/mind/mind
 	var/static/next_mob_id = 0
@@ -54,6 +57,9 @@
 
 	/// Tick time the mob can next move
 	var/next_move = null
+
+	///Last time an area was created by a mob plus a short cooldown period
+	var/create_area_cooldown
 
 	/**
 	  * Magic var that stops you moving and interacting with anything
@@ -190,7 +196,7 @@
 	//Wasp Begin - Holy fuck work for spacepods
 	var/list/mousemove_intercept_objects
 	//Wasp End
-	
+
 	///For storing what do_after's someone has, in case we want to restrict them to only one of a certain do_after at a time
 	var/list/do_afters
 
@@ -209,11 +215,10 @@
 
 	var/datum/hSB/sandbox = null
 
-	var/bloody_hands = 0
-
 	var/datum/focus //What receives our keyboard inputs. src by default
 
 	/// Used for tracking last uses of emotes for cooldown purposes
 	var/list/emotes_used
 
-	vis_flags = VIS_INHERIT_PLANE //when this be added to vis_contents of something it inherit something.plane, important for visualisation of mob in openspace.
+	///Whether the mob is updating glide size when movespeed updates or not
+	var/updating_glide_size = TRUE
