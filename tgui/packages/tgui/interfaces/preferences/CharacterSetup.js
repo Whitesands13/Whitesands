@@ -1,20 +1,18 @@
 import { useBackend } from '../../backend';
-import { Flex, NoticeBox, Tabs, Divider, Button, Input, Dropdown } from '../../components';
+import { Box, Flex, NoticeBox, Tabs, Divider, Button, Input, Dropdown, TextArea } from '../../components';
 import OccupationPicker from './OccupationPicker';
 import QuirkPicker from './QuirkPicker';
 import { actOnCharacter as _actOnCharacter } from './helpers/characterSlotHelpers';
 
-const genderDisplayNames = ['male', 'female', 'other'];
+/* eslint-disable react/jsx-closing-tag-location */
 
-const characterName = (slot, index) => {
-  return slot[index] ? slot[index].name : `Character Slot ${index}`;
-};
+const genderDisplayNames = ['male', 'female', 'other'];
 
 export const CharacterSetupPanel = (props, context) => {
   const { act, data } = useBackend(context);
 
   const {
-    banned, flags, pref_defines
+    banned, flags, pref_defines,
   } = data;
 
   const { index, character } = props;
@@ -33,7 +31,7 @@ export const CharacterSetupPanel = (props, context) => {
           <Flex.Item>
             <Input
               onChange={(e, value) => actOnCharacter('set_custom_name', {
-                type: define.type, value
+                type: define.type, value,
               })}
               value={current.value}
             />
@@ -41,12 +39,9 @@ export const CharacterSetupPanel = (props, context) => {
         </Flex>
       );
     }
-    return <Flex.Item>
-      {ret}
-    </Flex.Item>;
+    return (<Flex.Item>{ret}</Flex.Item>);
   };
-
-  return <Flex>
+  return (<Flex>
     <Flex.Item>
       <OccupationPicker {...props} />
       <Divider />
@@ -56,25 +51,27 @@ export const CharacterSetupPanel = (props, context) => {
       <Divider />
     </Flex.Item>}
     {banned.appearance && <Flex.Item>
-      <NoticeBox danger={true}>
-        <b>
-          You are banned from using custom names and appearances.
-          You can continue to adjust your characters, but you will be randomised once you join the game.
-        </b>
+      <NoticeBox danger>
+        <b>You are banned from using custom names and appearances.
+          You can continue to adjust your characters,
+          but you will be randomised once you join the game.</b>
       </NoticeBox>
     </Flex.Item>}
     <Flex.Item>
       <Button
         onClick={() => actOnCharacter('randomize_name')}
-      >Random Name</Button>
+      >Random Name
+      </Button>
       <Button.Checkbox
         checked={character.always_random_name}
         onClick={() => actOnCharacter('toggle_random', { type: 'name' })}
-      >Always Random Name</Button.Checkbox>
+      >Always Random Name
+      </Button.Checkbox>
       <Button.Checkbox
         checked={character.always_random_antag_name}
         onClick={() => actOnCharacter('toggle_random', { type: 'name', antag: true })}
-      >Always Random Antag Name</Button.Checkbox>
+      >Always Random Antag Name
+      </Button.Checkbox>
     </Flex.Item>
     <Flex.Item>
       Name: <Input
@@ -82,45 +79,52 @@ export const CharacterSetupPanel = (props, context) => {
         onChange={(evt, value) => actOnCharacter('update_real_name', { value })}
       />
     </Flex.Item>
-    {!character.species.traits.agender && <Flex.Item>
-      Gender: <Dropdown
-        options={genderDisplayNames}
-        selected={genderDisplayNames[character.gender]}
-        onSelected={value => actOnCharacter('select_gender', { value: genderDisplayNames.indexOf(value) })}
-      />
-    </Flex.Item>}
-    {character.always_random_body || character.always_random_antag_body && <Flex.Item>
+    {!character.species.traits.agender
+      && <Flex.Item>
+        Gender: <Dropdown
+          options={genderDisplayNames}
+          selected={genderDisplayNames[character.gender]}
+          onSelected={value => actOnCharacter('select_gender', { value: genderDisplayNames.indexOf(value) })}
+        />
+      </Flex.Item>}
+    {character.always_random_body || character.always_random_antag_body
+    && <Flex.Item>
       <Button.Checkbox
         checked={character.always_random_gender}
         onClick={() => actOnCharacter('toggle_random', { type: 'gender' })}
-      >Always Random Gender</Button.Checkbox>
+      >Always Random Gender
+      </Button.Checkbox>
       <Button.Checkbox
         checked={character.always_random_antag_gender}
         onClick={() => actOnCharacter('toggle_random', { type: 'gender', antag: true })}
-      >Always Random Antag Gender</Button.Checkbox>
+      >Always Random Antag Gender
+      </Button.Checkbox>
     </Flex.Item>}
     <Flex.Item>
       Age: <Input
         value={character.age}
         onChange={(evt, value) => {
-          const san_val = parseInt(value);
+          const san_val = parseInt(value, 10);
           if (Number.isNaN(san_val)) {
-            actOnCharacter('update_age', { value: character.age })
+            actOnCharacter('update_age', { value: character.age });
           } else {
-            actOnCharacter('update_age', { value: sand_val })
+            actOnCharacter('update_age', { value: san_val });
           }
         }}
       />
     </Flex.Item>
-    {character.always_random_body || character.always_random_antag_body && <Flex.Item>
+    {character.always_random_body || character.always_random_antag_body
+    && <Flex.Item>
       <Button.Checkbox
         checked={character.always_random_age}
         onClick={() => actOnCharacter('toggle_random', { type: 'age' })}
-      >Always Random Age</Button.Checkbox>
+      >Always Random Age
+      </Button.Checkbox>
       <Button.Checkbox
         checked={character.always_random_antag_age}
         onClick={() => actOnCharacter('toggle_random', { type: 'age', antag: true })}
-      >Always Random Antag Age</Button.Checkbox>
+      >Always Random Antag Age
+      </Button.Checkbox>
     </Flex.Item>}
     <Flex.Item>
       Flavor Text:<br />
@@ -183,17 +187,17 @@ export const CharacterSetupPanel = (props, context) => {
         onSelected={value => actOnCharacter('set_uplink_loc', { value })}
       />
     </Flex.Item>
-  </Flex>
+  </Flex>);
 };
 
 export const CharacterSetup = (props, context) => {
   const { act, data } = useBackend(context);
 
   const {
-    active_character
+    active_character,
   } = data;
   const {
-    characters
+    characters,
   } = data;
 
   const renderCharacterTabs = () => {
@@ -204,20 +208,23 @@ export const CharacterSetup = (props, context) => {
           key={i}
           selected={active_character === i}
           onClick={() => act('set_active_character', { value: i })}
-        >{characterName(characters[i], i)}</Tabs.Tab>
+        >{characterName(characters[i], i)}
+        </Tabs.Tab>
       );
     }
     return ret;
   };
 
-  return <React.Fragment>
+  return (<Box>
     <Tabs>
       {renderCharacterTabs()}
     </Tabs>
     <Box>
-      <CharacterSetupPanel index={active_character} character={characters[activeTabIndex]} />
+      <CharacterSetupPanel
+        index={active_character} character={characters[active_character]}
+      />
     </Box>
-  </React.Fragment>;
+  </Box>);
 };
 
 export default CharacterSetup;
