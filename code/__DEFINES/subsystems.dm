@@ -192,6 +192,7 @@
 
 ///Compile all the overlays for an atom from the cache lists
 #define COMPILE_OVERLAYS(A)\
+	do{\
 		var/list/ad = A.add_overlays;\
 		var/list/rm = A.remove_overlays;\
 		var/list/po = A.priority_overlays;\
@@ -213,6 +214,7 @@
 			}\
 		}\
 		A.flags_1 &= ~OVERLAY_QUEUED_1;\
+	}while(FALSE)
 
 // Air subsystem subtasks
 #define SSAIR_PIPENETS 1
