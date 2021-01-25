@@ -26,8 +26,8 @@
 /obj/machinery/atmospherics/components/unary/thermomachine/Initialize()
 	. = ..()
 	initialize_directions = dir
-	SSair.atmos_machinery += src	//WS edit, initialize thermomachines to SSairs list of tickable machines
-	world.log << src
+	if(SSair.atmos_machinery.Find(src) == 0)	//WS edit, initialize thermomachines to SSairs list of tickable machines
+		SSair.atmos_machinery += src
 /obj/machinery/atmospherics/components/unary/thermomachine/on_construction(obj_color, set_layer)
 	var/obj/item/circuitboard/machine/thermomachine/board = circuit
 	if(board)
