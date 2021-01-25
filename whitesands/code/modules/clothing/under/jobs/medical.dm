@@ -102,8 +102,8 @@
 /obj/item/clothing/under/rank/medical/chief_medical_officer/surgeon_general
 	name = "surgeon-general scrubs"
 	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is meant to be worn by surgeon-generals."
-	icon = 'waspstation/icons/obj/clothing/under/medical.dmi'
-	mob_overlay_icon = 'waspstation/icons/mob/clothing/under/medical.dmi'
+	icon = 'whitesands/icons/obj/clothing/under/medical.dmi'
+	mob_overlay_icon = 'whitesands/icons/mob/clothing/under/medical.dmi'
 	icon_state = "surgeon_general"
 	can_adjust = FALSE
 
