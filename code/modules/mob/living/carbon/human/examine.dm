@@ -130,7 +130,7 @@
 			else
 				. += "<span class='deadsay'>[t_He] [t_is] limp and unresponsive; there are no signs of life...</span>"
 
-//WaspStaion Begin - Broken Bones
+//WSStaion Begin - Broken Bones
 
 	var/list/splinted_stuff = list()
 	for(var/obj/item/bodypart/B in bodyparts)
@@ -317,6 +317,14 @@
 				msg += "<span class='warning'>[t_He] appears to be suffering from SSD - Space Sleep Disorder. [t_He] may snap out of it at any time! Or maybe never. It's best to leave [t_him] be.</span>\n"
 	if (length(msg))
 		. += "<span class='warning'>[msg.Join("")]</span>"
+
+	switch(mothdust) //WS edit - moth dust from hugging
+		if(1 to 50)
+			. += "[t_He] [t_is] a little dusty."
+		if(51 to 150)
+			. += "[t_He] [t_has] a layer of shimmering dust on [t_him]."
+		if(151 to INFINITY)
+			. += "<b>[t_He] [t_is] covered in glistening dust!</b>" //End WS edit
 
 	var/trait_exam = common_trait_examine()
 	if (!isnull(trait_exam))
