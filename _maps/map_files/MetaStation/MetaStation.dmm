@@ -21615,17 +21615,6 @@
 	dir = 5
 	},
 /area/crew_quarters/kitchen)
-"bLM" = (
-/obj/machinery/light{
-	dir = 1
-	},
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
-	dir = 4
-	},
-/turf/open/floor/plasteel/cafeteria{
-	dir = 5
-	},
-/area/crew_quarters/kitchen)
 "bLO" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /obj/structure/cable{
@@ -25634,6 +25623,26 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/medical/medbay/central)
+"cdF" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
+	dir = 4
+	},
+/obj/machinery/button/door{
+	id = "kitchen";
+	name = "Kitchen Shutters Control";
+	pixel_x = -4;
+	pixel_y = 28;
+	req_access_txt = "28"
+	},
+/obj/structure/table,
+/obj/machinery/microwave,
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/open/floor/plasteel/cafeteria{
+	dir = 5
+	},
+/area/crew_quarters/kitchen)
 "cdG" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /obj/structure/disposalpipe/segment{
@@ -50639,16 +50648,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/crew_quarters/bar)
-"hZT" = (
-/obj/machinery/firealarm{
-	dir = 4;
-	pixel_x = 26;
-	pixel_z = -28
-	},
-/obj/structure/table,
-/obj/item/camera,
-/turf/open/floor/plasteel,
-/area/storage/art)
 "iau" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 4
@@ -52016,6 +52015,15 @@
 	dir = 5
 	},
 /area/crew_quarters/kitchen)
+"iIC" = (
+/obj/structure/table,
+/obj/item/camera,
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = 26
+	},
+/turf/open/floor/plasteel,
+/area/storage/art)
 "iIG" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 9
@@ -53571,23 +53579,6 @@
 	},
 /turf/open/floor/wood,
 /area/crew_quarters/theatre)
-"juI" = (
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
-	dir = 4
-	},
-/obj/machinery/button/door{
-	id = "kitchen";
-	name = "Kitchen Shutters Control";
-	pixel_x = -4;
-	pixel_y = 28;
-	req_access_txt = "28"
-	},
-/obj/structure/table,
-/obj/machinery/microwave,
-/turf/open/floor/plasteel/cafeteria{
-	dir = 5
-	},
-/area/crew_quarters/kitchen)
 "juM" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
@@ -87670,6 +87661,14 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/port/fore)
+"yhD" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
+	dir = 4
+	},
+/turf/open/floor/plasteel/cafeteria{
+	dir = 5
+	},
+/area/crew_quarters/kitchen)
 "yih" = (
 /obj/structure/cable{
 	icon_state = "1-8"
@@ -121333,7 +121332,7 @@ bkU
 bmM
 dGZ
 hXM
-hZT
+iIC
 bmP
 iIL
 rUn
@@ -121858,7 +121857,7 @@ izV
 byC
 mvE
 pYv
-bLM
+yhD
 bNx
 xKg
 hPW
@@ -122115,7 +122114,7 @@ nsK
 sqV
 vaP
 bKe
-juI
+cdF
 bNx
 cpu
 tIn
