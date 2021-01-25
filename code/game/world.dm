@@ -314,7 +314,7 @@ GLOBAL_VAR(restart_counter)
 	s += "</a>"
 	s += ")"
 	s += " ("
-	s += "<a href=\"https://github.com/WaspStation/WaspStation-1.0\">" //Change this to wherever you want the hub to link to.
+	s += "<a href=\"https://github.com/Whitesands13/Whitesands\">" //Change this to wherever you want the hub to link to.
 	s += "Github"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
 	s += "</a>"
 	s += ")"

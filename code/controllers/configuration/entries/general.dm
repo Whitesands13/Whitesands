@@ -241,7 +241,7 @@
 	config_entry_value = "https://wiki.white-sands.space/Rules"
 
 /datum/config_entry/string/githuburl
-	config_entry_value = "https://github.com/WaspStation/WaspStation-1.0"
+	config_entry_value = "https://github.com/Whitesands13/Whitesands"
 
 /datum/config_entry/string/discordurl
 	config_entry_value = "https://discord.gg/BUM8uRc"
