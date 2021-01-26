@@ -1,5 +1,5 @@
 /obj/effect/temp_visual/dir_setting/space_wind
-	icon = 'waspstation/icons/effects/atmospherics.dmi'
+	icon = 'whitesands/icons/effects/atmospherics.dmi'
 	icon_state = "space_wind"
 	layer = FLY_LAYER
 	duration = 20
@@ -10,7 +10,7 @@
 	alpha = set_alpha
 
 /obj/effect/temp_visual/dir_setting/item_swing
-	icon = 'waspstation/icons/effects/effects.dmi'
+	icon = 'whitesands/icons/effects/effects.dmi'
 	icon_state = "swing"
 	duration = 5
 
