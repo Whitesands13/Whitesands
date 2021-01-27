@@ -360,6 +360,12 @@
 /obj/item/storage/box/syndie_kit/imp_uplink/PopulateContents()
 	new /obj/item/implanter/uplink(src)
 
+/obj/item/storage/box/syndie_kit/razorwing //WS edit - LepiCorp stuff
+	name = "razorwing implant box"
+
+/obj/item/storage/box/syndie_kit/razorwing/PopulateContents()
+	new /obj/item/implanter/razorwing(src) //End WS edit
+
 /obj/item/storage/box/syndie_kit/bioterror
 	name = "bioterror syringe box"
 
