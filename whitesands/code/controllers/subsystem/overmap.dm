@@ -15,6 +15,8 @@ SUBSYSTEM_DEF(overmap)
 	var/list/navs
 	///List of all events
 	var/list/events
+	///List of all autopilot consoles
+	var/list/autopilots
 
 	///The main station or ship
 	var/obj/structure/overmap/main
@@ -33,23 +35,25 @@ SUBSYSTEM_DEF(overmap)
 /datum/controller/subsystem/overmap/Initialize(start_timeofday)
 	create_map()
 
-	for(var/shuttle in SSshuttle.mobile)
-		var/obj/docking_port/mobile/M = shuttle
+	for(var/obj/docking_port/mobile/M as anything in SSshuttle.mobile)
 		if(istype(M, /obj/docking_port/mobile/arrivals))
 			continue
 		setup_shuttle_ship(M)
 
-	for(var/ship in simulated_ships)
-		var/obj/structure/overmap/ship/simulated/S = ship
+	for(var/obj/structure/overmap/ship/simulated/S as anything in simulated_ships)
 		S.initial_load()
 
-	for(var/helm in helms)
-		var/obj/machinery/computer/helm/H = helm
+	for(var/obj/machinery/computer/helm/H as anything in helms)
 		H.set_ship()
+	qdel(helms)
 
-	for(var/nav in navs)
-		var/obj/machinery/computer/camera_advanced/shuttle_docker/nav/N = nav
+	for(var/obj/machinery/computer/camera_advanced/shuttle_docker/nav/N as anything in navs)
 		N.link_shuttle()
+	qdel(navs)
+
+	for(var/obj/machinery/computer/autopilot/A as anything in autopilots)
+		A.initial_load()
+	qdel(autopilots)
 
 	return ..()
 
@@ -68,9 +72,8 @@ SUBSYSTEM_DEF(overmap)
 	var/docked_object = get_overmap_object_by_z(shuttle.z)
 	if(docked_object)
 		shuttle.current_ship = new (docked_object, shuttle.id, shuttle)
-	else if(SSmapping.level_trait(shuttle.z, ZTRAIT_RESERVED))
-		shuttle.current_ship = new /obj/structure/overmap/ship/simulated(get_unused_overmap_square(), shuttle.id, shuttle)
-		shuttle.current_ship.state = OVERMAP_SHIP_FLYING
+		if(shuttle.undock_roundstart)
+			shuttle.current_ship.undock()
 	else if(is_centcom_level(shuttle.z))
 		shuttle.current_ship = new /obj/structure/overmap/ship/simulated(null, shuttle.id, shuttle)
 	else
@@ -292,8 +295,6 @@ SUBSYSTEM_DEF(overmap)
 /datum/controller/subsystem/overmap/Recover()
 	if(istype(SSovermap.simulated_ships))
 		simulated_ships = SSovermap.simulated_ships
-	if(istype(SSovermap.helms))
-		helms = SSovermap.helms
 	if(istype(SSovermap.events))
 		events = SSovermap.events
 	if(istype(SSovermap.main))

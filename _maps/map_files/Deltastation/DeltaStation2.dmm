@@ -1219,17 +1219,6 @@
 	},
 /turf/open/space,
 /area/space/nearstation)
-"agS" = (
-/obj/docking_port/stationary{
-	dir = 8;
-	dwidth = 11;
-	height = 22;
-	id = "whiteship_home";
-	name = "SS13: Auxiliary Dock, Station-Fore";
-	width = 35
-	},
-/turf/open/space/basic,
-/area/space)
 "agT" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
 /obj/effect/turf_decal/stripes/line{
@@ -16016,6 +16005,18 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/medical/chemistry)
+"aZD" = (
+/obj/docking_port/stationary{
+	dir = 8;
+	dwidth = 11;
+	height = 26;
+	id = "whiteship_home";
+	name = "SS13: Auxiliary Dock, Station-Fore";
+	roundstart_template = /datum/map_template/shuttle/mining_ship;
+	width = 35
+	},
+/turf/open/space/basic,
+/area/space)
 "aZK" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/camera{
@@ -111010,6 +111011,18 @@
 /obj/machinery/door/firedoor/border_only,
 /turf/open/floor/wood,
 /area/bridge/showroom/corporate)
+"qUR" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-4"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
+/turf/open/floor/plating/airless,
+/area/engine/engineering)
 "qVe" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
@@ -126839,18 +126852,6 @@
 /obj/effect/spawner/structure/window/reinforced/shutters,
 /turf/open/floor/plating,
 /area/crew_quarters/heads/hos)
-"vZJ" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 4
-	},
-/obj/structure/cable/yellow{
-	icon_state = "1-4"
-	},
-/obj/structure/cable/yellow{
-	icon_state = "2-4"
-	},
-/turf/open/floor/plating/airless,
-/area/engine/engineering)
 "vZM" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
@@ -156510,7 +156511,7 @@ bNF
 bNF
 bNF
 bNF
-vZJ
+qUR
 bNF
 bNF
 bNF
@@ -165164,7 +165165,7 @@ aaa
 aaa
 aaa
 aaa
-agS
+aZD
 aaa
 aaa
 aaa
