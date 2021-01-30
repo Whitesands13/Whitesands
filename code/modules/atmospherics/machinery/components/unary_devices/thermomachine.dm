@@ -35,10 +35,6 @@
 		set_layer = piping_layer
 	..()
 
-/obj/machinery/atmospherics/components/unary/thermomachine/Destroy()
-	SSair.atmos_machinery.Remove(src)
-	return ..()
-
 /obj/machinery/atmospherics/components/unary/thermomachine/RefreshParts()
 	var/B
 	for(var/obj/item/stock_parts/matter_bin/M in component_parts)
