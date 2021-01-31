@@ -8740,11 +8740,12 @@
 /turf/open/floor/plasteel/grimy,
 /area/crew_quarters/solgov)
 "uL" = (
-/obj/machinery/computer/crew{
-	dir = 4
-	},
 /obj/item/radio/intercom{
 	pixel_y = -26
+	},
+/obj/structure/table/reinforced,
+/obj/machinery/photocopier/faxmachine/longrange{
+	department = "Internal Affairs"
 	},
 /turf/open/floor/plasteel/grimy,
 /area/crew_quarters/solgov)
@@ -14976,6 +14977,9 @@
 	dir = 1
 	},
 /obj/machinery/door/firedoor/border_only,
+/obj/effect/mapping_helpers/airlock/unres{
+	dir = 1
+	},
 /turf/open/floor/engine/hull/reinforced/interior,
 /area/engine/gravity_generator)
 "Mr" = (
@@ -16580,7 +16584,7 @@
 /area/maintenance/solars/starboard/aft)
 "Ti" = (
 /obj/machinery/door/window/eastleft{
-	name = "lieutenant's office";
+	name = "\improper SolGov Consulate";
 	req_access_txt = "90"
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
@@ -17883,6 +17887,10 @@
 	dir = 1
 	},
 /obj/machinery/telecomms/relay/preset/station,
+/obj/machinery/camera{
+	c_tag = "Engineering - Upper Comms Relay";
+	name = "engineering camera"
+	},
 /turf/open/floor/circuit/green/telecomms,
 /area/tcommsat/server/upper)
 "YM" = (
