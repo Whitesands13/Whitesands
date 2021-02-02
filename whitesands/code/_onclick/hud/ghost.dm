@@ -14,4 +14,5 @@
 
 	using = new /obj/screen/ghost/spawner_menu()
 	using.screen_loc_name = "ui_ghost_spawner_menu"
+	using.hud = src
 	static_inventory += using

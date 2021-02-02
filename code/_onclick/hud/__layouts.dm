@@ -142,7 +142,7 @@ GLOBAL_LIST_INIT(ui_layout_default, list(
 	ui_ghost_orbit = "SOUTH:6,CENTER-2:24",
 	ui_ghost_reenter_corpse = "SOUTH:6,CENTER-1:24",
 	ui_ghost_teleport = "SOUTH:6,CENTER:24",
-	ui_ghost_pai = "SOUTH: 6,CENTER+1:24",
+	ui_ghost_pai = "SOUTH:6,CENTER+1:24",
 	ui_ghost_spawner_menu = "SOUTH:6,CENTER+2:24"
 ))
 

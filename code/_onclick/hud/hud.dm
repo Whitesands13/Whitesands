@@ -17,7 +17,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 
 GLOBAL_LIST_INIT(available_ui_layouts, list(
 	"Default" = GLOB.ui_layout_default,
-	"Alternate" = GLOB.ui_layout_alternate
+	"Goon" = GLOB.ui_layout_alternate
 ))
 
 /proc/ui_style2icon(ui_style)

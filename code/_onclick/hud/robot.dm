@@ -137,6 +137,7 @@
 	module_store_icon = new /obj/screen/robot/store()
 	module_store_icon.screen_loc_name = "ui_borg_store"
 	module_store_icon.hud = src
+	module_store_icon.hud = src
 
 	pull_icon = new /obj/screen/pull()
 	pull_icon.icon = 'icons/mob/screen_cyborg.dmi'
