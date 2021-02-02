@@ -3,6 +3,9 @@
 /obj/machinery/power/smes/shuttle/precharged{
 	dir = 1
 	},
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
 /turf/open/floor/mineral/titanium/blue,
 /area/shuttle/pod_1)
 "m" = (
@@ -43,7 +46,10 @@
 /obj/machinery/power/shuttle/engine/electric{
 	dir = 1
 	},
-/turf/closed/wall/mineral/titanium/nodiagonal,
+/obj/structure/cable,
+/obj/structure/window/reinforced/spawner/east,
+/obj/structure/window/reinforced/spawner/north,
+/turf/open/floor/plating,
 /area/shuttle/pod_1)
 "H" = (
 /obj/structure/chair/comfy/shuttle{
@@ -116,15 +122,21 @@
 	},
 /turf/open/floor/mineral/titanium/blue,
 /area/shuttle/pod_1)
-"W" = (
-/turf/closed/wall/mineral/titanium,
-/area/template_noop)
+"Y" = (
+/obj/machinery/power/shuttle/engine/electric{
+	dir = 1
+	},
+/obj/structure/cable,
+/obj/structure/window/reinforced/spawner/west,
+/obj/structure/window/reinforced/spawner/north,
+/turf/open/floor/plating,
+/area/shuttle/pod_1)
 "Z" = (
 /turf/closed/wall/mineral/titanium/nodiagonal,
 /area/shuttle/pod_1)
 
 (1,1,1) = {"
-W
+B
 B
 B
 u
@@ -153,10 +165,10 @@ E
 M
 H
 h
-F
+Y
 "}
 (5,1,1) = {"
-W
+B
 B
 B
 u
