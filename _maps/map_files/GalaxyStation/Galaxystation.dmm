@@ -3268,6 +3268,10 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
+/obj/structure/sign/warning/biohazard{
+	pixel_y = 32
+	},
+/obj/structure/closet/l3closet/scientist,
 /turf/open/floor/plasteel/white,
 /area/science/xenobiology)
 "asb" = (
@@ -5456,6 +5460,8 @@
 	dir = 1
 	},
 /obj/machinery/light,
+/obj/item/storage/box/monkeycubes,
+/obj/item/storage/box/monkeycubes,
 /turf/open/floor/plasteel,
 /area/science/xenobiology)
 "aUd" = (
@@ -19763,6 +19769,22 @@
 	},
 /turf/open/floor/engine,
 /area/science/storage)
+"tfm" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj/structure/closet/l3closet/scientist,
+/turf/open/floor/plasteel/white,
+/area/science/xenobiology)
 "tgn" = (
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
@@ -24007,7 +24029,7 @@
 "ylu" = (
 /obj/machinery/door/airlock/maintenance_hatch{
 	name = "Bar Backroom";
-	req_access = "25";
+	req_access = null;
 	req_access_txt = "25"
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
@@ -50125,7 +50147,7 @@ buu
 cfr
 ojn
 aFx
-aEZ
+tfm
 akb
 atz
 aIg
