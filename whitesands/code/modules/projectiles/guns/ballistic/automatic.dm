@@ -48,7 +48,7 @@
 
 /obj/item/gun/ballistic/automatic/ak47
 	name = "AK-47"
-	desc = {"A favorite among both the soldiers of the Space Russain Army and civillians out on the edges of explored space, the AK-47 is a reliable rifle designed and sold by a Space Russian company and remains one of the most common automatic rifles in the known galaxy."}
+	desc = {"A favorite among both the soldiers of the Russian Colonial Army and civilians out on the edges of explored space, the AK-47 is a reliable rifle designed and sold by a Space Russian company and remains one of the most common automatic rifles in the known galaxy."}
 	icon = 'whitesands/icons/obj/guns/48x32guns.dmi'
 	icon_state = "ak47"
 	item_state = "arg"
