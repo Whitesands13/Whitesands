@@ -22,6 +22,6 @@
 	name = "AK-47 Magazine (7.62x39mm FMJ)"
 	icon = 'whitesands/icons/obj/ammo.dmi'
 	icon_state = "ak47_mag"
-	ammo_type = /obj/item/ammo_casing/ballistic/762_39
+	ammo_type = /obj/item/ammo_casing/ballistic/a762_39
 	caliber = "7.62x39mm FMJ"
 	max_ammo = 30

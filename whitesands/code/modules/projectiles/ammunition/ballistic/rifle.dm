@@ -13,12 +13,12 @@
 	variance = 3.5
 	projectile_type = /obj/projectile/bullet/a545_39
 
-	/obj/item/ammo_casing/ballistic/762_39
+/obj/item/ammo_casing/ballistic/a762_39
 	name = "7.62x39mm FMJ bullet casing"
 	desc = "A 7.62x39mm FMJ bullet casing."
 	caliber = "7.62x39mm FMJ"
 	variance = 2
-	projectile_type = /obj/projectile/bullet/762_39
+	projectile_type = /obj/projectile/bullet/a762_39
 
 /obj/item/ammo_casing/ballistic/aac_300blk
 	name = ".300BLK bullet casing"

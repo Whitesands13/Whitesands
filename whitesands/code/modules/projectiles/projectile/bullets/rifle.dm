@@ -7,6 +7,6 @@
 	damage = 20
 	dismemberment = 20
 
-	/obj/projectile/bullet/762_39
+	/obj/projectile/bullet/a762_39
 	name = "7.62x39mm FMJ"
 	damage = 30
