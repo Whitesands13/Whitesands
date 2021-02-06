@@ -41,6 +41,7 @@
 	"}
 	icon = 'whitesands/icons/obj/guns/projectile.dmi'
 	icon_state = "aks74u"
+	fire_rate = 10
 	weapon_weight = WEAPON_MEDIUM
 	w_class = WEIGHT_CLASS_NORMAL
 	pin = /obj/item/firing_pin/explorer
@@ -52,7 +53,7 @@
 	icon = 'whitesands/icons/obj/guns/48x32guns.dmi'
 	icon_state = "ak47"
 	item_state = "arg"
-	fire_rate = 4
+	fire_rate = 2
 	mag_display = TRUE
 	weapon_weight = WEAPON_MEDIUM
 	w_class = WEIGHT_CLASS_BULKY
