@@ -45,3 +45,16 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	pin = /obj/item/firing_pin/explorer
 	mag_type = /obj/item/ammo_box/magazine/aks74u
+
+/obj/item/gun/ballistic/automatic/ak47
+	name = "AK-47"
+	desc = {"A favorite among both the soldiers of the Space Russain Army and civillians out on the edges of explored space, the AK-47 is a reliable rifle designed and sold by a Space Russian company and remains one of the most common automatic rifles in the known galaxy."}
+	icon = 'whitesands/icons/obj/guns/48x32guns.dmi'
+	icon_state = "ak47"
+	item_state = "arg"
+	fire_rate = 4
+	mag_display = TRUE
+	weapon_weight = WEAPON_MEDIUM
+	w_class = WEIGHT_CLASS_BULKY
+	mag_type = /obj/item/ammo_box/magazine/ak47
+
