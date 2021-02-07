@@ -6,12 +6,8 @@
 	actions_types = list(/datum/action/item_action/activate_lanternbang)
 	var/cooldown = 0
 
-/obj/item/flashlight/lantern/lanternbang/proc/cooldown()
-	sleep(10 SECONDS)
-	cooldown = 0
-
 /obj/item/flashlight/lantern/lanternbang/proc/activate()
-	if(cooldown > 0)
+	if(cooldown)
 		return
 	src.visible_message("<span class='warning'>\The [src]'s light overloads!</span>")
 	new /obj/effect/dummy/lighting_obj (get_turf(src), 10, 4, COLOR_WHITE, 2)
@@ -25,5 +21,5 @@
 		if(M.flash_act(affect_silicon = 1))
 			M.Knockdown(max(60/max(1, distance), 30))
 			M.confused += 30
-	cooldown = 1
-	cooldown()
+	cooldown = TRUE
+    addtimer(VARSET_CALLBACK(src, cooldown, FALSE), 10 SECONDS)

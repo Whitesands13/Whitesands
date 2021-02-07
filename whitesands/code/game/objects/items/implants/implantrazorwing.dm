@@ -3,17 +3,17 @@
     desc = "Don't let your wings be dreams."
     icon = 'icons/obj/surgery.dmi'
     icon_state = "severedwings"
-    var/cooldown = 0
+    var/cooldown = FALSE
 
-/obj/item/implant/razorwing/proc/cooldown()
-    cooldown = 1
-    sleep(5 SECONDS)
-    cooldown = 0
 
 /obj/item/implant/razorwing/activate()
     if(cooldown)
         to_chat(imp_in, "<span class='warning'>You can't do that yet!</span>")
         return
+    if(imp_in.incapacitated())
+        to_chat(imp_in, "<span class='warning'>You're in no state to do that!</span>")
+        return
+
     imp_in.visible_message("<span class='danger'>\The [imp_in] flourishes their wings rapidly!</span>", "<span class='danger'>You flourish your wings!</span>")
     imp_in.emote("spin")
     imp_in.emote("flip")
@@ -21,8 +21,9 @@
     for(var/mob/living/L in get_hearers_in_view(1, imp_in))
         if(L == imp_in)
             continue
-        L.adjustBruteLoss(30)
-    cooldown()
+        L.adjustBruteLoss(20)
+    cooldown = TRUE
+    addtimer(VARSET_CALLBACK(src, cooldown, FALSE), 10 SECONDS)
 
 /obj/item/implant/razorwing/get_data()
     var/dat = {"
