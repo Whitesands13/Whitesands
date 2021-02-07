@@ -1,6 +1,6 @@
 /obj/item/implant/razorwing
     name = "razorwing implant"
-    desc = "Fwfwf."
+    desc = "Don't let your wings be dreams."
     icon = 'icons/obj/surgery.dmi'
     icon_state = "severedwings"
     var/cooldown = 0
