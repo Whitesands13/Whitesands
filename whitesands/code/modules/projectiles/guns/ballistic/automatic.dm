@@ -36,7 +36,7 @@
 
 /obj/item/gun/ballistic/automatic/pistol/commissar/equipped(mob/living/user, slot)
 	..()
-	if(slot == ITEM_SLOT_HANDS && funnysounds) // We do this instead of equip_sound as we only want this to play when it's weilded
+	if(slot == ITEM_SLOT_HANDS && funnysounds) // We do this instead of equip_sound as we only want this to play when it's wielded
 		playsound(src, 'whitesands/sound/weapons/gun/commissar/pickup.ogg', 30, 0)
 
 /obj/item/gun/ballistic/automatic/pistol/commissar/shoot_live_shot(mob/living/user, pointblank, atom/pbtarget, message)
