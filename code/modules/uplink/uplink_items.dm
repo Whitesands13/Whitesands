@@ -1676,20 +1676,6 @@ GLOBAL_LIST_INIT(uplink_items, subtypesof(/datum/uplink_item))
 	LepiCorp-brand \"Extra-Bright Lantern™\". Enjoy."
 	cost = 1
 	item = /obj/item/flashlight/lantern/syndicate
-	restricted_species = list("moth")
-
-/datum/uplink_item/race_restricted/razorwing
-	name = "Razorwing Implant"
-	desc = "Put those wings to good use! This implant will make your wingtips razer sharp and give you the ability to flourish them, cutting anyone who gets too close."
-	cost = 4
-	item = /obj/item/storage/box/syndie_kit/razorwing
-	restricted_species = list("moth")
-
-/datum/uplink_item/race_restricted/lampbang
-	name = "Lanternbang"
-	desc = "This LepiCorp-brand lantern has the ability to overload its lightbulb, blinding and confusing anyone in a radius around it except for its holder."
-	cost = 5
-	item = /obj/item/flashlight/lantern/lanternbang
 	restricted_species = list("moth") //End WS edit
 
 /datum/uplink_item/race_restricted/syndigenetics
