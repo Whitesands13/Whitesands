@@ -324,7 +324,7 @@
 		return round ? CEILING(total_cost * 5, 1) : total_cost
 
 	var/amt_ratio = (materials[mat] + 1) / amt
-	if (amt_ratio > 1 && amt > 1)
+	if (amt_ratio < 2 && amt > 1)
 		// Cost Scaling = 2*(Amount Ratio - 1)^2
 		total_cost *= 1 + ((amt_ratio - 1) ** 2)
 
