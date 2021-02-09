@@ -320,9 +320,13 @@
 	if(!linked_account)
 		return FALSE //Don't need to charge for it, return default
 	if(!materials[mat]) //Do we have the resource?
-		return total_cost * 5 //Can't afford it, send the default price times five so that it's very profitable to put in
+		//Can't afford it, send the default price times five so that it's very profitable to put in
+		return round ? CEILING(total_cost * 5, 1) : total_cost
 
-	total_cost = total_cost * (amt / materials[mat] + 1) //Scale it so that if you use half of the mats in the silo, you pay 2x
+	var/amt_ratio = (materials[mat] + 1) / amt
+	if (amt_ratio > 1 && amt > 1)
+		// Cost Scaling = 2*(Amount Ratio - 1)^2
+		total_cost *= 1 + ((amt_ratio - 1) ** 2)
 
 	return round ? CEILING(total_cost, 1) : total_cost
 
