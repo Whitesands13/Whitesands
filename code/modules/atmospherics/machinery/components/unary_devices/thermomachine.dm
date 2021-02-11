@@ -26,7 +26,8 @@
 /obj/machinery/atmospherics/components/unary/thermomachine/Initialize()
 	. = ..()
 	initialize_directions = dir
-
+	if(!(src in SSair.atmos_machinery))	//WS edit, initialize thermomachines to SSairs list of tickable machines
+		SSair.atmos_machinery += src
 /obj/machinery/atmospherics/components/unary/thermomachine/on_construction(obj_color, set_layer)
 	var/obj/item/circuitboard/machine/thermomachine/board = circuit
 	if(board)
@@ -171,7 +172,7 @@
 
 	update_icon()
 
-//Wasp Edit - Update from Cit's Thermomachine - PR #8800, adds additional info to ctrl and alt clicks - BFAT
+//WS Edit - Update from Cit's Thermomachine - PR #8800, adds additional info to ctrl and alt clicks - BFAT
 
 /obj/machinery/atmospherics/components/unary/thermomachine/CtrlClick(mob/living/user)
 	var/area/A = get_area(src)

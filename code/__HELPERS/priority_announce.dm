@@ -1,4 +1,4 @@
-/proc/priority_announce(text, title = "", sound = 'sound/ai/attention.ogg', type, sender_override, auth_id)            // Waspstation Edit - Make cap's announcement use logged-in name
+/proc/priority_announce(text, title = "", sound = 'sound/ai/attention.ogg', type, sender_override, auth_id)            //WS Edit - Make cap's announcement use logged-in name
 	if(!text)
 		return
 
@@ -28,8 +28,8 @@
 
 	announcement += "<br><span class='alert'>[html_encode(text)]</span><br>"
 	announcement += "<br>"
-	if(auth_id)                                                                                                       // Waspstation Edit - Make cap's announcement use logged-in name
-		announcement += "<span class='alert'>-[auth_id]</span><br>"                                                   // Waspstation Edit - Make cap's announcement use logged-in name
+	if(auth_id)                                                                                                       //WS Edit - Make cap's announcement use logged-in name
+		announcement += "<span class='alert'>-[auth_id]</span><br>"                                                   //WS Edit - Make cap's announcement use logged-in name
 
 	var/s = sound(sound)
 	for(var/mob/M in GLOB.player_list)
@@ -57,10 +57,7 @@
 
 	for(var/mob/M in GLOB.player_list)
 		if(!isnewplayer(M) && M.can_hear())
-			var/complete_msg = "<span class='big bold'><font color = red>[html_encode(title)]</font color><BR>[html_encode(message)]</span><BR>"
-			if(from)
-				complete_msg += "<span class='alert'>-[from.name] ([from.job])</span>"
-			to_chat(M, complete_msg)
+			to_chat(M, "<span class='minorannounce'><font color = red>[title]</font color><BR>[message]</span><BR>[from ? "<span class='alert'>-[from.name] ([from.job])</span>" : null]")
 			if(M.client.prefs.toggles & SOUND_ANNOUNCEMENTS)
 				if(alert)
 					SEND_SOUND(M, sound('sound/misc/notice1.ogg'))

@@ -73,7 +73,7 @@
 	if (obj_flags & EMAGGED)
 		return
 	obj_flags |= EMAGGED
-	SSshuttle.shuttle_purchase_requirements_met |= SHUTTLE_UNLOCK_EMAGGED //Wasp Edit - Makes shuttles from Emag list purchaseable
+	SSshuttle.shuttle_purchase_requirements_met |= SHUTTLE_UNLOCK_EMAGGED //WS Edit - Makes shuttles from Emag list purchaseable
 	if (authenticated)
 		authorize_access = get_all_accesses()
 	to_chat(user, "<span class='danger'>You scramble the communication routing circuits!</span>")
@@ -87,14 +87,24 @@
 	if (.)
 		return
 
+	if (!has_communication())
+		return
+
 	. = TRUE
 
 	switch (action)
 		if ("answerMessage")
 			if (!authenticated(usr))
 				return
-			var/answer_index = text2num(params["answer"])
-			var/message_index = text2num(params["message"])
+
+			var/answer_index = params["answer"]
+			var/message_index = params["message"]
+
+			// If either of these aren't numbers, then bad voodoo.
+			if(!isnum(answer_index) || !isnum(message_index))
+				message_admins("[ADMIN_LOOKUPFLW(usr)] provided an invalid index type when replying to a message on [src] [ADMIN_JMP(src)]. This should not happen. Please check with a maintainer and/or consult tgui logs.")
+				CRASH("Non-numeric index provided when answering comms console message.")
+
 			if (!answer_index || !message_index || answer_index < 1 || message_index < 1)
 				return
 			var/datum/comm_message/message = messages[message_index]
@@ -318,7 +328,7 @@
 				log_game("[key_name(usr)] enabled emergency maintenance access.")
 				message_admins("[ADMIN_LOOKUPFLW(usr)] enabled emergency maintenance access.")
 				deadchat_broadcast(" enabled emergency maintenance access at <span class='name'>[get_area_name(usr, TRUE)]</span>.", "<span class='name'>[usr.real_name]</span>", usr, message_type = DEADCHAT_ANNOUNCEMENT)
-		//Wasp Begin - Nightshift Toggling
+		//WS Begin - Nightshift Toggling
 		if ("toggleNightshift")
 			if(!SSnightshift.can_fire)
 				SSnightshift.can_fire = TRUE
@@ -330,12 +340,13 @@
 				SSnightshift.update_nightshift(FALSE, TRUE)
 				log_game("[key_name(usr)] has overridden the night shift to be off.")
 				message_admins("[ADMIN_LOOKUPFLW(usr)] has overridden the night shift to be off.")
-		//Wasp End
+		//WS End
 
 /obj/machinery/computer/communications/ui_data(mob/user)
 	var/list/data = list(
 		"authenticated" = FALSE,
 		"emagged" = FALSE,
+		"hasConnection" = has_communication(),
 	)
 
 	var/ui_state = issilicon(user) ? cyborg_state : state
@@ -362,9 +373,9 @@
 				data["shuttleCalled"] = FALSE
 				data["shuttleLastCalled"] = FALSE
 
-				//Wasp Begin - Allows Toggling Nightshift Lighting
+				//WS Begin - Allows Toggling Nightshift Lighting
 				data["nightShiftActive"] = SSnightshift.can_fire
-				//Wasp End
+				//WS End
 
 				data["alertLevel"] = get_security_level()
 				data["authorizeName"] = authorize_name
@@ -453,6 +464,12 @@
 		"maxMessageLength" = MAX_MESSAGE_LEN,
 	)
 
+/// Returns whether or not the communications console can communicate with the station
+/obj/machinery/computer/communications/proc/has_communication()
+	var/turf/current_turf = get_turf(src)
+	var/z_level = current_turf.z
+	return is_station_level(z_level) || is_centcom_level(z_level)
+
 /obj/machinery/computer/communications/proc/set_state(mob/user, new_state)
 	if (issilicon(user))
 		cyborg_state = new_state
@@ -491,7 +508,7 @@
 		to_chat(user, "<span class='warning'>You find yourself unable to speak.</span>")
 	else
 		input = user.treat_message(input) //Adds slurs and so on. Someone should make this use languages too.
-	SScommunications.make_announcement(user, is_ai, input, authorize_name) // Waspstation Edit - Make cap's announcement use logged-in name
+	SScommunications.make_announcement(user, is_ai, input, authorize_name) //WS Edit - Make cap's announcement use logged-in name
 	deadchat_broadcast(" made a priority announcement from <span class='name'>[get_area_name(usr, TRUE)]</span>.", "<span class='name'>[user.real_name]</span>", user, message_type=DEADCHAT_ANNOUNCEMENT)
 
 /obj/machinery/computer/communications/proc/post_status(command, data1, data2)
@@ -510,7 +527,6 @@
 			status_signal.data["picture_state"] = data1
 
 	frequency.post_signal(src, status_signal)
-
 
 /obj/machinery/computer/communications/Destroy()
 	GLOB.shuttle_caller_list -= src
