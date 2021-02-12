@@ -449,7 +449,7 @@
 /datum/supply_pack/engineer/shuttle_designator
 	name = "Shuttle designator"
 	desc = "A tool used to create spacecraft from scratch, used for defining areas and linking consoles."
-	cost = 2500
+	cost = 5000
 	contains = list(/obj/item/shuttle_creator)
 
 //////////////////////////////////////////////////////////////////////////////
