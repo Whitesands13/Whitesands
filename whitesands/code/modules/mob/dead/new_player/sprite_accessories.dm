@@ -13,3 +13,4 @@
 /datum/sprite_accessory/moth_fluff/plasmafire
 	name = "Plasmafire"
 	icon_state = "plasmafire"
+    
