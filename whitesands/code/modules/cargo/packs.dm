@@ -432,6 +432,27 @@
 	crate_name = "deep core logi crate"
 
 //////////////////////////////////////////////////////////////////////////////
+/////////////////////////// Overmap Shuttles /////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+/datum/supply_pack/engineering/shuttle_in_a_box
+	name = "Shuttle in a Box"
+	desc = "The bare minimum amount of machine and computer boards required to create a working spacecraft."
+	cost = 8000
+	contains = list(
+		/obj/item/circuitboard/computer/shuttle/docker,
+		/obj/item/circuitboard/computer/shuttle/helm,
+		/obj/item/circuitboard/machine/shuttle/smes,
+		/obj/item/circuitboard/machine/shuttle/engine/electric
+	)
+
+/datum/supply_pack/engineer/shuttle_designator
+	name = "Shuttle designator"
+	desc = "A tool used to create spacecraft from scratch, used for defining areas and linking consoles."
+	cost = 2500
+	contains = list(/obj/item/shuttle_creator)
+
+//////////////////////////////////////////////////////////////////////////////
 //////////////////////////// Miscellaneous ///////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 
