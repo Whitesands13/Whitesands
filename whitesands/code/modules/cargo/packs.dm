@@ -446,7 +446,7 @@
 		/obj/item/circuitboard/machine/shuttle/engine/electric
 	)
 
-/datum/supply_pack/engineer/shuttle_designator
+/datum/supply_pack/engineering/shuttle_designator
 	name = "Shuttle designator"
 	desc = "A tool used to create spacecraft from scratch, used for defining areas and linking consoles."
 	cost = 5000
