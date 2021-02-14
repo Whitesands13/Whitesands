@@ -42,7 +42,7 @@
 	path = /obj/item/clothing/suit/bronze
 
 /datum/gear/suit/yakuza
- 	display_name = "yakuza suit"
+	display_name = "yakuza suit"
 	path = /obj/item/clothing/suit/yakuza
 
 //Misc
