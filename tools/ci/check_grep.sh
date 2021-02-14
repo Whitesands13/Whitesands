@@ -74,8 +74,10 @@ do
 		for file in $(jq -r '.map_file[]' $json)
 		do
 			if [ ! -f "_maps$(jq -r '.map_path' $json)/$file" ]
+			then
 				echo "found invalid file reference to $filename in _maps/$json"
        			st=1
+			fi
 		done
     if [ ! -f "$filename" ]
     then
