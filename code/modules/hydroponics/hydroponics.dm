@@ -9,7 +9,7 @@
 	idle_power_usage = 0
 	var/waterlevel = 100	//The amount of water in the tray (max 100)
 	var/maxwater = 100		//The maximum amount of water in the tray
-	var/nutridrain = 1	//The amount of nutrient in the tray (max 10)
+	var/nutridrain = 1      // How many units of nutrient will be drained in the tray
 	var/maxnutri = 10		//The maximum nutrient of water in the tray
 	var/pestlevel = 0		//The amount of pests in the tray (max 10)
 	var/weedlevel = 0		//The amount of weeds in the tray (max 10)
@@ -21,14 +21,15 @@
 	var/plant_health		//Its health
 	var/lastproduce = 0		//Last time it was harvested
 	var/lastcycle = 0		//Used for timing of cycles.
-	var/cycledelay = CYCLE_DELAY_DEFAULT		// WS edit - Crystals
+	var/cycledelay = 200	//About 10 seconds / cycle
 	var/harvest = FALSE			//Ready to harvest?
 	var/obj/item/seeds/myseed = null	//The currently planted seed
 	var/rating = 1
 	var/unwrenchable = TRUE
 	var/recent_bee_visit = FALSE //Have we been visited by a bee recently, so bees dont overpollinate one plant
+	var/mob/lastuser //Last user to add reagents to a tray. Mostly for logging.
 	var/self_sustaining = FALSE //If the tray generates nutrients and water on its own
-
+	// Here lies irrigation. You won't be missed, because you were never used.
 
 /obj/machinery/hydroponics/Initialize()
 	//Here lies "nutrilevel", killed by ArcaneMusic 20??-2019. Finally, we strive for a better future. Please use "reagents" instead
@@ -40,6 +41,14 @@
 	name = "hydroponics tray"
 	icon = 'icons/obj/hydroponics/equipment.dmi'
 	icon_state = "hydrotray3"
+
+/obj/machinery/hydroponics/constructable/ComponentInitialize()
+	. = ..()
+	AddComponent(/datum/component/simple_rotation, ROTATION_ALTCLICK | ROTATION_CLOCKWISE | ROTATION_COUNTERCLOCKWISE | ROTATION_VERBS, null, CALLBACK(src, .proc/can_be_rotated))
+	AddComponent(/datum/component/plumbing/simple_demand)
+
+/obj/machinery/hydroponics/constructable/proc/can_be_rotated(mob/user, rotation_type)
+	return !anchored
 
 /obj/machinery/hydroponics/constructable/RefreshParts()
 	var/tmp_capacity = 0
@@ -70,39 +79,32 @@
 		// handle opening the panel
 		if(default_deconstruction_screwdriver(user, icon_state, icon_state, I))
 			return
-
-		// handle deconstructing the machine, if permissible
 		if(default_deconstruction_crowbar(I))
 			return
 
 	return ..()
 
-/obj/machinery/hydroponics/bullet_act(obj/projectile/Proj) //Works with the Somatoray to modify plant variables.
+/obj/machinery/hydroponics/bullet_act(obj/item/projectile/Proj) //Works with the Somatoray to modify plant variables.
 	if(!myseed)
 		return ..()
-	if(istype(Proj , /obj/projectile/energy/floramut))
+	if(istype(Proj , /obj/item/projectile/energy/floramut))
 		mutate()
-	else if(istype(Proj , /obj/projectile/energy/florayield))
+		return BULLET_ACT_HIT
+	else if(istype(Proj , /obj/item/projectile/energy/florayield))
 		return myseed.bullet_act(Proj)
+	else if(istype(Proj , /obj/item/projectile/energy/florarevolution))
+		if(myseed)
+			if(myseed.mutatelist.len > 0)
+				myseed.instability = (myseed.instability/2)
+		mutatespecie()
 	else
 		return ..()
 
 /obj/machinery/hydroponics/process()
 	var/needs_update = 0 // Checks if the icon needs updating so we don't redraw empty trays every time
-	var/temp_sustain = FALSE	// If we want self_sustaining effects temporarily		// WS edit begin - Crystals
 
-	if(myseed)
-		if(myseed.loc != src)
-			myseed.forceMove(src)
-		if(myseed.get_gene(/datum/plant_gene/trait/plant_type/crystal))
-			temp_sustain = TRUE
-
-	if(temp_sustain)		//WS edit end
-		reagents(1)
-		adjustWater(rand(3,5))
-		adjustWeeds(-2)
-		adjustPests(-2)
-		adjustToxic(-2)
+	if(myseed && (myseed.loc != src))
+		myseed.forceMove(src)
 
 	if(!powered() && self_sustaining)
 		visible_message("<span class='warning'>[name]'s auto-grow functionality shuts off!</span>")
@@ -114,7 +116,6 @@
 		adjustWater(rand(1,2))
 		adjustWeeds(-1)
 		adjustPests(-1)
-		adjustToxic(-1)
 
 	if(world.time > (lastcycle + cycledelay))
 		lastcycle = world.time
@@ -246,7 +247,7 @@
 				adjustWeeds(1 / rating)
 
 		// Weeeeeeeeeeeeeeedddssss
-		if(weedlevel >= 10 && prob(50) && !self_sustaining) // At this point the plant is kind of fucked. Weeds can overtake the plant spot.
+		if(weedlevel >= 10 && prob(50)) // At this point the plant is kind of fucked. Weeds can overtake the plant spot.
 			if(myseed)
 				if(!myseed.get_gene(/datum/plant_gene/trait/plant_type/weed_hardy) && !myseed.get_gene(/datum/plant_gene/trait/plant_type/fungal_metabolism)) // If a normal plant
 					weedinvasion()
@@ -297,7 +298,7 @@
 		else
 			plant_overlay.icon_state = myseed.icon_harvest
 	else
-		var/t_growthstate = min(round((age / myseed.maturation) * myseed.growthstages), myseed.growthstages)
+		var/t_growthstate = clamp(round((age / myseed.maturation) * myseed.growthstages), 1, myseed.growthstages)
 		plant_overlay.icon_state = "[myseed.icon_grow][t_growthstate]"
 	add_overlay(plant_overlay)
 
@@ -326,8 +327,9 @@
 			. += "<span class='warning'>It looks unhealthy.</span>"
 	else
 		. += "<span class='info'>It's empty.</span>"
-	. += "<span class='info'>Water: [waterlevel]/[maxwater].</span>"
-	. += "<span class='info'>Nutrient: [reagents.total_volume]/[maxnutri].</span>"
+
+	. += "<span class='info'>Water: [waterlevel]/[maxwater].</span>\n"+\
+	"<span class='info'>Nutrient: [reagents.total_volume]/[maxnutri].</span>"
 	if(self_sustaining)
 		. += "<span class='info'>The tray's autogrow is active, halving active reagent drain, and actively maintaning the plant.</span>"
 
@@ -336,6 +338,7 @@
 	if(pestlevel >= 5)
 		to_chat(user, "<span class='warning'>It's filled with tiny worms!</span>")
 	to_chat(user, "" )
+
 
 
 /obj/machinery/hydroponics/proc/weedinvasion() // If a weed growth is sufficient, this happens.
@@ -370,10 +373,13 @@
 	harvest = 0
 	weedlevel = 0 // Reset
 	pestlevel = 0 // Reset
-	cycledelay = CYCLE_DELAY_DEFAULT		// WS edit - crystals
 	update_icon()
 	visible_message("<span class='warning'>The [oldPlantName] is overtaken by some [myseed.plantname]!</span>")
-	TRAY_NAME_UPDATE
+	name = "hydroponics tray ([myseed.plantname])"
+	if(myseed.product)
+		desc = initial(myseed.product.desc)
+	else
+		desc = initial(desc)
 
 /obj/machinery/hydroponics/proc/mutate(lifemut = 2, endmut = 5, productmut = 1, yieldmut = 2, potmut = 25, wrmut = 2, wcmut = 5, traitmut = 0) // Mutates the current seed
 	if(!myseed)
@@ -382,7 +388,6 @@
 
 /obj/machinery/hydroponics/proc/hardmutate()
 	mutate(4, 10, 2, 4, 50, 4, 10, 3)
-
 
 /obj/machinery/hydroponics/proc/mutatespecie() // Mutagent produced a new plant!
 	if(!myseed || dead)
@@ -432,7 +437,11 @@
 		to_chat(usr, "<span class='warning'>The few weeds in [src] seem to react, but only for a moment...</span>")
 
 
-/obj/machinery/hydroponics/proc/plantdies() // OH NOES!!!!! I put this all in one function to make things easier
+/**
+  * Plant Death Proc.
+  * Cleans up various stats for the plant upon death, including pests, harvestability, and plant health.
+  */
+/obj/machinery/hydroponics/proc/plantdies()
 	plant_health = 0
 	harvest = FALSE
 	pestlevel = 0 // Pests die
@@ -440,7 +449,6 @@
 	if(!dead)
 		update_icon()
 		dead = TRUE
-
 
 
 /obj/machinery/hydroponics/proc/mutatepest(mob/user)
@@ -451,11 +459,6 @@
 		spawn_atom_to_turf(/obj/structure/spider/spiderling/hunter, src, 3, FALSE)
 	else
 		to_chat(user, "<span class='warning'>The pests seem to behave oddly, but quickly settle down...</span>")
-
-/obj/machinery/hydroponics/proc/applyChemicals(datum/reagents/S, mob/user)
-	if(myseed)
-		myseed.on_chem_reaction(S) //In case seeds have some special interactions with special chems, currently only used by vines
-
 
 /obj/machinery/hydroponics/attackby(obj/item/O, mob/user, params)
 	//Called when mob user "attacks" it with object O
@@ -469,7 +472,7 @@
 				return
 
 		if(!reagent_source.reagents.total_volume)
-			to_chat(user, "<span class='warning'>[reagent_source] is empty!</span>")
+			to_chat(user, "<span class='notice'>[reagent_source] is empty.</span>")
 			return 1
 
 		if(reagents.total_volume >= reagents.maximum_volume && !reagent_source.reagents.has_reagent(/datum/reagent/water, 1))
@@ -495,11 +498,6 @@
 				visi_msg="[user] injects [target] with [syr]"
 				if(syr.reagents.total_volume <= syr.amount_per_transfer_from_this)
 					syr.mode = 0
-			else if(istype(reagent_source, /obj/item/reagent_containers/spray/))
-				visi_msg="[user] sprays [target] with [reagent_source]"
-				playsound(loc, 'sound/effects/spray3.ogg', 50, TRUE, -6)
-			else if(transfer_amount) // Droppers, cans, beakers, what have you.
-				visi_msg="[user] uses [reagent_source] on [target]"
 			// Beakers, bottles, buckets, etc.
 			if(reagent_source.is_drainable())
 				playsound(loc, 'sound/effects/slosh.ogg', 25, TRUE)
@@ -507,14 +505,15 @@
 		if(visi_msg)
 			visible_message("<span class='notice'>[visi_msg].</span>")
 
-//This was originally in apply_chemicals, but due to apply_chemicals only holding nutrients, we handle it here now.
+
+		for(var/obj/machinery/hydroponics/H in trays)
+		//cause I don't want to feel like im juggling 15 tamagotchis and I can get to my real work of ripping flooring apart in hopes of validating my life choices of becoming a space-gardener
+			//This was originally in apply_chemicals, but due to apply_chemicals only holding nutrients, we handle it here now.
 			if(reagent_source.reagents.has_reagent(/datum/reagent/water, 1))
 				var/water_amt = reagent_source.reagents.get_reagent_amount(/datum/reagent/water) * transfer_amount / reagent_source.reagents.total_volume
 				H.adjustWater(round(water_amt))
 				reagent_source.reagents.remove_reagent(/datum/reagent/water, water_amt)
 			reagent_source.reagents.trans_to(H.reagents, transfer_amount)
-
-			reagent_source.reagents.trans_to(S,split, transfered_by = user)
 			if(istype(reagent_source, /obj/item/reagent_containers/food/snacks) || istype(reagent_source, /obj/item/reagent_containers/pill))
 				qdel(reagent_source)
 				lastuser = user
@@ -531,23 +530,21 @@
 				investigate_log("had Kudzu planted in it by [key_name(user)] at [AREACOORD(src)]","kudzu")
 			if(!user.transferItemToLoc(O, src))
 				return
-			var/obj/item/seeds/S = O
-			if(S.get_gene(/datum/plant_gene/trait/plant_type/crystal))
-				cycledelay = CYCLE_DELAY_SLOW
-			else
-				cycledelay = CYCLE_DELAY_DEFAULT
 			to_chat(user, "<span class='notice'>You plant [O].</span>")
-			dead = 0
+			dead = FALSE
 			myseed = O
 			TRAY_NAME_UPDATE
 			age = 1
 			plant_health = myseed.endurance
 			lastcycle = world.time
 			update_icon()
+			return
 		else
 			to_chat(user, "<span class='warning'>[src] already has seeds in it!</span>")
+			return
 
 	else if(istype(O, /obj/item/plant_analyzer))
+		var/obj/item/plant_analyzer/P_analyzer = O
 		if(myseed)
 			if(P_analyzer.scan_mode == PLANT_SCANMODE_STATS)
 				to_chat(user, "*** <B>[myseed.plantname]</B> ***" )
@@ -570,10 +567,11 @@
 		to_chat(user, "- Water level: <span class='notice'>[waterlevel] / [maxwater]</span>")
 		to_chat(user, "- Nutrition level: <span class='notice'>[reagents.total_volume] / [maxnutri]</span>")
 		to_chat(user, "")
+		return
 
 	else if(istype(O, /obj/item/cultivator))
 		if(weedlevel > 0)
-			user.visible_message("<span class='notice'>[user] uproots the weeds.</span>", "<span class='notice'>You remove the weeds from [src].</span>")
+			user.visible_message("[user] uproots the weeds.", "<span class='notice'>You remove the weeds from [src].</span>")
 			weedlevel = 0
 			update_icon()
 		else
@@ -598,7 +596,6 @@
 			if(myseed) //Could be that they're just using it as a de-weeder
 				age = 0
 				plant_health = 0
-				lastproduce = 0
 				if(harvest)
 					harvest = FALSE //To make sure they can't just put in another seed and insta-harvest it
 				qdel(myseed)
@@ -607,8 +604,34 @@
 				desc = initial(desc)
 			weedlevel = 0 //Has a side effect of cleaning up those nasty weeds
 			update_icon()
-
-
+	else if(istype(O, /obj/item/gun/energy/floragun))
+		var/obj/item/gun/energy/floragun/flowergun = O
+		if(flowergun.cell.charge < flowergun.cell.maxcharge)
+			to_chat(user, "<span class='notice'>[flowergun] must be fully charged to lock in a mutation!</span>")
+			return
+		if(!myseed)
+			to_chat(user, "<span class='warning'>[src] is empty!</span>")
+			return
+		if(myseed.endurance <= 20)
+			to_chat(user, "<span class='warning'>[myseed.plantname] isn't hardy enough to sequence its mutation!</span>")
+			return
+		if(!myseed.mutatelist)
+			to_chat(user, "<span class='warning'>[myseed.plantname] has nothing else to mutate into!</span>")
+			return
+		else
+			var/list/fresh_mut_list = list()
+			for(var/muties in myseed.mutatelist)
+				var/obj/item/seeds/another_mut = new muties
+				fresh_mut_list[another_mut.plantname] =  muties
+			var/locked_mutation = (input(user, "Select a mutation to lock.", "Plant Mutation Locks") as null|anything in sortList(fresh_mut_list))
+			if(!user.canUseTopic(src, BE_CLOSE) || !locked_mutation)
+				return
+			myseed.mutatelist = list(fresh_mut_list[locked_mutation])
+			myseed.endurance = (myseed.endurance/2)
+			flowergun.cell.use(flowergun.cell.charge)
+			flowergun.update_icon()
+			to_chat(user, "<span class='notice'>[myseed.plantname]'s mutation was set to [locked_mutation], depleting [flowergun]'s cell!</span>")
+			return
 	else
 		return ..()
 
@@ -625,7 +648,8 @@
 	if(issilicon(user)) //How does AI know what plant is?
 		return
 	if(harvest)
-		return myseed.harvest(user)
+		myseed.harvest(user)
+		return
 
 	else if(dead)
 		dead = FALSE
@@ -675,10 +699,12 @@
 		qdel(myseed)
 		myseed = null
 		dead = FALSE
+		name = initial(name)
+		desc = initial(desc)
 		TRAY_NAME_UPDATE
-	if(self_sustaining) //No reason to pay for an empty tray.
-		idle_power_usage = 0
-		self_sustaining = FALSE
+		if(self_sustaining) //No reason to pay for an empty tray.
+			idle_power_usage = 0
+			self_sustaining = FALSE
 	update_icon()
 
 /// Tray Setters - The following procs adjust the tray or plants variables, and make sure that the stat doesn't go out of bounds.///
@@ -713,7 +739,6 @@
 	desc = "A patch of dirt."
 	icon = 'icons/obj/hydroponics/equipment.dmi'
 	icon_state = "soil"
-	gender = PLURAL
 	circuit = null
 	density = FALSE
 	use_power = NO_POWER_USE
@@ -724,7 +749,7 @@
 	return // Has no lights
 
 /obj/machinery/hydroponics/soil/attackby(obj/item/O, mob/user, params)
-	if(O.tool_behaviour == TOOL_SHOVEL && !istype(O, /obj/item/shovel/spade)) //Doesn't include spades because of uprooting plants
+	if(istype(O, /obj/item/shovel) && !istype(O, /obj/item/shovel/spade)) //Doesn't include spades because of uprooting plants
 		to_chat(user, "<span class='notice'>You clear up [src]!</span>")
 		qdel(src)
 	else
