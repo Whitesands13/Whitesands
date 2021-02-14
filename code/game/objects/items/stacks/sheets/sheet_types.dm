@@ -151,6 +151,14 @@ GLOBAL_LIST_INIT(plasteel_recipes, list ( \
 		new/datum/stack_recipe("high security airlock assembly", /obj/structure/door_assembly/door_assembly_highsecurity, 4, time = 50, one_per_turf = 1, on_floor = 1), \
 		new/datum/stack_recipe("vault door assembly", /obj/structure/door_assembly/door_assembly_vault, 6, time = 50, one_per_turf = 1, on_floor = 1), \
 	)), \
+	new/datum/stack_recipe_list("nanoweave carpets", list(\ //WS edit begin: carpet
+		new/datum/stack_recipe("nanoweave (dark)", /obj/item/stack/tile/carpet/nanoweave, 1, 4, 20), \
+		new/datum/stack_recipe("nanoweave (red)", /obj/item/stack/tile/carpet/nanoweave/red, 1, 4, 20), \
+		new/datum/stack_recipe("nanoweave (blue)", /obj/item/stack/tile/carpet/nanoweave/blue, 1, 4, 20), \
+		new/datum/stack_recipe("nanoweave (beige)", /obj/item/stack/tile/carpet/nanoweave/beige, 1, 4, 20), \
+		new/datum/stack_recipe("nanoweave (purple)", /obj/item/stack/tile/carpet/nanoweave/purple, 1, 4, 20), \
+		new/datum/stack_recipe("nanoweave (orange)", /obj/item/stack/tile/carpet/nanoweave/orange, 1, 4, 20), \
+	))
 ))
 
 /obj/item/stack/sheet/plasteel

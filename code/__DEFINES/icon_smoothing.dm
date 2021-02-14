@@ -126,3 +126,12 @@ DEFINE_BITFIELD(smoothing_flags, list(
 #define SMOOTH_GROUP_CLEANABLE_DIRT	S_OBJ(67)			///obj/effect/decal/cleanable/dirt
 
 #define MAX_S_OBJ SMOOTH_GROUP_CLEANABLE_DIRT //Always match this value with the one above it.
+
+//WS edit: ports Nanoweave carpet from NSV
+
+#define SMOOTH_GROUP_CARPET_NWDARK(70)
+#define SMOOTH_GROUP_CARPET_NWRED(71)
+#define SMOOTH_GROUP_CARPET_NWBLUE(72)
+#define SMOOTH_GROUP_CARPET_NWPURPLE(73)
+#define SMOOTH_GROUP_CARPET_NWORANGE(74)
+#define SMOOTH_GROUP_CARPET_NWBEIGE(75) //WS end
