@@ -69,15 +69,12 @@ fi;
 for json in _maps/*.json
 do
     filename="_maps/$(jq -r '.map_path' $json)/$(jq -r '.map_file' $json)"
-	echo "$filename"
-	echo "$(jq -r '.map_file|type' $json)"
 	if [ "$(jq -r '.map_file|type' $json)" == "array" ]
 	then
 		# We've got a multi-z map, check each file in succession
 		for file in $(jq -r '.map_file[]' $json)
 		do
 			subpath="_maps/$(jq -r '.map_path' $json)/$file"
-			echo $subpath
 			if [ ! -f $subpath ]
 			then
 				echo "found invalid file reference to $subpath in _maps/$json"
