@@ -53,7 +53,7 @@
 			else
 				inc_metabalance(METACOIN_ESCAPE_REWARD(is_speed_round, round_duration), reason="Survived the shift.")
 		else
-			inc_metabalance(METACOIN_NOTSURVIVE_REWARD(is_speed_round, round_duration), reason="You tried.")
+			inc_metabalance(METACOIN_NOTSURVIVE_REWARD, reason="You tried.")
 
 /client/proc/process_greentext(is_speed_round, round_duration)
 	inc_metabalance(METACOIN_GREENTEXT_REWARD(is_speed_round, round_duration), reason="Greentext!")
