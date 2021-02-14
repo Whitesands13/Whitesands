@@ -70,7 +70,7 @@ for json in _maps/*.json
 do
     filename="_maps/$(jq -r '.map_path' $json)/$(jq -r '.map_file' $json)"
 	if [ "$filename" == *"["* ]
-		then
+	then
 			# We've got a multi-z map, check each file in succession
 			for file in $(jq -r '.map_file[]' $json)
 			do
