@@ -677,8 +677,8 @@
 		dead = FALSE
 		TRAY_NAME_UPDATE
 	if(self_sustaining) //No reason to pay for an empty tray.
-			idle_power_usage = 0
-			self_sustaining = FALSE
+		idle_power_usage = 0
+		self_sustaining = FALSE
 	update_icon()
 
 /// Tray Setters - The following procs adjust the tray or plants variables, and make sure that the stat doesn't go out of bounds.///
