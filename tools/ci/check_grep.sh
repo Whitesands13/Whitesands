@@ -70,16 +70,17 @@ for json in _maps/*.json
 do
     filename="_maps/$(jq -r '.map_path' $json)/$(jq -r '.map_file' $json)"
 	if [ "$filename" == *"["* ]
-		# We've got a multi-z map, check each file in succession
-		for file in $(jq -r '.map_file[]' $json)
-		do
-			if [ ! -f "_maps$(jq -r '.map_path' $json)/$file" ]
-			then
-				echo "found invalid file reference to $filename in _maps/$json"
-       			st=1
-			fi
-		done
-    if [ ! -f "$filename" ]
+		then
+			# We've got a multi-z map, check each file in succession
+			for file in $(jq -r '.map_file[]' $json)
+			do
+				if [ ! -f "_maps$(jq -r '.map_path' $json)/$file" ]
+				then
+					echo "found invalid file reference to $filename in _maps/$json"
+					st=1
+				fi
+			done
+    elif [ ! -f "$filename" ]
     then
         echo "found invalid file reference to $filename in _maps/$json"
         st=1
