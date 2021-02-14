@@ -76,7 +76,7 @@ do
 		# We've got a multi-z map, check each file in succession
 		for file in $(jq -r '.map_file[]' $json)
 		do
-			subpath="_maps$(jq -r '.map_path' $json)/$file"
+			subpath="_maps/$(jq -r '.map_path' $json)/$file"
 			echo $subpath
 			if [ ! -f $subpath ]
 			then
