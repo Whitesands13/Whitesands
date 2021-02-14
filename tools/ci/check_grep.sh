@@ -70,6 +70,7 @@ for json in _maps/*.json
 do
     filename="_maps/$(jq -r '.map_path' $json)/$(jq -r '.map_file' $json)"
 	echo "$filename"
+	echo "$(jq -r '.map_file|type')"
 	if [ "$(jq -r '.map_file|type')" == "array" ]
 	then
 		# We've got a multi-z map, check each file in succession
