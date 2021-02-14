@@ -10,7 +10,7 @@
 	w_class = WEIGHT_CLASS_TINY
 	slot_flags = ITEM_SLOT_BELT
 	custom_materials = list(/datum/material/iron=30, /datum/material/glass=20)
-		var/scan_mode = PLANT_SCANMODE_STATS
+	var/scan_mode = PLANT_SCANMODE_STATS
 
 /obj/item/plant_analyzer/attack_self(mob/user)
 	. = ..()
