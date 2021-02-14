@@ -76,6 +76,7 @@ do
 		# We've got a multi-z map, check each file in succession
 		for file in $(jq -r '.map_file[]' $json)
 		do
+			echo $file
 			if [ ! -f "_maps$(jq -r '.map_path' $json)/$file" ]
 			then
 				echo "found invalid file reference to $filename in _maps/$json"
