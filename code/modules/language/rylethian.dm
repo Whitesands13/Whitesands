@@ -22,3 +22,8 @@
 		"forbici"
 	)
 	default_priority = 80
+
+	// WS Edit Start - Whitesands
+	icon = 'whitesands/icons/effects/language.dmi'
+	icon_state = "squid"
+	// WS Edit End - Whitesands
