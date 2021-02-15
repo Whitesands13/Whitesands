@@ -28,7 +28,7 @@
 	select_name = "mutation"
 
 /obj/item/ammo_casing/energy/flora/revolution
-	projectile_type = /obj/item/projectile/energy/florarevolution
+	projectile_type = /obj/projectile/energy/florarevolution
 	select_name = "revolution"
 	e_cost = 250
 
