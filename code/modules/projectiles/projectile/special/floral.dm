@@ -14,7 +14,7 @@
 	nodamage = TRUE
 	flag = "energy"
 
-/obj/item/projectile/energy/florarevolution
+/obj/projectile/energy/florarevolution
 	name = "gamma somatorary"
 	icon_state = "energy3"
 	damage = 0

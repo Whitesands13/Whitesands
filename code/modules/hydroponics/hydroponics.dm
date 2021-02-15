@@ -84,15 +84,15 @@
 
 	return ..()
 
-/obj/machinery/hydroponics/bullet_act(obj/item/projectile/Proj) //Works with the Somatoray to modify plant variables.
+/obj/machinery/hydroponics/bullet_act(obj/projectile/Proj) //Works with the Somatoray to modify plant variables.
 	if(!myseed)
 		return ..()
-	if(istype(Proj , /obj/item/projectile/energy/floramut))
+	if(istype(Proj , /obj/projectile/energy/floramut))
 		mutate()
 		return BULLET_ACT_HIT
-	else if(istype(Proj , /obj/item/projectile/energy/florayield))
+	else if(istype(Proj , /obj/projectile/energy/florayield))
 		return myseed.bullet_act(Proj)
-	else if(istype(Proj , /obj/item/projectile/energy/florarevolution))
+	else if(istype(Proj , /obj/projectile/energy/florarevolution))
 		if(myseed)
 			if(myseed.mutatelist.len > 0)
 				myseed.instability = (myseed.instability/2)
