@@ -21,7 +21,7 @@
 	var/plant_health		//Its health
 	var/lastproduce = 0		//Last time it was harvested
 	var/lastcycle = 0		//Used for timing of cycles.
-	var/cycledelay = 200	//About 10 seconds / cycle
+	var/cycledelay = CYCLE_DELAY_DEFAULT	//WS edit - Crystals
 	var/harvest = FALSE			//Ready to harvest?
 	var/obj/item/seeds/myseed = null	//The currently planted seed
 	var/rating = 1
@@ -102,9 +102,17 @@
 
 /obj/machinery/hydroponics/process()
 	var/needs_update = 0 // Checks if the icon needs updating so we don't redraw empty trays every time
+	var/temp_sustain = FALSE	// If we want self_sustaining effects temporarily		// WS edit begin - Crystals
 
 	if(myseed && (myseed.loc != src))
 		myseed.forceMove(src)
+
+	if(temp_sustain)
+		adjustHealth(20) //yes, this is hacky as fuck. Please change me to copy nutrients from the reagent tank someday.
+		adjustWater(rand(3,5))
+		adjustWeeds(-2)
+		adjustPests(-2)
+		adjustToxic(-2) //WS edit end
 
 	if(!powered() && self_sustaining)
 		visible_message("<span class='warning'>[name]'s auto-grow functionality shuts off!</span>")
@@ -373,6 +381,7 @@
 	harvest = 0
 	weedlevel = 0 // Reset
 	pestlevel = 0 // Reset
+	cycledelay = CYCLE_DELAY_DEFAULT //WS edit - crystals
 	update_icon()
 	visible_message("<span class='warning'>The [oldPlantName] is overtaken by some [myseed.plantname]!</span>")
 	name = "hydroponics tray ([myseed.plantname])"
