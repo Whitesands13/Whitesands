@@ -116,7 +116,7 @@
 	integer = FALSE
 	min_val = 0
 
-//Waspstation Begin - Autotranfer vote
+//WS Begin - Autotranfer vote
 
 /datum/config_entry/number/vote_autotransfer_initial //length of time before the first autotransfer vote is called (deciseconds, default 2 hours)
 	config_entry_value = 72000
@@ -128,7 +128,7 @@
 	integer = FALSE
 	min_val = 0
 
-//Waspstation End
+//WS End
 
 /datum/config_entry/flag/default_no_vote	// vote does not default to nochange/norestart
 
@@ -232,19 +232,19 @@
 /datum/config_entry/string/banappeals
 
 /datum/config_entry/string/wikiurl
-	config_entry_value = "http://www.tgstation13.org/wiki"
+	config_entry_value = "https://wiki.white-sands.space"
 
 /datum/config_entry/string/forumurl
-	config_entry_value = "http://tgstation13.org/phpBB/index.php"
+	config_entry_value = "https://forum.white-sands.space"
 
 /datum/config_entry/string/rulesurl
-	config_entry_value = "http://www.tgstation13.org/wiki/Rules"
+	config_entry_value = "https://wiki.white-sands.space/Rules"
 
 /datum/config_entry/string/githuburl
-	config_entry_value = "https://www.github.com/tgstation/-tg-station"
+	config_entry_value = "https://github.com/Whitesands13/Whitesands"
 
 /datum/config_entry/string/discordurl
-	config_entry_value = "https://discord.gg/husVWe8"
+	config_entry_value = "https://discord.gg/BUM8uRc"
 
 /datum/config_entry/string/centcom_ban_db	// URL for the CentCom Galactic Ban DB API
 
@@ -526,22 +526,9 @@
 
 /datum/config_entry/flag/auto_profile
 
-// DISCORD ROLE STUFFS
-// Using strings for everything because BYOND does not like numbers this big
-// (exception to the above is required living hours haha)
-/datum/config_entry/flag/enable_discord_autorole
-
-/datum/config_entry/number/required_living_hours
-
-/datum/config_entry/string/discord_token
-
-/datum/config_entry/string/discord_guildid
-
-/datum/config_entry/string/discord_roleid
-
-//Begin Wasp Edit
+//BeginWS Edit
 /datum/config_entry/flag/minimaps_enabled
 	config_entry_value = TRUE
-//End Wasp Edit
+//EndWS Edit
 
 /datum/config_entry/string/centcom_source_whitelist

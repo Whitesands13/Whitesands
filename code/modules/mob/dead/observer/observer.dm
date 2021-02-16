@@ -413,7 +413,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	var/list/filtered = list()
 	for(var/V in GLOB.sortedAreas)
 		var/area/A = V
-		if(!A.hidden)
+		if(!(A.area_flags & HIDDEN_AREA))
 			filtered += A
 	var/area/thearea  = input("Area to jump to", "BOOYEA") as null|anything in filtered
 
@@ -488,7 +488,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		var/list/dest = list() //List of possible destinations (mobs)
 		var/target = null	   //Chosen target.
 
-		dest += getpois(mobs_only=1) //Fill list, prompt user with list
+		dest += getpois(mobs_only = TRUE) //Fill list, prompt user with list
 		target = input("Please, select a player!", "Jump to Mob", null, null) as null|anything in dest
 
 		if (!target)//Make sure we actually have a target
@@ -848,7 +848,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if (!eye_name)
 		return
 
-	var/mob/mob_eye = creatures[eye_name]
+	do_observe(creatures[eye_name])
+
+/mob/dead/observer/proc/do_observe(mob/mob_eye)
 	//Istype so we filter out points of interest that are not mobs
 	if(client && mob_eye && istype(mob_eye))
 		client.eye = mob_eye
@@ -937,7 +939,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		else
 			client.images -= stored_t_ray_images
 
-//Wasp Begin
+//WS Begin
 /mob/dead/observer/proc/possess_mouse_verb()
 	set category = "Ghost"
 	set name = "Possess a mouse"
@@ -999,4 +1001,4 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 				food on the floor to gain health and help create new mice. Mouse traps will hurt your fragile body \
 				and so will any kind of weapons. You can control click food and trash items in order to eat them. Get. That. Cheese.")
 	return TRUE
-//Wasp End
+//WS End

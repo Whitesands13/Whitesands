@@ -40,7 +40,15 @@
 	if(admin_controlled)
 		data["status"] = "Unauthorized Access"
 	else
-		data["status"] = M.mode == SHUTTLE_IGNITING ? "Igniting" : M.mode != SHUTTLE_IDLE ? "In Transit" : "Idle"
+		switch(M.mode)
+			if(SHUTTLE_IGNITING)
+				data["status"] = "Igniting"
+			if(SHUTTLE_IDLE)
+				data["status"] = "Idle"
+			if(SHUTTLE_RECHARGING)
+				data["status"] = "Recharging"
+			else
+				data["status"] = "In Transit"
 	for(var/obj/docking_port/stationary/S in SSshuttle.stationary)
 		if(!options.Find(S.id))
 			continue
@@ -60,6 +68,15 @@
 		data["status"] = "Locked"
 	return data
 
+/**
+  * Checks if we are allowed to launch the shuttle, for special cases
+  *
+  * Arguments:
+  * * user - The mob trying to initiate the launch
+  */
+/obj/machinery/computer/shuttle/proc/launch_check(mob/user)
+	return TRUE
+
 /obj/machinery/computer/shuttle/ui_act(action, params)
 	. = ..()
 	if(.)
@@ -70,6 +87,8 @@
 
 	switch(action)
 		if("move")
+			if(!launch_check(usr))
+				return
 			var/obj/docking_port/mobile/M = SSshuttle.getShuttle(shuttleId)
 			if(M.launch_status == ENDGAME_LAUNCHED)
 				to_chat(usr, "<span class='warning'>You've already escaped. Never going back to that place again!</span>")
@@ -78,7 +97,7 @@
 				if(M.mode == SHUTTLE_RECHARGING)
 					to_chat(usr, "<span class='warning'>Shuttle engines are not ready for use.</span>")
 					return
-				if(M.mode != SHUTTLE_IDLE)
+				if(M.mode != SHUTTLE_IDLE && (M.timer < INFINITY))
 					to_chat(usr, "<span class='warning'>Shuttle already in transit.</span>")
 					return
 			var/list/options = params2list(possible_destinations)

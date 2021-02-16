@@ -1,3 +1,5 @@
+/* WS edit - Command/Sec Resprite
+
 /*
  * Contains:
  *		Security
@@ -26,7 +28,7 @@
 
 ///obj/item/clothing/under/rank/security/officer/grey
 //name = "grey security jumpsuit"
-/obj/item/clothing/under/rank/security/officer/white //WaspStation edit - Better security jumpsuit sprites
+/obj/item/clothing/under/rank/security/officer/white //WS edit - Better security jumpsuit sprites
 	name = "white security jumpsuit"
 	desc = "A tactical relic of years past before Nanotrasen decided it was cheaper to dye the suits red instead of washing out the blood."
 	icon_state = "security"
@@ -76,7 +78,7 @@
 
 ///obj/item/clothing/under/rank/security/warden/grey
 //	name = "grey security suit"
-/obj/item/clothing/under/rank/security/warden/white //WaspStation edit - Better security jumpsuit sprites
+/obj/item/clothing/under/rank/security/warden/white //WS edit - Better security jumpsuit sprites
 	name = "white security suit"
 	desc = "A formal relic of years past before Nanotrasen decided it was cheaper to dye the suits red instead of washing out the blood."
 	icon_state = "warden"
@@ -162,7 +164,7 @@
 
 ///obj/item/clothing/under/rank/security/head_of_security/grey
 //	name = "head of security's grey jumpsuit"
-/obj/item/clothing/under/rank/security/head_of_security/white //WaspStation edit - Better security jumpsuit sprites
+/obj/item/clothing/under/rank/security/head_of_security/white //WS edit - Better security jumpsuit sprites
 	name = "head of security's white jumpsuit"
 	desc = "There are old men, and there are bold men, but there are very few old, bold men."
 	icon_state = "hos"
@@ -206,7 +208,7 @@
 	alt_covers_chest = TRUE
 
 /*
-  WaspStation edit - Better security jumpsuit sprites
+  WS edit - Better security jumpsuit sprites
 */
 
 /*
@@ -256,3 +258,5 @@
 	icon_state = "spacepolice_families"
 	item_state = "spacepolice_families"
 	can_adjust = FALSE
+
+WS edit - Command/Sec Resprite */

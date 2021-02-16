@@ -25,7 +25,7 @@
 	QDEL_NULL(soundloop)
 	return ..()
 
-/*Wasp Edit - Smartwire Revert
+/*WS Edit - Smartwire Revert
 /obj/machinery/power/port_gen/should_have_node()
 	return anchored
 */
@@ -253,7 +253,8 @@
 	. =  data
 
 /obj/machinery/power/port_gen/pacman/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
 	switch(action)
 		if("toggle_power")

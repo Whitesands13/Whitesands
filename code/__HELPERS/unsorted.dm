@@ -233,7 +233,7 @@ Turf and target are separate in case you want to teleport some distance from a t
 	return "[pick("!","@","#","$","%","^","&")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]"
 
 //Returns a list of all items of interest with their name
-/proc/getpois(mobs_only=0,skip_mindless=0)
+/proc/getpois(mobs_only = FALSE, skip_mindless = FALSE, specify_dead_role = TRUE)
 	var/list/mobs = sortmobs()
 	var/list/namecounts = list()
 	var/list/pois = list()
@@ -247,7 +247,7 @@ Turf and target are separate in case you want to teleport some distance from a t
 
 		if(M.real_name && M.real_name != M.name)
 			name += " \[[M.real_name]\]"
-		if(M.stat == DEAD)
+		if(M.stat == DEAD && specify_dead_role)
 			if(isobserver(M))
 				name += " \[ghost\]"
 			else
@@ -382,6 +382,30 @@ Turf and target are separate in case you want to teleport some distance from a t
 		x = max(1, x - range)
 
 	return locate(x,y,A.z)
+
+/**
+ * Get ranged target turf, but with direct targets as opposed to directions
+ *
+ * Starts at atom A and gets the exact angle between A and target
+ * Moves from A with that angle, Range amount of times, until it stops, bound to map size
+ * Arguments:
+ * * A - Initial Firer / Position
+ * * target - Target to aim towards
+ * * range - Distance of returned target turf from A
+ * * offset - Angle offset, 180 input would make the returned target turf be in the opposite direction
+ */
+/proc/get_ranged_target_turf_direct(atom/A, atom/target, range, offset)
+	var/angle = ATAN2(target.x - A.x, target.y - A.y)
+	if(offset)
+		angle += offset
+	var/turf/T = get_turf(A)
+	for(var/i in 1 to range)
+		var/turf/check = locate(A.x + cos(angle) * i, A.y + sin(angle) * i, A.z)
+		if(!check)
+			break
+		T = check
+
+	return T
 
 
 // returns turf relative to A offset in dx and dy tiles
@@ -1035,7 +1059,7 @@ B --><-- A
 			var/I = rand(1, L.len)
 			var/turf/T = L[I]
 			var/area/X = get_area(T)
-			if(!T.density && X.valid_territory)
+			if(!T.density && (X.area_flags & VALID_TERRITORY))
 				var/clear = TRUE
 				for(var/obj/O in T)
 					if(O.density)

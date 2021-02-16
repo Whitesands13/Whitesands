@@ -20,7 +20,7 @@
   *
   * make sure you add an update to the schema_version stable in the db changelog
   */
-#define DB_MINOR_VERSION 9
+#define DB_MINOR_VERSION 10
 
 
 //! ## Timing subsystem
@@ -133,6 +133,7 @@
 #define INIT_ORDER_STICKY_BAN		-10
 #define INIT_ORDER_LIGHTING			-20
 #define INIT_ORDER_SHUTTLE			-21
+#define INIT_ORDER_OVERMAP			-25
 #define INIT_ORDER_MINOR_MAPPING	-40
 #define INIT_ORDER_PATH				-50
 #define INIT_ORDER_DISCORD			-60
@@ -191,7 +192,7 @@
 
 ///Compile all the overlays for an atom from the cache lists
 #define COMPILE_OVERLAYS(A)\
-	if (TRUE) {\
+	do{\
 		var/list/ad = A.add_overlays;\
 		var/list/rm = A.remove_overlays;\
 		var/list/po = A.priority_overlays;\
@@ -213,7 +214,7 @@
 			}\
 		}\
 		A.flags_1 &= ~OVERLAY_QUEUED_1;\
-	}
+	}while(FALSE)
 
 // Air subsystem subtasks
 #define SSAIR_PIPENETS 1

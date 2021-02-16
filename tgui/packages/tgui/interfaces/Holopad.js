@@ -1,4 +1,3 @@
-import { Fragment } from 'inferno';
 import { useBackend } from '../backend';
 import { Box, Button, Flex, Icon, LabeledList, Modal, NoticeBox, Section } from '../components';
 import { Window } from '../layouts';
@@ -64,15 +63,15 @@ const HolopadContent = (props, context) => {
     em_cooldown,
   } = data;
   return (
-    <Fragment>
+    <>
       <Section
         title="Holopad"
         buttons={(
           <Button
             icon="bell"
             content={on_cooldown
-              ? "AI Presence Requested"
-              : "Request AI Presence"}
+              ? "AI's Presence Requested"
+              : "Request AI's Presence"}
             disabled={!on_network || on_cooldown}
             onClick={() => act('AIrequest')} />
         )} >
@@ -169,6 +168,6 @@ const HolopadContent = (props, context) => {
           </LabeledList>
         )}
       </Section>
-    </Fragment>
+    </>
   );
 };

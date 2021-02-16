@@ -57,15 +57,15 @@
 
 /mob/living/carbon/attackby(obj/item/I, mob/user, params)
 	var/be_nice = FALSE
-	if(body_position == LYING_DOWN)
-		if((I.item_flags & SURGICAL_TOOL) && user.a_intent == INTENT_HELP)
-			attempt_initiate_surgery(I, src, user)
-			be_nice = TRUE
-		for(var/datum/surgery/S in surgeries)
-			if(body_position == LYING_DOWN || !S.lying_required)
-				if((S.self_operable || user != src) && (user.a_intent == INTENT_HELP || user.a_intent == INTENT_DISARM))
-					if(S.next_step(user ,user.a_intent))
-						return 1
+	// if(body_position == LYING_DOWN) //WS - Fix IPC surgery
+	if((I.item_flags & SURGICAL_TOOL) && user.a_intent == INTENT_HELP)
+		attempt_initiate_surgery(I, src, user)
+		be_nice = TRUE
+	for(var/datum/surgery/S in surgeries)
+		if(body_position == LYING_DOWN || !S.lying_required)
+			if((S.self_operable || user != src) && (user.a_intent == INTENT_HELP || user.a_intent == INTENT_DISARM))
+				if(S.next_step(user ,user.a_intent))
+					return 1
 	if(be_nice)//so that if we don't stab them after starting a surgery that can't be started with a sharp tool
 		return 1
 	return ..()
@@ -160,44 +160,43 @@
 
 /mob/living/carbon/show_inv(mob/user)
 	user.set_machine(src)
-	var/dat = {"
-	<HR>
-	<B><FONT size=3>[name]</FONT></B>
-	<HR>
-	<BR><B>Head:</B> <A href='?src=[REF(src)];item=[ITEM_SLOT_HEAD]'>[(head && !(head.item_flags & ABSTRACT)) ? head : "Nothing"]</A>"}
+	var/has_breathable_mask = istype(wear_mask, /obj/item/clothing/mask)
+	var/obscured = check_obscured_slots()
+	var/list/dat = list()
 
-	var/list/obscured = check_obscured_slots()
-
-	if(ITEM_SLOT_NECK in obscured)
-		dat += "<BR><B>Neck:</B> Obscured"
-	else
-		dat += "<BR><B>Neck:</B> <A href='?src=[REF(src)];item=[ITEM_SLOT_NECK]'>[(wear_neck && !(wear_neck.item_flags & ABSTRACT)) ? (wear_neck) : "Nothing"]</A>"
-
-	if(ITEM_SLOT_MASK in obscured)
-		dat += "<BR><B>Mask:</B> Obscured"
-	else
-		dat += "<BR><B>Mask:</B> <A href='?src=[REF(src)];item=[ITEM_SLOT_MASK]'>[(wear_mask && !(wear_mask.item_flags & ABSTRACT))	? wear_mask	: "Nothing"]</a>"
-
+	dat += "<table>"
 	for(var/i in 1 to held_items.len)
 		var/obj/item/I = get_item_for_held_index(i)
-		dat += "<BR><B>[get_held_index_name(i)]:</B> </td><td><A href='?src=[REF(src)];item=[ITEM_SLOT_HANDS];hand_index=[i]'>[(I && !(I.item_flags & ABSTRACT)) ? I : "Nothing"]</a>"
+		dat += "<tr><td><B>[get_held_index_name(i)]:</B></td><td><A href='?src=[REF(src)];item=[ITEM_SLOT_HANDS];hand_index=[i]'>[(I && !(I.item_flags & ABSTRACT)) ? I : "<font color=grey>Empty</font>"]</a></td></tr>"
+	dat += "<tr><td>&nbsp;</td></tr>"
 
-	dat += "<BR><B>Back:</B> <A href='?src=[REF(src)];item=[ITEM_SLOT_BACK]'>[back ? back : "Nothing"]</A>"
+	dat += "<tr><td><B>Back:</B></td><td><A href='?src=[REF(src)];item=[ITEM_SLOT_BACK]'>[(back && !(back.item_flags & ABSTRACT)) ? back : "<font color=grey>Empty</font>"]</A>"
+	if(has_breathable_mask && istype(back, /obj/item/tank))
+		dat += "&nbsp;<A href='?src=[REF(src)];internal=[ITEM_SLOT_BACK]'>[internal ? "Disable Internals" : "Set Internals"]</A>"
 
-	if(istype(wear_mask, /obj/item/clothing/mask) && istype(back, /obj/item/tank))
-		dat += "<BR><A href='?src=[REF(src)];internal=1'>[internal ? "Disable Internals" : "Set Internals"]</A>"
+	dat += "</td></tr><tr><td>&nbsp;</td></tr>"
+
+	dat += "<tr><td><B>Head:</B></td><td><A href='?src=[REF(src)];item=[ITEM_SLOT_HEAD]'>[(head && !(head.item_flags & ABSTRACT)) ? head : "<font color=grey>Empty</font>"]</A></td></tr>"
+
+	if(obscured & ITEM_SLOT_MASK)
+		dat += "<tr><td><font color=grey><B>Mask:</B></font></td><td><font color=grey>Obscured</font></td></tr>"
+	else
+		dat += "<tr><td><B>Mask:</B></td><td><A href='?src=[REF(src)];item=[ITEM_SLOT_MASK]'>[(wear_mask && !(wear_mask.item_flags & ABSTRACT)) ? wear_mask : "<font color=grey>Empty</font>"]</A></td></tr>"
+
+	dat += "<tr><td><B>Neck:</B></td><td><A href='?src=[REF(src)];item=[ITEM_SLOT_NECK]'>[(wear_neck && !(wear_neck.item_flags & ABSTRACT)) ? wear_neck : "<font color=grey>Empty</font>"]</A></td></tr>"
 
 	if(handcuffed)
-		dat += "<BR><A href='?src=[REF(src)];item=[ITEM_SLOT_HANDCUFFED]'>Handcuffed</A>"
+		dat += "<tr><td><B>Handcuffed:</B> <A href='?src=[REF(src)];item=[ITEM_SLOT_HANDCUFFED]'>Remove</A></td></tr>"
 	if(legcuffed)
-		dat += "<BR><A href='?src=[REF(src)];item=[ITEM_SLOT_LEGCUFFED]'>Legcuffed</A>"
+		dat += "<tr><td><B>Legcuffed:</B> <A href='?src=[REF(src)];item=[ITEM_SLOT_LEGCUFFED]'>Remove</A></td></tr>"
 
-	dat += {"
-	<BR>
-	<BR><A href='?src=[REF(user)];mach_close=mob[REF(src)]'>Close</A>
+	dat += {"</table>
+	<A href='?src=[REF(user)];mach_close=mob[REF(src)]'>Close</A>
 	"}
-	user << browse(dat, "window=mob[REF(src)];size=325x500")
-	onclose(user, "mob[REF(src)]")
+
+	var/datum/browser/popup = new(user, "mob[REF(src)]", "[src]", 440, 510)
+	popup.set_content(dat.Join())
+	popup.open()
 
 /mob/living/carbon/Topic(href, href_list)
 	..()
@@ -423,9 +422,9 @@
 	var/obj/item/organ/alien/plasmavessel/vessel = getorgan(/obj/item/organ/alien/plasmavessel)
 	if(vessel)
 		. += "Plasma Stored: [vessel.storedPlasma]/[vessel.max_plasma]"
-	var/obj/item/organ/dwarfgland/dwarfgland = getorgan(/obj/item/organ/dwarfgland)		// Begin Wasp Edit - Dwarf Alcohol Gland
+	var/obj/item/organ/dwarfgland/dwarfgland = getorgan(/obj/item/organ/dwarfgland)		// BeginWS Edit - Dwarf Alcohol Gland
 	if(dwarfgland)
-		. += "Alcohol Stored: [dwarfgland.stored_alcohol]/[dwarfgland.max_alcohol]"		// End Wasp Edit
+		. += "Alcohol Stored: [dwarfgland.stored_alcohol]/[dwarfgland.max_alcohol]"		// EndWS Edit
 	if(locate(/obj/item/assembly/health) in src)
 		. += "Health: [health]"
 
@@ -544,7 +543,7 @@
 
 /mob/living/carbon/update_stamina()
 	var/stam = getStaminaLoss()
-	if(stam > DAMAGE_PRECISION && (health - stam) <= crit_threshold && !stat)		// Waspstation edit - Stamina stacks with health damage
+	if(stam > DAMAGE_PRECISION && (health - stam) <= crit_threshold && !stat)		//WS edit - Stamina stacks with health damage
 		enter_stamcrit()
 	else if(HAS_TRAIT_FROM(src, TRAIT_INCAPACITATED, STAMINA))
 		REMOVE_TRAIT(src, TRAIT_INCAPACITATED, STAMINA)
@@ -768,7 +767,7 @@
 	if(hud_used && hud_used.internals)
 		hud_used.internals.icon_state = "internal[internal_state]"
 
-/* Wasp revert
+/*WS revert
 /mob/living/carbon/proc/update_spacesuit_hud_icon(cell_state = "empty")
 	if(hud_used && hud_used.spacesuit)
 		hud_used.spacesuit.icon_state = "spacesuit_[cell_state]"

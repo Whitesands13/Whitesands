@@ -1,11 +1,10 @@
 /datum/language/rylethian
 	name = "Rylethian"
 	desc = "A strange language spoken by squidpeople."
-	icon_state = "squid"
 	speech_verb = "gurgles"
 	ask_verb = "bubbles"
 	whisper_verb = "squelches"
-	flags = LANGUAGE_HIDE_ICON_IF_NOT_UNDERSTOOD //WaspStation Edit- Language icon hiding
+	flags = LANGUAGE_HIDE_ICON_IF_NOT_UNDERSTOOD //WS Edit- Language icon hiding
 	scramble_spans = list(SPAN_SGA)
 	key = "e"
 	sentence_chance = 8
@@ -22,3 +21,8 @@
 		"forbici"
 	)
 	default_priority = 80
+
+	// WS Edit Start - Whitesands
+	icon = 'whitesands/icons/effects/language.dmi'
+	icon_state = "squiddish"
+	// WS Edit End - Whitesands

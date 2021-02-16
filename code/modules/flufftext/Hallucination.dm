@@ -793,7 +793,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 	..()
 	var/turf/source = random_far_turf()
 	if(!sound_type)
-		sound_type = pick("airlock","airlock pry","console","explosion","far explosion","mech","glass","alarm","beepsky","mech","wall decon","door hack","speen") //Waspstation - Ghostspeen
+		sound_type = pick("airlock","airlock pry","console","explosion","far explosion","mech","glass","alarm","beepsky","mech","wall decon","door hack","speen") //WS - Ghostspeen
 	feedback_details += "Type: [sound_type]"
 	//Strange audio
 	switch(sound_type)
@@ -840,8 +840,8 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 			target.playsound_local(source, 'sound/items/screwdriver.ogg', 50, 1)
 			sleep(rand(40,80))
 			target.playsound_local(source, 'sound/machines/airlockforced.ogg', 30, 1)
-		if("speen") //Waspstation - Ghostspeen
-			target.playsound_local(source, 'waspstation/sound/voice/speen.ogg', 50, 1)
+		if("speen") //WS - Ghostspeen
+			target.playsound_local(source, 'whitesands/sound/voice/speen.ogg', 50, 1)
 	qdel(src)
 
 /datum/hallucination/weird_sounds
@@ -1101,7 +1101,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 	name = "lava"
 
 /obj/effect/hallucination/danger/lava/show_icon()
-	image = image('icons/turf/floors/lava.dmi',src,"smooth",TURF_LAYER)
+	image = image('icons/turf/floors/lava.dmi', src, "lava-0", TURF_LAYER)
 	if(target.client)
 		target.client.images += image
 
@@ -1115,7 +1115,8 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 	name = "chasm"
 
 /obj/effect/hallucination/danger/chasm/show_icon()
-	image = image('icons/turf/floors/Chasms.dmi',src,"smooth",TURF_LAYER)
+	var/turf/target_loc = get_turf(target)
+	image = image('icons/turf/floors/chasms.dmi', src, "chasms-[target_loc.smoothing_junction]", TURF_LAYER)
 	if(target.client)
 		target.client.images += image
 
@@ -1320,9 +1321,9 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 	H.fire()
 	qdel(src)
 
-//Wasp Begin - Borers
+//WS Begin - Borers
 /obj/effect/hallucination/simple/borer
-	image_icon = 'waspstation/icons/mob/borer.dmi'
+	image_icon = 'whitesands/icons/mob/borer.dmi'
 	image_state = "brainslug"
 
 /datum/hallucination/borer
@@ -1352,4 +1353,4 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 			qdel(borer)
 	qdel(src)
 
-//Wasp end
+//WS end

@@ -67,7 +67,7 @@
 /proc/adminscrub(t,limit=MAX_MESSAGE_LEN)
 	return copytext((html_encode(strip_html_simple(t))),1,limit)
 
-//Begin Waspstation edit - Chat markup
+//BeginWS edit - Chat markup
 //Credit to Aurorastation for the regex and idea for the proc
 //Should be in the form of "tag to be replaced" = list("replacement for beginning", "replacement for end")
 GLOBAL_LIST_INIT(markup_tags, list("/"  = list("<i>", "</i>"),
@@ -86,7 +86,7 @@ GLOBAL_LIST_INIT(markup_regex, list("/"  = new /regex("((\\W|^)_)(\[^_\]*)(_(\\W
 		message = markup.Replace_char(message, "$2[GLOB.markup_tags[tag][1]]$3[GLOB.markup_tags[tag][2]]$5")
 
 	return message
-//End Waspstation edit - Chat markup
+//EndWS edit - Chat markup
 
 //Returns null if there is any bad text in the string
 /proc/reject_bad_text(text, max_length = 512, ascii_only = TRUE)
@@ -273,6 +273,21 @@ GLOBAL_LIST_INIT(markup_regex, list("/"  = new /regex("((\\W|^)_)(\[^_\]*)(_(\\W
 		if (text2ascii(text, i) > 32)
 			return copytext(text, 1, i + 1)
 	return ""
+
+/**
+  * Truncate a string to the given length
+  *
+  * Will only truncate if the string is larger than the length and *ignores unicode concerns*
+  *
+  * This exists soley because trim does other stuff too.
+  *
+  * Arguments:
+  * * text - String
+  * * max_length - integer length to truncate at
+  */
+/proc/truncate(text, max_length)
+	if(length(text) > max_length)
+		return copytext(text, 1, max_length)
 
 //Returns a string with reserved characters and spaces before the first word and after the last word removed.
 /proc/trim(text, max_length)

@@ -10,7 +10,7 @@
 	var/crate_name = "crate"
 	var/desc = ""//no desc by default
 	var/crate_type = /obj/structure/closet/crate
-	var/dangerous = FALSE // Should we message admins? // wasp station edit: all the dangerous shit is actually labeled as dangerous
+	var/dangerous = FALSE // Should we message admins? //WS station edit: all the dangerous shit is actually labeled as dangerous
 	var/special = FALSE //Event/Station Goals/Admin enabled packs
 	var/special_enabled = FALSE
 	var/DropPodOnly = FALSE//only usable by the Bluespace Drop Pod via the express cargo console
@@ -339,21 +339,16 @@
 	name = "Security Clothing Crate"
 	desc = "Contains appropriate outfits for the station's private security force. Contains outfits for the Warden, Head of Security, and two Security Officers. Each outfit comes with a rank-appropriate jumpsuit, suit, and beret. Requires extended Security access to open."
 	cost = 3000
-	contains = list(/obj/item/clothing/under/rank/security/officer/formal,
-					/obj/item/clothing/under/rank/security/officer/formal,
-					/obj/item/clothing/suit/security/officer,
-					/obj/item/clothing/suit/security/officer,
-					/obj/item/clothing/head/beret/sec/navyofficer,
-					/obj/item/clothing/head/beret/sec/navyofficer,
-					/obj/item/clothing/head/beret/sec/navyofficer/black,
-					/obj/item/clothing/under/rank/security/warden/formal,
-					/obj/item/clothing/suit/security/warden,
-					/obj/item/clothing/head/beret/sec/navywarden,
-					/obj/item/clothing/head/beret/sec/navywarden/black,
-					/obj/item/clothing/under/rank/security/head_of_security/formal,
-					/obj/item/clothing/suit/security/hos,
-					/obj/item/clothing/head/beret/sec/navyhos,
-					/obj/item/clothing/head/beret/sec/navyhos/black)
+	contains = list(/obj/item/clothing/suit/armor/vest/security/officer,
+					/obj/item/clothing/suit/armor/vest/security/officer,
+					/obj/item/clothing/suit/armor/vest/security/officer,
+					/obj/item/clothing/head/beret/sec/officer,
+					/obj/item/clothing/head/beret/sec/officer,
+					/obj/item/clothing/head/beret/sec/officer,
+					/obj/item/clothing/suit/armor/vest/security/warden,
+					/obj/item/clothing/head/beret/sec/warden,
+					/obj/item/clothing/suit/armor/vest/security/hos,
+					/obj/item/clothing/head/beret/sec/hos)
 	crate_name = "security clothing crate"
 
 /datum/supply_pack/security/stingpack
@@ -637,10 +632,11 @@
 /datum/supply_pack/security/armory/russian
 	name = "Russian Surplus Crate"
 	desc = "Hello Comrade, we have the most modern russian military equipment the black market can offer, for the right price of course. Sadly we couldnt remove the lock so it requires Armory access to open."
-	cost = 5000
+	cost = 8000
 	contraband = TRUE
 	contains = list(/obj/item/reagent_containers/food/snacks/rationpack,
 					/obj/item/ammo_box/a762,
+					/obj/item/ammo_box/magazine/ak47, //WS edit: gun
 					/obj/item/storage/toolbox/ammo,
 					/obj/item/clothing/suit/armor/vest/russian,
 					/obj/item/clothing/head/helmet/rus_helmet,
@@ -651,6 +647,7 @@
 					/obj/item/clothing/mask/russian_balaclava,
 					/obj/item/clothing/head/helmet/rus_ushanka,
 					/obj/item/clothing/suit/armor/vest/russian_coat,
+					/obj/item/gun/ballistic/automatic/ak47, //WS edit: gun
 					/obj/item/gun/ballistic/rifle/boltaction,
 					/obj/item/gun/ballistic/rifle/boltaction)
 	crate_name = "surplus military crate"

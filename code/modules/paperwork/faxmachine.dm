@@ -3,7 +3,7 @@ GLOBAL_LIST_EMPTY(alldepartments)
 
 /obj/machinery/photocopier/faxmachine
 	name = "fax machine"
-	icon = 'waspstation/icons/obj/library.dmi'
+	icon = 'whitesands/icons/obj/library.dmi'
 	icon_state = "fax"
 	insert_anim = "faxsend"
 	density = FALSE
@@ -99,7 +99,8 @@ GLOBAL_LIST_EMPTY(alldepartments)
 	return data
 
 /obj/machinery/photocopier/faxmachine/ui_act(action, params)
-	if (..())
+	. = ..()
+	if (.)
 		return
 
 	var/is_authenticated = is_authenticated(usr)

@@ -241,6 +241,10 @@
 	log_message("(job: [src.job ? "[src.job]" : "None"]) committed suicide", LOG_ATTACK)
 
 /mob/living/proc/canSuicide()
+	var/area/A = get_area(src)
+	if(A.area_flags & BLOCK_SUICIDE)
+		to_chat(src, "<span class='warning'>You can't commit suicide here! You can ghost if you'd like.</span>")
+		return
 	switch(stat)
 		if(CONSCIOUS)
 			return TRUE
@@ -258,7 +262,7 @@
 	if(!(mobility_flags & MOBILITY_USE))	//just while I finish up the new 'fun' suiciding verb. This is to prevent metagaming via suicide
 		to_chat(src, "<span class='warning'>You can't commit suicide whilst immobile! ((You can type Ghost instead however.))</span>")
 		return
-	if(has_brain_worms())		//Wasp Begin - Borers
+	if(has_brain_worms())		//WS Begin - Borers
 		to_chat(src, "You can't bring yourself to commit suicide!")
-		return		//Wasp End
+		return		//WS End
 	return TRUE

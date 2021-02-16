@@ -20,7 +20,7 @@
 		pipe_astar_cost = 1\
 	)
 
-/*Wasp Edit - Revert smartwire
+/*WS Edit - Revert smartwire
 /obj/structure/grille/Destroy()
 	update_cable_icons_on_turf(get_turf(src))
 	return ..()
@@ -37,7 +37,7 @@
 	var/ratio = obj_integrity / max_integrity
 	ratio = CEILING(ratio*4, 1) * 25
 
-	if(smoothing_flags)
+	if(smoothing_flags & (SMOOTH_CORNERS|SMOOTH_BITMASK))
 		QUEUE_SMOOTH(src)
 
 	if(ratio > 50)

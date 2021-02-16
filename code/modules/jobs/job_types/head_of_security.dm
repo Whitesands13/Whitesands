@@ -11,8 +11,8 @@
 	req_admin_notify = 1
 	minimal_player_age = 14
 	exp_requirements = 300
-	wiki_page = "Head_of_Security" //WaspStation Edit - Wikilinks/Warning
-	special_notice = "Remember, Space Law is THE law. Follow it." //WaspStation Edit - Wikilinks/Warning
+	wiki_page = "Head_of_Security" //WS Edit - Wikilinks/Warning
+	special_notice = "Remember, Space Law is THE law. Follow it." //WS Edit - Wikilinks/Warning
 	exp_type = EXP_TYPE_CREW
 	exp_type_department = EXP_TYPE_SECURITY
 
@@ -40,13 +40,12 @@
 	belt = /obj/item/pda/heads/hos
 	ears = /obj/item/radio/headset/heads/hos/alt
 	uniform = /obj/item/clothing/under/rank/security/head_of_security
-	alt_uniform = /obj/item/clothing/under/rank/security/head_of_security/white //Wasp Edit - Alt Uniforms
 	shoes = /obj/item/clothing/shoes/jackboots
 	suit = /obj/item/clothing/suit/armor/hos/trenchcoat
-	alt_suit = /obj/item/clothing/suit/armor/hos
-	dcoat = /obj/item/clothing/suit/hooded/wintercoat/security //Wasp Edit - Alt Uniforms
+	alt_suit = /obj/item/clothing/suit/armor/vest/security/hos
+	dcoat = /obj/item/clothing/suit/hooded/wintercoat/security //WS Edit - Alt Uniforms
 	gloves = /obj/item/clothing/gloves/color/black
-	head = /obj/item/clothing/head/beret/sec/navyhos/black //Wasp edit - Better Berets
+	head = /obj/item/clothing/head/beret/sec/hos //WS edit - Better Berets
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses
 	suit_store = /obj/item/gun/energy/e_gun
 	r_pocket = /obj/item/assembly/flash/handheld

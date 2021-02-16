@@ -287,7 +287,7 @@
 	H.dna.add_mutation(DWARFISM)
 
 /obj/effect/mob_spawn/human/corpse/damaged/legioninfested/Initialize()
-	var/type = pickweight(list("Miner" = 66, "Ashwalker" = 5, "Kobold" = 5, "Golem" = 10,"Clown" = 10, pick(list("Shadow", "YeOlde","Operative", "Cultist")) = 4)) //Wasp Edit - Kobold
+	var/type = pickweight(list("Miner" = 66, "Ashwalker" = 5, "Kobold" = 5, "Golem" = 10,"Clown" = 10, pick(list("Shadow", "YeOlde","Operative", "Cultist")) = 4)) //WS Edit - Kobold
 	switch(type)
 		if("Miner")
 			mob_species = pickweight(list(/datum/species/human = 70, /datum/species/lizard = 26, /datum/species/fly = 2, /datum/species/plasmaman = 2))
@@ -330,7 +330,7 @@
 				r_pocket = /obj/item/kitchen/knife/combat/bone
 			if(prob(30))
 				l_pocket = /obj/item/kitchen/knife/combat/bone
-		//Wasp Edit Start - Kobold
+		//WS Edit Start - Kobold
 		if("Kobold")
 			mob_species = /datum/species/lizard/ashwalker/kobold
 			uniform = /obj/item/clothing/under/costume/gladiator/ash_walker
@@ -348,7 +348,7 @@
 				r_pocket = /obj/item/kitchen/knife/combat/bone
 			if(prob(30))
 				l_pocket = /obj/item/kitchen/knife/combat/bone
-		//Wasp Edit End - Kobold
+		//WS Edit End - Kobold
 		if("Clown")
 			name = pick(GLOB.clown_names)
 			outfit = /datum/outfit/job/clown
@@ -405,3 +405,26 @@
 			glasses =  /obj/item/clothing/glasses/hud/health/night/cultblind
 			backpack_contents = list(/obj/item/reagent_containers/glass/beaker/unholywater = 1, /obj/item/cult_shift = 1, /obj/item/flashlight/flare/culttorch = 1, /obj/item/stack/sheet/runed_metal = 15)
 	. = ..()
+
+// Snow Legion
+/mob/living/simple_animal/hostile/asteroid/hivelord/legion/snow
+	name = "snow legion"
+	desc = "You can still see what was once a human under the shifting snowy mass, clearly decorated by a clown."
+	icon = 'icons/mob/icemoon/icemoon_monsters.dmi'
+	icon_state = "snowlegion"
+	icon_living = "snowlegion"
+	icon_aggro = "snowlegion_alive"
+	icon_dead = "snowlegion"
+	crusher_loot = /obj/item/crusher_trophy/legion_skull
+	loot = list(/obj/item/organ/regenerative_core/legion)
+	brood_type = /mob/living/simple_animal/hostile/asteroid/hivelordbrood/legion/snow
+
+// Snow Legion skull
+/mob/living/simple_animal/hostile/asteroid/hivelordbrood/legion/snow
+	name = "snow legion"
+	desc = "One of many."
+	icon = 'icons/mob/icemoon/icemoon_monsters.dmi'
+	icon_state = "snowlegion_head"
+	icon_living = "snowlegion_head"
+	icon_aggro = "snowlegion_head"
+	icon_dead = "snowlegion_head"

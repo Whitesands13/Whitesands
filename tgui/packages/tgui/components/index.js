@@ -5,6 +5,7 @@
  */
 
 export { AnimatedNumber } from './AnimatedNumber';
+export { Blink } from './Blink';
 export { BlockQuote } from './BlockQuote';
 export { Box } from './Box';
 export { Button } from './Button';
@@ -27,9 +28,11 @@ export { Modal } from './Modal';
 export { NoticeBox } from './NoticeBox';
 export { NumberInput } from './NumberInput';
 export { ProgressBar } from './ProgressBar';
+export { RoundGauge } from './RoundGauge';
 export { Section } from './Section';
 export { Slider } from './Slider';
+export { Stack } from './Stack';
 export { Table } from './Table';
-export { TextArea } from './TextArea';
 export { Tabs } from './Tabs';
+export { TextArea } from './TextArea';
 export { Tooltip } from './Tooltip';

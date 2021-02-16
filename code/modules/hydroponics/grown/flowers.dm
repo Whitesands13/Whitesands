@@ -83,6 +83,8 @@
 	filling_color = "#FF6347"
 	bitesize_mod = 3
 	foodtype = VEGETABLES
+	wine_power = 40
+	wine_flavor = "Purple"  //WS edit: new wine flavors. capitalization intentional
 
 // Geranium
 /obj/item/seeds/poppy/geranium

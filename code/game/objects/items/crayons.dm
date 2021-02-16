@@ -226,8 +226,10 @@
 	.["current_colour"] = paint_color
 
 /obj/item/toy/crayon/ui_act(action, list/params)
-	if(..())
+	. = ..()
+	if(.)
 		return
+
 	switch(action)
 		if("toggle_cap")
 			if(has_cap)
@@ -631,6 +633,8 @@
 	lefthand_file = 'icons/mob/inhands/equipment/hydroponics_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/hydroponics_righthand.dmi'
 	desc = "A metallic container containing tasty paint."
+
+	custom_materials = list(/datum/material/iron = 100, /datum/material/glass = 100) // WS Edit - Item Materials
 
 	instant = TRUE
 	edible = FALSE

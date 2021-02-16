@@ -25,6 +25,8 @@
 /obj/structure/spawner/lavaland/legion
 	mob_types = list(/mob/living/simple_animal/hostile/asteroid/hivelord/legion/tendril)
 
+/obj/structure/spawner/lavaland/icewatcher
+	mob_types = list(/mob/living/simple_animal/hostile/asteroid/basilisk/watcher/icewing)
 
 GLOBAL_LIST_INIT(tendrils, list())
 /obj/structure/spawner/lavaland/Initialize()
@@ -91,8 +93,8 @@ GLOBAL_LIST_INIT(tendrils, list())
 	for(var/mob/M in range(7,src))
 		shake_camera(M, 15, 1)
 	playsound(get_turf(src),'sound/effects/explosionfar.ogg', 200, TRUE)
-	visible_message("<span class='boldannounce'>The tendril falls inward, the ground around it erupting into bubbling lava!</span>") //Waspstation edit.
+	visible_message("<span class='boldannounce'>The tendril falls inward, the ground around it erupting into bubbling lava!</span>") //WS edit.
 	for(var/turf/T in range(2,src))
 		if(!T.density)
-			T.TerraformTurf(/turf/open/lava/smooth/lava_land_surface, /turf/open/lava/smooth/lava_land_surface, flags = CHANGETURF_INHERIT_AIR) //Waspstation edit, instead of chasms this produces lava instead.
+			T.TerraformTurf(/turf/open/lava/smooth/lava_land_surface, /turf/open/lava/smooth/lava_land_surface, flags = CHANGETURF_INHERIT_AIR) //WS edit, instead of chasms this produces lava instead.
 	qdel(src)

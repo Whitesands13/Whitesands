@@ -39,7 +39,7 @@
 	unset_control() //remove from control computer
 	return ..()
 
-/* Wasp Edit - Smartwire Revert - Fucking swear don't TG Marge This
+/*WS Edit - Smartwire Revert - Fucking swear don't TG Marge This
 /obj/machinery/power/solar/should_have_node()
 	return TRUE
 */
@@ -371,7 +371,8 @@
 	return data
 
 /obj/machinery/power/solar_control/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
 	if(action == "azimuth")
 		var/adjust = text2num(params["adjust"])

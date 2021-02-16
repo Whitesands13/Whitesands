@@ -6,8 +6,8 @@
 	spawn_positions = 1
 	supervisors = "the head of personnel"
 	selection_color = "#d7b088"
-	wiki_page = "Quartermaster" //WaspStation Edit - Wikilinks/Warning
-	special_notice = "You are not a head of staff. You answer to the Head of Personnel." //WaspStation Edit - Wikilinks/Warning
+	wiki_page = "Quartermaster" //WS Edit - Wikilinks/Warning
+	special_notice = "You are not a head of staff. You answer to the Head of Personnel." //WS Edit - Wikilinks/Warning
 	exp_type_department = EXP_TYPE_SUPPLY // This is so the jobs menu can work properly
 
 	outfit = /datum/outfit/job/quartermaster
@@ -26,9 +26,9 @@
 	belt = /obj/item/pda/quartermaster
 	ears = /obj/item/radio/headset/headset_cargo
 	uniform = /obj/item/clothing/under/rank/cargo/qm
-	alt_uniform = /obj/item/clothing/under/pants/jeans //Wasp Edit - Alt Uniforms
+	alt_uniform = /obj/item/clothing/under/pants/jeans //WS Edit - Alt Uniforms
 	alt_suit = /obj/item/clothing/suit/hazardvest
-	dcoat = /obj/item/clothing/suit/hooded/wintercoat/cargo //Wasp Edit - Alt Uniforms
+	dcoat = /obj/item/clothing/suit/hooded/wintercoat/cargo //WS Edit - Alt Uniforms
 	shoes = /obj/item/clothing/shoes/sneakers/brown
 	glasses = /obj/item/clothing/glasses/sunglasses
 	l_hand = /obj/item/clipboard
@@ -37,7 +37,7 @@
 	chameleon_extras = /obj/item/stamp/qm
 
 /datum/outfit/job/quartermaster/supplychief
-	name = "Supply Chief"
+	name = "Quartermaster (Supply Chief)"
 	jobtype = /datum/job/qm
 
 	uniform = /obj/item/clothing/under/suit/qm
@@ -47,4 +47,5 @@
 	shoes = /obj/item/clothing/shoes/laceup
 	l_hand = null
 	neck = /obj/item/clothing/neck/tie/brown
+	head = /obj/item/clothing/head/supply_chief
 	backpack_contents = list(/obj/item/modular_computer/tablet/preset/cargo=1, /obj/item/clipboard=1)

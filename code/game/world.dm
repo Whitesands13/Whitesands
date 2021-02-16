@@ -50,14 +50,14 @@ GLOBAL_VAR(restart_counter)
 	config.Load(params[OVERRIDE_CONFIG_DIRECTORY_PARAMETER])
 
 	load_admins()
-	load_mentors() //Wasp edit - Mentors
+	load_mentors() //WS edit - Mentors
 
 	//SetupLogs depends on the RoundID, so lets check
 	//DB schema and set RoundID if we can
 	SSdbcore.CheckSchemaVersion()
 	SSdbcore.SetRoundID()
 	SetupLogs()
-	populate_gear_list() //Wasp edit - Loadouts
+	populate_gear_list() //WS edit - Loadouts
 	load_poll_data()
 
 #ifndef USE_CUSTOM_ERROR_HANDLER
@@ -145,7 +145,6 @@ GLOBAL_VAR(restart_counter)
 	GLOB.world_paper_log = "[GLOB.log_directory]/paper.log"
 	GLOB.tgui_log = "[GLOB.log_directory]/tgui.log"
 	GLOB.world_shuttle_log = "[GLOB.log_directory]/shuttle.log"
-	GLOB.discord_api_log = "[GLOB.log_directory]/discord_api_log.log"
 
 	GLOB.demo_log = "[GLOB.log_directory]/demo.log"
 
@@ -164,7 +163,6 @@ GLOBAL_VAR(restart_counter)
 	start_log(GLOB.world_job_debug_log)
 	start_log(GLOB.tgui_log)
 	start_log(GLOB.world_shuttle_log)
-	start_log(GLOB.discord_api_log)
 
 	GLOB.changelog_hash = md5('html/changelog.html') //for telling if the changelog has changed recently
 	if(fexists(GLOB.config_error_log))
@@ -316,7 +314,7 @@ GLOBAL_VAR(restart_counter)
 	s += "</a>"
 	s += ")"
 	s += " ("
-	s += "<a href=\"https://github.com/WaspStation/WaspStation-1.0\">" //Change this to wherever you want the hub to link to.
+	s += "<a href=\"https://github.com/Whitesands13/Whitesands\">" //Change this to wherever you want the hub to link to.
 	s += "Github"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
 	s += "</a>"
 	s += ")"

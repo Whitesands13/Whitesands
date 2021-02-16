@@ -105,16 +105,15 @@
 #define ui_borg_pull "EAST-2:26,SOUTH+1:7"
 #define ui_borg_radio "EAST-1:28,SOUTH+1:7"
 #define ui_borg_intents "EAST-2:26,SOUTH:5"
-#define ui_borg_sensor "CENTER-3:16, SOUTH:5"
-#define ui_borg_lamp "CENTER-4:16, SOUTH:5"
-#define ui_borg_thrusters "CENTER-5:16, SOUTH:5"
+#define ui_borg_lamp "CENTER-3:16, SOUTH:5"
+#define ui_borg_tablet "CENTER-4:16, SOUTH:5"
 #define ui_inv1 "CENTER-2:16,SOUTH:5"
 #define ui_inv2 "CENTER-1  :16,SOUTH:5"
 #define ui_inv3 "CENTER  :16,SOUTH:5"
 #define ui_borg_module "CENTER+1:16,SOUTH:5"
 #define ui_borg_store "CENTER+2:16,SOUTH:5"
 #define ui_borg_camera "CENTER+3:21,SOUTH:5"
-#define ui_borg_album "CENTER+4:21,SOUTH:5"
+#define ui_borg_alerts "CENTER+4:21,SOUTH:5"
 #define ui_borg_language_menu "CENTER+4:21,SOUTH+1:5"
 
 //Aliens
@@ -162,12 +161,12 @@
 #define ui_pai_take_picture "SOUTH:6,WEST+12"
 #define ui_pai_view_images "SOUTH:6,WEST+13"
 
-/* Ghosts - REPLACED BY WASPSTATION _defines.dm
+/* Ghosts - REPLACED BY WS _defines.dm
 #define ui_ghost_jumptomob "SOUTH:6,CENTER-2:24"
 #define ui_ghost_orbit "SOUTH:6,CENTER-1:24"
 #define ui_ghost_reenter_corpse "SOUTH:6,CENTER:24"
 #define ui_ghost_teleport "SOUTH:6,CENTER+1:24"
 #define ui_ghost_pai "SOUTH: 6, CENTER+2:24"
-End Waspstation*/
+EndWS*/
 
 #define ui_wanted_lvl "NORTH,11"
