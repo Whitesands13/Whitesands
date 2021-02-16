@@ -90,6 +90,22 @@
 	make_reagents = list(/datum/reagent/plantnutriment/robustharvestnutriment = 25)
 	category = list("initial","Botany Chemicals")
 
+/datum/design/end_gro
+	name = "25u Enduro Grow"
+	id = "end_gro"
+	build_type = BIOGENERATOR
+	materials = list(/datum/material/biomass= 25)
+	make_reagents = list(/datum/reagent/plantnutriment/endurogrow = 25)
+	category = list("initial","Botany Chemicals")
+
+/datum/design/liq_earth
+	name = "25u Liquid Earthquake"
+	id = "liq_earth"
+	build_type = BIOGENERATOR
+	materials = list(/datum/material/biomass= 25)
+	make_reagents = list(/datum/reagent/plantnutriment/liquidearthquake = 25)
+	category = list("initial","Botany Chemicals")
+
 /datum/design/weed_killer
 	name = "25u Weed Killer"
 	id = "weed_killer"

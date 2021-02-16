@@ -10,7 +10,7 @@
 	glass_desc = "Are you sure this is tomato juice?"
 	shot_glass_icon_state = "shotglassred"
 
-// FEED ME,SEYMOUR!
+// FEED ME!
 /datum/reagent/blood/on_hydroponics_apply(obj/item/seeds/myseed, datum/reagents/chems, obj/machinery/hydroponics/mytray)
 	. = ..()
 	if(chems.has_reagent(src.type, 1))
@@ -1008,11 +1008,10 @@
 //Mutagenic chem side-effects.
 /datum/reagent/uranium/on_hydroponics_apply(obj/item/seeds/myseed, datum/reagents/chems, obj/machinery/hydroponics/mytray, mob/user)
 	. = ..()
+	mytray.mutation_roll(user)
 	if(chems.has_reagent(src.type, 1))
 		mytray.adjustHealth(-round(chems.get_reagent_amount(src.type) * 1))
 		mytray.adjustToxic(round(chems.get_reagent_amount(src.type) * 2))
-		if(myseed && chems.has_reagent(src.type, 1))
-			myseed.adjust_instability(2)
 
 /datum/reagent/uranium/on_mob_life(mob/living/carbon/M)
 	M.apply_effect(irradiation_level/M.metabolism_efficiency,EFFECT_IRRADIATE,0)
@@ -1037,13 +1036,11 @@
 	process_flags = ORGANIC | SYNTHETIC //WS Edit - IPCs
 	material = null
 
-/datum/reagent/radium/on_hydroponics_apply(obj/item/seeds/myseed, datum/reagents/chems, obj/machinery/hydroponics/mytray, mob/user)
+/datum/reagent/uranium/radium/on_hydroponics_apply(obj/item/seeds/myseed, datum/reagents/chems, obj/machinery/hydroponics/mytray, mob/user)
 	. = ..()
 	if(chems.has_reagent(src.type, 1))
-		mytray.adjustHealth(-round(chems.get_reagent_amount(src.type) * 2.5))
-		mytray.adjustToxic(round(chems.get_reagent_amount(src.type) * 1.5))
-		if(myseed && chems.has_reagent(src.type, 1))
-			myseed.adjust_instability(3)
+		mytray.adjustHealth(-round(chems.get_reagent_amount(src.type) * 1))
+		mytray.adjustToxic(round(chems.get_reagent_amount(src.type) * 1))
 
 /datum/reagent/bluespace
 	name = "Bluespace Dust"
