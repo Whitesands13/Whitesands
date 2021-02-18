@@ -2,6 +2,14 @@
 Uplink Items
 **/
 
+/*Dangerous items*/
+/datum/uplink_item/dangerous/mauser8mm
+	name = "C96 Machine Pistol"
+	desc = "A powerful machine pistol sporting a high rate of fire and armor-piercing rounds."
+	item = /obj/item/gun/ballistic/automatic/pistol/mauser8mm
+	cost = 12
+	surplus = 20
+
 /*Stealthy Weapons*/
 /datum/uplink_item/stealthy_weapons/derringerpack
 	name = "Compact Derringer"
@@ -41,6 +49,15 @@ Uplink Items
 	desc = "A medipen stocked with an agent that will help regenerate bones and organs. A single-use pocket Medbay visit."
 	item = /obj/item/reagent_containers/hypospray/medipen/bonefixingjuice
 	cost = 3
+
+/*Ammo*/
+/datum/uplink_item/ammo/mauser8mm
+	name = "COOL 96 Magazine"
+	desc = "An additional 16 round 8mm magazine for the COOL 96."
+	item = /obj/item/ammo_box/magazine/mauser8mm
+	cost = 3
+	exclude_modes = list(/datum/game_mode/nuclear/clown_ops)
+
 
 /*Role Restricted*/
 /datum/uplink_item/role_restricted/greykingsword

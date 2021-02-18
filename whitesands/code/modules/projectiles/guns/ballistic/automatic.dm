@@ -109,3 +109,16 @@
 	w_class = WEIGHT_CLASS_BULKY
 	mag_type = /obj/item/ammo_box/magazine/ak47
 
+/obj/item/gun/ballistic/automatic/pistol/mauser8mm
+	name = "COOL 96 Machine Pistol"
+	desc = "A total re-design of the C96, this weapon features burst and full-auto firemodes, an integrated suppressor, and numerous other t a c t i c o o l  improvements."
+	icon = 'whitesands/icons/obj/guns/projectile.dmi'
+	icon_state = "mauser"
+	weapon_weight = WEAPON_LIGHT
+	w_class = WEIGHT_CLASS_SMALL
+	can_suppress = TRUE
+	mag_type = /obj/item/ammo_box/magazine/mauser8mm
+	burst_size = 2
+	fire_delay = 2
+	fire_rate = 4
+
