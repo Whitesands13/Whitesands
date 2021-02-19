@@ -124,7 +124,8 @@
 		primed = FALSE
 		update_icon()
 		primed_attack(A, user)
-		I.melee_attack_chain(user, A, params)
+		if(CanReach(A, I))
+			I.melee_attack_chain(user, A, params)
 		user.swap_hand()
 
 /obj/item/storage/belt/weebstick/proc/primed_attack(atom/target, mob/living/user)
@@ -168,8 +169,9 @@
 
 /obj/item/storage/belt/weebstick/PopulateContents()
 	//Time to generate names now that we have the sword
-	var/title = pick(GLOB.ninja_titles)
-	var/name = pick(GLOB.ninja_names)
+	var/n_title = pick(GLOB.ninja_titles)
+	var/n_name = pick(GLOB.ninja_names)
 	var/obj/item/melee/weebstick/sword = new /obj/item/melee/weebstick(src)
-	sword.name = "[title] blade of clan [name]"
+	sword.name = "[n_title] blade of clan [n_name]"
+	name = "[n_title] scabbard of clan [n_name]"
 	update_icon()
