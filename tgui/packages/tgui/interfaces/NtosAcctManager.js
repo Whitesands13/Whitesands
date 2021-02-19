@@ -96,7 +96,7 @@ export const NtosBankAcctManagerContent = (props, context) => {
                   <Button
                     icon={"window-close-o"}
                     color={"bad"}
-                    onClick={() => act('PRG_close_acct', {
+                    onClick={() => act('PRG_close_account', {
                       selected_account: account.ref,
                     })} />
                 </Table.Cell>
