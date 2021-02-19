@@ -287,7 +287,7 @@
 
 	if(materials?.mat_container?.linked_account)
 		var/cost
-		if(obj_flags & EMAGGED)
+		if((obj_flags & EMAGGED) || iscyborg(usr) || isdrone(usr))
 			cost = 0
 		else
 			cost = materials.mat_container.get_material_list_cost(D.materials)
