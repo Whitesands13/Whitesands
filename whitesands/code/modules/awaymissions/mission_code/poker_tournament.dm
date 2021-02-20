@@ -121,6 +121,7 @@
 	value = 1
 	w_class = WEIGHT_CLASS_TINY
 
+
 /obj/item/coin/poker_chip/Initialize()
 	. = ..()
 	pixel_x = rand(0,16)-8
@@ -135,6 +136,12 @@
 	. = ..()
 	value = initial(src.value) // Keep their preset values
 
+/obj/item/coin/poker_chip/one
+	value = 1
+	custom_materials = list(/datum/material/plastic = 400)
+/obj/item/coin/poker_chip/five
+	value = 5
+	custom_materials = list(/datum/material/glass = 400)
 /obj/item/coin/poker_chip/ten
 	value = 10
 /obj/item/coin/poker_chip/twenty_five
@@ -166,6 +173,7 @@
 /obj/item/storage/box/poker_chips/hundred/PopulateContents()
 	. = ..()
 	for(var/i = 0, i < 5, i++)
+		CHECK_TICK
 		new /obj/item/coin/poker_chip/ten(src)
 	new /obj/item/coin/poker_chip/twenty_five(src)
 	new /obj/item/coin/poker_chip/fifty(src)
@@ -178,14 +186,18 @@
 	. = ..()
 	// 10*10 = 100
 	for(var/i = 0, i < 10, i++)
+		CHECK_TICK
 		new /obj/item/coin/poker_chip/ten(src)
 	// 25*8 = 200, 300
 	for(var/i = 0, i < 8, i++)
+		CHECK_TICK
 		new /obj/item/coin/poker_chip/twenty_five(src)
 	// 50 * 4 = 200, 500
 	for(var/i = 0, i < 4, i++)
+		CHECK_TICK
 		new /obj/item/coin/poker_chip/fifty(src)
 	for (var/i = 0, i < 5, i++)
+		CHECK_TICK
 		new /obj/item/coin/poker_chip/hundred(src)
 /obj/item/storage/box/poker_chips/five_thousand
 	name = "Poker Chip box (5,000)"
@@ -195,19 +207,39 @@
 	. = ..()
 	// 10*40 = 400
 	for(var/i = 0, i < 20, i++)
+		CHECK_TICK
 		new /obj/item/coin/poker_chip/ten(src)
 	// 25*24 = 600, 1000
 	for(var/i = 0, i < 8, i++)
+		CHECK_TICK
 		new /obj/item/coin/poker_chip/twenty_five(src)
 	// 50 * 10 = 1000, 2000
 	for(var/i = 0, i < 4, i++)
+		CHECK_TICK
 		new /obj/item/coin/poker_chip/fifty(src)
 	// 100 * 10 = 1000, 3000
 	for (var/i = 0, i < 10, i++)
+		CHECK_TICK
 		new /obj/item/coin/poker_chip/hundred(src)
 	// 500 * 4 = 2000, 5000
 	for (var/i = 0, i < 4, i++)
+		CHECK_TICK
 		new /obj/item/coin/poker_chip/five_hundred(src)
+
+/obj/item/storage/box/poker_chips/hundred_small
+	name = "Poker Chip box (100, Small Denomination)"
+	desc = "A box containing poker chips totaling 100 points in smaller chip denominations. Used for Casino games."
+
+/obj/item/storage/box/poker_chips/hundred_small/PopulateContents()
+	for(var/i = 0, i < 20, i++)
+		CHECK_TICK
+		new /obj/item/coin/poker_chip/one(src)
+	for(var/i = 0, i < 10, i++)
+		CHECK_TICK
+		new /obj/item/coin/poker_chip/five(src)
+	for(var/i = 0, i < 3, i++)
+		CHECK_TICK
+		new /obj/item/coin/poker_chip/ten(src)
 
 /obj/machinery/mineral/equipment_vendor/casino_chip_vendor
 	name = "Casino Chip Vendor"
@@ -217,7 +249,8 @@
 	prize_list = list(
 		new /datum/data/mining_equipment("5000pt Chips", /obj/item/storage/box/poker_chips/five_thousand, 5000),
 		new /datum/data/mining_equipment("1000pt Chips", /obj/item/storage/box/poker_chips/thousand, 1000),
-		new /datum/data/mining_equipment("100pt Chips", /obj/item/storage/box/poker_chips/hundred, 100)
+		new /datum/data/mining_equipment("100pt Chips", /obj/item/storage/box/poker_chips/hundred, 100),
+		new /datum/data/mining_equipment("100pt Chips (Small Denomination)", /obj/item/storage/box/poker_chips/hundred_small, 100)
 	)
 
 /obj/machinery/mineral/equipment_vendor/casino_chip_vendor/ui_interact(mob/user, datum/tgui/ui)
