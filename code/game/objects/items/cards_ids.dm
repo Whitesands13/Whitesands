@@ -156,6 +156,11 @@
 	else if(istype(W, /obj/item/stack/spacecash))
 		insert_money(W, user, TRUE)
 		return
+	// White Sands Start - Casino & Poker Tournament!
+	else if (istype(W, /obj/item/coin/poker_chip))
+		to_chat(user, "Probably doesn't go in this ID, you should use this at the Casino!")
+		return FALSE
+	// White Sands End - Casino & Poker Tournament
 	else if(istype(W, /obj/item/coin))
 		insert_money(W, user, TRUE)
 		return

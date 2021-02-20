@@ -842,6 +842,7 @@
 
 /obj/item/toy/cards/cardhand/apply_card_vars(obj/item/toy/cards/newobj,obj/item/toy/cards/sourceobj)
 	..()
+	newobj.icon = sourceobj.icon // WS Edit - Casino & Poker Tournament
 	newobj.deckstyle = sourceobj.deckstyle
 	update_sprite()
 	newobj.card_hitsound = sourceobj.card_hitsound
@@ -943,6 +944,7 @@
 
 /obj/item/toy/cards/singlecard/apply_card_vars(obj/item/toy/cards/singlecard/newobj,obj/item/toy/cards/sourceobj)
 	..()
+	newobj.icon = sourceobj.icon // WS Edit - Casino & Poker Tournament
 	newobj.deckstyle = sourceobj.deckstyle
 	newobj.icon_state = "singlecard_down_[deckstyle]" // Without this the card is invisible until flipped. It's an ugly hack, but it works.
 	newobj.card_hitsound = sourceobj.card_hitsound
