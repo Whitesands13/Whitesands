@@ -145,7 +145,7 @@
 	custom_materials = list(/datum/material/gold = 400)
 /obj/item/coin/poker_chip/hundred
 	value = 100
-	custom_materials = list(/datum/material/uranium = 400)
+	custom_materials = list(/datum/material/titanium = 400)
 /obj/item/coin/poker_chip/five_hundred
 	value = 500
 	custom_materials = list(/datum/material/plasma = 400)
