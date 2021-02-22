@@ -51,8 +51,6 @@
 	var/turf/current_item_loc = isturf(A) ? A : A.loc
 	if(!isturf(current_item_loc))
 		return
-	if(locate(/obj/structure/table) in target.contents)
-		return
 	var/turf/new_item_loc = get_step(current_item_loc, user.dir)
 	var/obj/machinery/disposal/bin/target_bin = locate(/obj/machinery/disposal/bin) in new_item_loc.contents
 	var/i = 0
