@@ -19,7 +19,7 @@
 		if(distance == 0) //We won't affect ourselves
 			continue
 		if(M.flash_act(affect_silicon = 1))
-			M.Knockdown(10/(max(1, distance))
+			M.Knockdown(10/(max(1, distance)))
 			M.confused += 15
 	cooldown = TRUE
 	addtimer(VARSET_CALLBACK(src, cooldown, FALSE), 20 SECONDS)
