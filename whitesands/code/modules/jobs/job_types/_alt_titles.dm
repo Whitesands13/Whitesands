@@ -12,8 +12,8 @@
 
 //Service
 /datum/job/assistant
-	alt_titles = list("Civilian", "Visitor", "Businessman", "Entertainer", "Greytider")
-	senior_title = "Asshat"
+	alt_titles = list("Civilian", "Visitor", "Businessman", "Entertainer")
+	senior_title = "Greytider"
 
 /datum/job/cook
 	alt_titles = list("Culinary Artist", "Butcher", "Grillmaster")
@@ -28,7 +28,7 @@
 	senior_title = "Master Gardener"
 
 /datum/job/curator
-	alt_titles = list("Journalist", "Librarian", "Tabletop Gamer")
+	alt_titles = list("Journalist", "Librarian", "Historian", "Archaeologist")
 	senior_title = "Dungeon Master"
 
 /datum/job/janitor
@@ -97,7 +97,7 @@
 
 /datum/job/brig_phys
 	alt_titles = list("Security Medic")
-	senior_title = "Execution Supervisor"
+	senior_title = "Correctional Surgeon"
 
 /datum/job/officer
 	alt_titles = list("Security Guard", "Junior Officer")
@@ -119,4 +119,4 @@
 
 /datum/job/cargo_tech
 	alt_titles = list("Mailroom Technician", "Deliveries Officer")
-	senior_title = "Stock Boy"
+	senior_title = "Cargonian"
