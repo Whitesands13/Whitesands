@@ -11,7 +11,7 @@
 		return
 	src.visible_message("<span class='warning'>\The [src]'s light overloads!</span>")
 	new /obj/effect/dummy/lighting_obj (get_turf(src), 10, 4, COLOR_WHITE, 2)
-	playsound(get_turf(src), 'sound/weapons/flashbang.ogg', 50, TRUE, 3)
+	playsound(get_turf(src), 'sound/weapons/flash.ogg', 50, TRUE, 3)
 	for(var/mob/living/M in get_hearers_in_view(7, get_turf(src)))
 		if(M.stat == DEAD)
 			continue
