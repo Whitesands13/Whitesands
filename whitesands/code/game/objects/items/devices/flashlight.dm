@@ -22,4 +22,4 @@
 			M.Knockdown(10/(max(1, distance))
 			M.confused += 15
 	cooldown = TRUE
-	addtimer(VARSET_CALLBACK(src, cooldown, FALSE), 10 SECONDS)
+	addtimer(VARSET_CALLBACK(src, cooldown, FALSE), 20 SECONDS)
