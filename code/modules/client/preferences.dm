@@ -139,6 +139,13 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	var/action_buttons_screen_locs = list()
 
+	/// If we have persistent scars enabled
+	var/persistent_scars = TRUE
+	/// We have 5 slots for persistent scars, if enabled we pick a random one to load (empty by default) and scars at the end of the shift if we survived as our original person
+	var/list/scars_list = list("1" = "", "2" = "", "3" = "", "4" = "", "5" = "")
+	/// Which of the 5 persistent scar slots we randomly roll to load for this round, if enabled. Actually rolled in [/datum/preferences/proc/load_character(slot)]
+	var/scars_index = 1
+
 /datum/preferences/New(client/C)
 	parent = C
 
@@ -334,6 +341,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			dat += "<br><b>Socks:</b><BR><a href ='?_src_=prefs;preference=socks;task=input'>[socks]</a>"
 			dat += "<a href='?_src_=prefs;preference=toggle_random;random_type=[RANDOM_SOCKS]'>[(randomise[RANDOM_SOCKS]) ? "Lock" : "Unlock"]</A><BR></td>"
 
+
+			if(CAN_SCAR in pref_species.species_traits)
+				dat += "<BR><b>Temporal Scarring:</b><BR><a href='?_src_=prefs;preference=persistent_scars'>[(persistent_scars) ? "Enabled" : "Disabled"]</A>"
+				dat += "<a href='?_src_=prefs;preference=clear_scars'>Clear scar slots</A>"
 
 			var/use_skintones = pref_species.use_skintones
 			if(use_skintones)
@@ -2092,6 +2103,17 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						randomise -= random_type
 					else
 						randomise[random_type] = TRUE
+
+				if("persistent_scars")
+					persistent_scars = !persistent_scars
+
+				if("clear_scars")
+					to_chat(user, "<span class='notice'>All scar slots cleared. Please save character to confirm.</span>")
+					scars_list["1"] = ""
+					scars_list["2"] = ""
+					scars_list["3"] = ""
+					scars_list["4"] = ""
+					scars_list["5"] = ""
 
 				if("hear_midis")
 					toggles ^= SOUND_MIDI

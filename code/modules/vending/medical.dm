@@ -23,6 +23,11 @@
 					/obj/item/reagent_containers/medigel/styptic = 2,
 					/obj/item/reagent_containers/medigel/silver_sulf = 2,
 					/obj/item/reagent_containers/medigel/sterilizine = 1,
+					/obj/item/stack/sticky_tape/surgical = 3,
+					/obj/item/healthanalyzer/wound = 4,
+					/obj/item/stack/medical/ointment = 2,
+					/obj/item/stack/medical/suture = 2,
+					/obj/item/stack/medical/bone_gel = 4)
 						/obj/item/reagent_containers/pill/morphine = 4,
 						/obj/item/storage/box/gum/happiness = 3,
 					/obj/item/sensor_device = 2,

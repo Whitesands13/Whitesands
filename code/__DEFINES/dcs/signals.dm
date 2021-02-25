@@ -47,13 +47,22 @@
 #define COMSIG_ELEMENT_DETACH "element_detach"
 
 // /atom signals
-#define COMSIG_ATOM_CREATED "atom_created"						///from base of atom/proc/Initialize(): sent any time a new atom is created
-#define COMSIG_PARENT_ATTACKBY "atom_attackby"			        ///from base of atom/attackby(): (/obj/item, /mob/living, params)
-	#define COMPONENT_NO_AFTERATTACK 1								//Return this in response if you don't want afterattack to be called
-#define COMSIG_ATOM_HULK_ATTACK "hulk_attack"					///from base of atom/attack_hulk(): (/mob/living/carbon/human)
-#define COMSIG_ATOM_ATTACK_ANIMAL "attack_animal"				///from base of atom/animal_attack(): (/mob/user)
-#define COMSIG_PARENT_EXAMINE "atom_examine"                    ///from base of atom/examine(): (/mob)
-#define COMSIG_ATOM_GET_EXAMINE_NAME "atom_examine_name"		///from base of atom/get_examine_name(): (/mob, list/overrides)
+///from base of atom/proc/Initialize(): sent any time a new atom is created
+#define COMSIG_ATOM_CREATED "atom_created"
+//from SSatoms InitAtom - Only if the  atom was not deleted or failed initialization
+#define COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZE "atom_init_success"
+///from base of atom/attackby(): (/obj/item, /mob/living, params)
+#define COMSIG_PARENT_ATTACKBY "atom_attackby"
+///Return this in response if you don't want afterattack to be called
+	#define COMPONENT_NO_AFTERATTACK (1<<0)
+///from base of atom/attack_hulk(): (/mob/living/carbon/human)
+#define COMSIG_ATOM_HULK_ATTACK "hulk_attack"
+///from base of atom/animal_attack(): (/mob/user)
+#define COMSIG_ATOM_ATTACK_ANIMAL "attack_animal"
+///from base of atom/examine(): (/mob)
+#define COMSIG_PARENT_EXAMINE "atom_examine"
+///from base of atom/get_examine_name(): (/mob, list/overrides)
+#define COMSIG_ATOM_GET_EXAMINE_NAME "atom_examine_name"
 #define COMSIG_PARENT_EXAMINE_MORE "atom_examine_more"                    ///from base of atom/examine_more(): (/mob)
 	//Positions for overrides list
 	#define EXAMINE_POSITION_ARTICLE 1
@@ -364,9 +373,6 @@
 #define COMSIG_LIVING_REVIVE "living_revive"
 ///from base of /mob/living/regenerate_limbs(): (noheal, excluded_limbs)
 #define COMSIG_LIVING_REGENERATE_LIMBS "living_regen_limbs"
-///from base of /obj/item/bodypart/proc/attach_limb(): (new_limb, special) allows you to fail limb attachment
-#define COMSIG_LIVING_ATTACH_LIMB "living_attach_limb"
-	#define COMPONENT_NO_ATTACH 1
 ///from base of mob/living/set_buckled(): (new_buckled)
 #define COMSIG_LIVING_SET_BUCKLED "living_set_buckled"
 
@@ -398,6 +404,13 @@
 
 ///When a carbon mob hugs someone, this is called on the carbon mob.
 #define COMSIG_CARBON_HUG "carbon_hug"
+// /mob/living/carbon physiology signals
+#define COMSIG_CARBON_GAIN_WOUND "carbon_gain_wound"				//from /datum/wound/proc/apply_wound() (/mob/living/carbon/C, /datum/wound/W, /obj/item/bodypart/L)
+#define COMSIG_CARBON_LOSE_WOUND "carbon_lose_wound"				//from /datum/wound/proc/remove_wound() (/mob/living/carbon/C, /datum/wound/W, /obj/item/bodypart/L)
+///from base of /obj/item/bodypart/proc/attach_limb(): (new_limb, special) allows you to fail limb attachment
+#define COMSIG_CARBON_ATTACH_LIMB "carbon_attach_limb"
+	#define COMPONENT_NO_ATTACH (1<<0)
+#define COMSIG_CARBON_REMOVE_LIMB "carbon_remove_limb"			//from base of /obj/item/bodypart/proc/drop_limb(special, dismembered)
 
 ///from base of mob/living/carbon/soundbang_act(): (list(intensity))
 #define COMSIG_CARBON_SOUNDBANG "carbon_soundbang"

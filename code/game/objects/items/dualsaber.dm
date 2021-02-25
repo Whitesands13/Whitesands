@@ -25,6 +25,8 @@
 	resistance_flags = FIRE_PROOF
 	var/w_class_on = WEIGHT_CLASS_BULKY
 	var/saber_color = "green"
+	wound_bonus = -110
+	bare_wound_bonus = 20
 	var/two_hand_force = 34
 	var/hacked = FALSE
 	var/list/possible_colors = list("red", "blue", "green", "purple")

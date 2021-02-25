@@ -2,11 +2,23 @@
 	name = "12g shotgun slug"
 	damage = 45					//WS Edit - Shotgun Nerf
 
+/obj/projectile/bullet/shotgun_slug/executioner
+	name = "executioner slug" // admin only, can dismember limbs
+	sharpness = TRUE
+	wound_bonus = 0
+
+/obj/projectile/bullet/shotgun_slug/pulverizer
+	name = "pulverizer slug" // admin only, can crush bones
+	sharpness = FALSE
+	wound_bonus = 0
+
 /obj/projectile/bullet/shotgun_beanbag
 	name = "beanbag slug"
-	damage = 5
+	damage = 10
 	stamina = 45					//WS Edit - Shotgun Nerf
 	armour_penetration = -10		//WS Edit - Shotgun Nerf
+	wound_bonus = 20
+	sharpness = FALSE
 
 /obj/projectile/bullet/incendiary/shotgun
 	name = "incendiary slug"
@@ -64,6 +76,7 @@
 	name = "buckshot pellet"
 	damage = 10						//WS Edit - Shotgun Nerf
 	armour_penetration = -20		//WS Edit - Shotgun Nerf
+	wound_bonus = -10
 
 /obj/projectile/bullet/pellet/shotgun_rubbershot
 	name = "rubbershot pellet"

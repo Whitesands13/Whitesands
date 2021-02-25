@@ -20,19 +20,9 @@
 	var/use_digitigrade = NOT_DIGITIGRADE //Used for alternate legs, useless elsewhere
 	var/list/embedded_objects = list()
 	var/held_index = 0 //are we a hand? if so, which one!
-	var/render_like_organic = FALSE // TRUE is for when you want a BODYPART_ROBOTIC to pretend to be a BODYPART_ORGANIC.
 	var/is_pseudopart = FALSE //For limbs that don't really exist, eg chainsaws
-	var/bone_status = BONE_FLAG_NO_BONES // Is it fine, broken, splinted, or just straight up fucking gone
-	var/bone_break_threshold = 30
 
-	/// So we know if we need to scream if this limb hits max damage
-	var/last_maxed
-	///If disabled, limb is as good as missing.
-	var/bodypart_disabled = FALSE
-	///Multiplied by max_damage it returns the threshold which defines a limb being disabled or not. From 0 to 1.
-	var/disable_threshold = 1
-	///Controls whether bodypart_disabled makes sense or not for this limb.
-	var/can_be_disabled = FALSE
+	var/disabled = BODYPART_NOT_DISABLED //If disabled, limb is as good as missing
 	var/body_damage_coeff = 1 //Multiplier of the limb's damage that gets applied to the mob
 	var/stam_damage_coeff = 0.75
 	var/brutestate = 0
@@ -76,18 +66,27 @@
 	var/medium_burn_msg = "blistered"
 	var/heavy_burn_msg = "peeling away"
 
-/obj/item/bodypart/Initialize(mapload)
-	. = ..()
-	if(can_be_disabled)
-		RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS), .proc/on_paralysis_trait_gain)
-		RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS), .proc/on_paralysis_trait_loss)
+	/// The wounds currently afflicting this body part
+	var/list/wounds
 
+	/// The scars currently afflicting this body part
+	var/list/scars
+	/// Our current stored wound damage multiplier
+	var/wound_damage_multiplier = 1
 
-/obj/item/bodypart/Destroy()
-	if(owner)
-		owner.remove_bodypart(src)
-		set_owner(null)
-	return ..()
+	/// This number is subtracted from all wound rolls on this bodypart, higher numbers mean more defense, negative means easier to wound
+	var/wound_resistance = 0
+	/// When this bodypart hits max damage, this number is added to all wound rolls. Obviously only relevant for bodyparts that have damage caps.
+	var/disabled_wound_penalty = 15
+
+	/// A hat won't cover your face, but a shirt covering your chest will cover your... you know, chest
+	var/scars_covered_by_clothes = TRUE
+	/// Descriptions for the locations on the limb for scars to be assigned, just cosmetic
+	var/list/specific_locations = list("general area")
+	/// So we know if we need to scream if this limb hits max damage
+	var/last_maxed
+	/// How much generic bleedstacks we have on this bodypart
+	var/generic_bleedstacks
 
 
 /obj/item/bodypart/examine(mob/user)
@@ -97,10 +96,14 @@
 	if(burn_dam > DAMAGE_PRECISION)
 		. += "<span class='warning'>This limb has [burn_dam > 30 ? "severe" : "minor"] burns.</span>"
 
-
 /obj/item/bodypart/blob_act()
 	take_damage(max_damage)
 
+/obj/item/bodypart/Destroy()
+	if(owner)
+		owner.bodyparts -= src
+		owner = null
+	return ..()
 
 /obj/item/bodypart/attack(mob/living/carbon/C, mob/user)
 	if(ishuman(C))
@@ -149,6 +152,14 @@
 	for(var/obj/item/I in src)
 		I.forceMove(T)
 
+/obj/item/bodypart/proc/consider_processing()
+	if(stamina_dam > DAMAGE_PRECISION)
+		. = TRUE
+	//else if.. else if.. so on.
+	else
+		. = FALSE
+	needs_processing = .
+
 //Return TRUE to get whatever mob this is in to update health.
 /obj/item/bodypart/proc/on_life(stam_regen)
 	if(stamina_dam > DAMAGE_PRECISION && stam_regen)					//DO NOT update health here, it'll be done in the carbon's life.
@@ -158,7 +169,7 @@
 //Applies brute and burn damage to the organ. Returns 1 if the damage-icon states changed at all.
 //Damage will not exceed max_damage using this proc
 //Cannot apply negative damage
-/obj/item/bodypart/proc/receive_damage(brute = 0, burn = 0, stamina = 0, blocked = 0, updating_health = TRUE, required_status = null, break_modifier = 1)
+/obj/item/bodypart/proc/receive_damage(brute = 0, burn = 0, stamina = 0, blocked = 0, updating_health = TRUE, required_status = null, wound_bonus = 0, bare_wound_bonus = 0, sharpness = FALSE) // maybe separate BRUTE_SHARP and BRUTE_OTHER eventually somehow hmm
 	var/hit_percent = (100-blocked)/100
 	if((!brute && !burn && !stamina) || hit_percent <= 0)
 		return FALSE
@@ -179,94 +190,170 @@
 	if(!brute && !burn && !stamina)
 		return FALSE
 
+	brute *= wound_damage_multiplier
+	burn *= wound_damage_multiplier
+
 	switch(animal_origin)
 		if(ALIEN_BODYPART,LARVA_BODYPART) //aliens take double burn //nothing can burn with so much snowflake code around
 			burn *= 2
 
-	// Is the damage greater than the threshold, and if so, probability of damage + item force
-	if((brute_dam > bone_break_threshold) && prob(brute_dam + break_modifier))
-		break_bone()
+	var/wounding_type = (brute > burn ? WOUND_BRUTE : WOUND_BURN)
+	var/wounding_dmg = max(brute, burn)
+	if(wounding_type == WOUND_BRUTE && sharpness)
+		wounding_type = WOUND_SHARP
+	// i know this is effectively the same check as above but i don't know if those can null the damage by rounding and want to be safe
+	if(owner && wounding_dmg > 4 && wound_bonus != CANT_WOUND)
+		// if you want to make tox wounds or some other type, this will need to be expanded and made more modular
+		// handle all our wounding stuff
+		check_wounding(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 
 	var/can_inflict = max_damage - get_damage()
-	if(can_inflict <= 0)
-		return FALSE
-
 	var/total_damage = brute + burn
-
-	if(total_damage > can_inflict)
+	if(total_damage > can_inflict && total_damage > 0) // TODO: the second part of this check should be removed once disabling is all done
 		brute = round(brute * (can_inflict / total_damage),DAMAGE_PRECISION)
 		burn = round(burn * (can_inflict / total_damage),DAMAGE_PRECISION)
+
+	if(can_inflict <= 0)
+		return FALSE
 
 	brute_dam += brute
 	burn_dam += burn
 
+	for(var/i in wounds)
+		var/datum/wound/W = i
+		W.receive_damage(wounding_type, wounding_dmg, wound_bonus)
+
 	//We've dealt the physical damages, if there's room lets apply the stamina damage.
-	if(stamina)
-		set_stamina_dam(stamina_dam + round(clamp(stamina, 0, max_stamina_damage - stamina_dam), DAMAGE_PRECISION))
+	stamina_dam += round(clamp(stamina, 0, max_stamina_damage - stamina_dam), DAMAGE_PRECISION)
 
-
-	if(owner)
-		if(can_be_disabled)
-			update_disabled()
-		if(updating_health)
-			owner.updatehealth()
-			if(stamina > DAMAGE_PRECISION)
-				owner.update_stamina()
-				owner.stam_regen_start_time = world.time + STAMINA_REGEN_BLOCK_TIME
-				. = TRUE
+	if(owner && updating_health)
+		owner.updatehealth()
+		if(stamina > DAMAGE_PRECISION)
+			owner.update_stamina()
+			owner.stam_regen_start_time = world.time + STAMINA_REGEN_BLOCK_TIME
+			. = TRUE
+	consider_processing()
+	update_disabled()
 	return update_bodypart_damage_state() || .
+
+/**
+  * check_wounding() is where we handle rolling for, selecting, and applying a wound if we meet the criteria
+  *
+  * We generate a "score" for how woundable the attack was based on the damage and other factors discussed in [check_wounding_mods()], then go down the list from most severe to least severe wounds in that category.
+  * We can promote a wound from a lesser to a higher severity this way, but we give up if we have a wound of the given type and fail to roll a higher severity, so no sidegrades/downgrades
+  *
+  * Arguments:
+  * * woundtype- Either WOUND_SHARP, WOUND_BRUTE, or WOUND_BURN based on the attack type.
+  * * damage- How much damage is tied to this attack, since wounding potential scales with damage in an attack (see: WOUND_DAMAGE_EXPONENT)
+  * * wound_bonus- The wound_bonus of an attack
+  * * bare_wound_bonus- The bare_wound_bonus of an attack
+  */
+/obj/item/bodypart/proc/check_wounding(woundtype, damage, wound_bonus, bare_wound_bonus)
+	// actually roll wounds if applicable
+	if(HAS_TRAIT(owner, TRAIT_EASYLIMBDISABLE))
+		damage *= 1.5
+
+	var/base_roll = rand(1, round(damage ** WOUND_DAMAGE_EXPONENT))
+	var/injury_roll = base_roll
+	injury_roll += check_woundings_mods(woundtype, damage, wound_bonus, bare_wound_bonus)
+	var/list/wounds_checking
+
+	switch(woundtype)
+		if(WOUND_SHARP)
+			wounds_checking = WOUND_LIST_CUT
+		if(WOUND_BRUTE)
+			wounds_checking = WOUND_LIST_BONE
+		if(WOUND_BURN)
+			wounds_checking = WOUND_LIST_BURN
+
+	//cycle through the wounds of the relevant category from the most severe down
+	for(var/PW in wounds_checking)
+		var/datum/wound/possible_wound = PW
+		var/datum/wound/replaced_wound
+		for(var/i in wounds)
+			var/datum/wound/existing_wound = i
+			if(existing_wound.type in wounds_checking)
+				if(existing_wound.severity >= initial(possible_wound.severity))
+					return
+				else
+					replaced_wound = existing_wound
+
+		if(initial(possible_wound.threshold_minimum) < injury_roll)
+			if(replaced_wound)
+				var/datum/wound/new_wound = replaced_wound.replace_wound(possible_wound)
+				log_wound(owner, new_wound, damage, wound_bonus, bare_wound_bonus, base_roll)
+			else
+				var/datum/wound/new_wound = new possible_wound
+				new_wound.apply_wound(src)
+				log_wound(owner, new_wound, damage, wound_bonus, bare_wound_bonus, base_roll)
+			return
+
+// try forcing a specific wound, but only if there isn't already a wound of that severity or greater for that type on this bodypart
+/obj/item/bodypart/proc/force_wound_upwards(specific_woundtype, smited = FALSE)
+	var/datum/wound/potential_wound = specific_woundtype
+	for(var/i in wounds)
+		var/datum/wound/existing_wound = i
+		if(existing_wound.type in (initial(potential_wound.wound_type)))
+			if(existing_wound.severity < initial(potential_wound.severity)) // we only try if the existing one is inferior to the one we're trying to force
+				existing_wound.replace_wound(potential_wound, smited)
+			return
+
+	var/datum/wound/new_wound = new potential_wound
+	new_wound.apply_wound(src, smited = smited)
+
+/obj/item/bodypart/proc/check_woundings_mods(wounding_type, damage, wound_bonus, bare_wound_bonus)
+	var/armor_ablation = 0
+	var/injury_mod = 0
+
+	//var/bwb = 0
+
+	if(owner && ishuman(owner))
+		var/mob/living/carbon/human/H = owner
+		var/list/clothing = H.clothingonpart(src)
+		for(var/c in clothing)
+			var/obj/item/clothing/C = c
+			// unlike normal armor checks, we tabluate these piece-by-piece manually so we can also pass on appropriate damage the clothing's limbs if necessary
+			armor_ablation += C.armor.getRating("wound")
+			if(wounding_type == WOUND_SHARP)
+				C.take_damage_zone(body_zone, damage, BRUTE, armour_penetration)
+			else if(wounding_type == WOUND_BURN && damage >= 10) // lazy way to block freezing from shredding clothes without adding another var onto apply_damage()
+				C.take_damage_zone(body_zone, damage, BURN, armour_penetration)
+
+		if(!armor_ablation)
+			injury_mod += bare_wound_bonus
+
+	injury_mod -= armor_ablation
+	injury_mod += wound_bonus
+
+	for(var/thing in wounds)
+		var/datum/wound/W = thing
+		injury_mod += W.threshold_penalty
+
+	var/part_mod = -wound_resistance
+	if(is_disabled())
+		part_mod += disabled_wound_penalty
+
+	injury_mod += part_mod
+
+	return injury_mod
 
 //Heals brute and burn damage for the organ. Returns 1 if the damage-icon states changed at all.
 //Damage cannot go below zero.
 //Cannot remove negative damage (i.e. apply damage)
 /obj/item/bodypart/proc/heal_damage(brute, burn, stamina, required_status, updating_health = TRUE)
 
-	if(required_status && status != required_status) //So we can only heal certain kinds of limbs, ie robotic vs organic.
+	if(required_status && (status != required_status)) //So we can only heal certain kinds of limbs, ie robotic vs organic.
 		return
 
-	if(brute)
-		set_brute_dam(round(max(brute_dam - brute, 0), DAMAGE_PRECISION))
-	if(burn)
-		set_burn_dam(round(max(burn_dam - burn, 0), DAMAGE_PRECISION))
-	if(stamina)
-		set_stamina_dam(round(max(stamina_dam - stamina, 0), DAMAGE_PRECISION))
-
-	if(owner)
-		if(can_be_disabled)
-			update_disabled()
-		if(updating_health)
-			owner.updatehealth()
+	brute_dam	= round(max(brute_dam - brute, 0), DAMAGE_PRECISION)
+	burn_dam	= round(max(burn_dam - burn, 0), DAMAGE_PRECISION)
+	stamina_dam = round(max(stamina_dam - stamina, 0), DAMAGE_PRECISION)
+	if(owner && updating_health)
+		owner.updatehealth()
+	consider_processing()
+	update_disabled()
 	cremation_progress = min(0, cremation_progress - ((brute_dam + burn_dam)*(100/max_damage)))
 	return update_bodypart_damage_state()
-
-
-///Proc to hook behavior associated to the change of the brute_dam variable's value.
-/obj/item/bodypart/proc/set_brute_dam(new_value)
-	if(brute_dam == new_value)
-		return
-	. = brute_dam
-	brute_dam = new_value
-
-
-///Proc to hook behavior associated to the change of the burn_dam variable's value.
-/obj/item/bodypart/proc/set_burn_dam(new_value)
-	if(burn_dam == new_value)
-		return
-	. = burn_dam
-	burn_dam = new_value
-
-
-///Proc to hook behavior associated to the change of the stamina_dam variable's value.
-/obj/item/bodypart/proc/set_stamina_dam(new_value)
-	if(stamina_dam == new_value)
-		return
-	. = stamina_dam
-	stamina_dam = new_value
-	if(stamina_dam > DAMAGE_PRECISION)
-		needs_processing = TRUE
-	else
-		needs_processing = FALSE
-
 
 //Returns total damage.
 /obj/item/bodypart/proc/get_damage(include_stamina = FALSE)
@@ -275,154 +362,48 @@
 		total = max(total, stamina_dam)
 	return total
 
-
 //Checks disabled status thresholds
 /obj/item/bodypart/proc/update_disabled()
-	if(!can_be_disabled)
-		set_disabled(FALSE)
-		CRASH("update_disabled called with can_be_disabled false")
-	if(HAS_TRAIT(src, TRAIT_PARALYSIS))
-		set_disabled(TRUE)
-		return
-
-	var/total_damage = max(brute_dam + burn_dam, stamina_dam)
-
-	if(total_damage >= max_damage * disable_threshold) //Easy limb disable disables the limb at 40% health instead of 0%
-		if(!last_maxed)
-			if(owner.stat < UNCONSCIOUS)
-				INVOKE_ASYNC(owner, /mob.proc/emote, "scream")
-			last_maxed = TRUE
-		set_disabled(TRUE)
-		return
-
-	if(bodypart_disabled && total_damage <= max_damage * 0.8) // reenabled at 80% now instead of 50% as of wounds update
-		last_maxed = FALSE
-		set_disabled(FALSE)
-
-///Proc to change the value of the `disabled` variable and react to the event of its change.
-/obj/item/bodypart/proc/set_disabled(new_disabled)
-	if(bodypart_disabled == new_disabled)
-		return
-	. = bodypart_disabled
-	bodypart_disabled = new_disabled
-
 	if(!owner)
 		return
+	set_disabled(is_disabled())
+
+/obj/item/bodypart/proc/is_disabled()
+	if(!owner)
+		return
+	if(HAS_TRAIT(src, TRAIT_PARALYSIS))
+		return BODYPART_DISABLED_PARALYSIS
+	for(var/i in wounds)
+		var/datum/wound/W = i
+		if(W.disabling)
+			return BODYPART_DISABLED_WOUND
+	if(can_dismember() && !HAS_TRAIT(owner, TRAIT_NOLIMBDISABLE))
+		. = disabled //inertia, to avoid limbs healing 0.1 damage and being re-enabled
+
+		// TODO: figure if i'm keeping disabling to broken bones only
+		if((get_damage(TRUE) >= max_damage) || (HAS_TRAIT(owner, TRAIT_EASYLIMBDISABLE) && (get_damage(TRUE) >= (max_damage * 0.6)))) //Easy limb disable disables the limb at 40% health instead of 0%
+			if(!last_maxed)
+				owner.emote("scream")
+				last_maxed = TRUE
+			if(!is_organic_limb())
+				return BODYPART_DISABLED_DAMAGE
+		else if(disabled && (get_damage(TRUE) <= (max_damage * 0.8))) // reenabled at 80% now instead of 50% as of wounds update
+			last_maxed = FALSE
+			return BODYPART_NOT_DISABLED
+	else
+		return BODYPART_NOT_DISABLED
+	return BODYPART_NOT_DISABLED
+
+/obj/item/bodypart/proc/set_disabled(new_disabled)
+	if(disabled == new_disabled || !owner)
+		return
+	disabled = new_disabled
+	if(disabled && owner.get_item_for_held_index(held_index))
+		owner.dropItemToGround(owner.get_item_for_held_index(held_index))
 	owner.update_health_hud() //update the healthdoll
 	owner.update_body()
-
-///Proc to change the value of the `owner` variable and react to the event of its change.
-/obj/item/bodypart/proc/set_owner(new_owner)
-	if(owner == new_owner)
-		return FALSE //`null` is a valid option, so we need to use a num var to make it clear no change was made.
-	. = owner
-	owner = new_owner
-	var/needs_update_disabled = FALSE //Only really relevant if there's an owner
-	if(.)
-		var/mob/living/carbon/old_owner = .
-		if(can_be_disabled)
-			if(HAS_TRAIT(old_owner, TRAIT_EASYLIMBDISABLE))
-				disable_threshold = initial(disable_threshold)
-				needs_update_disabled = TRUE
-			UnregisterSignal(old_owner, list(
-				SIGNAL_REMOVETRAIT(TRAIT_EASYLIMBDISABLE),
-				SIGNAL_ADDTRAIT(TRAIT_EASYLIMBDISABLE),
-				))
-		if(initial(can_be_disabled))
-			if(HAS_TRAIT(old_owner, TRAIT_NOLIMBDISABLE))
-				if(!owner || !HAS_TRAIT(owner, TRAIT_NOLIMBDISABLE))
-					set_can_be_disabled(initial(can_be_disabled))
-					needs_update_disabled = TRUE
-			UnregisterSignal(old_owner, list(
-				SIGNAL_REMOVETRAIT(TRAIT_NOLIMBDISABLE),
-				SIGNAL_ADDTRAIT(TRAIT_NOLIMBDISABLE),
-				))
-	if(owner)
-		if(can_be_disabled)
-			if(HAS_TRAIT(owner, TRAIT_EASYLIMBDISABLE))
-				disable_threshold = 0.6
-				needs_update_disabled = TRUE
-			RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_EASYLIMBDISABLE), .proc/on_owner_easylimbwound_trait_loss)
-			RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_EASYLIMBDISABLE), .proc/on_owner_easylimbwound_trait_gain)
-		if(initial(can_be_disabled))
-			if(HAS_TRAIT(owner, TRAIT_NOLIMBDISABLE))
-				set_can_be_disabled(FALSE)
-				needs_update_disabled = FALSE
-			RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_NOLIMBDISABLE), .proc/on_owner_nolimbdisable_trait_loss)
-			RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_NOLIMBDISABLE), .proc/on_owner_nolimbdisable_trait_gain)
-		if(needs_update_disabled)
-			update_disabled()
-
-
-///Proc to change the value of the `can_be_disabled` variable and react to the event of its change.
-/obj/item/bodypart/proc/set_can_be_disabled(new_can_be_disabled)
-	if(can_be_disabled == new_can_be_disabled)
-		return
-	. = can_be_disabled
-	can_be_disabled = new_can_be_disabled
-	if(can_be_disabled)
-		if(owner)
-			if(HAS_TRAIT(owner, TRAIT_NOLIMBDISABLE))
-				CRASH("set_can_be_disabled to TRUE with for limb whose owner has TRAIT_NOLIMBDISABLE")
-			RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS), .proc/on_paralysis_trait_gain)
-			RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS), .proc/on_paralysis_trait_loss)
-			if(HAS_TRAIT(owner, TRAIT_EASYLIMBDISABLE))
-				disable_threshold = 0.6
-			RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_EASYLIMBDISABLE), .proc/on_owner_easylimbwound_trait_loss)
-			RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_EASYLIMBDISABLE), .proc/on_owner_easylimbwound_trait_gain)
-		update_disabled()
-	else if(.)
-		if(owner)
-			UnregisterSignal(owner, list(
-				SIGNAL_ADDTRAIT(TRAIT_PARALYSIS),
-				SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS),
-				SIGNAL_REMOVETRAIT(TRAIT_EASYLIMBDISABLE),
-				SIGNAL_ADDTRAIT(TRAIT_EASYLIMBDISABLE),
-				))
-		set_disabled(FALSE)
-
-
-///Called when TRAIT_PARALYSIS is added to the limb.
-/obj/item/bodypart/proc/on_paralysis_trait_gain(obj/item/bodypart/source)
-	SIGNAL_HANDLER
-	if(can_be_disabled)
-		set_disabled(TRUE)
-
-
-///Called when TRAIT_PARALYSIS is removed from the limb.
-/obj/item/bodypart/proc/on_paralysis_trait_loss(obj/item/bodypart/source)
-	SIGNAL_HANDLER
-	if(can_be_disabled)
-		update_disabled()
-
-
-///Called when TRAIT_NOLIMBDISABLE is added to the owner.
-/obj/item/bodypart/proc/on_owner_nolimbdisable_trait_gain(mob/living/carbon/source)
-	SIGNAL_HANDLER
-	set_can_be_disabled(FALSE)
-
-
-///Called when TRAIT_NOLIMBDISABLE is removed from the owner.
-/obj/item/bodypart/proc/on_owner_nolimbdisable_trait_loss(mob/living/carbon/source)
-	SIGNAL_HANDLER
-	set_can_be_disabled(initial(can_be_disabled))
-
-
-///Called when TRAIT_EASYLIMBDISABLE is added to the owner.
-/obj/item/bodypart/proc/on_owner_easylimbwound_trait_gain(mob/living/carbon/source)
-	SIGNAL_HANDLER
-	disable_threshold = 0.6
-	if(can_be_disabled)
-		update_disabled()
-
-
-///Called when TRAIT_EASYLIMBDISABLE is removed from the owner.
-/obj/item/bodypart/proc/on_owner_easylimbwound_trait_loss(mob/living/carbon/source)
-	SIGNAL_HANDLER
-	disable_threshold = initial(disable_threshold)
-	if(can_be_disabled)
-		update_disabled()
-
+	owner.update_mobility()
+	return TRUE //if there was a change.
 
 //Updates an organ's brute/burn states for use by update_damage_overlays()
 //Returns 1 if we need to update overlays. 0 otherwise.
@@ -473,13 +454,6 @@
 		else
 			no_update = FALSE
 
-	if(C.has_bones) // Get the data from default carbon
-		bone_status = BONE_FLAG_NORMAL //get the carbon's default bone settings
-		RegisterSignal(owner, COMSIG_MOVABLE_MOVED, .proc/on_mob_move)
-	else
-		bone_status = BONE_FLAG_NO_BONES
-		UnregisterSignal(owner, COMSIG_MOVABLE_MOVED)
-
 	if(HAS_TRAIT(C, TRAIT_HUSK) && is_organic_limb())
 		species_id = "husk" //overrides species_id
 		dmg_overlay_type = "" //no damage overlay shown when husked
@@ -504,7 +478,7 @@
 		else
 			skin_tone = ""
 
-		body_gender = H.gender
+		body_gender = H.body_type
 		should_draw_gender = S.sexes
 
 		if((MUTCOLORS in S.species_traits) || (DYNCOLORS in S.species_traits))
@@ -515,14 +489,6 @@
 			should_draw_greyscale = TRUE
 		else
 			species_color = ""
-
-		if(NO_BONES in S.species_traits)
-			bone_status = BONE_FLAG_NO_BONES
-			UnregisterSignal(owner, COMSIG_MOVABLE_MOVED)
-		else
-			bone_status = BONE_FLAG_NORMAL
-			RegisterSignal(owner, COMSIG_MOVABLE_MOVED, .proc/on_mob_move)
-
 
 		if(!dropping_limb && H.dna.check_mutation(HULK))
 			mutation_color = "00aa00"
@@ -588,7 +554,7 @@
 	if((body_zone != BODY_ZONE_HEAD && body_zone != BODY_ZONE_CHEST))
 		should_draw_gender = FALSE
 
-	if(status == BODYPART_ORGANIC || (status == BODYPART_ROBOTIC && render_like_organic == TRUE)) // So IPC augments can be colorful without disrupting normal BODYPART_ROBOTIC render code.
+	if(is_organic_limb())
 		if(should_draw_greyscale)
 			limb.icon = 'icons/mob/human_parts_greyscale.dmi'
 			if(should_draw_gender)
@@ -630,30 +596,46 @@
 	drop_organs()
 	qdel(src)
 
-// BROKEN BONE PROCS //
-/obj/item/bodypart/proc/can_break_bone()
-	// Do they have bones, are the bones not broken, is the limb not robotic? If yes to all, return 1
-    return (bone_status && bone_status != BONE_FLAG_BROKEN && status != BODYPART_ROBOTIC)
-
-/obj/item/bodypart/proc/break_bone()
-	if(!can_break_bone())
-		return
-	bone_status = BONE_FLAG_BROKEN
-	owner.set_broken_legs(owner.broken_legs + 1)
-	addtimer(CALLBACK(owner, /atom/.proc/visible_message, "<span class='danger'>You hear a cracking sound coming from [owner]'s [name].</span>", "<span class='userdanger'>You feel something crack in your [name]!</span>", "<span class='danger'>You hear an awful cracking sound.</span>"), 1 SECONDS)
-
-/obj/item/bodypart/proc/fix_bone()
-	bone_status = BONE_FLAG_NORMAL
-	owner.update_inv_splints()
-	owner.set_broken_legs(owner.broken_legs - 1)
-
-/obj/item/bodypart/proc/on_mob_move()
-	// Dont trigger if it isn't broken or if it has no owner
-	if(bone_status != BONE_FLAG_BROKEN || !owner)
+/// Get whatever wound of the given type is currently attached to this limb, if any
+/obj/item/bodypart/proc/get_wound_type(checking_type)
+	if(isnull(wounds))
 		return
 
-	if(prob(5))
-		to_chat(owner, "<span class='danger'>[pick("You feel broken bones moving around in your [name]!", "There are broken bones moving around in your [name]!", "The bones in your [name] are moving around!")]</span>")
-		receive_damage(rand(1, 3))
-		//1-3 damage every 20 tiles for every broken bodypart.
-		//A single broken bodypart will give you an average of 650 tiles to run before you get a total of 100 damage and fall into crit
+	for(var/thing in wounds)
+		var/datum/wound/W = thing
+		if(istype(W, checking_type))
+			return W
+
+/// very rough start for updating efficiency and other stats on a body part whenever a wound is gained/lost
+/obj/item/bodypart/proc/update_wounds()
+	var/dam_mul = 1 //initial(wound_damage_multiplier)
+
+	// we can only have one wound per type, but remember there's multiple types
+	for(var/datum/wound/W in wounds)
+		dam_mul *= W.damage_mulitplier_penalty
+
+	wound_damage_multiplier = dam_mul
+	update_disabled()
+
+/obj/item/bodypart/proc/get_bleed_rate()
+	if(status != BODYPART_ORGANIC) // maybe in the future we can bleed oil from aug parts, but not now
+		return
+
+	var/bleed_rate = 0
+	if(generic_bleedstacks > 0)
+		bleed_rate++
+
+	if(brute_dam >= 40)
+		bleed_rate += (brute_dam * 0.008)
+
+	//We want an accurate reading of .len
+	listclearnulls(embedded_objects)
+	for(var/obj/item/embeddies in embedded_objects)
+		if(!embeddies.isEmbedHarmless())
+			bleed_rate += 0.5
+
+	for(var/thing in wounds)
+		var/datum/wound/W = thing
+		bleed_rate += W.blood_flow
+
+	return bleed_rate
