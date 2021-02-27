@@ -151,7 +151,7 @@
 	
 /datum/map_template/ruin/camp/whitesands/survivors/saloon
 	name = "Abandoned Saloon"
-	id = "ws-drugstore"
+	id = "ws-saloon"
 	description = "A western style saloon that has not been touched in years"
 	cost = 1
 	placement_weight = 0.5
