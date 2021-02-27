@@ -130,15 +130,6 @@
 	cost = 10
 	placement_weight = 0.5
 	allow_duplicates = FALSE
-	
-/datum/map_template/ruin/camp/whitesands/survivors/catsurgeon
-	name = "Cat Surgeon's abode"
-	id = "ws-catsurgeon"
-	description = "A seemingly abandoned hospital, devoid of all life..."
-	cost = 1
-	placement_weight = 0.5
-	suffix = "whitesands_surface_camp_catsurgeon.dmm"
-	allow_duplicates = FALSE
 
 /datum/map_template/ruin/camp/whitesands/survivors/farm
 	name = "Abandoned Farm"
