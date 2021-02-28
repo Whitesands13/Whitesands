@@ -6,7 +6,7 @@
 
 /obj/projectile/bullet/c9mm_ap
 	name = "9mm armor-piercing bullet"
-	damage = 15
+	damage = 17
 	armour_penetration = 40
 
 /obj/projectile/bullet/incendiary/c9mm

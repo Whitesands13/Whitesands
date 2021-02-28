@@ -265,8 +265,8 @@
 	contains = list(/obj/item/ammo_box/magazine/m10mm,
 					/obj/item/ammo_box/magazine/m10mm,
 					/obj/item/ammo_box/magazine/m10mm,
-					/obj/item/ammo_box/magazine/mauser8mm,
-					/obj/item/ammo_box/magazine/mauser8mm,
+					/obj/item/ammo_box/magazine/tec9,
+					/obj/item/ammo_box/magazine/tec9,
 					/obj/item/ammo_box/a357,
 					/obj/item/ammo_box/a357,
 					/obj/item/storage/box/lethalshot)

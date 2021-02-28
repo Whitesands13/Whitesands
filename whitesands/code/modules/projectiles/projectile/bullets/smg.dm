@@ -7,8 +7,3 @@
 	name = "5.56mm HITP bullet"
 	damage = 25
 	armour_penetration = 20
-
-/obj/projectile/bullet/mauser8mm
-	name = "8mm AP bullet"
-	damage = 25
-	armour_penetration = 30

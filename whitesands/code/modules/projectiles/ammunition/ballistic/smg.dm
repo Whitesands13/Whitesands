@@ -13,10 +13,3 @@
 	icon_state = "caseless"
 	caliber = "5.56mm HITP caseless"
 	projectile_type = /obj/projectile/bullet/c556mmHITP
-
-/obj/item/ammo_casing/mauser8mm
-	name = "8mm Mauser Round"
-	desc = "An armor-piercing 8mm round."
-	icon = 'whitesands/icons/obj/ammo.dmi'
-	caliber = "8mm Mauser"
-	projectile_type = /obj/projectile/bullet/mauser8mm
