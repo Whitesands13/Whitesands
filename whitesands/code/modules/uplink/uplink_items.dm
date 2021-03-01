@@ -71,7 +71,7 @@ Uplink Items
 	desc = "An additional 10 round .308 magazine for the EBR."
 	item = /obj/item/ammo_box/magazine/ebr
 	cost = 2
-	exclude_modes = list(/datum/game_mode/nuclear/clown_ops)
+	include_modes = list(/datum/game_mode/nuclear)
 
 
 /*Role Restricted*/
