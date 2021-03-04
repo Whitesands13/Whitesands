@@ -347,7 +347,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		if(newtype)
 			pref_species = new newtype
 
-	scars_index = rand(1,5)
 
 	//Character
 	READ_FILE(S["real_name"], real_name)
