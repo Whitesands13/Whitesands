@@ -40,6 +40,10 @@
 			handle_liver()
 
 		dna.species.spec_life(src) // for mutantraces
+	else
+		for(var/i in all_wounds)
+			var/datum/wound/iter_wound = i
+			iter_wound.on_stasis()
 
 	//WS Begin - Broken bones
 	if(stat != DEAD)
