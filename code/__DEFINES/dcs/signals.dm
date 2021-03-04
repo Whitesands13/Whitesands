@@ -531,15 +531,26 @@
 #define COMSIG_GRENADE_ARMED "grenade_armed"					//called in /obj/item/gun/process_fire (user, target, params, zone_override)
 
 // /obj/projectile signals (sent to the firer)
-#define COMSIG_PROJECTILE_SELF_ON_HIT "projectile_self_on_hit"			// from base of /obj/projectile/proc/on_hit(): (atom/movable/firer, atom/target, Angle)
-#define COMSIG_PROJECTILE_ON_HIT "projectile_on_hit"			// from base of /obj/projectile/proc/on_hit(): (atom/movable/firer, atom/target, Angle)
-#define COMSIG_PROJECTILE_BEFORE_FIRE "projectile_before_fire" 			// from base of /obj/projectile/proc/fire(): (obj/projectile, atom/original_target)
-#define COMSIG_PROJECTILE_FIRE "projectile_fire"				// from the base of /obj/projectile/proc/fire(): ()
-#define COMSIG_PROJECTILE_PREHIT "com_proj_prehit"				// sent to targets during the process_hit proc of projectiles
-#define COMSIG_PROJECTILE_RANGE_OUT "projectile_range_out"				// sent to targets during the process_hit proc of projectiles
-#define COMSIG_EMBED_TRY_FORCE "item_try_embed"					// sent when trying to force an embed (mainly for projectiles, only used in the embed element)
 
-#define COMSIG_PELLET_CLOUD_INIT "pellet_cloud_init"				// sent to targets during the process_hit proc of projectiles
+///from base of /obj/projectile/proc/on_hit(): (atom/movable/firer, atom/target, Angle, hit_limb)
+#define COMSIG_PROJECTILE_SELF_ON_HIT "projectile_self_on_hit"
+	#define COMPONENT_PROJECTILE_SELF_ON_HIT_EMBED_SUCCESS (1<<0)
+	#define COMPONENT_PROJECTILE_SELF_ON_HIT_SELF_DELETE (1<<1)
+///from base of /obj/projectile/proc/on_hit(): (atom/movable/firer, atom/target, Angle)
+#define COMSIG_PROJECTILE_ON_HIT "projectile_on_hit"
+///from base of /obj/projectile/proc/fire(): (obj/projectile, atom/original_target)
+#define COMSIG_PROJECTILE_BEFORE_FIRE "projectile_before_fire"
+///from the base of /obj/projectile/proc/fire(): ()
+#define COMSIG_PROJECTILE_FIRE "projectile_fire"
+///sent to targets during the process_hit proc of projectiles
+#define COMSIG_PROJECTILE_PREHIT "com_proj_prehit"
+///sent to targets during the process_hit proc of projectiles
+#define COMSIG_PROJECTILE_RANGE_OUT "projectile_range_out"
+///sent when trying to force an embed (mainly for projectiles, only used in the embed element)
+#define COMSIG_EMBED_TRY_FORCE "item_try_embed"
+
+///sent to targets during the process_hit proc of projectiles
+#define COMSIG_PELLET_CLOUD_INIT "pellet_cloud_init"
 
 // /obj/mecha signals
 #define COMSIG_MECHA_ACTION_ACTIVATE "mecha_action_activate"	//sent from mecha action buttons to the mecha they're linked to
