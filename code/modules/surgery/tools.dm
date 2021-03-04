@@ -77,6 +77,9 @@
 	sharpness = IS_SHARP		//WS Edit - Makes the Drill sharp
 	tool_behaviour = TOOL_DRILL
 	toolspeed = 1
+	sharpness = SHARP_POINTY
+	wound_bonus = 10
+	bare_wound_bonus = 10
 
 /obj/item/surgicaldrill/Initialize()		//WS Edit Start - Trying to butcher with a drill is a bad idea
 	. = ..()
@@ -118,7 +121,8 @@
 	sharpness = SHARP_EDGED
 	tool_behaviour = TOOL_SCALPEL
 	toolspeed = 1
-	bare_wound_bonus = 20
+	wound_bonus = 15
+	bare_wound_bonus = 15
 
 /obj/item/scalpel/Initialize()
 	. = ..()
@@ -154,8 +158,8 @@
 	sharpness = SHARP_EDGED
 	tool_behaviour = TOOL_SAW
 	toolspeed = 1
-	wound_bonus = 10
-	bare_wound_bonus = 15
+	wound_bonus = 15
+	bare_wound_bonus = 10
 
 /obj/item/circular_saw/Initialize()
 	. = ..()
