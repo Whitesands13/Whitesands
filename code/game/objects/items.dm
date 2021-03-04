@@ -927,13 +927,10 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 	if(embedding)
 		return !isnull(embedding["pain_mult"]) && !isnull(embedding["jostle_pain_mult"]) && embedding["pain_mult"] == 0 && embedding["jostle_pain_mult"] == 0
 
-///In case we want to do something special (like self delete) upon failing to embed in something. Returns a bitflag.
+///In case we want to do something special (like self delete) upon failing to embed in something.
 /obj/item/proc/failedEmbed()
 	if(item_flags & DROPDEL)
 		qdel(src)
-		return COMPONENT_PROJECTILE_SELF_ON_HIT_SELF_DELETE
-	return NONE
-
 
 ///Called by the carbon throw_item() proc. Returns null if the item negates the throw, or a reference to the thing to suffer the throw else.
 /obj/item/proc/on_thrown(mob/living/carbon/user, atom/target)
@@ -950,7 +947,7 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
   *
   * Really, this is used mostly with projectiles with shrapnel payloads, from [/datum/element/embed/proc/checkEmbedProjectile], and called on said shrapnel. Mostly acts as an intermediate between different embed elements.
   *
-  * Returns bitflags informing whether the item was able to embed itself, deleted itself in the process, or nothing happened.
+  * Returns TRUE if it embedded successfully, nothing otherwise
   *
   * Arguments:
   * * target- Either a body part or a carbon. What are we hitting?
@@ -963,9 +960,8 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 		return NONE
 
 	if(SEND_SIGNAL(src, COMSIG_EMBED_TRY_FORCE, target, forced, silent))
-		return COMPONENT_PROJECTILE_SELF_ON_HIT_EMBED_SUCCESS
-	return failedEmbed()
-
+		return COMPONENT_EMBED_SUCCESS
+	failedEmbed()
 
 ///For when you want to disable an item's embedding capabilities (like transforming weapons and such), this proc will detach any active embed elements from it.
 /obj/item/proc/disableEmbedding()
