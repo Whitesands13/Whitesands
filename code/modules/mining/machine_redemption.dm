@@ -4,11 +4,12 @@
 /obj/machinery/mineral/ore_redemption
 	name = "ore redemption machine"
 	desc = "A machine that accepts ore and instantly transforms it into workable material sheets. Points for ore are generated based on type and can be redeemed at a mining equipment vendor."
-	icon = 'icons/obj/machines/mining_machines.dmi'
+	icon = 'whitesands/icons/obj/machines/orm.dmi' // WS Edit - Directional ORM Sprites
 	icon_state = "ore_redemption"
 	density = TRUE
 	input_dir = NORTH
 	output_dir = SOUTH
+	dir = SOUTH // WS Edit - Directional ORM Sprites
 	req_access = list(ACCESS_MINERAL_STOREROOM)
 	layer = BELOW_OBJ_LAYER
 	circuit = /obj/item/circuitboard/machine/ore_redemption
@@ -200,6 +201,7 @@
 	if(panel_open)
 		input_dir = turn(input_dir, -90)
 		output_dir = turn(output_dir, -90)
+		dir = input_dir // WS Edit - Directional ORM Sprites
 		to_chat(user, "<span class='notice'>You change [src]'s I/O settings, setting the input to [dir2text(input_dir)] and the output to [dir2text(output_dir)].</span>")
 		unregister_input_turf() // someone just rotated the input and output directions, unregister the old turf
 		register_input_turf() // register the new one
@@ -363,6 +365,10 @@
 	..()
 
 /obj/machinery/mineral/ore_redemption/update_icon_state()
+	// WS Start - Directional ORM Sprites
+	if (panel_open)
+		icon_state = "[initial(icon_state)]-open"
+	// WS End - Directional ORM Sprites
 	if(powered())
 		icon_state = initial(icon_state)
 	else
