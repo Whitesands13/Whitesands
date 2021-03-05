@@ -282,6 +282,7 @@
 	desc = "An envirosuit helmet made for the tutored plasmaman."
 	icon_state = "ce_envirohelm"
 	item_state = "ce_envirohelm"
+	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 
 /obj/item/clothing/head/helmet/space/plasmaman/cmo
 	name = "chief medical officers envirohelmet"
@@ -318,4 +319,4 @@
 	desc = "an envirosuit helmet made for the sentinel plasmaman."
 	icon_state = "lt_envirohelm"
 	item_state = "lt_envirohelm"
-	
+
