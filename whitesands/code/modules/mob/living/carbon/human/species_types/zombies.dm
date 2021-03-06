@@ -12,7 +12,7 @@
 	id = "memezombies"
 	limbs_id = "zombie"
 	mutanthands = /obj/item/zombie_hand
-	armor = 25
+	armor = 20
 	speedmod = 2
 	mutanteyes = /obj/item/organ/eyes/night_vision/zombie
 	var/heal_rate = 4
