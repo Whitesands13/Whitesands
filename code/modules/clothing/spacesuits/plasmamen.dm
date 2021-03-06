@@ -203,12 +203,14 @@
 	icon_state = "engineer_envirohelm"
 	item_state = "engineer_envirohelm"
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 100, "rad" = 10, "fire" = 100, "acid" = 75)
+	resistance_flags = FIRE_PROOF
 
 /obj/item/clothing/head/helmet/space/plasmaman/atmospherics
 	name = "atmospherics plasma envirosuit helmet"
 	desc = "A space-worthy helmet specially designed for atmos technician plasmamen, the usual purple stripes being replaced by engineering's blue."
 	icon_state = "atmos_envirohelm"
 	item_state = "atmos_envirohelm"
+	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 
 /obj/item/clothing/head/helmet/space/plasmaman/cargo
 	name = "cargo plasma envirosuit helmet"
@@ -276,12 +278,18 @@
 	desc = "An envirosuit helmet made for the most important plasmaman of them all."
 	icon_state = "command_envirohelm"
 	item_state = "command_envirohelm"
+	armor = list("melee" = 40, "bullet" = 50, "laser" = 50, "energy" = 60, "bomb" = 50, "bio" = 100, "rad" = 50, "fire" = 100, "acid" = 100)
+	resistance_flags = FIRE_PROOF | ACID_PROOF
+	heat_protection = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
+	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT //this needed to be added a long fucking time ago
+
 
 /obj/item/clothing/head/helmet/space/plasmaman/engineering/ce
 	name = "chief engineers envirohelmet"
 	desc = "An envirosuit helmet made for the tutored plasmaman."
 	icon_state = "ce_envirohelm"
 	item_state = "ce_envirohelm"
+	armor = list("melee" = 40, "bullet" = 5, "laser" = 10, "energy" = 20, "bomb" = 50, "bio" = 100, "rad" = 100, "fire" = 100, "acid" = 90)
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 
 /obj/item/clothing/head/helmet/space/plasmaman/cmo
@@ -289,18 +297,25 @@
 	desc = "An envirosuit helmet made for the taxed plasmaman."
 	icon_state = "cmo_envirohelm"
 	item_state = "cmo_envirohelm"
+	armor = list("melee" = 30, "bullet" = 5, "laser" = 10, "energy" = 20, "bomb" = 10, "bio" = 100, "rad" = 60, "fire" = 60, "acid" = 75)
+
 
 /obj/item/clothing/head/helmet/space/plasmaman/security/hos
 	name = "head of securitys helmet"
 	desc = "An envirosuit helmet made for the right and honorable plasmaman."
 	icon_state = "hos_envirohelm"
 	item_state = "hos_envirohelm"
+	armor = list("melee" = 45, "bullet" = 25, "laser" = 30, "energy" = 40, "bomb" = 25, "bio" = 100, "rad" = 100, "fire" = 95, "acid" = 95)
 
 /obj/item/clothing/head/helmet/space/plasmaman/rd
 	name = "research directors envirosuit helmet"
 	desc = "An envirosuit helmet made for the erudite plasmaman."
 	icon_state = "rd_envirohelm"
 	item_state = "rd_envirohelm"
+	armor = list("melee" = 30, "bullet" = 5, "laser" = 10, "energy" = 20, "bomb" = 100, "bio" = 100, "rad" = 60, "fire" = 60, "acid" = 80)
+	var/explosion_detection_dist = 21
+	clothing_flags = STOPSPRESSUREDAMAGE | THICKMATERIAL | SCAN_REAGENTS | SNUG_FIT | BLOCK_GAS_SMOKE_EFFECT | ALLOWINTERNALS //WS Port - Cit Internals
+	actions_types = list(/datum/action/item_action/toggle_helmet_light, /datum/action/item_action/toggle_research_scanner)
 
 /obj/item/clothing/head/helmet/space/plasmaman/hop
 	name = "head of personnels envirosuit helmet"
@@ -319,4 +334,3 @@
 	desc = "an envirosuit helmet made for the sentinel plasmaman."
 	icon_state = "lt_envirohelm"
 	item_state = "lt_envirohelm"
-
