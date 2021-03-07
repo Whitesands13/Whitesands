@@ -9,7 +9,6 @@
 	density = TRUE
 	input_dir = NORTH
 	output_dir = SOUTH
-	dir = SOUTH // WS Edit - Directional ORM Sprites
 	req_access = list(ACCESS_MINERAL_STOREROOM)
 	layer = BELOW_OBJ_LAYER
 	circuit = /obj/item/circuitboard/machine/ore_redemption
@@ -29,6 +28,7 @@
 	. = ..()
 	stored_research = new /datum/techweb/specialized/autounlocking/smelter
 	materials = AddComponent(/datum/component/remote_materials, "orm", mapload)
+	dir = input_dir // WS Edit - Directional ORM Sprites
 
 /obj/machinery/mineral/ore_redemption/Destroy()
 	QDEL_NULL(stored_research)
