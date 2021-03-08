@@ -334,6 +334,9 @@
 /obj/structure/overmap/star
 	name = "Kepler 453"
 	desc = "The binary star Kepler 453, home to the planet White Sands"
+	icon = 'whitesands/icons/effects/overmap_large.dmi'
 	icon_state = "kepler_453"
 	opacity = 1
 	density = 1
+	pixel_x = -32
+	pixel_y = -32
