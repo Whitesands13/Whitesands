@@ -7,13 +7,15 @@
 /area/shuttle/arrival)
 "c" = (
 /obj/structure/shuttle/engine/propulsion{
-	dir = 1
+	dir = 1;
+	icon_state = "propulsion"
 	},
 /turf/open/floor/plating/airless,
 /area/shuttle/arrival)
 "d" = (
 /obj/structure/shuttle/engine/heater{
-	dir = 1
+	dir = 1;
+	icon_state = "heater"
 	},
 /obj/structure/window/reinforced,
 /turf/open/floor/plating/airless,
@@ -36,10 +38,16 @@
 /obj/structure/chair/comfy/shuttle,
 /turf/open/floor/mineral/titanium/blue,
 /area/shuttle/arrival)
+"k" = (
+/obj/machinery/door/airlock/titanium,
+/obj/structure/fans/tiny,
+/turf/open/floor/plating,
+/area/shuttle/arrival)
 "l" = (
 /obj/machinery/light{
 	dir = 8
 	},
+/obj/machinery/suit_storage_unit/standard_unit,
 /turf/open/floor/mineral/titanium,
 /area/shuttle/arrival)
 "m" = (
@@ -53,6 +61,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
+/obj/machinery/suit_storage_unit/standard_unit,
 /turf/open/floor/mineral/titanium,
 /area/shuttle/arrival)
 "o" = (
@@ -61,19 +70,25 @@
 /area/shuttle/arrival)
 "p" = (
 /obj/structure/shuttle/engine/propulsion{
-	dir = 1
+	dir = 1;
+	icon_state = "propulsion"
 	},
 /obj/docking_port/mobile/arrivals{
 	dir = 2;
+	dwidth = 3;
 	height = 13;
-	name = "donut arrivals shuttle"
+	name = "donut arrivals shuttle";
+	width = 7
 	},
 /turf/open/floor/plating/airless,
 /area/shuttle/arrival)
-"H" = (
-/obj/machinery/door/airlock/titanium,
-/obj/structure/fans/tiny,
-/turf/open/floor/plating,
+"C" = (
+/obj/machinery/suit_storage_unit/standard_unit,
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
+"K" = (
+/obj/machinery/suit_storage_unit/standard_unit,
+/turf/open/floor/mineral/titanium/blue,
 /area/shuttle/arrival)
 
 (1,1,1) = {"
@@ -95,14 +110,14 @@ a
 b
 b
 e
-h
-h
+C
+C
 l
 h
 h
 l
-h
-h
+C
+C
 b
 b
 "}
@@ -112,13 +127,13 @@ d
 f
 i
 h
-m
+i
 h
 m
 h
-m
+i
 h
-g
+K
 o
 "}
 (4,1,1) = {"
@@ -127,11 +142,11 @@ d
 g
 i
 h
-m
+i
 h
-m
+i
 h
-m
+i
 h
 i
 o
@@ -142,27 +157,27 @@ d
 f
 i
 h
-m
+i
 h
-m
+i
 h
-m
+i
 h
-g
+K
 o
 "}
 (6,1,1) = {"
 b
 b
 e
-h
-h
-n
-h
+C
 h
 n
+C
+C
+n
 h
-h
+C
 b
 b
 "}
@@ -171,12 +186,12 @@ a
 b
 b
 b
-H
+k
 b
 o
 o
 b
-H
+k
 b
 b
 a

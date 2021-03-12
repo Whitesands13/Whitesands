@@ -23,35 +23,14 @@
 /obj/structure/closet/emcloset/PopulateContents()
 	..()
 
-	if (prob(40))
-		new /obj/item/storage/toolbox/emergency(src)
-
-	switch (pickweight(list("small" = 40, "aid" = 25, "tank" = 20, "both" = 10, "nothing" = 4, "delete" = 1)))
-		if ("small")
-			new /obj/item/tank/internals/emergency_oxygen(src)
-			new /obj/item/tank/internals/emergency_oxygen(src)
-			new /obj/item/clothing/mask/breath(src)
-			new /obj/item/clothing/mask/breath(src)
-
-		if ("aid")
-			new /obj/item/tank/internals/emergency_oxygen(src)
-			new /obj/item/storage/firstaid/o2(src)
-			new /obj/item/clothing/mask/breath(src)
-
-		if ("tank")
-			new /obj/item/tank/internals/oxygen(src)
-			new /obj/item/clothing/mask/breath(src)
-
-		if ("both")
-			new /obj/item/tank/internals/emergency_oxygen(src)
-			new /obj/item/clothing/mask/breath(src)
-
-		if ("nothing")
-			// doot
-
-		// teehee
-		if ("delete")
-			qdel(src)
+	new /obj/item/clothing/suit/space/eva(src)		// E:b:ent code
+	new /obj/item/clothing/suit/space/eva(src)
+	new /obj/item/clothing/head/helmet/space/eva(src)
+	new /obj/item/clothing/head/helmet/space/eva(src)
+	new /obj/item/tank/internals/oxygen(src)
+	new /obj/item/tank/internals/oxygen(src)
+	new /obj/item/clothing/mask/breath(src)
+	new /obj/item/clothing/mask/breath(src)
 
 /*
  * Fire Closet

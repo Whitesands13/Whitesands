@@ -235,11 +235,34 @@
 	},
 /turf/open/floor/mineral/titanium/blue,
 /area/shuttle/escape)
+"aP" = (
+/obj/machinery/door/airlock/titanium{
+	name = "Emergency Shuttle Airlock";
+	req_access_txt = "2"
+	},
+/turf/open/floor/plating,
+/area/shuttle/escape)
 "aQ" = (
 /obj/structure/chair/comfy/shuttle{
 	dir = 1
 	},
 /turf/open/floor/mineral/plastitanium/red/brig,
+/area/shuttle/escape)
+"aR" = (
+/obj/machinery/door/airlock/titanium{
+	name = "Emergency Shuttle Airlock"
+	},
+/turf/open/floor/plating,
+/area/shuttle/escape)
+"aS" = (
+/obj/machinery/door/airlock/titanium{
+	name = "Emergency Shuttle Airlock"
+	},
+/obj/docking_port/mobile/emergency{
+	name = "Donut emergency shuttle";
+	width = 34
+	},
+/turf/open/floor/plating,
 /area/shuttle/escape)
 "aT" = (
 /obj/structure/extinguisher_cabinet,
@@ -341,7 +364,7 @@
 /area/shuttle/escape)
 "bj" = (
 /obj/structure/sink{
-	dir = 4;
+	dir = 8;
 	pixel_x = -12
 	},
 /turf/open/floor/mineral/titanium/white,
@@ -353,7 +376,9 @@
 /turf/open/floor/mineral/titanium/white,
 /area/shuttle/escape)
 "bl" = (
-/obj/structure/closet/crate/medical,
+/obj/structure/closet/crate/medical{
+	name = "medical crate"
+	},
 /obj/item/storage/firstaid/regular,
 /obj/item/storage/firstaid/o2{
 	pixel_x = 3;
@@ -461,43 +486,6 @@
 /obj/structure/shuttle/engine/propulsion,
 /turf/open/floor/plating/airless,
 /area/shuttle/escape)
-"bx" = (
-/obj/machinery/stasis,
-/turf/open/floor/mineral/titanium,
-/area/shuttle/escape)
-"bS" = (
-/obj/item/storage/backpack/duffelbag/med/surgery,
-/obj/item/clothing/suit/apron/surgical,
-/obj/item/clothing/mask/surgical,
-/obj/structure/table/optable,
-/turf/open/floor/mineral/titanium,
-/area/shuttle/escape)
-"mi" = (
-/obj/machinery/door/airlock/titanium{
-	name = "Emergency Shuttle Airlock";
-	req_access_txt = "2"
-	},
-/obj/structure/fans/tiny,
-/turf/open/floor/plating,
-/area/shuttle/escape)
-"JE" = (
-/obj/machinery/door/airlock/titanium{
-	name = "Emergency Shuttle Airlock"
-	},
-/obj/structure/fans/tiny,
-/turf/open/floor/plating,
-/area/shuttle/escape)
-"RH" = (
-/obj/machinery/door/airlock/titanium{
-	name = "Emergency Shuttle Airlock"
-	},
-/obj/docking_port/mobile/emergency{
-	name = "Donut emergency shuttle";
-	width = 34
-	},
-/obj/structure/fans/tiny,
-/turf/open/floor/plating,
-/area/shuttle/escape)
 
 (1,1,1) = {"
 aa
@@ -513,17 +501,17 @@ aa
 aa
 ab
 ab
-mi
+aP
 ab
-RH
+aS
 ab
 aa
 aa
 aa
 ab
-JE
+aR
 ac
-JE
+aR
 ab
 aa
 ab
@@ -672,7 +660,7 @@ aW
 aX
 aY
 ab
-bS
+bf
 bj
 bn
 ab
@@ -852,7 +840,7 @@ aW
 aX
 aY
 ab
-bx
+bf
 bk
 bq
 ab
@@ -981,17 +969,17 @@ aa
 aa
 ab
 ab
-JE
+aR
 ac
-JE
+aR
 ab
 aa
 aa
 aa
 ab
-JE
+aR
 ac
-JE
+aR
 ab
 aa
 ab
