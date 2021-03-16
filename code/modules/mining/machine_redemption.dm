@@ -28,7 +28,6 @@
 	. = ..()
 	stored_research = new /datum/techweb/specialized/autounlocking/smelter
 	materials = AddComponent(/datum/component/remote_materials, "orm", mapload)
-	dir = input_dir // WS Edit - Directional ORM Sprites
 
 /obj/machinery/mineral/ore_redemption/Destroy()
 	QDEL_NULL(stored_research)
