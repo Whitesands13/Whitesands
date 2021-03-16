@@ -108,7 +108,8 @@
 			S.z = dz * distance_multiplier
 			var/dy = (turf_source.z - T.z) * 5 * distance_multiplier // Hearing from  above / below, multiplied by 5 because we assume height is further along coords.
 			S.y = dy
-
+		else
+			S.y = 1	//To make sure the mono sound doesn't make you feel like you're dying.
 		S.falloff = (falloff ? falloff : FALLOFF_SOUNDS)
 
 	SEND_SOUND(src, S)
