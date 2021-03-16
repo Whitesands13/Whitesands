@@ -1,5 +1,5 @@
 //A slow but strong beast that tries to stun using its tentacles
-/whitesands/mob/living/simple_animal/hostile/asteroid/gruboid
+/mob/living/simple_animal/hostile/whitesands/gruboid
 	name = "gruboid"
 	desc = "A massive beast that uses long tentacles to ensnare its prey, threatening them is not advised under any conditions."
 	icon = 'whitesands/icons/mob/whitesands/monsters.dmi'
@@ -46,31 +46,31 @@
 
 	footstep_type = FOOTSTEP_MOB_HEAVY
 
-/whitesands/mob/living/simple_animal/hostile/asteroid/gruboid/Life()
+/mob/living/simple_animal/hostile/whitesands/gruboid/Life()
 	. = ..()
 	handle_preattack()
 
-/whitesands/mob/living/simple_animal/hostile/asteroid/gruboid/proc/handle_preattack()
+/mob/living/simple_animal/hostile/whitesands/gruboid/proc/handle_preattack()
 	if(ranged_cooldown <= world.time + ranged_cooldown_time*0.25 && !pre_attack)
 		pre_attack++
 	if(!pre_attack || stat || AIStatus == AI_IDLE)
 		return
 	icon_state = pre_attack_icon
 
-/whitesands/mob/living/simple_animal/hostile/asteroid/gruboid/revive(full_heal = FALSE, admin_revive = FALSE)//who the fuck anchors mobs
+/mob/living/simple_animal/hostile/whitesands/gruboid/revive(full_heal = FALSE, admin_revive = FALSE)//who the fuck anchors mobs
 	if(..())
 		move_force = MOVE_FORCE_VERY_STRONG
 		move_resist = MOVE_FORCE_VERY_STRONG
 		pull_force = MOVE_FORCE_VERY_STRONG
 		. = 1
 
-/whitesands/mob/living/simple_animal/hostile/asteroid/gruboid/death(gibbed)
+/mob/living/simple_animal/hostile/whitesands/gruboid/death(gibbed)
 	move_force = MOVE_FORCE_DEFAULT
 	move_resist = MOVE_RESIST_DEFAULT
 	pull_force = PULL_FORCE_DEFAULT
 	..(gibbed)
 
-/whitesands/mob/living/simple_animal/hostile/asteroid/gruboid/OpenFire()
+/mob/living/simple_animal/hostile/whitesands/gruboid/OpenFire()
 	var/tturf = get_turf(target)
 	if(!isturf(tturf))
 		return
@@ -81,14 +81,14 @@
 		icon_state = icon_aggro
 		pre_attack = 0
 
-/whitesands/mob/living/simple_animal/hostile/asteroid/gruboid/Found(atom/A)
+/mob/living/simple_animal/hostile/whitesands/gruboid/Found(atom/A)
 	if(istype(A, /obj/structure/flora/ash))
 		var/obj/structure/flora/ash/edible = A
 		if(!edible.harvested)
 			return TRUE
 	return FALSE
 
-/whitesands/mob/living/simple_animal/hostile/asteroid/gruboid/AttackingTarget()
+/mob/living/simple_animal/hostile/whitesands/gruboid/AttackingTarget()
 	if(istype(target, /obj/structure/flora/ash))
 		var/obj/structure/flora/ash/edible = target
 		visible_message("<span class='notice'>[src] eats the [edible].</span>")
@@ -97,21 +97,21 @@
 	else
 		. = ..()
 
-/whitesands/mob/living/simple_animal/hostile/asteroid/gruboid/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/simple_animal/hostile/whitesands/gruboid/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	ranged_cooldown -= 10
 	handle_preattack()
 	. = ..()
 
-/whitesands/mob/living/simple_animal/hostile/asteroid/gruboid/Aggro()
+/mob/living/simple_animal/hostile/whitesands/gruboid/Aggro()
 	vision_range = aggro_vision_range
 	handle_preattack()
 	if(icon_state != icon_aggro)
 		icon_state = icon_aggro
 
-/whitesands/mob/living/simple_animal/hostile/asteroid/gruboid/pup
+/mob/living/simple_animal/hostile/whitesands/gruboid/pup
 	name = "gruboid pup"
 	desc = "A small gruboid pup. It's tendrils have not yet fully grown."
-    icon = 'whitesands/icons/mob/whitesands/monsters.dmi'
+	icon = 'whitesands/icons/mob/whitesands/monsters.dmi'
 	icon_state = "gruboid_baby"
 	icon_living = "gruboid_baby"
 	icon_aggro = "gruboid_baby"
@@ -130,10 +130,10 @@
 
 
 //Lavaland Gruboid
-/whitesands/mob/living/simple_animal/hostile/asteroid/gruboid/beast
+/mob/living/simple_animal/hostile/whitesands/gruboid/beast
 	name = "gruboid"
 	desc = "A hulking, armor-plated beast with long tendrils arching from its back."
-    icon = 'whitesands/icons/mob/whitesands/monsters.dmi'
+	icon = 'whitesands/icons/mob/whitesands/monsters.dmi'
 	icon_state = "gruboid"
 	icon_living = "gruboid"
 	icon_aggro = "gruboid"
@@ -152,7 +152,7 @@
 	var/charge_range = 7
 	var/tent_range = 3
 
-/whitesands/mob/living/simple_animal/hostile/asteroid/gruboid/beast/proc/charge(atom/chargeat = target, delay = 10, chargepast = 2)
+/mob/living/simple_animal/hostile/whitesands/gruboid/beast/proc/charge(atom/chargeat = target, delay = 10, chargepast = 2)
 	if(!chargeat)
 		return
 	var/chargeturf = get_turf(chargeat)
@@ -176,12 +176,12 @@
 	walk(src, 0) // cancel the movement
 	charging = FALSE
 
-/whitesands/mob/living/simple_animal/hostile/asteroid/gruboid/beast/Bump(atom/A)
+/mob/living/simple_animal/hostile/whitesands/gruboid/beast/Bump(atom/A)
 	. = ..()
 	if(charging && isclosedturf(A))				// We slammed into a wall while charging
 		wall_slam(A)
 
-/whitesands/mob/living/simple_animal/hostile/asteroid/gruboid/beast/proc/wall_slam(atom/A)
+/mob/living/simple_animal/hostile/whitesands/gruboid/beast/proc/wall_slam(atom/A)
 	charging = FALSE
 	Stun(100, TRUE, TRUE)
 	walk(src, 0)		// Cancel the movement
@@ -190,7 +190,7 @@
 		if(M.mineralAmt < 7)
 			M.mineralAmt++
 
-/whitesands/mob/living/simple_animal/hostile/asteroid/gruboid/beast/OpenFire()
+/mob/living/simple_animal/hostile/whitesands/gruboid/beast/OpenFire()
 	var/tturf = get_turf(target)
 	var/dist = get_dist(src, target)
 	if(!isturf(tturf) || !isliving(target))
@@ -204,7 +204,7 @@
 	else if(dist <= charge_range)		//Screen range check, so you can't get charged offscreen
 		charge()
 
-/whitesands/mob/living/simple_animal/hostile/asteroid/gruboid/beast/attackby(obj/item/O, mob/user, params)
+/mob/living/simple_animal/hostile/whitesands/gruboid/beast/attackby(obj/item/O, mob/user, params)
 	if(istype(O, /obj/item/saddle) && !saddled)
 		if(tame && do_after(user,55,target=src))
 			user.visible_message("<span class='notice'>You manage to put [O] on [src], you can now ride [p_them()].</span>")
@@ -226,13 +226,13 @@
 		return
 	..()
 
-/whitesands/mob/living/simple_animal/hostile/asteroid/gruboid/beast/random/Initialize()
+/mob/living/simple_animal/hostile/whitesands/gruboid/beast/random/Initialize()
 	. = ..()
 	if(prob(1))
-		new /whitesands/mob/living/simple_animal/hostile/asteroid/gruboid/beast/ancient(loc)
+		new /mob/living/simple_animal/hostile/whitesands/gruboid/beast/ancient(loc)
 		return INITIALIZE_HINT_QDEL
 
-/whitesands/mob/living/simple_animal/hostile/asteroid/gruboid/beast/ancient
+/mob/living/simple_animal/hostile/whitesands/gruboid/beast/ancient
 	name = "ancient gruboid"
 	desc = "Gruboids are biologically immortal, and rare specimens have survived for centuries. This one is clearly ancient, and its tentacles constantly churn the earth around it."
 	icon_state = "Gruboid"
@@ -253,7 +253,7 @@
 	var/turf/last_location
 	var/tentacle_recheck_cooldown = 100
 
-/whitesands/mob/living/simple_animal/hostile/asteroid/gruboid/beast/ancient/Life()
+/mob/living/simple_animal/hostile/whitesands/gruboid/beast/ancient/Life()
 	. = ..()
 	if(!.) // dead
 		return
@@ -271,20 +271,20 @@
 			else
 				cached_tentacle_turfs -= t
 
-/whitesands/mob/living/simple_animal/hostile/asteroid/gruboid/beast/tendril
+/mob/living/simple_animal/hostile/whitesands/gruboid/beast/tendril
 	fromtendril = TRUE
 
 //tentacles
-/whitesands/obj/effect/temp_visual/gruboid_tentacle
+/obj/effect/temp_visual/gruboid_tentacle
 	name = "gruboid tentacle"
-    icon = 'whitesands/icons/mob/whitesands/monsters.dmi'
+	icon = 'whitesands/icons/mob/whitesands/monsters.dmi'
 	icon_state = "Gruboid_tentacle_spawn"
 	layer = BELOW_MOB_LAYER
 	var/mob/living/spawner
 
-/whitesands/obj/effect/temp_visual/gruboid_tentacle/Initialize(mapload, mob/living/new_spawner)
+/obj/effect/temp_visual/gruboid_tentacle/Initialize(mapload, mob/living/new_spawner)
 	. = ..()
-	for(var/whitesands/obj/effect/temp_visual/gruboid_tentacle/T in loc)
+	for(var/obj/effect/temp_visual/gruboid_tentacle/T in loc)
 		if(T != src)
 			return INITIALIZE_HINT_QDEL
 	if(!QDELETED(new_spawner))
@@ -295,21 +295,21 @@
 	deltimer(timerid)
 	timerid = addtimer(CALLBACK(src, .proc/tripanim), 7, TIMER_STOPPABLE)
 
-/whitesands/obj/effect/temp_visual/gruboid_tentacle/original/Initialize(mapload, new_spawner)
+/obj/effect/temp_visual/gruboid_tentacle/original/Initialize(mapload, new_spawner)
 	. = ..()
 	var/list/directions = GLOB.cardinals.Copy()
 	for(var/i in 1 to 3)
 		var/spawndir = pick_n_take(directions)
 		var/turf/T = get_step(src, spawndir)
 		if(T)
-			new /whitesands/obj/effect/temp_visual/gruboid_tentacle(T, spawner)
+			new /obj/effect/temp_visual/gruboid_tentacle(T, spawner)
 
-/whitesands/obj/effect/temp_visual/gruboid_tentacle/proc/tripanim()
+/obj/effect/temp_visual/gruboid_tentacle/proc/tripanim()
 	icon_state = "Gruboid_tentacle_wiggle"
 	deltimer(timerid)
 	timerid = addtimer(CALLBACK(src, .proc/trip), 3, TIMER_STOPPABLE)
 
-/whitesands/obj/effect/temp_visual/gruboid_tentacle/proc/trip()
+/obj/effect/temp_visual/gruboid_tentacle/proc/trip()
 	var/latched = FALSE
 	for(var/mob/living/L in loc)
 		if((!QDELETED(spawner) && spawner.faction_check_mob(L)) || L.stat == DEAD)
@@ -324,7 +324,7 @@
 		deltimer(timerid)
 		timerid = addtimer(CALLBACK(src, .proc/retract), 10, TIMER_STOPPABLE)
 
-/whitesands/obj/effect/temp_visual/gruboid_tentacle/proc/retract()
+/obj/effect/temp_visual/gruboid_tentacle/proc/retract()
 	icon_state = "Gruboid_tentacle_retract"
 	deltimer(timerid)
 	timerid = QDEL_IN(src, 7)
