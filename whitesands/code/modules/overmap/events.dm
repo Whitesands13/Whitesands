@@ -188,7 +188,7 @@
 	name = "wormhole"
 	icon_state = "wormhole"
 	spread_chance = 0
-	chain_rate = 1
+	chain_rate = 0
 	///The currently linked wormhole
 	var/obj/structure/overmap/event/wormhole/other_wormhole
 	///Amount of times a ship can pass through before it collapses
@@ -200,7 +200,14 @@
 	if(_other_wormhole)
 		other_wormhole = _other_wormhole
 	if(!other_wormhole)
-		other_wormhole = new(SSovermap.get_unused_overmap_square(), "[id]_exit", src)
+		if(SSovermap.generator_type == OVERMAP_GENERATOR_SOLAR)
+			var/list/L = list_keys(SSovermap.radius_tiles)
+			L -= "unsorted"
+			var/selected_radius = pick(L)
+			var/turf/T = SSovermap.get_unused_overmap_square_in_radius(selected_radius)
+			other_wormhole = new(T, "[id]_exit", src)
+		else
+			other_wormhole = new(SSovermap.get_unused_overmap_square(), "[id]_exit", src)
 
 /obj/structure/overmap/event/wormhole/affect_ship(obj/structure/overmap/ship/simulated/S)
 	if(!other_wormhole)
