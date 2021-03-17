@@ -53,7 +53,6 @@
 			tiles += "[honor]"
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE
-//ATTACK HAND NOT CALLING PARENT
 /obj/item/toy/mahjong/wall/attack_hand(mob/user)
 	draw_card(user)
 
@@ -137,7 +136,7 @@
 
 
 /obj/item/toy/mahjong/tilegroup
-	name = "a tile group"
+	name = "tile group"
 	desc = "A number of mahjong tiles."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "none"
@@ -238,11 +237,11 @@
 
 /obj/item/toy/mahjong/singletile
 	name = "mahjong tile"
-	desc = "A playing card used to play card games like poker."
+	desc = "A tile used to play mahjong. Made of hard plastic."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "haku"
 	w_class = WEIGHT_CLASS_TINY
-	var/cardname = null
+	var/cardname = "haku"
 	pixel_x = -5
 
 /obj/item/toy/mahjong/singletile/Initialize()
