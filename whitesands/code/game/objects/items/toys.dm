@@ -7,6 +7,11 @@
 || A Deck of Mahjong tiles for playing exactly one game of chance ||
 */
 
+/obj/item/toy
+	throwforce = 0
+	throw_speed = 3
+	throw_range = 7
+	force = 0
 
 /obj/item/toy/mahjong
 	max_integrity = 50
@@ -28,7 +33,7 @@
 /obj/item/toy/mahjong/wall
 	name = "mahjong wall"
 	desc = "A set of self-shuffling mahjong tiles."
-	icon = 'icons/obj/toy.dmi'
+	icon = 'whitesands/icons/obj/toy.dmi'
 	icon_state = "mahjong_wall"
 	w_class = WEIGHT_CLASS_NORMAL
 	var/cooldown = 0
@@ -53,14 +58,13 @@
 			tiles += "[honor]"
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE
-/obj/item/toy/mahjong/wall/attack_hand(mob/user)
+/obj/item/toy/mahjong/wall/attack_hand(mob/living/user)
 	draw_card(user)
 
-/obj/item/toy/mahjong/wall/proc/draw_card(mob/user)
-	if(isliving(user))
-		var/mob/living/L = user
-		if(!(L.mobility_flags & MOBILITY_PICKUP))
-			return
+/obj/item/toy/mahjong/wall/proc/draw_card(mob/living/user)
+	var/mob/living/L = user
+	if(!(L.mobility_flags & MOBILITY_PICKUP))
+		return
 	var/choice = null
 	if(tiles.len == 0)
 		to_chat(user, "<span class='warning'>There are no more tiles to draw!</span>")
@@ -138,7 +142,7 @@
 /obj/item/toy/mahjong/tilegroup
 	name = "tile group"
 	desc = "A number of mahjong tiles."
-	icon = 'icons/obj/toy.dmi'
+	icon = 'whitesands/icons/obj/toy.dmi'
 	icon_state = "none"
 	w_class = WEIGHT_CLASS_TINY
 	var/list/currentgroup = list()
@@ -238,7 +242,7 @@
 /obj/item/toy/mahjong/singletile
 	name = "mahjong tile"
 	desc = "A tile used to play mahjong. Made of hard plastic."
-	icon = 'icons/obj/toy.dmi'
+	icon = 'whitesands/icons/obj/toy.dmi'
 	icon_state = "haku"
 	w_class = WEIGHT_CLASS_TINY
 	var/cardname = "haku"
