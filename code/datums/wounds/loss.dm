@@ -17,7 +17,6 @@
 		qdel(src)
 		return
 
-	already_scarred = TRUE // so we don't scar a limb we don't have. If I add different levels of amputation desc, do it here
 	victim = dismembered_part.owner
 
 	if(dismembered_part.body_zone == BODY_ZONE_CHEST)
