@@ -60,7 +60,7 @@
 		following = holder.following
 
 	if(!following)
-		to_chat(user, "<span class='info'>You're not following anyone.</span>")
+		to_chat(usr, "<span class='info'>You're not following anyone.</span>")
 		return
 
 	to_chat(GLOB.admins, "<span class='mentor'><span class='prefix'>MENTOR:</span> <EM>[key_name(usr)]</EM> is no longer following <EM>[key_name(following)].</span>")
