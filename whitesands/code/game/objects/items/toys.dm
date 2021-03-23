@@ -7,24 +7,14 @@
 || A Deck of Mahjong tiles for playing exactly one game of chance ||
 */
 
-/obj/item/toy
-	throwforce = 0
-	throw_speed = 3
-	throw_range = 7
-	force = 0
-
+//Abstract to hold generic values for mahjong-related items
 /obj/item/toy/mahjong
 	max_integrity = 50
 	var/parentdeck = null
 	var/card_hitsound = null
 	var/card_force = 0
 	var/card_throwforce = 5
-	var/list/card_attack_verb = list("attacked")
-
-/obj/item/toy/mahjong/suicide_act(mob/living/carbon/user)
-	user.visible_message("<span class='suicide'>[user] is trying to swallow \the [src]! It looks like [user.p_they()] [user.p_have()] a crummy hand!</span>")
-	playsound(src, 'sound/items/cardshuffle.ogg', 50, TRUE)
-	return BRUTELOSS
+	var/list/card_attack_verb = list("clacked")
 
 /obj/item/toy/mahjong/proc/apply_card_vars(obj/item/toy/mahjong/newobj, obj/item/toy/mahjong/sourceobj) // Applies variables for supporting multiple types of card deck
 	if(!istype(sourceobj))
@@ -55,7 +45,7 @@
 				tiles += "[i]-[suit]"
 	for(var/honor in list("ton","nan","sha","pei","haku","hatsu","chun"))
 		for(var/c = 0;c<4;c++)
-			tiles += "[honor]"
+			tiles += honor
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE
 /obj/item/toy/mahjong/wall/attack_hand(mob/living/user)
@@ -96,7 +86,7 @@
 		var/obj/item/toy/mahjong/singletile/SC = I
 		if(SC.parentdeck == src)
 			if(!user.temporarilyRemoveItemFromInventory(SC))
-				to_chat(user, "<span class='warning'>The tiles are stuck to your hand, you can't add them to the deck!</span>")
+				to_chat(user, "<span class='warning'>The tile is stuck to your hand, you can't add them to the deck!</span>")
 				return
 			tiles += SC.cardname
 			user.visible_message("<span class='notice'>[user] adds a tile to the end of the wall.</span>","<span class='notice'>You add the tile to the end of the wall.</span>")
@@ -111,7 +101,7 @@
 				to_chat(user, "<span class='warning'>The tiles are stuck to your hand, you can't add it to the deck!</span>")
 				return
 			tiles += CH.currentgroup
-			user.visible_message("<span class='notice'>[user] puts [user.p_their()] group of tiles in the wall.</span>", "<span class='notice'>You put the tiles in the wall.</span>")
+			user.visible_message("<span class='notice'>[user] puts [user.p_their()] group of tiles in the wall.</span>", "<span class='notice'>You put the group of tiles in the wall.</span>")
 			qdel(CH)
 		else
 			to_chat(user, "<span class='warning'>You can't mix tiles from other walls!</span>")
