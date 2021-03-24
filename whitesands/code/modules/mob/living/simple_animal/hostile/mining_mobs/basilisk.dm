@@ -1,5 +1,4 @@
 #define LEGIONVIRUS_TYPE /datum/disease/transformation/legionvirus
-#define BULLET_SHELL_DAMAGE 1
 
 //A beast that fire freezing blasts.
 /mob/living/simple_animal/hostile/asteroid/basilisk
@@ -115,24 +114,73 @@ mob/living/simple_animal/hostile/asteroid/basilisk/proc/cool_down()
 ******************************************/
 
 /mob/living/simple_animal/hostile/asteroid/basilisk/whitesands
-	armor = list("melee" = 30, "bullet" = 30, "laser" = 100, "energy" = 100, "bomb" = 30, "bio" = 30, "rad" = 30, "fire" = 30, "acid" = 30)
+	desc = "A territorial beast, covered in a thick shell that deflects energy. Its stare causes victims to freeze from the inside."
+	icon = 'whitesands/icons/mob/miningmobs.dmi'
+	icon_state = "basilisk_sands"
+	icon_living = "basilisk_sands"
+	icon_dead = "basilisk_sands_dead"
+	armor = list("melee" = 50, "bullet" = 50, "laser" = 100, "energy" = 100, "bomb" = 30, "bio" = 30, "rad" = 30, "fire" = 30, "acid" = 30)
+	flags_ricochet = RICOCHET_SHINY
 	attack_same = TRUE		// So we'll attack watchers
 	butcher_results = list(/obj/item/stack/sheet/sinew = 4, /obj/item/stack/sheet/bone = 2)
+	ranged_cooldown_time = 120
+	projectiletype = /obj/projectile/temp/basilisk_cold/whitesands
 	lava_drinker = FALSE
-	var/shell_health = 50
+	loot = list()
+	var/shell_health = 120
 	var/has_shell = TRUE
 	var/list/shell_loot = list(/obj/item/stack/ore/diamond, /obj/item/stack/ore/diamond)
+	var/pre_attack = 0
+
+/mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/Life()
+	. = ..()
+	if(target && AIStatus == AI_ON)
+		handle_preattack()
+	if(stat == DEAD)
+		return
+	if(has_shell)
+		fully_heal() //no damage until shell is broken
+	switch(shell_health)
+		if(25 to 75)
+			icon_state = "basilisk_sands_crack"
+		if(-4000 to 0)
+			has_shell = FALSE
+			icon_state = "basilisk_sands_cracked"
+			armor = null		// Armor comes from the shell
+
+/mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/proc/handle_preattack()
+	var/mutable_appearance/charging = mutable_appearance(icon, "basilisk_sands_charge")
+	if(ranged_cooldown <= world.time + ranged_cooldown_time*0.25 && !pre_attack)
+		pre_attack++
+	if(!pre_attack || stat || AIStatus == AI_IDLE)
+		return
+	add_overlay(charging)
+
+/mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/OpenFire()
+	. = ..()
+	cut_overlays()
+	pre_attack = 0
 
 /mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/proc/shell_damage(dam_amount)
 	if(has_shell)
 		shell_health -= dam_amount
-		if(shell_health <= 0)
-			has_shell = FALSE
-			armor = null		// Armor comes from the shell
-			for(var/l in shell_loot)
-				new l(loc)
+		fully_heal() //no damage until shell is broken
+		switch(shell_health)
+			if(25 to 75)
+				icon_state = "basilisk_sands_crack"
+			if(-4000 to 0)
+				has_shell = FALSE
+				icon_state = "basilisk_sands_cracked"
+				armor = null		// Armor comes from the shell
+				for(var/l in shell_loot)
+					new l(loc)
 		return TRUE
-	return FALSE
+	else if(!has_shell)
+		return FALSE
+
+/mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/LoseAggro()
+	if(stat == DEAD)
+		return
 
 /mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/CanAttack(atom/the_target)
 	. = ..()
@@ -150,14 +198,22 @@ mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/attacked_by(obj/it
 			send_item_attack_message(I, user)
 			return TRUE
 	return ..()
-	
+
+/mob/living/simple_animal/hostile/asteroid/death(gibbed)
+	..()
+	cut_overlays()
+
 mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/bullet_act(obj/projectile/P)
-	shell_damage(BULLET_SHELL_DAMAGE)
+	if(P.damage)
+		if(shell_damage(P.damage))	// Damage was absorbed by the shell, no need to go further
+			. = ..()
+			return TRUE
 	return ..()
 
 /mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum)
 	if(istype(AM, /obj/item))
-		shell_damage(BULLET_SHELL_DAMAGE)
+		if(shell_damage(AM.throwforce))			// Damage was absorbed by the shell, no need to go further
+			return TRUE
 	..()
 
 mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/drop_loot()
@@ -166,12 +222,11 @@ mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/drop_loot()
 			new l(loc)
 	..()
 
-/mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/heat
-	name = "glowing basilisk"
-	projectiletype = /obj/projectile/temp/basilisk_heat
-
-#undef BULLET_SHELL_DAMAGE
 #undef LEGIONVIRUS_TYPE
+
+/obj/projectile/temp/basilisk_cold/whitesands
+	icon_state = "ice_1"
+	temperature = -240
 
 //Watcher
 /mob/living/simple_animal/hostile/asteroid/basilisk/watcher
