@@ -9,9 +9,11 @@
 
 //Abstract to hold generic values for mahjong-related items
 /obj/item/toy/mahjong
+	name = "abstract mahjong"
+	desc = "please do not spawn me"
 	max_integrity = 50
 	var/parentdeck = null
-	var/card_hitsound = null
+	var/card_hitsound = "whitesands/sound/items/mahjongclack.ogg"
 	var/card_force = 0
 	var/card_throwforce = 5
 	var/list/card_attack_verb = list("clacked")
@@ -77,7 +79,7 @@
 /obj/item/toy/mahjong/wall/attack_self(mob/user)
 	if(cooldown < world.time - 50)
 		tiles = shuffle(tiles)
-		playsound(src, 'sound/items/cardshuffle.ogg', 50, TRUE)
+		playsound(src, 'whitesands/sound/items/mahjongshuffle.ogg', 50, TRUE)
 		user.visible_message("<span class='notice'>[user] shuffles the wall.</span>", "<span class='notice'>You shuffle the wall.</span>")
 		cooldown = world.time
 
@@ -192,6 +194,7 @@
 	if(istype(C))
 		if(C.parentdeck == src.parentdeck)
 			src.currentgroup += C.cardname
+			playsound(src, src.card_hitsound, 50, TRUE)
 			user.visible_message("<span class='notice'>[user] adds a tile to [user.p_their()] group.</span>", "<span class='notice'>You add the [C.cardname] to your group.</span>")
 			qdel(C)
 			interact(user)
@@ -255,6 +258,7 @@
 	if(istype(I, /obj/item/toy/mahjong/singletile/))
 		var/obj/item/toy/mahjong/singletile/C = I
 		if(C.parentdeck == src.parentdeck)
+			playsound(src, src.card_hitsound, 50, TRUE)
 			var/obj/item/toy/mahjong/tilegroup/H = new/obj/item/toy/mahjong/tilegroup(user.loc)
 			H.currentgroup += C.cardname
 			H.currentgroup += src.cardname
@@ -271,6 +275,7 @@
 	if(istype(I, /obj/item/toy/mahjong/tilegroup/))
 		var/obj/item/toy/mahjong/tilegroup/H = I
 		if(H.parentdeck == parentdeck)
+			playsound(src, src.card_hitsound, 50, TRUE)
 			H.currentgroup += cardname
 			user.visible_message("<span class='notice'>[user] adds a tile to [user.p_their()] group.</span>", "<span class='notice'>You add the [cardname] to your group.</span>")
 			qdel(src)
