@@ -74,13 +74,13 @@
 
 /obj/effect/spawner/lootdrop/prison_contraband
 	name = "prison contraband loot spawner"
-	loot = list(/obj/item/clothing/mask/cigarette/space_cigarette = 4,
-				/obj/item/clothing/mask/cigarette/robust = 2,
-				/obj/item/clothing/mask/cigarette/carp = 3,
-				/obj/item/clothing/mask/cigarette/uplift = 2,
-				/obj/item/clothing/mask/cigarette/dromedary = 3,
-				/obj/item/clothing/mask/cigarette/robustgold = 1,
-				/obj/item/storage/fancy/cigarettes/cigpack_uplift = 3,
+	loot = list(/obj/item/clothing/mask/cigarette/nanotransen = 4, //WS EDIT - Cigaretees
+				/obj/item/clothing/mask/cigarette/donkco = 2, //WS EDIT - Cigaretees
+				/obj/item/clothing/mask/cigarette/waffleco = 3, //WS EDIT - Cigaretees
+				/obj/item/clothing/mask/cigarette/solgov = 2, //WS EDIT - Cigaretees
+				/obj/item/clothing/mask/cigarette/superfresh = 3, //WS EDIT - Cigaretees
+				/obj/item/clothing/mask/cigarette/syndicate = 1, //WS EDIT - Cigaretees
+				/obj/item/storage/fancy/cigarettes/cigpack_solgov = 3, //WS EDIT - Cigaretees
 				/obj/item/storage/fancy/cigarettes = 3,
 				/obj/item/clothing/mask/cigarette/rollie/cannabis = 4,
 				/obj/item/toy/crayon/spraycan = 2,

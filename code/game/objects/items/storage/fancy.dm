@@ -40,6 +40,15 @@
 		else
 			. += "There are [contents.len <= 0 ? "no" : "[contents.len]"] [icon_type]s left."
 
+//WHITE SANDS EDIT - Open Closed Fancy on Click
+
+/obj/item/storage/fancy/MouseDrop(mob/user)
+	fancy_open = TRUE
+	update_icon()
+	. = ..()
+
+//WHITE SANDS EDIT END - Open Closed Fancy on Click
+
 /obj/item/storage/fancy/attack_self(mob/user)
 	fancy_open = !fancy_open
 	update_icon()
@@ -151,6 +160,9 @@
 
 /obj/item/storage/fancy/candle_box/attack_self(mob_user)
 	return
+
+/*
+		WS Edit - Moved to modular folder
 
 ////////////
 //CIG PACK//
@@ -315,7 +327,7 @@
 	desc = "Banned in over 36 galaxies."
 	icon_state = "shadyjim"
 	spawn_type = /obj/item/clothing/mask/cigarette/rollie/mindbreaker
-
+*/
 /obj/item/storage/fancy/rollingpapers
 	name = "rolling paper pack"
 	desc = "A pack of Nanotrasen brand rolling papers."
@@ -341,6 +353,9 @@
 	. = ..()
 	if(!contents.len)
 		. += "[icon_state]_empty"
+
+/*
+		WS Edit - Moved to modular folder
 
 /////////////
 //CIGAR BOX//
@@ -387,7 +402,7 @@
 	desc = "A case of classy Havanian cigars."
 	icon_state = "cohibacase"
 	spawn_type = /obj/item/clothing/mask/cigarette/cigar/havana
-
+*/
 /*
  * Heart Shaped Box w/ Chocolates
  */

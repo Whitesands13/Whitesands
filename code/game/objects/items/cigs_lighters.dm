@@ -107,6 +107,8 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/match/firebrand/Initialize()
 	. = ..()
 	matchignite()
+/*
+		WS Edit - Moved to modular folder
 
 //////////////////
 //FINE SMOKABLES//
@@ -464,7 +466,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	name = "cigar butt"
 	desc = "A manky old cigar butt."
 	icon_state = "cigarbutt"
-
+*/
 /////////////////
 //SMOKING PIPES//
 /////////////////
@@ -473,8 +475,8 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	desc = "A pipe, for smoking. Probably made of meerschaum or something."
 	icon_state = "pipeoff"
 	item_state = "pipeoff"
-	icon_on = "pipeon"  //Note - these are in masks.dmi
-	icon_off = "pipeoff"
+	var/icon_on = "pipeon"  //Note - these are in masks.dmi 	WS EDIT - Cigarettes
+	var/icon_off = "pipeoff"	//WS EDIT - Cigarettes
 	smoketime = 0
 	chem_volume = 100
 	list_reagents = null
@@ -793,7 +795,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(istype(target, /obj/item/reagent_containers/food/snacks/grown))
 		var/obj/item/reagent_containers/food/snacks/grown/O = target
 		if(O.dry)
-			var/obj/item/clothing/mask/cigarette/rollie/R = new /obj/item/clothing/mask/cigarette/rollie(user.loc)
+			var/obj/item/clothing/mask/cigarette/rollie/custom/R = new /obj/item/clothing/mask/cigarette/rollie/custom(user.loc) //WHITE SANDS EDIT - ROLLIES
 			R.chem_volume = target.reagents.total_volume
 			target.reagents.trans_to(R, R.chem_volume, transfered_by = user)
 			qdel(target)
