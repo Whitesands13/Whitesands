@@ -43,9 +43,10 @@
 //WHITE SANDS EDIT - Open Closed Fancy on Click
 
 /obj/item/storage/fancy/MouseDrop(mob/user)
-	fancy_open = TRUE
-	update_icon()
-	. = ..()
+	if(ismob(user) && (user.stat != DEAD)) //stops ghosts from doing this
+		fancy_open = TRUE
+		update_icon()
+		. = ..()
 
 //WHITE SANDS EDIT END - Open Closed Fancy on Click
 

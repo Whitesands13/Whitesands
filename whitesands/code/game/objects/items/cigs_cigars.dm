@@ -20,6 +20,7 @@
 	spawn_type = /obj/item/clothing/mask/cigarette/nanotransen
 	custom_price = 75
 	age_restricted = TRUE
+	var/othertype = FALSE
 
 /obj/item/storage/fancy/cigarettes/ComponentInitialize()
 	. = ..()
@@ -53,18 +54,18 @@
 /obj/item/storage/fancy/cigarettes/update_overlays()
 	. = ..()
 	var/obj/item/clothing/mask/cigarette/A = locate(/obj/item/clothing/mask/cigarette) in contents
-	if(fancy_open && contents.len)
+	if(fancy_open && contents.len && !othertype)
 		. += "[icon_state]_open"
 		var/cig_position = 1
 		for(var/C in contents)
 			var/mutable_appearance/inserted_overlay = mutable_appearance('whitesands/icons/obj/cigarettes.dmi')
 
-			if(istype(C, /obj/item/lighter/greyscale) || istype(C, /obj/item/lighter))
-				inserted_overlay.icon_state = "overlay_other"
-			if(istype(C, /obj/item/reagent_containers/food/snacks/donkpocket))
+			if(istype(C, /obj/item/clothing/mask/cigarette))
+				inserted_overlay.icon_state = "overlay_[A.smoke_type]"
+			else if(istype(C, /obj/item/reagent_containers/food/snacks/donkpocket))
 				inserted_overlay.icon_state = "overlay_pocket"
 			else
-				inserted_overlay.icon_state = "overlay_[A.smoke_type]"
+				inserted_overlay.icon_state = "overlay_other"
 
 			inserted_overlay.icon_state = "[inserted_overlay.icon_state]_[cig_position]"
 			. += inserted_overlay
@@ -130,7 +131,7 @@
 /obj/item/storage/fancy/cigarettes/cigpack_superfresh
 	name = "Superfresh packet"
 	desc = "The label on the packaging is composed of gibberish and covered in an yellow insulative rubber, one word stands clear to you: \"Superfresh\"."
-	icon_state = "solgov"
+	icon_state = "superfresh"
 	spawn_type = /obj/item/clothing/mask/cigarette/superfresh
 
 /obj/item/storage/fancy/cigarettes/ComponentInitialize()
@@ -156,7 +157,7 @@
 //Cigars - PACKETS
 
 /obj/item/storage/fancy/cigarettes/cigars
-	name = "premium cigar case"
+	name = "Premium cigar case"
 	desc = "A case of premium cigars. Very expensive."
 	icon_state = "cigar"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -176,18 +177,18 @@
 		icon_state = "[initial(icon_state)]"
 
 /obj/item/storage/fancy/cigarettes/cigars/robusto
-	name = "robusto cigar case"
+	name = "Robusto cigar case"
 	desc = "A case of premium robusto cigars. Smoked by the truly robust."
 	spawn_type = /obj/item/clothing/mask/cigarette/cigar/robusto
 
 /obj/item/storage/fancy/cigarettes/cigars/gold
-	name = "robusto gold cigar case"
+	name = "Robusto Gold cigar case"
 	icon_state = "gold"
 	desc = "A case of the elitist cigars in the known universe."
 	spawn_type = /obj/item/clothing/mask/cigarette/cigar/gold
 
 /obj/item/storage/fancy/cigarettes/cigars/havana
-	name = "cocubana havana cigar case"
+	name = "Cocubana Havana cigar case"
 	icon_state = "gold"
 	desc = "The finest empire building, crack smoking cigars. Honchos Only."
 	spawn_type = /obj/item/clothing/mask/cigarette/cigar/havana
@@ -235,10 +236,10 @@
 
 /obj/item/clothing/mask/cigarette/syndicate
 	desc = "A suspicious looking, unbranded cigarette."
-	icon_state = "syndicate"
+	icon_state = "syndi"
 	list_reagents = list(/datum/reagent/drug/nicotine = 10, /datum/reagent/medicine/omnizine = 15)
 	smoke_all = TRUE
-	smoke_type = "syndicate"
+	smoke_type = "syndi"
 
 /obj/item/clothing/mask/cigarette/donkco
 	desc = "A donk-co branded cigarette, hunger for those without time or hands."
@@ -400,12 +401,12 @@
 /obj/item/clothing/mask/cigarette/proc/light() //removes lit and unlit states
 	if(lit)
 		return
-	if(!(flags_1 & INITIALIZED_1))
-		return
 
-	item_state = "[item_state]_lit"
-	mob_overlay_state = "[mob_overlay_state]_lit"
+	START_PROCESSING(SSobj, src)
 	lit = TRUE
+	update_overlays()
+	item_state = "[initial(lit_type)]_lit"
+	mob_overlay_state = "[initial(lit_type)]_lit"
 	name = "lit [name]"
 	attack_verb = list("burnt", "singed")
 	hitsound = 'sound/items/welder.ogg'
@@ -426,8 +427,6 @@
 	// allowing reagents to react after being lit
 	reagents.flags &= ~(NO_REACT)
 	reagents.handle_reactions()
-	START_PROCESSING(SSobj, src)
-	update_overlays()
 
 	if(ismob(loc))
 		var/mob/M = loc
@@ -447,14 +446,14 @@
 	STOP_PROCESSING(SSobj, src)
 	reagents.flags |= NO_REACT
 	lit = FALSE
-	item_state = "[item_state]_extinguished"
-	mob_overlay_state = "[mob_overlay_state]_extinguished"
+	update_overlays()
+	item_state = "[initial(lit_type)]_extinguished"
+	mob_overlay_state = "[initial(lit_type)]_extinguished"
 	if(ismob(loc))
 		var/mob/living/M = loc
 		to_chat(M, "<span class='notice'>Your [name] goes out.</span>")
 		M.update_inv_wear_mask()
 		M.update_inv_hands()
-	update_overlays()
 
 /obj/item/clothing/mask/cigarette/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is huffing [src] as quickly as [user.p_they()] can! It looks like [user.p_theyre()] trying to give [user.p_them()]self cancer.</span>")
@@ -601,27 +600,24 @@
 	if(!lit)
 		lit_or_extinguished = "extinguished"
 	if(lit || !lit)
+		cut_overlays()
 		var/mutable_appearance/LT = mutable_appearance(icon_state = "[lit_type]_[lit_or_extinguished]")
 		switch(smoketime)
-			if(360 to 1800)
+			if(289 to 1800)
 				add_overlay(LT)
-			if(288)
-				cut_overlays()
+			if(216 to 288)
 				LT.pixel_x = 2
 				LT.pixel_y = 2
 				add_overlay(LT)
-			if(215)
-				cut_overlays()
+			if(144 to 215)
 				LT.pixel_x = 4
 				LT.pixel_y = 4
 				add_overlay(LT)
-			if(143)
-				cut_overlays()
+			if(72 to 143)
 				LT.pixel_x = 5
 				LT.pixel_y = 5
 				add_overlay(LT)
-			if(71)
-				cut_overlays()
+			if(0 to 71)
 				LT.pixel_x = 6
 				LT.pixel_y = 6
 				add_overlay(LT)
