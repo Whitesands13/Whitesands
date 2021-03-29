@@ -451,6 +451,8 @@
 	mob_overlay_state = "[initial(lit_type)]_extinguished"
 	if(ismob(loc))
 		var/mob/living/M = loc
+		var/obj/item/organ/lungs/L = M.getorganslot(ORGAN_SLOT_LUNGS)
+		L.smoking = FALSE
 		to_chat(M, "<span class='notice'>Your [name] goes out.</span>")
 		M.update_inv_wear_mask()
 		M.update_inv_hands()
@@ -628,16 +630,20 @@
 		var/mob/living/carbon/C = loc
 		var/obj/item/organ/lungs/L = C.getorganslot(ORGAN_SLOT_LUNGS)
 		if(src == C.wear_mask)
+			L.smoking = TRUE
 			if(L && !(L.organ_flags & ORGAN_SYNTHETIC) && L.chain_smokah < 100)
 				L.chain_smokah += chain_smoking_damage
-		else if(!(src == C.wear_mask) && (L.chain_smokah) >= (7.2)) //no cigarette in mouth, has smoked at least 2 cigarette
-			L.chain_smokah -= 0.6 //dissipates 1 cigarette smoked a minute
+		if(!(src == C.wear_mask))
+			L.smoking = FALSE
 
 /obj/item/organ/lungs
 	var/chain_smokah = 0
+	var/smoking = FALSE
 
 /obj/item/organ/lungs/on_life()
 	. = ..()
+	if(!smoking && (chain_smokah) >= (7.2)) //no cigarette in mouth, has smoked at least 2 cigarette
+		chain_smokah -= 0.06 //dissipates 1 cigarette smoked a minute
 	switch(chain_smokah)
 		if(10.8 to 14.3) //3 cigarettes
 			owner.adjustOrganLoss(ORGAN_SLOT_LUNGS, 0.01)
