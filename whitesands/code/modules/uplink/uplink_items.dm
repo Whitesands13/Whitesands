@@ -30,7 +30,7 @@ Uplink Items
 /*Stealthy Weapons*/
 /datum/uplink_item/stealthy_weapons/derringerpack
 	name = "Compact Derringer"
-	desc = "An easily concealable handgun capable of firing .357 rounds. Comes in an inconspicuious packet of cigarettes with additional munitions."
+	desc = "An easily concealable handgun capable of firing .357 rounds. Comes in an inconspicuous box of cigars with additional munitions.."
 	item = /obj/item/storage/fancy/cigarettes/cigars/derringer
 	cost = 8
 	surplus = 30
