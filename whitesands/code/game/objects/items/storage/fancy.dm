@@ -1,5 +1,5 @@
 /obj/item/storage/fancy/cigarettes/cigars/derringer
-	name = "Robusto cigar case"
+	name = "\improper Robusto cigar case"
 	desc = "Smoked by the robust."
 	icon_state = "derringer"
 	spawn_type = /obj/item/gun/ballistic/derringer/traitor
@@ -35,18 +35,22 @@
 				inserted_overlay.icon_state = "[inserted_overlay.icon_state]_[bullet_position]"
 				. += inserted_overlay
 				bullet_position++
-			if(istype(C, /obj/item/gun/ballistic/derringer/traitor))
-				inserted_overlay.icon_state = "syndi_gun"
-			if(istype(C, /obj/item/gun/ballistic/derringer/gold))
-				inserted_overlay.icon_state = "gold_gun"
-			if(!(istype(C, /obj/item/gun/ballistic/derringer/gold) || istype(C, /obj/item/gun/ballistic/derringer/traitor)) && istype(C, /obj/item/gun/ballistic/derringer))
-				inserted_overlay.icon_state = "normal_gun"
-			else if(istype(C, /obj/item/clothing/mask/cigarette/cigar/robusto))
-				inserted_overlay.icon_state = "overlay_cigar_robusto"
-			else if(istype(C, /obj/item/clothing/mask/cigarette/cigar/gold))
-				inserted_overlay.icon_state = "overlay_cigar_gold"
-			else if(istype(C, /obj/item/clothing/mask/cigarette/cigar))
-				inserted_overlay.icon_state = "overlay_cigar"
+
+			if(istype(C, /obj/item/clothing/mask/cigarette/cigar))
+				if(istype(C, /obj/item/clothing/mask/cigarette/cigar/robusto))
+					inserted_overlay.icon_state = "overlay_cigar_robusto"
+				else if(istype(C, /obj/item/clothing/mask/cigarette/cigar/gold))
+					inserted_overlay.icon_state = "overlay_cigar_gold"
+				else
+					inserted_overlay.icon_state = "overlay_cigar"
+
+			if(istype(C, /obj/item/gun/ballistic/derringer))
+				if(istype(C, /obj/item/gun/ballistic/derringer/traitor))
+					inserted_overlay.icon_state = "syndi_gun"
+				else if(istype(C, /obj/item/gun/ballistic/derringer/gold))
+					inserted_overlay.icon_state = "gold_gun"
+				else
+					inserted_overlay.icon_state = "normal_gun"
 
 			inserted_overlay.icon_state = "[inserted_overlay.icon_state]"
 			. += inserted_overlay

@@ -9,12 +9,13 @@
 //Cigarettes - PACKETS
 
 /obj/item/storage/fancy/cigarettes
-	name = "Nanotransen packet"
+	name = "\improper Nanotransen packet"
 	desc = "A standard packet of six Nanotransen approved coping sticks.  A label on the packaging reads, \"A loyalists best friend! Now 46% more cancer free!\""
 	icon = 'whitesands/icons/obj/boxes.dmi'
 	icon_state = "nt"
 	icon_type = "cigarette"
 	w_class = WEIGHT_CLASS_TINY
+	gender = PLURAL
 	throwforce = 0
 	slot_flags = ITEM_SLOT_BELT
 	spawn_type = /obj/item/clothing/mask/cigarette/nanotransen
@@ -26,7 +27,7 @@
 	. = ..()
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	STR.max_items = 6
-	STR.set_holdable(list(/obj/item/clothing/mask/cigarette, /obj/item/lighter))
+	STR.set_holdable(list(/obj/item/clothing/mask/cigarette, /obj/item/lighter, /obj/item/match))
 
 /obj/item/storage/fancy/cigarettes/examine(mob/user)
 	. = ..()
@@ -90,13 +91,13 @@
 //brands
 
 /obj/item/storage/fancy/cigarettes/cigpack_syndicate
-	name = "Syndicate packet"
+	name = "\improper Syndicate packet"
 	desc = "A badass packet of operative healing smokes. A label on the packaging reads, \"You goddamn know who to smoke.\""
 	icon_state = "syndi"
 	spawn_type = /obj/item/clothing/mask/cigarette/syndicate
 
 /obj/item/storage/fancy/cigarettes/cigpack_donkco
-	name = "Donk-Co packet"
+	name = "\improper Donk-Co packet"
 	desc = "A well packaged fancy box containing the favourite smokes/snack of every hard working spacefarer. A label on the packaging reads, \"Buy now and have a chance to find one free donk pocket duty-free! (Refund not included).\""
 	icon_state = "donk"
 	spawn_type = /obj/item/clothing/mask/cigarette/donkco
@@ -117,19 +118,19 @@
 	STR.set_holdable(list(/obj/item/clothing/mask/cigarette, /obj/item/lighter, /obj/item/reagent_containers/food/snacks/donkpocket))
 
 /obj/item/storage/fancy/cigarettes/cigpack_waffleco
-	name = "Waffle-Co packet"
+	name = "\improper Waffle-Co packet"
 	desc = "An irresistable pack of mouth-watering nicotine infusing heavenly sweet goodness."
 	icon_state = "waffle"
 	spawn_type = /obj/item/clothing/mask/cigarette/waffleco
 
 /obj/item/storage/fancy/cigarettes/cigpack_solgov
-	name = "SolGov packet"
+	name = "\improper SolGov packet"
 	desc = "A 6 pack of invigorating duty-free SolGov cigarettes. A label on the packaging reads, \"Move Today! Contact your nearest representative to find out more!\""
 	icon_state = "solgov"
 	spawn_type = /obj/item/clothing/mask/cigarette/solgov
 
 /obj/item/storage/fancy/cigarettes/cigpack_superfresh
-	name = "Superfresh packet"
+	name = "\improper Superfresh packet"
 	desc = "The label on the packaging is composed of gibberish and covered in an yellow insulative rubber, one word stands clear to you: \"Superfresh\"."
 	icon_state = "superfresh"
 	spawn_type = /obj/item/clothing/mask/cigarette/superfresh
@@ -141,7 +142,7 @@
 	STR.set_holdable(list(/obj/item/clothing/mask/cigarette, /obj/item/lighter))
 
 /obj/item/storage/fancy/cigarettes/cigpack_xeno
-	name = "Xeno Filtered packet"
+	name = "\improper Xeno Filtered packet"
 	desc = "Loaded with 100% pure slime. And also nicotine."
 	icon_state = "slime"
 	spawn_type = /obj/item/clothing/mask/cigarette/xeno
@@ -149,7 +150,7 @@
 //Rollies - PACKETS
 
 /obj/item/storage/fancy/cigarettes/cigpack_turbo
-	name = "Turbo packet"
+	name = "\improper Turbo packet"
 	desc = "A 6-pack of turbo brand rollies, guaranteed to make you trip shit like no tommorrow."
 	icon_state = "turbo"
 	spawn_type = /obj/item/clothing/mask/cigarette/rollie/turbo
@@ -157,7 +158,7 @@
 //Cigars - PACKETS
 
 /obj/item/storage/fancy/cigarettes/cigars
-	name = "Premium cigar case"
+	name = "\improper Premium cigar case"
 	desc = "A case of premium cigars. Very expensive."
 	icon_state = "cigar"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -177,18 +178,18 @@
 		icon_state = "[initial(icon_state)]"
 
 /obj/item/storage/fancy/cigarettes/cigars/robusto
-	name = "Robusto cigar case"
+	name = "\improper Robusto cigar case"
 	desc = "A case of premium robusto cigars. Smoked by the truly robust."
 	spawn_type = /obj/item/clothing/mask/cigarette/cigar/robusto
 
 /obj/item/storage/fancy/cigarettes/cigars/gold
-	name = "Robusto Gold cigar case"
+	name = "\improper Robusto Gold cigar case"
 	icon_state = "gold"
 	desc = "A case of the elitist cigars in the known universe."
 	spawn_type = /obj/item/clothing/mask/cigarette/cigar/gold
 
 /obj/item/storage/fancy/cigarettes/cigars/havana
-	name = "Cocubana Havana cigar case"
+	name = "\improper Cocubana Havana cigar case"
 	icon_state = "gold"
 	desc = "The finest empire building, crack smoking cigars. Honchos Only."
 	spawn_type = /obj/item/clothing/mask/cigarette/cigar/havana
@@ -207,6 +208,7 @@
 	item_state = "standard"
 	throw_speed = 0.5
 	w_class = WEIGHT_CLASS_TINY
+	gender = PLURAL
 	body_parts_covered = null
 	grind_results = list()
 	heat = 1000
