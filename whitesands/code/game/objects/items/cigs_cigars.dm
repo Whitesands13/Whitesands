@@ -115,7 +115,7 @@
 	. = ..()
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	STR.max_items = 1
-	STR.set_holdable(list(/obj/item/clothing/mask/cigarette, /obj/item/lighter, /obj/item/reagent_containers/food/snacks/donkpocket))
+	STR.set_holdable(list(/obj/item/clothing/mask/cigarette, /obj/item/lighter, /obj/item/match, /obj/item/reagent_containers/food/snacks/donkpocket))
 
 /obj/item/storage/fancy/cigarettes/cigpack_waffleco
 	name = "\improper Waffle-Co packet"
