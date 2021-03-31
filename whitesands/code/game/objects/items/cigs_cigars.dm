@@ -141,6 +141,12 @@
 	STR.max_items = 6
 	STR.set_holdable(list(/obj/item/clothing/mask/cigarette, /obj/item/lighter))
 
+/obj/item/storage/fancy/cigarettes/cigpack_loko
+	name = "\improper Loko packet"
+	desc = "A potentially highly dangerous and super sweet space gamer cigarette, Rumored to have been taken off the market for \"Safety Concerns\" years ago."
+	icon_state = "superfresh"
+	spawn_type = /obj/item/clothing/mask/cigarette/superfresh
+
 /obj/item/storage/fancy/cigarettes/cigpack_xeno
 	name = "\improper Xeno Filtered packet"
 	desc = "Loaded with 100% pure slime. And also nicotine."
@@ -276,6 +282,12 @@
 	. = ..()
 	list_reagents = list(/datum/reagent/drug/nicotine = 10, get_random_reagent_id() = rand(5,20))
 	grind_results = list_reagents
+
+/obj/item/clothing/mask/cigarette/loko
+	desc = "A potentially highly dangerous and super sweet space gamer cigarette, Rumored to have been taken off the market for \"Safety Concerns\" years ago."
+	icon_state = "loko"
+	list_reagents = list(/datum/reagent/drug/nicotine = 20, /datum/reagent/toxin/mutagen/mutagenvirusfood/sugar = 5, /datum/reagent/toxin/mindbreaker = 10, /datum/reagent/consumable/ethanol/thirteenloko = 3)
+	smoke_type = "loko"
 
 /obj/item/clothing/mask/cigarette/xeno
 	desc = "A Xeno Filtered brand cigarette."

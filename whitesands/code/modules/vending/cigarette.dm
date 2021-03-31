@@ -12,7 +12,8 @@
 					/obj/item/storage/box/matches = 10,
 					/obj/item/lighter/greyscale = 4,
 					/obj/item/storage/fancy/rollingpapers = 5)
-	contraband = list(/obj/item/storage/fancy/cigarettes/cigpack_superfresh = 5)
+	contraband = list(/obj/item/storage/fancy/cigarettes/cigpack_superfresh = 5,
+					  /obj/item/storage/fancy/cigarettes/cigpack_loko = 3)
 	premium = list(/obj/item/storage/box/gum/nicotine = 2,
 				   /obj/item/lighter = 3,
 				   /obj/item/clothing/mask/vape = 5,
