@@ -143,9 +143,9 @@
 
 /obj/item/storage/fancy/cigarettes/cigpack_loko
 	name = "\improper Loko packet"
-	desc = "A potentially highly dangerous and super sweet space gamer cigarette, Rumored to have been taken off the market for \"Safety Concerns\" years ago."
-	icon_state = "superfresh"
-	spawn_type = /obj/item/clothing/mask/cigarette/superfresh
+	desc = "A 6 pack of off-the-market space gamer charts! A wicked label on the packaging reads, \"DRINK, GAME, WIN!\""
+	icon_state = "loko"
+	spawn_type = /obj/item/clothing/mask/cigarette/loko
 
 /obj/item/storage/fancy/cigarettes/cigpack_xeno
 	name = "\improper Xeno Filtered packet"
