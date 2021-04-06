@@ -135,12 +135,6 @@
 	icon_state = "superfresh"
 	spawn_type = /obj/item/clothing/mask/cigarette/superfresh
 
-/obj/item/storage/fancy/cigarettes/ComponentInitialize()
-	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_items = 6
-	STR.set_holdable(list(/obj/item/clothing/mask/cigarette, /obj/item/lighter))
-
 /obj/item/storage/fancy/cigarettes/cigpack_loko
 	name = "\improper Loko packet"
 	desc = "A 6 pack of off-the-market space gamer charts! A wicked label on the packaging reads, \"DRINK, GAME, WIN!\""
