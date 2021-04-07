@@ -120,6 +120,8 @@ mob/living/simple_animal/hostile/asteroid/basilisk/proc/cool_down()
 	icon_living = "basilisk_sands"
 	icon_dead = "basilisk_sands_dead"
 	armor = list("melee" = 50, "bullet" = 50, "laser" = 100, "energy" = 100, "bomb" = 30, "bio" = 30, "rad" = 30, "fire" = 30, "acid" = 30)
+	maxHealth = 295
+	health = 295
 	flags_ricochet = RICOCHET_SHINY
 	attack_same = TRUE		// So we'll attack watchers
 	butcher_results = list(/obj/item/stack/sheet/sinew = 4, /obj/item/stack/sheet/bone = 2)
@@ -127,10 +129,9 @@ mob/living/simple_animal/hostile/asteroid/basilisk/proc/cool_down()
 	projectiletype = /obj/projectile/temp/basilisk_cold/whitesands
 	lava_drinker = FALSE
 	loot = list()
-	var/shell_health = 120
-	var/has_shell = TRUE
 	var/list/shell_loot = list(/obj/item/stack/ore/diamond, /obj/item/stack/ore/diamond)
 	var/pre_attack = 0
+	var/looted = FALSE
 
 /mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/Life()
 	. = ..()
@@ -138,15 +139,16 @@ mob/living/simple_animal/hostile/asteroid/basilisk/proc/cool_down()
 		handle_preattack()
 	if(stat == DEAD)
 		return
-	if(has_shell)
-		fully_heal() //no damage until shell is broken
-	switch(shell_health)
-		if(25 to 75)
+	switch(health)
+		if(135 to 175)
 			icon_state = "basilisk_sands_crack"
-		if(-4000 to 0)
-			has_shell = FALSE
+		if(-4000 to 135)
 			icon_state = "basilisk_sands_cracked"
-			armor = null		// Armor comes from the shell
+			armor = null		// Armor comes from the hypothetical shell
+			if(!looted)
+				for(var/l in shell_loot)
+					new l(loc)
+					looted = TRUE
 
 /mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/proc/handle_preattack()
 	var/mutable_appearance/charging = mutable_appearance(icon, "basilisk_sands_charge")
@@ -160,23 +162,6 @@ mob/living/simple_animal/hostile/asteroid/basilisk/proc/cool_down()
 	. = ..()
 	cut_overlays()
 	pre_attack = 0
-
-/mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/proc/shell_damage(dam_amount)
-	if(has_shell)
-		shell_health -= dam_amount
-		fully_heal() //no damage until shell is broken
-		switch(shell_health)
-			if(25 to 75)
-				icon_state = "basilisk_sands_crack"
-			if(-4000 to 0)
-				has_shell = FALSE
-				icon_state = "basilisk_sands_cracked"
-				armor = null		// Armor comes from the shell
-				for(var/l in shell_loot)
-					new l(loc)
-		return TRUE
-	else if(!has_shell)
-		return FALSE
 
 /mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/LoseAggro()
 	if(stat == DEAD)
@@ -193,34 +178,20 @@ mob/living/simple_animal/hostile/asteroid/basilisk/proc/cool_down()
 	return TRUE
 
 mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/attacked_by(obj/item/I, mob/living/user)
-	if(I.force)
-		if(shell_damage(I.force))			// Damage was absorbed by the shell, no need to go further
-			send_item_attack_message(I, user)
-			return TRUE
-	return ..()
+	..()
+	Life()
 
 /mob/living/simple_animal/hostile/asteroid/death(gibbed)
 	..()
 	cut_overlays()
 
 mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/bullet_act(obj/projectile/P)
-	if(P.damage)
-		if(shell_damage(P.damage))	// Damage was absorbed by the shell, no need to go further
-			. = ..()
-			return TRUE
-	return ..()
+	..()
+	Life()
 
 /mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum)
-	if(istype(AM, /obj/item))
-		if(shell_damage(AM.throwforce))			// Damage was absorbed by the shell, no need to go further
-			return TRUE
 	..()
-
-mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/drop_loot()
-	if(has_shell)
-		for(var/l in shell_loot)		// You get the stuff anyways
-			new l(loc)
-	..()
+	Life()
 
 #undef LEGIONVIRUS_TYPE
 
