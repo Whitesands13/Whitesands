@@ -61,10 +61,12 @@
 	flags_cover = HEADCOVERSMOUTH|HEADCOVERSEYES|PEPPERPROOF
 	visor_flags_inv = HIDEEYES|HIDEFACE
 
-/obj/item/clothing/head/helmet/space/plasmaman/proc/display_visor_message(var/msg) // WS Begin - plasmeme command helmets buff-used for RD bomb scanner
+// WS Begin - plasmeme command helmets buff - used for RD bomb scanner
+/obj/item/clothing/head/helmet/space/plasmaman/proc/display_visor_message(var/msg)
 	var/mob/wearer = loc
 	if(msg && ishuman(wearer))
-		wearer.show_message("[icon2html(src, wearer)]<b><span class='robot'>[msg]</span></b>", MSG_VISUAL) //WS END
+		wearer.show_message("[icon2html(src, wearer)]<b><span class='robot'>[msg]</span></b>", MSG_VISUAL)
+//WS END
 
 /obj/item/clothing/head/helmet/space/plasmaman/Initialize()
 	. = ..()
@@ -278,46 +280,45 @@
 	visor_icon = "clown_envisor"
 	smile_state = "clown_smile"
 
+// WS BEGIN - plasmeme command helmets buff start
 /obj/item/clothing/head/helmet/space/plasmaman/command
 	name = "captains envirosuit helmet"
 	desc = "An envirosuit helmet made for the most important plasmaman of them all."
 	icon_state = "command_envirohelm"
 	item_state = "command_envirohelm"
-	armor = list("melee" = 40, "bullet" = 50, "laser" = 50, "energy" = 60, "bomb" = 50, "bio" = 100, "rad" = 50, "fire" = 100, "acid" = 75) // WS BEGIN - plasmeme command helmets buff start
+	armor = list("melee" = 40, "bullet" = 50, "laser" = 50, "energy" = 60, "bomb" = 50, "bio" = 100, "rad" = 50, "fire" = 100, "acid" = 75)
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	heat_protection = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
-	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT //this needed to be added a long fucking time ago //WS END
-
+	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT //this needed to be added a long fucking time ago
 
 /obj/item/clothing/head/helmet/space/plasmaman/engineering/ce
 	name = "chief engineers envirohelmet"
 	desc = "An envirosuit helmet made for the tutored plasmaman."
 	icon_state = "ce_envirohelm"
 	item_state = "ce_envirohelm"
-	armor = list("melee" = 40, "bullet" = 5, "laser" = 10, "energy" = 20, "bomb" = 50, "bio" = 100, "rad" = 100, "fire" = 100, "acid" = 75) // WS Edit - plasmeme command helmets buff
-	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT //WS END
+	armor = list("melee" = 40, "bullet" = 5, "laser" = 10, "energy" = 20, "bomb" = 50, "bio" = 100, "rad" = 100, "fire" = 100, "acid" = 75)
+	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 
 /obj/item/clothing/head/helmet/space/plasmaman/cmo
 	name = "chief medical officers envirohelmet"
 	desc = "An envirosuit helmet made for the taxed plasmaman."
 	icon_state = "cmo_envirohelm"
 	item_state = "cmo_envirohelm"
-	armor = list("melee" = 30, "bullet" = 5, "laser" = 10, "energy" = 20, "bomb" = 10, "bio" = 100, "rad" = 60, "fire" = 100, "acid" = 75) // WS Edit - plasmeme command helmets buff
-
+	armor = list("melee" = 30, "bullet" = 5, "laser" = 10, "energy" = 20, "bomb" = 10, "bio" = 100, "rad" = 60, "fire" = 100, "acid" = 75)
 
 /obj/item/clothing/head/helmet/space/plasmaman/security/hos
 	name = "head of securitys helmet"
 	desc = "An envirosuit helmet made for the right and honorable plasmaman."
 	icon_state = "hos_envirohelm"
 	item_state = "hos_envirohelm"
-	armor = list("melee" = 30, "bullet" = 30, "laser" = 30, "energy" = 40, "bomb" = 25, "bio" = 100, "rad" = 50, "fire" = 100, "acid" = 75) // WS Edit - plasmeme command helmets buff
+	armor = list("melee" = 35, "bullet" = 30, "laser" = 30, "energy" = 40, "bomb" = 25, "bio" = 100, "rad" = 50, "fire" = 100, "acid" = 75)
 
 /obj/item/clothing/head/helmet/space/plasmaman/rd
 	name = "research directors envirosuit helmet"
 	desc = "An envirosuit helmet made for the erudite plasmaman."
 	icon_state = "rd_envirohelm"
 	item_state = "rd_envirohelm"
-	armor = list("melee" = 30, "bullet" = 5, "laser" = 10, "energy" = 20, "bomb" = 100, "bio" = 100, "rad" = 60, "fire" = 100, "acid" = 75) // WS BEGIN - plasmeme command helmets buff
+	armor = list("melee" = 30, "bullet" = 5, "laser" = 10, "energy" = 20, "bomb" = 100, "bio" = 100, "rad" = 60, "fire" = 100, "acid" = 75)
 	var/explosion_detection_dist = 21
 	clothing_flags = STOPSPRESSUREDAMAGE | THICKMATERIAL | SCAN_REAGENTS | SNUG_FIT | BLOCK_GAS_SMOKE_EFFECT | ALLOWINTERNALS //WS Port - Cit Internals
 	actions_types = list(/datum/action/item_action/toggle_helmet_light, /datum/action/item_action/toggle_research_scanner)
@@ -345,7 +346,8 @@
 		return
 	if(get_dist(epicenter, T) > explosion_detection_dist)
 		return
-	display_visor_message("Explosion detected! Epicenter: [devastation_range], Outer: [heavy_impact_range], Shock: [light_impact_range]") //WS END
+	display_visor_message("Explosion detected! Epicenter: [devastation_range], Outer: [heavy_impact_range], Shock: [light_impact_range]")
+//WS END
 
 /obj/item/clothing/head/helmet/space/plasmaman/hop
 	name = "head of personnels envirosuit helmet"
