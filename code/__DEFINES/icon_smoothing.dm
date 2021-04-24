@@ -125,13 +125,17 @@ DEFINE_BITFIELD(smoothing_flags, list(
 
 #define SMOOTH_GROUP_CLEANABLE_DIRT	S_OBJ(67)			///obj/effect/decal/cleanable/dirt
 
-#define MAX_S_OBJ SMOOTH_GROUP_CLEANABLE_DIRT //Always match this value with the one above it.
+// WS Begin: Custom WS Smoothing Groups
+#define MAX_S_OBJ_NON_WS SMOOTH_GROUP_CLEANABLE_DIRT //Always match this value with the one above it.
 
-//WS edit: ports Nanoweave carpet from NSV
+#define WS_S_OBJ(num) (MAX_S_OBJ_NON_WS + 1 + num)
 
-#define SMOOTH_GROUP_CARPET_NWDARK(70)
-#define SMOOTH_GROUP_CARPET_NWRED(71)
-#define SMOOTH_GROUP_CARPET_NWBLUE(72)
-#define SMOOTH_GROUP_CARPET_NWPURPLE(73)
-#define SMOOTH_GROUP_CARPET_NWORANGE(74)
-#define SMOOTH_GROUP_CARPET_NWBEIGE(75) //WS end
+#define SMOOTH_GROUP_CARPET_NWDARK   WS_S_OBJ(0)        ///obj/item/stack/tile/carpet/nanoweave
+#define SMOOTH_GROUP_CARPET_NWRED    WS_S_OBJ(1)        ///obj/item/stack/tile/carpet/nanoweave/red
+#define SMOOTH_GROUP_CARPET_NWBLUE   WS_S_OBJ(2)        ///obj/item/stack/tile/carpet/nanoweave/blue
+#define SMOOTH_GROUP_CARPET_NWPURPLE WS_S_OBJ(3)        ///obj/item/stack/tile/carpet/nanoweave/purple
+#define SMOOTH_GROUP_CARPET_NWORANGE WS_S_OBJ(4)        ///obj/item/stack/tile/carpet/nanoweave/orange
+#define SMOOTH_GROUP_CARPET_NWBEIGE  WS_S_OBJ(5)        ///obj/item/stack/tile/carpet/nanoweave/beige
+
+#define MAX_S_OBJ SMOOTH_GROUP_CARPET_NWBEIGE //Always match this value with the one above it.
+// WS End
