@@ -237,9 +237,7 @@
 	desc = "A delightly devilish flower... you got a feeling where this is going."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "clownflower"
-	amount_per_transfer_from_this = 3
-	spray_range = 1
-	stream_range = 1
+	amount_per_transfer_from_this = 3  // WS edit - superlube fix
 	volume = 30
 	list_reagents = list(/datum/reagent/lube/superlube = 30)
 
