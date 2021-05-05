@@ -5,18 +5,28 @@ GLOBAL_VAR(restart_counter)
 /**
   * World creation
   *
-  * Here is where a round itself is actually begun and setup, lots of important config changes happen here
+  * Here is where a round itself is actually begun and setup.
   * * db connection setup
   * * config loaded from files
   * * loads admins
   * * Sets up the dynamic menu system
   * * and most importantly, calls initialize on the master subsystem, starting the game loop that causes the rest of the game to begin processing and setting up
   *
-  * Note this happens after the Master subsystem is created (as that is a global datum), this means all the subsystems exist,
-  * but they have not been Initialized at this point, only their New proc has run
   *
   * Nothing happens until something moves. ~Albert Einstein
   *
+  * For clarity, this proc gets triggered later in the initialization pipeline, it is not the first thing to happen, as it might seem.
+  *
+  * Initialization Pipeline:
+  *		Global vars are new()'ed, (including config, glob, and the master controller will also new and preinit all subsystems when it gets new()ed)
+  *		Compiled in maps are loaded (mainly centcom). all areas/turfs/objs/mobs(ATOMs) in these maps will be new()ed
+  *		world/New() (You are here)
+  *		Once world/New() returns, client's can connect.
+  *		1 second sleep
+  *		Master Controller initialization.
+  *		Subsystem initialization.
+  *			Non-compiled-in maps are maploaded, all atoms are new()ed
+  *			All atoms in both compiled and uncompiled maps are initialized()
   */
 /world/New()
 	var/extools = world.GetConfig("env", "EXTOOLS_DLL") || (world.system_type == MS_WINDOWS ? "./byond-extools.dll" : "./libbyond-extools.so")
@@ -27,14 +37,7 @@ GLOBAL_VAR(restart_counter)
 	enable_reference_tracking()
 #endif
 
-	//Early profile for auto-profiler - will be stopped on profiler init if necessary.
-#if DM_BUILD >= 1506
-	world.Profile(PROFILE_START)
-#endif
-
 	log_world("World loaded at [time_stamp()]!")
-
-	SetupExternalRSC()
 
 	make_datum_references_lists()	//initialises global lists for referencing frequently used datums (so that we only ever do it once)
 
@@ -47,14 +50,15 @@ GLOBAL_VAR(restart_counter)
 	config.Load(params[OVERRIDE_CONFIG_DIRECTORY_PARAMETER])
 
 	load_admins()
-	load_mentors() //Wasp edit - Mentors
+	load_mentors() //WS edit - Mentors
 
 	//SetupLogs depends on the RoundID, so lets check
 	//DB schema and set RoundID if we can
 	SSdbcore.CheckSchemaVersion()
 	SSdbcore.SetRoundID()
 	SetupLogs()
-	populate_gear_list() //Wasp edit - Loadouts
+	populate_gear_list() //WS edit - Loadouts
+	load_poll_data()
 
 #ifndef USE_CUSTOM_ERROR_HANDLER
 	world.log = file("[GLOB.log_directory]/dd.log")
@@ -78,8 +82,9 @@ GLOBAL_VAR(restart_counter)
 
 	Master.Initialize(10, FALSE, TRUE)
 
-	if(TEST_RUN_PARAMETER in params)
-		HandleTestRun()
+	#ifdef UNIT_TESTS
+	HandleTestRun()
+	#endif
 
 /world/proc/InitTgs()
 	TgsNew(new /datum/tgs_event_handler/impl, TGS_SECURITY_TRUSTED)
@@ -98,16 +103,6 @@ GLOBAL_VAR(restart_counter)
 #endif
 	SSticker.OnRoundstart(CALLBACK(GLOBAL_PROC, /proc/addtimer, cb, 10 SECONDS))
 
-/world/proc/SetupExternalRSC()
-#if (PRELOAD_RSC == 0)
-	GLOB.external_rsc_urls = world.file2list("[global.config.directory]/external_rsc_urls.txt","\n")
-	var/i=1
-	while(i<=GLOB.external_rsc_urls.len)
-		if(GLOB.external_rsc_urls[i])
-			i++
-		else
-			GLOB.external_rsc_urls.Cut(i,i+1)
-#endif
 
 /world/proc/SetupLogs()
 	var/override_dir = params[OVERRIDE_LOG_DIRECTORY_PARAMETER]
@@ -150,12 +145,11 @@ GLOBAL_VAR(restart_counter)
 	GLOB.world_paper_log = "[GLOB.log_directory]/paper.log"
 	GLOB.tgui_log = "[GLOB.log_directory]/tgui.log"
 	GLOB.world_shuttle_log = "[GLOB.log_directory]/shuttle.log"
-	GLOB.discord_api_log = "[GLOB.log_directory]/discord_api_log.log"
 
 	GLOB.demo_log = "[GLOB.log_directory]/demo.log"
 
 #ifdef UNIT_TESTS
-	GLOB.test_log = file("[GLOB.log_directory]/tests.log")
+	GLOB.test_log = "[GLOB.log_directory]/tests.log"
 	start_log(GLOB.test_log)
 #endif
 	start_log(GLOB.world_game_log)
@@ -169,7 +163,6 @@ GLOBAL_VAR(restart_counter)
 	start_log(GLOB.world_job_debug_log)
 	start_log(GLOB.tgui_log)
 	start_log(GLOB.world_shuttle_log)
-	start_log(GLOB.discord_api_log)
 
 	GLOB.changelog_hash = md5('html/changelog.html') //for telling if the changelog has changed recently
 	if(fexists(GLOB.config_error_log))
@@ -252,9 +245,10 @@ GLOBAL_VAR(restart_counter)
 
 	TgsReboot()
 
-	if(TEST_RUN_PARAMETER in params)
-		FinishTestRun()
-		return
+	#ifdef UNIT_TESTS
+	FinishTestRun()
+	return
+	#endif
 
 	if(TgsAvailable())
 		var/do_hard_reboot
@@ -320,7 +314,7 @@ GLOBAL_VAR(restart_counter)
 	s += "</a>"
 	s += ")"
 	s += " ("
-	s += "<a href=\"https://github.com/WaspStation/WaspStation-1.0\">" //Change this to wherever you want the hub to link to.
+	s += "<a href=\"https://github.com/Whitesands13/Whitesands\">" //Change this to wherever you want the hub to link to.
 	s += "Github"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
 	s += "</a>"
 	s += ")"

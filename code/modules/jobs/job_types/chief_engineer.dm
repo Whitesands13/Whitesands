@@ -13,7 +13,7 @@
 	exp_requirements = 180
 	exp_type = EXP_TYPE_CREW
 	exp_type_department = EXP_TYPE_ENGINEERING
-	wiki_page = "Chief_Engineer" //WaspStation Edit - Wikilinks/Warning
+	wiki_page = "Chief_Engineer" //WS Edit - Wikilinks/Warning
 
 	outfit = /datum/outfit/job/ce
 
@@ -39,9 +39,9 @@
 	l_pocket = /obj/item/pda/heads/ce
 	ears = /obj/item/radio/headset/heads/ce
 	uniform = /obj/item/clothing/under/rank/engineering/chief_engineer
-	alt_uniform = /obj/item/clothing/under/rank/engineering/engineer/hazard //Wasp Edit - Alt Uniforms
+	alt_uniform = /obj/item/clothing/under/rank/engineering/engineer/hazard //WS Edit - Alt Uniforms
 	alt_suit = /obj/item/clothing/suit/hazardvest
-	dcoat = /obj/item/clothing/suit/hooded/wintercoat/engineering //Wasp Edit - Alt Uniforms
+	dcoat = /obj/item/clothing/suit/hooded/wintercoat/engineering //WS Edit - Alt Uniforms
 	shoes = /obj/item/clothing/shoes/sneakers/brown
 	head = /obj/item/clothing/head/hardhat/white
 	gloves = /obj/item/clothing/gloves/color/black
@@ -67,7 +67,7 @@
 	head = null
 	internals_slot = ITEM_SLOT_SUITSTORE
 
-	/datum/outfit/job/ce/engineeringcoordinator
+/datum/outfit/job/ce/engineeringcoordinator
 	name = "Chief Engineer (Engineering Coordinator)"
 
 	belt = null

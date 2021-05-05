@@ -18,7 +18,7 @@
 //  Generic non-item
 /obj/item/storage/bag
 	slot_flags = ITEM_SLOT_BELT
-	w_class = WEIGHT_CLASS_BULKY
+	w_class = WEIGHT_CLASS_NORMAL
 
 /obj/item/storage/bag/ComponentInitialize()
 	. = ..()
@@ -34,6 +34,7 @@
 /obj/item/storage/bag/trash
 	name = "trash bag"
 	desc = "It's the heavy-duty black polymer kind. Time to take out the trash!"
+	w_class = WEIGHT_CLASS_BULKY
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "trashbag"
 	item_state = "trashbag"
@@ -99,12 +100,11 @@
 /obj/item/storage/bag/ore
 	name = "mining satchel"
 	desc = "This little bugger can be used to store and transport ores."
-	//WaspStation Begin - Better bag sprites
-	icon = 'waspstation/icons/obj/bags.dmi'
+	//WS Begin - Better bag sprites
+	icon = 'whitesands/icons/obj/bags.dmi'
 	icon_state = "minebag"
-	//WaspStation end
+	//WS end
 	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_POCKETS
-	w_class = WEIGHT_CLASS_NORMAL
 	component_type = /datum/component/storage/concrete/stack
 	var/spam_protection = FALSE //If this is TRUE, the holder won't receive any messages when they fail to pick up ore through crossing it
 	var/mob/listeningTo
@@ -172,10 +172,10 @@
 /obj/item/storage/bag/ore/holding //miners, your messiah has arrived
 	name = "mining satchel of holding"
 	desc = "A revolution in convenience, this satchel allows for huge amounts of ore storage. It's been outfitted with anti-malfunction safety measures."
-	//WaspStation Begin - Better bag sprites
-	icon = 'waspstation/icons/obj/bags.dmi'
+	//WS Begin - Better bag sprites
+	icon = 'whitesands/icons/obj/bags.dmi'
 	icon_state = "minebagbs"
-	//WaspStation end
+	//WS end
 
 /obj/item/storage/bag/ore/holding/ComponentInitialize()
 	. = ..()
@@ -190,18 +190,17 @@
 
 /obj/item/storage/bag/plants
 	name = "plant bag"
-	//WaspStation Begin - Better bag sprites
-	icon = 'waspstation/icons/obj/bags.dmi'
+	//WS Begin - Better bag sprites
+	icon = 'whitesands/icons/obj/bags.dmi'
 	icon_state = "plantbag"
-	w_class = WEIGHT_CLASS_TINY
-	//WaspStation end
+	//WS end
 	resistance_flags = FLAMMABLE
 
 /obj/item/storage/bag/plants/ComponentInitialize()
 	. = ..()
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	STR.max_w_class = WEIGHT_CLASS_NORMAL
-	STR.max_combined_w_class = 100
+	STR.max_combined_w_class = 50
 	STR.max_items = 100
 	STR.set_holdable(list(
 		/obj/item/reagent_containers/food/snacks/grown,
@@ -366,10 +365,10 @@
 
 /obj/item/storage/bag/chemistry
 	name = "chemistry bag"
-	//WaspStation Begin - Better bag sprites
-	icon = 'waspstation/icons/obj/bags.dmi'
+	//WS Begin - Better bag sprites
+	icon = 'whitesands/icons/obj/bags.dmi'
 	icon_state = "chembag"
-	//WaspStation end
+	//WS end
 	desc = "A bag for storing pills, patches, and bottles."
 	resistance_flags = FLAMMABLE
 
@@ -377,7 +376,7 @@
 	. = ..()
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	STR.max_combined_w_class = 200
-	STR.max_items = 50
+	STR.max_items = 30
 	STR.insert_preposition = "in"
 	STR.set_holdable(list(
 		/obj/item/reagent_containers/pill,
@@ -396,10 +395,10 @@
 
 /obj/item/storage/bag/bio
 	name = "bio bag"
-	//WaspStation Begin - Better bag sprites
-	icon = 'waspstation/icons/obj/bags.dmi'
+	//WS Begin - Better bag sprites
+	icon = 'whitesands/icons/obj/bags.dmi'
 	icon_state = "virobag"
-	//WaspStation end
+	//WS end
 	desc = "A bag for the safe transportation and disposal of biowaste and other biological materials."
 	resistance_flags = FLAMMABLE
 
@@ -407,7 +406,7 @@
 	. = ..()
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	STR.max_combined_w_class = 200
-	STR.max_items = 25
+	STR.max_items = 20
 	STR.insert_preposition = "in"
 	STR.set_holdable(list(
 		/obj/item/slime_extract,
@@ -429,10 +428,10 @@
 
 /obj/item/storage/bag/construction
 	name = "construction bag"
-	//WaspStation Begin - Better bag sprites
-	icon = 'waspstation/icons/obj/bags.dmi'
+	//WS Begin - Better bag sprites
+	icon = 'whitesands/icons/obj/bags.dmi'
 	icon_state = "engbag"
-	//WaspStation end
+	//WS end
 	desc = "A bag for storing small construction components."
 	resistance_flags = FLAMMABLE
 

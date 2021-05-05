@@ -39,9 +39,8 @@
 /obj/item/clothing/head/hardhat/cakehat
 	name = "cakehat"
 	desc = "You put the cake on your head. Brilliant."
-	icon_state = "hardhat0_cakehat"
-	item_state = "hardhat0_cakehat"
-	hat_type = "cakehat"
+	icon_state = "hardhat_cakehat"
+	item_state = "hardhat_cakehat"
 	lefthand_file = 'icons/mob/inhands/clothing_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/clothing_righthand.dmi'
 	hitsound = 'sound/weapons/tap.ogg'
@@ -52,7 +51,7 @@
 	var/damtype_on = BURN
 	flags_inv = HIDEEARS|HIDEHAIR
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	brightness_on = 2 //luminosity when on
+	light_range = 2 //luminosity when on
 	flags_cover = HEADCOVERSEYES
 	heat = 999
 
@@ -90,15 +89,14 @@
 /obj/item/clothing/head/hardhat/cakehat/energycake
 	name = "energy cake"
 	desc = "You put the energy sword on your cake. Brilliant."
-	icon_state = "hardhat0_energycake"
-	item_state = "hardhat0_energycake"
-	hat_type = "energycake"
+	icon_state = "hardhat_energycake"
+	item_state = "hardhat_energycake"
 	hitsound = 'sound/weapons/tap.ogg'
 	hitsound_on = 'sound/weapons/blade1.ogg'
 	hitsound_off = 'sound/weapons/tap.ogg'
 	damtype_on = BRUTE
 	force_on = 18 //same as epen (but much more obvious)
-	brightness_on = 3 //ditto
+	light_range = 3 //ditto
 	heat = 0
 
 /obj/item/clothing/head/hardhat/cakehat/energycake/turn_on(mob/living/user)
@@ -144,13 +142,13 @@
 /obj/item/clothing/head/hardhat/pumpkinhead
 	name = "carved pumpkin"
 	desc = "A jack o' lantern! Believed to ward off evil spirits."
-	icon_state = "hardhat0_pumpkin"
-	item_state = "hardhat0_pumpkin"
-	hat_type = "pumpkin"
+	icon_state = "hardhat_pumpkin"
+	item_state = "hardhat_pumpkin"
+
 	clothing_flags = SNUG_FIT
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	brightness_on = 2 //luminosity when on
+	light_range = 2 //luminosity when on
 	flags_cover = HEADCOVERSEYES
 
 /*
@@ -181,12 +179,11 @@
 /obj/item/clothing/head/hardhat/reindeer
 	name = "novelty reindeer hat"
 	desc = "Some fake antlers and a very fake red nose."
-	icon_state = "hardhat0_reindeer"
-	item_state = "hardhat0_reindeer"
-	hat_type = "reindeer"
+	icon_state = "hardhat_reindeer"
+	item_state = "hardhat_reindeer"
 	flags_inv = 0
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	brightness_on = 1 //luminosity when on
+	light_range = 1 //luminosity when on
 	dynamic_hair_suffix = ""
 
 	dog_fashion = /datum/dog_fashion/head/reindeer
@@ -356,7 +353,7 @@
 	if(target.get_item_by_slot(ITEM_SLOT_HEAD) != src)
 		return
 	QDEL_NULL(paranoia)
-	if(!target.IsUnconscious())
+	if(target.stat < UNCONSCIOUS)
 		to_chat(target, "<span class='warning'>Your zealous conspirationism rapidly dissipates as the donned hat warps up into a ruined mess. All those theories starting to sound like nothing but a ridicolous fanfare.</span>")
 
 /obj/item/clothing/head/foilhat/attack_hand(mob/user)

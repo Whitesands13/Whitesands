@@ -14,7 +14,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 /obj/item/pda
 	name = "\improper PDA"
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. Functionality determined by a preprogrammed ROM cartridge."
-	icon = 'waspstation/icons/obj/pda.dmi' //WaspStation Edit - Better PDAs from Eris(?)
+	icon = 'whitesands/icons/obj/pda.dmi' //WS Edit - Better PDAs from Eris(?)
 	icon_state = "pda"
 	item_state = "electronic"
 	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
@@ -25,7 +25,11 @@ GLOBAL_LIST_EMPTY(PDAs)
 	actions_types = list(/datum/action/item_action/toggle_light)
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 100)
 	resistance_flags = FIRE_PROOF | ACID_PROOF
-
+	light_system = MOVABLE_LIGHT_DIRECTIONAL
+	light_range = 2.3
+	light_power = 0.6
+	light_color = "#FFCC66"
+	light_on = FALSE
 
 	//Main variables
 	var/owner = null // String name of owner
@@ -48,10 +52,6 @@ GLOBAL_LIST_EMPTY(PDAs)
 
 	//Secondary variables
 	var/scanmode = PDA_SCANNER_NONE
-	var/fon = FALSE //Is the flashlight function on?
-	var/f_lum = 2.3 //Luminosity for the flashlight function
-	var/f_pow = 0.6 //Power for the flashlight function
-	var/f_col = "#FFCC66" //Color for the flashlight function
 	var/silent = FALSE //To beep or not to beep, that is the question
 	var/toff = FALSE //If TRUE, messenger disabled
 	var/tnote = null //Current Texts
@@ -107,9 +107,6 @@ GLOBAL_LIST_EMPTY(PDAs)
 
 /obj/item/pda/Initialize()
 	. = ..()
-	if(fon)
-		set_light(f_lum, f_pow, f_col)
-
 	GLOB.PDAs += src
 	if(default_cartridge)
 		cartridge = new default_cartridge(src)
@@ -176,7 +173,10 @@ GLOBAL_LIST_EMPTY(PDAs)
 	if(inserted_item)
 		overlay.icon_state = "insert_overlay"
 		. += new /mutable_appearance(overlay)
-	if(fon)
+	if(cartridge) //WSedit: lol copy and pasted from PR #55072 on TGstation haha!!
+		overlay.icon_state = "cartridge_overlay" //does this work? fuck if I know!
+		. += new /mutable_appearance(overlay) //WS end
+	if(light_on)
 		overlay.icon_state = "light_overlay"
 		. += new /mutable_appearance(overlay)
 	if(pai)
@@ -207,12 +207,12 @@ GLOBAL_LIST_EMPTY(PDAs)
 	var/datum/asset/spritesheet/assets = get_asset_datum(/datum/asset/spritesheet/simple/pda)
 	assets.send(user)
 
-	var/datum/asset/spritesheet/emoji_s = get_asset_datum(/datum/asset/spritesheet/goonchat)
+	var/datum/asset/spritesheet/emoji_s = get_asset_datum(/datum/asset/spritesheet/chat)
 	emoji_s.send(user) //Already sent by chat but no harm doing this
 
 	user.set_machine(src)
 
-	var/dat = "" // WaspStation Edit - PDA Redesign
+	var/dat = "" //WS Edit - PDA Redesign
 	dat += assets.css_tag()
 	dat += emoji_s.css_tag()
 
@@ -246,7 +246,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 				dat += "<li><a href='byond://?src=[REF(src)];choice=2'>[PDAIMG(mail)] Messenger</a></li>"
 				dat += "<li><a href='byond://?src=[REF(src)];choice=41'>[PDAIMG(notes)] View Crew Manifest</a></li>"
 				dat += "<li><a href='byond://?src=[REF(src)];choice=6'>[PDAIMG(skills)]Skill Tracker</a></li>"
-				
+
 				if(cartridge)
 					if(cartridge.access)
 						dat += "<h4>Job Specific Functions</h4>"
@@ -287,7 +287,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 					if (cartridge.access & CART_DRONEPHONE)
 						dat += "<li><a href='byond://?src=[REF(src)];choice=Drone Phone'>[PDAIMG(dronephone)]Drone Phone</a></li>"
 				dat += "<li><a href='byond://?src=[REF(src)];choice=3'>[PDAIMG(atmos)]Atmospheric Scan</a></li>"
-				dat += "<li><a href='byond://?src=[REF(src)];choice=Light'>[PDAIMG(flashlight)][fon ? "Disable" : "Enable"] Flashlight</a></li>"
+				dat += "<li><a href='byond://?src=[REF(src)];choice=Light'>[PDAIMG(flashlight)][light_on ? "Disable" : "Enable"] Flashlight</a></li>"
 				if (pai)
 					if(pai.loc != src)
 						pai = null
@@ -567,6 +567,17 @@ GLOBAL_LIST_EMPTY(PDAs)
 						usr.put_in_hands(pai)
 						to_chat(usr, "<span class='notice'>You remove the pAI from the [name].</span>")
 
+//WS Start -- Skill Cloak Fix
+//SKILL FUNCTIONS===================================
+
+			if("SkillReward")
+				var/type = text2path(href_list["skill"])
+				var/datum/skill/S = GetSkillRef(type)
+				var/datum/mind/mind = U.mind
+				var/new_level = mind.get_skill_level(type)
+				S.try_skill_reward(mind, new_level)
+//WS End
+
 //LINK FUNCTIONS===================================
 
 			else//Cartridge menu linking
@@ -619,8 +630,18 @@ GLOBAL_LIST_EMPTY(PDAs)
 			H.sec_hud_set_ID()
 
 
-/obj/item/pda/proc/msg_input(mob/living/U = usr)
-	var/t = stripped_input(U, "Please enter message", name, null, MAX_MESSAGE_LEN)
+//WS Start -- Added recipient to PDA messages
+/obj/item/pda/proc/msg_input(mob/living/U = usr, list/obj/item/pda/targets)
+	var/title = name
+	if(targets)
+		if(length(targets) == 1)
+			title = "[name] -> [targets[1]]"
+		else if(length(targets) > 1)
+			title = "[name] -> Multiple PDAs"
+		else
+			CRASH("msg_input(): Length of list/obj/item/pda/targets is non-positive")
+	var/t = stripped_input(U, "Please enter message", title, null, MAX_MESSAGE_LEN)
+	//WS End
 	if(!t || toff)
 		return
 	if(!in_range(src, U) && loc != U)
@@ -630,7 +651,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 	return t
 
 /obj/item/pda/proc/send_message(mob/living/user, list/obj/item/pda/targets, everyone)
-	var/message = msg_input(user)
+	var/message = msg_input(user, targets)                  //WS Edit -- Added recipient to PDA messages
 	if(!message || !targets.len)
 		return
 	if((last_text && world.time < last_text + 10) || (everyone && last_everyone && world.time < last_everyone + PDA_SPAM_DELAY))
@@ -702,7 +723,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 	else
 		L = get(src, /mob/living/silicon)
 
-	if(L && L.stat != UNCONSCIOUS)
+	if(L && (L.stat == CONSCIOUS || L.stat == SOFT_CRIT))
 		var/reply = "(<a href='byond://?src=[REF(src)];choice=Message;skiprefresh=1;target=[REF(signal.source)]'>Reply</a>)"
 		var/hrefstart
 		var/hrefend
@@ -717,7 +738,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 		if(signal.data["emojis"] == TRUE)//so will not parse emojis as such from pdas that don't send emojis
 			inbound_message = emoji_parse(inbound_message)
 
-		to_chat(L, "[icon2html(src)] <b>PDA message from [hrefstart][signal.data["name"]] ([signal.data["job"]])[hrefend], </b>[inbound_message] [reply]")
+		to_chat(L, "<span class='infoplain'>[icon2html(src)] <b>PDA message from [hrefstart][signal.data["name"]] ([signal.data["job"]])[hrefend], </b>[inbound_message] [reply]</span>")
 
 	update_icon()
 	add_overlay(icon_alert)
@@ -791,12 +812,10 @@ GLOBAL_LIST_EMPTY(PDAs)
 /obj/item/pda/proc/toggle_light(mob/user)
 	if(issilicon(user) || !user.canUseTopic(src, BE_CLOSE))
 		return
-	if(fon)
-		fon = FALSE
-		set_light(0)
-	else if(f_lum)
-		fon = TRUE
-		set_light(f_lum, f_pow, f_col)
+	if(light_on)
+		set_light_on(FALSE)
+	else if(light_range)
+		set_light_on(TRUE)
 	update_icon()
 	for(var/X in actions)
 		var/datum/action/A = X

@@ -34,6 +34,7 @@
 		if(stat != DEAD)
 			handle_brain_damage()
 
+		mothdust = max(0, mothdust - 1); //WS edit - moth dust when hugging
 	else
 		. = ..()
 
@@ -314,19 +315,19 @@
 	breath.set_temperature(bodytemperature)
 
 /mob/living/carbon/proc/get_breath_from_internal(volume_needed)
-	//Wasp Port Begin - Citadel Internals
+	//WS Port Begin - Citadel Internals
 	var/obj/item/clothing/check
 	var/internals = FALSE
 
 	for(check in GET_INTERNAL_SLOTS(src))
 		if(check.clothing_flags & ALLOWINTERNALS)
 			internals = TRUE
-	//Wasp Port End - Citadel Internals
+	//WS Port End - Citadel Internals
 	if(internal)
 		if(internal.loc != src)
 			internal = null
 			update_internals_hud_icon(0)
-		else if (!internals && !getorganslot(ORGAN_SLOT_BREATHING_TUBE)) //Wasp Port - Citadel Internals
+		else if (!internals && !getorganslot(ORGAN_SLOT_BREATHING_TUBE)) //WS Port - Citadel Internals
 			internal = null
 			update_internals_hud_icon(0)
 		else
@@ -342,7 +343,7 @@
 	var/stam_regen = FALSE
 	if(stam_regen_start_time <= world.time)
 		stam_regen = TRUE
-		if(stam_paralyzed)
+		if(HAS_TRAIT_FROM(src, TRAIT_INCAPACITATED, STAMINA))
 			. |= BODYPART_LIFE_UPDATE_HEALTH //make sure we remove the stamcrit
 	for(var/I in bodyparts)
 		var/obj/item/bodypart/BP = I
@@ -544,7 +545,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			Dizzy(10)
 
 		if(drunkenness >= 51)
-			if(prob(3))
+			if(prob(3) && !dna.check_mutation(DORFISM)) //WS Edit - they can handle their drink to keep it down
 				confused += 15
 				vomit() // vomiting clears toxloss, consider this a blessing
 			Dizzy(25)

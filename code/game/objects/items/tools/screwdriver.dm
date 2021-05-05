@@ -1,7 +1,7 @@
 /obj/item/screwdriver
 	name = "screwdriver"
 	desc = "You can be totally screwy with this."
-	icon = 'waspstation/icons/obj/tools.dmi' //WaspStation Edit - Better Tool Sprites
+	icon = 'whitesands/icons/obj/tools.dmi' //WS Edit - Better Tool Sprites
 	icon_state = "screwdriver_map"
 	item_state = "screwdriver"
 	lefthand_file = 'icons/mob/inhands/equipment/tools_lefthand.dmi'
@@ -22,7 +22,7 @@
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 30)
 	drop_sound = 'sound/items/handling/screwdriver_drop.ogg'
 	pickup_sound =  'sound/items/handling/screwdriver_pickup.ogg'
-	item_flags = EYE_STAB
+	item_flags = SURGICAL_TOOL | EYE_STAB //WS - Fix IPC surgery
 	var/random_color = TRUE //if the screwdriver uses random coloring
 	var/static/list/screwdriver_colors = list(
 		"blue" = "#8080ff",
@@ -65,13 +65,13 @@
 
 /obj/item/screwdriver/get_belt_overlay()
 	if(random_color)
-		var/mutable_appearance/body = mutable_appearance('waspstation/icons/obj/clothing/belt_overlays.dmi', "screwdriver")
-		var/mutable_appearance/head = mutable_appearance('waspstation/icons/obj/clothing/belt_overlays.dmi', "screwdriver_head")
+		var/mutable_appearance/body = mutable_appearance('whitesands/icons/obj/clothing/belt_overlays.dmi', "screwdriver")
+		var/mutable_appearance/head = mutable_appearance('whitesands/icons/obj/clothing/belt_overlays.dmi', "screwdriver_head")
 		body.color = color
 		head.add_overlay(body)
 		return head
 	else
-		return mutable_appearance('waspstation/icons/obj/clothing/belt_overlays.dmi', icon_state)
+		return mutable_appearance('whitesands/icons/obj/clothing/belt_overlays.dmi', icon_state)
 
 /obj/item/screwdriver/abductor
 	name = "alien screwdriver"
@@ -84,15 +84,13 @@
 	random_color = FALSE
 
 /obj/item/screwdriver/abductor/get_belt_overlay()
-	return mutable_appearance('waspstation/icons/obj/clothing/belt_overlays.dmi', "screwdriver_nuke")
+	return mutable_appearance('whitesands/icons/obj/clothing/belt_overlays.dmi', "screwdriver_nuke")
 
 /obj/item/screwdriver/power
 	name = "hand drill"
 	desc = "A simple powered hand drill."
 	icon_state = "drill_screw"
 	item_state = "drill"
-	lefthand_file = 'icons/mob/inhands/equipment/tools_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/equipment/tools_righthand.dmi'
 	custom_materials = list(/datum/material/iron=150,/datum/material/silver=50,/datum/material/titanium=25) //done for balance reasons, making them high value for research, but harder to get
 	force = 8 //might or might not be too high, subject to change
 	w_class = WEIGHT_CLASS_SMALL

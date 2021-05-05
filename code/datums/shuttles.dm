@@ -127,7 +127,7 @@
 	can_be_bought = FALSE
 
 /datum/map_template/shuttle/mining_common
-	port_id = "mining_common"
+	port_id = "commonmining"
 	can_be_bought = FALSE
 
 /datum/map_template/shuttle/arrival
@@ -452,6 +452,10 @@
 	suffix = "whiteship_pod"
 	name = "Salvage Pod"
 
+/datum/map_template/shuttle/whiteship/midway//WS edit
+	suffix = "midway"
+	name = "NT Atmospherics tanker"
+
 /datum/map_template/shuttle/cargo/kilo
 	suffix = "kilo"
 	name = "supply shuttle (Kilo)"
@@ -568,7 +572,19 @@
 /datum/map_template/shuttle/arrival/omega
 	suffix = "omega"
 	name = "arrival shuttle (Omega)"
+//WS Edit
+/datum/map_template/shuttle/arrival/packed
+	suffix = "packed"
+	name = "arrival shuttle (Packedstation)"
 
+/datum/map_template/shuttle/cargo/packed
+	suffix = "packed"
+	name = "supply shuttle (Packedstation)"
+
+/datum/map_template/shuttle/mining/packed
+	suffix = "packed"
+	name = "mining shuttle (Packedstation)"
+//WS End
 /datum/map_template/shuttle/aux_base/default
 	suffix = "default"
 	name = "auxilliary base (Default)"

@@ -13,8 +13,6 @@
 	var/list/head_announce = null
 
 	//Bitflags for the job
-	var/flag = NONE //Deprecated
-	var/department_flag = NONE //Deprecated
 	var/auto_deadmin_role_flags = NONE
 
 	//Players will be allowed to spawn in as jobs that are set to "Station"
@@ -69,7 +67,6 @@
 
 	///Levels unlocked at roundstart in physiology
 	var/list/roundstart_experience
-	var/tmp/list/gear_leftovers = list()
 
 //Only override this proc, unless altering loadout code. Loadouts act on H but get info from M
 //H is usually a human unless an /equip override transformed it
@@ -88,6 +85,7 @@
 	if(!ishuman(H))
 		return
 	var/mob/living/carbon/human/human = H
+	var/list/gear_leftovers
 	if(M.client && (M.client.prefs.equipped_gear && M.client.prefs.equipped_gear.len))
 		for(var/gear in M.client.prefs.equipped_gear)
 			var/datum/gear/G = GLOB.gear_datums[gear]
@@ -110,23 +108,22 @@
 				if(!permitted)
 					to_chat(M, "<span class='warning'>Your current species or role does not permit you to spawn with [gear]!</span>")
 					continue
-				// WaspStation Edit - Fix Loadout Uniforms not spawning ID/PDA
+				//WS Edit - Fix Loadout Uniforms not spawning ID/PDA
 				if(G.slot == ITEM_SLOT_ICLOTHING)
 					continue // Handled in pre_equip
-				//End WaspStation Edit - Fix Loadout Uniforms not spawning ID/PDA
+				//EndWS Edit - Fix Loadout Uniforms not spawning ID/PDA
 				if(G.slot)
-					if(!H.equip_to_slot_or_del(G.spawn_item(H), G.slot))
-						gear_leftovers += G
+					if(!H.equip_to_slot_or_del(G.spawn_item(H, owner = H), G.slot))
+						LAZYADD(gear_leftovers, G)
 				else
-					gear_leftovers += G
-
+					LAZYADD(gear_leftovers, G)
 			else
 				M.client.prefs.equipped_gear -= gear
 
 	if(gear_leftovers?.len)
 		for(var/datum/gear/G in gear_leftovers)
 			var/metadata = M.client.prefs.equipped_gear[G.display_name]
-			var/item = G.spawn_item(null, metadata)
+			var/item = G.spawn_item(null, metadata, owner = H)
 			var/atom/placed_in = human.equip_or_collect(item)
 
 			if(istype(placed_in))
@@ -145,14 +142,12 @@
 
 			var/obj/item/storage/B = (locate() in H)
 			if(B)
-				G.spawn_item(B, metadata)
+				G.spawn_item(B, metadata, owner = H)
 				to_chat(M, "<span class='notice'>Placing [G.display_name] in [B.name]!</span>")
 				continue
 
 			to_chat(M, "<span class='danger'>Failed to locate a storage object on your mob, either you spawned with no hands free and no backpack or this is a bug.</span>")
 			qdel(item)
-
-		qdel(gear_leftovers)
 
 /datum/job/proc/announce(mob/living/carbon/human/H)
 	if(head_announce)
@@ -186,12 +181,14 @@
 	//Equip the rest of the gear
 	H.dna.species.before_equip_job(src, H, visualsOnly)
 
-	if(outfit && preference_source && preference_source.prefs && preference_source.prefs.alt_titles_preferences[title])
-		var/outfitholder = "[outfit]/[replacetext(lowertext(preference_source.prefs.alt_titles_preferences[title]), " ", "")]"
+	// WS Edit - Alt-Job Titles
+	if(outfit && preference_source?.prefs?.alt_titles_preferences[title] && !outfit_override)
+		var/outfitholder = "[outfit]/[ckey(preference_source.prefs.alt_titles_preferences[title])]"
 		if(text2path(outfitholder) || !outfitholder)
-			outfit = text2path(outfitholder)
+			outfit_override = text2path(outfitholder)
 	if(outfit_override || outfit)
 		H.equipOutfit(outfit_override ? outfit_override : outfit, visualsOnly, preference_source)
+	// WS Edit - Alt-Job Titles
 
 	H.dna.species.after_equip_job(src, H, visualsOnly)
 
@@ -219,6 +216,9 @@
 
 //If the configuration option is set to require players to be logged as old enough to play certain jobs, then this proc checks that they are, otherwise it just returns 1
 /datum/job/proc/player_old_enough(client/C)
+	var/isexempt = C.prefs.db_flags & DB_FLAG_EXEMPT
+	if(isexempt)
+		return TRUE
 	if(available_in_days(C) == 0)
 		return TRUE	//Available in 0 days = available right now = player is old enough to play.
 	return FALSE
@@ -263,7 +263,7 @@
 	var/duffelbag = /obj/item/storage/backpack/duffelbag
 	var/courierbag = /obj/item/storage/backpack/messenger
 
-	var/alt_uniform = /obj/item/clothing/under
+	var/alt_uniform
 
 	var/alt_suit = null
 	var/dcoat = /obj/item/clothing/suit/hooded/wintercoat
@@ -296,10 +296,11 @@
 		if(PREF_SKIRT)
 			holder = "[uniform]/skirt"
 		if(PREF_ALTSUIT)
-			holder = "[alt_uniform]"
+			if(alt_uniform)
+				holder = "[alt_uniform]"
 		if(PREF_GREYSUIT)
 			holder = "/obj/item/clothing/under/color/grey"
-		// WaspStation Edit - Fix Loadout Uniforms not spawning ID/PDA
+		//WS Edit - Fix Loadout Uniforms not spawning ID/PDA
 		if(PREF_LOADOUT)
 			if (preference_source == null)
 				holder = "[uniform]" // Who are we getting the loadout pref from anyways?
@@ -313,7 +314,7 @@
 					holder = "[uniform]"
 				else
 					uniform = pref_loadout_uniform
-		// End WaspStation Edit - Fix Loadout Uniforms not spawning ID/PDA
+		// EndWS Edit - Fix Loadout Uniforms not spawning ID/PDA
 		else
 			holder = "[uniform]"
 
@@ -354,12 +355,12 @@
 		C.access = J.get_access()
 		shuffle_inplace(C.access) // Shuffle access list to make NTNet passkeys less predictable
 		C.registered_name = H.real_name
-		//Wasp begin - Alt job titles
+		//WS begin - Alt job titles
 		if(preference_source && preference_source.prefs && preference_source.prefs.alt_titles_preferences[J.title])
 			C.assignment = preference_source.prefs.alt_titles_preferences[J.title]
 		else
 			C.assignment = J.title
-		//Wasp end
+		//WS end
 		if(H.age)
 			C.registered_age = H.age
 		C.update_label()
@@ -374,12 +375,12 @@
 	var/obj/item/pda/PDA = H.get_item_by_slot(pda_slot)
 	if(istype(PDA))
 		PDA.owner = H.real_name
-		//Wasp begin - Alt job titles
+		//WS begin - Alt job titles
 		if(preference_source && preference_source.prefs && preference_source.prefs.alt_titles_preferences[J.title])
 			PDA.ownjob = preference_source.prefs.alt_titles_preferences[J.title]
 		else
 			PDA.ownjob = J.title
-		//Wasp end
+		//WS end
 		PDA.update_label()
 
 /datum/outfit/job/get_chameleon_disguise_info()

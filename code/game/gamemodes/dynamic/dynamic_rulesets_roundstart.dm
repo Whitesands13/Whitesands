@@ -11,7 +11,7 @@
 	antag_flag = ROLE_TRAITOR
 	antag_datum = /datum/antagonist/traitor/
 	minimum_required_age = 0
-	protected_roles = list("Prisoner","Security Officer", "Warden", "Detective", "Head of Security", "Captain")
+	protected_roles = list("Prisoner", "Security Officer", "Warden", "Detective", "Head of Security", "Captain", "Research Director", "Chief Medical Officer", "Chief Engineer", "Head of Personnel", "SolGov Representative")
 	restricted_roles = list("Cyborg")
 	required_candidates = 1
 	weight = 5
@@ -23,6 +23,7 @@
 	var/autotraitor_cooldown = 450 // 15 minutes (ticks once per 2 sec)
 
 /datum/dynamic_ruleset/roundstart/traitor/pre_execute()
+	. = ..()
 	var/num_traitors = antag_cap[indice_pop] * (scaled_times + 1)
 	for (var/i = 1 to num_traitors)
 		var/mob/M = pick_n_take(candidates)
@@ -51,7 +52,7 @@
 	name = "Blood Brothers"
 	antag_flag = ROLE_BROTHER
 	antag_datum = /datum/antagonist/brother/
-	protected_roles = list("Prisoner","Security Officer", "Warden", "Detective", "Head of Security", "Captain")
+	protected_roles = list("Prisoner", "Security Officer", "Warden", "Detective", "Head of Security", "Captain", "Head of Personnel", "Chief Engineer", "Chief Medical Officer", "Research Director", "SolGov Representative")
 	restricted_roles = list("Cyborg", "AI")
 	required_candidates = 2
 	weight = 4
@@ -64,6 +65,7 @@
 	var/const/min_team_size = 2
 
 /datum/dynamic_ruleset/roundstart/traitorbro/pre_execute()
+	. = ..()
 	var/num_teams = (antag_cap[indice_pop]/min_team_size) * (scaled_times + 1) // 1 team per scaling
 	for(var/j = 1 to num_teams)
 		if(candidates.len < min_team_size || candidates.len < required_candidates)
@@ -101,7 +103,7 @@
 	name = "Changelings"
 	antag_flag = ROLE_CHANGELING
 	antag_datum = /datum/antagonist/changeling
-	protected_roles = list("Prisoner","Security Officer", "Warden", "Detective", "Head of Security", "Captain")
+	protected_roles = list("Prisoner", "Security Officer", "Warden", "Detective", "Head of Security", "Captain", "Head of Personnel", "Research Director", "Chief Medical Officer", "Chief Engineer", "SolGov Representative")
 	restricted_roles = list("AI", "Cyborg")
 	required_candidates = 1
 	weight = 3
@@ -113,6 +115,7 @@
 	var/team_mode_probability = 30
 
 /datum/dynamic_ruleset/roundstart/changeling/pre_execute()
+	. = ..()
 	var/num_changelings = antag_cap[indice_pop] * (scaled_times + 1)
 	for (var/i = 1 to num_changelings)
 		var/mob/M = pick_n_take(candidates)
@@ -170,6 +173,7 @@
 	return ..()
 
 /datum/dynamic_ruleset/roundstart/wizard/pre_execute()
+	. = ..()
 	if(GLOB.wizardstart.len == 0)
 		return FALSE
 	mode.antags_rolled += 1
@@ -198,7 +202,7 @@
 	antag_flag = ROLE_CULTIST
 	antag_datum = /datum/antagonist/cult
 	minimum_required_age = 14
-	restricted_roles = list("AI", "Cyborg", "Prisoner", "Security Officer", "Warden", "Detective", "Head of Security", "Captain", "Chaplain", "Head of Personnel")
+	restricted_roles = list("AI", "Cyborg", "Prisoner", "Security Officer", "Warden", "Detective", "Head of Security", "Captain", "Chaplain", "Head of Personnel", "Research Director", "Chief Medical Officer", "Chief Engineer", "SolGov Representative")
 	required_candidates = 2
 	weight = 3
 	cost = 35
@@ -213,6 +217,7 @@
 	. = ..()
 
 /datum/dynamic_ruleset/roundstart/bloodcult/pre_execute()
+	. = ..()
 	var/cultists = antag_cap[indice_pop]
 	mode.antags_rolled += cultists
 	for(var/cultists_number = 1 to cultists)
@@ -272,6 +277,7 @@
 	. = ..()
 
 /datum/dynamic_ruleset/roundstart/nuclear/pre_execute()
+	. = ..()
 	// If ready() did its job, candidates should have 5 or more members in it
 	var/operatives = antag_cap[indice_pop]
 	mode.antags_rolled += operatives
@@ -343,7 +349,7 @@
 	antag_flag_override = ROLE_REV
 	antag_datum = /datum/antagonist/rev/head
 	minimum_required_age = 14
-	restricted_roles = list("AI", "Cyborg", "Prisoner", "Security Officer", "Warden", "Detective", "Head of Security", "Captain", "Head of Personnel", "Chief Engineer", "Chief Medical Officer", "Research Director")
+	restricted_roles = list("AI", "Cyborg", "Prisoner", "Security Officer", "Warden", "Detective", "Head of Security", "Captain", "Head of Personnel", "Chief Engineer", "Chief Medical Officer", "Research Director", "SolGov Representative")
 	required_candidates = 3
 	weight = 2
 	delay = 7 MINUTES
@@ -359,6 +365,7 @@
 	var/finished = FALSE
 
 /datum/dynamic_ruleset/roundstart/revs/pre_execute()
+	. = ..()
 	var/max_candidates = antag_cap[indice_pop]
 	mode.antags_rolled += max_candidates
 	for(var/i = 1 to max_candidates)
@@ -474,6 +481,7 @@
 	high_population_requirement = 101
 
 /datum/dynamic_ruleset/roundstart/extended/pre_execute()
+	. = ..()
 	message_admins("Starting a round of extended.")
 	log_game("Starting a round of extended.")
 	mode.spend_threat(mode.threat)
@@ -524,6 +532,7 @@
 	antag_cap = list(1,1,1,2,2,2,3,3,3,4)
 
 /datum/dynamic_ruleset/roundstart/devil/pre_execute()
+	. = ..()
 	var/num_devils = antag_cap[indice_pop]
 	mode.antags_rolled += num_devils
 
@@ -581,6 +590,7 @@
 	var/datum/team/monkey/monkey_team
 
 /datum/dynamic_ruleset/roundstart/monkey/pre_execute()
+	. = ..()
 	var/carriers_to_make = max(round(mode.roundstart_pop_ready / players_per_carrier, 1), 1)
 	mode.antags_rolled += carriers_to_make
 

@@ -1,5 +1,4 @@
 import { toTitleCase } from 'common/string';
-import { Fragment } from 'inferno';
 import { useBackend, useLocalState } from '../backend';
 import { BlockQuote, Box, Button, NumberInput, Section, Table } from '../components';
 import { Window } from '../layouts';
@@ -8,6 +7,7 @@ export const OreRedemptionMachine = (props, context) => {
   const { act, data } = useBackend(context);
   const {
     unclaimedPoints,
+    userCash,
     materials,
     alloys,
     diskDesigns,
@@ -27,6 +27,12 @@ export const OreRedemptionMachine = (props, context) => {
           </BlockQuote>
           <Box>
             <Box inline color="label" mr={1}>
+              User Credit Balance:
+            </Box>
+            {userCash}
+          </Box>
+          <Box>
+            <Box inline color="label" mr={1}>
               Unclaimed points:
             </Box>
             {unclaimedPoints}
@@ -39,7 +45,7 @@ export const OreRedemptionMachine = (props, context) => {
         </Section>
         <Section>
           {hasDisk && (
-            <Fragment>
+            <>
               <Box mb={1}>
                 <Button
                   icon="eject"
@@ -63,7 +69,7 @@ export const OreRedemptionMachine = (props, context) => {
                   </Table.Row>
                 ))}
               </Table>
-            </Fragment>
+            </>
           ) || (
             <Button
               icon="save"

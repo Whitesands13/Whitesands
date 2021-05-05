@@ -6,6 +6,7 @@
 #define POLL_IGNORE_SYNDICATE "syndicate"
 #define POLL_IGNORE_HOLOPARASITE "holoparasite"
 #define POLL_IGNORE_POSIBRAIN "posibrain"
+#define POLL_IGNORE_EM_HOLOGRAM "emergency_hologram"
 #define POLL_IGNORE_SPECTRAL_BLADE "spectral_blade"
 #define POLL_IGNORE_CONSTRUCT "construct"
 #define POLL_IGNORE_SPIDER "spider"
@@ -14,7 +15,7 @@
 #define POLL_IGNORE_SWARMER "swarmer"
 #define POLL_IGNORE_DRONE "drone"
 #define POLL_IGNORE_FUGITIVE "fugitive"
-#define POLL_IGNORE_DEFECTIVECLONE "defective_clone" //WaspStation Edit - Cloning
+#define POLL_IGNORE_DEFECTIVECLONE "defective_clone" //WS Edit - Cloning
 #define POLL_IGNORE_PYROSLIME "slime"
 #define POLL_IGNORE_SHADE "shade"
 #define POLL_IGNORE_IMAGINARYFRIEND "imaginary_friend"
@@ -30,6 +31,7 @@ GLOBAL_LIST_INIT(poll_ignore_desc, list(
 	POLL_IGNORE_SYNDICATE = "Syndicate",
 	POLL_IGNORE_HOLOPARASITE = "Holoparasite",
 	POLL_IGNORE_POSIBRAIN = "Positronic brain",
+	POLL_IGNORE_EM_HOLOGRAM = "Emergency Hologram",
 	POLL_IGNORE_SPECTRAL_BLADE = "Spectral blade",
 	POLL_IGNORE_CONSTRUCT = "Construct",
 	POLL_IGNORE_SPIDER = "Spiders",
@@ -38,7 +40,7 @@ GLOBAL_LIST_INIT(poll_ignore_desc, list(
 	POLL_IGNORE_SWARMER = "Swarmer shells",
 	POLL_IGNORE_DRONE = "Drone shells",
 	POLL_IGNORE_FUGITIVE = "Fugitive Hunter",
-	POLL_IGNORE_DEFECTIVECLONE = "Defective clone", //WaspStation Edit - Cloning
+	POLL_IGNORE_DEFECTIVECLONE = "Defective clone", //WS Edit - Cloning
 	POLL_IGNORE_PYROSLIME = "Slime",
 	POLL_IGNORE_SHADE = "Shade",
 	POLL_IGNORE_IMAGINARYFRIEND = "Imaginary Friend",

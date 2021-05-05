@@ -1,5 +1,4 @@
 import { toArray } from 'common/collections';
-import { Fragment } from 'inferno';
 import { useBackend, useSharedState } from '../backend';
 import { AnimatedNumber, Box, Button, Flex, LabeledList, Section, Table, Tabs } from '../components';
 import { formatMoney } from '../format';
@@ -20,34 +19,36 @@ export const Cargo = (props, context) => {
       resizable>
       <Window.Content scrollable>
         <CargoStatus />
-        <Tabs>
-          <Tabs.Tab
-            icon="list"
-            selected={tab === 'catalog'}
-            onClick={() => setTab('catalog')}>
-            Catalog
-          </Tabs.Tab>
-          <Tabs.Tab
-            icon="envelope"
-            textColor={tab !== 'requests'
-              && requests.length > 0
-              && 'yellow'}
-            selected={tab === 'requests'}
-            onClick={() => setTab('requests')}>
-            Requests ({requests.length})
-          </Tabs.Tab>
-          {!requestonly && (
+        <Section fitted>
+          <Tabs>
             <Tabs.Tab
-              icon="shopping-cart"
-              textColor={tab !== 'cart'
-                && cart.length > 0
-                && 'yellow'}
-              selected={tab === 'cart'}
-              onClick={() => setTab('cart')}>
-              Checkout ({cart.length})
+              icon="list"
+              selected={tab === 'catalog'}
+              onClick={() => setTab('catalog')}>
+              Catalog
             </Tabs.Tab>
-          )}
-        </Tabs>
+            <Tabs.Tab
+              icon="envelope"
+              textColor={tab !== 'requests'
+                && requests.length > 0
+                && 'yellow'}
+              selected={tab === 'requests'}
+              onClick={() => setTab('requests')}>
+              Requests ({requests.length})
+            </Tabs.Tab>
+            {!requestonly && (
+              <Tabs.Tab
+                icon="shopping-cart"
+                textColor={tab !== 'cart'
+                  && cart.length > 0
+                  && 'yellow'}
+                selected={tab === 'cart'}
+                onClick={() => setTab('cart')}>
+                Checkout ({cart.length})
+              </Tabs.Tab>
+            )}
+          </Tabs>
+        </Section>
         {tab === 'catalog' && (
           <CargoCatalog />
         )}
@@ -133,17 +134,17 @@ export const CargoCatalog = (props, context) => {
     <Section
       title="Catalog"
       buttons={!express && (
-        <Fragment>
+        <>
           <CargoCartButtons />
           <Button.Checkbox
             ml={2}
             content="Buy Privately"
             checked={self_paid}
             onClick={() => act('toggleprivate')} />
-        </Fragment>
+        </>
       )}>
       <Flex>
-        <Flex.Item>
+        <Flex.Item ml={-1} mr={1}>
           <Tabs vertical>
             {supplies.map(supply => (
               <Tabs.Tab
@@ -282,7 +283,7 @@ const CargoCartButtons = (props, context) => {
     return null;
   }
   return (
-    <Fragment>
+    <>
       <Box inline mx={1}>
         {cart.length === 0 && 'Cart is empty'}
         {cart.length === 1 && '1 item'}
@@ -295,7 +296,7 @@ const CargoCartButtons = (props, context) => {
         color="transparent"
         content="Clear"
         onClick={() => act('clear')} />
-    </Fragment>
+    </>
   );
 };
 

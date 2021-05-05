@@ -15,12 +15,14 @@
 	RegisterSignal(parent, list(COMSIG_MOVABLE_CROSSED), .proc/Crossed)
 
 /datum/component/caltrop/proc/Crossed(datum/source, atom/movable/AM)
+	SIGNAL_HANDLER
+
 	if(!prob(probability))
 		return
 
 	if(ishuman(AM))
 		var/mob/living/carbon/human/H = AM
-		var/atom/A = parent		// Wasp Edit
+		var/atom/A = parent		//WS Edit
 
 		if(HAS_TRAIT(H, TRAIT_PIERCEIMMUNE))
 			return
@@ -33,7 +35,7 @@
 			return							//gravity checking only our parent would prevent us from triggering they're using magboots / other gravity assisting items that would cause them to still touch us.
 		if(H.buckled) //if they're buckled to something, that something should be checked instead.
 			return
-		if(!(H.mobility_flags & MOBILITY_STAND)) //if were not standing we cant step on the caltrop
+		if(H.body_position == LYING_DOWN) //if were not standing we cant step on the caltrop
 			return
 
 		var/picked_def_zone = pick(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
@@ -49,22 +51,28 @@
 			return
 
 		var/damage = rand(min_damage, max_damage)
-		if(HAS_TRAIT(H, TRAIT_LIGHT_STEP))
+		var/haslightstep = HAS_TRAIT(H, TRAIT_LIGHT_STEP) //BeginWS edit - caltrops don't paralyze people with light step
+		if(haslightstep && !H.incapacitated(ignore_restraints = TRUE))
 			damage *= 0.75
 
 		if(cooldown < world.time - 10) //cooldown to avoid message spam.
-			//var/atom/A = parent		Wasp edit
+			//var/atom/A = parent		WS edit
 			if(!H.incapacitated(ignore_restraints = TRUE))
-				H.visible_message("<span class='danger'>[H] steps on [A].</span>", \
-						"<span class='userdanger'>You step on [A]!</span>")
+				if(haslightstep)
+					H.visible_message("<span class='danger'>[H] carefully steps on [A].</span>",
+									  "<span class='danger'>You carefully step on [A], but it still hurts!</span>")
+				else
+					H.visible_message("<span class='danger'>[H] steps on [A].</span>", \
+									  "<span class='userdanger'>You step on [A]!</span>")
 			else
 				H.visible_message("<span class='danger'>[H] slides on [A]!</span>", \
 						"<span class='userdanger'>You slide on [A]!</span>")
 
 			cooldown = world.time
 		H.apply_damage(damage, BRUTE, picked_def_zone)
-		H.Paralyze(60)
-		if(H.pulledby)								// Waspstation Edit Begin - Being pulled over caltrops is logged
+		if(!haslightstep)
+			H.Paralyze(60) //EndWS edit - caltrops don't paralyze people with light step
+		if(H.pulledby)								//WS Edit Begin - Being pulled over caltrops is logged
 			log_combat(H.pulledby, H, "pulled", A)
 		else
-			H.log_message("has stepped on [A]", LOG_ATTACK, color="orange")		// Waspstation Edit End
+			H.log_message("has stepped on [A]", LOG_ATTACK, color="orange")		//WS Edit End

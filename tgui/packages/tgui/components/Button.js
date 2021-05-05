@@ -4,10 +4,9 @@
  * @license MIT
  */
 
+import { KEY_ENTER, KEY_ESCAPE, KEY_SPACE } from 'common/keycodes';
 import { classes, pureComponentHooks } from 'common/react';
 import { Component, createRef } from 'inferno';
-import { KEY_ENTER, KEY_ESCAPE, KEY_SPACE } from '../hotkeys';
-import { refocusLayout } from '../layouts';
 import { createLogger } from '../logging';
 import { Box } from './Box';
 import { Icon } from './Icon';
@@ -20,15 +19,19 @@ export const Button = props => {
     className,
     fluid,
     icon,
+    iconRotation,
+    iconSpin,
+    iconColor,
+    iconPosition,
     color,
     disabled,
     selected,
     tooltip,
     tooltipPosition,
     ellipsis,
+    compact,
+    circular,
     content,
-    iconRotation,
-    iconSpin,
     children,
     onclick,
     onClick,
@@ -54,6 +57,9 @@ export const Button = props => {
         selected && 'Button--selected',
         hasContent && 'Button--hasContent',
         ellipsis && 'Button--ellipsis',
+        circular && 'Button--circular',
+        compact && 'Button--compact',
+        iconPosition && 'Button--iconPosition--' + iconPosition,
         (color && typeof color === 'string')
           ? 'Button--color--' + color
           : 'Button--color--default',
@@ -61,8 +67,7 @@ export const Button = props => {
       ])}
       tabIndex={!disabled && '0'}
       unselectable={Byond.IS_LTE_IE8}
-      onclick={e => {
-        refocusLayout();
+      onClick={e => {
         if (!disabled && onClick) {
           onClick(e);
         }
@@ -80,19 +85,26 @@ export const Button = props => {
         // Refocus layout on pressing escape.
         if (keyCode === KEY_ESCAPE) {
           e.preventDefault();
-          refocusLayout();
           return;
         }
       }}
       {...rest}>
-      {icon && (
+      {(icon && iconPosition !== 'right') && (
         <Icon
           name={icon}
+          color={iconColor}
           rotation={iconRotation}
           spin={iconSpin} />
       )}
       {content}
       {children}
+      {(icon && iconPosition === 'right') && (
+        <Icon
+          name={icon}
+          color={iconColor}
+          rotation={iconRotation}
+          spin={iconSpin} />
+      )}
       {tooltip && (
         <Tooltip
           content={tooltip}

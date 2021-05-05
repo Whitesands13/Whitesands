@@ -294,8 +294,9 @@
 	return max(S.potency*(rate + 0.01), 0.1)
 
 /datum/plant_gene/trait/glow/on_new(obj/item/reagent_containers/food/snacks/grown/G, newloc)
-	..()
-	G.set_light(glow_range(G.seed), glow_power(G.seed), glow_color)
+	. = ..()
+	G.light_system = MOVABLE_LIGHT
+	G.AddComponent(/datum/component/overlay_lighting, glow_range(G.seed), glow_power(G.seed), glow_color)
 
 /datum/plant_gene/trait/glow/shadow
 	//makes plant emit slightly purple shadows
@@ -426,9 +427,7 @@
 		var/mob/living/L = target
 		if(L.reagents && L.can_inject(null, 0))
 			var/injecting_amount = max(1, G.seed.potency*0.2) // Minimum of 1, max of 20
-			var/fraction = min(injecting_amount/G.reagents.total_volume, 1)
-			G.reagents.expose(L, INJECT, fraction)
-			G.reagents.trans_to(L, injecting_amount)
+			G.reagents.trans_to(L, injecting_amount, method = INJECT)
 			to_chat(target, "<span class='danger'>You are pricked by [G]!</span>")
 			log_combat(G, L, "pricked and attempted to inject reagents from [G] to [L]. Last touched by: [G.fingerprintslast].")
 
@@ -488,6 +487,9 @@
 
 /datum/plant_gene/trait/plant_type/fungal_metabolism
 	name = "Fungal Vitality"
+
+/datum/plant_gene/trait/plant_type/crystal		// WS edit - Crystals
+	name = "Crystalline Growing Patterns"
 
 /datum/plant_gene/trait/plant_type/alien_properties
 	name ="?????"

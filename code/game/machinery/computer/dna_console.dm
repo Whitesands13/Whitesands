@@ -254,6 +254,10 @@
 		ui = new(user, src, "DnaConsole")
 		ui.open()
 
+/obj/machinery/computer/scan_consolenew/ui_assets()
+	. = ..() || list()
+	. += get_asset_datum(/datum/asset/simple/genetics)
+
 /obj/machinery/computer/scan_consolenew/ui_data(mob/user)
 	var/list/data = list()
 
@@ -344,10 +348,10 @@
 
 	return data
 
-/obj/machinery/computer/scan_consolenew/ui_act(action, var/list/params)
-	if(..())
-		return TRUE
-
+/obj/machinery/computer/scan_consolenew/ui_act(action, list/params)
+	. = ..()
+	if(.)
+		return
 	. = TRUE
 
 	add_fingerprint(usr)

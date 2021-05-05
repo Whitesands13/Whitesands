@@ -8,6 +8,7 @@
 	icon_state_unpowered = "laptop-off"
 	icon_state_menu = "menu"
 	display_overlays = FALSE
+	custom_materials = list(/datum/material/iron = 10000, /datum/material/glass = 1000) // WS Edit - Item Materials
 
 	hardware_flag = PROGRAM_LAPTOP
 	max_hardware_size = 2
@@ -63,14 +64,16 @@
 	. = ..()
 	if(over_object == usr || over_object == src)
 		try_toggle_open(usr)
-	else if(istype(over_object, /obj/screen/inventory/hand))
+		return
+	if(istype(over_object, /obj/screen/inventory/hand))
 		var/obj/screen/inventory/hand/H = over_object
 		var/mob/M = usr
 
-		if(!M.restrained() && !M.stat)
-			if(!isturf(loc) || !Adjacent(M))
-				return
-			M.put_in_hand(src, H.held_index)
+		if(M.stat != CONSCIOUS || HAS_TRAIT(M, TRAIT_HANDS_BLOCKED))
+			return
+		if(!isturf(loc) || !Adjacent(M))
+			return
+		M.put_in_hand(src, H.held_index)
 
 /obj/item/modular_computer/laptop/attack_hand(mob/user)
 	. = ..()

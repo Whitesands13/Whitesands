@@ -57,7 +57,7 @@ SUBSYSTEM_DEF(air)
 	msg += "HP:[high_pressure_delta.len]|"
 	msg += "AS:[active_super_conductivity.len]|"
 	msg += "AT/MS:[round((cost ? active_turfs.len/cost : 0),0.1)]"
-	..(msg)
+	return ..()
 
 
 /datum/controller/subsystem/air/Initialize(timeofday)
@@ -372,7 +372,7 @@ SUBSYSTEM_DEF(air)
 		CHECK_TICK
 
 /datum/controller/subsystem/air/proc/setup_template_machinery(list/atmos_machines)
-	if(!initialized) //Wasp - Random Engine Framework
+	if(!initialized) //WS - Random Engine Framework
 		return
 
 	for(var/A in atmos_machines)

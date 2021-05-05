@@ -10,12 +10,12 @@
 	minimal_player_age = 7
 	exp_requirements = 300
 	exp_type = EXP_TYPE_CREW
-	special_notice = "You are not a security officer, do not do their job for them. However, you can help them if they need immediate assistance." //WaspStation Edit - Wikilinks/Warning
-	wiki_page = "Space_Law" //WaspStation Edit - Wikilinks/Warning
+	special_notice = "You are not a security officer, do not do their job for them. However, you can help them if they need immediate assistance." //WS Edit - Wikilinks/Warning
+	wiki_page = "Space_Law" //WS Edit - Wikilinks/Warning
 
 	outfit = /datum/outfit/job/detective
 
-	access = list(ACCESS_SEC_DOORS, ACCESS_FORENSICS_LOCKERS, ACCESS_MORGUE, ACCESS_MAINT_TUNNELS, ACCESS_MECH_SECURITY, ACCESS_COURT, ACCESS_BRIG, ACCESS_WEAPONS, ACCESS_MINERAL_STOREROOM)
+	access = list(ACCESS_SEC_DOORS, ACCESS_FORENSICS_LOCKERS, ACCESS_MORGUE, ACCESS_MAINT_TUNNELS, ACCESS_MECH_SECURITY, ACCESS_COURT, ACCESS_BRIG, ACCESS_WEAPONS, ACCESS_MINERAL_STOREROOM, ACCESS_EVA)
 	minimal_access = list(ACCESS_SEC_DOORS, ACCESS_FORENSICS_LOCKERS, ACCESS_MORGUE, ACCESS_MAINT_TUNNELS, ACCESS_MECH_SECURITY, ACCESS_COURT, ACCESS_BRIG, ACCESS_WEAPONS, ACCESS_MINERAL_STOREROOM)
 	paycheck = PAYCHECK_MEDIUM
 	paycheck_department = ACCOUNT_SEC
@@ -30,7 +30,7 @@
 	belt = /obj/item/pda/detective
 	ears = /obj/item/radio/headset/headset_sec/alt
 	uniform = /obj/item/clothing/under/rank/security/detective
-	alt_uniform = /obj/item/clothing/under/rank/security/detective/grey //Wasp Edit - Alt Uniforms
+	alt_uniform = /obj/item/clothing/under/rank/security/detective/grey //WS Edit - Alt Uniforms
 	neck = /obj/item/clothing/neck/tie/detective
 	shoes = /obj/item/clothing/shoes/sneakers/brown
 	suit = /obj/item/clothing/suit/det_suit

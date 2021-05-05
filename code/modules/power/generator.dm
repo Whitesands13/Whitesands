@@ -61,12 +61,12 @@
 
 
 			if(delta_temperature > 0 && cold_air_heat_capacity > 0 && hot_air_heat_capacity > 0)
-				var/efficiency = 0.45 //Wasp Edit - Nerfed down to Cit's efficiency
+				var/efficiency = 0.45 //WS Edit - Nerfed down to Cit's efficiency
 
 				var/energy_transfer = delta_temperature*hot_air_heat_capacity*cold_air_heat_capacity/(hot_air_heat_capacity+cold_air_heat_capacity)
 
 				var/heat = energy_transfer*(1-efficiency)
-				lastgen += energy_transfer*efficiency
+				lastgen += LOGISTIC_FUNCTION(500000,0.0009,delta_temperature,10000) //WS Edit - Buries the 3x3 freezer heater TEG into the ground
 
 				hot_air.set_temperature(hot_air.return_temperature() - energy_transfer/hot_air_heat_capacity)
 				cold_air.set_temperature(cold_air.return_temperature() + heat/cold_air_heat_capacity)
@@ -139,7 +139,6 @@
 	. = ..()
 	var/datum/browser/popup = new(user, "teg", "Thermo-Electric Generator", 460, 300)
 	popup.set_content(get_menu())
-	popup.set_title_image(user.browse_rsc_icon(src.icon, src.icon_state))
 	popup.open()
 
 /obj/machinery/power/generator/Topic(href, href_list)
@@ -189,7 +188,7 @@
 	. = ..()
 	if(!panel_open)
 		return
-	anchored = !anchored
+	set_anchored(!anchored)
 	I.play_tool_sound(src)
 	if(!anchored)
 		kill_circs()

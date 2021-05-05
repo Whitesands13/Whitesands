@@ -6,6 +6,7 @@
 	icon_keyboard = "security_key"
 	req_access = list(ACCESS_ARMORY)
 	circuit = /obj/item/circuitboard/computer/gulag_teleporter_console
+	light_color = COLOR_SOFT_RED
 
 	var/default_goal = 200
 	var/obj/machinery/gulag_teleporter/teleporter = null
@@ -13,7 +14,6 @@
 	var/mob/living/carbon/human/prisoner = null
 	var/datum/data/record/temporary_record = null
 
-	light_color = LIGHT_COLOR_RED
 
 /obj/machinery/computer/prisoner/gulag_teleporter_computer/Initialize()
 	. = ..()
@@ -68,10 +68,11 @@
 	return data
 
 /obj/machinery/computer/prisoner/gulag_teleporter_computer/ui_act(action, list/params)
+	. = ..()
+	if(.)
+		return
 	if(isliving(usr))
 		playsound(src, 'sound/machines/terminal_prompt_confirm.ogg', 50, FALSE)
-	if(..())
-		return
 	if(!allowed(usr))
 		to_chat(usr, "<span class='warning'>Access denied.</span>")
 		return

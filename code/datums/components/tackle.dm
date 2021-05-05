@@ -63,11 +63,15 @@
 
 ///Store the thrownthing datum for later use
 /datum/component/tackler/proc/registerTackle(mob/living/carbon/user, datum/thrownthing/TT)
+	SIGNAL_HANDLER
+
 	tackle = TT
 
 ///See if we can tackle or not. If we can, leap!
 /datum/component/tackler/proc/checkTackle(mob/living/carbon/user, atom/A, params)
-	if(!user.in_throw_mode || user.get_active_held_item() || user.pulling || user.buckling)
+	SIGNAL_HANDLER
+
+	if(!user.in_throw_mode || user.get_active_held_item() || user.pulling || user.buckled || user.incapacitated())
 		return
 
 	if(!A || !(isturf(A) || isturf(A.loc)))
@@ -77,11 +81,11 @@
 		to_chat(user, "<span class='warning'>You're too angry to remember how to tackle!</span>")
 		return
 
-	if(user.restrained())
+	if(HAS_TRAIT(user, TRAIT_HANDS_BLOCKED))
 		to_chat(user, "<span class='warning'>You need free use of your hands to tackle!</span>")
 		return
 
-	if(!(user.mobility_flags & MOBILITY_STAND))
+	if(user.body_position == LYING_DOWN)
 		to_chat(user, "<span class='warning'>You must be standing to tackle!</span>")
 		return
 
@@ -112,7 +116,7 @@
 	if(get_dist(user, A) < min_distance)
 		A = get_ranged_target_turf(user, get_dir(user, A), min_distance) //TODO: this only works in cardinals/diagonals, make it work with in-betweens too!
 
-	user.Knockdown(base_knockdown, TRUE, TRUE)
+	user.Knockdown(base_knockdown, ignore_canstun = TRUE)
 	user.adjustStaminaLoss(stamina_cost)
 	user.throw_at(A, range, speed, user, FALSE)
 	addtimer(CALLBACK(src, .proc/resetTackle), base_knockdown, TIMER_STOPPABLE)
@@ -139,6 +143,8 @@
  * Finally, we return a bitflag to [COMSIG_MOVABLE_IMPACT] that forces the hitpush to false so that we don't knock them away.
 */
 /datum/component/tackler/proc/sack(mob/living/carbon/user, atom/hit)
+	SIGNAL_HANDLER_DOES_SLEEP
+
 	if(!tackling || !tackle)
 		return
 
@@ -420,7 +426,7 @@
 
 ///A special case for splatting for handling windows
 /datum/component/tackler/proc/splatWindow(mob/living/carbon/user, obj/structure/window/W)
-	playsound(user, "sound/effects/Glasshit.ogg", 140, TRUE)
+	playsound(user, 'sound/effects/Glasshit.ogg', 140, TRUE)
 
 	if(W.type in list(/obj/structure/window, /obj/structure/window/fulltile, /obj/structure/window/unanchored, /obj/structure/window/fulltile/unanchored)) // boring unreinforced windows
 		for(var/i = 0, i < speed, i++)
@@ -450,6 +456,8 @@
 
 ///Check to see if we hit a table, and if so, make a big mess!
 /datum/component/tackler/proc/checkObstacle(mob/living/carbon/owner)
+	SIGNAL_HANDLER
+
 	if(!tackling)
 		return
 

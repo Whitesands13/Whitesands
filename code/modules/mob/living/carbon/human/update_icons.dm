@@ -175,9 +175,9 @@ There are several things that need to be remembered:
 		var/obj/screen/inventory/inv = hud_used.inv_slots[TOBITSHIFT(ITEM_SLOT_GLOVES) + 1]
 		inv.update_icon()
 
-	if(!gloves && bloody_hands)
+	if(!gloves && blood_in_hands)
 		var/mutable_appearance/bloody_overlay = mutable_appearance('icons/effects/blood.dmi', "bloodyhands", -GLOVES_LAYER)
-		if(get_num_arms(FALSE) < 2)
+		if(num_hands < 2)
 			if(has_left_hand(FALSE))
 				bloody_overlay.icon_state = "bloodyhands_left"
 			else if(has_right_hand(FALSE))
@@ -257,7 +257,7 @@ There are several things that need to be remembered:
 /mob/living/carbon/human/update_inv_shoes()
 	remove_overlay(SHOES_LAYER)
 
-	if(get_num_legs(FALSE) <2)
+	if(num_legs < 2)
 		return
 
 	if(client && hud_used)
@@ -495,38 +495,26 @@ generate/load female uniform sprites matching all previously decided variables
 */
 /obj/item/proc/build_worn_icon(default_layer = 0, default_icon_file = null, isinhands = FALSE, femaleuniform = NO_FEMALE_UNIFORM, override_state = null)
 
+	// WS Edit Start - Worn Icon State
 	var/t_state
 	if(override_state)
 		t_state = override_state
 	else
-		if(isinhands && item_state)
-			t_state = item_state
-		else
-			t_state = icon_state
-	var/t_icon = mob_overlay_icon
-	if(!t_icon)
-		t_icon = default_icon_file
+		t_state = !isinhands ? (mob_overlay_state ? mob_overlay_state : icon_state) : (item_state ? item_state : icon_state)
 
 	//Find a valid icon file from variables+arguments
-	var/file2use
-	if(!isinhands && mob_overlay_icon)
-		file2use = mob_overlay_icon
-	if(!file2use)
-		file2use = default_icon_file
+	var/file2use = !isinhands ? (mob_overlay_icon ? mob_overlay_icon : default_icon_file) : default_icon_file
 
 	//Find a valid layer from variables+arguments
-	var/layer2use
-	if(alternate_worn_layer)
-		layer2use = alternate_worn_layer
-	if(!layer2use)
-		layer2use = default_layer
+	var/layer2use = alternate_worn_layer ? alternate_worn_layer : default_layer
 
 	var/mutable_appearance/standing
 	if(femaleuniform)
-		standing = wear_female_version(t_state,file2use,layer2use,femaleuniform)
+		standing = wear_female_version(t_state,file2use,layer2use,femaleuniform) //should layer2use be in sync with the adjusted value below? needs testing - shiz
 	if(!standing)
 		standing = mutable_appearance(file2use, t_state, -layer2use)
 
+	// WS Edit End - Worn Icon State
 	//Get the overlays for this item when it's being worn
 	//eg: ammo counters, primed grenade flashes, etc.
 	var/list/worn_overlays = worn_overlays(isinhands, file2use)

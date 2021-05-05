@@ -310,21 +310,25 @@ Key procs
 								/datum/language/draconic = list(LANGUAGE_ATOM),
 								/datum/language/moffic = list(LANGUAGE_ATOM),
 								/datum/language/calcic = list(LANGUAGE_ATOM),
-								/datum/language/voltaic = list(LANGUAGE_ATOM))
+								/datum/language/voltaic = list(LANGUAGE_ATOM),
+								/datum/language/rylethian = list(LANGUAGE_ATOM), //WS Edit - Squid Translation
+								/datum/language/spider = list(LANGUAGE_ATOM), //WS Edit - Spider Translation
+								/datum/language/dwarf = list(LANGUAGE_ATOM)) //WS Edit - Dwarf Translation
 	spoken_languages = list(/datum/language/common = list(LANGUAGE_ATOM),
 							/datum/language/machine = list(LANGUAGE_ATOM),
 							/datum/language/draconic = list(LANGUAGE_ATOM),
 							/datum/language/moffic = list(LANGUAGE_ATOM),
 							/datum/language/calcic = list(LANGUAGE_ATOM),
-							/datum/language/voltaic = list(LANGUAGE_ATOM))
+							/datum/language/voltaic = list(LANGUAGE_ATOM),
+							/datum/language/rylethian = list(LANGUAGE_ATOM)) //WS Edit - Squid Translation
 
 /datum/language_holder/moth
 	understood_languages = list(/datum/language/common = list(LANGUAGE_ATOM),
 								/datum/language/moffic = list(LANGUAGE_ATOM),
-								/datum/language/buzzwords = list(LANGUAGE_ATOM)) // WaspStation Edit - Insectoid Language
+								/datum/language/buzzwords = list(LANGUAGE_ATOM)) //WS Edit - Insectoid Language
 	spoken_languages = list(/datum/language/common = list(LANGUAGE_ATOM),
 							/datum/language/moffic = list(LANGUAGE_ATOM),
-							/datum/language/buzzwords = list(LANGUAGE_ATOM)) // WaspStation Edit - Insectoid Language
+							/datum/language/buzzwords = list(LANGUAGE_ATOM)) //WS Edit - Insectoid Language
 
 /datum/language_holder/skeleton
 	understood_languages = list(/datum/language/common = list(LANGUAGE_ATOM),

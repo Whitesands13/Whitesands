@@ -153,10 +153,12 @@
 
 /// Called every time a carbon with a harmful embed moves, rolling a chance for the item to cause pain. The chance is halved if the carbon is crawling or walking.
 /datum/component/embedded/proc/jostleCheck()
+	SIGNAL_HANDLER
+
 	var/mob/living/carbon/victim = parent
 
 	var/chance = jostle_chance
-	if(victim.m_intent == MOVE_INTENT_WALK || !(victim.mobility_flags & MOBILITY_STAND))
+	if(victim.m_intent == MOVE_INTENT_WALK || victim.body_position == LYING_DOWN)
 		chance *= 0.5
 
 	if(harmful && prob(chance))
@@ -183,6 +185,8 @@
 
 /// Called when a carbon with an object embedded/stuck to them inspects themselves and clicks the appropriate link to begin ripping the item out. This handles the ripping attempt, descriptors, and dealing damage, then calls safe_remove()
 /datum/component/embedded/proc/ripOutCarbon(datum/source, obj/item/I, obj/item/bodypart/limb)
+	SIGNAL_HANDLER_DOES_SLEEP
+
 	if(I != weapon || src.limb != limb)
 		return
 
@@ -209,6 +213,8 @@
 /// This proc handles the final step and actual removal of an embedded/stuck item from a carbon, whether or not it was actually removed safely.
 /// Pass TRUE for to_hands if we want it to go to the victim's hands when they pull it out
 /datum/component/embedded/proc/safeRemoveCarbon(to_hands)
+	SIGNAL_HANDLER_DOES_SLEEP
+
 	var/mob/living/carbon/victim = parent
 	limb.embedded_objects -= weapon
 
@@ -242,6 +248,8 @@
 
 /// Something deleted or moved our weapon while it was embedded, how rude!
 /datum/component/embedded/proc/byeItemCarbon()
+	SIGNAL_HANDLER
+
 	var/mob/living/carbon/victim = parent
 	limb.embedded_objects -= weapon
 	UnregisterSignal(weapon, list(COMSIG_MOVABLE_MOVED, COMSIG_PARENT_QDELETING))
@@ -269,7 +277,7 @@
 
 	var/damage = weapon.w_class * pain_mult
 	var/chance = pain_chance
-	if(pain_stam_pct && victim.stam_paralyzed) //if it's a less-lethal embed, give them a break if they're already stamcritted
+	if(pain_stam_pct && HAS_TRAIT_FROM(victim, TRAIT_INCAPACITATED, STAMINA)) //if it's a less-lethal embed, give them a break if they're already stamcritted
 		chance *= 0.3
 		damage *= 0.7
 

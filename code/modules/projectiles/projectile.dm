@@ -72,7 +72,7 @@
 	var/muzzle_type
 	var/impact_type
 
-	var/turf/last_angle_set_hitscan_store		//Wasp Edit - last turf we stored a hitscan segment while changing angles. without this you'll have potentially hundreds of segments from a homing projectile or something.
+	var/turf/last_angle_set_hitscan_store		//WS Edit - last turf we stored a hitscan segment while changing angles. without this you'll have potentially hundreds of segments from a homing projectile or something.
 
 	//Fancy hitscan lighting effects!
 	var/hitscan_light_intensity = 1.5
@@ -201,7 +201,8 @@
 			if(isalien(L))
 				new /obj/effect/temp_visual/dir_setting/bloodsplatter/xenosplatter(target_loca, splatter_dir)
 			var/obj/item/bodypart/B = L.get_bodypart(def_zone)
-			if(B.status == BODYPART_ROBOTIC) // So if you hit a robotic, it sparks instead of bloodspatters
+			// WS edit - Fix various startup runtimes
+			if(B?.status == BODYPART_ROBOTIC) // So if you hit a robotic, it sparks instead of bloodspatters
 				do_sparks(2, FALSE, target.loc)
 				if(prob(25))
 					new /obj/effect/decal/cleanable/oil(target_loca)
@@ -466,12 +467,12 @@
 		var/matrix/M = new
 		M.Turn(Angle)
 		transform = M
-	//Wasp Edit - Hitscan Emitters
+	//WS Edit - Hitscan Emitters
 	if(fired && hitscan && trajectory && isloc(loc) && (loc != last_angle_set_hitscan_store))
 		last_angle_set_hitscan_store = loc
 		var/datum/point/pcache = trajectory.copy_to()
 		store_hitscan_collision(pcache)
-	//Wasp End
+	//WS End
 	if(trajectory)
 		trajectory.set_angle(new_angle)
 	return TRUE
@@ -518,7 +519,7 @@
 		beam_segments[beam_index] = null	//record start.
 
 /obj/projectile/proc/process_hitscan()
-	var/safety = range * 10 //Wasp Edit - 3 to 10 - Hitscan Emitters
+	var/safety = range * 10 //WS Edit - 3 to 10 - Hitscan Emitters
 	record_hitscan_start(RETURN_POINT_VECTOR_INCREMENT(src, Angle, MUZZLE_EFFECT_PIXEL_INCREMENT, 1))
 	while(loc && !QDELETED(src))
 		if(paused)
@@ -600,7 +601,7 @@
 		return FALSE
 	if(!ignore_source_check && firer)
 		var/mob/M = firer
-		if((target == firer) || ((target == firer.loc) && (ismecha(firer.loc) || isspacepod(firer.loc))) || (target in firer.buckled_mobs) || (istype(M) && (M.buckled == target))) //cannot shoot yourself or your mech // Wasp - or your spacepod
+		if((target == firer) || ((target == firer.loc) && (ismecha(firer.loc) || isspacepod(firer.loc))) || (target in firer.buckled_mobs) || (istype(M) && (M.buckled == target))) //cannot shoot yourself or your mech //WS - or your spacepod
 			return FALSE
 	if(!ignore_loc && (loc != target.loc))
 		return FALSE
@@ -613,12 +614,11 @@
 			return FALSE
 	else
 		var/mob/living/L = target
-		if(!direct_target)
-			var/checking = NONE
-			if(!hit_stunned_targets)
-				checking = MOBILITY_USE | MOBILITY_STAND | MOBILITY_MOVE
-			if(!(L.mobility_flags & checking) || L.stat == DEAD)		// If target not able to use items, move and stand - or if they're just dead, pass over.
-				return FALSE
+		if(direct_target)
+			return TRUE
+		// If target not able to use items, move and stand - or if they're just dead, pass over.
+		if(L.stat == DEAD || (!hit_stunned_targets && HAS_TRAIT(L, TRAIT_IMMOBILIZED) && HAS_TRAIT(L, TRAIT_FLOORED) && HAS_TRAIT(L, TRAIT_HANDS_BLOCKED)))
+			return FALSE
 	return TRUE
 
 //Spread is FORCED!
@@ -707,7 +707,7 @@
 /obj/projectile/proc/cleanup_beam_segments()
 	QDEL_LIST_ASSOC(beam_segments)
 	beam_segments = list()
-	QDEL_NULL(beam_index) //Wasp edit - Hitscan emitters
+	QDEL_NULL(beam_index) //WS edit - Hitscan emitters
 
 /obj/projectile/proc/finalize_hitscan_and_generate_tracers(impacting = TRUE)
 	if(trajectory && beam_index)

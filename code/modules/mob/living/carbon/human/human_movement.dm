@@ -12,12 +12,17 @@
 /mob/living/carbon/human/slip(knockdown_amount, obj/O, lube, paralyze, forcedrop)
 	if(HAS_TRAIT(src, TRAIT_NOSLIPALL))
 		return 0
-	if (!(lube&GALOSHES_DONT_HELP))
+	if (!(lube & GALOSHES_DONT_HELP))
 		if(HAS_TRAIT(src, TRAIT_NOSLIPWATER))
 			return 0
 		if(shoes && istype(shoes, /obj/item/clothing))
 			var/obj/item/clothing/CS = shoes
 			if (CS.clothing_flags & NOSLIP)
+				return 0
+	if (lube & SLIDE_ICE)
+		if(shoes && istype(shoes, /obj/item/clothing))
+			var/obj/item/clothing/CS = shoes
+			if (CS.clothing_flags & NOSLIP_ICE)
 				return 0
 	return ..()
 
@@ -45,7 +50,7 @@
 	. = ..()
 
 	if(shoes)
-		if(mobility_flags & MOBILITY_STAND)
+		if(body_position == STANDING_UP)
 			if(loc == NewLoc)
 				if(!has_gravity(loc))
 					return
@@ -69,9 +74,6 @@
 					update_inv_shoes()
 				//End bloody footprints
 				S.step_action()
-	// Limb crap
-	for(var/obj/item/bodypart/B in bodyparts)
-		B.on_mob_move()
 
 /mob/living/carbon/human/Process_Spacemove(movement_dir = 0) //Temporary laziness thing. Will change to handles by species reee.
 	if(dna.species.space_move(src))

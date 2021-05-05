@@ -226,8 +226,10 @@
 	.["current_colour"] = paint_color
 
 /obj/item/toy/crayon/ui_act(action, list/params)
-	if(..())
+	. = ..()
+	if(.)
 		return
+
 	switch(action)
 		if("toggle_cap")
 			if(has_cap)
@@ -427,8 +429,7 @@
 	if(affected_turfs.len)
 		fraction /= affected_turfs.len
 	for(var/t in affected_turfs)
-		reagents.expose(t, TOUCH, fraction * volume_multiplier)
-		reagents.trans_to(t, ., volume_multiplier, transfered_by = user)
+		reagents.trans_to(t, ., volume_multiplier, transfered_by = user, method = TOUCH)
 	check_empty(user)
 
 /obj/item/toy/crayon/attack(mob/M, mob/user)
@@ -447,9 +448,7 @@
 		var/eaten = use_charges(user, 5, FALSE)
 		if(check_empty(user)) //Prevents divsion by zero
 			return
-		var/fraction = min(eaten / reagents.total_volume, 1)
-		reagents.expose(M, INGEST, fraction * volume_multiplier)
-		reagents.trans_to(M, eaten, volume_multiplier, transfered_by = user)
+		reagents.trans_to(M, eaten, volume_multiplier, transfered_by = user, method = INGEST)
 		// check_empty() is called during afterattack
 	else
 		..()
@@ -635,6 +634,8 @@
 	righthand_file = 'icons/mob/inhands/equipment/hydroponics_righthand.dmi'
 	desc = "A metallic container containing tasty paint."
 
+	custom_materials = list(/datum/material/iron = 100, /datum/material/glass = 100) // WS Edit - Item Materials
+
 	instant = TRUE
 	edible = FALSE
 	has_cap = TRUE
@@ -670,9 +671,7 @@
 			H.lip_color = paint_color
 			H.update_body()
 		var/used = use_charges(user, 10, FALSE)
-		var/fraction = min(1, used / reagents.maximum_volume)
-		reagents.expose(user, VAPOR, fraction * volume_multiplier)
-		reagents.trans_to(user, used, volume_multiplier, transfered_by = user)
+		reagents.trans_to(user, used, volume_multiplier, transfered_by = user, method = VAPOR)
 
 		return (OXYLOSS)
 
@@ -746,9 +745,7 @@
 					target.set_opacity(initial(target.opacity))
 
 		. = use_charges(user, 2)
-		var/fraction = min(1, . / reagents.maximum_volume)
-		reagents.expose(target, TOUCH, fraction * volume_multiplier)
-		reagents.trans_to(target, ., volume_multiplier, transfered_by = user)
+		reagents.trans_to(target, ., volume_multiplier, transfered_by = user, method = VAPOR)
 
 		if(pre_noise || post_noise)
 			playsound(user.loc, 'sound/effects/spray.ogg', 5, TRUE, 5)

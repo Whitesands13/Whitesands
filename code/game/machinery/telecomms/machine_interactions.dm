@@ -79,7 +79,8 @@
 	return data
 
 /obj/machinery/telecomms/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
 
 	if(!issilicon(usr))
@@ -120,9 +121,9 @@
 					. = TRUE
 		if("tempfreq")
 			if(params["value"])
-				tempfreq = text2num(params["value"]) * 10
+				tempfreq = sanitize_frequency(text2num(params["value"]) * 10, TRUE) //WS Edit - add frequency filter fix
 		if("freq")
-			var/newfreq = tempfreq * 10
+			var/newfreq = tempfreq                                                  //WS Edit - add frequency filter fix
 			if(newfreq == FREQ_SYNDICATE)
 				to_chat(operator, "<span class='warning'>Error: Interference preventing filtering frequency: \"[newfreq / 10] GHz\"</span>")
 				playsound(src, 'sound/machines/buzz-sigh.ogg', 50, TRUE)

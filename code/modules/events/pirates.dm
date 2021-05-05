@@ -179,7 +179,7 @@
 	shuttleId = "pirateship"
 	icon_screen = "syndishuttle"
 	icon_keyboard = "syndie_key"
-	light_color = LIGHT_COLOR_RED
+	light_color = COLOR_SOFT_RED
 	possible_destinations = "pirateship_away;pirateship_home;pirateship_custom"
 
 /obj/machinery/computer/camera_advanced/shuttle_docker/syndicate/pirate
@@ -300,7 +300,8 @@
 	return data
 
 /obj/machinery/computer/piratepad_control/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
 	if(!pad)
 		return

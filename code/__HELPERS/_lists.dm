@@ -24,6 +24,7 @@
 #define reverseList(L) reverseRange(L.Copy())
 #define LAZYADDASSOC(L, K, V) if(!L) { L = list(); } L[K] += list(V);
 #define LAZYREMOVEASSOC(L, K, V) if(L) { if(L[K]) { L[K] -= V; if(!length(L[K])) L -= K; } if(!length(L)) L = null; }
+#define LAZYACCESSASSOC(L, I, K) L ? L[I] ? L[I][K] ? L[I][K] : null : null : null
 
 /// Passed into BINARY_INSERT to compare keys
 #define COMPARE_KEY __BIN_LIST[__BIN_MID]
@@ -37,6 +38,7 @@
 	* TYPECONT: The typepath of the contents of the list
 	* COMPARE: The object to compare against, usualy the same as INPUT
 	* COMPARISON: The variable on the objects to compare
+	* COMPTYPE: How should the values be compared? Either COMPARE_KEY or COMPARE_VALUE.
 	*/
 #define BINARY_INSERT(INPUT, LIST, TYPECONT, COMPARE, COMPARISON, COMPTYPE) \
 	do {\
@@ -48,7 +50,7 @@
 			var/__BIN_LEFT = 1;\
 			var/__BIN_RIGHT = __BIN_CTTL;\
 			var/__BIN_MID = (__BIN_LEFT + __BIN_RIGHT) >> 1;\
-			var/##TYPECONT/__BIN_ITEM;\
+			var ##TYPECONT/__BIN_ITEM;\
 			while(__BIN_LEFT < __BIN_RIGHT) {\
 				__BIN_ITEM = COMPTYPE;\
 				if(__BIN_ITEM.##COMPARISON <= COMPARE.##COMPARISON) {\
@@ -220,6 +222,24 @@
 		total += L[item]
 
 	total = rand(0, total)
+	for (item in L)
+		total -=L [item]
+		if (total <= 0 && L[item])
+			return item
+
+	return null
+
+// Allows picks with non-integer weights and also 0
+// precision 1000 means it works up to 3 decimal points
+/proc/pickweight_float(list/L, default=1, precision=1000)
+	var/total = 0
+	var/item
+	for (item in L)
+		if (!isnum(L[item]))
+			L[item] = default
+		total += round(L[item]*precision)
+
+	total = rand(0, total)/precision
 	for (item in L)
 		total -=L [item]
 		if (total <= 0 && L[item])
@@ -579,3 +599,19 @@
 			return FALSE
 
 	return TRUE
+
+/proc/list_keys(list/l)
+	if(!islist(l))
+		return list()
+	var/ret = list()
+	for(var/key in l)
+		ret += key
+	return ret
+
+/proc/list_values(list/l)
+	if(!islist(l))
+		return list()
+	var/ret = list()
+	for(var/key in l)
+		ret += l[key]
+	return ret

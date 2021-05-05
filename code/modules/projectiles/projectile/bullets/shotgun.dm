@@ -1,11 +1,12 @@
 /obj/projectile/bullet/shotgun_slug
 	name = "12g shotgun slug"
-	damage = 60
+	damage = 45					//WS Edit - Shotgun Nerf
 
 /obj/projectile/bullet/shotgun_beanbag
 	name = "beanbag slug"
 	damage = 5
-	stamina = 55
+	stamina = 45					//WS Edit - Shotgun Nerf
+	armour_penetration = -10		//WS Edit - Shotgun Nerf
 
 /obj/projectile/bullet/incendiary/shotgun
 	name = "incendiary slug"
@@ -56,17 +57,20 @@
 	return BULLET_ACT_HIT
 
 /obj/projectile/bullet/pellet
-	var/tile_dropoff = 0.75
-	var/tile_dropoff_s = 0.5
+	var/tile_dropoff = 1		//WS Edit - Shotgun Nerf
+	var/tile_dropoff_s = 0.8		//WS Edit - Shotgun Nerf
 
 /obj/projectile/bullet/pellet/shotgun_buckshot
 	name = "buckshot pellet"
-	damage = 12.5
+	damage = 10						//WS Edit - Shotgun Nerf
+	armour_penetration = -20		//WS Edit - Shotgun Nerf
 
 /obj/projectile/bullet/pellet/shotgun_rubbershot
 	name = "rubbershot pellet"
-	damage = 3
-	stamina = 11
+	damage = 2						//WS Edit Begin - Shotgun Nerf
+	stamina = 8
+	armour_penetration = -20
+	tile_dropoff = 0.2			// Keep it at 10% per tile	//WS Edit End
 
 /obj/projectile/bullet/pellet/shotgun_incapacitate
 	name = "incapacitating pellet"
@@ -83,8 +87,9 @@
 		qdel(src)
 
 /obj/projectile/bullet/pellet/shotgun_improvised
-	tile_dropoff = 0.55		//Come on it does 6 damage don't be like that.
-	damage = 6
+	tile_dropoff = 0.45		//Come on it does 4.5 damage don't be like that.		//WS Edit - Shotgun nerf
+	damage = 4.5			//WS Edit - Shotgun nerf
+	armour_penetration = -20		//WS Edit - Shotgun nerf
 
 /obj/projectile/bullet/pellet/shotgun_improvised/Initialize()
 	. = ..()

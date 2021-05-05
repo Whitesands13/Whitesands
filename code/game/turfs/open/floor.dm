@@ -11,6 +11,9 @@
 	clawfootstep = FOOTSTEP_HARD_CLAW
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
 
+	smoothing_groups = list(SMOOTH_GROUP_TURF_OPEN, SMOOTH_GROUP_OPEN_FLOOR)
+	canSmoothWith = list(SMOOTH_GROUP_OPEN_FLOOR, SMOOTH_GROUP_TURF_OPEN)
+
 	var/icon_regular_floor = "floor" //used to remember what icon the tile should have by default
 	var/icon_plating = "plating"
 	thermal_conductivity = 0.040
@@ -26,10 +29,11 @@
 
 /turf/open/floor/Initialize(mapload)
 	if (!broken_states)
-		broken_states = typelist("broken_states", list("damaged1", "damaged2", "damaged3", "damaged4", "damaged5"))
+		broken_states = string_list(list("damaged1", "damaged2", "damaged3", "damaged4", "damaged5"))
 	else
-		broken_states = typelist("broken_states", broken_states)
-	burnt_states = typelist("burnt_states", burnt_states)
+		broken_states = string_list(broken_states)
+	if(burnt_states)
+		burnt_states = string_list(burnt_states)
 	if(!broken && broken_states && (icon_state in broken_states))
 		broken = TRUE
 	if(!burnt && burnt_states && (icon_state in burnt_states))
@@ -45,7 +49,7 @@
 					"basalt","basalt_dug",
 					"basalt0","basalt1","basalt2","basalt3","basalt4",
 					"basalt5","basalt6","basalt7","basalt8","basalt9","basalt10","basalt11","basalt12",
-					"oldburning","light-on-r","light-on-y","light-on-g","light-on-b", "wood", "carpetsymbol", "carpetstar",
+					"oldburning","light-on-r","light-on-y","light-on-g","light-on-b", "wood",
 					"carpetcorner", "carpetside", "carpet", "ironsand1", "ironsand2", "ironsand3", "ironsand4", "ironsand5",
 					"ironsand6", "ironsand7", "ironsand8", "ironsand9", "ironsand10", "ironsand11",
 					"ironsand12", "ironsand13", "ironsand14", "ironsand15")
@@ -132,7 +136,7 @@
 /turf/open/floor/burn_tile()
 	if(broken || burnt)
 		return
-	if(burnt_states.len)
+	if(LAZYLEN(burnt_states))
 		icon_state = pick(burnt_states)
 	else
 		icon_state = pick(broken_states)
@@ -272,8 +276,6 @@
 			if(A.electronics.unres_sides)
 				A.unres_sides = A.electronics.unres_sides
 			A.autoclose = TRUE
-			if(A.has_hatch)
-				A.setup_hatch()
 			return TRUE
 		if(RCD_DECONSTRUCT)
 			if(!ScrapeAway(flags = CHANGETURF_INHERIT_AIR))
@@ -285,7 +287,7 @@
 				return FALSE
 			to_chat(user, "<span class='notice'>You construct the grille.</span>")
 			var/obj/structure/grille/G = new(src)
-			G.anchored = TRUE
+			G.set_anchored(TRUE)
 			return TRUE
 		if(RCD_MACHINE)
 			if(locate(/obj/structure/frame/machine) in src)
@@ -293,13 +295,13 @@
 			var/obj/structure/frame/machine/M = new(src)
 			M.state = 2
 			M.icon_state = "box_1"
-			M.anchored = TRUE
+			M.set_anchored(TRUE)
 			return TRUE
 		if(RCD_COMPUTER)
 			if(locate(/obj/structure/frame/computer) in src)
 				return FALSE
 			var/obj/structure/frame/computer/C = new(src)
-			C.anchored = TRUE
+			C.set_anchored(TRUE)
 			C.state = 1
 			C.setDir(the_rcd.computer_dir)
 			return TRUE

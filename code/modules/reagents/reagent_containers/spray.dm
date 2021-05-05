@@ -92,7 +92,7 @@
 					var/mob/living/M = T
 					if(!M.can_inject())
 						continue
-					if((M.mobility_flags & MOBILITY_STAND) || !range_left)
+					if((M.body_position == STANDING_UP) || !range_left)
 						D.reagents.expose(M, VAPOR)
 						puff_reagent_left -= 1
 						var/contained = D.reagents.log_list() // looks like more copypasta but now the reagents are in a different place fuck you old coder
@@ -406,7 +406,7 @@
 			item_state = "sprayer_med_blue"
 	M.update_inv_hands()
 
-/* WaspStation Begin - No Cobby
+/*WS Begin - No Cobby
 
 /obj/item/reagent_containers/spray/hercuri
 	name = "medical spray (hercuri)"
@@ -414,4 +414,4 @@
 	icon_state = "sprayer_large"
 	list_reagents = list(/datum/reagent/medicine/C2/hercuri = 100)
 
-WaspStation End */
+WS End */

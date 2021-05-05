@@ -1,7 +1,7 @@
 /obj/machinery/power/bluespace_miner
 	name = "bluespace mining machine"
 	desc = "A machine that uses the magic of Bluespace to slowly generate materials and add them to a linked ore silo."
-	icon = 'waspstation/icons/obj/machines/bsm.dmi'
+	icon = 'whitesands/icons/obj/machines/bsm.dmi'
 	icon_state = "bsm_off"
 	density = TRUE
 	circuit = /obj/item/circuitboard/machine/bluespace_miner
@@ -53,7 +53,7 @@
 		if(SM.rating > 3)
 			minable_ores |= tier4_ores
 	for(var/obj/item/stock_parts/micro_laser/ML in component_parts)
-		mining_rate = 10 ** (ML.rating)
+		mining_rate = 10 ** sqrt(ML.rating)
 	for(var/obj/item/stock_parts/manipulator/M in component_parts)
 		M_C += 12 * sqrt(M.rating) + 8
 	mining_chance = M_C

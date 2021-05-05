@@ -117,7 +117,12 @@
 		..()
 
 /obj/structure/closet/crate/secure/loot/deconstruct(disassembled = TRUE)
-	boom()
+	if(locked)
+		boom()
+	else
+		if (qdel_on_open)
+			qdel(src)
+		..()
 
 /obj/structure/closet/crate/secure/loot/proc/spawn_loot()
 	var/loot = rand(1,100) //100 different crates with varying chances of spawning
@@ -218,7 +223,7 @@
 			new /obj/item/banhammer(src)
 			for(var/i in 1 to 3)
 				var/obj/effect/mine/sound/bwoink/mine = new (src)
-				mine.anchored = FALSE
+				mine.set_anchored(FALSE)
 				mine.move_resist = MOVE_RESIST_DEFAULT
 		if(97)
 			for(var/i in 1 to 4)

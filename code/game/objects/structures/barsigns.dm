@@ -279,6 +279,13 @@
 	icon = "maidcafe"
 	desc = "Welcome back, master!"
 
+//WS edit - Jackpot Brew
+/datum/barsign/jackpotbrew
+	name = "Jackpot Brews"
+	icon = "jackpotbrew"
+	desc = "Gambling and alcohol, nothing could go wrong with this combo!"
+//EndWS edit
+
 /datum/barsign/the_lightbulb
 	name = "The Lightbulb"
 	icon = "the_lightbulb"

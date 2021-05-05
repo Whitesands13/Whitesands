@@ -1,4 +1,4 @@
-//#define LOWMEMORYMODE //uncomment this to load centcom and runtime station and thats it.
+// #define LOWMEMORYMODE //uncomment this to load centcom and runtime station and thats it.
 
 #include "map_files\generic\CentCom.dmm"
 
@@ -12,10 +12,11 @@
 		#include "map_files\MetaStation\MetaStation.dmm"
 		#include "map_files\PubbyStation\PubbyStation.dmm"
 		#include "map_files\BoxStation\BoxStation.dmm"
-		#include "map_files\Donutstation\Donutstation.dmm"
-		#include "map_files\Donutstation\Donutstation_LVL2.dmm"
-
-		#ifdef TRAVISBUILDING
+		#include "map_files\PackedStation\PackedStation.dmm"
+		#include "map_files\GalaxyStation\Galaxystation.dmm"
+		#include "map_files\GalaxyStation\Galaxystation_LVL2.dmm"
+		#include "map_files\MidwayStation\MidwayStation.dmm"
+		#ifdef CIBUILDING
 			#include "templates.dm"
 		#endif
 	#endif

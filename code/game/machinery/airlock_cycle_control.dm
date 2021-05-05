@@ -56,14 +56,14 @@
 /obj/item/wallframe/advanced_airlock_controller
 	name = "airlock controller frame"
 	desc = "Used for building advanced airlock controllers."
-	icon = 'waspstation/icons/obj/monitors.dmi'
+	icon = 'whitesands/icons/obj/monitors.dmi'
 	icon_state = "aac_bitem"
 	result_path = /obj/machinery/advanced_airlock_controller
 
 /obj/machinery/advanced_airlock_controller
 	name = "advanced airlock controller"
 	desc = "A machine designed to control the operation of cycling airlocks"
-	icon = 'waspstation/icons/obj/monitors.dmi'
+	icon = 'whitesands/icons/obj/monitors.dmi'
 	icon_state = "aac"
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 4
@@ -220,7 +220,7 @@
 	if(!prob(prb))
 		return 0 //you lucked out, no shock for you
 	var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
-	s.set_up(5, TRUE, src)		
+	s.set_up(5, TRUE, src)
 	s.start() //sparks always.
 	if (electrocute_mob(user, get_area(src), src, 1, TRUE))
 		return 1
@@ -285,7 +285,7 @@
 
 // Handles the airlocks connected to the controller
 
-/obj/machinery/advanced_airlock_controller/proc/coerce_door(obj/machinery/door/airlock/door, target_density = 0) 
+/obj/machinery/advanced_airlock_controller/proc/coerce_door(obj/machinery/door/airlock/door, target_density = 0)
 	if(door.density == target_density && !door.operating)
 		door.bolt()
 		return TRUE
@@ -635,7 +635,8 @@
 		"vents" = list(),
 		"airlocks" = list(),
 		"skip_timer" = (world.time - skip_timer),
-		"skip_delay" = skip_delay
+		"skip_delay" = skip_delay,
+		"vis_target" = "\ref[vis_target]"
 	)
 
 	if((locked && !user.has_unlimited_silicon_privilege) || (user.has_unlimited_silicon_privilege && aidisabled))

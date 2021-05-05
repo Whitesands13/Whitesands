@@ -48,6 +48,8 @@
 	* oldLoc - the old location that `target` was at before moving onto `source`.
 */
 /obj/machinery/mineral/proc/pickup_item(datum/source, atom/movable/target, atom/oldLoc)
+	SIGNAL_HANDLER
+
 	return
 
 /// Generic unloading proc. Takes an atom as an argument and forceMove's it to the turf adjacent to this machine in the `output_dir` direction.
@@ -215,7 +217,7 @@
 			on = FALSE
 		else
 			var/out = get_step(src, output_dir)
-			materials.retrieve_sheets(sheets_to_remove, mat, out)
+			materials.retrieve_sheets(sheets_to_remove, mat, out, SSeconomy.get_dep_account(ACCOUNT_CAR))
 
 
 /obj/machinery/mineral/processing_unit/proc/smelt_alloy()

@@ -31,7 +31,7 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 
 /obj/machinery/conveyor/inverted/Initialize(mapload)
 	. = ..()
-	if(mapload && !(dir in GLOB.diagonals))
+	if(mapload && !(ISDIAGONALDIR(dir)))
 		log_mapping("[src] at [AREACOORD(src)] spawned without using a diagonal dir. Please replace with a normal version.")
 
 // Auto conveyour is always on unless unpowered
@@ -46,7 +46,7 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 	if(.)
 		operating = TRUE
 		update_icon()
-		begin_processing()                                              // Waspstation Edit - Auto Conveyor Fix (Issue #331)
+		begin_processing()                                              //WS Edit - Auto Conveyor Fix (Issue #331)
 
 // create a conveyor
 /obj/machinery/conveyor/Initialize(mapload, newdir, newid)
@@ -63,7 +63,7 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 	. = ..()
 
 /obj/machinery/conveyor/vv_edit_var(var_name, var_value)
-	if (var_name == "id")
+	if (var_name == NAMEOF(src, id))
 		// if "id" is varedited, update our list membership
 		LAZYREMOVE(GLOB.conveyors_by_id[id], src)
 		. = ..()
@@ -258,7 +258,7 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 	. = ..()
 
 /obj/machinery/conveyor_switch/vv_edit_var(var_name, var_value)
-	if (var_name == "id")
+	if (var_name == NAMEOF(src, id))
 		// if "id" is varedited, update our list membership
 		LAZYREMOVE(GLOB.conveyors_by_id[id], src)
 		. = ..()
@@ -354,6 +354,7 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 	icon = 'icons/obj/recycling.dmi'
 	icon_state = "switch-off"
 	w_class = WEIGHT_CLASS_BULKY
+	custom_materials = list(/datum/material/iron = 450, /datum/material/glass = 190) // WS Edit - Item Materials
 	var/id = "" //inherited by the switch
 
 /obj/item/conveyor_switch_construct/Initialize()
@@ -389,6 +390,7 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 	max_amount = 30
 	singular_name = "conveyor belt"
 	w_class = WEIGHT_CLASS_BULKY
+	custom_materials = list(/datum/material/iron = 3000) // WS Edit - Item Materials
 	///id for linking
 	var/id = ""
 

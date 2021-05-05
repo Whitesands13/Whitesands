@@ -1,7 +1,7 @@
 /obj/item/gun/energy/ionrifle
 	name = "ion rifle"
 	desc = "A man-portable anti-armor weapon designed to disable mechanical threats at range."
-	icon = 'waspstation/icons/obj/guns/energy.dmi' //waspstation edit
+	icon = 'whitesands/icons/obj/guns/energy.dmi' //WS edit
 	icon_state = "ionrifle"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	shaded_charge = FALSE
@@ -9,6 +9,7 @@
 	ammo_y_offset = 2
 	can_flashlight = FALSE
 	w_class = WEIGHT_CLASS_HUGE
+	big_gun = TRUE //yes, you can put the comically large cell in it. No, you aren't getting it roundstart. You slut.
 	flags_1 =  CONDUCT_1
 	slot_flags = ITEM_SLOT_BACK
 	ammo_type = list(/obj/item/ammo_casing/energy/ion)
@@ -137,7 +138,7 @@
 	usesound = list('sound/items/welder.ogg', 'sound/items/welder2.ogg')
 	tool_behaviour = TOOL_WELDER
 	toolspeed = 0.7 //plasmacutters can be used as welders, and are faster than standard welders
-	internal_cell = TRUE //so you don't cheese through the need for plasma - WASP EDIT
+	internal_cell = TRUE //so you don't cheese through the need for plasma - WS EDIT
 	var/charge_weld = 25 //amount of charge used up to start action (multiplied by amount) and per progress_flash_divisor ticks of welding
 	weapon_weight = WEAPON_LIGHT
 	fire_rate = 3
@@ -312,11 +313,11 @@
 
 /obj/item/gun/energy/temperature
 	name = "temperature gun"
-	icon = 'waspstation/icons/obj/guns/energy.dmi' //waspstation edit
+	icon = 'whitesands/icons/obj/guns/energy.dmi' //WS edit
 	icon_state = "freezegun"
 	desc = "A gun that changes temperatures."
 	ammo_type = list(/obj/item/ammo_casing/energy/temp, /obj/item/ammo_casing/energy/temp/hot)
-	cell_type = /obj/item/stock_parts/cell/gun/upgraded
+	cell_type = "/obj/item/stock_parts/cell/gun/upgraded"
 	ammo_x_offset = 2
 	automatic = 1
 	fire_rate = 4

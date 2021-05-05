@@ -127,6 +127,11 @@
 	emittersemicd = TRUE
 	addtimer(CALLBACK(src, .proc/emittercool), 600)
 
+	if(!holoform)
+		ADD_TRAIT(src, TRAIT_IMMOBILIZED, PAI_FOLDED)
+		ADD_TRAIT(src, TRAIT_HANDS_BLOCKED, PAI_FOLDED)
+
+
 /mob/living/silicon/pai/proc/pdaconfig()
 	//PDA
 	aiPDA = new/obj/item/pda/ai(src)
@@ -166,16 +171,13 @@
 	else
 		client.eye = card
 
-/mob/living/silicon/pai/Stat()
-	..()
-	if(statpanel("Status"))
-		if(!stat)
-			stat(null, text("Emitter Integrity: [emitterhealth * (100/emittermaxhealth)]"))
-		else
-			stat(null, text("Systems nonfunctional"))
+/mob/living/silicon/pai/get_status_tab_items()
+	. += ..()
+	if(!stat)
+		. += text("Emitter Integrity: [emitterhealth * (100/emittermaxhealth)]")
+	else
+		. += text("Systems nonfunctional")
 
-/mob/living/silicon/pai/restrained(ignore_grab)
-	. = FALSE
 
 // See software.dm for Topic()
 
@@ -241,7 +243,7 @@
 
 /datum/action/innate/pai/rest/Trigger()
 	..()
-	P.lay_down()
+	P.toggle_resting()
 
 /datum/action/innate/pai/light
 	name = "Toggle Integrated Lights"
@@ -281,7 +283,7 @@
 /mob/living/silicon/pai/updatehealth()
 	if(status_flags & GODMODE)
 		return
-	health = maxHealth - getBruteLoss() - getFireLoss()
+	set_health(maxHealth - getBruteLoss() - getFireLoss())
 	update_stat()
 
 /mob/living/silicon/pai/process()

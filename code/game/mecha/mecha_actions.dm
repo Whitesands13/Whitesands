@@ -22,7 +22,7 @@
 
 
 /datum/action/innate/mecha
-	check_flags = AB_CHECK_RESTRAINED | AB_CHECK_STUN | AB_CHECK_CONSCIOUS
+	check_flags = AB_CHECK_HANDS_BLOCKED | AB_CHECK_IMMOBILE | AB_CHECK_CONSCIOUS
 	icon_icon = 'icons/mob/actions/actions_mecha.dmi'
 	var/obj/mecha/chassis
 
@@ -44,7 +44,7 @@
 		return
 	if(!chassis || chassis.occupant != owner)
 		return
-	chassis.container_resist(chassis.occupant)
+	chassis.container_resist_act(chassis.occupant)
 
 /datum/action/innate/mecha/mech_toggle_internals
 	name = "Toggle Internal Airtank Usage"
@@ -108,11 +108,10 @@
 		return
 	chassis.lights = !chassis.lights
 	if(chassis.lights)
-		chassis.set_light(chassis.lights_power)
 		button_icon_state = "mech_lights_on"
 	else
-		chassis.set_light(-chassis.lights_power)
 		button_icon_state = "mech_lights_off"
+	chassis.set_light_on(chassis.lights)
 	chassis.occupant_message("<span class='notice'>Toggled lights [chassis.lights?"on":"off"].</span>")
 	chassis.log_message("Toggled lights [chassis.lights?"on":"off"].", LOG_MECHA)
 	UpdateButtonIcon()
@@ -211,10 +210,10 @@
 		chassis.log_message("Toggled zoom mode.", LOG_MECHA)
 		chassis.occupant_message("<font color='[chassis.zoom_mode?"blue":"red"]'>Zoom mode [chassis.zoom_mode?"en":"dis"]abled.</font>")
 		if(chassis.zoom_mode)
-			owner.client.change_view(12)
+			owner.client.view_size.setTo(4.5)
 			SEND_SOUND(owner, sound('sound/mecha/imag_enh.ogg',volume=50))
 		else
-			owner.client.change_view(CONFIG_GET(string/default_view)) //world.view - default mob view size
+			owner.client.view_size.resetToDefault() //Let's not let this stack shall we?
 		UpdateButtonIcon()
 
 /datum/action/innate/mecha/mech_switch_damtype

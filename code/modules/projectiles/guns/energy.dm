@@ -2,7 +2,7 @@
 	icon_state = "energy"
 	name = "energy gun"
 	desc = "A basic energy-based gun."
-	icon = 'waspstation/icons/obj/guns/energy.dmi'
+	icon = 'whitesands/icons/obj/guns/energy.dmi'
 
 	var/obj/item/stock_parts/cell/gun/cell //What type of power cell this uses
 	var/cell_type = /obj/item/stock_parts/cell/gun
@@ -20,9 +20,10 @@
 	var/use_cyborg_cell = FALSE //whether the gun's cell drains the cyborg user's cell to recharge
 	var/dead_cell = FALSE //set to true so the gun is given an empty cell
 
-	//WaspStation Begin - Gun Cells
+	//WS Begin - Gun Cells
 	var/internal_cell = FALSE ///if the gun's cell cannot be replaced
 	var/small_gun = FALSE ///if the gun is small and can only fit batteries that have less than a certain max charge
+	var/big_gun = FALSE ///if the gun is big and can fit the comically large gun cell
 	var/max_charge = 10000 ///if the gun is small, this is the highest amount of charge can be in a battery for it
 	var/unscrewing_time = 20 ///Time it takes to unscrew the internal cell
 
@@ -30,7 +31,7 @@
 	var/eject_sound = 'sound/weapons/gun/general/magazine_remove_full.ogg' //Sound of ejecting a cell. UPDATE PLEASE
 	var/sound_volume = 40 //Volume of loading/unloading sounds
 	var/load_sound_vary = TRUE //Should the load/unload sounds vary?
-	//WaspStation End
+	//WS End
 
 /obj/item/gun/energy/emp_act(severity)
 	. = ..()
@@ -89,7 +90,7 @@
 		if(charge_tick < charge_delay)
 			return
 		charge_tick = 0
-		cell.give(1000) // WaspStation Edit - Egun energy cells
+		cell.give(1000) //WS Edit - Egun energy cells
 		if(!chambered) //if empty chamber we try to charge a new shot
 			recharge_newshot(TRUE)
 		update_icon()
@@ -113,6 +114,9 @@
 		to_chat(user, "<span class='warning'>\The [C] doesn't seem to fit into \the [src]...</span>")
 		return FALSE
 	if(!small_gun && istype(C, /obj/item/stock_parts/cell/gun/mini))
+		to_chat(user, "<span class='warning'>\The [C] doesn't seem to fit into \the [src]...</span>")
+		return FALSE
+	if(!big_gun && istype(C, /obj/item/stock_parts/cell/gun/large))
 		to_chat(user, "<span class='warning'>\The [C] doesn't seem to fit into \the [src]...</span>")
 		return FALSE
 	if(user.transferItemToLoc(C, src))
@@ -140,8 +144,7 @@
 	update_icon()
 
 /obj/item/gun/energy/screwdriver_act(mob/living/user, obj/item/I)
-	. = ..()
-	if(!internal_cell)
+	if(cell && !internal_cell && !gun_light && !bayonet)
 		to_chat(user, "<span class='notice'>You begin unscrewing and pulling out the cell...</span>")
 		if(I.use_tool(src, user, unscrewing_time, volume=100))
 			to_chat(user, "<span class='notice'>You remove the power cell.</span>")
@@ -264,7 +267,7 @@
 
 /obj/item/gun/energy/vv_edit_var(var_name, var_value)
 	switch(var_name)
-		if("selfcharge")
+		if(NAMEOF(src, selfcharge))
 			if(var_value)
 				START_PROCESSING(SSobj, src)
 			else

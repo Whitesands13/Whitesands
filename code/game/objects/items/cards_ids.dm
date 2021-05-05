@@ -15,7 +15,7 @@
 /obj/item/card
 	name = "card"
 	desc = "Does card things."
-	icon = 'waspstation/icons/obj/card.dmi' //WaspStation Edit - Actually good-looking IDs >:)
+	icon = 'whitesands/icons/obj/card.dmi' //WS Edit - Actually good-looking IDs >:)
 	w_class = WEIGHT_CLASS_TINY
 
 	var/list/files = list()
@@ -146,7 +146,7 @@
 	. = ..()
 	if(.)
 		switch(var_name)
-			if("assignment","registered_name","registered_age")
+			if(NAMEOF(src, assignment),NAMEOF(src, registered_name),NAMEOF(src, registered_age))
 				update_label()
 
 /obj/item/card/id/attackby(obj/item/W, mob/user, params)
@@ -278,13 +278,18 @@
 		log_econ("[amount_to_remove] credits were removed from [src] owned by [src.registered_name]")
 		return
 	else
-		var/difference = amount_to_remove - registered_account.account_balance
-		registered_account.bank_card_talk("<span class='warning'>ERROR: The linked account requires [difference] more credit\s to perform that withdrawal.</span>", TRUE)
+		if (registered_account.frozen)
+			registered_account.bank_card_talk("<span class='warning'>ERROR: The linked account is frozen! Contact your department head.</span>", TRUE)
+		else
+			var/difference = amount_to_remove - registered_account.account_balance
+			registered_account.bank_card_talk("<span class='warning'>ERROR: The linked account requires [difference] more credit\s to perform that withdrawal.</span>", TRUE)
 
 /obj/item/card/id/examine(mob/user)
 	. = ..()
 	if(registered_account)
 		. += "The account linked to the ID belongs to '[registered_account.account_holder]' and reports a balance of [registered_account.account_balance] cr."
+		if(registered_account.frozen)
+			. += "<span class='warning'>The linked account is frozen, and cannot be withdrawn from or deposited into!</span>"
 	. += "<span class='notice'><i>There's more information below, you can look again to take a closer look...</i></span>"
 
 /obj/item/card/id/examine_more(mob/user)
@@ -330,6 +335,8 @@
 		. += mutable_appearance(icon, "id[job]")
 
 /obj/item/card/id/proc/update_in_wallet()
+	SIGNAL_HANDLER
+
 	if(istype(loc, /obj/item/storage/wallet))
 		var/obj/item/storage/wallet/powergaming = loc
 		if(powergaming.front_id == src)
@@ -366,6 +373,11 @@ update_label()
 	item_state = "silver_id"
 	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
+
+/obj/item/card/id/silver/hologram
+	assignment = "Head of Personnel"
+	registered_name = "Emergency Command Hologram"
+	access = list(ACCESS_CHANGE_IDS)
 
 /obj/item/card/id/silver/reaper
 	name = "Thirteen's ID Card (Reaper)"

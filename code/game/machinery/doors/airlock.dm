@@ -59,7 +59,7 @@
 	interaction_flags_machine = INTERACT_MACHINE_WIRES_IF_OPEN | INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OPEN_SILICON | INTERACT_MACHINE_REQUIRES_SILICON | INTERACT_MACHINE_OPEN
 
 	var/security_level = 0 //How much are wires secured
-	var/aiControlDisabled = 0 //If 1, AI control is disabled until the AI hacks back in and disables the lock. If 2, the AI has bypassed the lock. If -1, the control is enabled but the AI had bypassed it earlier, so if it is disabled again the AI would have no trouble getting back in.
+	var/aiControlDisabled = AI_WIRE_NORMAL //If 1, AI control is disabled until the AI hacks back in and disables the lock. If 2, the AI has bypassed the lock. If -1, the control is enabled but the AI had bypassed it earlier, so if it is disabled again the AI would have no trouble getting back in.
 	var/hackProof = FALSE // if true, this door can't be hacked by the AI
 	var/secondsMainPowerLost = 0 //The number of seconds until power is restored.
 	var/secondsBackupPowerLost = 0 //The number of seconds until power is restored.
@@ -87,8 +87,8 @@
 	var/note_overlay_file = 'icons/obj/doors/airlocks/station/overlays.dmi' //Used for papers and photos pinned to the airlock
 
 	var/cyclelinkeddir = 0
-	var/cyclelinkedx = 0			//Wasp start	negative is left positive is right
-	var/cyclelinkedy = 0			//Wasp end		negative is down positive is up
+	var/cyclelinkedx = 0			//WS start	negative is left positive is right
+	var/cyclelinkedy = 0			//WS end		negative is down positive is up
 	var/obj/machinery/door/airlock/cyclelinkedairlock
 	var/shuttledocked = 0
 	var/delayed_close_requested = FALSE // TRUE means the door will automatically close the next time it's opened.
@@ -107,7 +107,6 @@
 	var/hatch_colour = "#7d7d7d"
 	var/hatch_open_sound = 'sound/machines/hatch_open.ogg'
 	var/hatch_close_sound = 'sound/machines/hatch_close.ogg'
-	var/image/hatch_image
 
 /obj/machinery/door/airlock/Initialize()
 	. = ..()
@@ -134,19 +133,17 @@
 
 	RegisterSignal(src, COMSIG_MACHINERY_BROKEN, .proc/on_break)
 
-	if(has_hatch && !abandoned)
-		setup_hatch()
 	update_icon()
 
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/door/airlock/LateInitialize()
 	. = ..()
-	if(cyclelinkedx || cyclelinkedy)	//Wasp start
+	if(cyclelinkedx || cyclelinkedy)	//WS start
 		cyclelinkairlock_target()
 	else
 		if(cyclelinkeddir)
-			cyclelinkairlock()		//Wasp end
+			cyclelinkairlock()		//WS end
 	if(abandoned)
 		var/outcome = rand(1,100)
 		switch(outcome)
@@ -178,28 +175,31 @@
 	if(id_tag)
 		id_tag = "[idnum][id_tag]"
 
-/obj/machinery/door/airlock/proc/setup_hatch()
-	hatch_image = image('icons/obj/doors/hatches.dmi', src, "hatch_closed", layer=(CLOSED_FIREDOOR_LAYER-0.01))
-	hatch_image.color = hatch_colour
-	hatch_image.pixel_x = hatch_offset_x
-	hatch_image.pixel_y = hatch_offset_y
-	update_icon()
+/obj/machinery/door/airlock/CanPass(atom/movable/mover, turf/target)
+	. = ..()
+	if(density && has_hatch && (mover.pass_flags & PASSDOORHATCH))
+		return TRUE //If this airlock is closed, has hatches, and this creature can go through hatches, then we let it through without opening the airlock
 
-/obj/machinery/door/airlock/proc/open_hatch(var/atom/mover = null)
-	if(!hatchstate)
+/obj/machinery/door/airlock/Crossed(atom/movable/mover)
+	. = ..()
+	if(density && has_hatch && (mover.pass_flags & PASSDOORHATCH) && !hatchstate)
 		hatchstate = 1
 		update_icon()
-		playsound(loc, hatch_open_sound, 40, 1, -1)
-		addtimer(CALLBACK(src, .proc/close_hatch), 20, TIMER_OVERRIDE|TIMER_UNIQUE) //hatch stays open for 2 seconds
+		playsound(loc, hatch_open_sound, 40, 1, -1, mono_adj = TRUE)
+		if(mover.layer != initial(mover.layer))
+			return
+		mover.layer = UNDERDOOR
 
-	if(istype(mover, /mob/living/simple_animal/drone))
-		var/mob/living/simple_animal/drone/D = mover
-		D.under_door()
+/obj/machinery/door/airlock/Uncrossed(atom/movable/mover)
+	. = ..()
+	if(density && has_hatch && (mover.pass_flags & PASSDOORHATCH))
+		mover.layer = initial(mover.layer)
+		close_hatch()
 
 /obj/machinery/door/airlock/proc/close_hatch()
 	hatchstate = 0
 	update_icon()
-	playsound(loc, hatch_close_sound, 30, 1, -1)
+	playsound(loc, hatch_close_sound, 30, 1, -1, mono_adj = TRUE)
 
 /obj/machinery/door/airlock/proc/update_other_id()
 	for(var/obj/machinery/door/airlock/A in GLOB.airlocks)
@@ -207,7 +207,7 @@
 			closeOther = A
 			break
 
-/obj/machinery/door/airlock/proc/cyclelinkairlock_target()		//wasp start
+/obj/machinery/door/airlock/proc/cyclelinkairlock_target()		//WS start
 	if (cyclelinkedairlock)
 		cyclelinkedairlock.cyclelinkedairlock = null
 		cyclelinkedairlock = null
@@ -244,7 +244,7 @@
 		log_mapping("[src] at [AREACOORD(src)] failed to find a valid airlock to cyclelink_target with! Was targeting [T.x], [T.y], [T.z].")
 		return
 	FoundDoor.cyclelinkedairlock = src
-	cyclelinkedairlock = FoundDoor				//wasp end
+	cyclelinkedairlock = FoundDoor				//WS end
 
 /obj/machinery/door/airlock/proc/cyclelinkairlock()
 	if (cyclelinkedairlock)
@@ -271,11 +271,11 @@
 /obj/machinery/door/airlock/vv_edit_var(var_name)
 	. = ..()
 	switch (var_name)
-		if ("cyclelinkedx")				//Wasp start
+		if (NAMEOF(src, cyclelinkedx))				//WS start
 			cyclelinkairlock_target()
-		if ("cyclelinkedy")
-			cyclelinkairlock_target()	//Wasp end
-		if ("cyclelinkeddir")
+		if (NAMEOF(src, cyclelinkedy))
+			cyclelinkairlock_target()	//WS end
+		if (NAMEOF(src, cyclelinkeddir))
 			cyclelinkairlock()
 
 /obj/machinery/door/airlock/check_access_ntnet(datum/netdata/data)
@@ -335,7 +335,7 @@
 	if(locked)
 		return
 	locked = TRUE
-	playsound(src,boltDown,30,FALSE,3)
+	playsound(src, boltDown, 30, FALSE, 3, mono_adj = TRUE)
 	audible_message("<span class='hear'>You hear a click from the bottom of the door.</span>", null,  1)
 	update_icon()
 
@@ -346,7 +346,7 @@
 	if(!locked)
 		return
 	locked = FALSE
-	playsound(src,boltUp,30,FALSE,3)
+	playsound(src, boltUp, 30, FALSE, 3, mono_adj = TRUE)
 	audible_message("<span class='hear'>You hear a click from the bottom of the door.</span>", null,  1)
 	update_icon()
 
@@ -424,10 +424,10 @@
 	return FALSE
 
 /obj/machinery/door/airlock/proc/canAIControl(mob/user)
-	return ((aiControlDisabled != 1) && !isAllPowerCut())
+	return ((aiControlDisabled != AI_WIRE_DISABLED) && !isAllPowerCut())
 
 /obj/machinery/door/airlock/proc/canAIHack()
-	return ((aiControlDisabled==1) && (!hackProof) && (!isAllPowerCut()));
+	return ((aiControlDisabled==AI_WIRE_DISABLED) && (!hackProof) && (!isAllPowerCut()));
 
 /obj/machinery/door/airlock/hasPower()
 	return ((!secondsMainPowerLost || !secondsBackupPowerLost) && !(machine_stat & NOPOWER))
@@ -559,12 +559,12 @@
 					lights_overlay = get_airlock_overlay("lights_emergency", overlays_file)
 			if(note)
 				note_overlay = get_airlock_overlay(notetype, note_overlay_file)
-			if(has_hatch && hatch_image)
+			if(has_hatch)
 				if(hatchstate)
-					hatch_image.icon_state = "hatch_open"
+					hatch_overlay = get_airlock_overlay("hatch_open", overlays_file)
 				else
-					hatch_image.icon_state = "hatch_closed"
-				hatch_overlay = hatch_image
+					hatch_overlay = get_airlock_overlay("hatch_closed", overlays_file)
+				hatch_overlay.color = hatch_colour
 
 		if(AIRLOCK_DENY)
 			if(!hasPower())
@@ -588,12 +588,12 @@
 			lights_overlay = get_airlock_overlay("lights_denied", overlays_file)
 			if(note)
 				note_overlay = get_airlock_overlay(notetype, note_overlay_file)
-			if(has_hatch && hatch_image)
+			if(has_hatch)
 				if(hatchstate)
-					hatch_image.icon_state = "hatch_open"
+					hatch_overlay = get_airlock_overlay("hatch_open", overlays_file)
 				else
-					hatch_image.icon_state = "hatch_closed"
-				hatch_overlay = hatch_image
+					hatch_overlay = get_airlock_overlay("hatch_closed", overlays_file)
+				hatch_overlay.color = hatch_colour
 
 		if(AIRLOCK_EMAG)
 			frame_overlay = get_airlock_overlay("closed", icon)
@@ -633,6 +633,7 @@
 				note_overlay = get_airlock_overlay("[notetype]_closing", note_overlay_file)
 			if(has_hatch)
 				hatch_overlay = get_airlock_overlay("hatch_closing", overlays_file)
+				hatch_overlay.color = hatch_colour
 
 		if(AIRLOCK_OPEN)
 			frame_overlay = get_airlock_overlay("open", icon)
@@ -667,6 +668,7 @@
 				note_overlay = get_airlock_overlay("[notetype]_opening", note_overlay_file)
 			if(has_hatch)
 				hatch_overlay = get_airlock_overlay("hatch_opening", overlays_file)
+				hatch_overlay.color = hatch_colour
 
 	cut_overlays()
 	add_overlay(frame_overlay)
@@ -677,8 +679,7 @@
 	add_overlay(sparks_overlay)
 	add_overlay(damag_overlay)
 	add_overlay(note_overlay)
-	if(has_hatch && AIRLOCK_CLOSED)
-		add_overlay(hatch_overlay)
+	add_overlay(hatch_overlay)
 	check_unres()
 
 /proc/get_airlock_overlay(icon_state, icon_file)
@@ -688,12 +689,6 @@
 	var/iconkey = "[icon_state][icon_file]"
 	if((!(. = airlock_overlays[iconkey])))
 		. = airlock_overlays[iconkey] = mutable_appearance(icon_file, icon_state)
-
-/obj/machinery/door/airlock/CanPass(atom/movable/mover, turf/target)
-	. = ..()
-	if(density && has_hatch && (mover.pass_flags & PASSDOORHATCH))
-		open_hatch(mover)
-		return TRUE //If this airlock is closed, has hatches, and this creature can go through hatches, then we let it through without opening the airlock
 
 /obj/machinery/door/airlock/proc/check_unres() //unrestricted sides. This overlay indicates which directions the player can access even without an ID
 	if(hasPower() && unres_sides)
@@ -729,7 +724,7 @@
 		if("deny")
 			if(!machine_stat)
 				update_icon(AIRLOCK_DENY)
-				playsound(src,doorDeni,50,FALSE,3)
+				playsound(src, doorDeni, 50, FALSE, 3, mono_adj = TRUE)
 				sleep(6)
 				update_icon(AIRLOCK_CLOSED)
 
@@ -827,7 +822,7 @@
 		to_chat(user, "<span class='notice'>Transfer complete. Forcing airlock to execute program.</span>")
 		sleep(50)
 		//disable blocked control
-		aiControlDisabled = 2
+		aiControlDisabled = AI_WIRE_HACKED
 		to_chat(user, "<span class='notice'>Receiving control information from airlock.</span>")
 		sleep(10)
 		//bring up airlock dialog
@@ -844,6 +839,12 @@
 	return attack_hand(user)
 
 /obj/machinery/door/airlock/attack_hand(mob/user)
+	if(user.a_intent == INTENT_GRAB && note) //WS edit - Grabbing notes off doors
+		user.visible_message("<span class='notice'>[user] grabs [note] from [src].</span>", "<span class='notice'>You remove [note] from [src].</span>")
+		user.put_in_hands(note)
+		note = null
+		update_icon() //WS end
+		return TRUE
 	if(locked && allowed(user) && aac)
 		aac.request_from_door(src)
 		. = TRUE
@@ -1125,7 +1126,7 @@
 
 			if(!prying_so_hard)
 				var/time_to_open = 50
-				playsound(src, 'sound/machines/airlock_alien_prying.ogg', 100, TRUE) //is it aliens or just the CE being a dick?
+				playsound(src, 'sound/machines/airlock_alien_prying.ogg', 100, TRUE, mono_adj = TRUE) //is it aliens or just the CE being a dick?
 				prying_so_hard = TRUE
 				if(do_after(user, time_to_open, TRUE, src))
 					open(2)
@@ -1155,11 +1156,11 @@
 		if(obj_flags & EMAGGED)
 			return FALSE
 		use_power(50)
-		playsound(src, doorOpen, 30, TRUE)
+		playsound(src, doorOpen, 30, TRUE, mono_adj = TRUE)
 		if(closeOther != null && istype(closeOther, /obj/machinery/door/airlock/) && !closeOther.density)
 			closeOther.close()
 	else
-		playsound(src, 'sound/machines/airlockforced.ogg', 30, TRUE)
+		playsound(src, 'sound/machines/airlockforced.ogg', 30, TRUE, mono_adj = TRUE)
 
 	if(autoclose)
 		autoclose_in(normalspeed ? 150 : 15)
@@ -1203,9 +1204,9 @@
 		if(obj_flags & EMAGGED)
 			return
 		use_power(50)
-		playsound(src, doorClose, 30, TRUE)
+		playsound(src, doorClose, 30, TRUE, mono_adj = TRUE)
 	else
-		playsound(src, 'sound/machines/airlockforced.ogg', 30, TRUE)
+		playsound(src, 'sound/machines/airlockforced.ogg', 30, TRUE, mono_adj = TRUE)
 
 	var/obj/structure/window/killthis = (locate(/obj/structure/window) in get_turf(src))
 	if(killthis)
@@ -1312,7 +1313,7 @@
 	var/time_to_open = 5 //half a second
 	if(hasPower())
 		time_to_open = 5 SECONDS //Powered airlocks take longer to open, and are loud.
-		playsound(src, 'sound/machines/airlock_alien_prying.ogg', 100, TRUE)
+		playsound(src, 'sound/machines/airlock_alien_prying.ogg', 100, TRUE, mono_adj = TRUE)
 
 
 	if(do_after(user, time_to_open, TRUE, src))
@@ -1341,6 +1342,8 @@
 
 
 /obj/machinery/door/airlock/proc/on_break()
+	SIGNAL_HANDLER
+
 	if(!panel_open)
 		panel_open = TRUE
 	wires.cut_all()
@@ -1379,7 +1382,7 @@
 			A = new /obj/structure/door_assembly(loc)
 			//If you come across a null assemblytype, it will produce the default assembly instead of disintegrating.
 		A.heat_proof_finished = heat_proof //tracks whether there's rglass in
-		A.setAnchored(TRUE)
+		A.set_anchored(TRUE)
 		A.glass = glass
 		A.state = AIRLOCK_ASSEMBLY_NEEDS_ELECTRONICS
 		A.created_name = name
@@ -1481,8 +1484,10 @@
 	return data
 
 /obj/machinery/door/airlock/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
+
 	if(!user_allowed(usr))
 		return
 	switch(action)

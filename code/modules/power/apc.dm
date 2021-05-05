@@ -38,6 +38,11 @@
 #define APC_CHARGING 1
 #define APC_FULLY_CHARGED 2
 
+//WS Begin -- Ethereal Charge Scaling
+#define APC_DRAIN_TIME 75
+#define APC_POWER_GAIN (10 * ETHEREAL_CHARGE_SCALING_MULTIPLIER)
+//WS End
+
 // the Area Power Controller (APC), formerly Power Distribution Unit (PDU)
 // one per area, needs wire connection to power network through a terminal
 
@@ -93,8 +98,8 @@
 	var/main_status = 0
 	powernet = 0		// set so that APCs aren't found as powernet nodes //Hackish, Horrible, was like this before I changed it :(
 	var/malfhack = 0 //New var for my changes to AI malf. --NeoFite
-	var/malfhackhide = 0 // WaspStation Edit - Malf AI Rework
-	var/malfhackhidecooldown = 0 // WaspStation Edit - Malf AI Rework
+	var/malfhackhide = 0 //WS Edit - Malf AI Rework
+	var/malfhackhidecooldown = 0 //WS Edit - Malf AI Rework
 	var/mob/living/silicon/ai/malfai = null //See above --NeoFite
 	var/has_electronics = APC_ELECTRONICS_MISSING // 0 - none, 1 - plugged in, 2 - secured by screwdriver
 	var/overload = 1 //used for the Blackout malf module
@@ -342,14 +347,14 @@
 	if(update_state & UPSTATE_ALLGOOD)
 		switch(charging)
 			if(APC_NOT_CHARGING)
-				light_color = LIGHT_COLOR_RED
+				set_light_color(COLOR_SOFT_RED)
 			if(APC_CHARGING)
-				light_color = LIGHT_COLOR_BLUE
+				set_light_color(LIGHT_COLOR_BLUE)
 			if(APC_FULLY_CHARGED)
-				light_color = LIGHT_COLOR_GREEN
+				set_light_color(LIGHT_COLOR_GREEN)
 		set_light(lon_range)
 	else if(update_state & UPSTATE_BLUESCREEN)
-		light_color = LIGHT_COLOR_BLUE
+		set_light_color(LIGHT_COLOR_BLUE)
 		set_light(lon_range)
 	else
 		set_light(0)
@@ -373,7 +378,7 @@
 			update_state |= UPSTATE_OPENED1
 		if(opened==APC_COVER_REMOVED)
 			update_state |= UPSTATE_OPENED2
-	// WaspStation Edit - Malf AI Rework
+	//WS Edit - Malf AI Rework
 	else if((obj_flags & EMAGGED))
 		update_state |= UPSTATE_BLUESCREEN
 	else if(malfai)
@@ -381,7 +386,7 @@
 			update_state |= UPSTATE_ALLGOOD
 		else
 			update_state |= UPSTATE_BLUESCREEN
-	// End WaspStation Edit - Malf AI Rework
+	// EndWS Edit - Malf AI Rework
 	else if(panel_open)
 		update_state |= UPSTATE_WIREEXP
 	if(update_state <= 1)
@@ -810,51 +815,54 @@
 	if(.)
 		return
 
+	//WS Begin -- Ethereal Charge Scaling
 	if(isethereal(user))
 		var/mob/living/carbon/human/H = user
 		var/datum/species/ethereal/E = H.dna.species
+		var/charge_limit = ETHEREAL_CHARGE_DANGEROUS - APC_POWER_GAIN
 		if((H.a_intent == INTENT_HARM) && (E.drain_time < world.time))
-			if(cell.charge <= (cell.maxcharge / 2)) // if charge is under 50% you shouldnt drain it
-				to_chat(H, "<span class='warning'>The APC doesn't have much power, you probably shouldn't drain any.</span>")
+			if(cell.charge <= (cell.maxcharge / 2)) // ethereals can't drain APCs under half charge, this is so that they are forced to look to alternative power sources if the station is running low
+				to_chat(H, "<span class='warning'>The APC's syphon safeties prevent you from draining power!</span>")
 				return
 			var/obj/item/organ/stomach/ethereal/stomach = H.getorganslot(ORGAN_SLOT_STOMACH)
-			if(stomach.crystal_charge > 145)
+			if(stomach.crystal_charge > charge_limit)
 				to_chat(H, "<span class='warning'>Your charge is full!</span>")
 				return
-			E.drain_time = world.time + 75
+			E.drain_time = world.time + APC_DRAIN_TIME
 			to_chat(H, "<span class='notice'>You start channeling some power through the APC into your body.</span>")
-			while(do_after(user, 75, target = src)) //Wasp edit
-				E.drain_time = world.time + 75 //Wasp edit
-				if(cell.charge <= (cell.maxcharge / 2) || (stomach.crystal_charge > 145))
+			while(do_after(user, APC_DRAIN_TIME, target = src)) //WS edit
+				E.drain_time = world.time + APC_DRAIN_TIME //WS edit
+				if(cell.charge <= (cell.maxcharge / 2) || (stomach.crystal_charge > charge_limit))
 					return
 				if(istype(stomach))
 					to_chat(H, "<span class='notice'>You receive some charge from the APC.</span>")
-					stomach.adjust_charge(10)
-					cell.charge -= 10
+					stomach.adjust_charge(APC_POWER_GAIN)
+					cell.charge -= APC_POWER_GAIN
 				else
 					to_chat(H, "<span class='warning'>You can't receive charge from the APC!</span>")
 			return
 		if((H.a_intent == INTENT_GRAB) && (E.drain_time < world.time))
-			if(cell.charge == cell.maxcharge)
+			if(cell.charge >= cell.maxcharge - APC_POWER_GAIN)
 				to_chat(H, "<span class='warning'>The APC is full!</span>")
 				return
 			var/obj/item/organ/stomach/ethereal/stomach = H.getorganslot(ORGAN_SLOT_STOMACH)
-			if(stomach.crystal_charge < 10)
+			if(stomach.crystal_charge < APC_POWER_GAIN)
 				to_chat(H, "<span class='warning'>Your charge is too low!</span>")
 				return
-			E.drain_time = world.time + 75
+			E.drain_time = world.time + APC_DRAIN_TIME
 			to_chat(H, "<span class='notice'>You start channeling power through your body into the APC.</span>")
-			while(do_after(user, 75, target = src)) //Wasp edit
-				E.drain_time = world.time + 75 //Wasp edit
-				if(cell.charge == cell.maxcharge || (stomach.crystal_charge < 10))
+			while(do_after(user, APC_DRAIN_TIME, target = src)) //WS edit
+				E.drain_time = world.time + APC_DRAIN_TIME //WS edit
+				if(cell.charge >= (cell.maxcharge - APC_POWER_GAIN) || (stomach.crystal_charge < APC_POWER_GAIN))
 					return
 				if(istype(stomach))
 					to_chat(H, "<span class='notice'>You transfer some power to the APC.</span>")
-					stomach.adjust_charge(-10)
-					cell.charge += 10
+					stomach.adjust_charge(-APC_POWER_GAIN)
+					cell.charge += APC_POWER_GAIN
 				else
 					to_chat(H, "<span class='warning'>You can't transfer power to the APC!</span>")
 			return
+	//WS End
 
 	if(opened && (!issilicon(user)))
 		if(cell)
@@ -985,7 +993,9 @@
 		. = UI_INTERACTIVE
 
 /obj/machinery/power/apc/ui_act(action, params)
-	if(..() || !can_use(usr, 1) || (locked && !usr.has_unlimited_silicon_privilege && !failure_timer && action != "toggle_nightshift"))
+	. = ..()
+
+	if(. || !can_use(usr, 1) || (locked && !usr.has_unlimited_silicon_privilege && !failure_timer && action != "toggle_nightshift"))
 		return
 	switch(action)
 		if("lock")
@@ -1038,9 +1048,9 @@
 		if("deoccupy")
 			if(get_malf_status(usr))
 				malfvacate()
-		if("hide_hack") // WaspStation Edit - Malf AI Rework
+		if("hide_hack") //WS Edit - Malf AI Rework
 			if(get_malf_status(usr))
-				malfhidehack(usr) //End WaspStation Edit - Malf AI Rework
+				malfhidehack(usr) //EndWS Edit - Malf AI Rework
 		if("reboot")
 			failure_timer = 0
 			update_icon()
@@ -1069,7 +1079,7 @@
 	if(get_malf_status(malf) != 1)
 		return
 	if(malf.malfhacking)
-		to_chat(malf, "<span class='warning'>You are already hacking or masking an APC!</span>") // WaspStation Edit - Malf AI Rework
+		to_chat(malf, "<span class='warning'>You are already hacking or masking an APC!</span>") //WS Edit - Malf AI Rework
 		return
 	to_chat(malf, "<span class='notice'>Beginning override of APC systems. This takes some time, and you cannot perform other actions during the process.</span>")
 	malf.malfhack = src
@@ -1079,7 +1089,7 @@
 	A = malf.throw_alert("hackingapc", /obj/screen/alert/hackingapc)
 	A.target = src
 
-// WaspStation Edit - Malf AI Rework
+//WS Edit - Malf AI Rework
 /obj/machinery/power/apc/proc/malfhidehack(mob/living/silicon/ai/malf)
 	if(!istype(malf))
 		return
@@ -1122,7 +1132,7 @@
 	malfhackhidecooldown = 0
 	to_chat(malf, "<span class='notice'>The [src.area.name] APC has recovered from your masking and has returned to normal operating status.</span>" )
 
-// End WaspStation Edit - Malf AI Rework
+// EndWS Edit - Malf AI Rework
 
 /obj/machinery/power/apc/proc/malfoccupy(mob/living/silicon/ai/malf)
 	if(!istype(malf))
@@ -1529,6 +1539,11 @@
 #undef APC_NOT_CHARGING
 #undef APC_CHARGING
 #undef APC_FULLY_CHARGED
+
+//WS Begin -- Ethereal Charge Scaling
+#undef APC_DRAIN_TIME
+#undef APC_POWER_GAIN
+//WS End
 
 //update_overlay
 #undef APC_UPOVERLAY_CHARGEING0

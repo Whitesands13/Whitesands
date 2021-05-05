@@ -49,8 +49,10 @@
 		ui.open()
 
 /obj/machinery/computer/sat_control/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
+
 	switch(action)
 		if("toggle")
 			toggle(text2num(params["id"]))
@@ -102,6 +104,19 @@
 /obj/machinery/satellite/interact(mob/user)
 	toggle(user)
 
+/obj/machinery/satellite/set_anchored(anchorvalue)
+	. = ..()
+	if(isnull(.))
+		return //no need to process if we didn't change anything.
+	active = anchorvalue
+	if(anchorvalue)
+		begin_processing()
+		animate(src, pixel_y = 2, time = 10, loop = -1)
+	else
+		end_processing()
+		animate(src, pixel_y = 0, time = 10)
+	update_icon()
+
 /obj/machinery/satellite/proc/toggle(mob/user)
 	if(!active && !isinspace())
 		if(user)
@@ -109,16 +124,7 @@
 		return FALSE
 	if(user)
 		to_chat(user, "<span class='notice'>You [active ? "deactivate": "activate"] [src].</span>")
-	active = !active
-	if(active)
-		begin_processing()
-		animate(src, pixel_y = 2, time = 10, loop = -1)
-		anchored = TRUE
-	else
-		end_processing()
-		animate(src, pixel_y = 0, time = 10)
-		anchored = FALSE
-	update_icon()
+	set_anchored(!anchored)
 
 /obj/machinery/satellite/update_icon_state()
 	icon_state = active ? "sat_active" : "sat_inactive"

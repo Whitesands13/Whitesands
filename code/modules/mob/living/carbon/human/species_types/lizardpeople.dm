@@ -23,7 +23,7 @@
 	liked_food = GROSS | MEAT
 	inert_mutation = FIREBREATH
 	deathsound = 'sound/voice/lizard/deathsound.ogg'
-	wings_icon = "Dragon"
+	wings_icons = list("Dragon")
 	species_language_holder = /datum/language_holder/lizard
 	// Lizards are coldblooded and can stand a greater temperature range than humans
 	bodytemp_heat_damage_limit = (BODYTEMP_HEAT_DAMAGE_LIMIT + 20) // This puts lizards 10 above lavaland max heat for ash lizards.
@@ -89,3 +89,17 @@
 	species_traits = list(MUTCOLORS,EYECOLOR,LIPS,DIGITIGRADE)
 	inherent_traits = list(TRAIT_CHUNKYFINGERS,TRAIT_NOBREATH)
 	species_language_holder = /datum/language_holder/lizard/ash
+//WS Edit Start - Kobold
+//Ashwalker subspecies: KOBOLD
+/datum/species/lizard/ashwalker/kobold
+	name = "Kobold"
+	id = "kobold"
+	limbs_id = "lizard"
+	species_traits = list(MUTCOLORS,EYECOLOR,LIPS,DIGITIGRADE)
+	inherent_traits = list(TRAIT_CHUNKYFINGERS,TRAIT_NOBREATH)
+	species_language_holder = /datum/language_holder/lizard/ash
+
+/datum/species/lizard/ashwalker/kobold/on_species_gain(mob/living/carbon/C, datum/species/old_species, pref_load)
+  . = ..() //call everything from species/on_species_gain()
+  C.dna.add_mutation(DWARFISM)
+//WS Edit End - Kobold

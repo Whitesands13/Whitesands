@@ -37,18 +37,14 @@
 
 	vis_flags = VIS_INHERIT_PLANE //when this be added to vis_contents of something it inherit something.plane, important for visualisation of obj in openspace.
 
+	FASTDMM_PROP(\
+		pinned_vars = list("name", "dir")\
+	)
+
 /obj/vv_edit_var(vname, vval)
-	switch(vname)
-		if("anchored")
-			setAnchored(vval)
-			return TRUE
-		if("obj_flags")
-			if ((obj_flags & DANGEROUS_POSSESSION) && !(vval & DANGEROUS_POSSESSION))
-				return FALSE
-		if("control_object")
-			var/obj/O = vval
-			if(istype(O) && (O.obj_flags & DANGEROUS_POSSESSION))
-				return FALSE
+	if(vname == NAMEOF(src, obj_flags))
+		if ((obj_flags & DANGEROUS_POSSESSION) && !(vval & DANGEROUS_POSSESSION))
+			return FALSE
 	return ..()
 
 /obj/Initialize()
@@ -76,15 +72,17 @@
 		var/turf/T = loc
 		T.add_blueprints_preround(src)
 
+	for(var/i = 1; i < SStextobfs.obf_string_list.len + 1; i++)
+		if(src.name == SStextobfs.obf_string_list[i][4])
+			src.name = SStextobfs.obf_string_list[i][1]
+			break
+
 /obj/Destroy(force=FALSE)
 	if(!ismachinery(src))
 		STOP_PROCESSING(SSobj, src) // TODO: Have a processing bitflag to reduce on unnecessary loops through the processing lists
 	SStgui.close_uis(src)
 	. = ..()
 
-/obj/proc/setAnchored(anchorvalue)
-	SEND_SIGNAL(src, COMSIG_OBJ_SETANCHORED, anchorvalue)
-	anchored = anchorvalue
 
 /obj/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force, gentle = FALSE, quickstart = TRUE)
 	..()
@@ -175,9 +173,6 @@
 	if(.)
 		return
 	ui_interact(user)
-
-/obj/proc/container_resist(mob/living/user)
-	return
 
 /mob/proc/unset_machine()
 	if(machine)

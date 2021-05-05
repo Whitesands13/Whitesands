@@ -4,7 +4,12 @@
 #define ALL (~0) //For convenience.
 #define NONE 0
 
+
 GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768))
+
+/* Directions */
+///All the cardinal direction bitflags.
+#define ALL_CARDINALS (NORTH|SOUTH|EAST|WEST)
 
 // for /datum/var/datum_flags
 #define DF_USE_TAG		(1<<0)
@@ -55,6 +60,30 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define NO_LAVA_GEN_1				(1<<6)
 /// Blocks ruins spawning on the turf
 #define NO_RUINS_1					(1<<10)
+
+////////////////Area flags\\\\\\\\\\\\\\
+/// If it's a valid territory for cult summoning or the CRAB-17 phone to spawn
+#define VALID_TERRITORY				(1<<0)
+/// If blobs can spawn there and if it counts towards their score.
+#define BLOBS_ALLOWED				(1<<1)
+/// If mining tunnel generation is allowed in this area
+#define CAVES_ALLOWED				(1<<2)
+/// If flora are allowed to spawn in this area randomly through tunnel generation
+#define FLORA_ALLOWED				(1<<3)
+/// If mobs can be spawned by natural random generation
+#define MOB_SPAWN_ALLOWED			(1<<4)
+/// If megafauna can be spawned by natural random generation
+#define MEGAFAUNA_SPAWN_ALLOWED		(1<<5)
+/// Are you forbidden from teleporting to the area? (centcom, mobs, wizard, hand teleporter)
+#define NOTELEPORT					(1<<6)
+/// Hides area from player Teleport function.
+#define HIDDEN_AREA					(1<<7)
+/// If false, loading multiple maps with this area type will create multiple instances.
+#define UNIQUE_AREA					(1<<8)
+/// If people are allowed to suicide in it. Mostly for OOC stuff like minigames
+#define BLOCK_SUICIDE				(1<<9)
+/// Can the Xenobio management console transverse this area by default?
+#define XENOBIOLOGY_COMPATIBLE		(1<<10)
 
 /*
 	These defines are used specifically with the atom/pass_flags bitmask
@@ -126,7 +155,6 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define MOBILITY_PULL			(1<<6)
 
 #define MOBILITY_FLAGS_DEFAULT (MOBILITY_MOVE | MOBILITY_STAND | MOBILITY_PICKUP | MOBILITY_USE | MOBILITY_UI | MOBILITY_STORAGE | MOBILITY_PULL)
-#define MOBILITY_FLAGS_INTERACTION (MOBILITY_USE | MOBILITY_PICKUP | MOBILITY_UI | MOBILITY_STORAGE)
 
 //alternate appearance flags
 #define AA_TARGET_SEE_APPEARANCE (1<<0)
@@ -146,3 +174,20 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 		REMOVE_TRAIT(x, TRAIT_KEEP_TOGETHER, KEEP_TOGETHER_ORIGINAL);\
 	else if(!HAS_TRAIT(x, TRAIT_KEEP_TOGETHER))\
 	 	x.appearance_flags &= ~KEEP_TOGETHER
+
+//dir macros
+///Returns true if the dir is diagonal, false otherwise
+#define ISDIAGONALDIR(d) (d&(d-1))
+///True if the dir is north or south, false therwise
+#define NSCOMPONENT(d)   (d&(NORTH|SOUTH))
+///True if the dir is east/west, false otherwise
+#define EWCOMPONENT(d)   (d&(EAST|WEST))
+///Flips the dir for north/south directions
+#define NSDIRFLIP(d)     (d^(NORTH|SOUTH))
+///Flips the dir for east/west directions
+#define EWDIRFLIP(d)     (d^(EAST|WEST))
+///Turns the dir by 180 degrees
+#define DIRFLIP(d)       turn(d, 180)
+
+/// 33554431 (2^24 - 1) is the maximum value our bitflags can reach.
+#define MAX_BITFLAG_DIGITS 8

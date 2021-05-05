@@ -1,11 +1,11 @@
+import { Fragment } from 'inferno';
 import { filter, sortBy } from 'common/collections';
 import { flow } from 'common/fp';
 import { classes } from 'common/react';
 import { createSearch } from 'common/string';
-import { Fragment } from 'inferno';
 import { useBackend, useLocalState } from '../backend';
-import { Button, ByondUi, Input, Section } from '../components';
-import { refocusLayout, Window } from '../layouts';
+import { Button, ByondUi, Flex, Input, Section } from '../components';
+import { Window } from '../layouts';
 
 /**
  * Returns previous and next camera names relative to the currently
@@ -42,7 +42,7 @@ const selectCameras = (cameras, searchText = '') => {
 };
 
 export const CameraConsole = (props, context) => {
-  const { act, data, config } = useBackend(context);
+  const { act, data } = useBackend(context);
   const { mapRef, activeCamera } = data;
   const cameras = selectCameras(data.cameras);
   const [
@@ -122,12 +122,9 @@ export const CameraConsoleContent = (props, context) => {
                 && camera.name === activeCamera.name
                 && 'Button--selected',
             ])}
-            onClick={() => {
-              refocusLayout();
-              act('switch_camera', {
-                name: camera.name,
-              });
-            }}>
+            onClick={() => act('switch_camera', {
+              name: camera.name,
+            })}>
             {camera.name}
           </div>
         ))}

@@ -14,7 +14,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 	/turf/open/chasm,
 	/turf/open/lava,
 	/turf/open/water,
-	/turf/open/openspace
+	/turf/open/transparent/openspace
 	)))
 
 #define isgroundlessturf(A) (is_type_in_typecache(A, GLOB.turfs_without_ground))
@@ -40,6 +40,8 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define ischasm(A) (istype(A, /turf/open/chasm))
 
 #define isplatingturf(A) (istype(A, /turf/open/floor/plating))
+
+#define istransparentturf(A) (istype(A, /turf/open/transparent))
 
 //Mobs
 #define isliving(A) (istype(A, /mob/living))
@@ -70,11 +72,11 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define isvampire(A) (is_species(A,/datum/species/vampire))
 #define isdullahan(A) (is_species(A, /datum/species/dullahan))
 
-//WaspStation Begin - Custom Species
+//WS Begin - Custom Species
 #define issquidperson(A) (is_species(A, /datum/species/squid))
 #define isipc(A) (is_species(A, /datum/species/ipc))
 #define isspiderperson(A) (is_species(A, /datum/species/spider))
-//WaspStation End
+//WS End
 
 //more carbon mobs
 #define ismonkey(A) (istype(A, /mob/living/carbon/monkey))
@@ -141,11 +143,11 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 
 #define isclown(A) (istype(A, /mob/living/simple_animal/hostile/retaliate/clown))
 
-//Waspstation Begin - Custom Simplemobs
+//WS Begin - Custom Simplemobs
 
 #define isborer(A) (istype(A, /mob/living/simple_animal/borer))
 
-//Wasp end
+//WS end
 
 //Misc mobs
 #define isobserver(A) (istype(A, /mob/dead/observer))
@@ -179,7 +181,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 
 #define ismecha(A) (istype(A, /obj/mecha))
 
-#define is_cleanable(A) (istype(A, /obj/effect/decal/cleanable) || istype(A, /obj/effect/rune)) //if something is cleanable
+#define ismopable(A) (A.layer <= HIGH_SIGIL_LAYER) //If something can be cleaned by floor-cleaning devices such as mops or clean bots
 
 #define isorgan(A) (istype(A, /obj/item/organ))
 
@@ -226,6 +228,13 @@ GLOBAL_LIST_INIT(glass_sheet_types, typecacheof(list(
 
 #define isshuttleturf(T) (length(T.baseturfs) && (/turf/baseturf_skipover/shuttle in T.baseturfs))
 
-//Wasp Begin
+//WS Begin
 #define isspacepod(A) (istype(A, /obj/spacepod))
-//Wasp End
+//WS End
+
+#define isbook(O) (is_type_in_typecache(O, GLOB.book_types))
+
+GLOBAL_LIST_INIT(book_types, typecacheof(list(
+	/obj/item/book,
+	/obj/item/spellbook,
+	/obj/item/storage/book)))

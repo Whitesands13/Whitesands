@@ -37,7 +37,6 @@
 		//To add a new minor reward, add it here.
 		/obj/item/stack/circuit_stack/full,
 		/obj/item/pen/survival,
-		/obj/item/circuitboard/machine/sleeper/party,
 		/obj/item/toy/sprayoncan,
 	)
 	var/static/list/item_list = list()
@@ -233,7 +232,8 @@
 	return data
 
 /obj/machinery/rnd/bepis/ui_act(action,params)
-	if(..())
+	. = ..()
+	if(.)
 		return
 	switch(action)
 		if("deposit_cash")

@@ -95,7 +95,7 @@ GLOBAL_LIST_INIT(uplink_items, subtypesof(/datum/uplink_item))
 	var/refund_amount = 0 // specified refund amount in case there needs to be a TC penalty for refunds.
 	var/refundable = FALSE
 	var/surplus = 100 // Chance of being included in the surplus crate.
-	var/surplus_nullcrates // Chance of being included in null crates. null = pull from surplus. WaspStation Edit
+	var/surplus_nullcrates // Chance of being included in null crates. null = pull from surplus. WS Edit
 	var/cant_discount = FALSE
 	var/limited_stock = -1 //Setting this above zero limits how many times this item can be bought by the same traitor in a round, -1 is unlimited
 	var/list/include_modes = list() // Game modes to allow this item in.
@@ -107,12 +107,12 @@ GLOBAL_LIST_INIT(uplink_items, subtypesof(/datum/uplink_item))
 	var/list/restricted_species //Limits items to a specific species. Hopefully.
 	var/illegal_tech = TRUE // Can this item be deconstructed to unlock certain techweb research nodes?
 
-//WaspStation Begin - NULLcrates
+//WS Begin - NULLcrates
 /datum/uplink_item/New()
 	. = ..()
 	if(isnull(surplus_nullcrates))
 		surplus_nullcrates = surplus
-//WaspStation End
+//WS End
 
 /datum/uplink_item/proc/get_discount()
 	return pick(4;0.75,2;0.5,1;0.25)
@@ -603,15 +603,6 @@ GLOBAL_LIST_INIT(uplink_items, subtypesof(/datum/uplink_item))
 	cost = 4
 	surplus = 50
 
-/datum/uplink_item/stealthy_weapons/fuckyouinator
-	name = "L666 FUCKYOUINATOR"
-	desc = "A heavily modified L6 SAW. \
-			This literal WMD has a massive 5000-round magazine of devastating special splitting L666 .50 caliber ammunition. \
-			It has a firerate so high that it is considered unethical even for most syndicate agents, as nobody will survive it."
-	item = /obj/item/gun/ballistic/automatic/l666
-	cost = 1000
-	cant_discount = TRUE
-
 /datum/uplink_item/stealthy_weapons/dehy_carp
 	name = "Dehydrated Space Carp"
 	desc = "Looks like a plush toy carp, but just add water and it becomes a real-life space carp! Activate in \
@@ -694,7 +685,7 @@ GLOBAL_LIST_INIT(uplink_items, subtypesof(/datum/uplink_item))
 /datum/uplink_item/stealthy_weapons/holster
 	name = "Syndicate Holster"
 	desc = "A useful little device that allows for inconspicuous carrying of guns using chameleon technology. It also allows for badass gun-spinning."
-	item = /obj/item/clothing/accessory/holster/chameleon // WaspStation Edit - Holsters are Accessories
+	item = /obj/item/clothing/accessory/holster/chameleon //WS Edit - Holsters are Accessories
 	cost = 1
 
 // Ammunition
@@ -1394,7 +1385,7 @@ GLOBAL_LIST_INIT(uplink_items, subtypesof(/datum/uplink_item))
 	item = /obj/item/disk/nuclear/fake
 	cost = 1
 	surplus = 1
-	surplus_nullcrates = 0 // WaspStation Edit - NULLcrates
+	surplus_nullcrates = 0 //WS Edit - NULLcrates
 
 /datum/uplink_item/device_tools/frame
 	name = "F.R.A.M.E. PDA Cartridge"
@@ -1408,7 +1399,7 @@ GLOBAL_LIST_INIT(uplink_items, subtypesof(/datum/uplink_item))
 
 /datum/uplink_item/device_tools/failsafe
 	name = "Failsafe Uplink Code"
-	desc = "When entered the uplink will self-destruct immediately."
+	desc = "When entered the uplink will self-destruct immediately, taking whoever punches the code in with it in an explosion." //WS edit - more descriptive failsafe
 	item = /obj/effect/gibspawner/generic
 	cost = 1
 	surplus = 0
@@ -1679,13 +1670,13 @@ GLOBAL_LIST_INIT(uplink_items, subtypesof(/datum/uplink_item))
 	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 	surplus = 0
 
-/datum/uplink_item/race_restricted/syndilamp
+/datum/uplink_item/race_restricted/syndilamp //WS edit - LepiCorp stuff
 	name = "Extra-Bright Lantern"
 	desc = "We heard that moths such as yourself really like lamps, so we decided to grant you early access to a prototype \
-	Syndicate brand \"Extra-Bright Lantern™\". Enjoy."
-	cost = 2
+	LepiCorp-brand \"Extra-Bright Lantern™\". Enjoy."
+	cost = 1
 	item = /obj/item/flashlight/lantern/syndicate
-	restricted_species = list("moth")
+	restricted_species = list("moth") //End WS edit
 
 /datum/uplink_item/race_restricted/syndigenetics
 	name = "Fire Breath"
@@ -1986,7 +1977,7 @@ GLOBAL_LIST_INIT(uplink_items, subtypesof(/datum/uplink_item))
 	item = /obj/item/toy/cards/deck/syndicate
 	cost = 1
 	surplus = 40
-	surplus_nullcrates = 0 //WaspStation Edit - NULLcrates
+	surplus_nullcrates = 0 //WS Edit - NULLcrates
 
 /datum/uplink_item/badass/syndiecigs
 	name = "Syndicate Smokes"

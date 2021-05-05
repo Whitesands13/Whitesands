@@ -27,7 +27,7 @@ GLOBAL_LIST_EMPTY(req_console_ckey_departments)
 /obj/machinery/requests_console
 	name = "requests console"
 	desc = "A console intended to send requests to different departments on the station."
-	icon = 'waspstation/icons/obj/terminals.dmi' //WaspStation Edit - Better Icons
+	icon = 'whitesands/icons/obj/terminals.dmi' //WS Edit - Better Icons
 	icon_state = "req_comp0"
 	var/department = "Unknown" //The list of all departments on the station (Determined from this variable on each unit) Set this to the same thing if you want several consoles in one department
 	var/list/messages = list() //List of all messages
@@ -68,6 +68,14 @@ GLOBAL_LIST_EMPTY(req_console_ckey_departments)
 	var/receive_ore_updates = FALSE //If ore redemption machines will send an update when it receives new ores.
 	max_integrity = 300
 	armor = list("melee" = 70, "bullet" = 30, "laser" = 30, "energy" = 30, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 90, "acid" = 90)
+
+	FASTDMM_PROP(\
+		set_instance_vars(\
+			pixel_x = dir & EAST ? 32 : (dir & WEST ? -32 : INSTANCE_VAR_DEFAULT),\
+			pixel_y = dir & NORTH ? 32 : (dir & SOUTH ? -32 : INSTANCE_VAR_DEFAULT)\
+		),\
+		dir_amount = 8\
+    )
 
 /obj/machinery/requests_console/update_icon_state()
 	if(machine_stat & NOPOWER)
@@ -211,7 +219,6 @@ GLOBAL_LIST_EMPTY(req_console_ckey_departments)
 			CRASH("No UI for src. Screen var is: [screen]")
 		var/datum/browser/popup = new(user, "req_console", "[department] Requests Console", 450, 440)
 		popup.set_content(dat)
-		popup.set_title_image(user.browse_rsc_icon(src.icon, src.icon_state))
 		popup.open()
 	return
 
@@ -343,7 +350,7 @@ GLOBAL_LIST_EMPTY(req_console_ckey_departments)
 
 	updateUsrDialog()
 
-/obj/machinery/requests_console/say_mod(input, message_mode)
+/obj/machinery/requests_console/say_mod(input, list/message_mods = list())
 	if(spantext_char(input, "!", -3))
 		return "blares"
 	else

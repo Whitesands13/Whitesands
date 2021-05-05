@@ -5,7 +5,7 @@
 //  - Camera jack
 
 
-/mob/living/silicon/pai/var/list/available_software = list( // Waspstation -- idk what to do about removing code so i'm just putting this note here to say, removes messanger and manifest, thet get it for free now
+/mob/living/silicon/pai/var/list/available_software = list( //WS -- idk what to do about removing code so i'm just putting this note here to say, removes messanger and manifest, thet get it for free now
 															//Nightvision
 															//T-Ray
 															//radiation eyes
@@ -89,7 +89,7 @@
 			<head>
 				<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
 				<style type=\"text/css\">
-					body { background-image:url('html/paigrid.png'); }
+					body { background-image:url('[SSassets.transport.get_asset_url("paigrid.png")]'); }
 
 					#header { text-align:center; color:white; font-size: 30px; height: 35px; width: 100%; letter-spacing: 2px; z-index: 5}
 					#content {position: relative; left: 10px; height: 400px; width: 100%; z-index: 0}
@@ -296,8 +296,6 @@
 			if("loudness")
 				if(subscreen == 1) // Open Instrument
 					internal_instrument.interact(src)
-				if(subscreen == 2) // Change Instrument type
-					internal_instrument.selectInstrument()
 
 		paiInterface()
 
@@ -311,8 +309,8 @@
 	dat += "<A href='byond://?src=[REF(src)];software=directives'>Directives</A><br>"
 	dat += "<A href='byond://?src=[REF(src)];software=radio;sub=0'>Radio Configuration</A><br>"
 	dat += "<A href='byond://?src=[REF(src)];software=image'>Screen Display</A><br>"
-	dat += "<a href='byond://?src=[REF(src)];software=pdamessage;sub=0'>Digital Messenger</a> <br>" // Waspstation Start -- pAIs get messanger and manifest for free
-	dat += "<a href='byond://?src=[REF(src)];software=manifest;sub=0'>Crew Manifest</a> <br>" // WaspStation end
+	dat += "<a href='byond://?src=[REF(src)];software=pdamessage;sub=0'>Digital Messenger</a> <br>" //WS Start -- pAIs get messanger and manifest for free
+	dat += "<a href='byond://?src=[REF(src)];software=manifest;sub=0'>Crew Manifest</a> <br>" //WS end
 	//dat += "Text Messaging <br>"
 	dat += "<br>"
 

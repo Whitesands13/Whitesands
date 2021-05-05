@@ -42,7 +42,7 @@
 		var/obj/item/clothing/CH = H.head
 		if (CS.clothing_flags & CH.clothing_flags & STOPSPRESSUREDAMAGE)
 			atmos_sealed = TRUE
-	if((!istype(H.w_uniform, /obj/item/clothing/under/plasmaman) || !istype(H.head, /obj/item/clothing/head/helmet/space/plasmaman) || !istype(H.gloves, /obj/item/clothing/gloves)) && !atmos_sealed)
+	if((!istype(H.w_uniform, /obj/item/clothing/under/plasmaman) || !istype(H.head, /obj/item/clothing/head/helmet/space/plasmaman)) && !atmos_sealed)
 		if(environment)
 			if(environment.total_moles())
 				if(environment.get_moles(/datum/gas/oxygen) >= 1) //Same threshold that extinguishes fire
@@ -160,7 +160,13 @@
 		if("Clown")
 			O = new /datum/outfit/plasmaman/clown
 
-	var/holder		// Wasp Edit Begin - Plasma skirtsuit prefs
+		if("Lieutenant")	//WS edit plasmaman customization
+			O = new /datum/outfit/plasmaman/lieutenant	//WS edit plasmaman customization
+
+		if("SolGov Representative") //WS edit sgr
+			O = new /datum/outfit/plasmaman/solgov
+
+	var/holder		//WS Edit Begin - Plasma skirtsuit prefs
 	switch(H.jumpsuit_style)
 		if(PREF_SKIRT)
 			holder = "[O.uniform]/skirt"
@@ -171,7 +177,7 @@
 			holder = "[O.uniform]"
 
 	if(text2path(holder))
-		O.uniform = text2path(holder)		// Wasp Edit End
+		O.uniform = text2path(holder)		//WS Edit End
 
 	H.equipOutfit(O, visualsOnly)
 	H.internal = H.get_item_for_held_index(2)
@@ -206,7 +212,7 @@
 				if(1)
 					H.say(pick("oof.", "ouch.", "my bones.", "oof ouch.", "oof ouch my bones."), forced = /datum/reagent/toxin/bonehurtingjuice)
 				if(2)
-					H.emote("me", 1, pick("oofs silently.", "looks like their bones hurt.", "grimaces, as though their bones hurt."))
+					H.manual_emote(pick("oofs silently.", "looks like their bones hurt.", "grimaces, as though their bones hurt."))
 				if(3)
 					to_chat(H, "<span class='warning'>Your bones hurt!</span>")
 		if(chem.overdosed)

@@ -44,11 +44,11 @@
 	REMOVE_TRAITS_NOT_IN(M, list(SPECIES_TRAIT, ROUNDSTART_TRAIT, ORGAN_TRAIT))
 	M.set_blurriness(0)
 	M.set_blindness(0)
-	M.SetKnockdown(0, FALSE)
-	M.SetStun(0, FALSE)
-	M.SetUnconscious(0, FALSE)
-	M.SetParalyzed(0, FALSE)
-	M.SetImmobilized(0, FALSE)
+	M.SetKnockdown(0)
+	M.SetStun(0)
+	M.SetUnconscious(0)
+	M.SetParalyzed(0)
+	M.SetImmobilized(0)
 	M.silent = FALSE
 	M.dizziness = 0
 	M.disgust = 0
@@ -56,7 +56,7 @@
 	M.stuttering = 0
 	M.slurring = 0
 	M.confused = 0
-	M.SetSleeping(0, 0)
+	M.SetSleeping(0)
 	M.jitteriness = 0
 	if(M.blood_volume < BLOOD_VOLUME_NORMAL)
 		M.blood_volume = BLOOD_VOLUME_NORMAL
@@ -85,13 +85,13 @@
 
 /datum/reagent/medicine/synaptizine/on_mob_life(mob/living/carbon/M)
 	M.drowsyness = max(M.drowsyness-5, 0)
-	M.AdjustStun(-20, FALSE)
-	M.AdjustKnockdown(-20, FALSE)
-	M.AdjustUnconscious(-20, FALSE)
-	M.AdjustImmobilized(-20, FALSE)
-	M.AdjustParalyzed(-20, FALSE)
-	if(holder.has_reagent(/datum/reagent/toxin/mindbreaker))
-		holder.remove_reagent(/datum/reagent/toxin/mindbreaker, 5)
+	M.AdjustStun(-20)
+	M.AdjustKnockdown(-20)
+	M.AdjustUnconscious(-20)
+	M.AdjustImmobilized(-20)
+	M.AdjustParalyzed(-20)
+	if(M.reagents.has_reagent(/datum/reagent/toxin/mindbreaker))
+		M.reagents.remove_reagent(/datum/reagent/toxin/mindbreaker, 5)
 	M.hallucination = max(0, M.hallucination - 10)
 	if(prob(30))
 		M.adjustToxLoss(1, 0)
@@ -406,7 +406,7 @@
 	color = "#000000"
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 	taste_description = "ash"
-	process_flags = ORGANIC //WaspStation Edit - IPCs
+	process_flags = ORGANIC //WS Edit - IPCs
 
 /datum/reagent/medicine/charcoal/on_mob_life(mob/living/carbon/M)
 	M.adjustToxLoss(-2*REM, 0)
@@ -429,7 +429,7 @@
 	reagent_state = LIQUID
 	color = "#F1C40F"
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
-	process_flags = SYNTHETIC //WaspStation Edit - IPCs
+	process_flags = SYNTHETIC //WS Edit - IPCs
 
 /datum/reagent/medicine/system_cleaner/on_mob_life(mob/living/M)
 	M.adjustToxLoss(-2*REM, 0)
@@ -444,7 +444,7 @@
 	description = "Repairs brain damage in synthetics."
 	color = "#727272"
 	taste_description = "metallic"
-	process_flags = SYNTHETIC //WaspStation Edit - IPCs
+	process_flags = SYNTHETIC //WS Edit - IPCs
 
 /datum/reagent/medicine/liquid_solder/on_mob_life(mob/living/M)
 	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -3*REM)
@@ -496,8 +496,9 @@
 	taste_description = "acid"
 
 /datum/reagent/medicine/calomel/on_mob_life(mob/living/carbon/M)
-	for(var/datum/reagent/toxin/R in M.reagents.reagent_list)
-		M.reagents.remove_reagent(R.type,3)
+	for(var/datum/reagent/R in M.reagents.reagent_list)				//WS Edit Begin - Actually purges all chems
+		if(R != src)
+			M.reagents.remove_reagent(R.type,3)		//WS Edit End
 	if(M.health > 20)
 		M.adjustToxLoss(1*REM, 0)
 		. = 1
@@ -616,7 +617,7 @@
 			to_chat(M, "<span class='notice'>Your hands spaz out and you drop what you were holding!</span>")
 			M.Jitter(10)
 
-	M.AdjustAllImmobility(-20, FALSE)
+	M.AdjustAllImmobility(-20)
 	M.adjustStaminaLoss(-1*REM, FALSE)
 	..()
 	return TRUE
@@ -725,7 +726,7 @@
 		if(12 to 24)
 			M.drowsyness += 1
 		if(24 to INFINITY)
-			M.Sleeping(40, 0)
+			M.Sleeping(40)
 			. = 1
 	..()
 
@@ -864,7 +865,7 @@
 	M.adjustStaminaLoss(-0.5*REM, 0)
 	. = 1
 	if(prob(20))
-		M.AdjustAllImmobility(-20, FALSE)
+		M.AdjustAllImmobility(-20)
 	..()
 
 /datum/reagent/medicine/epinephrine/overdose_process(mob/living/M)
@@ -989,7 +990,7 @@
 		M.adjustToxLoss(-1*REM, 0)
 		M.adjustBruteLoss(-1*REM, 0)
 		M.adjustFireLoss(-1*REM, 0)
-	M.AdjustAllImmobility(-60, FALSE)
+	M.AdjustAllImmobility(-60)
 	M.adjustStaminaLoss(-5*REM, 0)
 	..()
 	. = 1
@@ -1010,7 +1011,7 @@
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 
 /datum/reagent/medicine/insulin/on_mob_life(mob/living/carbon/M)
-	if(M.AdjustSleeping(-20, FALSE))
+	if(M.AdjustSleeping(-20))
 		. = 1
 	M.reagents.remove_reagent(/datum/reagent/consumable/sugar, 3)
 	..()
@@ -1044,7 +1045,7 @@
 	M.adjustBruteLoss(-2*REM, 0)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		H.bleed_rate = max(H.bleed_rate - 0.25, 0) 
+		H.bleed_rate = max(H.bleed_rate - 0.25, 0)
 	..()
 	. = 1
 
@@ -1072,7 +1073,7 @@
 
 /datum/reagent/medicine/dexalinp
 	name = "Dexalin Plus"
-	description = "Restores oxygen loss. Overdose causes it instead. More effective than standardized Dexalin."
+	description = "Restores oxygen loss and purges Lexorin. Overdose causes it instead. More effective than standardized Dexalin."
 	reagent_state = LIQUID
 	color = "#0040FF"
 	overdose_threshold = 25
@@ -1081,6 +1082,8 @@
 	M.adjustOxyLoss(-2*REM, 0)
 	if(ishuman(M) && M.blood_volume < BLOOD_VOLUME_NORMAL)
 		M.blood_volume += 1
+	if(holder.has_reagent(/datum/reagent/toxin/lexorin))
+		holder.remove_reagent(/datum/reagent/toxin/lexorin, 3)
 	..()
 	. = 1
 
@@ -1168,7 +1171,7 @@
 		M.adjustToxLoss(-0.25*REM, 0)
 		. = 1
 	..()
-/datum/reagent/medicine/tetracordrazine //waspstation edit: Yes
+/datum/reagent/medicine/tetracordrazine //WS edit: Yes
 	name = "Tetracordrazine"
 	description = "A weak dilutant similar to Tricordrazine that slowly heals all damage types."
 	reagent_state = LIQUID
@@ -1212,7 +1215,7 @@
 	reagent_state = SOLID
 	color = "#555555"
 	overdose_threshold = 30
-	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs //WaspStation Edit - IPCs
+	process_flags = ORGANIC | SYNTHETIC //WS Edit - IPCs //WS Edit - IPCs
 
 /datum/reagent/medicine/syndicate_nanites/on_mob_life(mob/living/carbon/M)
 	M.adjustBruteLoss(-5*REM, 0) //A ton of healing - this is a 50 telecrystal investment.
@@ -1303,6 +1306,7 @@
 	..()
 	return TRUE
 
+/*	WS edit begin - Lavaland rework
 /datum/reagent/medicine/lavaland_extract
 	name = "Lavaland Extract"
 	description = "An extract of lavaland atmospheric and mineral elements. Heals the user in small doses, but is extremely toxic otherwise."
@@ -1321,6 +1325,7 @@
 	M.adjustToxLoss(3*REM, 0)
 	..()
 	return TRUE
+*/		//WS edit end
 
 //used for changeling's adrenaline power
 /datum/reagent/medicine/changelingadrenaline
@@ -1330,7 +1335,8 @@
 	overdose_threshold = 30
 
 /datum/reagent/medicine/changelingadrenaline/on_mob_life(mob/living/carbon/M as mob)
-	M.AdjustAllImmobility(-20, FALSE)
+	..()
+	M.AdjustAllImmobility(-20)
 	M.adjustStaminaLoss(-10, 0)
 	M.Jitter(10)
 	M.Dizzy(10)
@@ -1440,7 +1446,7 @@
 /datum/reagent/medicine/modafinil/on_mob_life(mob/living/carbon/M)
 	if(!overdosed) // We do not want any effects on OD
 		overdose_threshold = overdose_threshold + rand(-10,10)/10 // for extra fun
-		M.AdjustAllImmobility(-5, FALSE)
+		M.AdjustAllImmobility(-5)
 		M.adjustStaminaLoss(-0.5*REM, 0)
 		M.Jitter(1)
 		metabolization_rate = 0.01 * REAGENTS_METABOLISM * rand(5,20) // randomizes metabolism between 0.02 and 0.08 per tick
@@ -1471,13 +1477,13 @@
 			if(prob(20))
 				to_chat(M, "<span class='userdanger'>You have a sudden fit!</span>")
 				M.emote("moan")
-				M.Paralyze(20, 1, 0) // you should be in a bad spot at this point unless epipen has been used
+				M.Paralyze(20) // you should be in a bad spot at this point unless epipen has been used
 		if(81)
 			to_chat(M, "<span class='userdanger'>You feel too exhausted to continue!</span>") // at this point you will eventually die unless you get charcoal
 			M.adjustOxyLoss(0.1*REM, 0)
 			M.adjustStaminaLoss(0.1*REM, 0)
 		if(82 to INFINITY)
-			M.Sleeping(100, 0, TRUE)
+			M.Sleeping(100)
 			M.adjustOxyLoss(1.5*REM, 0)
 			M.adjustStaminaLoss(1.5*REM, 0)
 	..()
@@ -1542,9 +1548,9 @@
 /datum/reagent/medicine/silibinin/expose_mob(mob/living/carbon/M, method=INJECT, reac_volume)
 	if(method != INJECT)
 		return
-	
+
 	M.adjustOrganLoss(ORGAN_SLOT_LIVER, -1)  //on injection, will heal the liver. This will (hopefully) fix dead livers.
-	
+
 	..()
 
 /datum/reagent/medicine/silibinin/on_mob_life(mob/living/carbon/M)
@@ -1605,7 +1611,7 @@
 	..()
 	. = 1
 
-/* /datum/reagent/medicine/hepanephrodaxon    //Waspstation edit: Temporary removal of overloaded chem
+/* /datum/reagent/medicine/hepanephrodaxon    //WS edit: Temporary removal of overloaded chem
 	name = "Hepanephrodaxon"
 	description = "Used to repair the common tissues involved in filtration."
 	taste_description = "glue"
@@ -1637,7 +1643,7 @@
 	..()
 	ADD_TRAIT(L, TRAIT_SLEEPIMMUNE, type)
 	ADD_TRAIT(L, TRAIT_STUNRESISTANCE, type)
-	M.add_movespeed_modifier(/datum/movespeed_modifier/reagent/hepanephrodaxon) */ 
+	M.add_movespeed_modifier(/datum/movespeed_modifier/reagent/hepanephrodaxon) */
 
 /datum/reagent/medicine/bonefixingjuice
 	name = "C4L-Z1UM Agent"

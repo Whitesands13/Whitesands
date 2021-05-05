@@ -56,6 +56,10 @@
 #define MARTYRDOM	/datum/mutation/human/martyrdom
 #define HARS		/datum/mutation/human/headless
 
+// WS Edit Start - Dwarves
+#define DORFISM		/datum/mutation/human/dorfism
+// WS Edit End - Dwarves
+
 #define UI_CHANGED "ui changed"
 #define UE_CHANGED "ue changed"
 
@@ -131,7 +135,7 @@
 #define NOHUSK			22 // Can't be husked.
 #define ROBOTIC_LIMBS	23 //limbs start out as robotic; but also use organic icons. If you want to use the default ones, you'll have to use on_species_gain
 #define NOMOUTH			24
-#define NO_BONES		25 //WaspStation Edit - Breakable Bones
+#define NO_BONES		25 //WS Edit - Breakable Bones
 
 //organ slots
 #define ORGAN_SLOT_BRAIN "brain"

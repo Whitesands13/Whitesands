@@ -361,7 +361,7 @@
 		if(!C)
 			C = R.holder.my_atom
 
-		//Wasp begin - IPCs
+		//WS begin - IPCs
 		if(ishuman(C))
 			var/mob/living/carbon/human/H = C
 			//Check if this mob's species is set and can process this type of reagent
@@ -387,7 +387,7 @@
 				R.holder.remove_reagent(R.type, R.metabolization_rate)
 				continue
 		//If you got this far, that means we can process whatever reagent this iteration is for. Handle things normally from here.
-		//Wasp End
+		//WS End
 
 
 		if(C && R)
@@ -440,7 +440,6 @@
 		addiction_tick++
 	if(C && need_mob_update) //some of the metabolized reagents had effects on the mob that requires some updates.
 		C.updatehealth()
-		C.update_mobility()
 		C.update_stamina()
 	update_total()
 
@@ -828,7 +827,7 @@
 				handle_reactions()
 			if(my_atom)
 				my_atom.on_reagent_change(REM_REAGENT)
-			return TRUE
+			return amount
 
 	return FALSE
 

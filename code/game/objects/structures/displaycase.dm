@@ -422,7 +422,8 @@
 	return data
 
 /obj/structure/displaycase/forsale/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
 	var/obj/item/card/id/potential_acc = usr.get_idcard(hand_first = TRUE)
 	switch(action)
@@ -541,7 +542,7 @@
 				to_chat(user, "<span class='notice'>You unsecure [src].</span>")
 			else
 				to_chat(user, "<span class='notice'>You secure [src].</span>")
-			anchored = !anchored
+			set_anchored(!anchored)
 			return
 	else if(!open && user.a_intent == INTENT_HELP)
 		to_chat(user, "<span class='notice'>[src] must be open to move it.</span>")

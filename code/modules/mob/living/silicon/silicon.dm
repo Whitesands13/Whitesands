@@ -428,3 +428,18 @@
 
 /mob/living/silicon/handle_high_gravity(gravity)
 	return
+
+/mob/living/silicon/on_floored_start()
+	return // Silicons are always standing by default.
+
+/mob/living/silicon/on_floored_end()
+	return // Silicons are always standing by default.
+
+/mob/living/silicon/on_lying_down()
+	return // Silicons are always standing by default.
+
+/mob/living/silicon/on_standing_up()
+	return // Silicons are always standing by default.
+
+/mob/living/silicon/get_bank_account() /// WS Edit - Silicons can buy and use materials
+	return SSeconomy.get_dep_account(ACCOUNT_CIV)

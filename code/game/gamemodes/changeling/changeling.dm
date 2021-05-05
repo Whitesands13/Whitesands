@@ -12,7 +12,7 @@ GLOBAL_VAR(changeling_team_objective_type) //If this is not null, we hand our th
 	antag_flag = ROLE_CHANGELING
 	false_report_weight = 10
 	restricted_jobs = list("AI", "Cyborg")
-	protected_jobs = list("Security Officer", "Warden", "Detective", "Head of Security", "Captain", "Head of Personnel", "Brig Physician", "Lieutenant", "Prisoner") // Waspstation edit - Brig Physicians, Second Officer
+	protected_jobs = list("Security Officer", "Warden", "Detective", "Head of Security", "Captain", "Head of Personnel", "Brig Physician", "SolGov Representative", "Prisoner") //WS edit - Brig Physicians, SolGov Rep
 	required_players = 15
 	required_enemies = 1
 	recommended_enemies = 4
@@ -136,6 +136,7 @@ GLOBAL_VAR(changeling_team_objective_type) //If this is not null, we hand our th
 		C.flags_cover = chosen_prof.flags_cover_list[slot]
 		C.item_state = chosen_prof.item_state_list[slot]
 		C.mob_overlay_icon = chosen_prof.mob_overlay_icon_list[slot]
+		C.mob_overlay_state = chosen_prof.mob_overlay_state_list[slot] //WS EDIT - Mob Overlay State
 		if(equip)
 			user.equip_to_slot_or_del(C, GLOB.slot2slot[slot])
 

@@ -62,9 +62,9 @@
 	toxpwr = 3
 	material = /datum/material/plasma
 
-	//WaspStation Begin - IPCs
-	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
-	//WaspStation End
+	//WS Begin - IPCs
+	process_flags = ORGANIC | SYNTHETIC //WS Edit - IPCs
+	//WS End
 
 /datum/reagent/toxin/plasma/on_mob_life(mob/living/carbon/C)
 	if(holder.has_reagent(/datum/reagent/medicine/epinephrine))
@@ -175,7 +175,7 @@
 	toxpwr = 2
 	taste_description = "fish"
 
-/datum/reagent/toxin/carpotoxin/on_mob_life(mob/living/carbon/M)
+/datum/reagent/toxin/carpotoxin/on_mob_metabolize(mob/living/carbon/M)
 	if(isfelinid(M))
 		toxpwr = 0
 	..()
@@ -335,10 +335,10 @@
 			M.confused += 2
 			M.drowsyness += 2
 		if(10 to 50)
-			M.Sleeping(40, 0)
+			M.Sleeping(40)
 			. = 1
 		if(51 to INFINITY)
-			M.Sleeping(40, 0)
+			M.Sleeping(40)
 			M.adjustToxLoss((current_cycle - 50)*REM, 0)
 			. = 1
 	..()
@@ -356,9 +356,9 @@
 /datum/reagent/toxin/fakebeer/on_mob_life(mob/living/carbon/M)
 	switch(current_cycle)
 		if(1 to 50)
-			M.Sleeping(40, 0)
+			M.Sleeping(40)
 		if(51 to INFINITY)
-			M.Sleeping(40, 0)
+			M.Sleeping(40)
 			M.adjustToxLoss((current_cycle - 50)*REM, 0)
 	return ..()
 
@@ -410,7 +410,7 @@
 	color = "#787878"
 	metabolization_rate = 0.125 * REAGENTS_METABOLISM
 	toxpwr = 0
-	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
+	process_flags = ORGANIC | SYNTHETIC //WS Edit - IPCs
 
 /datum/reagent/toxin/polonium/on_mob_life(mob/living/carbon/M)
 	M.radiation += 4
@@ -499,7 +499,7 @@
 	if(current_cycle >= 4)
 		SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "smacked out", /datum/mood_event/narcotic_heavy, name)
 	if(current_cycle >= 18)
-		M.Sleeping(40, 0)
+		M.Sleeping(40)
 	..()
 	return TRUE
 
@@ -516,7 +516,7 @@
 		M.losebreath += 1
 	if(prob(8))
 		to_chat(M, "<span class='danger'>You feel horrendously weak!</span>")
-		M.Stun(40, 0)
+		M.Stun(40)
 		M.adjustToxLoss(2*REM, 0)
 	return ..()
 
@@ -575,7 +575,7 @@
 		var/picked_option = rand(1,3)
 		switch(picked_option)
 			if(1)
-				C.Paralyze(60, 0)
+				C.Paralyze(60)
 				. = TRUE
 			if(2)
 				C.losebreath += 10
@@ -604,7 +604,7 @@
 
 /datum/reagent/toxin/pancuronium/on_mob_life(mob/living/carbon/M)
 	if(current_cycle >= 10)
-		M.Stun(40, 0)
+		M.Stun(40)
 		. = TRUE
 	if(prob(20))
 		M.losebreath += 4
@@ -621,7 +621,7 @@
 
 /datum/reagent/toxin/sodium_thiopental/on_mob_life(mob/living/carbon/M)
 	if(current_cycle >= 10)
-		M.Sleeping(40, 0)
+		M.Sleeping(40)
 	M.adjustStaminaLoss(10*REM, 0)
 	..()
 	return TRUE
@@ -637,7 +637,7 @@
 
 /datum/reagent/toxin/sulfonal/on_mob_life(mob/living/carbon/M)
 	if(current_cycle >= 22)
-		M.Sleeping(40, 0)
+		M.Sleeping(40)
 	return ..()
 
 /datum/reagent/toxin/amanitin
@@ -719,7 +719,7 @@
 
 /datum/reagent/toxin/curare/on_mob_life(mob/living/carbon/M)
 	if(current_cycle >= 11)
-		M.Paralyze(60, 0)
+		M.Paralyze(60)
 	M.adjustOxyLoss(1*REM, 0)
 	. = 1
 	..()
@@ -751,7 +751,7 @@
 	metabolization_rate = 0.6 * REAGENTS_METABOLISM
 	toxpwr = 0.5
 	taste_description = "spinning"
-	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
+	process_flags = ORGANIC | SYNTHETIC //WS Edit - IPCs
 
 /datum/reagent/toxin/rotatium/on_mob_life(mob/living/carbon/M)
 	if(M.hud_used)
@@ -779,7 +779,7 @@
 	metabolization_rate = 0.8 * REAGENTS_METABOLISM
 	toxpwr = 0.25
 	taste_description = "skewing"
-	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
+	process_flags = ORGANIC | SYNTHETIC //WS Edit - IPCs
 
 /datum/reagent/toxin/skewium/on_mob_life(mob/living/carbon/M)
 	if(M.hud_used)
@@ -834,7 +834,7 @@
 	var/acidpwr = 10 //the amount of protection removed from the armour
 	taste_description = "acid"
 	self_consuming = TRUE
-	process_flags = ORGANIC | SYNTHETIC //WaspStation Edit - IPCs
+	process_flags = ORGANIC | SYNTHETIC //WS Edit - IPCs
 
 /datum/reagent/toxin/acid/expose_mob(mob/living/carbon/C, method=TOUCH, reac_volume)
 	if(!istype(C))
@@ -899,7 +899,7 @@
 		holder.remove_reagent(type, actual_metaboliztion_rate * M.metabolism_efficiency)
 		M.adjustToxLoss(actual_toxpwr*REM, 0)
 		if(prob(10))
-			M.Paralyze(20, 0)
+			M.Paralyze(20)
 		. = 1
 	..()
 
@@ -936,7 +936,7 @@
 			if(1)
 				M.say(pick("oof.", "ouch.", "my bones.", "oof ouch.", "oof ouch my bones."), forced = /datum/reagent/toxin/bonehurtingjuice)
 			if(2)
-				M.emote("me", 1, pick("oofs silently.", "looks like their bones hurt.", "grimaces, as though their bones hurt."))
+				M.manual_emote(pick("oofs silently.", "looks like their bones hurt.", "grimaces, as though their bones hurt."))
 			if(3)
 				to_chat(M, "<span class='warning'>Your bones hurt!</span>")
 	return ..()

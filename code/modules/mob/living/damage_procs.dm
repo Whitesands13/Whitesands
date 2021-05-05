@@ -14,7 +14,7 @@
   *
   * Returns TRUE if damage applied
   */
-/mob/living/proc/apply_damage(damage = 0,damagetype = BRUTE, def_zone = null, blocked = FALSE, forced = FALSE, spread_damage = FALSE, break_modifier = 1)//WaspStation Edit - Breakable Bones
+/mob/living/proc/apply_damage(damage = 0,damagetype = BRUTE, def_zone = null, blocked = FALSE, forced = FALSE, spread_damage = FALSE, break_modifier = 1)//WS Edit - Breakable Bones
 	SEND_SIGNAL(src, COMSIG_MOB_APPLY_DAMGE, damage, damagetype, def_zone)
 	var/hit_percent = (100-blocked)/100
 	if(!damage || (!forced && hit_percent <= 0))
@@ -167,19 +167,21 @@
 
 /mob/living/proc/adjustOxyLoss(amount, updating_health = TRUE, forced = FALSE)
 	if(!forced && (status_flags & GODMODE))
-		return FALSE
+		return
+	. = oxyloss
 	oxyloss = clamp((oxyloss + (amount * CONFIG_GET(number/damage_multiplier))), 0, maxHealth * 2)
 	if(updating_health)
 		updatehealth()
-	return amount
+
 
 /mob/living/proc/setOxyLoss(amount, updating_health = TRUE, forced = FALSE)
-	if(status_flags & GODMODE)
-		return 0
+	if(!forced && status_flags & GODMODE)
+		return
+	. = oxyloss
 	oxyloss = amount
 	if(updating_health)
 		updatehealth()
-	return amount
+
 
 /mob/living/proc/getToxLoss()
 	return toxloss

@@ -1,13 +1,9 @@
 
-/mob/living/carbon/human/restrained(ignore_grab)
-	. = ((wear_suit && wear_suit.breakouttime) || ..())
-
-
 /mob/living/carbon/human/canBeHandcuffed()
-	if(get_num_arms(FALSE) >= 2)
-		return TRUE
-	else
+	if(num_hands < 2)
 		return FALSE
+	return TRUE
+
 
 //gets assignment from ID or ID inside PDA or PDA itself
 //Useful when player do something with computers
@@ -150,10 +146,10 @@
 		to_chat(src, "<span class='warning'>You can't bring yourself to use a ranged weapon!</span>")
 		return FALSE
 
-/mob/living/carbon/human/proc/get_bank_account()
+/mob/living/carbon/human/get_bank_account(hand_first)
 	RETURN_TYPE(/datum/bank_account)
 	var/datum/bank_account/account
-	var/obj/item/card/id/I = get_idcard()
+	var/obj/item/card/id/I = get_idcard(hand_first)
 
 	if(I && I.registered_account)
 		account = I.registered_account

@@ -143,10 +143,6 @@ GLOBAL_LIST_INIT(dye_registry, list(
 	var/obj/item/color_source
 	var/max_wash_capacity = 5
 
-/obj/machinery/washing_machine/ComponentInitialize()
-	. = ..()
-	RegisterSignal(src, COMSIG_COMPONENT_CLEAN_ACT, .proc/clean_blood)
-
 /obj/machinery/washing_machine/examine(mob/user)
 	. = ..()
 	if(!busy)
@@ -186,15 +182,17 @@ GLOBAL_LIST_INIT(dye_registry, list(
 		M.Translate(rand(-3, 3), rand(-1, 3))
 		animate(src, transform=M, time=2)
 
-/obj/machinery/washing_machine/proc/clean_blood()
-	if(!busy)
+/obj/machinery/washing_machine/wash(clean_types)
+	. = ..()
+	if(!busy && bloody_mess && (clean_types & CLEAN_TYPE_BLOOD))
 		bloody_mess = FALSE
 		update_icon()
+		. = TRUE
 
 /obj/machinery/washing_machine/proc/wash_cycle()
 	for(var/X in contents)
 		var/atom/movable/AM = X
-		SEND_SIGNAL(AM, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_STRENGTH_BLOOD)
+		AM.wash(CLEAN_WASH)
 		AM.machine_wash(src)
 
 	busy = FALSE
@@ -219,6 +217,7 @@ GLOBAL_LIST_INIT(dye_registry, list(
 			righthand_file = initial(target_type.righthand_file)
 			item_state = initial(target_type.item_state)
 			mob_overlay_icon = initial(target_type.mob_overlay_icon)
+			mob_overlay_state = initial(target_type.mob_overlay_state) //WS EDIT - Mob Overlay State
 			inhand_x_dimension = initial(target_type.inhand_x_dimension)
 			inhand_y_dimension = initial(target_type.inhand_y_dimension)
 			name = initial(target_type.name)
@@ -271,10 +270,10 @@ GLOBAL_LIST_INIT(dye_registry, list(
 		new /obj/item/restraints/handcuffs(loc)
 	..()
 
-/obj/machinery/washing_machine/relaymove(mob/user)
-	container_resist(user)
+/obj/machinery/washing_machine/relaymove(mob/living/user)
+	container_resist_act(user)
 
-/obj/machinery/washing_machine/container_resist(mob/living/user)
+/obj/machinery/washing_machine/container_resist_act(mob/living/user)
 	if(!busy)
 		add_fingerprint(user)
 		open_machine()

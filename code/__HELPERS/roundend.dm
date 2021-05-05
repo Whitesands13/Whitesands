@@ -146,7 +146,7 @@
 						greentexters |= C
 
 	for (var/client/C in greentexters)
-		C.process_greentext()
+		C.process_greentext(world.time - SSticker.round_start_time <= 300 SECONDS, world.time - SSticker.round_start_time)
 
 /datum/controller/subsystem/ticker/proc/record_nuke_disk_location()
 	var/obj/item/disk/nuclear/N = locate() in GLOB.poi_list
@@ -213,7 +213,7 @@
 
 	for(var/client/C in GLOB.clients)
 		C.playtitlemusic(40)
-		C.process_endround_metacoin()
+		C.process_endround_metacoin(speed_round, world.time - SSticker.round_start_time)
 
 		if(speed_round)
 			C.give_award(/datum/award/achievement/misc/speed_round, C.mob)
@@ -309,14 +309,14 @@
 
 	//Medals
 	parts += medal_report()
-	//Wasp Begin
+	//WS Begin
 	CHECK_TICK
 
 	//Mouse
 	parts += mouse_report()
 
 	CHECK_TICK
-	//Wasp End
+	//WS End
 	//Station Goals
 	parts += goal_report()
 
@@ -369,7 +369,7 @@
 	if(!previous)
 		var/list/report_parts = list(personal_report(C), GLOB.common_report)
 		content = report_parts.Join()
-		C.verbs -= /client/proc/show_previous_roundend_report
+		remove_verb(C, /client/proc/show_previous_roundend_report)
 		fdel(filename)
 		text2file(content, filename)
 	else
@@ -405,7 +405,10 @@
 				for(var/datum/objective/crew/CO in M.mind.crew_objectives)
 					if(CO.check_completion())
 						parts += "<br><br><B>Your optional objective</B>: [CO.explanation_text] <span class='greentext'><B>Success!</B></span><br>"
-						C.inc_metabalance(METACOIN_CO_REWARD, reason="Completed your crew objective!")
+						var/speed_round = FALSE
+						if(world.time - SSticker.round_start_time <= 300 SECONDS)
+							speed_round = TRUE
+						C.inc_metabalance(METACOIN_CO_REWARD(speed_round, world.time - SSticker.round_start_time), reason="Completed your crew objective!")
 					else
 						parts += "<br><br><B>Your optional objective</B>: [CO.explanation_text] <span class='redtext'><B>Failed.</B></span><br>"
 
@@ -478,7 +481,7 @@
 			parts += com
 		return "<div class='panel stationborder'>[parts.Join("<br>")]</div>"
 	return ""
-//Wasp Begin
+//WS Begin
 /datum/controller/subsystem/ticker/proc/mouse_report()
 	if(GLOB.mouse_food_eaten)
 		var/list/parts = list()
@@ -488,7 +491,7 @@
 		parts += "Trash Eaten: [GLOB.mouse_food_eaten]"
 		return "<div class='panel stationborder'>[parts.Join("<br>")]</div>"
 	return ""
-//Wasp End
+//WS End
 /datum/controller/subsystem/ticker/proc/antag_report()
 	var/list/result = list()
 	var/list/all_teams = list()

@@ -15,7 +15,7 @@
 /obj/item/gun/ballistic/automatic/proto
 	name = "\improper Nanotrasen Saber SMG"
 	desc = "A prototype full auto 9mm submachine gun, designated 'SABR'. Has a threaded barrel for suppressors and a folding stock."
-	icon = 'waspstation/icons/obj/guns/projectile.dmi'
+	icon = 'whitesands/icons/obj/guns/projectile.dmi'
 	icon_state = "saber"
 	mag_type = /obj/item/ammo_box/magazine/smgm9mm
 	pin = null
@@ -84,7 +84,7 @@
 /obj/item/gun/ballistic/automatic/wt550
 	name = "WT-550 Automatic Rifle"
 	desc = "An outdated personal defence weapon. Uses 4.6x30mm rounds and is designated the WT-550 Automatic Rifle."
-	icon = 'waspstation/icons/obj/guns/projectile.dmi'
+	icon = 'whitesands/icons/obj/guns/projectile.dmi'
 	icon_state = "wt550"
 	item_state = "arg"
 	mag_type = /obj/item/ammo_box/magazine/wt550m9
@@ -324,7 +324,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	zoomable = TRUE
 	zoom_amt = 10 //Long range, enough to see in front of you, but no tiles behind you.
-	zoom_out_amt = 13
+	zoom_out_amt = 5
 	slot_flags = ITEM_SLOT_BACK
 	actions_types = list()
 	mag_display = TRUE

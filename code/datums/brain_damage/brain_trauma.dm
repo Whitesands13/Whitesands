@@ -15,9 +15,9 @@
 	var/random_gain = TRUE //can this be gained through random traumas?
 	var/resilience = TRAUMA_RESILIENCE_BASIC //how hard is this to cure?
 
-	//WaspStation Edit - Cloning
+	//WS Edit - Cloning
 	var/clonable = TRUE // will this transfer if the brain is cloned?
-	//WaspStation End
+	//WS End
 
 /datum/brain_trauma/Destroy()
 	if(brain && brain.traumas)
@@ -51,10 +51,14 @@
 
 //Called when hearing a spoken message
 /datum/brain_trauma/proc/handle_hearing(datum/source, list/hearing_args)
+	SIGNAL_HANDLER
+
 	UnregisterSignal(owner, COMSIG_MOVABLE_HEAR)
 
 //Called when speaking
 /datum/brain_trauma/proc/handle_speech(datum/source, list/speech_args)
+	SIGNAL_HANDLER
+
 	UnregisterSignal(owner, COMSIG_MOB_SAY)
 
 

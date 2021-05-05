@@ -58,10 +58,11 @@
 	new /obj/item/storage/bag/ore(src)
 	new /obj/item/t_scanner/adv_mining_scanner/lesser(src)
 	new /obj/item/gun/energy/kinetic_accelerator(src)
-	new /obj/item/clothing/glasses/meson/prescription(src) //Waspstation edit - Prescription HUDs
+	new /obj/item/clothing/glasses/meson/prescription(src) //WS edit - Prescription HUDs
 	new /obj/item/clothing/glasses/meson(src)
 	new /obj/item/survivalcapsule(src)
 	new /obj/item/assault_pod/mining(src)
+	new /obj/item/clothing/head/hardhat/mining(src)
 
 
 /**********************Shuttle Computer**************************/
@@ -72,7 +73,7 @@
 	circuit = /obj/item/circuitboard/computer/mining_shuttle
 	shuttleId = "mining"
 	possible_destinations = "mining_home;mining_away;landing_zone_dock;mining_public"
-	no_destination_swap = 1
+	no_destination_swap = TRUE
 	var/static/list/dumb_rev_heads = list()
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE
@@ -87,8 +88,8 @@
 	name = "lavaland shuttle console"
 	desc = "Used to call and send the lavaland shuttle."
 	circuit = /obj/item/circuitboard/computer/mining_shuttle/common
-	shuttleId = "mining_common"
-	possible_destinations = "commonmining_home;lavaland_common_away;landing_zone_dock;mining_public"
+	shuttleId = "commonmining"
+	possible_destinations = "commonmining_home;commonmining_away;landing_zone_dock;mining_public"
 
 
 /**********************Mining car (Crate like thing, not the rail car)**************************/

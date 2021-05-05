@@ -68,7 +68,6 @@ interface with the mining shuttle at the landing site if a mobile beacon is also
 
 	var/datum/browser/popup = new(user, "computer", "base management", 550, 300) //width, height
 	popup.set_content("<center>[dat]</center>")
-	popup.set_title_image(usr.browse_rsc_icon(src.icon, src.icon_state))
 	popup.open()
 
 
@@ -157,7 +156,7 @@ interface with the mining shuttle at the landing site if a mobile beacon is also
 			var/turf/place = colony_turfs[i]
 			if(!place)
 				return BAD_COORDS
-			if(!istype(place.loc, /area/lavaland/surface))
+			if(!istype(place.loc, /area/lavaland/surface) && !istype(place.loc, /area/whitesands/surface) && !istype(place.loc, /area/icemoon/surface))  // WaspStation Edit - LFD can target all mining maps
 				return BAD_AREA
 			if(disallowed_turf_types[place.type])
 				return BAD_TURF

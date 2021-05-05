@@ -102,7 +102,8 @@
 	atom/movable/virtualspeaker/speaker,  // representation of the method's speaker
 	datum/language/language,  // the language of the message
 	message,  // the text content of the message
-	spans  // the list of spans applied to the message
+	spans,  // the list of spans applied to the message
+	list/message_mods // the list of modification applied to the message. Whispering, singing, ect
 )
 	src.source = source
 	src.frequency = frequency
@@ -115,7 +116,8 @@
 		"message" = message,
 		"compression" = rand(35, 65),
 		"language" = lang_instance.name,
-		"spans" = spans
+		"spans" = spans,
+		"mods" = message_mods
 	)
 	var/turf/T = get_turf(source)
 	levels = list(T.z)
@@ -166,6 +168,14 @@
 				if(R.independent && R.can_receive(frequency, levels))
 					radios += R
 
+	//WS edit begin - Radio chatter #434
+	// Next, we'll have each radio play a small sound effect except for the one that broadcasted it.
+	for(var/obj/item/radio/radio in radios)
+		if(radio.last_chatter_time + 1 SECONDS < world.time && source != radio)
+			playsound(radio, "sound/effects/radio_chatter.ogg", 20, FALSE)
+			radio.last_chatter_time = world.time
+	//WS edit end
+
 	// From the list of radios, find all mobs who can hear those.
 	var/list/receive = get_mobs_in_radio_ranges(radios)
 
@@ -182,9 +192,11 @@
 	// Render the message and have everybody hear it.
 	// Always call this on the virtualspeaker to avoid issues.
 	var/spans = data["spans"]
+	var/list/message_mods = data["mods"]
 	var/rendered = virt.compose_message(virt, language, message, frequency, spans)
 	for(var/atom/movable/hearer in receive)
-		hearer.Hear(rendered, virt, language, message, frequency, spans)
+		hearer.Hear(rendered, virt, language, message, frequency, spans, message_mods)
+
 
 	// This following recording is intended for research and feedback in the use of department radio channels
 	if(length(receive))

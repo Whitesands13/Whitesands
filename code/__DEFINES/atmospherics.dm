@@ -262,6 +262,7 @@
 //LAVALAND
 /// what pressure you have to be under to increase the effect of equipment meant for lavaland
 #define LAVALAND_EQUIPMENT_EFFECT_PRESSURE 90
+#define ICEMOON_DEFAULT_ATMOS		"ICEMOON_ATMOS"
 
 //ATMOS MIX IDS
 #define LAVALAND_DEFAULT_ATMOS		"LAVALAND_ATMOS"
@@ -381,8 +382,8 @@ GLOBAL_LIST_INIT(atmos_adjacent_savings, list(0,0))
 GLOBAL_VAR(atmos_extools_initialized) // this must be an uninitialized (null) one or init_monstermos will be called twice because reasons
 #define ATMOS_EXTOOLS_CHECK if(!GLOB.atmos_extools_initialized){\
 	GLOB.atmos_extools_initialized=TRUE;\
-	if(fexists(world.system_type == MS_WINDOWS ? "byond-extools.dll" : "libbyond-extools.so")){\
-		var/result = call((world.system_type == MS_WINDOWS ? "byond-extools.dll" : "libbyond-extools.so"),"init_monstermos")();\
+	if(fexists(world.system_type == MS_WINDOWS ? "./byond-extools.dll" : "./libbyond-extools.so")){\
+		var/result = call((world.system_type == MS_WINDOWS ? "./byond-extools.dll" : "./libbyond-extools.so"),"init_monstermos")();\
 		if(result != "ok") {CRASH(result);}\
 	} else {\
 		CRASH("byond-extools.dll does not exist!");\

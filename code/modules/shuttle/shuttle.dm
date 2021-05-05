@@ -150,7 +150,7 @@
 
 /obj/docking_port/proc/is_in_shuttle_bounds(atom/A)
 	var/turf/T = get_turf(A)
-	if(T.z != z)
+	if(T?.z != z)
 		return FALSE
 	var/list/bounds = return_coords()
 	var/x0 = bounds[1]
@@ -294,6 +294,9 @@
 	var/can_move_docking_ports = FALSE
 	var/list/hidden_turfs = list()
 
+	///The linked overmap object, if there is one
+	var/obj/structure/overmap/ship/simulated/current_ship
+
 /obj/docking_port/mobile/proc/register()
 	SSshuttle.mobile += src
 
@@ -307,9 +310,11 @@
 		remove_ripples()
 	. = ..()
 
-/obj/docking_port/mobile/Initialize(mapload)
+/obj/docking_port/mobile/Initialize(mapload, _id)
 	. = ..()
 
+	if(_id)
+		id = _id
 	if(!id)
 		id = "[SSshuttle.mobile.len]"
 	if(name == "shuttle")
@@ -325,6 +330,9 @@
 
 	initial_engines = count_engines()
 	current_engines = initial_engines
+
+	if(!mapload)
+		SSovermap.setup_shuttle_ship(src)
 
 	#ifdef DOCKING_PORT_HIGHLIGHT
 	highlight("#0f0")
@@ -708,6 +716,24 @@
 	else
 		return "00:00"
 
+/**
+  * Gets shuttle location status in a form of string for tgui interfaces
+  */
+/obj/docking_port/mobile/proc/get_status_text_tgui()
+	var/obj/docking_port/stationary/dockedAt = get_docked()
+	var/docked_at = dockedAt?.name || "Unknown"
+	if(istype(dockedAt, /obj/docking_port/stationary/transit))
+		if(timeLeft() > 1 HOURS)
+			return "Hyperspace"
+		else
+			var/obj/docking_port/stationary/dst
+			if(mode == SHUTTLE_RECALL)
+				dst = previous
+			else
+				dst = destination
+			return "In transit to [dst?.name || "unknown location"]"
+	else
+		return docked_at
 
 /obj/docking_port/mobile/proc/getStatusText()
 	var/obj/docking_port/stationary/dockedAt = get_docked()
@@ -726,7 +752,6 @@
 		return "[docked_at], recharging [getTimerStr()]"
 	else
 		return docked_at
-
 
 /obj/docking_port/mobile/proc/getDbgStatusText()
 	var/obj/docking_port/stationary/dockedAt = get_docked()
@@ -785,7 +810,7 @@
 		for(var/mob/M in SSmobs.clients_by_zlevel[z])
 			var/dist_far = get_dist(M, distant_source)
 			if(dist_far <= long_range && dist_far > range)
-				M.playsound_local(distant_source, "sound/effects/[selected_sound]_distance.ogg", 100, falloff = 20)
+				M.playsound_local(distant_source, "sound/runtime/hyperspace/[selected_sound]_distance.ogg", 100, falloff = 20)
 			else if(dist_far <= range)
 				var/source
 				if(engine_list.len == 0)
@@ -797,13 +822,17 @@
 						if(dist_near < closest_dist)
 							source = O
 							closest_dist = dist_near
-				M.playsound_local(source, "sound/effects/[selected_sound].ogg", 100, falloff = range / 2)
+				M.playsound_local(source, "sound/runtime/hyperspace/[selected_sound].ogg", 100, falloff = range / 2)
 
 // Losing all initial engines should get you 2
 // Adding another set of engines at 0.5 time
-/obj/docking_port/mobile/proc/alter_engines(mod)
+/obj/docking_port/mobile/proc/alter_engines(mod, engine)
 	if(mod == 0)
 		return
+	if(mod < 0)
+		LAZYREMOVE(engine_list, engine)
+	else
+		LAZYOR(engine_list, engine)
 	var/old_coeff = engine_coeff
 	engine_coeff = get_engine_coeff(current_engines,mod)
 	current_engines = max(0,current_engines + mod)
@@ -813,12 +842,17 @@
 
 /obj/docking_port/mobile/proc/count_engines()
 	. = 0
+	engine_list = list()
 	for(var/thing in shuttle_areas)
 		var/area/shuttle/areaInstance = thing
 		for(var/obj/structure/shuttle/engine/E in areaInstance.contents)
 			if(!QDELETED(E))
 				engine_list += E
 				. += E.engine_power
+		for(var/obj/machinery/power/shuttle/engine/E in areaInstance.contents)
+			if(!QDELETED(E))
+				engine_list += E
+				. += E.thruster_active ? 1 : 0
 
 // Double initial engines to get to 0.5 minimum
 // Lose all initial engines to get to 2

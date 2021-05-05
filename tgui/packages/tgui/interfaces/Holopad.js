@@ -1,4 +1,3 @@
-import { Fragment } from 'inferno';
 import { useBackend } from '../backend';
 import { Box, Button, Flex, Icon, LabeledList, Modal, NoticeBox, Section } from '../components';
 import { Window } from '../layouts';
@@ -59,21 +58,36 @@ const HolopadContent = (props, context) => {
     loop_mode,
     record_mode,
     holo_calls = [],
+    em_hologram,
+    em_active,
+    em_cooldown,
   } = data;
   return (
-    <Fragment>
+    <>
       <Section
         title="Holopad"
         buttons={(
           <Button
             icon="bell"
             content={on_cooldown
-              ? "AI Presence Requested"
-              : "Request AI Presence"}
+              ? "AI's Presence Requested"
+              : "Request AI's Presence"}
             disabled={!on_network || on_cooldown}
             onClick={() => act('AIrequest')} />
         )} >
         <LabeledList>
+          {!!em_hologram && (
+            <LabeledList.Item label="">
+              <Button
+                icon="bell"
+                content={em_active
+                  ? "Deactivate emergency " + em_hologram + " hologram"
+                  : "Activate emergency " + em_hologram + " hologram"}
+                disabled={em_cooldown}
+                color={em_active ? 'bad' : 'good'}
+                onClick={() => act('em_action')} />
+            </LabeledList.Item>
+          )}
           <LabeledList.Item label="Communicator">
             <Button
               icon="phone-alt"
@@ -154,6 +168,6 @@ const HolopadContent = (props, context) => {
           </LabeledList>
         )}
       </Section>
-    </Fragment>
+    </>
   );
 };
