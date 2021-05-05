@@ -55,6 +55,7 @@ GLOBAL_LIST_INIT(bitfields, list(
 		"ADMIN" = R_ADMIN,
 		"BAN" = R_BAN,
 		"FUN" = R_FUN,
+		"ROD" = R_ROD, //WS edit: ROD
 		"SERVER" = R_SERVER,
 		"DEBUG" = R_DEBUG,
 		"POSSESS" = R_POSSESS,
