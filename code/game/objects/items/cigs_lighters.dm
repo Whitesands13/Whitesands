@@ -473,7 +473,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/clothing/mask/cigarette/pipe
 	name = "smoking pipe"
 	desc = "A pipe, for smoking. Probably made of meerschaum or something."
-	icon = 'icons/objects/clothing/masks.dmi'
+	icon = 'icons/obj/clothing/masks.dmi'
 	icon_state = "pipeoff"
 	item_state = "pipeoff"
 	var/icon_on = "pipeon"  //Note - these are in masks.dmi 	WS EDIT - Cigarettes
