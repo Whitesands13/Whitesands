@@ -59,7 +59,7 @@
 	name = "enginseer regalia"
 	desc = "You hold the secrets of the Machine."
 	icon = 'whitesands/icons/obj/clothing/suits.dmi'
-	mob_overlay_icon = 'waspstation/icons/mob/clothing/suits.dmi'
+	mob_overlay_icon = 'whitesands/icons/mob/clothing/suits.dmi'
 	icon_state = "enginseer"
 	item_state = "enginseer"
 	hoodtype = /obj/item/clothing/head/hooded/enginseer
@@ -71,7 +71,7 @@
 	name = "enginseer's hood"
 	desc = "You are honored that they require your skills."
 	icon = 'whitesands/icons/obj/clothing/hats.dmi'
-	mob_overlay_icon = 'waspstation/icons/mob/clothing/head.dmi'
+	mob_overlay_icon = 'whitesands/icons/mob/clothing/head.dmi'
 	icon_state = "enginseerhood"
 	item_state = "enginseerhood"
 	body_parts_covered = HEAD
