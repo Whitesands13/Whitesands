@@ -39,6 +39,7 @@
 	target_mobtypes = list(/mob/living/carbon/human)
 	possible_locs = list(BODY_ZONE_R_ARM,BODY_ZONE_L_ARM,BODY_ZONE_R_LEG,BODY_ZONE_L_LEG,BODY_ZONE_CHEST,BODY_ZONE_HEAD)
 	requires_real_bodypart = TRUE
+	self_operable = TRUE //WS Edit - Re-enables self-augmentation. Other surgeries performed on organics still require autodoc or someone else to assist you.
 
 //SURGERY STEP SUCCESSES
 
