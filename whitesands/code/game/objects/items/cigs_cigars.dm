@@ -105,8 +105,8 @@
 /obj/item/storage/fancy/cigarettes/cigpack_donkco/Initialize()
 	. = ..()
 	if(prob(7))
+		new /obj/item/storage/fancy/cigarettes/cigpack_donkco/pocket(get_turf(src))
 		qdel(src)
-		new /obj/item/storage/fancy/cigarettes/cigpack_donkco/pocket(src)
 
 /obj/item/storage/fancy/cigarettes/cigpack_donkco/pocket
 	spawn_type = /obj/item/reagent_containers/food/snacks/donkpocket/warm
@@ -256,10 +256,9 @@
 	smoke_type = "waffle"
 
 /obj/item/clothing/mask/cigarette/waffleco/Initialize()
-    . = ..()
-    if(!prob(25))
-        return
-    reagents?.add_reagent(/datum/reagent/consumable/secretsauce = 5)
+	if(prob(25))
+		list_reagents += list(/datum/reagent/consumable/secretsauce = 5)
+	. = ..()
 
 /obj/item/clothing/mask/cigarette/solgov
 	desc = "A duty-free solgov cigarette, refreshing."
@@ -273,9 +272,8 @@
 	smoke_type = "superfresh"
 
 /obj/item/clothing/mask/cigarette/superfresh/Initialize()
-	. = ..()
 	list_reagents = list(/datum/reagent/drug/nicotine = 10, get_random_reagent_id() = rand(5,20))
-	grind_results = list_reagents
+	. = ..()
 
 /obj/item/clothing/mask/cigarette/loko
 	desc = "A potentially highly dangerous and super sweet space gamer cigarette, Rumored to have been taken off the market for \"Safety Concerns\" years ago."

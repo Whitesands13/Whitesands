@@ -1,3 +1,5 @@
+#define MAX_DERRINGER_DISPLAY_BULLETS 5
+
 /obj/item/storage/fancy/cigarettes/cigars/derringer
 	name = "\improper Robusto cigar case"
 	desc = "Smoked by the robust."
@@ -31,9 +33,10 @@
 			var/mutable_appearance/inserted_overlay = mutable_appearance('whitesands/icons/obj/cigarettes.dmi')
 
 			if(istype(C, /obj/item/ammo_casing/a357))
-				inserted_overlay.icon_state = "overlay_bullet"
-				inserted_overlay.icon_state = "[inserted_overlay.icon_state]_[bullet_position]"
-				. += inserted_overlay
+				if(bullet_position <= MAX_DERRINGER_DISPLAY_BULLETS)
+					inserted_overlay.icon_state = "overlay_bullet"
+					inserted_overlay.icon_state = "[inserted_overlay.icon_state]_[bullet_position]"
+					. += inserted_overlay
 				bullet_position++
 
 			if(istype(C, /obj/item/clothing/mask/cigarette/cigar))
@@ -43,6 +46,7 @@
 					inserted_overlay.icon_state = "overlay_cigar_gold"
 				else
 					inserted_overlay.icon_state = "overlay_cigar"
+				. += inserted_overlay
 
 			if(istype(C, /obj/item/gun/ballistic/derringer))
 				if(istype(C, /obj/item/gun/ballistic/derringer/traitor))
@@ -51,9 +55,7 @@
 					inserted_overlay.icon_state = "gold_gun"
 				else
 					inserted_overlay.icon_state = "normal_gun"
-
-			inserted_overlay.icon_state = "[inserted_overlay.icon_state]"
-			. += inserted_overlay
+				. += inserted_overlay
 
 /obj/item/storage/fancy/cigarettes/cigars/derringer/PopulateContents()
 	new spawn_type(src)
@@ -79,3 +81,5 @@
 	new /obj/item/ammo_casing/a357(src)
 	new /obj/item/ammo_casing/a357(src)
 	new /obj/item/clothing/mask/cigarette/cigar/gold(src)
+
+#undef MAX_DERRINGER_DISPLAY_BULLETS
