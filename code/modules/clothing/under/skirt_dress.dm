@@ -88,3 +88,11 @@
 	desc = "A preppy green skirt with a white blouse."
 	icon_state = "plaid_green"
 	item_state = "plaid_green"
+
+// WS Begin - Bimbo Skirt
+/obj/item/clothing/under/dress/skirt/bimbo
+	name = "bimbo skirt"
+	desc = "A skirt in the style appropriate for a vivacious bimbo."
+	icon_state = "bimbo_skirt"
+	item_state = "bimbo_skirt"
+// WS End - Bimbo Skirt

@@ -67,6 +67,7 @@
 		            /obj/item/clothing/under/dress/skirt/blue = 2,
 		            /obj/item/clothing/under/dress/skirt/red = 2,
 		            /obj/item/clothing/under/dress/skirt/purple = 2,
+					/obj/item/clothing/under/dress/skirt/bimbo = 5, // WS Edit - Bimbo Skirt
 		            /obj/item/clothing/under/suit/white/skirt = 2,
 		            /obj/item/clothing/under/rank/command/captain/suit/skirt = 2,
 		            /obj/item/clothing/under/rank/command/head_of_personnel/suit/skirt = 2,
