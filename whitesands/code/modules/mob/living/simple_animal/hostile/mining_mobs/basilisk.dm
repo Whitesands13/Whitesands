@@ -139,16 +139,6 @@ mob/living/simple_animal/hostile/asteroid/basilisk/proc/cool_down()
 		handle_preattack()
 	if(stat == DEAD)
 		return
-	switch(health)
-		if(135 to 175)
-			icon_state = "basilisk_sands_crack"
-		if(-4000 to 135)
-			icon_state = "basilisk_sands_cracked"
-			armor = null		// Armor comes from the hypothetical shell
-			if(!looted)
-				for(var/l in shell_loot)
-					new l(loc)
-					looted = TRUE
 
 /mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/proc/handle_preattack()
 	var/mutable_appearance/charging = mutable_appearance(icon, "basilisk_sands_charge")
@@ -179,7 +169,7 @@ mob/living/simple_animal/hostile/asteroid/basilisk/proc/cool_down()
 
 mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/attacked_by(obj/item/I, mob/living/user)
 	..()
-	Life()
+	update_shell_state()
 
 /mob/living/simple_animal/hostile/asteroid/death(gibbed)
 	..()
@@ -187,11 +177,24 @@ mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/attacked_by(obj/it
 
 mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/bullet_act(obj/projectile/P)
 	..()
-	Life()
+	update_shell_state()
 
 /mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum)
 	..()
-	Life()
+	update_shell_state()
+
+/mob/living/simple_animal/hostile/asteroid/basilisk/whitesands/proc/update_shell_state()
+	switch(health)
+		if(135 to 175)
+			icon_state = "basilisk_sands_crack"
+		if(-4000 to 135)
+			icon_state = "basilisk_sands_cracked"
+			armor = null		// Armor comes from the hypothetical shell
+			if(!looted)
+				for(var/l in shell_loot)
+					new l(loc)
+					looted = TRUE
+
 
 #undef LEGIONVIRUS_TYPE
 
