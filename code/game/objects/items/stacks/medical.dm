@@ -12,7 +12,6 @@
 	max_integrity = 40
 	novariants = FALSE
 	item_flags = NOBLUDGEON
-	var/splint_fracture = FALSE //WS Edit- Splints
 	var/failure_chance //WS Edit - Failure chance
 	var/self_delay = 50
 	var/other_delay = 0
@@ -84,25 +83,6 @@
 		if(affecting.heal_damage(brute2heal, burn2heal))
 			C.update_damage_overlays()
 		return TRUE
-
-
-	//WS Begin - Splints
-	if(splint_fracture) //Check if it's a splint and the bone is broken
-		if(affecting.body_part in list(CHEST, HEAD)) // Check if it isn't the head or chest
-			to_chat(user, "<span class='warning'>You can't splint that bodypart!</span>")
-			return
-		else if(affecting.bone_status == BONE_FLAG_SPLINTED) // Check if it isn't already splinted
-			to_chat(user, "<span class='warning'>[C]'s [affecting.name] is already splinted!</span>")
-			return
-		else if(!(affecting.bone_status == BONE_FLAG_BROKEN)) // Check if it's actually broken
-			to_chat(user, "<span class='warning'>[C]'s [affecting.name] isn't broken!</span>")
-			return
-		affecting.bone_status = BONE_FLAG_SPLINTED
-		C.update_inv_splints()
-		user.visible_message("<span class='green'>[user] applies [src] on [C].</span>", "<span class='green'>You apply [src] on [C]'s [affecting.name].</span>")
-		return TRUE
-	//WS End
-
 
 	to_chat(user, "<span class='warning'>[C]'s [affecting.name] can not be healed with \the [src]!</span>")
 

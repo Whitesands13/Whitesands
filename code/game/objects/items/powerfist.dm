@@ -104,12 +104,12 @@
 	playsound(loc, 'sound/weapons/resonator_blast.ogg', 50, TRUE)
 	playsound(loc, 'sound/weapons/genhit2.ogg', 50, TRUE)
 
-    var/atom/throw_target = get_edge_target_turf(target, get_dir(src, get_step_away(target, src)))
+	var/atom/throw_target = get_edge_target_turf(target, get_dir(src, get_step_away(target, src)))
 
-    target.throw_at(throw_target, 5 * fisto_setting, 0.5 + (fisto_setting / 2))
+	target.throw_at(throw_target, 5 * fisto_setting, 0.5 + (fisto_setting / 2))
 
-    log_combat(user, target, "power fisted", src)
+	log_combat(user, target, "power fisted", src)
 
-    user.changeNext_move(CLICK_CD_MELEE * click_delay)
+	user.changeNext_move(CLICK_CD_MELEE * click_delay)
 
-    return
+	return
