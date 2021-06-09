@@ -20,6 +20,7 @@
 	var/use_digitigrade = NOT_DIGITIGRADE //Used for alternate legs, useless elsewhere
 	var/list/embedded_objects = list()
 	var/held_index = 0 //are we a hand? if so, which one!
+	var/render_like_organic = FALSE	// TRUE is for when you want a BODYPART_ROBOTIC to pretend to be a BODYPART_ORGANIC.	//WS edit - IPCs
 	var/is_pseudopart = FALSE //For limbs that don't really exist, eg chainsaws
 
 	var/disabled = BODYPART_NOT_DISABLED //If disabled, limb is as good as missing
@@ -536,7 +537,6 @@
 		owner.dropItemToGround(owner.get_item_for_held_index(held_index))
 	owner.update_health_hud() //update the healthdoll
 	owner.update_body()
-	owner.update_mobility()
 	return TRUE //if there was a change.
 
 //Updates an organ's brute/burn states for use by update_damage_overlays()
@@ -612,7 +612,7 @@
 		else
 			skin_tone = ""
 
-		body_gender = H.body_type
+		body_gender = H.gender
 		should_draw_gender = S.sexes
 
 		if((MUTCOLORS in S.species_traits) || (DYNCOLORS in S.species_traits))
@@ -688,7 +688,7 @@
 	if((body_zone != BODY_ZONE_HEAD && body_zone != BODY_ZONE_CHEST))
 		should_draw_gender = FALSE
 
-	if(is_organic_limb())
+	if(is_organic_limb() || (status == BODYPART_ROBOTIC && render_like_organic == TRUE))	// So IPC augments can be colorful without disrupting normal BODYPART_ROBOTIC render code.
 		if(should_draw_greyscale)
 			limb.icon = 'icons/mob/human_parts_greyscale.dmi'
 			if(should_draw_gender)

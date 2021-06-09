@@ -377,9 +377,9 @@
 
 /obj/item/clothing/update_overlays()
 	. = ..()
+	var/index = "[REF(initial(icon))]-[initial(icon_state)]"
+	var/static/list/damaged_clothes_icons = list()
 	if(damaged_clothes)
-		var/index = "[REF(initial(icon))]-[initial(icon_state)]"
-		var/static/list/damaged_clothes_icons = list()
 		var/icon/damaged_clothes_icon = damaged_clothes_icons[index]
 		if(!damaged_clothes_icon)
 			damaged_clothes_icon = icon(initial(icon), initial(icon_state), , 1)	//we only want to apply damaged effect to the initial icon_state for each object

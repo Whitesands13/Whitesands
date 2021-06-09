@@ -94,7 +94,7 @@
 	icon_state = "brutepack"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
-	var/heal_brute = 40
+	heal_brute = 40
 	self_delay = 20
 	grind_results = list(/datum/reagent/medicine/styptic_powder = 10)
 
@@ -211,7 +211,7 @@
 	icon_state = "ointment"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
-	var/heal_burn = 40
+	heal_burn = 40
 	self_delay = 20
 	grind_results = list(/datum/reagent/medicine/silver_sulfadiazine = 10)
 
@@ -294,7 +294,7 @@
 	heal_burn = 5
 	flesh_regeneration = 2.5
 	sanitization = 0.25
-	grind_results = list(/datum/reagent/medicine/c2/lenturi = 10)
+	grind_results = list((/datum/reagent/medicine/silver_sulfadiazine = 10))
 
 /obj/item/stack/medical/ointment/heal(mob/living/M, mob/user)
 	if(M.stat == DEAD)

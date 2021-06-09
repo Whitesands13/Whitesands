@@ -425,8 +425,7 @@
 	block_chance = 55
 	armour_penetration = 80
 	wound_bonus = -50
-	attack_verb_continuous = list("slaps", "slathers")
-	attack_verb_simple = list("slap", "slather")
+	attack_verb = list("slapped", "slathered")
 	w_class = WEIGHT_CLASS_BULKY
 	tastes = list("cherry" = 1, "crepe" = 1)
 	foodtype = GRAIN | FRUIT | SUGAR

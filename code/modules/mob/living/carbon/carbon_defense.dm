@@ -551,7 +551,7 @@
 	name = "self-grasp"
 	desc = "Sometimes all you can do is slow the bleeding."
 	icon_state = "latexballon"
-	inhand_icon_state = "nothing"
+	item_state = "nothing"
 	force = 0
 	throwforce = 0
 	slowdown = 1

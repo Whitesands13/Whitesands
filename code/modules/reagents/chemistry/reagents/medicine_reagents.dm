@@ -1052,7 +1052,7 @@
 	M.adjustBruteLoss(-2*REM, 0)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		H.bleed_rate = max(H.bleed_rate - 0.25, 0)
+
 	..()
 	. = 1
 
@@ -1580,7 +1580,7 @@
 	if(prob(50))
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
-			H.bleed_rate = max(H.bleed_rate - 2, 0)
+
 	..()
 	. = 1
 
@@ -1669,7 +1669,7 @@
 		if(31 to INFINITY)
 			C.AdjustSleeping(40)
 			for(var/obj/item/bodypart/B in C.bodyparts)
-				B.fix_bone()
+//				B.fix_bone()
 			for(var/obj/item/organ/O in C.internal_organs)
 				O.damage = 0
 			holder.remove_reagent(/datum/reagent/medicine/bonefixingjuice, 10)

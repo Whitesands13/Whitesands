@@ -87,6 +87,7 @@
 #define ADMIN_PUNISHMENT_BLEED ":B:loodless"
 #define ADMIN_PUNISHMENT_PERFORATE ":B:erforate"
 #define ADMIN_PUNISHMENT_SCARIFY "Scarify"
+#define ADMIN_PUNISHMENT_SHOES "Knot Shoes"
 #define ADMIN_PUNISHMENT_NYA "Neko"//WS Edit - Admin Punishment: Cat Tongue
 
 #define AHELP_ACTIVE 1

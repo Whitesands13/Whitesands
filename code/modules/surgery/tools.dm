@@ -74,7 +74,7 @@
 	force = 10		//WS Edit - Makes drill weaker than circular saw
 	w_class = WEIGHT_CLASS_NORMAL
 	attack_verb = list("drilled")
-	sharpness = IS_SHARP		//WS Edit - Makes the Drill sharp
+	sharpness = SHARP_POINTY
 	tool_behaviour = TOOL_DRILL
 	toolspeed = 1
 	sharpness = SHARP_POINTY

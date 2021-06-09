@@ -502,7 +502,7 @@
 	speed = 0.5
 
 /obj/projectile/bullet/reusable/gumball/harmful
-	ammo_type = /obj/item/reagent_containers/food/snacks/chewable/gumball/cyborg
+	ammo_type = /obj/item/reagent_containers/food/snacks/gumball/cyborg
 	nodamage = FALSE
 	damage = 3
 

@@ -342,7 +342,7 @@ SUBSYSTEM_DEF(ticker)
 
 	if(CONFIG_GET(flag/allow_crew_objectives))
 		generate_crew_objectives()
-	// handle persistence stuff that requires ckeys, in this case hardcore mode and temporal scarring
+	// handle persistence stuff that requires ckeys, in this case temporal scarring
 	for(var/i in GLOB.player_list)
 		if(!ishuman(i))
 			continue
@@ -350,12 +350,6 @@ SUBSYSTEM_DEF(ticker)
 
 		iter_human.increment_scar_slot()
 		iter_human.load_persistent_scars()
-
-		if(!iter_human.hardcore_survival_score)
-			continue
-		if(iter_human.mind?.special_role)
-			iter_human.hardcore_survival_score *= 2 //Double for antags
-		to_chat(iter_human, "<span class='notice'>You will gain [round(iter_human.hardcore_survival_score)] hardcore random points if you survive this round!</span>")
 
 
 //These callbacks will fire after roundstart key transfer
