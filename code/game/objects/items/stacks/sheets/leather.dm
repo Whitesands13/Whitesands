@@ -177,11 +177,11 @@ GLOBAL_LIST_INIT(leather_recipes, list ( \
 	icon_state = "sinew"
 	novariants = TRUE
 
-/obj/item/stack/sheet/sinew/wolf
-	name = "wolf sinew"
-	desc = "Long stringy filaments which came from the insides of a wolf."
-	singular_name = "wolf sinew"
-	merge_type = /obj/item/stack/sheet/sinew/wolf
+/obj/item/stack/sheet/sinew/dog
+	name = "dog sinew"
+	desc = "Long stringy filaments which came from the insides of a dog."
+	singular_name = "dog sinew"
+	merge_type = /obj/item/stack/sheet/sinew/dog
 
 GLOBAL_LIST_INIT(sinew_recipes, list ( \
 	new/datum/stack_recipe("sinew restraints", /obj/item/restraints/handcuffs/cable/sinew, 1), \

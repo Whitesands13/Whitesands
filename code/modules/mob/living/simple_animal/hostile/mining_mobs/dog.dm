@@ -1,10 +1,10 @@
-/mob/living/simple_animal/hostile/asteroid/wolf
-	name = "white wolf"
+/mob/living/simple_animal/hostile/asteroid/dog
+	name = "white dog"
 	desc = "A beast that survives by feasting on weaker opponents, they're much stronger with numbers."
 	icon = 'icons/mob/icemoon/icemoon_monsters.dmi'
-	icon_state = "whitewolf"
-	icon_living = "whitewolf"
-	icon_dead = "whitewolf_dead"
+	icon_state = "whitedog"
+	icon_living = "whitedog"
+	icon_dead = "whitedog_dead"
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	mouse_opacity = MOUSE_OPACITY_ICON
 	friendly_verb_continuous = "howls at"
@@ -28,21 +28,21 @@
 	move_force = MOVE_FORCE_WEAK
 	move_resist = MOVE_FORCE_WEAK
 	pull_force = MOVE_FORCE_WEAK
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab = 2, /obj/item/stack/sheet/sinew/wolf = 2, /obj/item/stack/sheet/bone = 2)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab = 2, /obj/item/stack/sheet/sinew/dog = 2, /obj/item/stack/sheet/bone = 2)
 	loot = list()
 	crusher_loot = /obj/item/crusher_trophy/watcher_wing
 	stat_attack = HARD_CRIT
 	robust_searching = TRUE
 	footstep_type = FOOTSTEP_MOB_CLAW
-	/// Message for when the wolf decides to start running away
+	/// Message for when the dog decides to start running away
 	var/retreat_message_said = FALSE
 
-/mob/living/simple_animal/hostile/asteroid/wolf/Move(atom/newloc)
+/mob/living/simple_animal/hostile/asteroid/dog/Move(atom/newloc)
 	if(newloc && newloc.z == z && (islava(newloc) || ischasm(newloc)))
 		return FALSE
 	return ..()
 
-/mob/living/simple_animal/hostile/asteroid/wolf/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/simple_animal/hostile/asteroid/dog/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	. = ..()
 	if(stat == DEAD || health > maxHealth*0.1)
 		retreat_distance = initial(retreat_distance)
@@ -52,7 +52,7 @@
 		retreat_message_said = TRUE
 	retreat_distance = 30
 
-/mob/living/simple_animal/hostile/asteroid/wolf/Life()
+/mob/living/simple_animal/hostile/asteroid/dog/Life()
 	. = ..()
 	if(!. || target)
 		return
