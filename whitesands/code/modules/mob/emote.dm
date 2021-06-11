@@ -27,3 +27,15 @@
 						riding_datum.force_dismount(M)
 			else
 				L.unbuckle_all_mobs()
+
+/datum/emote/sex
+	key = "sex"
+	key_third_person = "DOES AN ILLEGAL"
+	hands_use_check = TRUE
+	mob_type_allowed_typecache = list(/mob/living)
+
+/datum/emote/sex/run_emote(mob/user, params, type_override, intentional)
+	. = ..()
+	if(.)
+		playsound(user, 'sound/effects/adminhelp.ogg', 500, 1, 1)
+		user.gib()
