@@ -9,6 +9,7 @@ GLOBAL_VAR_INIT(hsboxspawn, TRUE)
 
 /mob/proc/sandbox_panel()
 	set name = "Sandbox Panel"
+	set category = "Sandbox"    // WS edit - makes verb visible
 	if(sandbox)
 		sandbox.update()
 
