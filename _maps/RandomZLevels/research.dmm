@@ -3466,6 +3466,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
+/obj/effect/landmark/awaystart,
 /turf/open/floor/plasteel/freezer,
 /area/awaymission/research/interior/bathroom)
 "iD" = (
@@ -5317,6 +5318,11 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/awaymission/research/interior/secure)
+"nM" = (
+/obj/structure/window/reinforced,
+/obj/effect/landmark/awaystart,
+/turf/open/floor/plasteel/dark,
+/area/awaymission/research/interior/gateway)
 "nY" = (
 /obj/machinery/door/airlock/maintenance_hatch{
 	name = "Security Maintenance";
@@ -5632,6 +5638,7 @@
 /obj/structure/cable{
 	icon_state = "2-4"
 	},
+/obj/effect/landmark/awaystart,
 /turf/open/floor/plasteel/dark,
 /area/awaymission/research/interior/gateway)
 "vD" = (
@@ -5687,7 +5694,9 @@
 /turf/open/floor/plasteel/white,
 /area/awaymission/research/interior)
 "wR" = (
-/obj/machinery/gateway/away,
+/obj/machinery/gateway/away{
+	calibrated = 0
+	},
 /turf/open/floor/plasteel/dark,
 /area/awaymission/research/interior/gateway)
 "xn" = (
@@ -5928,6 +5937,7 @@
 /obj/machinery/door/window/eastright{
 	dir = 2
 	},
+/obj/effect/landmark/awaystart,
 /turf/open/floor/plasteel/dark,
 /area/awaymission/research/interior/gateway)
 "Fb" = (
@@ -6014,6 +6024,10 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/awaymission/research/interior/secure)
+"JA" = (
+/obj/effect/landmark/awaystart,
+/turf/open/floor/plasteel/dark,
+/area/awaymission/research/interior/gateway)
 "JM" = (
 /obj/effect/turf_decal/tile/red{
 	dir = 1
@@ -6301,6 +6315,13 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/awaymission/research/interior/security)
+"Sh" = (
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj/effect/landmark/awaystart,
+/turf/open/floor/plasteel/dark,
+/area/awaymission/research/interior/gateway)
 "Sq" = (
 /obj/machinery/power/apc/highcap/ten_k{
 	auto_name = 1;
@@ -6416,6 +6437,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
+/obj/effect/landmark/awaystart,
 /turf/open/floor/plasteel/dark,
 /area/awaymission/research/interior/gateway)
 "VZ" = (
@@ -34905,9 +34927,9 @@ bl
 bA
 bS
 bY
-cj
-bz
-bz
+nM
+JA
+JA
 bl
 cp
 cp
@@ -35419,9 +35441,9 @@ bl
 bC
 bU
 ca
-cj
-Xs
-bz
+nM
+Sh
+JA
 bl
 cp
 cp
