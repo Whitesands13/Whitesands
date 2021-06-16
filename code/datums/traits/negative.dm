@@ -218,7 +218,6 @@
 	gain_text = "<span class='danger'>You feel frail.</span>"
 	lose_text = "<span class='notice'>You feel sturdy again.</span>"
 	medical_record_text = "Patient is absurdly easy to injure. Please take all due dilligence to avoid possible malpractice suits."
-	hardcore_value = 4
 
 /datum/quirk/heavy_sleeper
 	name = "Heavy Sleeper"
