@@ -128,7 +128,7 @@
 	if(!.)
 		return
 	ADD_TRAIT(H, TRAIT_NOGUNS, SLEEPING_CARP_TRAIT)
-	ADD_TRAIT(H, TRAIT_HARDLIMBWOUND, SLEEPING_CARP_TRAIT)
+	ADD_TRAIT(H, TRAIT_HARDLY_WOUNDED, SLEEPING_CARP_TRAIT)
 	ADD_TRAIT(H, TRAIT_NODISMEMBER, SLEEPING_CARP_TRAIT)
 	H.physiology.brute_mod *= 0.4 //brute is really not gonna cut it
 	H.physiology.burn_mod *= 0.7 //burn is distinctly more useful against them than brute but they're still resistant
@@ -143,7 +143,7 @@
 /datum/martial_art/the_sleeping_carp/on_remove(mob/living/carbon/human/H)
 	. = ..()
 	REMOVE_TRAIT(H, TRAIT_NOGUNS, SLEEPING_CARP_TRAIT)
-	REMOVE_TRAIT(H, TRAIT_HARDLIMBWOUND, SLEEPING_CARP_TRAIT)
+	REMOVE_TRAIT(H, TRAIT_HARDLY_WOUNDED, SLEEPING_CARP_TRAIT)
 	REMOVE_TRAIT(H, TRAIT_NODISMEMBER, SLEEPING_CARP_TRAIT)
 	H.physiology.brute_mod = initial(H.physiology.brute_mod)
 	H.physiology.burn_mod = initial(H.physiology.burn_mod)
