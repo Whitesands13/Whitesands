@@ -209,6 +209,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 //non-mob traits
 /// Used for limb-based paralysis, where replacing the limb will fix it.
 #define TRAIT_PARALYSIS				"paralysis"
+/// Used for limbs.
+#define TRAIT_DISABLED_BY_WOUND		"disabled-by-wound"
 
 #define TRAIT_KEEP_TOGETHER 	"keep-together"
 
