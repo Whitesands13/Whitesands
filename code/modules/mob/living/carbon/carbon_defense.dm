@@ -522,6 +522,13 @@
 	else if(getOxyLoss() <= 50)
 		REMOVE_TRAIT(src, TRAIT_KNOCKEDOUT, OXYLOSS_TRAIT)
 
+/mob/living/carbon/get_organic_health()
+	. = health
+	for (var/_limb in bodyparts)
+		var/obj/item/bodypart/limb = _limb
+		if (limb.status != BODYPART_ORGANIC)
+			. += (limb.brute_dam * limb.body_damage_coeff) + (limb.burn_dam * limb.body_damage_coeff)
+
 /mob/living/carbon/grabbedby(mob/living/carbon/user, supress_message = FALSE)
 	if(user != src)
 		return ..()
