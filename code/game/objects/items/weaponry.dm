@@ -683,7 +683,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	icon_state = "madeyoulook"
 	force = 0
 	throwforce = 0
-	item_flags = DROPDEL | ABSTRACT
+	item_flags = DROPDEL | ABSTRACT | HAND_ITEM
 	attack_verb = list("bopped")
 
 /obj/item/circlegame/Initialize()
@@ -781,7 +781,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	item_state = "nothing"
 	force = 0
 	throwforce = 0
-	item_flags = DROPDEL | ABSTRACT
+	item_flags = DROPDEL | ABSTRACT | HAND_ITEM
 	attack_verb = list("slapped")
 	hitsound = 'sound/effects/snap.ogg'
 
