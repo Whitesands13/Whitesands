@@ -55,6 +55,7 @@ GLOBAL_LIST_INIT(trash_loot, list(//junk: useless, very easy to get, or ghetto c
 
 		/obj/item/reagent_containers/pill/floorpill = 1,
 		/obj/item/toy/eightball = 1,
+		/obj/item/clothing/mask/cigarette/superfresh = 1,	//WS EDIT - Maint Cig
 		) = 8,
 
 	list(//tier 1 stock parts
@@ -121,7 +122,7 @@ GLOBAL_LIST_INIT(common_loot, list( //common: basic items
 		) = 1,
 
 	list(//medical and chemicals
-		/obj/item/storage/fancy/cigarettes/dromedaryco = 1,
+		/obj/item/storage/fancy/cigarettes/cigpack_donkco = 1, //WS EDIT - Cigarettes
 		/obj/item/grenade/chem_grenade/cleaner = 1,
 		/obj/item/storage/box/matches = 1,
 		/obj/item/reagent_containers/syringe = 1,
