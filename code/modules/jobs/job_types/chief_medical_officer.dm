@@ -15,7 +15,8 @@
 	exp_type_department = EXP_TYPE_MEDICAL
 	wiki_page = "Chief_Medical_Officer"
 
-	roundstart_experience = list(/datum/skill/healing = 1000)
+	skills = list(/datum/skill/healing = SKILL_EXP_JOURNEYMAN)
+	minimal_skills = list(/datum/skill/healing = SKILL_EXP_JOURNEYMAN)
 
 	outfit = /datum/outfit/job/cmo
 
