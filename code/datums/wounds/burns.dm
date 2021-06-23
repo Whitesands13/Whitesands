@@ -284,20 +284,3 @@
 	infestation_rate = 0.05 // appx 13 minutes to reach sepsis without any treatment
 	flesh_damage = 12.5
 	scar_keyword = "burnsevere"
-
-/datum/wound/burn/critical
-	name = "Catastrophic Burns"
-	desc = "Patient is suffering near complete loss of tissue and significantly charred muscle and bone, creating life-threatening risk of infection and negligible limb integrity."
-	treat_text = "Immediate surgical debriding of any infected skin, followed by potent tissue regeneration formula and bandaging."
-	examine_desc = "is a ruined mess of blanched bone, melted fat, and charred tissue"
-	occur_text = "vaporizes as flesh, bone, and fat melt together in a horrifying mess"
-	severity = WOUND_SEVERITY_CRITICAL
-	damage_mulitplier_penalty = 1.3
-	sound_effect = 'sound/effects/wounds/sizzle2.ogg'
-	threshold_minimum = 140
-	threshold_penalty = 80
-	status_effect_type = /datum/status_effect/wound/burn/critical
-	treatable_by = list(/obj/item/flashlight/pen/paramedic, /obj/item/stack/medical/ointment, /obj/item/stack/medical/mesh)
-	infestation_rate = 0.15 // appx 4.33 minutes to reach sepsis without any treatment
-	flesh_damage = 20
-	scar_keyword = "burncritical"

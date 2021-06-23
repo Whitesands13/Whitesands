@@ -65,13 +65,11 @@
 	precise_location = pick_list_replacements(SCAR_LOC_FILE, limb.body_zone)
 	switch(W.severity)
 		if(WOUND_SEVERITY_MODERATE)
-			visibility = 2
+			visibility = SCAR_VISIBILITY_MODERATE
 		if(WOUND_SEVERITY_SEVERE)
-			visibility = 3
-		if(WOUND_SEVERITY_CRITICAL)
-			visibility = 5
+			visibility = SCAR_VISIBILITY_SEVERE
 		if(WOUND_SEVERITY_LOSS)
-			visibility = 7
+			visibility = SCAR_VISIBILITY_LOSS
 			precise_location = "amputation"
 
 /// Used when we finalize a scar from a healing cut
@@ -104,13 +102,11 @@
 	precise_location = specific_location
 	switch(severity)
 		if(WOUND_SEVERITY_MODERATE)
-			visibility = 2
+			visibility = SCAR_VISIBILITY_MODERATE
 		if(WOUND_SEVERITY_SEVERE)
-			visibility = 3
-		if(WOUND_SEVERITY_CRITICAL)
-			visibility = 5
+			visibility = SCAR_VISIBILITY_SEVERE
 		if(WOUND_SEVERITY_LOSS)
-			visibility = 7
+			visibility = SCAR_VISIBILITY_LOSS
 	return src
 
 /// What will show up in examine_more() if this scar is visible
@@ -124,8 +120,6 @@
 			msg = "<span class='tinynoticeital'>[msg]</span>"
 		if(WOUND_SEVERITY_SEVERE)
 			msg = "<span class='smallnoticeital'>[msg]</span>"
-		if(WOUND_SEVERITY_CRITICAL)
-			msg = "<span class='smallnoticeital'><b>[msg]</b></span>"
 		if(WOUND_SEVERITY_LOSS)
 			msg = "[victim.p_their(TRUE)] [limb.name] [description]." // different format
 			msg = "<span class='notice'><i><b>[msg]</b></i></span>"

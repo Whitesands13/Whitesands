@@ -245,7 +245,7 @@
 
 
 /datum/wound/slash/moderate
-	name = "Rough Abrasion"
+	name = "Minor Bleeding"
 	desc = "Patient's skin has been badly scraped, generating moderate blood loss."
 	treat_text = "Application of clean bandages or first-aid grade sutures, followed by food and rest."
 	examine_desc = "has an open cut"
@@ -262,7 +262,7 @@
 	scar_keyword = "slashmoderate"
 
 /datum/wound/slash/severe
-	name = "Open Laceration"
+	name = "Heavy Bleeding"
 	desc = "Patient's skin is ripped clean open, allowing significant blood loss."
 	treat_text = "Speedy application of first-aid grade sutures and clean bandages, followed by vitals monitoring to ensure recovery."
 	examine_desc = "has a severe cut"
@@ -279,21 +279,3 @@
 	status_effect_type = /datum/status_effect/wound/slash/severe
 	scar_keyword = "slashsevere"
 
-/datum/wound/slash/critical
-	name = "Weeping Avulsion"
-	desc = "Patient's skin is completely torn open, along with significant loss of tissue. Extreme blood loss will lead to quick death without intervention."
-	treat_text = "Immediate bandaging and either suturing or cauterization, followed by supervised resanguination."
-	examine_desc = "is carved down to the bone, spraying blood wildly"
-	occur_text = "is torn open, spraying blood wildly"
-	sound_effect = 'sound/effects/wounds/blood3.ogg'
-	severity = WOUND_SEVERITY_CRITICAL
-	initial_flow = 4.25
-	minimum_flow = 4
-	clot_rate = -0.05 // critical cuts actively get worse instead of better
-	max_per_type = 5
-	threshold_minimum = 80
-	threshold_penalty = 40
-	demotes_to = /datum/wound/slash/severe
-	status_effect_type = /datum/status_effect/wound/slash/critical
-	scar_keyword = "slashcritical"
-	wound_flags = (FLESH_WOUND | ACCEPTS_GAUZE | MANGLES_FLESH)

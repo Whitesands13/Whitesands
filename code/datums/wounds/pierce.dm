@@ -159,21 +159,3 @@
 	threshold_penalty = 35
 	status_effect_type = /datum/status_effect/wound/pierce/severe
 	scar_keyword = "piercesevere"
-
-/datum/wound/pierce/critical
-	name = "Ruptured Cavity"
-	desc = "Patient's internal tissue and circulatory system is shredded, causing significant internal bleeding and damage to internal organs."
-	treat_text = "Surgical repair of puncture wound, followed by supervised resanguination."
-	examine_desc = "is ripped clear through, barely held together by exposed bone"
-	occur_text = "blasts apart, sending chunks of viscera flying in all directions"
-	sound_effect = 'sound/effects/wounds/pierce3.ogg'
-	severity = WOUND_SEVERITY_CRITICAL
-	initial_flow = 3
-	gauzed_clot_rate = 0.4
-	internal_bleeding_chance = 80
-	internal_bleeding_coefficient = 1.75
-	threshold_minimum = 100
-	threshold_penalty = 50
-	status_effect_type = /datum/status_effect/wound/pierce/critical
-	scar_keyword = "piercecritical"
-	wound_flags = (FLESH_WOUND | ACCEPTS_GAUZE | MANGLES_FLESH)

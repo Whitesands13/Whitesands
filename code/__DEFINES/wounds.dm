@@ -18,10 +18,14 @@
 #define WOUND_SEVERITY_TRIVIAL	0
 #define WOUND_SEVERITY_MODERATE	1
 #define WOUND_SEVERITY_SEVERE	2
-#define WOUND_SEVERITY_CRITICAL	3
 /// outright dismemberment of limb
-#define WOUND_SEVERITY_LOSS		4
+#define WOUND_SEVERITY_LOSS		3
 
+// WS defines - Remove scar magic numbers
+#define SCAR_VISIBILITY_MODERATE 2
+#define SCAR_VISIBILITY_SEVERE 4
+#define SCAR_VISIBILITY_LOSS 7
+// WS defines end
 
 // ~wound categories
 /// any brute weapon/attack that doesn't have sharpness. rolls for blunt bone wounds
@@ -46,17 +50,17 @@
 
 // ~wound global lists
 // list in order of highest severity to lowest
-GLOBAL_LIST_INIT(global_wound_types, list(WOUND_BLUNT = list(/datum/wound/blunt/critical, /datum/wound/blunt/severe, /datum/wound/blunt/moderate),
-		WOUND_SLASH = list(/datum/wound/slash/critical, /datum/wound/slash/severe, /datum/wound/slash/moderate),
-		WOUND_PIERCE = list(/datum/wound/pierce/critical, /datum/wound/pierce/severe, /datum/wound/pierce/moderate),
-		WOUND_BURN = list(/datum/wound/burn/critical, /datum/wound/burn/severe, /datum/wound/burn/moderate)
+GLOBAL_LIST_INIT(global_wound_types, list(WOUND_BLUNT = list(/datum/wound/blunt/severe, /datum/wound/blunt/moderate),
+		WOUND_SLASH = list(/datum/wound/slash/severe, /datum/wound/slash/moderate),
+		WOUND_PIERCE = list(/datum/wound/pierce/severe, /datum/wound/pierce/moderate),
+		WOUND_BURN = list(/datum/wound/burn/severe, /datum/wound/burn/moderate)
 		))
 
 // every single type of wound that can be rolled naturally, in case you need to pull a random one
-GLOBAL_LIST_INIT(global_all_wound_types, list(/datum/wound/blunt/critical, /datum/wound/blunt/severe, /datum/wound/blunt/moderate,
-	/datum/wound/slash/critical, /datum/wound/slash/severe, /datum/wound/slash/moderate,
-	/datum/wound/pierce/critical, /datum/wound/pierce/severe, /datum/wound/pierce/moderate,
-	/datum/wound/burn/critical, /datum/wound/burn/severe, /datum/wound/burn/moderate))
+GLOBAL_LIST_INIT(global_all_wound_types, list(/datum/wound/blunt/severe, /datum/wound/blunt/moderate,
+	/datum/wound/slash/severe, /datum/wound/slash/moderate,
+	/datum/wound/pierce/severe, /datum/wound/pierce/moderate,
+	/datum/wound/burn/severe, /datum/wound/burn/moderate))
 
 
 // ~burn wound infection defines

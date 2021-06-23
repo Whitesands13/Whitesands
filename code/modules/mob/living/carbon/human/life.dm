@@ -45,11 +45,6 @@
 			var/datum/wound/iter_wound = i
 			iter_wound.on_stasis()
 
-	//WS Begin - Broken bones
-	if(stat != DEAD)
-		handle_fractures()
-	//WS End
-
 	//Update our name based on whether our face is obscured/disfigured
 	name = get_visible_name()
 

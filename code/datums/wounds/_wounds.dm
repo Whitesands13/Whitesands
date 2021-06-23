@@ -154,9 +154,9 @@
 			msg = "<b>[msg]</b>"
 			vis_dist = DEFAULT_MESSAGE_RANGE
 
-		victim.visible_message(msg, "<span class='userdanger'>Your [limb.name] [occur_text]!</span>", vision_distance = vis_dist)
+		victim.skill_message(msg, "<span class='userdanger'>Your [limb.name] [occur_text]!</span>", vision_distance = vis_dist, skill = /datum/skill/healing, skill_level = SKILL_LEVEL_JOURNEYMAN)
 		if(sound_effect)
-			playsound(L.owner, sound_effect, 70 + 20 * severity, TRUE)
+			skillsound(L.owner, sound_effect, 70 + 20 * severity, TRUE, skill = /datum/skill/healing, skill_level = SKILL_LEVEL_JOURNEYMAN)
 
 	if(!demoted)
 		wound_injury(old_wound)
@@ -241,8 +241,6 @@
 			victim.reagents.add_reagent(/datum/reagent/determination, WOUND_DETERMINATION_MODERATE)
 		if(WOUND_SEVERITY_SEVERE)
 			victim.reagents.add_reagent(/datum/reagent/determination, WOUND_DETERMINATION_SEVERE)
-		if(WOUND_SEVERITY_CRITICAL)
-			victim.reagents.add_reagent(/datum/reagent/determination, WOUND_DETERMINATION_CRITICAL)
 		if(WOUND_SEVERITY_LOSS)
 			victim.reagents.add_reagent(/datum/reagent/determination, WOUND_DETERMINATION_LOSS)
 
@@ -363,5 +361,3 @@
 			return "Moderate"
 		if(WOUND_SEVERITY_SEVERE)
 			return "Severe"
-		if(WOUND_SEVERITY_CRITICAL)
-			return "Critical"

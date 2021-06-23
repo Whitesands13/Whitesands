@@ -281,12 +281,14 @@
 
 
 //change the mob's icon to the one matching its key
-/*/mob/living/carbon/proc/load_limb_from_cache()
+/mob/living/carbon/proc/load_limb_from_cache()
 	if(limb_icon_cache[icon_render_key])
 		remove_overlay(BODYPARTS_LAYER)
 		overlays_standing[BODYPARTS_LAYER] = limb_icon_cache[icon_render_key]
 		apply_overlay(BODYPARTS_LAYER)
 	update_damage_overlays()
+
+/*
 
 /mob/living/carbon/proc/update_inv_splints()
 	remove_overlay(SPLINT_LAYER)

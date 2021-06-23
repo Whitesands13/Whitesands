@@ -15,6 +15,8 @@
 	exp_type_department = EXP_TYPE_MEDICAL
 	wiki_page = "Chief_Medical_Officer"
 
+	roundstart_experience = list(/datum/skill/healing = 1000)
+
 	outfit = /datum/outfit/job/cmo
 
 	access = list(ACCESS_MEDICAL, ACCESS_PSYCHOLOGY, ACCESS_MORGUE, ACCESS_GENETICS, ACCESS_CLONING, ACCESS_PHARMACY, ACCESS_HEADS, ACCESS_MINERAL_STOREROOM, //WS edit - Gen/Sci Split
