@@ -48,3 +48,9 @@
 		M.adjustFireLoss(-2*REM, 0)
 	M.adjustStaminaLoss(-5*REM, 0)
 	..()
+
+/datum/reagent/consumable/coco/on_mob_life(mob/living/carbon/M)
+	if(isfelinid(M)) //If we are a felinid then we are also a human, so no need to typecheck both
+		var/mob/living/carbon/C = M
+		C.adjustToxLoss(2)
+	. = ..()

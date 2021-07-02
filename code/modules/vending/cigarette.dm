@@ -1,3 +1,6 @@
+/*
+		WS Edit - Moved to modular folder
+
 /obj/machinery/vending/cigarette
 	name = "\improper ShadyCigs Deluxe"
 	desc = "If you want to get cancer, might as well do it in style."
@@ -64,3 +67,4 @@
 	if(istype(I, /obj/item/lighter))
 		var/obj/item/lighter/L = I
 		L.set_lit(TRUE)
+*/
