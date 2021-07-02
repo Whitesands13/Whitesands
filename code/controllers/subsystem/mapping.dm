@@ -298,12 +298,11 @@ SUBSYSTEM_DEF(mapping)
 
 	GLOB.current_mining_map = config.minetype
 
-	if(config.minetype == "lavaland")
-		LoadGroup(FailedZs, "Lavaland", "map_files/Mining", "Lavaland.dmm", default_traits = ZTRAITS_LAVALAND)
-	else if (config.minetype == "icemoon")
+	if (config.minetype == "icemoon")
 		LoadGroup(FailedZs, "Ice moon Underground", "map_files/Mining", "IcemoonUnderground.dmm", default_traits = ZTRAITS_ICEMOON_UNDERGROUND)
 		LoadGroup(FailedZs, "Ice moon", "map_files/Mining", "Icemoon.dmm", default_traits = ZTRAITS_ICEMOON)
 	else if (config.minetype == "whitesands")
+		LoadGroup(FailedZs, "Lavaland", "map_files/Mining", "Lavaland.dmm", default_traits = ZTRAITS_LAVALAND)
 		LoadGroup(FailedZs, "Whitesands", "map_files/Mining", "Whitesands.dmm", default_traits = ZTRAITS_WHITESANDS)
 	else if (!isnull(config.minetype))
 		INIT_ANNOUNCE("WARNING: An unknown minetype '[config.minetype]' was set! This is being ignored! Update the maploader code!")

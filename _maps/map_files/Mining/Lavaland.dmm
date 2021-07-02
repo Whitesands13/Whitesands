@@ -75,11 +75,9 @@
 /turf/closed/mineral/random/labormineral/volcanic,
 /area/lavaland/surface/outdoors)
 "ao" = (
-/obj/machinery/computer/shuttle/labor/one_way{
-	dir = 4
-	},
-/turf/open/floor/plasteel,
-/area/mine/laborcamp)
+/obj/item/stack/sheet/mineral/plasma/twenty,
+/turf/open/floor/plating,
+/area/mine/living_quarters)
 "ap" = (
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
@@ -328,10 +326,6 @@
 "bh" = (
 /turf/open/floor/plasteel,
 /area/mine/laborcamp/security)
-"bi" = (
-/obj/structure/gulag_beacon,
-/turf/open/floor/plasteel,
-/area/mine/laborcamp)
 "bj" = (
 /obj/machinery/status_display/evac{
 	pixel_y = 32
@@ -495,9 +489,6 @@
 "bC" = (
 /obj/machinery/airalarm{
 	pixel_y = 24
-	},
-/obj/machinery/computer/shuttle/mining{
-	req_access = null
 	},
 /obj/effect/turf_decal/tile/purple{
 	dir = 1
@@ -1937,16 +1928,15 @@
 /turf/open/floor/plasteel,
 /area/mine/living_quarters)
 "gY" = (
-/obj/docking_port/stationary{
-	dir = 8;
-	dwidth = 2;
-	height = 5;
-	id = "laborcamp_away";
-	name = "labor camp";
-	width = 9
+/obj/structure/cable{
+	icon_state = "4-8"
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors/explored)
+/obj/structure/ladder/unbreakable{
+	height = 1;
+	id = whitesands
+	},
+/turf/open/floor/plasteel,
+/area/mine/living_quarters)
 "hg" = (
 /obj/structure/stone_tile/surrounding,
 /obj/structure/stone_tile/center/cracked,
@@ -4225,12 +4215,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/mine/production)
-"Co" = (
-/obj/machinery/computer/shuttle/mining/common{
-	dir = 4
-	},
-/turf/open/floor/plasteel,
-/area/mine/living_quarters)
 "Dh" = (
 /obj/machinery/light{
 	dir = 4
@@ -4613,9 +4597,7 @@
 /turf/open/floor/plating,
 /area/mine/eva)
 "Kn" = (
-/obj/machinery/power/smes{
-	charge = 5e+006
-	},
+/obj/machinery/power/smes,
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
@@ -4832,17 +4814,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/mine/living_quarters)
-"NC" = (
-/obj/docking_port/stationary{
-	dir = 8;
-	dwidth = 3;
-	height = 10;
-	id = "commonmining_away";
-	name = "Mining base public dock";
-	width = 7
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
 "NF" = (
 /obj/effect/turf_decal/tile/brown{
 	dir = 1
@@ -5331,17 +5302,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/mine/production)
-"Uq" = (
-/obj/docking_port/stationary{
-	dir = 2;
-	dwidth = 11;
-	height = 22;
-	id = "whiteship_away";
-	name = "lavaland wastes";
-	width = 35
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
 "Ur" = (
 /obj/structure/bookcase,
 /turf/open/floor/plasteel,
@@ -5496,17 +5456,6 @@
 	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/mine/living_quarters)
-"Wp" = (
-/obj/docking_port/stationary{
-	dir = 8;
-	dwidth = 3;
-	height = 10;
-	id = "mining_away";
-	name = "lavaland mine";
-	width = 7
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
 "WD" = (
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
@@ -10080,7 +10029,7 @@ aD
 aD
 aD
 aD
-gY
+aD
 aD
 aD
 aD
@@ -10592,7 +10541,7 @@ vj
 aq
 tT
 aq
-ao
+az
 aq
 YP
 yr
@@ -10849,7 +10798,7 @@ aQ
 aq
 Yn
 aq
-bi
+az
 aq
 Gb
 yr
@@ -11373,7 +11322,7 @@ cG
 LT
 Hd
 qt
-hZ
+gY
 Gn
 cM
 KF
@@ -11898,7 +11847,7 @@ ab
 ab
 ab
 ab
-NC
+ab
 ab
 ab
 ab
@@ -12923,7 +12872,7 @@ dZ
 cM
 Lg
 kO
-Co
+kO
 kO
 eL
 Dz
@@ -16255,7 +16204,7 @@ aj
 aj
 cM
 WK
-cV
+ao
 cV
 cM
 ea
@@ -19591,7 +19540,7 @@ ab
 ab
 ab
 ab
-Wp
+ab
 ab
 ab
 ab
@@ -31683,7 +31632,7 @@ ab
 ab
 ab
 ab
-Uq
+ab
 ab
 ab
 ab
