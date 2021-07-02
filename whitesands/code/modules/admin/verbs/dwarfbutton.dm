@@ -2,7 +2,7 @@
 
 /proc/dorf_migration()
 	for(var/M in GLOB.mob_list)
-		if(!isdwarf(M) && isliving(H))
+		if(!isdwarf(M) && isliving(M))
 			dorf_apply(M)
 		CHECK_TICK
 	addtimer(CALLBACK(src, .proc/dorf_migration), 1 SECONDS) //checks for non-dwarfs on glob list and makes them dwarfs, the fix for late spawns.
