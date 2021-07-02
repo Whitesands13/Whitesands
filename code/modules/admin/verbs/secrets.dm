@@ -577,6 +577,14 @@
 			message_admins("[key_name_admin(holder)] has Un-Fully Immersed \
 				everyone!")
 			log_admin("[key_name(holder)] has Un-Fully Immersed everyone.")
+		//WS Edit - Admin Buttons
+		if("dwarf_fortress")
+			if(!is_funmin)
+				return
+			message_admins("[key_name_admin(holder)] has struck the earth.")
+			dorf_migration()
+			log_admin("[key_name(holder)] has dwarfed everyone.")
+		//WS Edit End - Admin Buttons
 	if(E)
 		E.processing = FALSE
 		if(E.announceWhen>0)
