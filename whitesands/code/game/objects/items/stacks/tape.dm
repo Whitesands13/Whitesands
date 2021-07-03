@@ -1,6 +1,5 @@
 /obj/item/stack/tape
 	name = "packaging tape"
-	singular_name = "tape strip"
 	desc = "Sticks things together with minimal effort."
 	icon = 'whitesands/icons/obj/tapes.dmi'
 	icon_state = "tape"
@@ -10,10 +9,9 @@
 	grind_results = list(/datum/reagent/cellulose = 5)
 	usesound = 'whitesands/sound/items/tape.ogg'
 
-	absorption_rate = 0.25
-	absorption_capacity = 1
+	blood_capacity = 25
 	var/nonorganic_heal = 5
-	var/self_delay = 30 //! Also used for the tapecuff delay
+	var/self_delay = 30 //! Also used for the tapecuff delay/
 	var/other_delay = 10
 	var/prefix = "sticky"
 	var/list/conferred_embed = EMBED_HARMLESS
@@ -190,7 +188,7 @@
 	desc = "This roll of silver sorcery can fix just about anything."
 	icon_state = "tape_d"
 
-	absorption_capacity = 2
+	blood_capacity = 30
 	nonorganic_heal = 20
 	prefix = "super sticky"
 	conferred_embed = EMBED_HARMLESS_SUPERIOR
@@ -238,6 +236,6 @@
 	desc = "Now THIS is engineering."
 	icon_state = "tape_y"
 
-	absorption_capacity = 3
+	blood_capacity = 35
 	nonorganic_heal = 30
 	prefix = "industry-standard sticky"

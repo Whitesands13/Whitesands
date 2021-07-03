@@ -123,14 +123,14 @@
 	var/list/condition = list("[victim.p_their(TRUE)] [limb.name] [examine_desc]")
 	if(limb.current_gauze)
 		var/bandage_condition
-		switch(limb.current_gauze.absorption_capacity)
-			if(0 to 1.25)
+		switch(limb.current_gauze.blood_capacity)
+			if(0 to 10)
 				bandage_condition = "nearly ruined"
-			if(1.25 to 2.75)
+			if(10 to 20)
 				bandage_condition = "badly worn"
-			if(2.75 to 4)
+			if(20 to 30)
 				bandage_condition = "slightly pus-stained"
-			if(4 to INFINITY)
+			if(30 to INFINITY)
 				bandage_condition = "clean"
 
 		condition += " underneath a dressing of [bandage_condition] [limb.current_gauze.name]"

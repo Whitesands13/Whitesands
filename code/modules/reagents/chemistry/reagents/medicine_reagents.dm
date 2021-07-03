@@ -1043,16 +1043,13 @@
 
 /datum/reagent/medicine/bicaridinep
 	name = "Bicaridine Plus"
-	description = "Restores bruising and slowly stems bleeding. Overdose causes it instead. More effective than standardized Bicaridine."
+	description = "Restores bruising. Overdose causes it instead. More effective than standardized Bicaridine."
 	reagent_state = LIQUID
 	color = "#bf0000"
 	overdose_threshold = 25
 
 /datum/reagent/medicine/bicaridinep/on_mob_life(mob/living/carbon/M)
 	M.adjustBruteLoss(-2*REM, 0)
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-
 	..()
 	. = 1
 
@@ -1577,10 +1574,6 @@
 /datum/reagent/medicine/polypyr/on_mob_life(mob/living/carbon/M) //I wanted a collection of small positive effects, this is as hard to obtain as coniine after all.
 	M.adjustOrganLoss(ORGAN_SLOT_LUNGS, -0.25)
 	M.adjustBruteLoss(-0.5, 0)
-	if(prob(50))
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
-
 	..()
 	. = 1
 

@@ -897,6 +897,7 @@
 		return
 
 	var/bleed_rate = 0
+	var/internal_bleed_rate = 0		// Not affected by external gauze
 	if(generic_bleedstacks > 0)
 		bleed_rate++
 
@@ -908,7 +909,10 @@
 
 	for(var/thing in wounds)
 		var/datum/wound/W = thing
-		bleed_rate += W.blood_flow
+		if(istype(W, /datum/wound/pierce))
+			internal_bleed_rate += W.blood_flow
+		else
+			bleed_rate += W.blood_flow
 
 	if(owner.mobility_flags & ~MOBILITY_STAND)
 		bleed_rate *= 0.75
@@ -918,6 +922,12 @@
 
 	if(!bleed_rate)
 		QDEL_NULL(grasped_by)
+	
+	if(current_gauze)
+		seep_gauze(bleed_rate)
+		bleed_rate = 0
+	
+	bleed_rate += internal_bleed_rate
 
 	return bleed_rate
 
@@ -933,7 +943,7 @@
   * * gauze- Just the gauze stack we're taking a sheet from to apply here
   */
 /obj/item/bodypart/proc/apply_gauze(obj/item/stack/gauze)
-	if(!istype(gauze) || !gauze.absorption_capacity)
+	if(!istype(gauze) || !gauze.blood_capacity)
 		return
 	var/newly_gauzed = FALSE
 	if(!current_gauze)
@@ -955,8 +965,8 @@
 /obj/item/bodypart/proc/seep_gauze(seep_amt = 0)
 	if(!current_gauze)
 		return
-	current_gauze.absorption_capacity -= seep_amt
-	if(current_gauze.absorption_capacity <= 0)
+	current_gauze.blood_capacity -= seep_amt
+	if(current_gauze.blood_capacity <= 0)
 		owner.visible_message("<span class='danger'>\The [current_gauze] on [owner]'s [name] fall away in rags.</span>", "<span class='warning'>\The [current_gauze] on your [name] fall away in rags.</span>", vision_distance=COMBAT_MESSAGE_RANGE)
 		QDEL_NULL(current_gauze)
 		SEND_SIGNAL(src, COMSIG_BODYPART_GAUZE_DESTROYED)

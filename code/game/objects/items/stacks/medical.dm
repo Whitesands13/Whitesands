@@ -21,8 +21,6 @@
 	var/heal_brute
 	/// How much burn we heal per application
 	var/heal_burn
-	/// How much we reduce bleeding per application on cut wounds
-	var/stop_bleeding
 	/// How much sanitization to apply to burns on application
 	var/sanitization
 	/// How much we add to flesh_healing for burn wounds on application
@@ -133,8 +131,7 @@
 	amount = 6
 	grind_results = list(/datum/reagent/cellulose = 2)
 	custom_price = 100
-	absorption_rate = 0.25
-	absorption_capacity = 5
+	blood_capacity = 50
 	splint_factor = 0.35
 
 // gauze is only relevant for wounds, which are handled in the wounds themselves
@@ -157,7 +154,7 @@
 		to_chat(user, "<span class='notice'>There's no wounds that require bandaging on [user==M ? "your" : "[M]'s"] [limb.name]!</span>") // good problem to have imo
 		return
 
-	if(limb.current_gauze && (limb.current_gauze.absorption_capacity * 0.8 > absorption_capacity)) // ignore if our new wrap is < 20% better than the current one, so someone doesn't bandage it 5 times in a row
+	if(limb.current_gauze && (limb.current_gauze.blood_capacity * 0.8 > blood_capacity)) // ignore if our new wrap is < 20% better than the current one, so someone doesn't bandage it 5 times in a row
 		to_chat(user, "<span class='warning'>The bandage currently on [user==M ? "your" : "[M]'s"] [limb.name] is still in good condition!</span>")
 		return
 
@@ -195,8 +192,7 @@
 	desc = "A roll of cloth roughly cut from something that does a decent job of stabilizing wounds, but less efficiently so than real medical gauze."
 	self_delay = 60
 	other_delay = 30
-	absorption_rate = 0.15
-	absorption_capacity = 4
+	blood_capacity = 40
 
 /obj/item/stack/medical/gauze/cyborg
 	custom_materials = null
@@ -239,7 +235,6 @@
 	max_amount = 10
 	repeating = TRUE
 	heal_brute = 10
-	stop_bleeding = 0.6
 	grind_results = list(/datum/reagent/medicine/spaceacillin = 2)
 
 /obj/item/stack/medical/suture/emergency
@@ -254,7 +249,6 @@
 	icon_state = "suture_purp"
 	desc = "A suture infused with drugs that speed up wound healing of the treated laceration."
 	heal_brute = 15
-	stop_bleeding = 0.75
 	grind_results = list(/datum/reagent/medicine/polypyr = 2)
 
 /obj/item/stack/medical/suture/heal(mob/living/M, mob/user)

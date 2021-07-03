@@ -148,14 +148,14 @@
 	else
 		var/sling_condition = ""
 		// how much life we have left in these bandages
-		switch(limb.current_gauze.absorption_capacity)
-			if(0 to 1.25)
+		switch(limb.current_gauze.blood_capacity)
+			if(0 to 10)
 				sling_condition = "just barely"
-			if(1.25 to 2.75)
+			if(10 to 20)
 				sling_condition = "loosely"
-			if(2.75 to 4)
+			if(20 to 30)
 				sling_condition = "mostly"
-			if(4 to INFINITY)
+			if(30 to INFINITY)
 				sling_condition = "tightly"
 
 		msg += "[victim.p_their(TRUE)] [limb.name] is [sling_condition] fastened in a sling of [limb.current_gauze.name]"
@@ -194,7 +194,7 @@
 /datum/wound/blunt/moderate
 	name = "Bone Bruise"
 	desc = "Patient's bone has been bruised, causing pain and reduced motor function."
-	treat_text = "Recommended application of bonesetter to affected limb, though manual relocation by applying an aggressive grab to the patient and helpfully interacting with afflicted limb may suffice."
+	treat_text = "."
 	examine_desc = "appears grotesquely swollen, with a nasty looking bruise"
 	occur_text = "develops a nasty looking bruise"
 	severity = WOUND_SEVERITY_MODERATE
