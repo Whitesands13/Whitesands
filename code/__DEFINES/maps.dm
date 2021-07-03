@@ -79,14 +79,14 @@ require only minor tweaks.
     ZTRAIT_ASHSTORM = TRUE, \
     ZTRAIT_LAVA_RUINS = TRUE, \
     ZTRAIT_BOMBCAP_MULTIPLIER = 2, \
-    ZTRAIT_UP = 1, \
+    ZTRAIT_UP = 1, \                            // WS Edit - Merged Whitesands and Lavaland
     ZTRAIT_BASETURF = /turf/open/lava/smooth/lava_land_surface)
 #define ZTRAITS_WHITESANDS list(\
     ZTRAIT_MINING = TRUE, \
 	ZTRAIT_TEMPERATURE_GRADIENT = TRUE, \
     ZTRAIT_SAND_RUINS = TRUE, \
     ZTRAIT_BOMBCAP_MULTIPLIER = 2, \
-    ZTRAIT_DOWN = -1, \
+    ZTRAIT_DOWN = -1, \                         // WS Edit - Merged Whitesands and Lavaland
     ZTRAIT_BASETURF = /turf/open/floor/plating/asteroid/whitesands)
 #define ZTRAITS_ICEMOON list(\
     ZTRAIT_MINING = TRUE, \

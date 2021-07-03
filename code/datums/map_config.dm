@@ -3,7 +3,7 @@
 //defaults to box
 //  -Cyberboss
 
-GLOBAL_LIST_INIT(mining_maps, list("whitesands" = 1, "icemoon" = 0, "random" = 0))
+GLOBAL_LIST_INIT(mining_maps, list("whitesands" = 1, "icemoon" = 0, "random" = 0))        // WS Edit - Merged Whitesands and Lavaland
 GLOBAL_VAR_INIT(current_mining_map, "random")
 GLOBAL_VAR_INIT(next_mining_map, "random")
 
