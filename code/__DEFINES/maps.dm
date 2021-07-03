@@ -74,20 +74,22 @@ require only minor tweaks.
 #define ZTRAITS_CENTCOM list(ZTRAIT_CENTCOM = TRUE)
 #define ZTRAITS_STATION list(ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_STATION = TRUE)
 #define ZTRAITS_SPACE list(ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_SPACE_RUINS = TRUE)
+// WS Begin - Merged Whitesands and Lavaland
 #define ZTRAITS_LAVALAND list(\
     ZTRAIT_MINING = TRUE, \
     ZTRAIT_ASHSTORM = TRUE, \
     ZTRAIT_LAVA_RUINS = TRUE, \
     ZTRAIT_BOMBCAP_MULTIPLIER = 2, \
-    ZTRAIT_UP = 1, \                            // WS Edit - Merged Whitesands and Lavaland
+    ZTRAIT_UP = 1, \
     ZTRAIT_BASETURF = /turf/open/lava/smooth/lava_land_surface)
 #define ZTRAITS_WHITESANDS list(\
     ZTRAIT_MINING = TRUE, \
 	ZTRAIT_TEMPERATURE_GRADIENT = TRUE, \
     ZTRAIT_SAND_RUINS = TRUE, \
     ZTRAIT_BOMBCAP_MULTIPLIER = 2, \
-    ZTRAIT_DOWN = -1, \                         // WS Edit - Merged Whitesands and Lavaland
+    ZTRAIT_DOWN = -1, \
     ZTRAIT_BASETURF = /turf/open/floor/plating/asteroid/whitesands)
+// WS End - Merged Whitesands and Lavaland
 #define ZTRAITS_ICEMOON list(\
     ZTRAIT_MINING = TRUE, \
     ZTRAIT_SNOWSTORM = TRUE, \
