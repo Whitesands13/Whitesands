@@ -461,15 +461,15 @@ const FunForYouTab = (props, context) => {
         </NoticeBox>
       </Flex.Item>
       <Flex.Item grow={1} ml={0.25}>
-            <NoticeBox color="brown">
-              <Button
-                color="brown"
-                icon="arrow-down"
-                fluid
-                content="Dwarf Mode"
-                onClick={() => act("dwarf_fortress")} />
-            </NoticeBox>
-          </Flex.Item>
+        <NoticeBox color="brown">
+          <Button
+            color="brown"
+            icon="arrow-down"
+            fluid
+            content="Dwarf Mode"
+            onClick={() => act("dwarf_fortress")} />
+          </NoticeBox>
+        </Flex.Item>
       <Flex.Item>
         <NoticeBox danger>
           <Button
