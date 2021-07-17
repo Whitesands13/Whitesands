@@ -57,13 +57,13 @@
 	var/list/msg = list("The cuts on [victim.p_their()] [limb.name] are wrapped with ")
 	// how much life we have left in these bandages
 	switch(limb.current_gauze.blood_capacity)
-		if(0 to 10)
+		if(0 to 20)
 			msg += "nearly ruined"
-		if(10 to 20)
+		if(20 to 40)
 			msg += "badly worn"
-		if(20 to 30)
+		if(40 to 60)
 			msg += "slightly bloodied"
-		if(30 to INFINITY)
+		if(60 to INFINITY)
 			msg += "clean"
 	msg += " [limb.current_gauze.name]!"
 
@@ -227,7 +227,7 @@
 	minimum_flow = 0.5
 	max_per_type = 3
 	clot_rate = 0.06
-	threshold_minimum = 20
+	threshold_minimum = 30
 	threshold_penalty = 10
 	status_effect_type = /datum/status_effect/wound/slash/moderate
 	scar_keyword = "slashmoderate"
@@ -244,8 +244,8 @@
 	minimum_flow = 2.75
 	clot_rate = 0		// Need treatment immediately
 	max_per_type = 4
-	threshold_minimum = 50
-	threshold_penalty = 25
+	threshold_minimum = 60
+	threshold_penalty = 20
 	demotes_to = /datum/wound/slash/moderate
 	status_effect_type = /datum/status_effect/wound/slash/severe
 	scar_keyword = "slashsevere"

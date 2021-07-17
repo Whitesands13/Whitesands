@@ -78,7 +78,7 @@ GLOBAL_LIST_INIT(global_all_wound_types, list(/datum/wound/blunt/severe, /datum/
 
 // ~random wound balance defines
 /// how quickly sanitization removes infestation and decays per tick
-#define WOUND_BURN_SANITIZATION_RATE 	0.15
+#define WOUND_BURN_SANITIZATION_RATE 	0.155
 /// how much blood you can lose per tick per slash max. 8 is a LOT of blood for one cut so don't worry about hitting it easily
 #define WOUND_SLASH_MAX_BLOODFLOW		8
 /// dead people don't bleed, but they can clot! this is the minimum amount of clotting per tick on dead people, so even critical cuts will slowly clot in dead people

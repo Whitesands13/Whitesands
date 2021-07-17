@@ -149,13 +149,13 @@
 		var/sling_condition = ""
 		// how much life we have left in these bandages
 		switch(limb.current_gauze.blood_capacity)
-			if(0 to 10)
+			if(0 to 20)
 				sling_condition = "just barely"
-			if(10 to 20)
+			if(20 to 40)
 				sling_condition = "loosely"
-			if(20 to 30)
+			if(40 to 60)
 				sling_condition = "mostly"
-			if(30 to INFINITY)
+			if(60 to INFINITY)
 				sling_condition = "tightly"
 
 		msg += "[victim.p_their(TRUE)] [limb.name] is [sling_condition] fastened in a sling of [limb.current_gauze.name]"
@@ -201,8 +201,8 @@
 	viable_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 	interaction_efficiency_penalty = 1.5
 	limp_slowdown = 3
-	threshold_minimum = 35
-	threshold_penalty = 15
+	threshold_minimum = 30
+	threshold_penalty = 10
 	treatable_tool = TOOL_BONESET
 	wound_flags = (BONE_WOUND)
 	status_effect_type = /datum/status_effect/wound/blunt/moderate
@@ -218,13 +218,13 @@
 	desc = "Patient's bone has suffered a crack in the foundation, causing serious pain and reduced limb functionality."
 	treat_text = "Recommended light surgical application of bone gel, though a sling of medical gauze will prevent worsening situation."
 	examine_desc = "appears grotesquely swollen, its attachment weakened"
-	occur_text = "sprays chips of bone and develops a nasty looking bruise"
+	occur_text = "produces a cracking noise and develops a nasty looking bruise"
 
 	severity = WOUND_SEVERITY_SEVERE
 	interaction_efficiency_penalty = 2
 	limp_slowdown = 6
 	threshold_minimum = 60
-	threshold_penalty = 30
+	threshold_penalty = 20
 	treatable_by = list(/obj/item/stack/sticky_tape/surgical, /obj/item/stack/medical/bone_gel)
 	status_effect_type = /datum/status_effect/wound/blunt/severe
 	scar_keyword = "bluntsevere"

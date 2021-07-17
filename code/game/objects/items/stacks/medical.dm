@@ -131,7 +131,7 @@
 	amount = 6
 	grind_results = list(/datum/reagent/cellulose = 2)
 	custom_price = 100
-	blood_capacity = 50
+	blood_capacity = 100
 	splint_factor = 0.35
 
 // gauze is only relevant for wounds, which are handled in the wounds themselves
@@ -192,7 +192,7 @@
 	desc = "A roll of cloth roughly cut from something that does a decent job of stabilizing wounds, but less efficiently so than real medical gauze."
 	self_delay = 60
 	other_delay = 30
-	blood_capacity = 40
+	blood_capacity = 80
 
 /obj/item/stack/medical/gauze/cyborg
 	custom_materials = null

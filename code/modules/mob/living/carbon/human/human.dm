@@ -878,6 +878,12 @@
 				hud_used.healthdoll.icon_state = "healthdoll_OVERLAY"
 				for(var/X in bodyparts)
 					var/obj/item/bodypart/BP = X
+
+					var/numbing_wound = FALSE
+					for(var/datum/wound/W in BP.wounds)
+						if(W.wound_type == WOUND_BURN)
+							numbing_wound = TRUE
+
 					var/damage = BP.burn_dam + BP.brute_dam
 					var/comparison = (BP.max_damage/5)
 					var/icon_num = 0
@@ -891,7 +897,7 @@
 						icon_num = 4
 					if(damage > (comparison*4))
 						icon_num = 5
-					if(hal_screwyhud == SCREWYHUD_HEALTHY)
+					if(hal_screwyhud == SCREWYHUD_HEALTHY || numbing_wound)
 						icon_num = 0
 					if(icon_num)
 						hud_used.healthdoll.add_overlay(mutable_appearance('icons/mob/screen_gen.dmi', "[BP.body_zone][icon_num]"))

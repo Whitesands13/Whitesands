@@ -469,7 +469,8 @@
 
 	for(var/thing in wounds)
 		var/datum/wound/W = thing
-		injury_mod += W.threshold_penalty
+		if(W.wound_type == wounding_type)
+			injury_mod += W.threshold_penalty
 
 	var/part_mod = -wound_resistance
 	if(get_damage(TRUE) >= max_damage)

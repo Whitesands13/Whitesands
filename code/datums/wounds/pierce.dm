@@ -8,10 +8,10 @@
 	sound_effect = 'sound/weapons/slice.ogg'
 	processes = TRUE
 	wound_type = WOUND_PIERCE
-	treatable_by = list(/obj/item/stack/medical/suture)
+	treatable_by = list(/obj/item/stack/medical/gauze, /obj/item/gauze_injector)
 	treatable_tool = TOOL_CAUTERY
 	base_treat_time = 3 SECONDS
-	wound_flags = (FLESH_WOUND | ACCEPTS_GAUZE)
+	wound_flags = (FLESH_WOUND)
 
 	/// How much blood we start losing when this wound is first applied
 	var/initial_flow
@@ -134,15 +134,17 @@
 		I.use(1)
 
 /datum/wound/pierce/proc/gauze_injection(obj/item/gauze_injector/I, mob/user)
-	var/self_penalty_mult = (user == victim ? 1.5 : 1) // 50% longer and less effective if you do it to yourself
-
-	user.visible_message("<span class='danger'>[user] begins stuffing [victim]'s [limb.name] with [I]...</span>", "<span class='warning'>You begin stuffing [user == victim ? "your" : "[victim]'s"] [limb.name] with [I]...</span>")
-	if(!do_after(user, base_treat_time * self_penalty_mult, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
-		return
+	if(I.blood_capacity > 0)
+		user.visible_message("<span class='danger'>[user] begins stuffing [victim]'s [limb.name] with [I]...</span>", "<span class='warning'>You begin stuffing [user == victim ? "your" : "[victim]'s"] [limb.name] with [I]...</span>")
+		if(!do_after(user, base_treat_time, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
+			return
 	
-	absorption = I.blood_capacity
-	I.blood_capacity = 0
-	I.update_icon()
+		absorption = I.blood_capacity
+		I.blood_capacity = 0
+		I.update_icon_state()
+	else
+		to_chat(user, "<span class='warning'>[I] is used!</span>")
+		return
 
 /datum/wound/pierce/moderate
 	name = "Minor Internal Bleeding"
@@ -157,7 +159,7 @@
 	internal_bleeding_chance = 30
 	internal_bleeding_coefficient = 1.25
 	threshold_minimum = 30
-	threshold_penalty = 20
+	threshold_penalty = 10
 	status_effect_type = /datum/status_effect/wound/pierce/moderate
 	scar_keyword = "piercemoderate"
 
@@ -173,7 +175,7 @@
 	clot_rate = 0
 	internal_bleeding_chance = 60
 	internal_bleeding_coefficient = 1.5
-	threshold_minimum = 50
-	threshold_penalty = 35
+	threshold_minimum = 60
+	threshold_penalty = 25
 	status_effect_type = /datum/status_effect/wound/pierce/severe
 	scar_keyword = "piercesevere"
