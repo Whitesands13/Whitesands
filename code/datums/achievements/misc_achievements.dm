@@ -111,3 +111,9 @@
 	name = "HA, GOTTEM"
 	desc = "Made you look!"
 	database_id = MEDAL_GOTTEM
+
+/datum/award/achievement/misc/tram_surfer
+	name = "Tram Surfer"
+	desc = "Lights out, guerilla radio!"
+	database_id = MEDAL_TRAM_SURFER
+	icon = "tram_surfer"

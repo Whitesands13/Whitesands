@@ -29,6 +29,9 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 	return TRUE
 
 ///No bottom level for openspace.
+/turf/open/openspace/airless/planetary
+		planetary_atmos = TRUE
+
 /turf/open/transparent/openspace/show_bottom_level()
 	return FALSE
 
