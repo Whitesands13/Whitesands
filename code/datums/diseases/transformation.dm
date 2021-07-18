@@ -299,11 +299,51 @@
 	severity = DISEASE_SEVERITY_BIOHAZARD
 	visibility_flags = 0
 	stage1	= list("You seem a little lighter in your step.")
-	stage2	= list("You catch yourself smiling for no reason.")
+	stage2	= list("You catch yourself smiling for no reason. You seem to be retarded ")
 	stage3	= list("<span class='danger'>A cruel sense of calm overcomes you.</span>", "<span class='danger'>You can't feel your arms!</span>", "<span class='danger'>You let go of the urge to hurt clowns.</span>")
 	stage4	= list("<span class='danger'>You can't feel your arms. It does not bother you anymore.</span>", "<span class='danger'>You forgive the clown for hurting you.</span>")
 	stage5	= list("<span class='danger'>You have become a Gondola.</span>")
 	new_form = /mob/living/simple_animal/pet/gondola
+
+/datum/disease/transformation/clowndola
+	name = "Clowndola Transformation"
+	cure_text = "Laughter, ingested or injected."
+	cures = list(/datum/reagent/consumable/laughter)
+	cure_chance = 80
+	stage_prob = 5
+	agent = "Delirium"
+	desc = "Consuming the flesh of a Clowndola comes at a terrible price."
+	severity = DISEASE_SEVERITY_BIOHAZARD
+	visibility_flags = 0
+	stage1	= list("You seem a little clumsier in your step.")
+	stage2	= list("You catch yourself laughing for no reason.")
+	stage3	= list("<span class='danger'>A cruel sense of chaos overcomes you.</span>", "<span class='danger'>You can't feel your arms!</span>", "<span class='danger'>You let go of the urge to hurt clowns.</span>")
+	stage4	= list("<span class='danger'>You can't feel your arms. It does not bother you anymore.</span>", "<span class='danger'>You start to have the same mindset as a clown.</span>")
+	stage5	= list("<span class='danger'>You have become a Clowndola.</span>")
+	new_form = /mob/living/simple_animal/hostile/retaliate/clowndola
+
+/datum/disease/transformation/clowndola/stage_act()
+	..()
+	switch(stage)
+		if(2)
+			if (prob(5))
+				affected_mob.emote("laugh")
+			if (prob(20))
+				affected_mob.reagents.add_reagent_list(list(/datum/reagent/lithium = 5))
+		if(3)
+			if (prob(5))
+				affected_mob.emote("laugh")
+			if (prob(20))
+				affected_mob.reagents.add_reagent_list(list(/datum/reagent/lithium = 5))
+		if(4)
+			if (prob(5))
+				affected_mob.emote("laugh")
+			if (prob(20))
+				affected_mob.reagents.add_reagent_list(list(/datum/reagent/lithium = 5))
+			if (prob(2))
+				to_chat(affected_mob, "<span class='danger'>You let go of what you were holding.</span>")
+				var/obj/item/I = affected_mob.get_active_held_item()
+				affected_mob.dropItemToGround(I)
 
 /datum/disease/transformation/gondola/stage_act()
 	..()

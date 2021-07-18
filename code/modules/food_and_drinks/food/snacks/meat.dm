@@ -278,6 +278,18 @@
 	tastes = list("bacon" = 1)
 	foodtype = MEAT | BREAKFAST
 
+/obj/item/reagent_containers/food/snacks/meat/slab/clowndola
+	name = "clowndola meat"
+	desc = "According to NT, clowndola are a protected species that must be left alone."
+	list_reagents = list(/datum/reagent/consumable/nutriment = 3, /datum/reagent/delirium = 5, /datum/reagent/consumable/cooking_oil = 3)
+	tastes = list("meat" = 4, "delirium" = 1)
+	filling_color = "#ff7b00"
+	cooked_type = /obj/item/reagent_containers/food/snacks/meat/steak/gondola
+	slice_path = /obj/item/reagent_containers/food/snacks/meat/rawcutlet/gondola
+	foodtype = RAW | MEAT
+
+
+
 /obj/item/reagent_containers/food/snacks/meat/slab/gondola
 	name = "gondola meat"
 	desc = "According to legends of old, consuming raw gondola flesh grants one inner peace."
@@ -372,6 +384,12 @@
 	tastes = list("meat" = 1, "rock" = 1)
 	foodtype = MEAT
 
+
+/obj/item/reagent_containers/food/snacks/meat/steak/clowndola
+	name = "clowndola steak"
+	tastes = list("meat" = 1, "delirium" = 1)
+
+
 /obj/item/reagent_containers/food/snacks/meat/steak/gondola
 	name = "gondola steak"
 	tastes = list("meat" = 1, "tranquility" = 1)
@@ -446,6 +464,12 @@
 	cooked_type = /obj/item/reagent_containers/food/snacks/meat/cutlet/gondola
 	tastes = list("meat" = 1, "tranquility" = 1)
 
+/obj/item/reagent_containers/food/snacks/meat/rawcutlet/clowndola
+	name = "raw clowndola cutlet"
+	cooked_type = /obj/item/reagent_containers/food/snacks/meat/cutlet/clowndola
+	tastes = list("meat" = 1, "delirium" = 1)
+
+
 /obj/item/reagent_containers/food/snacks/meat/rawcutlet/penguin
 	name = "raw penguin cutlet"
 	cooked_type = /obj/item/reagent_containers/food/snacks/meat/cutlet/penguin
@@ -495,6 +519,10 @@
 /obj/item/reagent_containers/food/snacks/meat/cutlet/gondola
 	name = "gondola cutlet"
 	tastes = list("meat" = 1, "tranquility" = 1)
+
+/obj/item/reagent_containers/food/snacks/meat/cutlet/clowndola
+	name = "clowndola cutlet"
+	tastes = list("meat" = 1, "delirium" = 1)
 
 /obj/item/reagent_containers/food/snacks/meat/cutlet/penguin
 	name = "penguin cutlet"
