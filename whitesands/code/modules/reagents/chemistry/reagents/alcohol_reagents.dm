@@ -60,7 +60,7 @@
 	color = "#7c550bbe" // rgb: 102, 67, 0
 	boozepwr = 40
 	taste_description = "organ failure"
-	glass_icon_state = "blackroulette"
+	glass_icon_state = "black_roulette"
 	glass_name = "Black Roulette"
 	glass_desc = "There is a bullet in the gun-looking drink, I don't feel like trying this."
 
@@ -81,7 +81,7 @@
 	boozepwr = 80
 	quality = DRINK_NICE
 	taste_description = "bad idea"
-	glass_icon_state = "triplecoke"
+	glass_icon_state = "triple_coke"
 	glass_name = "Triple Coke"
 	glass_desc = "Is there cocaine in this drink ? That's sussy.."
 
