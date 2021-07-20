@@ -540,7 +540,7 @@ The reactor CHEWS through moderator. It does not do this slowly. Be very careful
 /obj/machinery/computer/reactor
 	name = "Reactor control console"
 	desc = "Scream"
-	icon = 'oasis/icons/obj/computer.dmi'
+	icon = 'icons/obj/computer.dmi'
 	icon_state = "oldcomp"
 	icon_screen = "library"
 	icon_keyboard = null
