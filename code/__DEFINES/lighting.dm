@@ -20,9 +20,6 @@
 //Important note on colors. Colors can end up significantly different from the basic html picture, especially when saturated
 #define LIGHT_COLOR_WHITE		"#FFFFFF" //! Full white. rgb(255, 255, 255)
 #define LIGHT_COLOR_RED        "#FA8282" //! Warm but extremely diluted red. rgb(250, 130, 130)
-#define LIGHT_COLOR_GREEN      "#64C864" //! Bright but quickly dissipating neon green. rgb(100, 200, 100)
-#define LIGHT_COLOR_BLUE       "#6496FA" //! Cold, diluted blue. rgb(100, 150, 250)
-
 /// type of falloff to use for lighting; 1 for circular, 2 for square
 #define LIGHTING_FALLOFF        1
 /// use lambertian shading for light sources
