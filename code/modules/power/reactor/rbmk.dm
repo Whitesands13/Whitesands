@@ -71,7 +71,7 @@ The reactor CHEWS through moderator. It does not do this slowly. Be very careful
 /obj/machinery/atmospherics/components/trinary/nuclear_reactor
 	name = "Advanced Gas-Cooled Nuclear Reactor"
 	desc = "A tried and tested design which can output stable power at an acceptably low risk. The moderator can be changed to provide different effects."
-	icon = 'oasis/icons/obj/machinery/rbmk.dmi'
+	icon = 'icons/obj/machinery/rbmk.dmi'
 	icon_state = "reactor_map"
 	pixel_x = -32
 	pixel_y = -32
@@ -428,7 +428,7 @@ The reactor CHEWS through moderator. It does not do this slowly. Be very careful
 			return
 		next_warning = world.time + 30 SECONDS //To avoid engis pissing people off when reaaaally trying to stop the meltdown or whatever.
 		warning = TRUE //Start warning the crew of the imminent danger.
-		relay('oasis/sound/effects/rbmk/alarm.ogg', null, loop=TRUE, channel = CHANNEL_REACTOR_ALERT)
+		relay('sound/effects/rbmk/alarm.ogg', null, loop=TRUE, channel = CHANNEL_REACTOR_ALERT)
 		set_light(0)
 		light_color = LIGHT_COLOR_RED
 		set_light(10)
@@ -444,7 +444,7 @@ The reactor CHEWS through moderator. It does not do this slowly. Be very careful
 	icon_state = "reactor_slagged"
 	AddComponent(/datum/component/radioactive, 15000 , src)
 	var/obj/effect/landmark/nuclear_waste_spawner/NSW = new /obj/effect/landmark/nuclear_waste_spawner/strong(get_turf(src))
-	relay('oasis/sound/effects/rbmk/meltdown.ogg', "<span class='userdanger'>You hear a horrible metallic hissing.</span>")
+	relay('sound/effects/rbmk/meltdown.ogg', "<span class='userdanger'>You hear a horrible metallic hissing.</span>")
 	stop_relay(CHANNEL_REACTOR_ALERT)
 	NSW.fire() //This will take out engineering for a decent amount of time as they have to clean up the sludge.
 	for(var/obj/machinery/power/apc/apc in GLOB.apcs_list)
@@ -499,7 +499,7 @@ The reactor CHEWS through moderator. It does not do this slowly. Be very careful
 	START_PROCESSING(SSmachines, src)
 	desired_k = 1
 	set_light(10)
-	var/startup_sound = pick('oasis/sound/effects/ship/reactor/startup.ogg', 'oasis/sound/effects/ship/reactor/startup2.ogg')
+	var/startup_sound = pick('sound/effects/ship/reactor/startup.ogg', 'sound/effects/ship/reactor/startup2.ogg')
 	playsound(loc, startup_sound, 100)
 
 //Shuts off the fuel rods, ambience, etc. Keep in mind that your temperature may still go up!
@@ -514,7 +514,7 @@ The reactor CHEWS through moderator. It does not do this slowly. Be very careful
 /obj/item/twohanded/required/fuel_rod
 	name = "Uranium-235 Fuel Rod"
 	desc = "A titanium sheathed rod containing a measure of enriched uranium-dioxide powder inside, and a breeding blanket of uranium-238 around it, used to kick off a fission reaction and breed plutonium fuel respectivly."
-	icon = 'oasis/icons/obj/control_rod.dmi'
+	icon = 'icons/obj/control_rod.dmi'
 	icon_state = "irradiated"
 	w_class = WEIGHT_CLASS_BULKY
 	var/depletion = 0 //Each fuel rod will deplete in around 30 minutes.
@@ -668,8 +668,8 @@ The reactor CHEWS through moderator. It does not do this slowly. Be very careful
 	var/atom/movable/fuel_rod = input(usr, "Select a fuel rod to remove", "[src]", null) as null|anything in reactor.fuel_rods
 	if(!fuel_rod)
 		return
-	playsound(src, pick('oasis/sound/effects/rbmk/switch.ogg','oasis/sound/effects/rbmk/switch2.ogg','oasis/sound/effects/rbmk/switch3.ogg'), 100, FALSE)
-	playsound(reactor, 'oasis/sound/effects/ship/freespace2/crane_1.wav', 100, FALSE)
+	playsound(src, pick('sound/effects/rbmk/switch.ogg','sound/effects/rbmk/switch2.ogg','sound/effects/rbmk/switch3.ogg'), 100, FALSE)
+	playsound(reactor, 'sound/effects/ship/freespace2/crane_1.wav', 100, FALSE)
 	fuel_rod.forceMove(get_turf(reactor))
 	reactor.fuel_rods -= fuel_rod
 
@@ -713,7 +713,7 @@ The reactor CHEWS through moderator. It does not do this slowly. Be very careful
 	. = ..()
 	if(!is_operational())
 		return FALSE
-	playsound(loc, pick('oasis/sound/effects/rbmk/switch.ogg','oasis/sound/effects/rbmk/switch2.ogg','oasis/sound/effects/rbmk/switch3.ogg'), 100, FALSE)
+	playsound(loc, pick('sound/effects/rbmk/switch.ogg','sound/effects/rbmk/switch2.ogg','sound/effects/rbmk/switch3.ogg'), 100, FALSE)
 	visible_message("<span class='notice'>[src]'s switch flips [on ? "off" : "on"].</span>")
 	on = !on
 	signal(on)
@@ -863,7 +863,7 @@ The reactor CHEWS through moderator. It does not do this slowly. Be very careful
 /obj/effect/decal/nuclear_waste
 	name = "Plutonium sludge"
 	desc = "A writhing pool of heavily irradiated, spent reactor fuel. You probably shouldn't step through this..."
-	icon = 'oasis/icons/obj/machinery/reactor_parts.dmi'
+	icon = 'icons/obj/machinery/reactor_parts.dmi'
 	icon_state = "nuclearwaste"
 	alpha = 150
 	light_color = LIGHT_COLOR_CYAN
@@ -924,7 +924,7 @@ The reactor CHEWS through moderator. It does not do this slowly. Be very careful
 	weather_duration_upper = 1500
 	weather_color = "green"
 	telegraph_sound = null
-	weather_sound = 'oasis/sound/effects/ship/reactor/falloutwind.ogg'
+	weather_sound = 'sound/effects/ship/reactor/falloutwind.ogg'
 	end_duration = 100
 	area_type = /area
 	protected_areas = list(/area/maintenance, /area/ai_monitored/turret_protected/ai_upload, /area/ai_monitored/turret_protected/ai_upload_foyer,
@@ -963,7 +963,7 @@ The reactor CHEWS through moderator. It does not do this slowly. Be very careful
 /obj/item/sealant
 	name = "Flexi seal"
 	desc = "A neat spray can that can repair torn inflatable segments, and more!"
-	icon = 'oasis/icons/obj/inflatable.dmi'
+	icon = 'icons/obj/inflatable.dmi'
 	icon_state = "sealant"
 	w_class = 1
 

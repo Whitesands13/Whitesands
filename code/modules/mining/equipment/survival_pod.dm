@@ -9,6 +9,13 @@
 	flags_1 = CAN_BE_DIRTY_1
 
 //Survival Capsule
+/obj/item/survivalcapsule/reactor // the not-so-survival capsule
+    name = "RMBK Reactor Beacon"
+    desc = "A special bluespace beacon designed to implement a reactor into the hull of the ship that it is activated on."
+    icon = 'icons/obj/device.dmi'
+    icon_state = "beacon"
+    template_id = "reactor"
+
 /obj/item/survivalcapsule
 	name = "bluespace shelter capsule"
 	desc = "An emergency shelter stored within a pocket of bluespace."
