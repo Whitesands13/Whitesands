@@ -718,25 +718,24 @@
 	group = "Engineering"
 	crate_type = /obj/structure/closet/crate/engineering
 
-/datum/supply_pack/engine/bananium_fuel_rod
-	name = "Bananium Fuel Rod crate"
-	desc = "Two fuel rods designed to utilize and multiply bananium in a reactor, requires CE access to open. Caution: Radioactive"
-	cost = 4000
-	access = ACCESS_CE // Nag your local CE
-	contains = list(/obj/item/twohanded/required/fuel_rod/material/bananium,
-					/obj/item/twohanded/required/fuel_rod/material/bananium)
-	crate_name = "Bluespace Crystal Fuel Rod crate"
+/datum/supply_pack/engine/fuel_rod
+	name = "Uranium Fuel Rod crate"
+	desc = "Two additional fuel rods for use in a reactor, requires CE access to open. Caution: Radioactive"
+	cost = 3000
+	access = ACCESS_CE
+	contains = list(/obj/item/fuel_rod,
+					/obj/item/fuel_rod)
+	crate_name = "Uranium-235 Fuel Rod crate"
 	crate_type = /obj/structure/closet/crate/secure/engineering
 	dangerous = TRUE
-	contraband = TRUE
 
 /datum/supply_pack/engine/fuel_rod
 	name = "Uranium Fuel Rod crate"
 	desc = "Two additional fuel rods for use in a reactor, requires CE access to open. Caution: Radioactive"
 	cost = 3000
 	access = ACCESS_CE
-	contains = list(/obj/item/twohanded/required/fuel_rod,
-					/obj/item/twohanded/required/fuel_rod)
+	contains = list(/obj/item/fuel_rod,
+					/obj/item/fuel_rod)
 	crate_name = "Uranium-235 Fuel Rod crate"
 	crate_type = /obj/structure/closet/crate/secure/engineering
 	dangerous = TRUE
