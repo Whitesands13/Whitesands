@@ -95,6 +95,9 @@
 	///Sorry, no spider+corgi buttbabies.
 	var/animal_species
 
+	///How much wounding power it has
+	var/wound_bonus = CANT_WOUND
+
 	///Simple_animal access.
 	///Innate access uses an internal ID card.
 	var/obj/item/card/id/access_card = null
