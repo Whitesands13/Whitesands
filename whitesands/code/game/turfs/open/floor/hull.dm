@@ -7,3 +7,7 @@
 	name = "interior reinforced hull plating"
 	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
 	temperature = T20C
+
+/turf/open/floor/plasteel/chapel/tile
+	icon_state = "darkest"
+
