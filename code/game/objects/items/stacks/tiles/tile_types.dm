@@ -4,7 +4,7 @@
 	desc = "A broken tile. This should not exist."
 	lefthand_file = 'icons/mob/inhands/misc/tiles_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/tiles_righthand.dmi'
-	icon = 'icons/obj/tiles.dmi'
+	icon = 'whitesands/icons/obj/tiles.dmi' //WS Edit - Tile Resprite
 	w_class = WEIGHT_CLASS_NORMAL
 	force = 1
 	throwforce = 1
