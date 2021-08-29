@@ -571,11 +571,10 @@
 
 /datum/quirk/junkie/smoker/on_spawn()
 	drug_container_type = pick(/obj/item/storage/fancy/cigarettes,
-		/obj/item/storage/fancy/cigarettes/cigpack_midori,
-		/obj/item/storage/fancy/cigarettes/cigpack_uplift,
-		/obj/item/storage/fancy/cigarettes/cigpack_robust,
-		/obj/item/storage/fancy/cigarettes/cigpack_robustgold,
-		/obj/item/storage/fancy/cigarettes/cigpack_carp)
+		/obj/item/storage/fancy/cigarettes/cigpack_donkco,	//WS EDIT - Cigarettes
+		/obj/item/storage/fancy/cigarettes/cigpack_waffleco,	//WS EDIT - Cigarettes
+		/obj/item/storage/fancy/cigarettes/cigpack_solgov,	//WS EDIT - Cigarettes
+		/obj/item/storage/fancy/cigarettes/cigpack_turbo)	//WS EDIT - Cigarettes
 	. = ..()
 
 /datum/quirk/junkie/smoker/announce_drugs()

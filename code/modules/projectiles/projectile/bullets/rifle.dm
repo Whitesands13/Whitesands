@@ -8,7 +8,7 @@
 // 7.62 (Nagant Rifle)
 
 /obj/projectile/bullet/a762
-	name = "7.62x51mm bullet" // WS Edit - Whitesands
+	name = "7.62x54mm bullet" // WS Edit - Whitesands
 	damage = 60
 	wound_bonus = -35
 	wound_falloff_tile = 0

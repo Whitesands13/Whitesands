@@ -1549,7 +1549,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				target.Knockdown(SHOVE_KNOCKDOWN_SOLID)
 				target.forceMove(target_disposal_bin)
 				target.visible_message("<span class='danger'>[user.name] shoves [target.name] into \the [target_disposal_bin]!</span>",
-								"<span class='userdanger'>You're shoved into \the [target_disposal_bin] by [target.name]!</span>", "<span class='hear'>You hear aggressive shuffling followed by a loud thud!</span>", COMBAT_MESSAGE_RANGE, user)
+								"<span class='userdanger'>You're shoved into \the [target_disposal_bin] by [user.name]!</span>", "<span class='hear'>You hear aggressive shuffling followed by a loud thud!</span>", COMBAT_MESSAGE_RANGE, user)
 				to_chat(user, "<span class='danger'>You shove [target.name] into \the [target_disposal_bin]!</span>")
 				log_combat(user, target, "shoved", "into [target_disposal_bin] (disposal bin)")
 		else

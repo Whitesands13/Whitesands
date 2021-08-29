@@ -12,9 +12,9 @@
 	if(loot && loot.len)
 		var/loot_spawned = 0
 		while((lootcount-loot_spawned) && loot.len)
-			var/lootspawn = pickweight(loot)
+			var/lootspawn = pickweight_float(loot) // WS edit - Fix various startup runtimes
 			while(islist(lootspawn))
-				lootspawn = pickweight(lootspawn)
+				lootspawn = pickweight_float(lootspawn) // WS edit - Fix various startup runtimes
 			if(!lootdoubles)
 				loot.Remove(lootspawn)
 
@@ -28,6 +28,8 @@
 				else
 					if (loot_spawned)
 						spawned_loot.pixel_x = spawned_loot.pixel_y = ((!(loot_spawned%2)*loot_spawned/2)*-1)+((loot_spawned%2)*(loot_spawned+1)/2*1)
+			else
+				break // WS edit - Support spawn weights of 0 in loot tables and ruins
 			loot_spawned++
 	return INITIALIZE_HINT_QDEL
 
@@ -72,13 +74,13 @@
 
 /obj/effect/spawner/lootdrop/prison_contraband
 	name = "prison contraband loot spawner"
-	loot = list(/obj/item/clothing/mask/cigarette/space_cigarette = 4,
-				/obj/item/clothing/mask/cigarette/robust = 2,
-				/obj/item/clothing/mask/cigarette/carp = 3,
-				/obj/item/clothing/mask/cigarette/uplift = 2,
-				/obj/item/clothing/mask/cigarette/dromedary = 3,
-				/obj/item/clothing/mask/cigarette/robustgold = 1,
-				/obj/item/storage/fancy/cigarettes/cigpack_uplift = 3,
+	loot = list(/obj/item/clothing/mask/cigarette/nanotransen = 4, //WS EDIT - Cigaretees
+				/obj/item/clothing/mask/cigarette/donkco = 2, //WS EDIT - Cigaretees
+				/obj/item/clothing/mask/cigarette/waffleco = 3, //WS EDIT - Cigaretees
+				/obj/item/clothing/mask/cigarette/solgov = 2, //WS EDIT - Cigaretees
+				/obj/item/clothing/mask/cigarette/superfresh = 3, //WS EDIT - Cigaretees
+				/obj/item/clothing/mask/cigarette/syndicate = 1, //WS EDIT - Cigaretees
+				/obj/item/storage/fancy/cigarettes/cigpack_solgov = 3, //WS EDIT - Cigaretees
 				/obj/item/storage/fancy/cigarettes = 3,
 				/obj/item/clothing/mask/cigarette/rollie/cannabis = 4,
 				/obj/item/toy/crayon/spraycan = 2,
@@ -472,6 +474,8 @@
 	qdel(spawner_to_table)
 	for(var/i in 1 to loot_count)
 		var/loot_spawn = pick_loot(lootpool)
+		if(!loot_spawn) // WS edit - Support spawn weights of 0 in loot tables and ruins
+			continue
 		if(!(loot_spawn in spawned_table))
 			spawned_table[loot_spawn] = 1
 		else
@@ -481,7 +485,7 @@
 		stat_table[item] /= loot_count
 
 /obj/item/loot_table_maker/proc/pick_loot(lootpool) //selects path from loot table and returns it
-	var/lootspawn = pickweight(lootpool)
+	var/lootspawn = pickweight_float(lootpool) // WS edit - Fix various startup runtimes
 	while(islist(lootspawn))
-		lootspawn = pickweight(lootspawn)
+		lootspawn = pickweight_float(lootspawn) // WS edit - Fix various startup runtimes
 	return lootspawn
