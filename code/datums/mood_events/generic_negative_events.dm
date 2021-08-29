@@ -91,7 +91,6 @@
 	mood_change = -2
 	timeout = 2 MINUTES
 
-/* WS - For shame /TG/... for shame.
 /datum/mood_event/table/add_effects()
 	if(isfelinid(owner))
 		var/mob/living/carbon/human/H = owner
