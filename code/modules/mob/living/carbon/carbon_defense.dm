@@ -599,5 +599,3 @@
 	user.visible_message("<span class='danger'>[user] grasps at [user.p_their()] [grasped_part.name], trying to stop the bleeding.</span>", "<span class='notice'>You grab hold of your [grasped_part.name] tightly.</span>", vision_distance=COMBAT_MESSAGE_RANGE)
 	playsound(get_turf(src), 'sound/weapons/thudswoosh.ogg', 50, TRUE, -1)
 	return TRUE
-
-#undef SHAKE_ANIMATION_OFFSET
