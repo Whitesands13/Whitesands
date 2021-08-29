@@ -158,29 +158,21 @@
 
 // blunt
 /datum/status_effect/wound/blunt/moderate
-	id = "disjoint"
+	id = "bruise"
 /datum/status_effect/wound/blunt/severe
 	id = "hairline"
-/datum/status_effect/wound/blunt/critical
-	id = "compound"
 // slash
 /datum/status_effect/wound/slash/moderate
-	id = "abrasion"
+	id = "bleeding"
 /datum/status_effect/wound/slash/severe
-	id = "laceration"
-/datum/status_effect/wound/slash/critical
-	id = "avulsion"
+	id = "heavy"
 // pierce
 /datum/status_effect/wound/pierce/moderate
-	id = "breakage"
+	id = "mininternal"
 /datum/status_effect/wound/pierce/severe
-	id = "puncture"
-/datum/status_effect/wound/pierce/critical
-	id = "rupture"
+	id = "internal"
 // burns
 /datum/status_effect/wound/burn/moderate
 	id = "seconddeg"
 /datum/status_effect/wound/burn/severe
 	id = "thirddeg"
-/datum/status_effect/wound/burn/critical
-	id = "fourthdeg"

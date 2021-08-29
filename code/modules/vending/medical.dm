@@ -33,7 +33,8 @@
 					/obj/item/sensor_device = 2,
 					/obj/item/pinpointer/crew = 2,
 					/obj/item/reagent_containers/glass/bottle/vial/small = 5,
-					/obj/item/stack/medical/splint = 10)
+					/obj/item/stack/medical/splint = 10,
+					/obj/item/gauze_injector = 3)
 	contraband = list(/obj/item/reagent_containers/pill/tox = 3,
 		              /obj/item/reagent_containers/pill/morphine = 4,
 		              /obj/item/reagent_containers/pill/charcoal = 6,
