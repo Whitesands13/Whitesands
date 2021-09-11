@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>code&#x2F;__DEFINES&#x2F;traits.dm - White Sands</title>
+</head>
+<body>
+<header>
+    <a href="index.html">White Sands</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="code/__DEFINES/traits.html#define">Define Details</a></header>
+<main>
+<h1>code/__DEFINES/traits.dm 
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/__DEFINES/traits.dm">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;traits.dm"/></a></h1>
+
+<table class="summary" cellspacing="0">
+        <tr><th><a href="code/__DEFINES/traits.html#define/TRAIT_KNOCKEDOUT">TRAIT_KNOCKEDOUT</a></th><td>Forces the user to stay unconscious.</td></tr>
+        <tr><th><a href="code/__DEFINES/traits.html#define/TRAIT_IMMOBILIZED">TRAIT_IMMOBILIZED</a></th><td>Prevents voluntary movement.</td></tr>
+        <tr><th><a href="code/__DEFINES/traits.html#define/TRAIT_FLOORED">TRAIT_FLOORED</a></th><td>Prevents voluntary standing or staying up on its own.</td></tr>
+        <tr><th><a href="code/__DEFINES/traits.html#define/TRAIT_HANDS_BLOCKED">TRAIT_HANDS_BLOCKED</a></th><td>Prevents usage of manipulation appendages (picking, holding or using items, manipulating storage).</td></tr>
+        <tr><th><a href="code/__DEFINES/traits.html#define/TRAIT_UI_BLOCKED">TRAIT_UI_BLOCKED</a></th><td>Inability to access UI hud elements. Turned into a trait from <a href="code/__DEFINES/flags.html#define/MOBILITY_UI" title="MOBILITY_UI">MOBILITY_UI</a> to be able to track sources.</td></tr>
+        <tr><th><a href="code/__DEFINES/traits.html#define/TRAIT_PULL_BLOCKED">TRAIT_PULL_BLOCKED</a></th><td>Inability to pull things. Turned into a trait from <a href="code/__DEFINES/flags.html#define/MOBILITY_PULL" title="MOBILITY_PULL">MOBILITY_PULL</a> to be able to track sources.</td></tr>
+        <tr><th><a href="code/__DEFINES/traits.html#define/TRAIT_RESTRAINED">TRAIT_RESTRAINED</a></th><td>Abstract condition that prevents movement if being pulled and might be resisted against. Handcuffs and straight jackets, basically.</td></tr>
+        <tr><th><a href="code/__DEFINES/traits.html#define/TRAIT_CRITICAL_CONDITION">TRAIT_CRITICAL_CONDITION</a></th><td>In some kind of critical condition. Is able to succumb.</td></tr>
+        <tr><th><a href="code/__DEFINES/traits.html#define/TRAIT_PERFECT_ATTACKER">TRAIT_PERFECT_ATTACKER</a></th><td>Doesn't miss attacks</td></tr>
+        <tr><th><a href="code/__DEFINES/traits.html#define/TRAIT_SPECIAL_TRAUMA_BOOST">TRAIT_SPECIAL_TRAUMA_BOOST</a></th><td>Increases chance of getting special traumas, makes them harder to cure</td></tr>
+        <tr><th><a href="code/__DEFINES/traits.html#define/TRAIT_PARALYSIS">TRAIT_PARALYSIS</a></th><td>Used for limb-based paralysis, where replacing the limb will fix it.</td></tr>
+        <tr><th><a href="code/__DEFINES/traits.html#define/TRAIT_DISABLED_BY_WOUND">TRAIT_DISABLED_BY_WOUND</a></th><td>Used for limbs.</td></tr>
+        <tr><th><a href="code/__DEFINES/traits.html#define/SUIT_TRAIT">SUIT_TRAIT</a></th><td>Trait associated to wearing a suit</td></tr>
+        <tr><th><a href="code/__DEFINES/traits.html#define/LYING_DOWN_TRAIT">LYING_DOWN_TRAIT</a></th><td>Trait associated to lying down (having a [lying_angle] of a different value than zero).</td></tr>
+        <tr><th><a href="code/__DEFINES/traits.html#define/POWER_LACK_TRAIT">POWER_LACK_TRAIT</a></th><td>Trait associated to lacking electrical power.</td></tr>
+        <tr><th><a href="code/__DEFINES/traits.html#define/WARPWHISTLE_TRAIT">WARPWHISTLE_TRAIT</a></th><td>Trait granted by <a href="obj/item.html" title="/obj/item">/obj/item/warpwhistle</a></td></tr>
+        <tr><th><a href="code/__DEFINES/traits.html#define/SOULSTONE_TRAIT">SOULSTONE_TRAIT</a></th><td>Trait applied by by <a href="datum/component.html" title="/datum/component">/datum/component/soulstoned</a></td></tr>
+        <tr><th><a href="code/__DEFINES/traits.html#define/SLIME_COLD">SLIME_COLD</a></th><td>Trait applied to slimes by low temperature</td></tr>
+        <tr><th><a href="code/__DEFINES/traits.html#define/BOT_TIPPED_OVER">BOT_TIPPED_OVER</a></th><td>Trait applied to bots by being tipped over</td></tr>
+        <tr><th><a href="code/__DEFINES/traits.html#define/PAI_FOLDED">PAI_FOLDED</a></th><td>Trait applied to PAIs by being folded</td></tr>
+        <tr><th><a href="code/__DEFINES/traits.html#define/BRAIN_UNAIDED">BRAIN_UNAIDED</a></th><td>Trait applied to brain mobs when they lack external aid for locomotion, such as being inside a mech.</td></tr></table><h2 id="define">Define Details</h2>
+<h3 id="define/BOT_TIPPED_OVER"><aside class="declaration">#define </aside>BOT_TIPPED_OVER
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/__DEFINES/traits.dm#L343">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;traits.dm 343"/></a>
+    </h3>
+    <p>Trait applied to bots by being tipped over</p><h3 id="define/BRAIN_UNAIDED"><aside class="declaration">#define </aside>BRAIN_UNAIDED
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/__DEFINES/traits.dm#L347">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;traits.dm 347"/></a>
+    </h3>
+    <p>Trait applied to brain mobs when they lack external aid for locomotion, such as being inside a mech.</p><h3 id="define/LYING_DOWN_TRAIT"><aside class="declaration">#define </aside>LYING_DOWN_TRAIT
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/__DEFINES/traits.dm#L287">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;traits.dm 287"/></a>
+    </h3>
+    <p>Trait associated to lying down (having a [lying_angle] of a different value than zero).</p><h3 id="define/PAI_FOLDED"><aside class="declaration">#define </aside>PAI_FOLDED
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/__DEFINES/traits.dm#L345">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;traits.dm 345"/></a>
+    </h3>
+    <p>Trait applied to PAIs by being folded</p><h3 id="define/POWER_LACK_TRAIT"><aside class="declaration">#define </aside>POWER_LACK_TRAIT
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/__DEFINES/traits.dm#L289">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;traits.dm 289"/></a>
+    </h3>
+    <p>Trait associated to lacking electrical power.</p><h3 id="define/SLIME_COLD"><aside class="declaration">#define </aside>SLIME_COLD
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/__DEFINES/traits.dm#L341">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;traits.dm 341"/></a>
+    </h3>
+    <p>Trait applied to slimes by low temperature</p><h3 id="define/SOULSTONE_TRAIT"><aside class="declaration">#define </aside>SOULSTONE_TRAIT
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/__DEFINES/traits.dm#L339">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;traits.dm 339"/></a>
+    </h3>
+    <p>Trait applied by by <a href="datum/component.html" title="/datum/component">/datum/component/soulstoned</a></p><h3 id="define/SUIT_TRAIT"><aside class="declaration">#define </aside>SUIT_TRAIT
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/__DEFINES/traits.dm#L285">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;traits.dm 285"/></a>
+    </h3>
+    <p>Trait associated to wearing a suit</p><h3 id="define/TRAIT_CRITICAL_CONDITION"><aside class="declaration">#define </aside>TRAIT_CRITICAL_CONDITION
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/__DEFINES/traits.dm#L95">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;traits.dm 95"/></a>
+    </h3>
+    <p>In some kind of critical condition. Is able to succumb.</p><h3 id="define/TRAIT_DISABLED_BY_WOUND"><aside class="declaration">#define </aside>TRAIT_DISABLED_BY_WOUND
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/__DEFINES/traits.dm#L213">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;traits.dm 213"/></a>
+    </h3>
+    <p>Used for limbs.</p><h3 id="define/TRAIT_FLOORED"><aside class="declaration">#define </aside>TRAIT_FLOORED
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/__DEFINES/traits.dm#L84">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;traits.dm 84"/></a>
+    </h3>
+    <p>Prevents voluntary standing or staying up on its own.</p><h3 id="define/TRAIT_HANDS_BLOCKED"><aside class="declaration">#define </aside>TRAIT_HANDS_BLOCKED
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/__DEFINES/traits.dm#L86">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;traits.dm 86"/></a>
+    </h3>
+    <p>Prevents usage of manipulation appendages (picking, holding or using items, manipulating storage).</p><h3 id="define/TRAIT_IMMOBILIZED"><aside class="declaration">#define </aside>TRAIT_IMMOBILIZED
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/__DEFINES/traits.dm#L82">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;traits.dm 82"/></a>
+    </h3>
+    <p>Prevents voluntary movement.</p><h3 id="define/TRAIT_KNOCKEDOUT"><aside class="declaration">#define </aside>TRAIT_KNOCKEDOUT
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/__DEFINES/traits.dm#L80">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;traits.dm 80"/></a>
+    </h3>
+    <p>Forces the user to stay unconscious.</p><h3 id="define/TRAIT_PARALYSIS"><aside class="declaration">#define </aside>TRAIT_PARALYSIS
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/__DEFINES/traits.dm#L211">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;traits.dm 211"/></a>
+    </h3>
+    <p>Used for limb-based paralysis, where replacing the limb will fix it.</p><h3 id="define/TRAIT_PERFECT_ATTACKER"><aside class="declaration">#define </aside>TRAIT_PERFECT_ATTACKER
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/__DEFINES/traits.dm#L97">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;traits.dm 97"/></a>
+    </h3>
+    <p>Doesn't miss attacks</p><h3 id="define/TRAIT_PULL_BLOCKED"><aside class="declaration">#define </aside>TRAIT_PULL_BLOCKED
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/__DEFINES/traits.dm#L90">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;traits.dm 90"/></a>
+    </h3>
+    <p>Inability to pull things. Turned into a trait from <a href="code/__DEFINES/flags.html#define/MOBILITY_PULL" title="MOBILITY_PULL">MOBILITY_PULL</a> to be able to track sources.</p><h3 id="define/TRAIT_RESTRAINED"><aside class="declaration">#define </aside>TRAIT_RESTRAINED
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/__DEFINES/traits.dm#L92">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;traits.dm 92"/></a>
+    </h3>
+    <p>Abstract condition that prevents movement if being pulled and might be resisted against. Handcuffs and straight jackets, basically.</p><h3 id="define/TRAIT_SPECIAL_TRAUMA_BOOST"><aside class="declaration">#define </aside>TRAIT_SPECIAL_TRAUMA_BOOST
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/__DEFINES/traits.dm#L200">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;traits.dm 200"/></a>
+    </h3>
+    <p>Increases chance of getting special traumas, makes them harder to cure</p><h3 id="define/TRAIT_UI_BLOCKED"><aside class="declaration">#define </aside>TRAIT_UI_BLOCKED
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/__DEFINES/traits.dm#L88">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;traits.dm 88"/></a>
+    </h3>
+    <p>Inability to access UI hud elements. Turned into a trait from <a href="code/__DEFINES/flags.html#define/MOBILITY_UI" title="MOBILITY_UI">MOBILITY_UI</a> to be able to track sources.</p><h3 id="define/WARPWHISTLE_TRAIT"><aside class="declaration">#define </aside>WARPWHISTLE_TRAIT
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/__DEFINES/traits.dm#L337">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__DEFINES&#x2F;traits.dm 337"/></a>
+    </h3>
+    <p>Trait granted by <a href="obj/item.html" title="/obj/item">/obj/item/warpwhistle</a></p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Whitesands13/Whitesands/tree/5ed480d6a85dbd88793238bc9ad635c3500b513f">5ed480d</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

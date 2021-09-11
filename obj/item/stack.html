@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;obj&#x2F;item&#x2F;stack - White Sands</title>
+</head>
+<body>
+<header>
+    <a href="index.html">White Sands</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="obj/item/stack.html#var">Var Details</a> - <a href="obj/item/stack.html#proc">Proc Details</a></header>
+<main>
+<h1>/<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/stack.html">stack</a>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/game/objects/items/stacks/stack.dm#L12">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;stacks&#x2F;stack.dm 12"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="obj/item/stack.html#var/blood_capacity">blood_capacity</a></th><td>How much blood loss this stack can prevent</td></tr>
+            <tr><th><a href="obj/item/stack.html#var/material_type">material_type</a></th><td>Datum material type that this stack is made of</td></tr>
+            <tr><th><a href="obj/item/stack.html#var/splint_factor">splint_factor</a></th><td>If set and this used as a splint for a broken bone wound, this is used as a multiplier for applicable slowdowns (lower = better) (also for speeding up burn recoveries)</td></tr>
+            <tr><th><a href="obj/item/stack.html#var/works_pierce">works_pierce</a></th><td>Whether this works on piercing wounds</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="obj/item/stack.html#proc/build_recipe">build_recipe</a></th><td>Returns a list of properties of a given recipe</td></tr>
+            <tr><th><a href="obj/item/stack.html#proc/is_valid_recipe">is_valid_recipe</a></th><td>Checks if the recipe is valid to be used</td></tr>
+            <tr><th><a href="obj/item/stack.html#proc/recursively_build_recipes">recursively_build_recipes</a></th><td>Builds all recipes in a given recipe list and returns an association list containing them</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/blood_capacity"><aside class="declaration">var </aside>blood_capacity
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/game/objects/items/stacks/stack.dm#L37">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;stacks&#x2F;stack.dm 37"/></a></h3>
+        <p>How much blood loss this stack can prevent</p><h3 id="var/material_type"><aside class="declaration">var </aside>material_type
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/game/objects/items/stacks/stack.dm#L29">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;stacks&#x2F;stack.dm 29"/></a></h3>
+        <p>Datum material type that this stack is made of</p><h3 id="var/splint_factor"><aside class="declaration">var </aside>splint_factor
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/game/objects/items/stacks/stack.dm#L35">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;stacks&#x2F;stack.dm 35"/></a></h3>
+        <p>If set and this used as a splint for a broken bone wound, this is used as a multiplier for applicable slowdowns (lower = better) (also for speeding up burn recoveries)</p><h3 id="var/works_pierce"><aside class="declaration">var </aside>works_pierce
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/game/objects/items/stacks/stack.dm#L42">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;stacks&#x2F;stack.dm 42"/></a></h3>
+        <p>Whether this works on piercing wounds</p><h2 id="proc">Proc Details</h2><h3 id="proc/build_recipe"><aside class="declaration">proc </aside>build_recipe<aside>(/<a href="datum.html">datum</a>/stack_recipe/R) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/game/objects/items/stacks/stack.dm#L153">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;stacks&#x2F;stack.dm 153"/></a></aside>
+        </h3>
+        <p>Returns a list of properties of a given recipe</p>
+<p>Arguments:</p>
+<ul>
+<li>R - The stack recipe we are using to get a list of properties</li>
+</ul><h3 id="proc/is_valid_recipe"><aside class="declaration">proc </aside>is_valid_recipe<aside>(/<a href="datum.html">datum</a>/stack_recipe/R, /list/recipe_list) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/game/objects/items/stacks/stack.dm#L168">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;stacks&#x2F;stack.dm 168"/></a></aside>
+        </h3>
+        <p>Checks if the recipe is valid to be used</p>
+<p>Arguments:</p>
+<ul>
+<li>R - The stack recipe we are checking if it is valid</li>
+<li>recipe_list - The list of recipes we are using to check the given recipe</li>
+</ul><h3 id="proc/recursively_build_recipes"><aside class="declaration">proc </aside>recursively_build_recipes<aside>(/list/recipe_to_iterate) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/game/objects/items/stacks/stack.dm#L136">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;objects&#x2F;items&#x2F;stacks&#x2F;stack.dm 136"/></a></aside>
+        </h3>
+        <p>Builds all recipes in a given recipe list and returns an association list containing them</p>
+<p>Arguments:</p>
+<ul>
+<li>recipe_to_iterate - The list of recipes we are using to build recipes</li>
+</ul></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Whitesands13/Whitesands/tree/5ed480d6a85dbd88793238bc9ad635c3500b513f">5ed480d</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;obj&#x2F;machinery - White Sands</title>
+</head>
+<body>
+<header>
+    <a href="index.html">White Sands</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="obj/machinery.html#var">Var Details</a> - <a href="obj/machinery.html#proc">Proc Details</a></header>
+<main>
+<h1>machinery <aside>/<a href="obj.html">obj</a>/<a href="obj/machinery.html">machinery</a></aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/game/machinery/_machinery.dm#L86">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;_machinery.dm 86"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="obj/machinery.html#var/processing_flags">processing_flags</a></th><td>Viable flags to go here are START_PROCESSING_ON_INIT, or START_PROCESSING_MANUALLY. See code__DEFINES\machines.dm for more information on these flags.</td></tr>
+            <tr><th><a href="obj/machinery.html#var/subsystem_type">subsystem_type</a></th><td>What subsystem this machine will use, which is generally SSmachines or SSfastprocess. By default all machinery use SSmachines. This fires a machine's process() roughly every 2 seconds.</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="obj/machinery.html#proc/begin_processing">begin_processing</a></th><td>Helper proc for telling a machine to start processing with the subsystem type that is located in its <code>subsystem_type</code> var.</td></tr>
+            <tr><th><a href="obj/machinery.html#proc/end_processing">end_processing</a></th><td>Helper proc for telling a machine to stop processing with the subsystem type that is located in its <code>subsystem_type</code> var.</td></tr>
+            <tr><th><a href="obj/machinery.html#proc/power_change">power_change</a></th><td>Called whenever the power settings of the containing area change</td></tr>
+            <tr><th><a href="obj/machinery.html#proc/try_put_in_hand">try_put_in_hand</a></th><td>Puts passed object in to user's hand</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/processing_flags"><aside class="declaration">var </aside>processing_flags
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/game/machinery/_machinery.dm#L119">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;_machinery.dm 119"/></a></h3>
+        <p>Viable flags to go here are START_PROCESSING_ON_INIT, or START_PROCESSING_MANUALLY. See code__DEFINES\machines.dm for more information on these flags.</p><h3 id="var/subsystem_type"><aside class="declaration">var </aside>subsystem_type
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/game/machinery/_machinery.dm#L121">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;_machinery.dm 121"/></a></h3>
+        <p>What subsystem this machine will use, which is generally SSmachines or SSfastprocess. By default all machinery use SSmachines. This fires a machine's process() roughly every 2 seconds.</p><h2 id="proc">Proc Details</h2><h3 id="proc/begin_processing"><aside class="declaration">proc </aside>begin_processing<aside>() 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/game/machinery/_machinery.dm#L151">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;_machinery.dm 151"/></a></aside>
+        </h3>
+        <p>Helper proc for telling a machine to start processing with the subsystem type that is located in its <code>subsystem_type</code> var.</p><h3 id="proc/end_processing"><aside class="declaration">proc </aside>end_processing<aside>() 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/game/machinery/_machinery.dm#L156">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;_machinery.dm 156"/></a></aside>
+        </h3>
+        <p>Helper proc for telling a machine to stop processing with the subsystem type that is located in its <code>subsystem_type</code> var.</p><h3 id="proc/power_change"><aside class="declaration">proc </aside>power_change<aside>() 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/power/power.dm#L114">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;power&#x2F;power.dm 114"/></a></aside>
+        </h3>
+        <p>Called whenever the power settings of the containing area change</p>
+<p>by default, check equipment channel &amp; set flag, can override if needed</p>
+<p>Returns TRUE if the NOPOWER flag was toggled</p><h3 id="proc/try_put_in_hand"><aside class="declaration">proc </aside>try_put_in_hand<aside>(/<a href="obj.html">obj</a>/object, /<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/user) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/game/machinery/_machinery.dm#L219">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;_machinery.dm 219"/></a></aside>
+        </h3>
+        <p>Puts passed object in to user's hand</p>
+<p>Puts the passed object in to the users hand if they are adjacent.
+If the user is not adjacent then place the object on top of the machine.</p>
+<p>Vars:</p>
+<ul>
+<li>object (obj) The object to be moved in to the users hand.</li>
+<li>user (mob/living) The user to recive the object</li>
+</ul></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Whitesands13/Whitesands/tree/5ed480d6a85dbd88793238bc9ad635c3500b513f">5ed480d</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

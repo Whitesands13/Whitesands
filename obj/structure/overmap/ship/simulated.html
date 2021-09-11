@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;obj&#x2F;structure&#x2F;overmap&#x2F;ship&#x2F;simulated - White Sands</title>
+</head>
+<body>
+<header>
+    <a href="index.html">White Sands</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="obj/structure/overmap/ship/simulated.html#var">Var Details</a> - <a href="obj/structure/overmap/ship/simulated.html#proc">Proc Details</a></header>
+<main>
+<h1>/<a href="obj.html">obj</a>/<a href="obj/structure/overmap.html">structure/overmap</a>/<a href="obj/structure/overmap/ship.html">ship</a>/<a href="obj/structure/overmap/ship/simulated.html">simulated</a>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/ships/simulated.dm#L13">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;ships&#x2F;simulated.dm 13"/></a></h1>
+
+<h3 id="simulated-overmap-ship">Simulated overmap ship</h3>
+<p>A ship that corresponds to an actual, physical shuttle.
+Can be docked to any other overmap object with a corresponding docking port and/or zlevel.
+SUPPOSED to be linked to the corresponding shuttle's mobile docking port, but you never know do you</p><table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="obj/structure/overmap/ship/simulated.html#var/avg_fuel_amnt">avg_fuel_amnt</a></th><td>Average fuel fullness percentage</td></tr>
+            <tr><th><a href="obj/structure/overmap/ship/simulated.html#var/dock_change_start_time">dock_change_start_time</a></th><td>The time the shuttle started launching</td></tr>
+            <tr><th><a href="obj/structure/overmap/ship/simulated.html#var/docked">docked</a></th><td>The overmap object the ship is docked to, if any</td></tr>
+            <tr><th><a href="obj/structure/overmap/ship/simulated.html#var/est_thrust">est_thrust</a></th><td>Vessel estimated thrust</td></tr>
+            <tr><th><a href="obj/structure/overmap/ship/simulated.html#var/mass">mass</a></th><td>Vessel approximate mass</td></tr>
+            <tr><th><a href="obj/structure/overmap/ship/simulated.html#var/repair_timer">repair_timer</a></th><td>The timer ID of the repair timer.</td></tr>
+            <tr><th><a href="obj/structure/overmap/ship/simulated.html#var/shuttle">shuttle</a></th><td>The docking port of the linked shuttle</td></tr>
+            <tr><th><a href="obj/structure/overmap/ship/simulated.html#var/state">state</a></th><td>State of the shuttle: idle, flying, docking, or undocking</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="obj/structure/overmap/ship/simulated.html#proc/burn_engines">burn_engines</a></th><td>Burns the engines in one direction, accelerating in that direction.
+If no dir variable is provided, it decelerates the vessel.</td></tr>
+            <tr><th><a href="obj/structure/overmap/ship/simulated.html#proc/calculate_avg_fuel">calculate_avg_fuel</a></th><td>Calculates the average fuel fullness of all engines.</td></tr>
+            <tr><th><a href="obj/structure/overmap/ship/simulated.html#proc/calculate_mass">calculate_mass</a></th><td>Calculates the mass based on the amount of turfs in the shuttle's areas</td></tr>
+            <tr><th><a href="obj/structure/overmap/ship/simulated.html#proc/check_loc">check_loc</a></th><td>Proc called after a shuttle is moved, used for checking a ship's location when it's moved manually (E.G. calling the mining shuttle via a console)</td></tr>
+            <tr><th><a href="obj/structure/overmap/ship/simulated.html#proc/complete_dock">complete_dock</a></th><td>Called after the shuttle docks, and finishes the transfer to the new location.</td></tr>
+            <tr><th><a href="obj/structure/overmap/ship/simulated.html#proc/dock">dock</a></th><td>Docks the shuttle by requesting a port at the requested spot.</td></tr>
+            <tr><th><a href="obj/structure/overmap/ship/simulated.html#proc/overmap_object_act">overmap_object_act</a></th><td>Acts on the specified option. Used for docking.</td></tr>
+            <tr><th><a href="obj/structure/overmap/ship/simulated.html#proc/recieve_damage">recieve_damage</a></th><td>Destroy if integrity &lt;= 0 and no concious mobs on shuttle</td></tr>
+            <tr><th><a href="obj/structure/overmap/ship/simulated.html#proc/refresh_engines">refresh_engines</a></th><td>Just double checks all the engines on the shuttle</td></tr>
+            <tr><th><a href="obj/structure/overmap/ship/simulated.html#proc/repair">repair</a></th><td>Handles repairs. Called by a repeating timer that is created when the ship docks.</td></tr>
+            <tr><th><a href="obj/structure/overmap/ship/simulated.html#proc/undock">undock</a></th><td>Undocks the shuttle by launching the shuttle with no destination (this causes it to remain in transit)</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/avg_fuel_amnt"><aside class="declaration">var </aside>avg_fuel_amnt
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/ships/simulated.dm#L27">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;ships&#x2F;simulated.dm 27"/></a></h3>
+        <p>Average fuel fullness percentage</p><h3 id="var/dock_change_start_time"><aside class="declaration">var </aside>dock_change_start_time
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/ships/simulated.dm#L17">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;ships&#x2F;simulated.dm 17"/></a></h3>
+        <p>The time the shuttle started launching</p><h3 id="var/docked"><aside class="declaration">var </aside>docked
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/structure/overmap.html">structure/overmap</a></aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/ships/simulated.dm#L30">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;ships&#x2F;simulated.dm 30"/></a></h3>
+        <p>The overmap object the ship is docked to, if any</p><h3 id="var/est_thrust"><aside class="declaration">var </aside>est_thrust
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/ships/simulated.dm#L23">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;ships&#x2F;simulated.dm 23"/></a></h3>
+        <p>Vessel estimated thrust</p><h3 id="var/mass"><aside class="declaration">var </aside>mass
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/ships/simulated.dm#L25">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;ships&#x2F;simulated.dm 25"/></a></h3>
+        <p>Vessel approximate mass</p><h3 id="var/repair_timer"><aside class="declaration">var </aside>repair_timer
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/ships/simulated.dm#L19">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;ships&#x2F;simulated.dm 19"/></a></h3>
+        <p>The timer ID of the repair timer.</p><h3 id="var/shuttle"><aside class="declaration">var </aside>shuttle
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/docking_port.html">docking_port</a>/<a href="obj/docking_port/mobile.html">mobile</a></aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/ships/simulated.dm#L34">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;ships&#x2F;simulated.dm 34"/></a></h3>
+        <p>The docking port of the linked shuttle</p><h3 id="var/state"><aside class="declaration">var </aside>state
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/ships/simulated.dm#L21">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;ships&#x2F;simulated.dm 21"/></a></h3>
+        <p>State of the shuttle: idle, flying, docking, or undocking</p><h2 id="proc">Proc Details</h2><h3 id="proc/burn_engines"><aside class="declaration">proc </aside>burn_engines<aside>(n_dir, percentage) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/ships/simulated.dm#L143">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;ships&#x2F;simulated.dm 143"/></a></aside>
+        </h3>
+        <p>Burns the engines in one direction, accelerating in that direction.
+If no dir variable is provided, it decelerates the vessel.</p>
+<ul>
+<li>n_dir - The direction to move in</li>
+</ul><h3 id="proc/calculate_avg_fuel"><aside class="declaration">proc </aside>calculate_avg_fuel<aside>() 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/ships/simulated.dm#L188">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;ships&#x2F;simulated.dm 188"/></a></aside>
+        </h3>
+        <p>Calculates the average fuel fullness of all engines.</p><h3 id="proc/calculate_mass"><aside class="declaration">proc </aside>calculate_mass<aside>() 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/ships/simulated.dm#L177">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;ships&#x2F;simulated.dm 177"/></a></aside>
+        </h3>
+        <p>Calculates the mass based on the amount of turfs in the shuttle's areas</p><h3 id="proc/check_loc"><aside class="declaration">proc </aside>check_loc<aside>() 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/ships/simulated.dm#L204">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;ships&#x2F;simulated.dm 204"/></a></aside>
+        </h3>
+        <p>Proc called after a shuttle is moved, used for checking a ship's location when it's moved manually (E.G. calling the mining shuttle via a console)</p><h3 id="proc/complete_dock"><aside class="declaration">proc </aside>complete_dock<aside>() 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/ships/simulated.dm#L244">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;ships&#x2F;simulated.dm 244"/></a></aside>
+        </h3>
+        <p>Called after the shuttle docks, and finishes the transfer to the new location.</p><h3 id="proc/dock"><aside class="declaration">proc </aside>dock<aside>(/<a href="obj.html">obj</a>/<a href="obj/structure/overmap.html">structure/overmap</a>/to_dock) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/ships/simulated.dm#L93">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;ships&#x2F;simulated.dm 93"/></a></aside>
+        </h3>
+        <p>Docks the shuttle by requesting a port at the requested spot.</p>
+<ul>
+<li>to_dock - The <a href="obj/structure/overmap.html" title="/obj/structure/overmap">/obj/structure/overmap</a> to dock to.</li>
+</ul><h3 id="proc/overmap_object_act"><aside class="declaration">proc </aside>overmap_object_act<aside>(/<a href="mob.html">mob</a>/user, /<a href="obj.html">obj</a>/<a href="obj/structure/overmap.html">structure/overmap</a>/object) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/ships/simulated.dm#L73">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;ships&#x2F;simulated.dm 73"/></a></aside>
+        </h3>
+        <p>Acts on the specified option. Used for docking.</p>
+<ul>
+<li>user - Mob that started the action</li>
+<li>object - Overmap object to act on</li>
+</ul><h3 id="proc/recieve_damage"><aside class="parent"><a title="/obj/structure/overmap" href="obj/structure/overmap.html#proc/recieve_damage">&uarr;</a></aside>recieve_damage<aside>(amount) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/ships/simulated.dm#L51">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;ships&#x2F;simulated.dm 51"/></a></aside>
+        </h3>
+        <p>Destroy if integrity &lt;= 0 and no concious mobs on shuttle</p><h3 id="proc/refresh_engines"><aside class="declaration">proc </aside>refresh_engines<aside>() 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/ships/simulated.dm#L166">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;ships&#x2F;simulated.dm 166"/></a></aside>
+        </h3>
+        <p>Just double checks all the engines on the shuttle</p><h3 id="proc/repair"><aside class="declaration">proc </aside>repair<aside>() 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/ships/simulated.dm#L267">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;ships&#x2F;simulated.dm 267"/></a></aside>
+        </h3>
+        <p>Handles repairs. Called by a repeating timer that is created when the ship docks.</p><h3 id="proc/undock"><aside class="declaration">proc </aside>undock<aside>() 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/ships/simulated.dm#L123">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;ships&#x2F;simulated.dm 123"/></a></aside>
+        </h3>
+        <p>Undocks the shuttle by launching the shuttle with no destination (this causes it to remain in transit)</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Whitesands13/Whitesands/tree/5ed480d6a85dbd88793238bc9ad635c3500b513f">5ed480d</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

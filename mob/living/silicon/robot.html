@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;mob&#x2F;living&#x2F;silicon&#x2F;robot - White Sands</title>
+</head>
+<body>
+<header>
+    <a href="index.html">White Sands</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="mob/living/silicon/robot.html#var">Var Details</a> - <a href="mob/living/silicon/robot.html#proc">Proc Details</a></header>
+<main>
+<h1>Cyborg <aside>/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/silicon.html">silicon</a>/<a href="mob/living/silicon/robot.html">robot</a></aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/silicon/robot/robot.dm#L1">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;silicon&#x2F;robot&#x2F;robot.dm 1"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="mob/living/silicon/robot.html#var/ident">ident</a></th><td>Random serial number generated for each cyborg upon its initialization</td></tr>
+            <tr><th><a href="mob/living/silicon/robot.html#var/lampButton">lampButton</a></th><td>Lamp button reference</td></tr>
+            <tr><th><a href="mob/living/silicon/robot.html#var/lamp_color">lamp_color</a></th><td>Set lamp color</td></tr>
+            <tr><th><a href="mob/living/silicon/robot.html#var/lamp_enabled">lamp_enabled</a></th><td>If the lamp is turned on</td></tr>
+            <tr><th><a href="mob/living/silicon/robot.html#var/lamp_functional">lamp_functional</a></th><td>If the lamp isn't broken.</td></tr>
+            <tr><th><a href="mob/living/silicon/robot.html#var/lamp_intensity">lamp_intensity</a></th><td>Lamp brightness. Starts at 3, but can be 1 - 5.</td></tr>
+            <tr><th><a href="mob/living/silicon/robot.html#var/modularInterface">modularInterface</a></th><td>The reference to the built-in tablet that borgs carry.</td></tr>
+            <tr><th><a href="mob/living/silicon/robot.html#var/opened">opened</a></th><td>If this is a path, this gets created as an object in Initialize.</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="mob/living/silicon/robot.html#proc/Exited">Exited</a></th><td>Checking Exited() to detect if a hat gets up and walks off.
+Drones and pAIs might do this, after all.</td></tr>
+            <tr><th><a href="mob/living/silicon/robot.html#proc/deploy_init">deploy_init</a></th><td>deploy_init: Deploys AI unit into AI shell</td></tr>
+            <tr><th><a href="mob/living/silicon/robot.html#proc/logevent">logevent</a></th><td>Records an IC event log entry in the cyborg's internal tablet.</td></tr>
+            <tr><th><a href="mob/living/silicon/robot.html#proc/make_shell">make_shell</a></th><td>make_shell: Makes an AI shell out of a cyborg unit</td></tr>
+            <tr><th><a href="mob/living/silicon/robot.html#proc/revert_shell">revert_shell</a></th><td>revert_shell: Reverts AI shell back into a normal cyborg unit</td></tr>
+            <tr><th><a href="mob/living/silicon/robot.html#proc/set_lockcharge">set_lockcharge</a></th><td>Reports the event of the change in value of the lockcharge variable.</td></tr>
+            <tr><th><a href="mob/living/silicon/robot.html#proc/smash_headlamp">smash_headlamp</a></th><td>Handles headlamp smashing</td></tr>
+            <tr><th><a href="mob/living/silicon/robot.html#proc/toggle_headlamp">toggle_headlamp</a></th><td>Handles headlamp toggling, disabling, and color setting.</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/ident"><aside class="declaration">var </aside>ident
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/silicon/robot/robot.dm#L55">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;silicon&#x2F;robot&#x2F;robot.dm 55"/></a></h3>
+        <p>Random serial number generated for each cyborg upon its initialization</p><h3 id="var/lampButton"><aside class="declaration">var </aside>lampButton
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/screen.html">screen</a>/robot/lamp</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/silicon/robot/robot.dm#L85">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;silicon&#x2F;robot&#x2F;robot.dm 85"/></a></h3>
+        <p>Lamp button reference</p><h3 id="var/lamp_color"><aside class="declaration">var </aside>lamp_color
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/silicon/robot/robot.dm#L81">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;silicon&#x2F;robot&#x2F;robot.dm 81"/></a></h3>
+        <p>Set lamp color</p><h3 id="var/lamp_enabled"><aside class="declaration">var </aside>lamp_enabled
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/silicon/robot/robot.dm#L79">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;silicon&#x2F;robot&#x2F;robot.dm 79"/></a></h3>
+        <p>If the lamp is turned on</p><h3 id="var/lamp_functional"><aside class="declaration">var </aside>lamp_functional
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/silicon/robot/robot.dm#L77">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;silicon&#x2F;robot&#x2F;robot.dm 77"/></a></h3>
+        <p>If the lamp isn't broken.</p><h3 id="var/lamp_intensity"><aside class="declaration">var </aside>lamp_intensity
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/silicon/robot/robot.dm#L83">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;silicon&#x2F;robot&#x2F;robot.dm 83"/></a></h3>
+        <p>Lamp brightness. Starts at 3, but can be 1 - 5.</p><h3 id="var/modularInterface"><aside class="declaration">var </aside>modularInterface
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/modular_computer.html">modular_computer</a>/<a href="obj/item/modular_computer/tablet/integrated.html">tablet/integrated</a></aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/silicon/robot/robot.dm#L91">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;silicon&#x2F;robot&#x2F;robot.dm 91"/></a></h3>
+        <p>The reference to the built-in tablet that borgs carry.</p><h3 id="var/opened"><aside class="declaration">var </aside>opened
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/silicon/robot/robot.dm#L49">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;silicon&#x2F;robot&#x2F;robot.dm 49"/></a></h3>
+        <p>If this is a path, this gets created as an object in Initialize.</p><h2 id="proc">Proc Details</h2><h3 id="proc/Exited"><aside class="parent"><a title="/atom" href="atom.html#proc/Exited">&uarr;</a></aside>Exited<aside>(/<a href="atom.html">atom</a>/A) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/silicon/robot/robot.dm#L883">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;silicon&#x2F;robot&#x2F;robot.dm 883"/></a></aside>
+        </h3>
+        <p>Checking Exited() to detect if a hat gets up and walks off.
+Drones and pAIs might do this, after all.</p><h3 id="proc/deploy_init"><aside class="declaration">proc </aside>deploy_init<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/silicon.html">silicon</a>/<a href="mob/living/silicon/ai.html">ai</a>/AI) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/silicon/robot/robot.dm#L931">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;silicon&#x2F;robot&#x2F;robot.dm 931"/></a></aside>
+        </h3>
+        <p>deploy_init: Deploys AI unit into AI shell</p>
+<p>Arguments:</p>
+<ul>
+<li>AI - AI unit that initiated the deployment into the AI shell</li>
+</ul><h3 id="proc/logevent"><aside class="declaration">proc </aside>logevent<aside>(string) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/silicon/robot/robot.dm#L1093">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;silicon&#x2F;robot&#x2F;robot.dm 1093"/></a></aside>
+        </h3>
+        <p>Records an IC event log entry in the cyborg's internal tablet.</p>
+<p>Creates an entry in the borglog list of the cyborg's internal tablet, listing the current
+in-game time followed by the message given. These logs can be seen by the cyborg in their
+BorgUI tablet app. By design, logging fails if the cyborg is dead.</p>
+<p>Arguments:
+arg1: a string containing the message to log.</p><h3 id="proc/make_shell"><aside class="declaration">proc </aside>make_shell<aside>(/<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/borg/upgrade/ai/board) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/silicon/robot/robot.dm#L895">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;silicon&#x2F;robot&#x2F;robot.dm 895"/></a></aside>
+        </h3>
+        <p>make_shell: Makes an AI shell out of a cyborg unit</p>
+<p>Arguments:</p>
+<ul>
+<li>board - B.O.R.I.S. module board used for transforming the cyborg into AI shell</li>
+</ul><h3 id="proc/revert_shell"><aside class="declaration">proc </aside>revert_shell<aside>() 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/silicon/robot/robot.dm#L910">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;silicon&#x2F;robot&#x2F;robot.dm 910"/></a></aside>
+        </h3>
+        <p>revert_shell: Reverts AI shell back into a normal cyborg unit</p><h3 id="proc/set_lockcharge"><aside class="declaration">proc </aside>set_lockcharge<aside>(new_lockcharge) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/silicon/robot/robot.dm#L496">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;silicon&#x2F;robot&#x2F;robot.dm 496"/></a></aside>
+        </h3>
+        <p>Reports the event of the change in value of the lockcharge variable.</p><h3 id="proc/smash_headlamp"><aside class="declaration">proc </aside>smash_headlamp<aside>() 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/silicon/robot/robot.dm#L525">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;silicon&#x2F;robot&#x2F;robot.dm 525"/></a></aside>
+        </h3>
+        <p>Handles headlamp smashing</p>
+<p>When called (such as by the shadowperson lighteater's attack), this proc will break the borg's headlamp
+and then call toggle_headlamp to disable the light. It also plays a sound effect of glass breaking, and
+tells the borg what happened to its chat. Broken lights can be repaired by using a flashlight on the borg.</p><h3 id="proc/toggle_headlamp"><aside class="declaration">proc </aside>toggle_headlamp<aside>(turn_off, update_color) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/silicon/robot/robot.dm#L546">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;silicon&#x2F;robot&#x2F;robot.dm 546"/></a></aside>
+        </h3>
+        <p>Handles headlamp toggling, disabling, and color setting.</p>
+<p>The initial if statment is a bit long, but the gist of it is that should the lamp be on AND the update_color
+arg be true, we should simply change the color of the lamp but not disable it. Otherwise, should the turn_off
+arg be true, the lamp already be enabled, any of the normal reasons the lamp would turn off happen, or the
+update_color arg be passed with the lamp not on, we should set the lamp off. The update_color arg is only
+ever true when this proc is called from the borg tablet, when the color selection feature is used.</p>
+<p>Arguments:</p>
+<ul>
+<li>arg1 - turn_off, if enabled will force the lamp into an off state (rather than toggling it if possible)</li>
+<li>arg2 - update_color, if enabled, will adjust the behavior of the proc to change the color of the light if it is already on.</li>
+</ul></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Whitesands13/Whitesands/tree/5ed480d6a85dbd88793238bc9ad635c3500b513f">5ed480d</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

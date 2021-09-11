@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;obj&#x2F;structure&#x2F;overmap&#x2F;event - White Sands</title>
+</head>
+<body>
+<header>
+    <a href="index.html">White Sands</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="obj/structure/overmap/event.html#var">Var Details</a> - <a href="obj/structure/overmap/event.html#proc">Proc Details</a></header>
+<main>
+<h1>generic overmap event <aside>/<a href="obj.html">obj</a>/<a href="obj/structure/overmap.html">structure/overmap</a>/<a href="obj/structure/overmap/event.html">event</a></aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/events.dm#L1">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;events.dm 1"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="obj/structure/overmap/event.html#var/affect_multiple_times">affect_multiple_times</a></th><td>Should the affect_ship() proc be called more than once?</td></tr>
+            <tr><th><a href="obj/structure/overmap/event.html#var/chain_rate">chain_rate</a></th><td>How many additional tiles to spawn at once in the selected orbit. Used with OVERMAP_GENERATOR_SOLAR.</td></tr>
+            <tr><th><a href="obj/structure/overmap/event.html#var/chance_to_affect">chance_to_affect</a></th><td>If prob(this), call affect_ship when processed</td></tr>
+            <tr><th><a href="obj/structure/overmap/event.html#var/spread_chance">spread_chance</a></th><td>Chance to spread to nearby tiles if spawned</td></tr>
+            <tr><th><a href="obj/structure/overmap/event.html#var/station_event">station_event</a></th><td>The event to run when the station gets hit by an event</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="obj/structure/overmap/event.html#proc/affect_ship">affect_ship</a></th><td>The proc called on all ships that are currently being affected.</td></tr>
+            <tr><th><a href="obj/structure/overmap/event.html#proc/apply_effect">apply_effect</a></th><td>The main proc for calling other procs. Called by SSovermap.</td></tr>
+            <tr><th><a href="obj/structure/overmap/event.html#proc/ship_act">ship_act</a></th><td>The action performed by a ship on this when the helm button is pressed.</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/affect_multiple_times"><aside class="declaration">var </aside>affect_multiple_times
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/events.dm#L5">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;events.dm 5"/></a></h3>
+        <p>Should the affect_ship() proc be called more than once?</p><h3 id="var/chain_rate"><aside class="declaration">var </aside>chain_rate
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/events.dm#L11">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;events.dm 11"/></a></h3>
+        <p>How many additional tiles to spawn at once in the selected orbit. Used with OVERMAP_GENERATOR_SOLAR.</p><h3 id="var/chance_to_affect"><aside class="declaration">var </aside>chance_to_affect
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/events.dm#L7">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;events.dm 7"/></a></h3>
+        <p>If prob(this), call affect_ship when processed</p><h3 id="var/spread_chance"><aside class="declaration">var </aside>spread_chance
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/events.dm#L9">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;events.dm 9"/></a></h3>
+        <p>Chance to spread to nearby tiles if spawned</p><h3 id="var/station_event"><aside class="declaration">var </aside>station_event
+            <aside>&ndash; /<a href="datum.html">datum</a>/round_event_control</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/events.dm#L15">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;events.dm 15"/></a></h3>
+        <p>The event to run when the station gets hit by an event</p><h2 id="proc">Proc Details</h2><h3 id="proc/affect_ship"><aside class="declaration">proc </aside>affect_ship<aside>(/<a href="obj.html">obj</a>/<a href="obj/structure/overmap.html">structure/overmap</a>/<a href="obj/structure/overmap/ship.html">ship</a>/<a href="obj/structure/overmap/ship/simulated.html">simulated</a>/S) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/events.dm#L42">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;events.dm 42"/></a></aside>
+        </h3>
+        <p>The proc called on all ships that are currently being affected.</p><h3 id="proc/apply_effect"><aside class="declaration">proc </aside>apply_effect<aside>() 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/events.dm#L33">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;events.dm 33"/></a></aside>
+        </h3>
+        <p>The main proc for calling other procs. Called by SSovermap.</p><h3 id="proc/ship_act"><aside class="declaration">proc </aside>ship_act<aside>(/<a href="mob.html">mob</a>/user, /<a href="obj.html">obj</a>/<a href="obj/structure/overmap.html">structure/overmap</a>/<a href="obj/structure/overmap/ship.html">ship</a>/<a href="obj/structure/overmap/ship/simulated.html">simulated</a>/acting) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/events.dm#L27">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;events.dm 27"/></a></aside>
+        </h3>
+        <p>The action performed by a ship on this when the helm button is pressed.</p>
+<ul>
+<li>acting - The ship acting on the event</li>
+</ul></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Whitesands13/Whitesands/tree/5ed480d6a85dbd88793238bc9ad635c3500b513f">5ed480d</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>whitesands&#x2F;README.md - White Sands</title>
+</head>
+<body>
+<header>
+    <a href="index.html">White Sands</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+</header>
+<main>
+<h1>White Sands Custom File Directory <aside>whitesands/README.md</aside> 
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/README.md">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;README.md"/></a></h1>
+
+<table class="summary" cellspacing="0">
+        <tr><td colspan="2"><h2 id="what-it-is">What it is</h2>
+<p>This directory exists to house custom code changes that can be properly seperated from the codebase and placed here. All files that can be placed here should. The less code in any folder that isn't this one, the fewer conflicts will exist in future updates. Concept and readme shamelessly stolen from Hippiestation.</p>
+<h2 id="what-it-means-to-modularize">What it means to modularize</h2>
+<p>Something is modular when it exists independent from the rest of the code. This means that by simply adding something modular to the DME file, it will exist in-game. It is not always possible to completely modularize something, but if standards are followed correctly, then there should be few to none conflicts with /tg/station in the future.</p>
+<h2 id="how-to-stay-modularized">How to stay modularized</h2>
+<ul>
+<li>Single line changes should have <code>//WS Edit -- reason</code> at the end of the exact line that was edited</li>
+<li>Multi line changes start with <code>//WS Start -- reason</code> and end with <code>//WS end</code>. The reason MUST be included in the change in all cases, so that future coders looking at the line will know why it is needed.</li>
+<li>The reason should generally be about what it was before, or what the change is.</li>
+<li>Commenting out some /tg/ code must be done by putting <code>/*WS start -- reason</code> one line before the commented out code, with said line having only the comment itself, and <code>WS end */</code> one line after the commented out code, always in an empty line.</li>
+<li>Some examples:</li>
+</ul>
+<pre><code class="language-dm">var/obj/O = new(thing) //WS -- added argument thing to new
+</code></pre>
+<pre><code class="language-dm">/*WS start -- mirrored in our file
+/proc/del_everything
+ del(world)
+ del(O)
+ del(everything)
+WS end */
+</code></pre>
+<h3 id="icons-code-and-sounds">Icons, code, and sounds</h3>
+<p>Icons are notorious for conflicts. Because of this, <strong>ALL NEW ICONS</strong> must go in the &quot;whitesands/icons&quot; folder. There are to be no exceptions to this rule. Sounds don't cause conflicts, but for the sake of organization they are to go in the &quot;whitesands/sounds&quot; folder. No exceptions, either. Unless absolutely necessary, code should go in the &quot;whitesands/code&quot; folder. Small changes outside of the folder should be done with &quot;hook&quot; procs. Larger changes should simply mirror the file in the &quot;whitesands/code&quot; folder.</p>
+<p>If a multiline addition needs to be made outside of the &quot;whitesands&quot; folder, then it should be done by adding a proc called &quot;hook&quot; proc. This proc will be defined inside of the &quot;whitesands&quot; folder. By doing this, a large number of things can be done by adding just one line of code outside of the folder! If possible, also add a comment in the modularized file pointing at the file and proc where the &quot;hook&quot; proc is called, it can be helpful during upstream merges and such.</p>
+<p>If a file must be completely changed, re-create it with the changes inside of the &quot;whitesands/code&quot; folder. <strong>Make sure to follow the file's path correctly</strong> (i.e. code/modules/clothing/clothing.dm.) Then, remove the original file from the tgstation.dme and add the new one.</p>
+<h3 id="defines">Defines</h3>
+<p>Defines only work if they come before the code in which they are used. Because of this, please put all defines in the `code/__DEFINES/~whitesands_defines' path. Use an existing file, or create a new one if necessary.</p></td></tr></table></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Whitesands13/Whitesands/tree/5ed480d6a85dbd88793238bc9ad635c3500b513f">5ed480d</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

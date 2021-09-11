@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;obj&#x2F;structure&#x2F;overmap&#x2F;dynamic - White Sands</title>
+</head>
+<body>
+<header>
+    <a href="index.html">White Sands</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="obj/structure/overmap/dynamic.html#var">Var Details</a> - <a href="obj/structure/overmap/dynamic.html#proc">Proc Details</a></header>
+<main>
+<h1>weak energy signature <aside>/<a href="obj.html">obj</a>/<a href="obj/structure/overmap.html">structure/overmap</a>/<a href="obj/structure/overmap/dynamic.html">dynamic</a></aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/_overmap.dm#L240">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;_overmap.dm 240"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="obj/structure/overmap/dynamic.html#var/planet">planet</a></th><td>If the level is a planet.</td></tr>
+            <tr><th><a href="obj/structure/overmap/dynamic.html#var/preserve_level">preserve_level</a></th><td>If the level should be preserved. Useful for if you want to build an autismfort or something.</td></tr>
+            <tr><th><a href="obj/structure/overmap/dynamic.html#var/reserve">reserve</a></th><td>The active turf reservation, if there is one</td></tr>
+            <tr><th><a href="obj/structure/overmap/dynamic.html#var/reserve_dock">reserve_dock</a></th><td>The docking port in the reserve</td></tr>
+            <tr><th><a href="obj/structure/overmap/dynamic.html#var/reserve_dock_secondary">reserve_dock_secondary</a></th><td>The docking port in the reserve</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="obj/structure/overmap/dynamic.html#proc/choose_level_type">choose_level_type</a></th><td>Chooses a type of level for the dynamic level to use.</td></tr>
+            <tr><th><a href="obj/structure/overmap/dynamic.html#proc/load_level">load_level</a></th><td>Load a level for a ship that's visiting the level.</td></tr>
+            <tr><th><a href="obj/structure/overmap/dynamic.html#proc/unload_level">unload_level</a></th><td>Unloads the reserve, deletes the linked docking port, and moves to a random location if there's no client-having, alive mobs.</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/planet"><aside class="declaration">var </aside>planet
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/_overmap.dm#L253">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;_overmap.dm 253"/></a></h3>
+        <p>If the level is a planet.</p><h3 id="var/preserve_level"><aside class="declaration">var </aside>preserve_level
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/_overmap.dm#L251">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;_overmap.dm 251"/></a></h3>
+        <p>If the level should be preserved. Useful for if you want to build an autismfort or something.</p><h3 id="var/reserve"><aside class="declaration">var </aside>reserve
+            <aside>&ndash; /<a href="datum.html">datum</a>/turf_reservation</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/_overmap.dm#L245">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;_overmap.dm 245"/></a></h3>
+        <p>The active turf reservation, if there is one</p><h3 id="var/reserve_dock"><aside class="declaration">var </aside>reserve_dock
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/docking_port.html">docking_port</a>/stationary</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/_overmap.dm#L247">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;_overmap.dm 247"/></a></h3>
+        <p>The docking port in the reserve</p><h3 id="var/reserve_dock_secondary"><aside class="declaration">var </aside>reserve_dock_secondary
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/docking_port.html">docking_port</a>/stationary</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/_overmap.dm#L249">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;_overmap.dm 249"/></a></h3>
+        <p>The docking port in the reserve</p><h2 id="proc">Proc Details</h2><h3 id="proc/choose_level_type"><aside class="declaration">proc </aside>choose_level_type<aside>() 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/_overmap.dm#L268">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;_overmap.dm 268"/></a></aside>
+        </h3>
+        <p>Chooses a type of level for the dynamic level to use.</p><h3 id="proc/load_level"><aside class="declaration">proc </aside>load_level<aside>(/<a href="obj.html">obj</a>/<a href="obj/docking_port.html">docking_port</a>/<a href="obj/docking_port/mobile.html">mobile</a>/visiting_shuttle) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/_overmap.dm#L307">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;_overmap.dm 307"/></a></aside>
+        </h3>
+        <p>Load a level for a ship that's visiting the level.</p>
+<ul>
+<li>visiting shuttle - The docking port of the shuttle visiting the level.</li>
+</ul><h3 id="proc/unload_level"><aside class="declaration">proc </aside>unload_level<aside>() 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/modules/overmap/_overmap.dm#L322">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;modules&#x2F;overmap&#x2F;_overmap.dm 322"/></a></aside>
+        </h3>
+        <p>Unloads the reserve, deletes the linked docking port, and moves to a random location if there's no client-having, alive mobs.</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Whitesands13/Whitesands/tree/5ed480d6a85dbd88793238bc9ad635c3500b513f">5ed480d</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

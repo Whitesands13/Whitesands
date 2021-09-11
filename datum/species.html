@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;datum&#x2F;species - White Sands</title>
+</head>
+<body>
+<header>
+    <a href="index.html">White Sands</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="datum/species.html#var">Var Details</a> - <a href="datum/species.html#proc">Proc Details</a></header>
+<main>
+<h1>species datum <aside>/<a href="datum.html">datum</a>/<a href="datum/species.html">species</a></aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L12">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 12"/></a></h1>
+
+<p>Datum that handles different species in the game.</p>
+<p>This datum handles species in the game, such as lizardpeople, mothmen, zombies, skeletons, etc.
+It is used in <a href="mob/living/carbon/human.html" title="/mob/living/carbon/human">carbon humans</a> to determine various things about them, like their food preferences, if they have biological genders, their damage resistances, and more.</p><table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="datum/species.html#var/allow_numbers_in_name">allow_numbers_in_name</a></th><td>Can this species use numbers in its name?</td></tr>
+            <tr><th><a href="datum/species.html#var/armor">armor</a></th><td>Percentage modifier for overall defense of the race, or less defense, if it's negative.</td></tr>
+            <tr><th><a href="datum/species.html#var/attack_type">attack_type</a></th><td>Type of damage attack does. Ethereals attack with burn damage for example.</td></tr>
+            <tr><th><a href="datum/species.html#var/attack_verb">attack_verb</a></th><td>Punch-specific attack verb.</td></tr>
+            <tr><th><a href="datum/species.html#var/bodytemp_autorecovery_min">bodytemp_autorecovery_min</a></th><td>Minimum amount of kelvin moved toward normal body temperature per tick.</td></tr>
+            <tr><th><a href="datum/species.html#var/bodytemp_cold_damage_limit">bodytemp_cold_damage_limit</a></th><td>The body temperature limit the body can take before it starts taking damage from cold.</td></tr>
+            <tr><th><a href="datum/species.html#var/bodytemp_heat_damage_limit">bodytemp_heat_damage_limit</a></th><td>The body temperature limit the body can take before it starts taking damage from heat.</td></tr>
+            <tr><th><a href="datum/species.html#var/bodytemp_normal">bodytemp_normal</a></th><td>The natural temperature for a body</td></tr>
+            <tr><th><a href="datum/species.html#var/breathid">breathid</a></th><td>What gas does this species breathe? Used by suffocation screen alerts, most of actual gas breathing is handled by mutantlungs. See [life.dm][code/modules/mob/living/carbon/human/life.dm]</td></tr>
+            <tr><th><a href="datum/species.html#var/brutemod">brutemod</a></th><td>multiplier for brute damage</td></tr>
+            <tr><th><a href="datum/species.html#var/burnmod">burnmod</a></th><td>multiplier for burn damage</td></tr>
+            <tr><th><a href="datum/species.html#var/changesource_flags">changesource_flags</a></th><td>Bitflag that controls what in game ways something can select this species as a spawnable source, such as magic mirrors. See [mob defines][code/_DEFINES/mobs.dm] for possible sources.</td></tr>
+            <tr><th><a href="datum/species.html#var/coldmod">coldmod</a></th><td>multiplier for damage from cold temperature</td></tr>
+            <tr><th><a href="datum/species.html#var/damage_overlay_type">damage_overlay_type</a></th><td>What kind of damage overlays (if any) appear on our species when wounded? If this is &quot;&quot;, does not add an overlay.</td></tr>
+            <tr><th><a href="datum/species.html#var/deathsound">deathsound</a></th><td>Used to set the mob's deathsound upon species change</td></tr>
+            <tr><th><a href="datum/species.html#var/default_features">default_features</a></th><td>Default mutant bodyparts for this species, like horns. Don't forget to set one for every mutant bodypart you allow this species to have.</td></tr>
+            <tr><th><a href="datum/species.html#var/disliked_food">disliked_food</a></th><td>Bitfield for food types that the species dislikes, giving them disgust. Humans hate raw food, for example.</td></tr>
+            <tr><th><a href="datum/species.html#var/exotic_blood">exotic_blood</a></th><td>If your race bleeds something other than bog standard blood, change this to reagent id. For example, ethereals bleed liquid electricity.</td></tr>
+            <tr><th><a href="datum/species.html#var/exotic_bloodtype">exotic_bloodtype</a></th><td>If your race uses a non standard bloodtype (A+, O-, AB-, etc). For example, lizards have L type blood.</td></tr>
+            <tr><th><a href="datum/species.html#var/fixed_mut_color">fixed_mut_color</a></th><td>To use MUTCOLOR with a fixed color that's independent of the mcolor feature in DNA.</td></tr>
+            <tr><th><a href="datum/species.html#var/fly">fly</a></th><td>The actual flying ability given to flying species</td></tr>
+            <tr><th><a href="datum/species.html#var/flying_species">flying_species</a></th><td>Is this species a flying species? Used as an easy check for some things</td></tr>
+            <tr><th><a href="datum/species.html#var/grab_sound">grab_sound</a></th><td>Special sound for grabbing</td></tr>
+            <tr><th><a href="datum/species.html#var/hair_alpha">hair_alpha</a></th><td>The alpha used by the hair. 255 is completely solid, 0 is invisible.</td></tr>
+            <tr><th><a href="datum/species.html#var/hair_color">hair_color</a></th><td>This allows races to have specific hair colors. If null, it uses the H's hair/facial hair colors. If &quot;mutcolor&quot;, it uses the H's mutant_color. If &quot;fixedmutcolor&quot;, it uses fixedmutcolor</td></tr>
+            <tr><th><a href="datum/species.html#var/has_innate_wings">has_innate_wings</a></th><td>Used to determine what description to give when using a potion of flight, if false it will describe them as growing new wings</td></tr>
+            <tr><th><a href="datum/species.html#var/heatmod">heatmod</a></th><td>multiplier for damage from hot temperature</td></tr>
+            <tr><th><a href="datum/species.html#var/id">id</a></th><td>If the game needs to manually check your race to do something not included in a proc here, it will use this.</td></tr>
+            <tr><th><a href="datum/species.html#var/inert_mutation">inert_mutation</a></th><td>Special mutation that can be found in the genepool exclusively in this species. Dont leave empty or changing species will be a headache</td></tr>
+            <tr><th><a href="datum/species.html#var/inherent_biotypes">inherent_biotypes</a></th><td>List of biotypes the mob belongs to. Used by diseases.</td></tr>
+            <tr><th><a href="datum/species.html#var/inherent_factions">inherent_factions</a></th><td>List of factions the mob gain upon gaining this species.</td></tr>
+            <tr><th><a href="datum/species.html#var/inherent_traits">inherent_traits</a></th><td>Generic traits tied to having the species.</td></tr>
+            <tr><th><a href="datum/species.html#var/liked_food">liked_food</a></th><td>Bitfield for food types that the species likes, giving them a mood boost. Lizards like meat, for example.</td></tr>
+            <tr><th><a href="datum/species.html#var/meat">meat</a></th><td>What the species drops when gibbed by a gibber machine.</td></tr>
+            <tr><th><a href="datum/species.html#var/mutant_bodyparts">mutant_bodyparts</a></th><td>Visible CURRENT bodyparts that are unique to a species. DO NOT USE THIS AS A LIST OF ALL POSSIBLE BODYPARTS AS IT WILL FUCK SHIT UP! Changes to this list for non-species specific bodyparts (ie cat ears and tails) should be assigned at organ level if possible. Layer hiding is handled by <a href="datum/species.html" title="/datum/species">datum/species/handle_mutant_bodyparts()</a> below.</td></tr>
+            <tr><th><a href="datum/species.html#var/mutant_organs">mutant_organs</a></th><td>Internal organs that are unique to this race, like a tail.</td></tr>
+            <tr><th><a href="datum/species.html#var/mutantappendix">mutantappendix</a></th><td>Replaces default appendix with a different organ.</td></tr>
+            <tr><th><a href="datum/species.html#var/mutantbrain">mutantbrain</a></th><td>Replaces default brain with a different organ</td></tr>
+            <tr><th><a href="datum/species.html#var/mutantears">mutantears</a></th><td>Replaces default ears with a different organ</td></tr>
+            <tr><th><a href="datum/species.html#var/mutanteyes">mutanteyes</a></th><td>Replaces default eyes with a different organ</td></tr>
+            <tr><th><a href="datum/species.html#var/mutanthands">mutanthands</a></th><td>Forces an item into this species' hands. Only an honorary mutantthing because this is not an organ and not loaded in the same way, you've been warned to do your research.</td></tr>
+            <tr><th><a href="datum/species.html#var/mutantheart">mutantheart</a></th><td>Replaces default heart with a different organ</td></tr>
+            <tr><th><a href="datum/species.html#var/mutantliver">mutantliver</a></th><td>Replaces default liver with a different organ</td></tr>
+            <tr><th><a href="datum/species.html#var/mutantlungs">mutantlungs</a></th><td>Replaces default lungs with a different organ</td></tr>
+            <tr><th><a href="datum/species.html#var/mutantstomach">mutantstomach</a></th><td>Replaces default stomach with a different organ</td></tr>
+            <tr><th><a href="datum/species.html#var/mutanttongue">mutanttongue</a></th><td>Replaces default tongue with a different organ</td></tr>
+            <tr><th><a href="datum/species.html#var/name">name</a></th><td>This is the fluff name. They are displayed on health analyzers and in the character setup menu. Leave them generic for other servers to customize.</td></tr>
+            <tr><th><a href="datum/species.html#var/no_equip">no_equip</a></th><td>Inventory slots the race can't equip stuff to. Golems cannot wear jumpsuits, for example.</td></tr>
+            <tr><th><a href="datum/species.html#var/nojumpsuit">nojumpsuit</a></th><td>Allows the species to equip items that normally require a jumpsuit without having one equipped. Used by golems.</td></tr>
+            <tr><th><a href="datum/species.html#var/offset_features">offset_features</a></th><td>Clothing offsets. If a species has a different body than other species, you can offset clothing so they look less weird.</td></tr>
+            <tr><th><a href="datum/species.html#var/outfit_important_for_life">outfit_important_for_life</a></th><td>A path to an outfit that is important for species life e.g. plasmaman outfit</td></tr>
+            <tr><th><a href="datum/species.html#var/override_float">override_float</a></th><td>Allows the species to not give a single F about gravity. Used by wings.</td></tr>
+            <tr><th><a href="datum/species.html#var/punchdamagehigh">punchdamagehigh</a></th><td>Highest possible punch damage this species can give.</td></tr>
+            <tr><th><a href="datum/species.html#var/punchdamagelow">punchdamagelow</a></th><td>Lowest possible punch damage this species can give. If this is set to 0, punches will always miss.</td></tr>
+            <tr><th><a href="datum/species.html#var/punchstunthreshold">punchstunthreshold</a></th><td>Damage at which punches from this race will stun</td></tr>
+            <tr><th><a href="datum/species.html#var/reagent_tag">reagent_tag</a></th><td>Used for metabolizing reagents. We're going to assume you're a meatbag unless you say otherwise.</td></tr>
+            <tr><th><a href="datum/species.html#var/say_mod">say_mod</a></th><td>Affects the speech message, for example: Motharula flutters, &quot;My speech message is flutters!&quot;</td></tr>
+            <tr><th><a href="datum/species.html#var/sexes">sexes</a></th><td>Whether or not the race has sexual characteristics (biological genders). At the moment this is only FALSE for skeletons and shadows</td></tr>
+            <tr><th><a href="datum/species.html#var/siemens_coeff">siemens_coeff</a></th><td>Base electrocution coefficient.  Basically a multiplier for damage from electrocutions.</td></tr>
+            <tr><th><a href="datum/species.html#var/skinned_type">skinned_type</a></th><td>What skin the species drops when gibbed by a gibber machine.</td></tr>
+            <tr><th><a href="datum/species.html#var/special_step_sounds">special_step_sounds</a></th><td>Sounds to override barefeet walking</td></tr>
+            <tr><th><a href="datum/species.html#var/species_gibs">species_gibs</a></th><td>Does this mob have special gibs?</td></tr>
+            <tr><th><a href="datum/species.html#var/species_language_holder">species_language_holder</a></th><td>What languages this species can understand and say. Use a <a href="datum/language_holder.html" title="/datum/language_holder">language holder datum</a> in this var.</td></tr>
+            <tr><th><a href="datum/species.html#var/species_traits">species_traits</a></th><td>Species-only traits. Can be found in [code/_DEFINES/DNA.dm]</td></tr>
+            <tr><th><a href="datum/species.html#var/speedmod">speedmod</a></th><td>Multiplier for the race's speed. Positive numbers make it move slower, negative numbers make it move faster.</td></tr>
+            <tr><th><a href="datum/species.html#var/stunmod">stunmod</a></th><td>multiplier for stun durations</td></tr>
+            <tr><th><a href="datum/species.html#var/toxic_food">toxic_food</a></th><td>Bitfield for food types that the species absolutely hates, giving them even more disgust than disliked food. Meat is &quot;toxic&quot; to moths, for example.</td></tr>
+            <tr><th><a href="datum/species.html#var/use_skintones">use_skintones</a></th><td>Does the species use skintones or not? As of now only used by humans.</td></tr>
+            <tr><th><a href="datum/species.html#var/wings_icon">wings_icon</a></th><td>Current wings icon</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="datum/species.html#proc/check_roundstart_eligible">check_roundstart_eligible</a></th><td>Checks if a species is eligible to be picked at roundstart.</td></tr>
+            <tr><th><a href="datum/species.html#proc/copy_properties_from">copy_properties_from</a></th><td>Copies some vars and properties over that should be kept when creating a copy of this species.</td></tr>
+            <tr><th><a href="datum/species.html#proc/get_biological_state">get_biological_state</a></th><td>The human species version of <a href="mob/living/carbon.html#proc/get_biological_state" title="/mob/living/carbon">/mob/living/carbon/proc/get_biological_state</a>. Depends on the HAS_FLESH and HAS_BONE species traits, having bones lets you have bone wounds, having flesh lets you have burn, slash, and piercing wounds</td></tr>
+            <tr><th><a href="datum/species.html#proc/give_important_for_life">give_important_for_life</a></th><td>Equip the outfit required for life. Replaces items currently worn.</td></tr>
+            <tr><th><a href="datum/species.html#proc/handle_body">handle_body</a></th><td>Handles the body of a human</td></tr>
+            <tr><th><a href="datum/species.html#proc/handle_body_temperature">handle_body_temperature</a></th><td>Handle the body temperature status effects for the species
+Traits for resitance to heat or cold are handled here.</td></tr>
+            <tr><th><a href="datum/species.html#proc/handle_environment">handle_environment</a></th><td>Enviroment handler for species</td></tr>
+            <tr><th><a href="datum/species.html#proc/handle_environment_pressure">handle_environment_pressure</a></th><td>Handle the air pressure of the environment</td></tr>
+            <tr><th><a href="datum/species.html#proc/handle_hair">handle_hair</a></th><td>Handles hair icons and dynamic hair.</td></tr>
+            <tr><th><a href="datum/species.html#proc/handle_mutant_bodyparts">handle_mutant_bodyparts</a></th><td>Handles the mutant bodyparts of a human</td></tr>
+            <tr><th><a href="datum/species.html#proc/harm">harm</a></th><td>This proc handles punching damage. IMPORTANT: Our owner is the TARGET and not the USER in this proc. For whatever reason...</td></tr>
+            <tr><th><a href="datum/species.html#proc/natural_bodytemperature_stabilization">natural_bodytemperature_stabilization</a></th><td>Used to stabilize the body temperature back to normal on living mobs</td></tr>
+            <tr><th><a href="datum/species.html#proc/on_species_gain">on_species_gain</a></th><td>Proc called when a carbon becomes this species.</td></tr>
+            <tr><th><a href="datum/species.html#proc/on_species_loss">on_species_loss</a></th><td>Proc called when a carbon is no longer this species.</td></tr>
+            <tr><th><a href="datum/species.html#proc/qualifies_for_rank">qualifies_for_rank</a></th><td>Checks if this carbon is allowed to be a certain job or rank.</td></tr>
+            <tr><th><a href="datum/species.html#proc/random_name">random_name</a></th><td>Generates a random name for a carbon.</td></tr>
+            <tr><th><a href="datum/species.html#proc/regenerate_organs">regenerate_organs</a></th><td></td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/allow_numbers_in_name"><aside class="declaration">var </aside>allow_numbers_in_name
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L107">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 107"/></a></h3>
+        <p>Can this species use numbers in its name?</p><h3 id="var/armor"><aside class="declaration">var </aside>armor
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L66">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 66"/></a></h3>
+        <p>Percentage modifier for overall defense of the race, or less defense, if it's negative.</p><h3 id="var/attack_type"><aside class="declaration">var </aside>attack_type
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L78">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 78"/></a></h3>
+        <p>Type of damage attack does. Ethereals attack with burn damage for example.</p><h3 id="var/attack_verb"><aside class="declaration">var </aside>attack_verb
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L139">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 139"/></a></h3>
+        <p>Punch-specific attack verb.</p><h3 id="var/bodytemp_autorecovery_min"><aside class="declaration">var </aside>bodytemp_autorecovery_min
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L123">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 123"/></a></h3>
+        <p>Minimum amount of kelvin moved toward normal body temperature per tick.</p><h3 id="var/bodytemp_cold_damage_limit"><aside class="declaration">var </aside>bodytemp_cold_damage_limit
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L127">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 127"/></a></h3>
+        <p>The body temperature limit the body can take before it starts taking damage from cold.</p><h3 id="var/bodytemp_heat_damage_limit"><aside class="declaration">var </aside>bodytemp_heat_damage_limit
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L125">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 125"/></a></h3>
+        <p>The body temperature limit the body can take before it starts taking damage from heat.</p><h3 id="var/bodytemp_normal"><aside class="declaration">var </aside>bodytemp_normal
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L121">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 121"/></a></h3>
+        <p>The natural temperature for a body</p><h3 id="var/breathid"><aside class="declaration">var </aside>breathid
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L145">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 145"/></a></h3>
+        <p>What gas does this species breathe? Used by suffocation screen alerts, most of actual gas breathing is handled by mutantlungs. See [life.dm][code/modules/mob/living/carbon/human/life.dm]</p><h3 id="var/brutemod"><aside class="declaration">var </aside>brutemod
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L68">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 68"/></a></h3>
+        <p>multiplier for brute damage</p><h3 id="var/burnmod"><aside class="declaration">var </aside>burnmod
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L70">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 70"/></a></h3>
+        <p>multiplier for burn damage</p><h3 id="var/changesource_flags"><aside class="declaration">var </aside>changesource_flags
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L175">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 175"/></a></h3>
+        <p>Bitflag that controls what in game ways something can select this species as a spawnable source, such as magic mirrors. See [mob defines][code/_DEFINES/mobs.dm] for possible sources.</p><h3 id="var/coldmod"><aside class="declaration">var </aside>coldmod
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L72">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 72"/></a></h3>
+        <p>multiplier for damage from cold temperature</p><h3 id="var/damage_overlay_type"><aside class="declaration">var </aside>damage_overlay_type
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L88">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 88"/></a></h3>
+        <p>What kind of damage overlays (if any) appear on our species when wounded? If this is &quot;&quot;, does not add an overlay.</p><h3 id="var/deathsound"><aside class="declaration">var </aside>deathsound
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L94">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 94"/></a></h3>
+        <p>Used to set the mob's deathsound upon species change</p><h3 id="var/default_features"><aside class="declaration">var </aside>default_features
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L58">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 58"/></a></h3>
+        <p>Default mutant bodyparts for this species, like horns. Don't forget to set one for every mutant bodypart you allow this species to have.</p><h3 id="var/disliked_food"><aside class="declaration">var </aside>disliked_food
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L46">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 46"/></a></h3>
+        <p>Bitfield for food types that the species dislikes, giving them disgust. Humans hate raw food, for example.</p><h3 id="var/exotic_blood"><aside class="declaration">var </aside>exotic_blood
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L36">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 36"/></a></h3>
+        <p>If your race bleeds something other than bog standard blood, change this to reagent id. For example, ethereals bleed liquid electricity.</p><h3 id="var/exotic_bloodtype"><aside class="declaration">var </aside>exotic_bloodtype
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L38">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 38"/></a></h3>
+        <p>If your race uses a non standard bloodtype (A+, O-, AB-, etc). For example, lizards have L type blood.</p><h3 id="var/fixed_mut_color"><aside class="declaration">var </aside>fixed_mut_color
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L90">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 90"/></a></h3>
+        <p>To use MUTCOLOR with a fixed color that's independent of the mcolor feature in DNA.</p><h3 id="var/fly"><aside class="declaration">var </aside>fly
+            <aside>&ndash; /<a href="datum.html">datum</a>/action/innate/flight</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L112">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 112"/></a></h3>
+        <p>The actual flying ability given to flying species</p><h3 id="var/flying_species"><aside class="declaration">var </aside>flying_species
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L110">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 110"/></a></h3>
+        <p>Is this species a flying species? Used as an easy check for some things</p><h3 id="var/grab_sound"><aside class="declaration">var </aside>grab_sound
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L98">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 98"/></a></h3>
+        <p>Special sound for grabbing</p><h3 id="var/hair_alpha"><aside class="declaration">var </aside>hair_alpha
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L31">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 31"/></a></h3>
+        <p>The alpha used by the hair. 255 is completely solid, 0 is invisible.</p><h3 id="var/hair_color"><aside class="declaration">var </aside>hair_color
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L29">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 29"/></a></h3>
+        <p>This allows races to have specific hair colors. If null, it uses the H's hair/facial hair colors. If &quot;mutcolor&quot;, it uses the H's mutant_color. If &quot;fixedmutcolor&quot;, it uses fixedmutcolor</p><h3 id="var/has_innate_wings"><aside class="declaration">var </aside>has_innate_wings
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L118">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 118"/></a></h3>
+        <p>Used to determine what description to give when using a potion of flight, if false it will describe them as growing new wings</p><h3 id="var/heatmod"><aside class="declaration">var </aside>heatmod
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L74">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 74"/></a></h3>
+        <p>multiplier for damage from hot temperature</p><h3 id="var/id"><aside class="declaration">var </aside>id
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L14">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 14"/></a></h3>
+        <p>If the game needs to manually check your race to do something not included in a proc here, it will use this.</p><h3 id="var/inert_mutation"><aside class="declaration">var </aside>inert_mutation
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L92">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 92"/></a></h3>
+        <p>Special mutation that can be found in the genepool exclusively in this species. Dont leave empty or changing species will be a headache</p><h3 id="var/inherent_biotypes"><aside class="declaration">var </aside>inherent_biotypes
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L134">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 134"/></a></h3>
+        <p>List of biotypes the mob belongs to. Used by diseases.</p><h3 id="var/inherent_factions"><aside class="declaration">var </aside>inherent_factions
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L136">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 136"/></a></h3>
+        <p>List of factions the mob gain upon gaining this species.</p><h3 id="var/inherent_traits"><aside class="declaration">var </aside>inherent_traits
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L132">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 132"/></a></h3>
+        <p>Generic traits tied to having the species.</p><h3 id="var/liked_food"><aside class="declaration">var </aside>liked_food
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L44">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 44"/></a></h3>
+        <p>Bitfield for food types that the species likes, giving them a mood boost. Lizards like meat, for example.</p><h3 id="var/meat"><aside class="declaration">var </aside>meat
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L40">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 40"/></a></h3>
+        <p>What the species drops when gibbed by a gibber machine.</p><h3 id="var/mutant_bodyparts"><aside class="declaration">var </aside>mutant_bodyparts
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L60">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 60"/></a></h3>
+        <p>Visible CURRENT bodyparts that are unique to a species. DO NOT USE THIS AS A LIST OF ALL POSSIBLE BODYPARTS AS IT WILL FUCK SHIT UP! Changes to this list for non-species specific bodyparts (ie cat ears and tails) should be assigned at organ level if possible. Layer hiding is handled by <a href="datum/species.html" title="/datum/species">datum/species/handle_mutant_bodyparts()</a> below.</p><h3 id="var/mutant_organs"><aside class="declaration">var </aside>mutant_organs
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L62">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 62"/></a></h3>
+        <p>Internal organs that are unique to this race, like a tail.</p><h3 id="var/mutantappendix"><aside class="declaration">var </aside>mutantappendix
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/organ.html">organ</a>/appendix</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L168">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 168"/></a></h3>
+        <p>Replaces default appendix with a different organ.</p><h3 id="var/mutantbrain"><aside class="declaration">var </aside>mutantbrain
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/organ.html">organ</a>/<a href="obj/item/organ/brain.html">brain</a></aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L152">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 152"/></a></h3>
+        <p>Replaces default brain with a different organ</p><h3 id="var/mutantears"><aside class="declaration">var </aside>mutantears
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/organ.html">organ</a>/ears</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L160">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 160"/></a></h3>
+        <p>Replaces default ears with a different organ</p><h3 id="var/mutanteyes"><aside class="declaration">var </aside>mutanteyes
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/organ.html">organ</a>/eyes</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L158">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 158"/></a></h3>
+        <p>Replaces default eyes with a different organ</p><h3 id="var/mutanthands"><aside class="declaration">var </aside>mutanthands
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/item.html">item</a></aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L170">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 170"/></a></h3>
+        <p>Forces an item into this species' hands. Only an honorary mutantthing because this is not an organ and not loaded in the same way, you've been warned to do your research.</p><h3 id="var/mutantheart"><aside class="declaration">var </aside>mutantheart
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/organ.html">organ</a>/heart</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L154">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 154"/></a></h3>
+        <p>Replaces default heart with a different organ</p><h3 id="var/mutantliver"><aside class="declaration">var </aside>mutantliver
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/organ.html">organ</a>/liver</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L164">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 164"/></a></h3>
+        <p>Replaces default liver with a different organ</p><h3 id="var/mutantlungs"><aside class="declaration">var </aside>mutantlungs
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/organ.html">organ</a>/lungs</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L156">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 156"/></a></h3>
+        <p>Replaces default lungs with a different organ</p><h3 id="var/mutantstomach"><aside class="declaration">var </aside>mutantstomach
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/organ.html">organ</a>/stomach</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L166">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 166"/></a></h3>
+        <p>Replaces default stomach with a different organ</p><h3 id="var/mutanttongue"><aside class="declaration">var </aside>mutanttongue
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/organ.html">organ</a>/tongue</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L162">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 162"/></a></h3>
+        <p>Replaces default tongue with a different organ</p><h3 id="var/name"><aside class="declaration">var </aside>name
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L18">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 18"/></a></h3>
+        <p>This is the fluff name. They are displayed on health analyzers and in the character setup menu. Leave them generic for other servers to customize.</p><h3 id="var/no_equip"><aside class="declaration">var </aside>no_equip
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L50">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 50"/></a></h3>
+        <p>Inventory slots the race can't equip stuff to. Golems cannot wear jumpsuits, for example.</p><h3 id="var/nojumpsuit"><aside class="declaration">var </aside>nojumpsuit
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L52">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 52"/></a></h3>
+        <p>Allows the species to equip items that normally require a jumpsuit without having one equipped. Used by golems.</p><h3 id="var/offset_features"><aside class="declaration">var </aside>offset_features
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L26">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 26"/></a></h3>
+        <p>Clothing offsets. If a species has a different body than other species, you can offset clothing so they look less weird.</p><h3 id="var/outfit_important_for_life"><aside class="declaration">var </aside>outfit_important_for_life
+            <aside>&ndash; /<a href="datum.html">datum</a>/<a href="datum/outfit.html">outfit</a></aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L100">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 100"/></a></h3>
+        <p>A path to an outfit that is important for species life e.g. plasmaman outfit</p><h3 id="var/override_float"><aside class="declaration">var </aside>override_float
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L172">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 172"/></a></h3>
+        <p>Allows the species to not give a single F about gravity. Used by wings.</p><h3 id="var/punchdamagehigh"><aside class="declaration">var </aside>punchdamagehigh
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L82">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 82"/></a></h3>
+        <p>Highest possible punch damage this species can give.</p><h3 id="var/punchdamagelow"><aside class="declaration">var </aside>punchdamagelow
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L80">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 80"/></a></h3>
+        <p>Lowest possible punch damage this species can give. If this is set to 0, punches will always miss.</p><h3 id="var/punchstunthreshold"><aside class="declaration">var </aside>punchstunthreshold
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L84">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 84"/></a></h3>
+        <p>Damage at which punches from this race will stun</p><h3 id="var/reagent_tag"><aside class="declaration">var </aside>reagent_tag
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L103">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 103"/></a></h3>
+        <p>Used for metabolizing reagents. We're going to assume you're a meatbag unless you say otherwise.</p><h3 id="var/say_mod"><aside class="declaration">var </aside>say_mod
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L54">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 54"/></a></h3>
+        <p>Affects the speech message, for example: Motharula flutters, &quot;My speech message is flutters!&quot;</p><h3 id="var/sexes"><aside class="declaration">var </aside>sexes
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L23">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 23"/></a></h3>
+        <p>Whether or not the race has sexual characteristics (biological genders). At the moment this is only FALSE for skeletons and shadows</p><h3 id="var/siemens_coeff"><aside class="declaration">var </aside>siemens_coeff
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L86">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 86"/></a></h3>
+        <p>Base electrocution coefficient.  Basically a multiplier for damage from electrocutions.</p><h3 id="var/skinned_type"><aside class="declaration">var </aside>skinned_type
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L42">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 42"/></a></h3>
+        <p>What skin the species drops when gibbed by a gibber machine.</p><h3 id="var/special_step_sounds"><aside class="declaration">var </aside>special_step_sounds
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L96">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 96"/></a></h3>
+        <p>Sounds to override barefeet walking</p><h3 id="var/species_gibs"><aside class="declaration">var </aside>species_gibs
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L105">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 105"/></a></h3>
+        <p>Does this mob have special gibs?</p><h3 id="var/species_language_holder"><aside class="declaration">var </aside>species_language_holder
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L56">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 56"/></a></h3>
+        <p>What languages this species can understand and say. Use a <a href="datum/language_holder.html" title="/datum/language_holder">language holder datum</a> in this var.</p><h3 id="var/species_traits"><aside class="declaration">var </aside>species_traits
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L130">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 130"/></a></h3>
+        <p>Species-only traits. Can be found in [code/_DEFINES/DNA.dm]</p><h3 id="var/speedmod"><aside class="declaration">var </aside>speedmod
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L64">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 64"/></a></h3>
+        <p>Multiplier for the race's speed. Positive numbers make it move slower, negative numbers make it move faster.</p><h3 id="var/stunmod"><aside class="declaration">var </aside>stunmod
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L76">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 76"/></a></h3>
+        <p>multiplier for stun durations</p><h3 id="var/toxic_food"><aside class="declaration">var </aside>toxic_food
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L48">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 48"/></a></h3>
+        <p>Bitfield for food types that the species absolutely hates, giving them even more disgust than disliked food. Meat is &quot;toxic&quot; to moths, for example.</p><h3 id="var/use_skintones"><aside class="declaration">var </aside>use_skintones
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L34">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 34"/></a></h3>
+        <p>Does the species use skintones or not? As of now only used by humans.</p><h3 id="var/wings_icon"><aside class="declaration">var </aside>wings_icon
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L114">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 114"/></a></h3>
+        <p>Current wings icon</p><h2 id="proc">Proc Details</h2><h3 id="proc/check_roundstart_eligible"><aside class="declaration">proc </aside>check_roundstart_eligible<aside>() 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L211">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 211"/></a></aside>
+        </h3>
+        <p>Checks if a species is eligible to be picked at roundstart.</p>
+<p>Checks the config to see if this species is allowed to be picked in the character setup menu.
+Used by [proc/generate_selectable_species].</p><h3 id="proc/copy_properties_from"><aside class="declaration">proc </aside>copy_properties_from<aside>(/<a href="datum.html">datum</a>/<a href="datum/species.html">species</a>/old_species) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L249">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 249"/></a></aside>
+        </h3>
+        <p>Copies some vars and properties over that should be kept when creating a copy of this species.</p>
+<p>Used by slimepeople to copy themselves, and by the DNA datum to hardset DNA to a species
+Arguments:</p>
+<ul>
+<li>old_species - The species that the carbon used to be before copying</li>
+</ul><h3 id="proc/get_biological_state"><aside class="declaration">proc </aside>get_biological_state<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/<a href="mob/living/carbon/human.html">human</a>/H) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L2205">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 2205"/></a></aside>
+        </h3>
+        <p>The human species version of <a href="mob/living/carbon.html#proc/get_biological_state" title="/mob/living/carbon">/mob/living/carbon/proc/get_biological_state</a>. Depends on the HAS_FLESH and HAS_BONE species traits, having bones lets you have bone wounds, having flesh lets you have burn, slash, and piercing wounds</p><h3 id="proc/give_important_for_life"><aside class="declaration">proc </aside>give_important_for_life<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/<a href="mob/living/carbon/human.html">human</a>/human_to_equip) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L1195">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 1195"/></a></aside>
+        </h3>
+        <p>Equip the outfit required for life. Replaces items currently worn.</p><h3 id="proc/handle_body"><aside class="declaration">proc </aside>handle_body<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/<a href="mob/living/carbon/human.html">human</a>/H) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L623">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 623"/></a></aside>
+        </h3>
+        <p>Handles the body of a human</p>
+<p>Handles lipstick, having no eyes, eye color, undergarnments like underwear, undershirts, and socks, and body layers.
+Calls <a href="datum/species.html#proc/handle_mutant_bodyparts" title="/datum/species">handle_mutant_bodyparts</a>
+Arguments:</p>
+<ul>
+<li>H - Human, whoever we're handling the body for</li>
+</ul><h3 id="proc/handle_body_temperature"><aside class="declaration">proc </aside>handle_body_temperature<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/<a href="mob/living/carbon/human.html">human</a>/H) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L1806">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 1806"/></a></aside>
+        </h3>
+        <p>Handle the body temperature status effects for the species
+Traits for resitance to heat or cold are handled here.</p><h3 id="proc/handle_environment"><aside class="declaration">proc </aside>handle_environment<aside>(/<a href="datum.html">datum</a>/<a href="datum/gas_mixture.html">gas_mixture</a>/environment, /<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/<a href="mob/living/carbon/human.html">human</a>/H) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L1795">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 1795"/></a></aside>
+        </h3>
+        <p>Enviroment handler for species</p>
+<p>vars:</p>
+<ul>
+<li>environment The environment gas mix</li>
+<li>H The mob we will stabilize</li>
+</ul><h3 id="proc/handle_environment_pressure"><aside class="declaration">proc </aside>handle_environment_pressure<aside>(/<a href="datum.html">datum</a>/<a href="datum/gas_mixture.html">gas_mixture</a>/environment, /<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/<a href="mob/living/carbon/human.html">human</a>/H) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L1872">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 1872"/></a></aside>
+        </h3>
+        <p>Handle the air pressure of the environment</p><h3 id="proc/handle_hair"><aside class="declaration">proc </aside>handle_hair<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/<a href="mob/living/carbon/human.html">human</a>/H, forced_colour) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L468">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 468"/></a></aside>
+        </h3>
+        <p>Handles hair icons and dynamic hair.</p>
+<p>Handles hiding hair with clothing, hair layers, losing hair due to husking or augmented heads, facial hair, head hair, and hair styles.
+Arguments:</p>
+<ul>
+<li>H - Human, whoever we're handling the hair for</li>
+<li>forced_colour - The colour of hair we're forcing on this human. Leave null to not change. Mind the british spelling!</li>
+</ul><h3 id="proc/handle_mutant_bodyparts"><aside class="declaration">proc </aside>handle_mutant_bodyparts<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/<a href="mob/living/carbon/human.html">human</a>/H, forced_colour) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L694">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 694"/></a></aside>
+        </h3>
+        <p>Handles the mutant bodyparts of a human</p>
+<p>Handles the adding and displaying of, layers, colors, and overlays of mutant bodyparts and accessories.
+Handles digitigrade leg displaying and squishing.
+Arguments:</p>
+<ul>
+<li>H - Human, whoever we're handling the body for</li>
+<li>forced_colour - The forced color of an accessory. Leave null to use mutant color.</li>
+</ul><h3 id="proc/harm"><aside class="declaration">proc </aside>harm<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/<a href="mob/living/carbon/human.html">human</a>/user, /<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/<a href="mob/living/carbon/human.html">human</a>/target, /<a href="datum.html">datum</a>/<a href="datum/martial_art.html">martial_art</a>/attacker_style) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L1386">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 1386"/></a></aside>
+        </h3>
+        <p>This proc handles punching damage. IMPORTANT: Our owner is the TARGET and not the USER in this proc. For whatever reason...</p><h3 id="proc/natural_bodytemperature_stabilization"><aside class="declaration">proc </aside>natural_bodytemperature_stabilization<aside>(/<a href="datum.html">datum</a>/<a href="datum/gas_mixture.html">gas_mixture</a>/environment, /<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/<a href="mob/living/carbon/human.html">human</a>/H) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L1920">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 1920"/></a></aside>
+        </h3>
+        <p>Used to stabilize the body temperature back to normal on living mobs</p>
+<p>vars:</p>
+<ul>
+<li>environment The environment gas mix</li>
+<li>H The mob we will stabilize</li>
+</ul><h3 id="proc/on_species_gain"><aside class="declaration">proc </aside>on_species_gain<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/C, /<a href="datum.html">datum</a>/<a href="datum/species.html">species</a>/old_species, pref_load) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L330">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 330"/></a></aside>
+        </h3>
+        <p>Proc called when a carbon becomes this species.</p>
+<p>This sets up and adds/changes/removes things, qualities, abilities, and traits so that the transformation is as smooth and bugfree as possible.
+Produces a [COMSIG_SPECIES_GAIN] signal.
+Arguments:</p>
+<ul>
+<li>C - Carbon, this is whoever became the new species.</li>
+<li>old_species - The species that the carbon used to be before becoming this race, used for regenerating organs.</li>
+<li>pref_load - Preferences to be loaded from character setup, loads in preferred mutant things like bodyparts, digilegs, skin color, etc.</li>
+</ul><h3 id="proc/on_species_loss"><aside class="declaration">proc </aside>on_species_loss<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/<a href="mob/living/carbon/human.html">human</a>/C, /<a href="datum.html">datum</a>/<a href="datum/species.html">species</a>/new_species, pref_load) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L416">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 416"/></a></aside>
+        </h3>
+        <p>Proc called when a carbon is no longer this species.</p>
+<p>This sets up and adds/changes/removes things, qualities, abilities, and traits so that the transformation is as smooth and bugfree as possible.
+Produces a [COMSIG_SPECIES_LOSS] signal.
+Arguments:</p>
+<ul>
+<li>C - Carbon, this is whoever lost this species.</li>
+<li>new_species - The new species that the carbon became, used for genetics mutations.</li>
+<li>pref_load - Preferences to be loaded from character setup, loads in preferred mutant things like bodyparts, digilegs, skin color, etc.</li>
+</ul><h3 id="proc/qualifies_for_rank"><aside class="declaration">proc </aside>qualifies_for_rank<aside>(rank, /list/features) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L260">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 260"/></a></aside>
+        </h3>
+        <p>Checks if this carbon is allowed to be a certain job or rank.</p>
+<p>Override this locally if you want to define when this species qualifies for what rank if human authority is enforced.
+Arguments:</p>
+<ul>
+<li>rank - Rank to be tested.</li>
+<li>features - Features of a species that factors into rank qualifications, like a human with cat ears being unable to join command positions.</li>
+</ul><h3 id="proc/random_name"><aside class="declaration">proc </aside>random_name<aside>(gender, unique, lastname) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L225">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 225"/></a></aside>
+        </h3>
+        <p>Generates a random name for a carbon.</p>
+<p>This generates a random unique name based on a human's species and gender.
+Arguments:</p>
+<ul>
+<li>gender - The gender that the name should adhere to. Use MALE for male names, use anything else for female names.</li>
+<li>unique - If true, ensures that this new name is not a duplicate of anyone else's name currently on the station.</li>
+<li>lastname - Does this species' naming system adhere to the last name system? Set to false if it doesn't.</li>
+</ul><h3 id="proc/regenerate_organs"><aside class="declaration">proc </aside>regenerate_organs<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/C, /<a href="datum.html">datum</a>/<a href="datum/species.html">species</a>/old_species, replace_current, /list/excluded_zones) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/mob/living/carbon/human/species.dm#L277">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;carbon&#x2F;human&#x2F;species.dm 277"/></a></aside>
+        </h3>
+        <ul>
+<li>regenerate_organs
+<ul>
+<li>
+<p>Corrects organs in a carbon, removing ones it doesn't need and adding ones it does</p>
+</li>
+<li>
+<p>takes all organ slots, removes organs a species should not have, adds organs a species should have.</p>
+</li>
+<li>
+<p>can use replace_current to refresh all organs, creating an entirely new set.</p>
+</li>
+<li>
+<p>Arguments:</p>
+</li>
+<li>
+<ul>
+<li>C - carbon, the owner of the species datum AKA whoever we're regenerating organs in</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>old_species - datum, used when regenerate organs is called in a switching species to remove old mutant organs.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>replace_current - boolean, forces all old organs to get deleted whether or not they pass the species' ability to keep that organ</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>excluded_zones - list, add zone defines to block organs inside of the zones from getting handled. see headless mutation for an example</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Whitesands13/Whitesands/tree/5ed480d6a85dbd88793238bc9ad635c3500b513f">5ed480d</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

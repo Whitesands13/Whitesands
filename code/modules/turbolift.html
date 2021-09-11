@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>code&#x2F;modules&#x2F;turbolift&#x2F;README.md - White Sands</title>
+</head>
+<body>
+<header>
+    <a href="index.html">White Sands</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+</header>
+<main>
+<h1>code/modules/turbolift/README.md 
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/code/modules/turbolift/README.md">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;turbolift&#x2F;README.md"/></a></h1>
+
+<table class="summary" cellspacing="0">
+        <tr><td colspan="2"><h3 id="robust-guide-to-turbolifts">Robust Guide to Turbolifts</h3><h4 id="by-ike709">by ike709</h4><h5 id="background-knowledge">Background Knowledge</h5>
+<p>Turbolifts work much like shuttles. Because they are shuttles. Therefore, it is essential to have a good understanding of <a href="https://wiki.beestation13.com/view/Guide_to_mapping#Shuttles">how shuttles work</a>. Also, an example of a functional turbolift can be found in <code>_maps\map_files\debug\multi_z.dmm</code> using the turbolift template found in <code>_maps\shuttles\turbolifts\debug_primary.dmm</code>.</p>
+<h5 id="creating-the-turbolift-template">Creating the turbolift template</h5>
+<p>The turbolift itself is a regular shuttle template in the shape of a square or rectangle. There are some caveats in order to make it as simple and straightforward as possible:</p>
+<ul>
+<li>The mobile dock type is <code>/obj/docking_port/mobile/turbolift</code>. The <code>dir</code> var must be the same side as the side with the airlocks. The only other relevant vars are <code>id</code>, <code>width</code>, <code>height</code>, <code>dwidth</code>, and <code>dheight</code> (all of which must match the values in the turbolift shaft's stationary dock, more on that later).</li>
+<li>Turbolifts are, for the moment, indestructible. Use <code>/obj/machinery/door/airlock/turbolift</code> for the doors, <code>/turf/open/indestructible/turbolift</code> for the floors, and <code>/turf/closed/indestructible/turbolift</code> for the walls. No vars need to be edited. Additional, destructible objects such as light fixtures are fine.</li>
+<li>Turbolifts require unique areas, which must be subtypes of <code>/area/shuttle/turbolift</code>. A unique name is recommended, but no other changes are necessary. At the time of writing, three subtypes have been pre-made in <code>turbolift_areas.dm</code>.</li>
+<li>Do not attempt to add APCs, piping, or cables to the turbolift template. Don't worry about power or atmos.</li>
+<li>The most important part of the turbolift is the turbolift computer (<code>/obj/machinery/computer/turbolift</code>). Edit the <code>pixel_y</code> and <code>pixel_x</code> vars as needed. Set the <code>shuttle_id</code> var equal to the mobile dock's <code>id</code>. If you want to, you can also set a custom <code>time_between_stops</code> (deciseconds) which is the amount of time it will wait on a floor before moving on to the next one. Do not touch the other vars unless you know what you are doing.</li>
+<li>Remember to add the template to <code>shuttles.dm</code>.</li>
+</ul>
+<h5 id="creating-the-turbolift-shaft">Creating the turbolift shaft</h5>
+<p>Unlike the turbolift, the shaft is mostly just a regular part of the station, and can be made out of regular walls or rwalls with the turbolift airlocks as the outer door on the same side as the turbolift template's inner door. However, there are some things to take note of:</p>
+<ul>
+<li>Use the <code>/area/shuttle/turbolift/shaft</code> area within the shaft.</li>
+<li>Use plating as the floor of the bottom zlevel, and <code>/turf/open/openspace</code> as the floor of every zlevel above that.</li>
+<li>Every zlevel of the shaft needs a turbolift docking port (<code>/obj/docking_port/stationary/turbolift</code>). They need to be in the same x/y position as the port below it. HOWEVER, for every docking port <strong>above the bottom level</strong> you only need to edit the <code>id</code> var to match the template's mobile dock <code>id</code>. For the <strong>bottom dock only</strong> you need to set the <code>id</code>, <code>width</code>, <code>height</code>, <code>dwidth</code>, and <code>dheight</code> vars to match the template's mobile dock. <strong>Those vars will be automatically copied to the docking ports above the bottom floor.</strong> You also need to set the bottom dock's <code>roundstart_template</code> to match the turbolift template.</li>
+<li>The deck name in the UI is set to the stationary dock's <code>name</code> var. Example: <code>name = &quot;Engineering&quot;</code> on the bottom floor will be displayed in the UI as <code>Deck 1: Engineering</code>.</li>
+<li>Don't add anything else to the inside of the shaft.</li>
+</ul>
+<h5 id="adding-turbolift-buttons">Adding turbolift buttons</h5>
+<p>Turbolift buttons (<code>/obj/machinery/turbolift_button</code>) are just call buttons. They can be anywhere on a z-level (though I recommend near the outer doors of the shaft), and they will call the linked turbolift to that z-level. Set the <code>shuttle_id</code> var to the turbolift mobile dock <code>id</code> / turbolift computer <code>shuttle_id</code> and it will handle the rest. You can also set the <code>pixel_x</code>/<code>pixel_y</code> vars as needed.</p>
+<h5 id="thats-all">That's all</h5>
+<p>The code will take care of everything else, assuming you did everything correctly. Also, rotating the elevators is not supported. Nor can you move them to various points on the same z-level. Many of these restrictions will hopefully be phased out in future updates.</p></td></tr></table></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Whitesands13/Whitesands/tree/5ed480d6a85dbd88793238bc9ad635c3500b513f">5ed480d</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

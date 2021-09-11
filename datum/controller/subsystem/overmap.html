@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;overmap - White Sands</title>
+</head>
+<body>
+<header>
+    <a href="index.html">White Sands</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="datum/controller/subsystem/overmap.html#var">Var Details</a> - <a href="datum/controller/subsystem/overmap.html#proc">Proc Details</a></header>
+<main>
+<h1>Overmap <aside>/<a href="datum.html">datum</a>/<a href="datum/controller/subsystem.html">controller/subsystem</a>/<a href="datum/controller/subsystem/overmap.html">overmap</a></aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/controllers/subsystem/overmap.dm#L1">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;controllers&#x2F;subsystem&#x2F;overmap.dm 1"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="datum/controller/subsystem/overmap.html#var/encounter_cooldown">encounter_cooldown</a></th><td>Cooldown on dynamically loading encounters</td></tr>
+            <tr><th><a href="datum/controller/subsystem/overmap.html#var/events">events</a></th><td>List of all events</td></tr>
+            <tr><th><a href="datum/controller/subsystem/overmap.html#var/events_enabled">events_enabled</a></th><td>Should events be processed</td></tr>
+            <tr><th><a href="datum/controller/subsystem/overmap.html#var/helms">helms</a></th><td>List of all helms, to be adjusted</td></tr>
+            <tr><th><a href="datum/controller/subsystem/overmap.html#var/main">main</a></th><td>The main station or ship</td></tr>
+            <tr><th><a href="datum/controller/subsystem/overmap.html#var/navs">navs</a></th><td>List of all nav computers to initialize</td></tr>
+            <tr><th><a href="datum/controller/subsystem/overmap.html#var/overmap_objects">overmap_objects</a></th><td>List of all overmap objects</td></tr>
+            <tr><th><a href="datum/controller/subsystem/overmap.html#var/radius_tiles">radius_tiles</a></th><td>Used for generating &quot;orbits&quot; via the solar generator
+Has tiles between index 1 and OVERMAP_DIMENSIONS,
+and a special &quot;unsorted&quot; key for tiles that don't fit in an orbit
+the latter being used primarily for oddities like wormholes.
+Map of tiles at each radius around the sun</td></tr>
+            <tr><th><a href="datum/controller/subsystem/overmap.html#var/simulated_ships">simulated_ships</a></th><td>List of all active, simulated ships</td></tr>
+            <tr><th><a href="datum/controller/subsystem/overmap.html#var/size">size</a></th><td>Width/height of the overmap &quot;zlevel&quot;</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="datum/controller/subsystem/overmap.html#proc/Initialize">Initialize</a></th><td>Creates an overmap object for shuttles, triggers initialization procs for ships and helms</td></tr>
+            <tr><th><a href="datum/controller/subsystem/overmap.html#proc/create_map">create_map</a></th><td>The proc that creates all the objects on the overmap, split into seperate procs for redundancy.</td></tr>
+            <tr><th><a href="datum/controller/subsystem/overmap.html#proc/get_overmap_object_by_id">get_overmap_object_by_id</a></th><td>Gets the corresponding overmap object that shares the provided ID</td></tr>
+            <tr><th><a href="datum/controller/subsystem/overmap.html#proc/get_overmap_object_by_z">get_overmap_object_by_z</a></th><td>Gets the corresponding overmap object that shares the provided z level</td></tr>
+            <tr><th><a href="datum/controller/subsystem/overmap.html#proc/get_unused_overmap_square">get_unused_overmap_square</a></th><td>Returns a random, usually empty turf in the overmap</td></tr>
+            <tr><th><a href="datum/controller/subsystem/overmap.html#proc/get_unused_overmap_square_in_radius">get_unused_overmap_square_in_radius</a></th><td>Returns a random turf in a radius from the star, or a random empty turf if OVERMAP_GENERATOR_RANDOM is the active generator.</td></tr>
+            <tr><th><a href="datum/controller/subsystem/overmap.html#proc/setup_shuttle_ship">setup_shuttle_ship</a></th><td>Creates an overmap ship object for the provided mobile docking port if one does not already exist.</td></tr>
+            <tr><th><a href="datum/controller/subsystem/overmap.html#proc/spawn_dynamic_encounter">spawn_dynamic_encounter</a></th><td>Reserves a square dynamic encounter area, and spawns a ruin in it if one is supplied.</td></tr>
+            <tr><th><a href="datum/controller/subsystem/overmap.html#proc/spawn_event_cluster">spawn_event_cluster</a></th><td>See <a href="datum/controller/subsystem/overmap.html#proc/spawn_events" title="/datum/controller/subsystem/overmap">/datum/controller/subsystem/overmap/proc/spawn_events</a>, spawns &quot;veins&quot; (like ores) of events</td></tr>
+            <tr><th><a href="datum/controller/subsystem/overmap.html#proc/spawn_events">spawn_events</a></th><td>VERY Simple random generation for overmap events, spawns the event in a random turf and sometimes spreads it out similar to ores</td></tr>
+            <tr><th><a href="datum/controller/subsystem/overmap.html#proc/spawn_ruin_levels">spawn_ruin_levels</a></th><td>Creates an overmap object for each ruin level, making them accessible.</td></tr>
+            <tr><th><a href="datum/controller/subsystem/overmap.html#proc/spawn_station">spawn_station</a></th><td>Creates a station and lavaland overmap object randomly on the overmap.</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/encounter_cooldown"><aside class="declaration">var </aside>encounter_cooldown
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/controllers/subsystem/overmap.dm#L40">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;controllers&#x2F;subsystem&#x2F;overmap.dm 40"/></a></h3>
+        <p>Cooldown on dynamically loading encounters</p><h3 id="var/events"><aside class="declaration">var </aside>events
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/controllers/subsystem/overmap.dm#L20">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;controllers&#x2F;subsystem&#x2F;overmap.dm 20"/></a></h3>
+        <p>List of all events</p><h3 id="var/events_enabled"><aside class="declaration">var </aside>events_enabled
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/controllers/subsystem/overmap.dm#L37">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;controllers&#x2F;subsystem&#x2F;overmap.dm 37"/></a></h3>
+        <p>Should events be processed</p><h3 id="var/helms"><aside class="declaration">var </aside>helms
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/controllers/subsystem/overmap.dm#L16">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;controllers&#x2F;subsystem&#x2F;overmap.dm 16"/></a></h3>
+        <p>List of all helms, to be adjusted</p><h3 id="var/main"><aside class="declaration">var </aside>main
+            <aside>&ndash; /<a href="obj.html">obj</a>/<a href="obj/structure/overmap.html">structure/overmap</a></aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/controllers/subsystem/overmap.dm#L32">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;controllers&#x2F;subsystem&#x2F;overmap.dm 32"/></a></h3>
+        <p>The main station or ship</p><h3 id="var/navs"><aside class="declaration">var </aside>navs
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/controllers/subsystem/overmap.dm#L18">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;controllers&#x2F;subsystem&#x2F;overmap.dm 18"/></a></h3>
+        <p>List of all nav computers to initialize</p><h3 id="var/overmap_objects"><aside class="declaration">var </aside>overmap_objects
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/controllers/subsystem/overmap.dm#L12">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;controllers&#x2F;subsystem&#x2F;overmap.dm 12"/></a></h3>
+        <p>List of all overmap objects</p><h3 id="var/radius_tiles"><aside class="declaration">var </aside>radius_tiles
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/controllers/subsystem/overmap.dm#L29">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;controllers&#x2F;subsystem&#x2F;overmap.dm 29"/></a></h3>
+        <p>Used for generating &quot;orbits&quot; via the solar generator
+Has tiles between index 1 and OVERMAP_DIMENSIONS,
+and a special &quot;unsorted&quot; key for tiles that don't fit in an orbit
+the latter being used primarily for oddities like wormholes.
+Map of tiles at each radius around the sun</p><h3 id="var/simulated_ships"><aside class="declaration">var </aside>simulated_ships
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/controllers/subsystem/overmap.dm#L14">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;controllers&#x2F;subsystem&#x2F;overmap.dm 14"/></a></h3>
+        <p>List of all active, simulated ships</p><h3 id="var/size"><aside class="declaration">var </aside>size
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/controllers/subsystem/overmap.dm#L35">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;controllers&#x2F;subsystem&#x2F;overmap.dm 35"/></a></h3>
+        <p>Width/height of the overmap &quot;zlevel&quot;</p><h2 id="proc">Proc Details</h2><h3 id="proc/Initialize">Initialize<aside>(start_timeofday) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/controllers/subsystem/overmap.dm#L45">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;controllers&#x2F;subsystem&#x2F;overmap.dm 45"/></a></aside>
+        </h3>
+        <p>Creates an overmap object for shuttles, triggers initialization procs for ships and helms</p><h3 id="proc/create_map"><aside class="declaration">proc </aside>create_map<aside>() 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/controllers/subsystem/overmap.dm#L117">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;controllers&#x2F;subsystem&#x2F;overmap.dm 117"/></a></aside>
+        </h3>
+        <p>The proc that creates all the objects on the overmap, split into seperate procs for redundancy.</p><h3 id="proc/get_overmap_object_by_id"><aside class="declaration">proc </aside>get_overmap_object_by_id<aside>(id) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/controllers/subsystem/overmap.dm#L408">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;controllers&#x2F;subsystem&#x2F;overmap.dm 408"/></a></aside>
+        </h3>
+        <p>Gets the corresponding overmap object that shares the provided ID</p>
+<ul>
+<li>id - ID of the overmap object you want to find</li>
+</ul><h3 id="proc/get_overmap_object_by_z"><aside class="declaration">proc </aside>get_overmap_object_by_z<aside>(zlevel) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/controllers/subsystem/overmap.dm#L417">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;controllers&#x2F;subsystem&#x2F;overmap.dm 417"/></a></aside>
+        </h3>
+        <p>Gets the corresponding overmap object that shares the provided z level</p>
+<ul>
+<li>zlevel - The Z-level of the overmap object you want to find</li>
+</ul><h3 id="proc/get_unused_overmap_square"><aside class="declaration">proc </aside>get_unused_overmap_square<aside>(thing_to_not_have, tries) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/controllers/subsystem/overmap.dm#L357">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;controllers&#x2F;subsystem&#x2F;overmap.dm 357"/></a></aside>
+        </h3>
+        <p>Returns a random, usually empty turf in the overmap</p>
+<ul>
+<li>thing_to_not_have - The thing you don't want to be in the found tile, for example, an overmap event <a href="obj/structure/overmap/event.html" title="/obj/structure/overmap/event">/obj/structure/overmap/event</a>.</li>
+<li>tries - How many attempts it will try before giving up finding an unused tile..</li>
+</ul><h3 id="proc/get_unused_overmap_square_in_radius"><aside class="declaration">proc </aside>get_unused_overmap_square_in_radius<aside>(radius, thing_to_not_have, tries) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/controllers/subsystem/overmap.dm#L372">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;controllers&#x2F;subsystem&#x2F;overmap.dm 372"/></a></aside>
+        </h3>
+        <p>Returns a random turf in a radius from the star, or a random empty turf if OVERMAP_GENERATOR_RANDOM is the active generator.</p>
+<ul>
+<li>thing_to_not_have - The thing you don't want to be in the found tile, for example, an overmap event <a href="obj/structure/overmap/event.html" title="/obj/structure/overmap/event">/obj/structure/overmap/event</a>.</li>
+<li>tries - How many attempts it will try before giving up finding an unused tile..</li>
+<li>radius - The distance from the star to search for an empty tile.</li>
+</ul><h3 id="proc/setup_shuttle_ship"><aside class="declaration">proc </aside>setup_shuttle_ship<aside>(/<a href="obj.html">obj</a>/<a href="obj/docking_port.html">docking_port</a>/<a href="obj/docking_port/mobile.html">mobile</a>/shuttle) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/controllers/subsystem/overmap.dm#L100">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;controllers&#x2F;subsystem&#x2F;overmap.dm 100"/></a></aside>
+        </h3>
+        <p>Creates an overmap ship object for the provided mobile docking port if one does not already exist.</p>
+<ul>
+<li>Shuttle: The docking port to create an overmap object for</li>
+</ul><h3 id="proc/spawn_dynamic_encounter"><aside class="declaration">proc </aside>spawn_dynamic_encounter<aside>(planet_type, ruin, dock_id, size, /<a href="obj.html">obj</a>/<a href="obj/docking_port.html">docking_port</a>/<a href="obj/docking_port/mobile.html">mobile</a>/visiting_shuttle, ignore_cooldown) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/controllers/subsystem/overmap.dm#L256">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;controllers&#x2F;subsystem&#x2F;overmap.dm 256"/></a></aside>
+        </h3>
+        <p>Reserves a square dynamic encounter area, and spawns a ruin in it if one is supplied.</p>
+<ul>
+<li>on_planet - If the encounter should be on a generated planet. Required, as it will be otherwise inaccessible.</li>
+<li>target - The ruin to spawn, if any</li>
+<li>dock_id - The id of the stationary docking port that will be spawned in the encounter. The primary and secondary prefixes will be applied, so do not include them.</li>
+<li>size - Size of the encounter, defaults to 1/3 total world size</li>
+<li>visiting_shuttle - The shuttle that is going to go to the encounter. Allows ruins to scale.</li>
+</ul><h3 id="proc/spawn_event_cluster"><aside class="declaration">proc </aside>spawn_event_cluster<aside>(/<a href="obj.html">obj</a>/<a href="obj/structure/overmap.html">structure/overmap</a>/<a href="obj/structure/overmap/event.html">event</a>/type, /<a href="turf.html">turf</a>/location, chance) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/controllers/subsystem/overmap.dm#L166">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;controllers&#x2F;subsystem&#x2F;overmap.dm 166"/></a></aside>
+        </h3>
+        <p>See <a href="datum/controller/subsystem/overmap.html#proc/spawn_events" title="/datum/controller/subsystem/overmap">/datum/controller/subsystem/overmap/proc/spawn_events</a>, spawns &quot;veins&quot; (like ores) of events</p><h3 id="proc/spawn_events"><aside class="declaration">proc </aside>spawn_events<aside>() 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/controllers/subsystem/overmap.dm#L130">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;controllers&#x2F;subsystem&#x2F;overmap.dm 130"/></a></aside>
+        </h3>
+        <p>VERY Simple random generation for overmap events, spawns the event in a random turf and sometimes spreads it out similar to ores</p><h3 id="proc/spawn_ruin_levels"><aside class="declaration">proc </aside>spawn_ruin_levels<aside>() 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/controllers/subsystem/overmap.dm#L227">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;controllers&#x2F;subsystem&#x2F;overmap.dm 227"/></a></aside>
+        </h3>
+        <p>Creates an overmap object for each ruin level, making them accessible.</p><h3 id="proc/spawn_station"><aside class="declaration">proc </aside>spawn_station<aside>(attempt) 
+        
+    
+            <a href="https://github.com/Whitesands13/Whitesands/blob/5ed480d6a85dbd88793238bc9ad635c3500b513f/whitesands/code/controllers/subsystem/overmap.dm#L185">
+        <img src="git.png" width="16" height="16" title="whitesands&#x2F;code&#x2F;controllers&#x2F;subsystem&#x2F;overmap.dm 185"/></a></aside>
+        </h3>
+        <p>Creates a station and lavaland overmap object randomly on the overmap.</p>
+<ul>
+<li>attempt - Used for the failsafe respawning of the station. Don't set unless you want it to only try to spawn it once.</li>
+</ul></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/Whitesands13/Whitesands/tree/5ed480d6a85dbd88793238bc9ad635c3500b513f">5ed480d</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>
