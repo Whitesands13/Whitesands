@@ -10,7 +10,9 @@
 					/obj/item/reagent_containers/pill/charcoal = 2,
 					/obj/item/reagent_containers/medigel/styptic = 2,
 					/obj/item/reagent_containers/medigel/silver_sulf = 2,
-					/obj/item/reagent_containers/medigel/sterilizine = 1)
+					/obj/item/reagent_containers/medigel/sterilizine = 1,
+					/obj/item/healthanalyzer/wound = 2,
+					/obj/item/stack/medical/bone_gel = 2)
 	contraband = list(/obj/item/reagent_containers/pill/tox = 2,
 	                  /obj/item/reagent_containers/pill/morphine = 2,
 	                  /obj/item/storage/box/gum/happiness = 1)

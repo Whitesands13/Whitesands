@@ -342,6 +342,14 @@ SUBSYSTEM_DEF(ticker)
 
 	if(CONFIG_GET(flag/allow_crew_objectives))
 		generate_crew_objectives()
+	// handle persistence stuff that requires ckeys, in this case temporal scarring
+	for(var/i in GLOB.player_list)
+		if(!ishuman(i))
+			continue
+		var/mob/living/carbon/human/iter_human = i
+
+		iter_human.increment_scar_slot()
+		iter_human.load_persistent_scars()
 
 
 //These callbacks will fire after roundstart key transfer

@@ -47,13 +47,22 @@
 #define COMSIG_ELEMENT_DETACH "element_detach"
 
 // /atom signals
-#define COMSIG_ATOM_CREATED "atom_created"						///from base of atom/proc/Initialize(): sent any time a new atom is created
-#define COMSIG_PARENT_ATTACKBY "atom_attackby"			        ///from base of atom/attackby(): (/obj/item, /mob/living, params)
-	#define COMPONENT_NO_AFTERATTACK 1								//Return this in response if you don't want afterattack to be called
-#define COMSIG_ATOM_HULK_ATTACK "hulk_attack"					///from base of atom/attack_hulk(): (/mob/living/carbon/human)
-#define COMSIG_ATOM_ATTACK_ANIMAL "attack_animal"				///from base of atom/animal_attack(): (/mob/user)
-#define COMSIG_PARENT_EXAMINE "atom_examine"                    ///from base of atom/examine(): (/mob)
-#define COMSIG_ATOM_GET_EXAMINE_NAME "atom_examine_name"		///from base of atom/get_examine_name(): (/mob, list/overrides)
+///from base of atom/proc/Initialize(): sent any time a new atom is created
+#define COMSIG_ATOM_CREATED "atom_created"
+//from SSatoms InitAtom - Only if the  atom was not deleted or failed initialization
+#define COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZE "atom_init_success"
+///from base of atom/attackby(): (/obj/item, /mob/living, params)
+#define COMSIG_PARENT_ATTACKBY "atom_attackby"
+///Return this in response if you don't want afterattack to be called
+	#define COMPONENT_NO_AFTERATTACK (1<<0)
+///from base of atom/attack_hulk(): (/mob/living/carbon/human)
+#define COMSIG_ATOM_HULK_ATTACK "hulk_attack"
+///from base of atom/animal_attack(): (/mob/user)
+#define COMSIG_ATOM_ATTACK_ANIMAL "attack_animal"
+///from base of atom/examine(): (/mob)
+#define COMSIG_PARENT_EXAMINE "atom_examine"
+///from base of atom/get_examine_name(): (/mob, list/overrides)
+#define COMSIG_ATOM_GET_EXAMINE_NAME "atom_examine_name"
 #define COMSIG_PARENT_EXAMINE_MORE "atom_examine_more"                    ///from base of atom/examine_more(): (/mob)
 	//Positions for overrides list
 	#define EXAMINE_POSITION_ARTICLE 1
@@ -345,6 +354,8 @@
 ///from base of mob/swap_hand(): (obj/item)
 #define COMSIG_MOB_SWAP_HANDS "mob_swap_hands"
 	#define COMPONENT_BLOCK_SWAP (1<<0)
+///from /obj/structure/door/crush(): (mob/living/crushed, /obj/machinery/door/crushing_door)
+#define COMSIG_LIVING_DOORCRUSHED "living_doorcrush"
 
 ///from base of mob/living/resist() (/mob/living)
 #define COMSIG_LIVING_RESIST "living_resist"
@@ -364,9 +375,6 @@
 #define COMSIG_LIVING_REVIVE "living_revive"
 ///from base of /mob/living/regenerate_limbs(): (noheal, excluded_limbs)
 #define COMSIG_LIVING_REGENERATE_LIMBS "living_regen_limbs"
-///from base of /obj/item/bodypart/proc/attach_limb(): (new_limb, special) allows you to fail limb attachment
-#define COMSIG_LIVING_ATTACH_LIMB "living_attach_limb"
-	#define COMPONENT_NO_ATTACH 1
 ///from base of mob/living/set_buckled(): (new_buckled)
 #define COMSIG_LIVING_SET_BUCKLED "living_set_buckled"
 
@@ -398,6 +406,15 @@
 
 ///When a carbon mob hugs someone, this is called on the carbon mob.
 #define COMSIG_CARBON_HUG "carbon_hug"
+// /mob/living/carbon physiology signals
+#define COMSIG_CARBON_GAIN_WOUND "carbon_gain_wound"				//from /datum/wound/proc/apply_wound() (/mob/living/carbon/C, /datum/wound/W, /obj/item/bodypart/L)
+#define COMSIG_CARBON_LOSE_WOUND "carbon_lose_wound"				//from /datum/wound/proc/remove_wound() (/mob/living/carbon/C, /datum/wound/W, /obj/item/bodypart/L)
+///from base of /obj/item/bodypart/proc/attach_limb(): (new_limb, special) allows you to fail limb attachment
+#define COMSIG_CARBON_ATTACH_LIMB "carbon_attach_limb"
+	#define COMPONENT_NO_ATTACH (1<<0)
+#define COMSIG_CARBON_REMOVE_LIMB "carbon_remove_limb"			//from base of /obj/item/bodypart/proc/drop_limb(special, dismembered)
+#define COMSIG_BODYPART_GAUZED	"bodypart_gauzed" // from /obj/item/bodypart/proc/apply_gauze(/obj/item/stack/gauze)
+#define COMSIG_BODYPART_GAUZE_DESTROYED	"bodypart_degauzed" // from [/obj/item/bodypart/proc/seep_gauze] when it runs out of absorption
 
 ///from base of mob/living/carbon/soundbang_act(): (list(intensity))
 #define COMSIG_CARBON_SOUNDBANG "carbon_soundbang"
@@ -516,15 +533,25 @@
 #define COMSIG_GRENADE_ARMED "grenade_armed"					//called in /obj/item/gun/process_fire (user, target, params, zone_override)
 
 // /obj/projectile signals (sent to the firer)
-#define COMSIG_PROJECTILE_SELF_ON_HIT "projectile_self_on_hit"			// from base of /obj/projectile/proc/on_hit(): (atom/movable/firer, atom/target, Angle)
-#define COMSIG_PROJECTILE_ON_HIT "projectile_on_hit"			// from base of /obj/projectile/proc/on_hit(): (atom/movable/firer, atom/target, Angle)
-#define COMSIG_PROJECTILE_BEFORE_FIRE "projectile_before_fire" 			// from base of /obj/projectile/proc/fire(): (obj/projectile, atom/original_target)
-#define COMSIG_PROJECTILE_FIRE "projectile_fire"				// from the base of /obj/projectile/proc/fire(): ()
-#define COMSIG_PROJECTILE_PREHIT "com_proj_prehit"				// sent to targets during the process_hit proc of projectiles
-#define COMSIG_PROJECTILE_RANGE_OUT "projectile_range_out"				// sent to targets during the process_hit proc of projectiles
-#define COMSIG_EMBED_TRY_FORCE "item_try_embed"					// sent when trying to force an embed (mainly for projectiles, only used in the embed element)
 
-#define COMSIG_PELLET_CLOUD_INIT "pellet_cloud_init"				// sent to targets during the process_hit proc of projectiles
+///from base of /obj/projectile/proc/on_hit(), like COMSIG_PROJECTILE_ON_HIT but on the projectile itself and with the hit limb (if any): (atom/movable/firer, atom/target, Angle, hit_limb)
+#define COMSIG_PROJECTILE_SELF_ON_HIT "projectile_self_on_hit"
+///from base of /obj/projectile/proc/on_hit(): (atom/movable/firer, atom/target, Angle)
+#define COMSIG_PROJECTILE_ON_HIT "projectile_on_hit"
+///from base of /obj/projectile/proc/fire(): (obj/projectile, atom/original_target)
+#define COMSIG_PROJECTILE_BEFORE_FIRE "projectile_before_fire"
+///from the base of /obj/projectile/proc/fire(): ()
+#define COMSIG_PROJECTILE_FIRE "projectile_fire"
+///sent to targets during the process_hit proc of projectiles
+#define COMSIG_PROJECTILE_PREHIT "com_proj_prehit"
+///sent to targets during the process_hit proc of projectiles
+#define COMSIG_PROJECTILE_RANGE_OUT "projectile_range_out"
+///from [/obj/item/proc/tryEmbed] sent when trying to force an embed (mainly for projectiles and eating glass)
+#define COMSIG_EMBED_TRY_FORCE "item_try_embed"
+	#define COMPONENT_EMBED_SUCCESS (1<<1)
+
+///sent to targets during the process_hit proc of projectiles
+#define COMSIG_PELLET_CLOUD_INIT "pellet_cloud_init"
 
 // /obj/mecha signals
 #define COMSIG_MECHA_ACTION_ACTIVATE "mecha_action_activate"	//sent from mecha action buttons to the mecha they're linked to

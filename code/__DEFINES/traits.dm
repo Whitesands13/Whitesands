@@ -144,6 +144,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_LIMBATTACHMENT 	"limb_attach"
 #define TRAIT_NOLIMBDISABLE		"no_limb_disable"
 #define TRAIT_EASYLIMBDISABLE	"easy_limb_disable"
+#define TRAIT_EASILY_WOUNDED		"easy_limb_wound"
+#define TRAIT_HARDLY_WOUNDED		"hard_limb_wound"
 #define TRAIT_TOXINLOVER		"toxinlover"
 #define TRAIT_NOBREATH			"no_breath"
 #define TRAIT_ANTIMAGIC			"anti_magic"
@@ -207,6 +209,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 //non-mob traits
 /// Used for limb-based paralysis, where replacing the limb will fix it.
 #define TRAIT_PARALYSIS				"paralysis"
+/// Used for limbs.
+#define TRAIT_DISABLED_BY_WOUND		"disabled-by-wound"
 
 #define TRAIT_KEEP_TOGETHER 	"keep-together"
 
